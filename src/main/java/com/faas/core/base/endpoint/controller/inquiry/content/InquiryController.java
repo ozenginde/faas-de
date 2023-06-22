@@ -1,0 +1,108 @@
+package com.faas.core.base.endpoint.controller.inquiry.content;
+
+import com.faas.core.base.middleware.inquiry.content.InquiryMiddleware;
+import com.faas.core.base.model.ws.inquiry.content.InquiryWSModel;
+import com.faas.core.utils.config.AppConstant;
+import com.faas.core.utils.config.BaseRoute;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+
+@Controller
+@RequestMapping(value = AppConstant.API_VERSION + "/base/inquiry/")
+public class InquiryController {
+
+
+    @Autowired
+    InquiryMiddleware inquiryMiddleware;
+
+
+    @RequestMapping(value = BaseRoute.GET_ALL_INQUIRIES, method = RequestMethod.POST)
+    public ResponseEntity<?> getAllInquiries(@RequestParam long userId,
+                                           @RequestParam int reqPage,
+                                           @RequestParam int reqSize) {
+
+        InquiryWSModel response = inquiryMiddleware.getAllInquiries(userId,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.GET_INQUIRIES_BY_STATE, method = RequestMethod.POST)
+    public ResponseEntity<?> getInquiriesByState(@RequestParam long userId,
+                                             @RequestParam int reqPage,
+                                             @RequestParam int reqSize) {
+
+        InquiryWSModel response = inquiryMiddleware.getInquiriesByState(userId,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.GET_INQUIRY, method = RequestMethod.POST)
+    public ResponseEntity<?> getInquiry(@RequestParam long userId,
+                                                 @RequestParam int reqPage,
+                                                 @RequestParam int reqSize) {
+
+        InquiryWSModel response = inquiryMiddleware.getInquiry(userId,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.CREATE_INQUIRY, method = RequestMethod.POST)
+    public ResponseEntity<?> createInquiry(@RequestParam long userId,
+                                        @RequestParam int reqPage,
+                                        @RequestParam int reqSize) {
+
+        InquiryWSModel response = inquiryMiddleware.createInquiry(userId,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.UPDATE_INQUIRY, method = RequestMethod.POST)
+    public ResponseEntity<?> updateInquiry(@RequestParam long userId,
+                                           @RequestParam int reqPage,
+                                           @RequestParam int reqSize) {
+
+        InquiryWSModel response = inquiryMiddleware.updateInquiry(userId,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.REMOVE_INQUIRY, method = RequestMethod.POST)
+    public ResponseEntity<?> removeInquiry(@RequestParam long userId,
+                                           @RequestParam int reqPage,
+                                           @RequestParam int reqSize) {
+
+        InquiryWSModel response = inquiryMiddleware.removeInquiry(userId,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+}
