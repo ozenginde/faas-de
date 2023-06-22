@@ -62,9 +62,10 @@ public class ScenarioController {
     @RequestMapping(value = BaseRoute.CREATE_SCENARIO, method = RequestMethod.POST)
     public ResponseEntity<?> createScenario(@RequestParam long userId,
                                             @RequestParam String scenario,
+                                            @RequestParam String scenarioDesc,
                                             @RequestParam long typeId) {
 
-        ScenarioWSModel response = scenarioMiddleware.createScenario(userId,scenario,typeId);
+        ScenarioWSModel response = scenarioMiddleware.createScenario(userId,scenario,scenarioDesc,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -77,9 +78,10 @@ public class ScenarioController {
     public ResponseEntity<?> updateScenario(@RequestParam long userId,
                                             @RequestParam String scenarioId,
                                             @RequestParam String scenario,
+                                            @RequestParam String scenarioDesc,
                                             @RequestParam long typeId) {
 
-        ScenarioWSModel response = scenarioMiddleware.updateScenario(userId,scenarioId,scenario,typeId);
+        ScenarioWSModel response = scenarioMiddleware.updateScenario(userId,scenarioId,scenario,scenarioDesc,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

@@ -13,6 +13,7 @@ public class ScenarioDBModel {
     @Id
     private String id;
     private String scenario;
+    private String scenarioDesc;
     private long typeId;
     private String scenarioType;
     private String baseType;
@@ -24,9 +25,10 @@ public class ScenarioDBModel {
     public ScenarioDBModel() {
     }
 
-    public ScenarioDBModel(String id, String scenario, long typeId, String scenarioType, String baseType, List<ScenarioDataDAO> scenarioDatas, long uDate, long cDate, int status) {
+    public ScenarioDBModel(String id, String scenario, String scenarioDesc, long typeId, String scenarioType, String baseType, List<ScenarioDataDAO> scenarioDatas, long uDate, long cDate, int status) {
         this.id = id;
         this.scenario = scenario;
+        this.scenarioDesc = scenarioDesc;
         this.typeId = typeId;
         this.scenarioType = scenarioType;
         this.baseType = baseType;
@@ -50,6 +52,14 @@ public class ScenarioDBModel {
 
     public void setScenario(String scenario) {
         this.scenario = scenario;
+    }
+
+    public String getScenarioDesc() {
+        return scenarioDesc;
+    }
+
+    public void setScenarioDesc(String scenarioDesc) {
+        this.scenarioDesc = scenarioDesc;
     }
 
     public long getTypeId() {

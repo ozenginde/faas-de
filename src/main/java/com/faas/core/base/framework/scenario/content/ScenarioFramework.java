@@ -72,10 +72,11 @@ public class ScenarioFramework {
     }
 
 
-    public ScenarioWSDTO createScenarioService(String scenario, long typeId) {
+    public ScenarioWSDTO createScenarioService(String scenario,String scenarioDesc,long typeId) {
 
         ScenarioDBModel scenarioDBModel = new ScenarioDBModel();
         scenarioDBModel.setScenario(scenario);
+        scenarioDBModel.setScenarioDesc(scenarioDesc);
         Optional<ScenarioTypeDBModel> scenarioTypeDBModel = scenarioTypeRepository.findById(typeId);
         if (scenarioTypeDBModel.isPresent()) {
             scenarioDBModel.setTypeId(typeId);
@@ -91,11 +92,12 @@ public class ScenarioFramework {
     }
 
 
-    public ScenarioWSDTO updateScenarioService(String scenarioId, String scenario, long typeId) {
+    public ScenarioWSDTO updateScenarioService(String scenarioId,String scenario,String scenarioDesc,long typeId) {
 
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
         if (scenarioDBModel.isPresent()) {
             scenarioDBModel.get().setScenario(scenario);
+            scenarioDBModel.get().setScenarioDesc(scenarioDesc);
             Optional<ScenarioTypeDBModel> scenarioTypeDBModel = scenarioTypeRepository.findById(typeId);
             if (scenarioTypeDBModel.isPresent()) {
                 scenarioDBModel.get().setTypeId(typeId);
