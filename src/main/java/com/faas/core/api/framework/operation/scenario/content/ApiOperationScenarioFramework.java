@@ -53,7 +53,7 @@ public class ApiOperationScenarioFramework {
     }
 
 
-    public List<ApiScenarioWSDTO> apiGetScenariosService(long agentId,long sessionId,long clientId,String processId) {
+    public List<ApiScenarioWSDTO> apiGetScenariosService(long agentId,long sessionId,String processId) {
 
         List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processId);
@@ -67,7 +67,7 @@ public class ApiOperationScenarioFramework {
     }
 
 
-    public ApiScenarioWSDTO apiGetScenarioService(long agentId,long sessionId,long clientId,String processId, String scenarioId) {
+    public ApiScenarioWSDTO apiGetScenarioService(long agentId,long sessionId,String processId, String scenarioId) {
 
         List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
         if (processScenarioDBModel.size()>0){
