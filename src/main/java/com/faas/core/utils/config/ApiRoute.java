@@ -120,6 +120,7 @@ public class ApiRoute {
 
     public static final String API_GET_SCENARIO_EXECUTES = "apigetscenarioexecutes";
     public static final String API_GET_SCENARIO_EXECUTE = "apigetscenarioexecute";
+    public static final String API_EXECUTE_SCENARIO = "apiexecutescenario";
 
 
 

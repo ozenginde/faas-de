@@ -48,8 +48,7 @@ public class ApiScenarioExecuteController {
     }
 
 
-
-    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_EXECUTE, method = RequestMethod.POST)
+    @RequestMapping(value = ApiRoute.API_EXECUTE_SCENARIO, method = RequestMethod.POST)
     public ResponseEntity<?> apiExecuteScenario(@RequestParam long agentId,
                                                 @RequestParam long sessionId) {
 
