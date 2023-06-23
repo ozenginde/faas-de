@@ -72,7 +72,7 @@ public class ApiOperationScenarioMiddleware {
         }
 
         response.setScenarios(scenarioWSDTOS);
-        general.setOperation("apiGetScenario1231322");
+        general.setOperation("apiGetScenario");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
