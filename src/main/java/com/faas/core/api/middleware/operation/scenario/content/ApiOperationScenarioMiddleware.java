@@ -40,12 +40,12 @@ public class ApiOperationScenarioMiddleware {
     }
 
 
-    public ApiScenarioWSModel apiGetScenarios(long agentId,long sessionId,long clientId,String processId) {
+    public ApiScenarioWSModel apiGetScenarios(long agentId,long sessionId,String processId) {
 
         ApiScenarioWSModel response = new ApiScenarioWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiScenarioWSDTO> scenarioWSDTOS = apiOperationScenarioFramework.apiGetScenariosService(agentId,sessionId,clientId,processId);
+        List<ApiScenarioWSDTO> scenarioWSDTOS = apiOperationScenarioFramework.apiGetScenariosService(agentId,sessionId,processId);
         if (scenarioWSDTOS != null){
             response.setScenarios(scenarioWSDTOS);
         }
@@ -60,13 +60,13 @@ public class ApiOperationScenarioMiddleware {
     }
 
 
-    public ApiScenarioWSModel apiGetScenario(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
+    public ApiScenarioWSModel apiGetScenario(long agentId,long sessionId,String processId,String scenarioId) {
 
         ApiScenarioWSModel response = new ApiScenarioWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
 
-        ApiScenarioWSDTO scenarioWSDTO = apiOperationScenarioFramework.apiGetScenarioService(agentId,sessionId,clientId,processId,scenarioId);
+        ApiScenarioWSDTO scenarioWSDTO = apiOperationScenarioFramework.apiGetScenarioService(agentId,sessionId,processId,scenarioId);
         if (scenarioWSDTO != null){
             scenarioWSDTOS.add(scenarioWSDTO);
         }

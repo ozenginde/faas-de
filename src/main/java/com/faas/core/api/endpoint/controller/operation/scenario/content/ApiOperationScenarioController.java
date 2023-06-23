@@ -41,10 +41,9 @@ public class ApiOperationScenarioController {
     @RequestMapping(value = ApiRoute.API_GET_SCENARIOS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenarios(@RequestParam long agentId,
                                              @RequestParam long sessionId,
-                                             @RequestParam long clientId,
                                              @RequestParam String processId) {
 
-        ApiScenarioWSModel response = apiOperationScenarioMiddleware.apiGetScenarios(agentId,sessionId,clientId,processId);
+        ApiScenarioWSModel response = apiOperationScenarioMiddleware.apiGetScenarios(agentId,sessionId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -56,11 +55,10 @@ public class ApiOperationScenarioController {
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenario(@RequestParam long agentId,
                                             @RequestParam long sessionId,
-                                            @RequestParam long clientId,
                                             @RequestParam String processId,
                                             @RequestParam String scenarioId) {
 
-        ApiScenarioWSModel response = apiOperationScenarioMiddleware.apiGetScenario(agentId,sessionId,clientId,processId,scenarioId);
+        ApiScenarioWSModel response = apiOperationScenarioMiddleware.apiGetScenario(agentId,sessionId,processId,scenarioId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
