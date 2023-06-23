@@ -3,6 +3,8 @@ package com.faas.core.api.endpoint.controller.operation.scenario.details;
 import com.faas.core.api.middleware.operation.scenario.details.ApiScenarioDetailsMiddleware;
 import com.faas.core.api.model.ws.operation.scenario.content.ApiOperationScenarioWSModel;
 import com.faas.core.api.model.ws.operation.scenario.content.ApiScenarioWSModel;
+import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioActionWSModel;
+import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioAutomationWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioDetailsWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
@@ -45,7 +47,7 @@ public class ApiScenarioDetailsController {
                                                    @RequestParam long clientId,
                                                    @RequestParam String processId) {
 
-        ApiOperationScenarioWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioActions(agentId,sessionId,clientId,processId);
+        ApiScenarioActionWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioActions(agentId,sessionId,clientId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -60,7 +62,7 @@ public class ApiScenarioDetailsController {
                                                   @RequestParam long clientId,
                                                   @RequestParam String processId) {
 
-        ApiScenarioWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioAction(agentId,sessionId,clientId,processId);
+        ApiScenarioActionWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioAction(agentId,sessionId,clientId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -76,7 +78,7 @@ public class ApiScenarioDetailsController {
                                                        @RequestParam long clientId,
                                                        @RequestParam String processId) {
 
-        ApiOperationScenarioWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioAutomations(agentId,sessionId,clientId,processId);
+        ApiScenarioAutomationWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioAutomations(agentId,sessionId,clientId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -91,14 +93,13 @@ public class ApiScenarioDetailsController {
                                                       @RequestParam long clientId,
                                                       @RequestParam String processId) {
 
-        ApiScenarioWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioAutomation(agentId,sessionId,clientId,processId);
+        ApiScenarioAutomationWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioAutomation(agentId,sessionId,clientId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
 
 
 }

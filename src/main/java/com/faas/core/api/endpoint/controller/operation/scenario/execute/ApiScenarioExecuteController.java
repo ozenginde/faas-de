@@ -49,4 +49,17 @@ public class ApiScenarioExecuteController {
 
 
 
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_EXECUTE, method = RequestMethod.POST)
+    public ResponseEntity<?> apiExecuteScenario(@RequestParam long agentId,
+                                                @RequestParam long sessionId) {
+
+        ApiScenarioExecuteWSModel response = apiScenarioExecuteMiddleware.apiExecuteScenario(agentId,sessionId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
 }
