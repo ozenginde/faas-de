@@ -1,7 +1,7 @@
 package com.faas.core.api.endpoint.controller.operation.scenario.execute;
 
 import com.faas.core.api.middleware.operation.scenario.execute.ApiScenarioExecuteMiddleware;
-import com.faas.core.api.model.ws.operation.scenario.content.ApiScenarioWSModel;
+import com.faas.core.api.model.ws.operation.scenario.execute.ApiScenarioExecuteWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class ApiScenarioExecuteController {
     public ResponseEntity<?> apiGetScenarioExecutes(@RequestParam long agentId,
                                                      @RequestParam long sessionId) {
 
-        ApiScenarioWSModel response = apiScenarioExecuteMiddleware.apiGetScenarioExecutes(agentId,sessionId);
+        ApiScenarioExecuteWSModel response = apiScenarioExecuteMiddleware.apiGetScenarioExecutes(agentId,sessionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -39,7 +39,7 @@ public class ApiScenarioExecuteController {
     public ResponseEntity<?> apiGetScenarioExecute(@RequestParam long agentId,
                                                     @RequestParam long sessionId) {
 
-        ApiScenarioWSModel response = apiScenarioExecuteMiddleware.apiGetScenarioExecute(agentId,sessionId);
+        ApiScenarioExecuteWSModel response = apiScenarioExecuteMiddleware.apiGetScenarioExecute(agentId,sessionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

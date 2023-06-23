@@ -2,6 +2,7 @@ package com.faas.core.api.middleware.operation.scenario.execute;
 
 import com.faas.core.api.framework.operation.scenario.execute.ApiScenarioExecuteFramework;
 import com.faas.core.api.model.ws.operation.scenario.content.ApiScenarioWSModel;
+import com.faas.core.api.model.ws.operation.scenario.execute.ApiScenarioExecuteWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,9 @@ public class ApiScenarioExecuteMiddleware {
     ApiScenarioExecuteFramework apiScenarioExecuteFramework;
 
 
-    public ApiScenarioWSModel apiGetScenarioExecutes(long agentId, long sessionId) {
+    public ApiScenarioExecuteWSModel apiGetScenarioExecutes(long agentId, long sessionId) {
 
-        ApiScenarioWSModel response = new ApiScenarioWSModel();
+        ApiScenarioExecuteWSModel response = new ApiScenarioExecuteWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
@@ -32,9 +33,9 @@ public class ApiScenarioExecuteMiddleware {
     }
 
 
-    public ApiScenarioWSModel apiGetScenarioExecute(long agentId, long sessionId) {
+    public ApiScenarioExecuteWSModel apiGetScenarioExecute(long agentId, long sessionId) {
 
-        ApiScenarioWSModel response = new ApiScenarioWSModel();
+        ApiScenarioExecuteWSModel response = new ApiScenarioExecuteWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 

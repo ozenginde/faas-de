@@ -2,8 +2,6 @@ package com.faas.core.api.framework.operation.scenario.content;
 
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationScenarioWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioWSDTO;
-import com.faas.core.api.model.ws.operation.scenario.execute.dto.ApiScenarioExecuteWSDTO;
-import com.faas.core.base.model.db.operation.scenario.ScenarioExecuteDBModel;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.repo.operation.scenario.ScenarioExecuteRepository;
@@ -47,13 +45,12 @@ public class ApiOperationScenarioFramework {
     AppUtils appUtils;
 
 
-    public ApiOperationScenarioWSDTO apiGetOperationScenarioService(long agentId, long sessionId,long clientId,String processId) {
-
+    public ApiOperationScenarioWSDTO apiGetOperationScenarioService(long agentId,long sessionId,long clientId,String processId) {
         return operationMapper.mapApiOperationScenarioWSDTO(sessionId,clientId,processId);
     }
 
 
-    public List<ApiScenarioWSDTO> apiGetScenariosService(long agentId,long sessionId,String processId) {
+    public List<ApiScenarioWSDTO> apiGetScenariosService(long agentId,long sessionId,long clientId,String processId) {
 
         List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processId);
@@ -67,7 +64,7 @@ public class ApiOperationScenarioFramework {
     }
 
 
-    public ApiScenarioWSDTO apiGetScenarioService(long agentId,long sessionId,String processId, String scenarioId) {
+    public ApiScenarioWSDTO apiGetScenarioService(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
 
         List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
         if (processScenarioDBModel.size()>0){

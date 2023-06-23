@@ -112,11 +112,11 @@ public class ApiRoute {
     public static final String API_GET_SCENARIOS = "apigetscenarios";
     public static final String API_GET_SCENARIO = "apigetscenario";
 
-    public static final String API_GET_SCENARIO_ELEMENTS = "apigetscenarioelements";
-    public static final String API_GET_ACTION_ELEMENTS = "apigetactionelements";
-    public static final String API_GET_ACTION_ELEMENT = "apigetactionelement";
-    public static final String API_GET_AUTOMATION_ELEMENTS = "apigetautomationelements";
-    public static final String API_GET_AUTOMATION_ELEMENT = "apigetautomationelement";
+    public static final String API_GET_SCENARIO_DETAILS = "apigetscenariodetails";
+    public static final String API_GET_SCENARIO_ACTIONS = "apiscenariogetactions";
+    public static final String API_GET_SCENARIO_ACTION = "apiscenariogetaction";
+    public static final String API_GET_SCENARIO_AUTOMATIONS = "apigetscenarioautomations";
+    public static final String API_GET_SCENARIO_AUTOMATION = "apigetscenarioautomation";
 
     public static final String API_GET_SCENARIO_EXECUTES = "apigetscenarioexecutes";
     public static final String API_GET_SCENARIO_EXECUTE = "apigetscenarioexecute";

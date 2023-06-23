@@ -5,16 +5,16 @@ import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;
 
-public class ApiActionElementWSDTO {
+public class ApiScenarioAutomationWSDTO {
 
     private GeneralWSModel general;
     private List<ApiScenarioWSDTO>scenarios;
 
 
-    public ApiActionElementWSDTO() {
+    public ApiScenarioAutomationWSDTO() {
     }
 
-    public ApiActionElementWSDTO(GeneralWSModel general, List<ApiScenarioWSDTO> scenarios) {
+    public ApiScenarioAutomationWSDTO(GeneralWSModel general, List<ApiScenarioWSDTO> scenarios) {
         this.general = general;
         this.scenarios = scenarios;
     }
