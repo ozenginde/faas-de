@@ -1,8 +1,6 @@
 package com.faas.core.api.endpoint.controller.operation.scenario.details;
 
 import com.faas.core.api.middleware.operation.scenario.details.ApiScenarioDetailsMiddleware;
-import com.faas.core.api.model.ws.operation.scenario.content.ApiOperationScenarioWSModel;
-import com.faas.core.api.model.ws.operation.scenario.content.ApiScenarioWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioActionWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioAutomationWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioDetailsWSModel;

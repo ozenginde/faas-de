@@ -412,8 +412,7 @@ public class BaseRoute {
 
 
 
-
-    public static final String GET_SCENARIO_ELEMENT = "getscenarioelement";
+    public static final String GET_SCENARIO_DETAILS = "getscenariodetails";
 
     public static final String GET_SCENARIO_DATAS = "getscenariodatas";
     public static final String GET_SCENARIO_DATA = "getscenariodata";
@@ -422,32 +421,31 @@ public class BaseRoute {
     public static final String REMOVE_SCENARIO_DATA = "removescenariodata";
 
 
+    public static final String GET_SCENARIO_ACTIONS = "getscenarioactions";
+    public static final String GET_ACTION = "getaction";
+    public static final String CREATE_ACTION = "createaction";
+    public static final String UPDATE_ACTION = "updateaction";
+    public static final String REMOVE_ACTION = "removeaction";
 
-    public static final String GET_SCENARIO_ACTION_ELEMENTS = "getscenarioactionelements";
-    public static final String GET_ACTION_ELEMENT = "getactionelement";
-    public static final String CREATE_ACTION_ELEMENT = "createactionelement";
-    public static final String UPDATE_ACTION_ELEMENT = "updateactionelement";
-    public static final String REMOVE_ACTION_ELEMENT = "removeactionelement";
-
-    public static final String GET_ACTION_ELEMENT_DATAS = "getactionelementdatas";
-    public static final String GET_ACTION_ELEMENT_DATA = "getactionelementdata";
-    public static final String CREATE_ACTION_ELEMENT_DATA = "createactionelementdata";
-    public static final String UPDATE_ACTION_ELEMENT_DATA = "updateactionelementdata";
-    public static final String REMOVE_ACTION_ELEMENT_DATA = "removeactionelementdata";
-
-
-    public static final String GET_SCENARIO_AUTOMATION_ELEMENTS = "getscenarioautomationelements";
-    public static final String GET_AUTOMATION_ELEMENT = "getautomationelement";
-    public static final String CREATE_AUTOMATION_ELEMENT = "createautomationelement";
-    public static final String UPDATE_AUTOMATION_ELEMENT = "updateautomationelement";
-    public static final String REMOVE_AUTOMATION_ELEMENT = "removeautomationelement";
+    public static final String GET_ACTION_DATAS = "getactiondatas";
+    public static final String GET_ACTION_DATA = "getactiondata";
+    public static final String CREATE_ACTION_DATA = "createactiondata";
+    public static final String UPDATE_ACTION_DATA = "updateactiondata";
+    public static final String REMOVE_ACTION_DATA = "removeactiondata";
 
 
-    public static final String GET_AUTOMATION_ELEMENT_DATAS = "getautomationelementdatas";
-    public static final String GET_AUTOMATION_ELEMENT_DATA = "getautomationelementdata";
-    public static final String CREATE_AUTOMATION_ELEMENT_DATA = "createautomationelementdata";
-    public static final String UPDATE_AUTOMATION_ELEMENT_DATA = "updateautomationelementdata";
-    public static final String REMOVE_AUTOMATION_ELEMENT_DATA = "removeautomationelementdata";
+    public static final String GET_SCENARIO_AUTOMATIONS = "getscenarioautomatios";
+    public static final String GET_AUTOMATION = "getautomation";
+    public static final String CREATE_AUTOMATION = "createautomation";
+    public static final String UPDATE_AUTOMATION = "updateautomation";
+    public static final String REMOVE_AUTOMATION = "removeautomation";
+
+    public static final String GET_AUTOMATION_DATAS = "getautomationdatas";
+    public static final String GET_AUTOMATION_DATA = "getautomationdata";
+    public static final String CREATE_AUTOMATION_DATA = "createautomationdata";
+    public static final String UPDATE_AUTOMATION_DATA = "updateautomationdata";
+    public static final String REMOVE_AUTOMATION_DATA = "removeautomationdata";
+
 
 
     public static final String GET_ACTION_TEMPS = "getactiontemps";

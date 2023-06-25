@@ -24,7 +24,7 @@ public class ApiScenarioExecuteController {
 
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO_EXECUTES, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenarioExecutes(@RequestParam long agentId,
-                                                     @RequestParam long sessionId) {
+                                                    @RequestParam long sessionId) {
 
         ApiScenarioExecuteWSModel response = apiScenarioExecuteMiddleware.apiGetScenarioExecutes(agentId,sessionId);
 
@@ -37,7 +37,7 @@ public class ApiScenarioExecuteController {
 
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO_EXECUTE, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenarioExecute(@RequestParam long agentId,
-                                                    @RequestParam long sessionId) {
+                                                   @RequestParam long sessionId) {
 
         ApiScenarioExecuteWSModel response = apiScenarioExecuteMiddleware.apiGetScenarioExecute(agentId,sessionId);
 
