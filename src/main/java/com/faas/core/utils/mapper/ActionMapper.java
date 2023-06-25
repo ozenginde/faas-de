@@ -1,7 +1,7 @@
 package com.faas.core.utils.mapper;
 
-import com.faas.core.base.model.db.scenario.details.action.dao.ActionDataDAO;
-import com.faas.core.base.model.ws.scenario.details.action.details.dto.ActionDataWSDTO;
+import com.faas.core.base.model.db.scenario.element.action.dao.ActionDataDAO;
+import com.faas.core.base.model.ws.scenario.element.action.details.dto.ActionDataWSDTO;
 import com.faas.core.base.repo.utils.variables.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;

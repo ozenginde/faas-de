@@ -403,7 +403,6 @@ public class BaseRoute {
     public static final String UPDATE_SCENARIO = "updatescenario";
     public static final String REMOVE_SCENARIO = "removesscenario";
 
-
     public static final String GET_ALL_SCENARIO_TYPES = "getallscenariotypes";
     public static final String GET_SCENARIO_TYPE = "getscenariotype";
     public static final String CREATE_SCENARIO_TYPE = "createscenariotype";
@@ -411,8 +410,7 @@ public class BaseRoute {
     public static final String REMOVE_SCENARIO_TYPE = "removescenariotype";
 
 
-
-    public static final String GET_SCENARIO_DETAILS = "getscenariodetails";
+    public static final String GET_SCENARIO_ELEMENTS = "getscenarioelements";
 
     public static final String GET_SCENARIO_DATAS = "getscenariodatas";
     public static final String GET_SCENARIO_DATA = "getscenariodata";

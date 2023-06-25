@@ -2,8 +2,8 @@ package com.faas.core.api.model.ws.operation.scenario.details.dto;
 
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
-import com.faas.core.base.model.db.scenario.details.action.ActionDBModel;
-import com.faas.core.base.model.db.scenario.details.automation.AutomationDBModel;
+import com.faas.core.base.model.db.scenario.element.action.ActionDBModel;
+import com.faas.core.base.model.db.scenario.element.automation.AutomationDBModel;
 
 import java.util.List;
 
