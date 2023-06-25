@@ -30,7 +30,7 @@ public class ScenarioDetailsMiddleware {
 
         List<ScenarioElementWSDTO>scenarioElementWSDTOS = scenarioDetailsFramework.getScenarioElementsService(scenarioId);
         if (scenarioElementWSDTOS != null){
-            response.setElements(scenarioElementWSDTOS);
+            response.setScenarioElements(scenarioElementWSDTOS);
         }
 
         general.setOperation("getScenarioElements");

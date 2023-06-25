@@ -51,13 +51,13 @@ public class ScenarioDetailsFramework {
         List<ActionDBModel> actionDBModels = actionRepository.findByScenarioId(scenarioId);
         for (ActionDBModel actionDBModel : actionDBModels) {
             ScenarioElementWSDTO scenarioElementWSDTO = new ScenarioElementWSDTO();
-            scenarioElementWSDTO.setAction(new ActionWSDTO(actionDBModel));
+            scenarioElementWSDTO.setActionElement(new ActionWSDTO(actionDBModel));
             scenarioElementWSDTOS.add(scenarioElementWSDTO);
         }
         List<AutomationDBModel> automationDBModels = automationRepository.findByScenarioId(scenarioId);
         for (AutomationDBModel automationDBModel : automationDBModels) {
             ScenarioElementWSDTO scenarioElementWSDTO = new ScenarioElementWSDTO();
-            scenarioElementWSDTO.setAutomation(new AutomationWSDTO(automationDBModel));
+            scenarioElementWSDTO.setAutomationElement(new AutomationWSDTO(automationDBModel));
             scenarioElementWSDTOS.add(scenarioElementWSDTO);
         }
 

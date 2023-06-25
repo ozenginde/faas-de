@@ -8,14 +8,14 @@ import java.util.List;
 public class ScenarioElementWSModel {
 
     private GeneralWSModel general;
-    private List<ScenarioElementWSDTO> elements;
+    private List<ScenarioElementWSDTO> scenarioElements;
 
     public ScenarioElementWSModel() {
     }
 
-    public ScenarioElementWSModel(GeneralWSModel general, List<ScenarioElementWSDTO> elements) {
+    public ScenarioElementWSModel(GeneralWSModel general, List<ScenarioElementWSDTO> scenarioElements) {
         this.general = general;
-        this.elements = elements;
+        this.scenarioElements = scenarioElements;
     }
 
     public GeneralWSModel getGeneral() {
@@ -26,11 +26,11 @@ public class ScenarioElementWSModel {
         this.general = general;
     }
 
-    public List<ScenarioElementWSDTO> getElements() {
-        return elements;
+    public List<ScenarioElementWSDTO> getScenarioElements() {
+        return scenarioElements;
     }
 
-    public void setElements(List<ScenarioElementWSDTO> elements) {
-        this.elements = elements;
+    public void setScenarioElements(List<ScenarioElementWSDTO> scenarioElements) {
+        this.scenarioElements = scenarioElements;
     }
 }

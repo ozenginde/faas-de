@@ -5,30 +5,30 @@ import com.faas.core.base.model.ws.scenario.element.automation.content.dto.Autom
 
 public class ScenarioElementWSDTO {
 
-    private ActionWSDTO action;
-    private AutomationWSDTO automation;
+    private ActionWSDTO actionElement;
+    private AutomationWSDTO automationElement;
 
     public ScenarioElementWSDTO() {
     }
 
-    public ScenarioElementWSDTO(ActionWSDTO action, AutomationWSDTO automation) {
-        this.action = action;
-        this.automation = automation;
+    public ScenarioElementWSDTO(ActionWSDTO actionElement, AutomationWSDTO automationElement) {
+        this.actionElement = actionElement;
+        this.automationElement = automationElement;
     }
 
-    public ActionWSDTO getAction() {
-        return action;
+    public ActionWSDTO getActionElement() {
+        return actionElement;
     }
 
-    public void setAction(ActionWSDTO action) {
-        this.action = action;
+    public void setActionElement(ActionWSDTO actionElement) {
+        this.actionElement = actionElement;
     }
 
-    public AutomationWSDTO getAutomation() {
-        return automation;
+    public AutomationWSDTO getAutomationElement() {
+        return automationElement;
     }
 
-    public void setAutomation(AutomationWSDTO automation) {
-        this.automation = automation;
+    public void setAutomationElement(AutomationWSDTO automationElement) {
+        this.automationElement = automationElement;
     }
 }

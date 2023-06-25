@@ -411,7 +411,6 @@ public class BaseRoute {
 
 
     public static final String GET_SCENARIO_ELEMENTS = "getscenarioelements";
-
     public static final String GET_SCENARIO_DATAS = "getscenariodatas";
     public static final String GET_SCENARIO_DATA = "getscenariodata";
     public static final String CREATE_SCENARIO_DATA = "createscenariodata";
