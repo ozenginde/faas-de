@@ -2,8 +2,8 @@ package com.faas.core.base.middleware.scenario.element.action.details;
 
 import com.faas.core.base.framework.scenario.element.action.details.ActionDetailsFramework;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.scenario.element.action.details.ActionDataWSModel;
-import com.faas.core.base.model.ws.scenario.element.action.details.dto.ActionDataWSDTO;
+import com.faas.core.base.model.ws.scenario.element.action.details.ActionVariableWSModel;
+import com.faas.core.base.model.ws.scenario.element.action.details.dto.ActionVariableWSDTO;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,17 +20,17 @@ public class ActionDetailsMiddleware {
     ActionDetailsFramework actionDetailsFramework;
 
 
-    public ActionDataWSModel getActionDatas(long userId, String actionId) {
+    public ActionVariableWSModel getActionVariables(long userId, String actionId) {
 
-        ActionDataWSModel response = new ActionDataWSModel();
+        ActionVariableWSModel response = new ActionVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ActionDataWSDTO> actionDataWSDTOS = actionDetailsFramework.getActionDatasService(actionId);
-        if (actionDataWSDTOS != null){
-            response.setActionDatas(actionDataWSDTOS);
+        List<ActionVariableWSDTO> actionVariableWSDTOS = actionDetailsFramework.getActionVariablesService(actionId);
+        if (actionVariableWSDTOS != null){
+            response.setActionVariables(actionVariableWSDTOS);
         }
 
-        general.setOperation("getActionDatas");
+        general.setOperation("getActionVariables");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -40,19 +40,19 @@ public class ActionDetailsMiddleware {
     }
 
 
-    public ActionDataWSModel getActionData(long userId, String actionId, String dataId) {
+    public ActionVariableWSModel getActionVariable(long userId, String actionId, String variableId) {
 
-        ActionDataWSModel response = new ActionDataWSModel();
+        ActionVariableWSModel response = new ActionVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ActionDataWSDTO> actionDataWSDTOS = new ArrayList<>();
+        List<ActionVariableWSDTO> actionVariableWSDTOS = new ArrayList<>();
 
-        ActionDataWSDTO actionDataWSDTO = actionDetailsFramework.getActionDataService(actionId,dataId);
-        if (actionDataWSDTO != null){
-            actionDataWSDTOS.add(actionDataWSDTO);
+        ActionVariableWSDTO actionVariableWSDTO = actionDetailsFramework.getActionVariableService(actionId,variableId);
+        if (actionVariableWSDTO != null){
+            actionVariableWSDTOS.add(actionVariableWSDTO);
         }
 
-        response.setActionDatas(actionDataWSDTOS);
-        general.setOperation("getActionData");
+        response.setActionVariables(actionVariableWSDTOS);
+        general.setOperation("getActionVariable");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -62,19 +62,19 @@ public class ActionDetailsMiddleware {
     }
 
 
-    public ActionDataWSModel createActionData(long userId, String actionId, long dataTypeId, String value) {
+    public ActionVariableWSModel createActionVariable(long userId, String actionId, long typeId, String value) {
 
-        ActionDataWSModel response = new ActionDataWSModel();
+        ActionVariableWSModel response = new ActionVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ActionDataWSDTO> actionDataWSDTOS = new ArrayList<>();
+        List<ActionVariableWSDTO> actionVariableWSDTOS = new ArrayList<>();
 
-        ActionDataWSDTO actionDataWSDTO = actionDetailsFramework.createActionDataService(actionId,dataTypeId,value);
-        if (actionDataWSDTO != null){
-            actionDataWSDTOS.add(actionDataWSDTO);
+        ActionVariableWSDTO actionVariableWSDTO = actionDetailsFramework.createActionVariableService(actionId,typeId,value);
+        if (actionVariableWSDTO != null){
+            actionVariableWSDTOS.add(actionVariableWSDTO);
         }
 
-        response.setActionDatas(actionDataWSDTOS);
-        general.setOperation("createActionData");
+        response.setActionVariables(actionVariableWSDTOS);
+        general.setOperation("createActionVariable");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -85,18 +85,18 @@ public class ActionDetailsMiddleware {
 
 
 
-    public ActionDataWSModel updateActionData(long userId, String actionId, String dataId, long dataTypeId, String value) {
+    public ActionVariableWSModel updateActionVariable(long userId, String actionId, String variableId, long typeId, String value) {
 
-        ActionDataWSModel response = new ActionDataWSModel();
+        ActionVariableWSModel response = new ActionVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ActionDataWSDTO> actionDataWSDTOS = new ArrayList<>();
+        List<ActionVariableWSDTO> actionVariableWSDTOS = new ArrayList<>();
 
-        ActionDataWSDTO actionDataWSDTO = actionDetailsFramework.updateActionDataService(actionId,dataId,dataTypeId,value);
-        if (actionDataWSDTO != null){
-            actionDataWSDTOS.add(actionDataWSDTO);
+        ActionVariableWSDTO actionVariableWSDTO = actionDetailsFramework.updateActionVariableService(actionId,variableId,typeId,value);
+        if (actionVariableWSDTO != null){
+            actionVariableWSDTOS.add(actionVariableWSDTO);
         }
 
-        response.setActionDatas(actionDataWSDTOS);
+        response.setActionVariables(actionVariableWSDTOS);
         general.setOperation("updateActionData");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -107,19 +107,19 @@ public class ActionDetailsMiddleware {
     }
 
 
-    public ActionDataWSModel removeActionData(long userId, String actionId, String dataId) {
+    public ActionVariableWSModel removeActionVariable(long userId, String actionId, String variableId) {
 
-        ActionDataWSModel response = new ActionDataWSModel();
+        ActionVariableWSModel response = new ActionVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ActionDataWSDTO> actionDataWSDTOS = new ArrayList<>();
+        List<ActionVariableWSDTO> actionVariableWSDTOS = new ArrayList<>();
 
-        ActionDataWSDTO actionDataWSDTO = actionDetailsFramework.removeActionDataService(actionId,dataId);
-        if (actionDataWSDTO != null){
-            actionDataWSDTOS.add(actionDataWSDTO);
+        ActionVariableWSDTO actionVariableWSDTO = actionDetailsFramework.removeActionVariableService(actionId,variableId);
+        if (actionVariableWSDTO != null){
+            actionVariableWSDTOS.add(actionVariableWSDTO);
         }
 
-        response.setActionDatas(actionDataWSDTOS);
-        general.setOperation("removeActionData");
+        response.setActionVariables(actionVariableWSDTOS);
+        general.setOperation("removeActionVariable");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

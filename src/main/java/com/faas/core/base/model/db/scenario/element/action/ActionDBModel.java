@@ -1,6 +1,6 @@
 package com.faas.core.base.model.db.scenario.element.action;
 
-import com.faas.core.base.model.db.scenario.element.action.dao.ActionDataDAO;
+import com.faas.core.base.model.db.scenario.element.action.dao.ActionVariableDAO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,7 +19,7 @@ public class ActionDBModel {
     private String actionTemp;
     private long actionTypeId;
     private String actionType;
-    private List<ActionDataDAO>actionDatas;
+    private List<ActionVariableDAO>actionVariables;
     private int order;
     private long uDate;
     private long cDate;
@@ -28,7 +28,7 @@ public class ActionDBModel {
     public ActionDBModel() {
     }
 
-    public ActionDBModel(String id, String scenarioId, String action, String actionDesc, long actionTempId, String actionTemp, long actionTypeId, String actionType, List<ActionDataDAO> actionDatas, int order, long uDate, long cDate, int status) {
+    public ActionDBModel(String id, String scenarioId, String action, String actionDesc, long actionTempId, String actionTemp, long actionTypeId, String actionType, List<ActionVariableDAO> actionVariables, int order, long uDate, long cDate, int status) {
         this.id = id;
         this.scenarioId = scenarioId;
         this.action = action;
@@ -37,7 +37,7 @@ public class ActionDBModel {
         this.actionTemp = actionTemp;
         this.actionTypeId = actionTypeId;
         this.actionType = actionType;
-        this.actionDatas = actionDatas;
+        this.actionVariables = actionVariables;
         this.order = order;
         this.uDate = uDate;
         this.cDate = cDate;
@@ -108,12 +108,12 @@ public class ActionDBModel {
         this.actionType = actionType;
     }
 
-    public List<ActionDataDAO> getActionDatas() {
-        return actionDatas;
+    public List<ActionVariableDAO> getActionVariables() {
+        return actionVariables;
     }
 
-    public void setActionDatas(List<ActionDataDAO> actionDatas) {
-        this.actionDatas = actionDatas;
+    public void setActionVariables(List<ActionVariableDAO> actionVariables) {
+        this.actionVariables = actionVariables;
     }
 
     public int getOrder() {

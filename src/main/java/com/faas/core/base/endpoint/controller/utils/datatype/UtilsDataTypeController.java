@@ -1,7 +1,7 @@
-package com.faas.core.base.endpoint.controller.utils.variables;
+package com.faas.core.base.endpoint.controller.utils.datatype;
 
-import com.faas.core.base.middleware.utils.variables.UtilsVariablesMiddleware;
-import com.faas.core.base.model.ws.utils.variables.DataTypeWSModel;
+import com.faas.core.base.middleware.utils.datatype.UtilsDataTypeMiddleware;
+import com.faas.core.base.model.ws.utils.datatype.DataTypeWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping(value = AppConstant.API_VERSION + "/base/utils/variables/")
-public class UtilsVariablesController {
+@RequestMapping(value = AppConstant.API_VERSION + "/base/utils/datatype/")
+public class UtilsDataTypeController {
 
 
     @Autowired
-    UtilsVariablesMiddleware utilsVariablesMiddleware;
+    UtilsDataTypeMiddleware utilsDataTypeMiddleware;
 
 
     @RequestMapping(value = BaseRoute.GET_ALL_DATA_TYPES, method = RequestMethod.POST)
     public ResponseEntity<?> getAllDataTypes(@RequestParam long userId) {
 
-        DataTypeWSModel response = utilsVariablesMiddleware.getAllDataTypes(userId);
+        DataTypeWSModel response = utilsDataTypeMiddleware.getAllDataTypes(userId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -33,11 +33,12 @@ public class UtilsVariablesController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
+
     @RequestMapping(value = BaseRoute.GET_BASE_DATA_TYPES, method = RequestMethod.POST)
     public ResponseEntity<?> getBaseDataTypes(@RequestParam long userId,
                                               @RequestParam String baseType) {
 
-        DataTypeWSModel response = utilsVariablesMiddleware.getBaseDataTypes(userId, baseType);
+        DataTypeWSModel response = utilsDataTypeMiddleware.getBaseDataTypes(userId, baseType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -50,7 +51,7 @@ public class UtilsVariablesController {
     public ResponseEntity<?> getDataType(@RequestParam long userId,
                                          @RequestParam long typeId) {
 
-        DataTypeWSModel response = utilsVariablesMiddleware.getDataType(userId, typeId);
+        DataTypeWSModel response = utilsDataTypeMiddleware.getDataType(userId, typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -64,7 +65,7 @@ public class UtilsVariablesController {
                                             @RequestParam String dataType,
                                             @RequestParam String baseType) {
 
-        DataTypeWSModel response = utilsVariablesMiddleware.createDataType(userId,dataType,baseType);
+        DataTypeWSModel response = utilsDataTypeMiddleware.createDataType(userId,dataType,baseType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -79,7 +80,7 @@ public class UtilsVariablesController {
                                             @RequestParam String dataType,
                                             @RequestParam String baseType) {
 
-        DataTypeWSModel response = utilsVariablesMiddleware.updateDataType(userId,typeId,dataType,baseType);
+        DataTypeWSModel response = utilsDataTypeMiddleware.updateDataType(userId,typeId,dataType,baseType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -92,7 +93,7 @@ public class UtilsVariablesController {
     public ResponseEntity<?> removeDataType(@RequestParam long userId,
                                             @RequestParam long typeId) {
 
-        DataTypeWSModel response = utilsVariablesMiddleware.removeDataType(userId,typeId);
+        DataTypeWSModel response = utilsDataTypeMiddleware.removeDataType(userId,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

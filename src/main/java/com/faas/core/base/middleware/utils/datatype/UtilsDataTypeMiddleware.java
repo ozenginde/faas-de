@@ -1,11 +1,11 @@
-package com.faas.core.base.middleware.utils.variables;
+package com.faas.core.base.middleware.utils.datatype;
 
-import com.faas.core.base.framework.utils.variables.UtilsVariablesFramework;
-import com.faas.core.base.model.db.utils.variables.DataTypeDBModel;
+import com.faas.core.base.framework.utils.datatype.UtilsDataTypeFramework;
+import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.utils.variables.DataTypeWSModel;
-import com.faas.core.base.model.ws.utils.variables.dto.DataTypeWSDTO;
-import com.faas.core.base.repo.utils.variables.DataTypeRepository;
+import com.faas.core.base.model.ws.utils.datatype.DataTypeWSModel;
+import com.faas.core.base.model.ws.utils.datatype.dto.DataTypeWSDTO;
+import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,11 @@ import java.util.Optional;
 
 
 @Component
-public class UtilsVariablesMiddleware {
+public class UtilsDataTypeMiddleware {
 
 
     @Autowired
-    UtilsVariablesFramework utilsVariablesFramework;
+    UtilsDataTypeFramework utilsDataTypeFramework;
 
     @Autowired
     DataTypeRepository dataTypeRepository;
@@ -39,7 +39,7 @@ public class UtilsVariablesMiddleware {
         List<DataTypeDBModel> dataTypeDBModels = dataTypeRepository.findByStatus(1);
         if (dataTypeDBModels.size() > 0) {
             for (DataTypeDBModel dataTypeDBModel : dataTypeDBModels) {
-                dataTypeWSDTOS.add(utilsVariablesFramework.fillDataTypeWSDTO(dataTypeDBModel));
+                dataTypeWSDTOS.add(utilsDataTypeFramework.fillDataTypeWSDTO(dataTypeDBModel));
             }
         }
 
@@ -63,7 +63,7 @@ public class UtilsVariablesMiddleware {
         List<DataTypeDBModel> dataTypeDBModels = dataTypeRepository.findByBaseType(baseType);
         if (dataTypeDBModels.size() > 0) {
             for (DataTypeDBModel dataTypeDBModel : dataTypeDBModels) {
-                dataTypeWSDTOS.add(utilsVariablesFramework.fillDataTypeWSDTO(dataTypeDBModel));
+                dataTypeWSDTOS.add(utilsDataTypeFramework.fillDataTypeWSDTO(dataTypeDBModel));
             }
         }
 
@@ -86,7 +86,7 @@ public class UtilsVariablesMiddleware {
 
         Optional<DataTypeDBModel> dataTypeDBModel = dataTypeRepository.findById(typeId);
         if (dataTypeDBModel.isPresent()) {
-            dataTypeWSDTOS.add(utilsVariablesFramework.fillDataTypeWSDTO(dataTypeDBModel.get()));
+            dataTypeWSDTOS.add(utilsDataTypeFramework.fillDataTypeWSDTO(dataTypeDBModel.get()));
         }
 
         response.setDataTypes(dataTypeWSDTOS);
@@ -106,9 +106,9 @@ public class UtilsVariablesMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<DataTypeWSDTO> dataTypeWSDTOS = new ArrayList<>();
 
-        DataTypeDBModel dataTypeDBModel = utilsVariablesFramework.createDataTypeService(dataType,baseType);
+        DataTypeDBModel dataTypeDBModel = utilsDataTypeFramework.createDataTypeService(dataType,baseType);
         if (dataTypeDBModel != null) {
-            dataTypeWSDTOS.add(utilsVariablesFramework.fillDataTypeWSDTO(dataTypeDBModel));
+            dataTypeWSDTOS.add(utilsDataTypeFramework.fillDataTypeWSDTO(dataTypeDBModel));
         }
 
         response.setDataTypes(dataTypeWSDTOS);
@@ -128,9 +128,9 @@ public class UtilsVariablesMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<DataTypeWSDTO> dataTypeWSDTOS = new ArrayList<>();
 
-        DataTypeDBModel dataTypeDBModel = utilsVariablesFramework.updateDataTypeService(typeId,dataType,baseType);
+        DataTypeDBModel dataTypeDBModel = utilsDataTypeFramework.updateDataTypeService(typeId,dataType,baseType);
         if (dataTypeDBModel != null) {
-            dataTypeWSDTOS.add(utilsVariablesFramework.fillDataTypeWSDTO(dataTypeDBModel));
+            dataTypeWSDTOS.add(utilsDataTypeFramework.fillDataTypeWSDTO(dataTypeDBModel));
         }
 
         response.setDataTypes(dataTypeWSDTOS);
@@ -150,9 +150,9 @@ public class UtilsVariablesMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<DataTypeWSDTO> dataTypeWSDTOS = new ArrayList<>();
 
-        DataTypeDBModel dataTypeDBModel = utilsVariablesFramework.removeDataTypeService(typeId);
+        DataTypeDBModel dataTypeDBModel = utilsDataTypeFramework.removeDataTypeService(typeId);
         if (dataTypeDBModel != null) {
-            dataTypeWSDTOS.add(utilsVariablesFramework.fillDataTypeWSDTO(dataTypeDBModel));
+            dataTypeWSDTOS.add(utilsDataTypeFramework.fillDataTypeWSDTO(dataTypeDBModel));
         }
 
         response.setDataTypes(dataTypeWSDTOS);

@@ -1,6 +1,6 @@
-package com.faas.core.base.model.ws.utils.variables.dto;
+package com.faas.core.base.model.ws.utils.datatype.dto;
 
-import com.faas.core.base.model.db.utils.variables.DataTypeDBModel;
+import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
 
 
 public class DataTypeWSDTO {

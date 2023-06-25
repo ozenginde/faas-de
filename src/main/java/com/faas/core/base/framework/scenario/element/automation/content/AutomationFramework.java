@@ -65,7 +65,7 @@ public class AutomationFramework {
             automationDBModel.setAutomationTypeId(automationTempDBModel.get().getTypeId());
             automationDBModel.setAutomationType(automationTempDBModel.get().getAutomationType());
             automationDBModel.setBaseType(automationTempDBModel.get().getBaseType());
-            automationDBModel.setAutomationDatas(new ArrayList<>());
+            automationDBModel.setAutomationVariables(new ArrayList<>());
             automationDBModel.setOrder(order);
             automationDBModel.setuDate(appUtils.getCurrentTimeStamp());
             automationDBModel.setcDate(appUtils.getCurrentTimeStamp());

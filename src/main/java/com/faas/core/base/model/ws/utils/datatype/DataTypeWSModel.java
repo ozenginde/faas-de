@@ -1,7 +1,7 @@
-package com.faas.core.base.model.ws.utils.variables;
+package com.faas.core.base.model.ws.utils.datatype;
 
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.utils.variables.dto.DataTypeWSDTO;
+import com.faas.core.base.model.ws.utils.datatype.dto.DataTypeWSDTO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 package com.faas.core.base.model.db.scenario.element.automation;
 
-import com.faas.core.base.model.db.scenario.element.automation.dao.AutomationDataDAO;
+import com.faas.core.base.model.db.scenario.element.automation.dao.AutomationVariableDAO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,7 +19,7 @@ public class AutomationDBModel {
     private long automationTypeId;
     private String automationType;
     private String baseType;
-    private List<AutomationDataDAO> automationDatas;
+    private List<AutomationVariableDAO>automationVariables;
     private int order;
     private long uDate;
     private long cDate;
@@ -28,7 +28,7 @@ public class AutomationDBModel {
     public AutomationDBModel() {
     }
 
-    public AutomationDBModel(String id, String scenarioId, String automation, String automationDesc, long automationTempId, String automationTemp, long automationTypeId, String automationType, String baseType, List<AutomationDataDAO> automationDatas, int order, long uDate, long cDate, int status) {
+    public AutomationDBModel(String id, String scenarioId, String automation, String automationDesc, long automationTempId, String automationTemp, long automationTypeId, String automationType, String baseType, List<AutomationVariableDAO> automationVariables, int order, long uDate, long cDate, int status) {
         this.id = id;
         this.scenarioId = scenarioId;
         this.automation = automation;
@@ -38,7 +38,7 @@ public class AutomationDBModel {
         this.automationTypeId = automationTypeId;
         this.automationType = automationType;
         this.baseType = baseType;
-        this.automationDatas = automationDatas;
+        this.automationVariables = automationVariables;
         this.order = order;
         this.uDate = uDate;
         this.cDate = cDate;
@@ -117,12 +117,12 @@ public class AutomationDBModel {
         this.baseType = baseType;
     }
 
-    public List<AutomationDataDAO> getAutomationDatas() {
-        return automationDatas;
+    public List<AutomationVariableDAO> getAutomationVariables() {
+        return automationVariables;
     }
 
-    public void setAutomationDatas(List<AutomationDataDAO> automationDatas) {
-        this.automationDatas = automationDatas;
+    public void setAutomationVariables(List<AutomationVariableDAO> automationVariables) {
+        this.automationVariables = automationVariables;
     }
 
     public int getOrder() {

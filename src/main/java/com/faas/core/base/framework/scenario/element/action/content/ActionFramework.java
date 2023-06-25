@@ -64,7 +64,7 @@ public class ActionFramework {
             actionDBModel.setActionTemp(actionTempDBModel.get().getActionTemp());
             actionDBModel.setActionTypeId(actionTempDBModel.get().getTypeId());
             actionDBModel.setActionType(actionTempDBModel.get().getActionType());
-            actionDBModel.setActionDatas(new ArrayList<>());
+            actionDBModel.setActionVariables(new ArrayList<>());
             actionDBModel.setOrder(order);
             actionDBModel.setuDate(appUtils.getCurrentTimeStamp());
             actionDBModel.setcDate(appUtils.getCurrentTimeStamp());

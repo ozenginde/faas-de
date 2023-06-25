@@ -2,8 +2,8 @@ package com.faas.core.base.middleware.scenario.element.automation.details;
 
 import com.faas.core.base.framework.scenario.element.automation.details.AutomationDetailsFramework;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.scenario.element.automation.details.AutomationDataWSModel;
-import com.faas.core.base.model.ws.scenario.element.automation.details.dto.AutomationDataWSDTO;
+import com.faas.core.base.model.ws.scenario.element.automation.details.AutomationVariableWSModel;
+import com.faas.core.base.model.ws.scenario.element.automation.details.dto.AutomationVariableWSDTO;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,17 +20,17 @@ public class AutomationDetailsMiddleware {
     AutomationDetailsFramework automationDetailsFramework;
 
 
-    public AutomationDataWSModel getAutomationDatas(long userId, String automationId) {
+    public AutomationVariableWSModel getAutomationVariables(long userId, String automationId) {
 
-        AutomationDataWSModel response = new AutomationDataWSModel();
+        AutomationVariableWSModel response = new AutomationVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<AutomationDataWSDTO> automationDataWSDTOS = automationDetailsFramework.getAutomationDatasService(automationId);
-        if (automationDataWSDTOS != null){
-            response.setAutomationDatas(automationDataWSDTOS);
+        List<AutomationVariableWSDTO> automationVariableWSDTOS = automationDetailsFramework.getAutomationVariablesService(automationId);
+        if (automationVariableWSDTOS != null){
+            response.setAutomationVariables(automationVariableWSDTOS);
         }
 
-        general.setOperation("getAutomationDatas");
+        general.setOperation("getAutomationVariables");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -40,20 +40,19 @@ public class AutomationDetailsMiddleware {
     }
 
 
+    public AutomationVariableWSModel getAutomationVariable(long userId, String automationId, String variableId) {
 
-    public AutomationDataWSModel getAutomationData(long userId, String automationId, String dataId) {
-
-        AutomationDataWSModel response = new AutomationDataWSModel();
+        AutomationVariableWSModel response = new AutomationVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<AutomationDataWSDTO>automationDataWSDTOS = new ArrayList<>();
+        List<AutomationVariableWSDTO> automationVariableWSDTOS = new ArrayList<>();
 
-        AutomationDataWSDTO automationDataWSDTO = automationDetailsFramework.getAutomationDataService(automationId,dataId);
-        if (automationDataWSDTO != null){
-            automationDataWSDTOS.add(automationDataWSDTO);
+        AutomationVariableWSDTO automationVariableWSDTO = automationDetailsFramework.getAutomationVariableService(automationId,variableId);
+        if (automationVariableWSDTO != null){
+            automationVariableWSDTOS.add(automationVariableWSDTO);
         }
 
-        response.setAutomationDatas(automationDataWSDTOS);
-        general.setOperation("getAutomationData");
+        response.setAutomationVariables(automationVariableWSDTOS);
+        general.setOperation("getAutomationVariable");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -63,19 +62,19 @@ public class AutomationDetailsMiddleware {
     }
 
 
-    public AutomationDataWSModel createAutomationData(long userId, String automationId, long dataTypeId, String value) {
+    public AutomationVariableWSModel createAutomationVariable(long userId, String automationId, long typeId, String value) {
 
-        AutomationDataWSModel response = new AutomationDataWSModel();
+        AutomationVariableWSModel response = new AutomationVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<AutomationDataWSDTO>automationDataWSDTOS = new ArrayList<>();
+        List<AutomationVariableWSDTO> automationVariableWSDTOS = new ArrayList<>();
 
-        AutomationDataWSDTO automationDataWSDTO = automationDetailsFramework.createAutomationDataService(automationId,dataTypeId,value);
-        if (automationDataWSDTO != null){
-            automationDataWSDTOS.add(automationDataWSDTO);
+        AutomationVariableWSDTO automationVariableWSDTO = automationDetailsFramework.createAutomationVariableService(automationId,typeId,value);
+        if (automationVariableWSDTO != null){
+            automationVariableWSDTOS.add(automationVariableWSDTO);
         }
 
-        response.setAutomationDatas(automationDataWSDTOS);
-        general.setOperation("createAutomationData");
+        response.setAutomationVariables(automationVariableWSDTOS);
+        general.setOperation("createAutomationVariable");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -85,20 +84,19 @@ public class AutomationDetailsMiddleware {
     }
 
 
+    public AutomationVariableWSModel updateAutomationVariable(long userId,String automationId,String variableId,long typeId, String value) {
 
-    public AutomationDataWSModel updateAutomationData(long userId, String automationId, String dataId, long dataTypeId, String value) {
-
-        AutomationDataWSModel response = new AutomationDataWSModel();
+        AutomationVariableWSModel response = new AutomationVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<AutomationDataWSDTO>automationDataWSDTOS = new ArrayList<>();
+        List<AutomationVariableWSDTO> automationVariableWSDTOS = new ArrayList<>();
 
-        AutomationDataWSDTO automationDataWSDTO = automationDetailsFramework.updateAutomationDataService(automationId,dataId,dataTypeId,value);
-        if (automationDataWSDTO != null){
-            automationDataWSDTOS.add(automationDataWSDTO);
+        AutomationVariableWSDTO automationVariableWSDTO = automationDetailsFramework.updateAutomationVariableService(automationId,variableId,typeId,value);
+        if (automationVariableWSDTO != null){
+            automationVariableWSDTOS.add(automationVariableWSDTO);
         }
 
-        response.setAutomationDatas(automationDataWSDTOS);
-        general.setOperation("updateAutomationData");
+        response.setAutomationVariables(automationVariableWSDTOS);
+        general.setOperation("updateAutomationVariable");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -108,19 +106,19 @@ public class AutomationDetailsMiddleware {
     }
 
 
-    public AutomationDataWSModel removeAutomationData(long userId, String automationId, String dataId) {
+    public AutomationVariableWSModel removeAutomationVariable(long userId, String automationId, String variableId) {
 
-        AutomationDataWSModel response = new AutomationDataWSModel();
+        AutomationVariableWSModel response = new AutomationVariableWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<AutomationDataWSDTO>automationDataWSDTOS = new ArrayList<>();
+        List<AutomationVariableWSDTO> automationVariableWSDTOS = new ArrayList<>();
 
-        AutomationDataWSDTO automationDataWSDTO = automationDetailsFramework.removeAutomationDataService(automationId,dataId);
-        if (automationDataWSDTO != null){
-            automationDataWSDTOS.add(automationDataWSDTO);
+        AutomationVariableWSDTO automationVariableWSDTO = automationDetailsFramework.removeAutomationVariableService(automationId,variableId);
+        if (automationVariableWSDTO != null){
+            automationVariableWSDTOS.add(automationVariableWSDTO);
         }
 
-        response.setAutomationDatas(automationDataWSDTOS);
-        general.setOperation("removeAutomationData");
+        response.setAutomationVariables(automationVariableWSDTOS);
+        general.setOperation("removeAutomationVariable");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

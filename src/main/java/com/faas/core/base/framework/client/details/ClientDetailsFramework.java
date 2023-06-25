@@ -5,20 +5,19 @@ import com.faas.core.base.model.db.client.details.ClientAddressDBModel;
 import com.faas.core.base.model.db.client.details.ClientDataDBModel;
 import com.faas.core.base.model.db.client.details.ClientEmailDBModel;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
-import com.faas.core.base.model.db.utils.variables.DataTypeDBModel;
+import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
 import com.faas.core.base.model.ws.client.details.dto.*;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.ClientAddressRepository;
 import com.faas.core.base.repo.client.details.ClientDataRepository;
 import com.faas.core.base.repo.client.details.ClientEmailRepository;
 import com.faas.core.base.repo.client.details.ClientPhoneRepository;
-import com.faas.core.base.repo.utils.variables.DataTypeRepository;
+import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.mapper.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 

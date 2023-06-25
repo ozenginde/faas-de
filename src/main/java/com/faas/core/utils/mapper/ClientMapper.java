@@ -1,6 +1,5 @@
 package com.faas.core.utils.mapper;
 
-import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -8,15 +7,11 @@ import com.faas.core.base.repo.client.details.ClientAddressRepository;
 import com.faas.core.base.repo.client.details.ClientDataRepository;
 import com.faas.core.base.repo.client.details.ClientEmailRepository;
 import com.faas.core.base.repo.client.details.ClientPhoneRepository;
-import com.faas.core.base.repo.utils.variables.DataTypeRepository;
-import com.faas.core.utils.config.AppConstant;
+import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Component

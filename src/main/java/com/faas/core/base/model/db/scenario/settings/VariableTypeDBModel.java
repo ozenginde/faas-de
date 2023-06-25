@@ -1,21 +1,20 @@
-package com.faas.core.base.model.db.utils.variables;
+package com.faas.core.base.model.db.scenario.settings;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "data_type_table")
-public class DataTypeDBModel {
-
+@Table(name = "variable_type_table")
+public class VariableTypeDBModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "data_type")
-    private String dataType;
+    @Column(name = "variable_type")
+    private String variableType;
 
-    @Column(name = "base_type")
-    private String baseType;
+    @Column(name = "category")
+    private String category;
 
     @Column(name = "u_date")
     private long uDate;
@@ -26,14 +25,13 @@ public class DataTypeDBModel {
     @Column(name = "status")
     private int status;
 
-
-    public DataTypeDBModel() {
+    public VariableTypeDBModel() {
     }
 
-    public DataTypeDBModel(long id, String dataType, String baseType, long uDate, long cDate, int status) {
+    public VariableTypeDBModel(long id, String variableType, String category, long uDate, long cDate, int status) {
         this.id = id;
-        this.dataType = dataType;
-        this.baseType = baseType;
+        this.variableType = variableType;
+        this.category = category;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -47,20 +45,20 @@ public class DataTypeDBModel {
         this.id = id;
     }
 
-    public String getDataType() {
-        return dataType;
+    public String getVariableType() {
+        return variableType;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setVariableType(String variableType) {
+        this.variableType = variableType;
     }
 
-    public String getBaseType() {
-        return baseType;
+    public String getCategory() {
+        return category;
     }
 
-    public void setBaseType(String baseType) {
-        this.baseType = baseType;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public long getuDate() {

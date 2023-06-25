@@ -1,8 +1,8 @@
-package com.faas.core.base.framework.utils.variables;
+package com.faas.core.base.framework.utils.datatype;
 
-import com.faas.core.base.model.db.utils.variables.DataTypeDBModel;
-import com.faas.core.base.model.ws.utils.variables.dto.DataTypeWSDTO;
-import com.faas.core.base.repo.utils.variables.DataTypeRepository;
+import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
+import com.faas.core.base.model.ws.utils.datatype.dto.DataTypeWSDTO;
+import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 @Component
-public class UtilsVariablesFramework {
+public class UtilsDataTypeFramework {
 
 
     @Autowired

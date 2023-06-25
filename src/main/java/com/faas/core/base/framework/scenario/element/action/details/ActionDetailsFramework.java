@@ -1,11 +1,12 @@
 package com.faas.core.base.framework.scenario.element.action.details;
 
 import com.faas.core.base.model.db.scenario.element.action.ActionDBModel;
-import com.faas.core.base.model.db.scenario.element.action.dao.ActionDataDAO;
-import com.faas.core.base.model.db.utils.variables.DataTypeDBModel;
-import com.faas.core.base.model.ws.scenario.element.action.details.dto.ActionDataWSDTO;
+import com.faas.core.base.model.db.scenario.element.action.dao.ActionVariableDAO;
+import com.faas.core.base.model.db.scenario.settings.VariableTypeDBModel;
+import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
+import com.faas.core.base.model.ws.scenario.element.action.details.dto.ActionVariableWSDTO;
 import com.faas.core.base.repo.scenario.element.action.ActionRepository;
-import com.faas.core.base.repo.utils.variables.DataTypeRepository;
+import com.faas.core.base.repo.scenario.settings.VariableTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,32 +24,32 @@ public class ActionDetailsFramework {
     ActionRepository actionRepository;
 
     @Autowired
-    DataTypeRepository dataTypeRepository;
+    VariableTypeRepository variableTypeRepository;
 
     @Autowired
     AppUtils appUtils;
 
 
-    public List<ActionDataWSDTO> getActionDatasService(String actionId) {
+    public List<ActionVariableWSDTO> getActionVariablesService(String actionId) {
 
-        List<ActionDataWSDTO> actionDataWSDTOS = new ArrayList<>();
+        List<ActionVariableWSDTO> actionVariableWSDTOS = new ArrayList<>();
         Optional<ActionDBModel> actionDBModel = actionRepository.findById(actionId);
-        if (actionDBModel.isPresent() && actionDBModel.get().getActionDatas() != null){
-            for (int i=0;i<actionDBModel.get().getActionDatas().size();i++){
-                actionDataWSDTOS.add(new ActionDataWSDTO(actionDBModel.get().getActionDatas().get(i)));
+        if (actionDBModel.isPresent() && actionDBModel.get().getActionVariables() != null) {
+            for (int i = 0; i < actionDBModel.get().getActionVariables().size(); i++) {
+                actionVariableWSDTOS.add(new ActionVariableWSDTO(actionDBModel.get().getActionVariables().get(i)));
             }
         }
-        return actionDataWSDTOS;
+        return actionVariableWSDTOS;
     }
 
 
-    public ActionDataWSDTO getActionDataService(String actionId, String dataId) {
+    public ActionVariableWSDTO getActionVariableService(String actionId, String variableId) {
 
         Optional<ActionDBModel> actionDBModel = actionRepository.findById(actionId);
-        if (actionDBModel.isPresent() && actionDBModel.get().getActionDatas() != null){
-            for (int i=0;i<actionDBModel.get().getActionDatas().size();i++){
-                if (actionDBModel.get().getActionDatas().get(i).getDataId().equalsIgnoreCase(dataId)){
-                    return new ActionDataWSDTO(actionDBModel.get().getActionDatas().get(i));
+        if (actionDBModel.isPresent() && actionDBModel.get().getActionVariables() != null) {
+            for (int i = 0; i < actionDBModel.get().getActionVariables().size(); i++) {
+                if (actionDBModel.get().getActionVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
+                    return new ActionVariableWSDTO(actionDBModel.get().getActionVariables().get(i));
                 }
             }
         }
@@ -56,50 +57,50 @@ public class ActionDetailsFramework {
     }
 
 
-    public ActionDataWSDTO createActionDataService(String actionId, long dataTypeId, String value) {
+    public ActionVariableWSDTO createActionVariableService(String actionId, long typeId, String value) {
 
         Optional<ActionDBModel> actionDBModel = actionRepository.findById(actionId);
-        Optional<DataTypeDBModel> dataTypeDBModel = dataTypeRepository.findById(dataTypeId);
-        if (actionDBModel.isPresent() && dataTypeDBModel.isPresent()){
+        Optional<VariableTypeDBModel> variableTypeDBModel = variableTypeRepository.findById(typeId);
+        if (actionDBModel.isPresent() && variableTypeDBModel.isPresent()) {
 
-            ActionDataDAO actionDataDAO = new ActionDataDAO();
-            actionDataDAO.setDataId(appUtils.generateUUID());
-            actionDataDAO.setDataType(dataTypeDBModel.get().getDataType());
-            actionDataDAO.setValue(value);
-            actionDataDAO.setcDate(appUtils.getCurrentTimeStamp());
-            actionDataDAO.setStatus(1);
+            ActionVariableDAO actionVariableDAO = new ActionVariableDAO();
+            actionVariableDAO.setVariableId(appUtils.generateUUID());
+            actionVariableDAO.setVariableType(variableTypeDBModel.get().getVariableType());
+            actionVariableDAO.setValue(value);
+            actionVariableDAO.setcDate(appUtils.getCurrentTimeStamp());
+            actionVariableDAO.setStatus(1);
 
-            if (actionDBModel.get().getActionDatas() == null){
-                List<ActionDataDAO> actionDataDAOS = new ArrayList<>();
-                actionDataDAOS.add(actionDataDAO);
-                actionDBModel.get().setActionDatas(actionDataDAOS);
-            }else {
-                actionDBModel.get().getActionDatas().add(actionDataDAO);
+            if (actionDBModel.get().getActionVariables() == null) {
+                List<ActionVariableDAO> actionVariableDAOS = new ArrayList<>();
+                actionVariableDAOS.add(actionVariableDAO);
+                actionDBModel.get().setActionVariables(actionVariableDAOS);
+            } else {
+                actionDBModel.get().getActionVariables().add(actionVariableDAO);
             }
             actionDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             actionRepository.save(actionDBModel.get());
 
-            return new ActionDataWSDTO(actionDataDAO);
+            return new ActionVariableWSDTO(actionVariableDAO);
         }
         return null;
     }
 
 
-    public ActionDataWSDTO updateActionDataService(String actionId, String dataId, long dataTypeId, String value) {
+    public ActionVariableWSDTO updateActionVariableService(String actionId, String variableId, long typeId, String value) {
 
         Optional<ActionDBModel> actionDBModel = actionRepository.findById(actionId);
-        Optional<DataTypeDBModel> dataTypeDBModel = dataTypeRepository.findById(dataTypeId);
-        if (actionDBModel.isPresent() && actionDBModel.get().getActionDatas() != null && dataTypeDBModel.isPresent()){
-            for (int i=0;i<actionDBModel.get().getActionDatas().size();i++){
-                if (actionDBModel.get().getActionDatas().get(i).getDataId().equalsIgnoreCase(dataId)){
+        Optional<VariableTypeDBModel> variableTypeDBModel = variableTypeRepository.findById(typeId);
+        if (actionDBModel.isPresent() && actionDBModel.get().getActionVariables() != null && variableTypeDBModel.isPresent()) {
+            for (int i = 0; i < actionDBModel.get().getActionVariables().size(); i++) {
+                if (actionDBModel.get().getActionVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
 
-                    actionDBModel.get().getActionDatas().get(i).setDataType(dataTypeDBModel.get().getDataType());
-                    actionDBModel.get().getActionDatas().get(i).setValue(value);
-                    actionDBModel.get().getActionDatas().get(i).setcDate(appUtils.getCurrentTimeStamp());
+                    actionDBModel.get().getActionVariables().get(i).setVariableType(variableTypeDBModel.get().getVariableType());
+                    actionDBModel.get().getActionVariables().get(i).setValue(value);
+                    actionDBModel.get().getActionVariables().get(i).setcDate(appUtils.getCurrentTimeStamp());
                     actionDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                     actionRepository.save(actionDBModel.get());
 
-                    return new ActionDataWSDTO(actionDBModel.get().getActionDatas().get(i));
+                    return new ActionVariableWSDTO(actionDBModel.get().getActionVariables().get(i));
                 }
             }
         }
@@ -107,17 +108,19 @@ public class ActionDetailsFramework {
     }
 
 
-    public ActionDataWSDTO removeActionDataService(String actionId, String dataId) {
+    public ActionVariableWSDTO removeActionVariableService(String actionId, String variableId) {
 
         Optional<ActionDBModel> actionDBModel = actionRepository.findById(actionId);
-        if (actionDBModel.isPresent() && actionDBModel.get().getActionDatas() != null){
-            for (int i=0;i<actionDBModel.get().getActionDatas().size();i++){
-                if (actionDBModel.get().getActionDatas().get(i).getDataId().equalsIgnoreCase(dataId)){
-                    ActionDataDAO actionDataDAO = actionDBModel.get().getActionDatas().get(i);
-                    actionDBModel.get().getActionDatas().remove(actionDataDAO);
-                    actionDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+        if (actionDBModel.isPresent() && actionDBModel.get().getActionVariables() != null) {
+            for (int i = 0; i < actionDBModel.get().getActionVariables().size(); i++) {
+                if (actionDBModel.get().getActionVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
 
-                    return new ActionDataWSDTO(actionDataDAO);
+                    ActionVariableDAO actionVariableDAO = actionDBModel.get().getActionVariables().get(i);
+                    actionDBModel.get().getActionVariables().remove(actionVariableDAO);
+                    actionDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+                    actionRepository.save(actionDBModel.get());
+
+                    return new ActionVariableWSDTO(actionVariableDAO);
                 }
             }
         }

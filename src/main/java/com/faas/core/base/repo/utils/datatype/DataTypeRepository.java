@@ -1,6 +1,6 @@
-package com.faas.core.base.repo.utils.variables;
+package com.faas.core.base.repo.utils.datatype;
 
-import com.faas.core.base.model.db.utils.variables.DataTypeDBModel;
+import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

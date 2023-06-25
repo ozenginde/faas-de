@@ -5,7 +5,7 @@ import com.faas.core.base.model.db.scenario.settings.ScenarioTypeDBModel;
 import com.faas.core.base.model.ws.scenario.content.dto.ScenarioWSDTO;
 import com.faas.core.base.repo.scenario.content.ScenarioRepository;
 import com.faas.core.base.repo.scenario.settings.ScenarioTypeRepository;
-import com.faas.core.base.repo.utils.variables.DataTypeRepository;
+import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -83,7 +83,7 @@ public class ScenarioFramework {
             scenarioDBModel.setScenarioType(scenarioTypeDBModel.get().getScenarioType());
             scenarioDBModel.setBaseType(scenarioTypeDBModel.get().getBaseType());
         }
-        scenarioDBModel.setScenarioDatas(new ArrayList<>());
+        scenarioDBModel.setScenarioVariables(new ArrayList<>());
         scenarioDBModel.setuDate(appUtils.getCurrentTimeStamp());
         scenarioDBModel.setcDate(appUtils.getCurrentTimeStamp());
         scenarioDBModel.setStatus(1);

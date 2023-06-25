@@ -1,7 +1,7 @@
 package com.faas.core.base.endpoint.controller.scenario.element.action.details;
 
 import com.faas.core.base.middleware.scenario.element.action.details.ActionDetailsMiddleware;
-import com.faas.core.base.model.ws.scenario.element.action.details.ActionDataWSModel;
+import com.faas.core.base.model.ws.scenario.element.action.details.ActionVariableWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,25 +22,11 @@ public class ActionDetailsController {
     ActionDetailsMiddleware actionDetailsMiddleware;
 
     
-    @RequestMapping(value = BaseRoute.GET_ACTION_DATAS, method = RequestMethod.POST)
-    public ResponseEntity<?> getActionDatas(@RequestParam long userId,
-                                            @RequestParam String actionId) {
+    @RequestMapping(value = BaseRoute.GET_ACTION_VARIABLES, method = RequestMethod.POST)
+    public ResponseEntity<?> getActionVariables(@RequestParam long userId,
+                                                @RequestParam String actionId) {
 
-        ActionDataWSModel response = actionDetailsMiddleware.getActionDatas(userId,actionId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.GET_ACTION_DATA, method = RequestMethod.POST)
-    public ResponseEntity<?> getActionData(@RequestParam long userId,
-                                           @RequestParam String actionId,
-                                           @RequestParam String dataId) {
-
-        ActionDataWSModel response = actionDetailsMiddleware.getActionData(userId,actionId,dataId);
+        ActionVariableWSModel response = actionDetailsMiddleware.getActionVariables(userId,actionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -49,13 +35,27 @@ public class ActionDetailsController {
     }
 
 
-    @RequestMapping(value = BaseRoute.CREATE_ACTION_DATA, method = RequestMethod.POST)
-    public ResponseEntity<?> createActionData(@RequestParam long userId,
-                                              @RequestParam String actionId,
-                                              @RequestParam long dataTypeId,
-                                              @RequestParam String value) {
+    @RequestMapping(value = BaseRoute.GET_ACTION_VARIABLE, method = RequestMethod.POST)
+    public ResponseEntity<?> getActionVariable(@RequestParam long userId,
+                                               @RequestParam String actionId,
+                                               @RequestParam String variableId) {
 
-        ActionDataWSModel response = actionDetailsMiddleware.createActionData(userId,actionId,dataTypeId,value);
+        ActionVariableWSModel response = actionDetailsMiddleware.getActionVariable(userId,actionId,variableId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.CREATE_ACTION_VARIABLE, method = RequestMethod.POST)
+    public ResponseEntity<?> createActionVariable(@RequestParam long userId,
+                                                  @RequestParam String actionId,
+                                                  @RequestParam long typeId,
+                                                  @RequestParam String value) {
+
+        ActionVariableWSModel response = actionDetailsMiddleware.createActionVariable(userId,actionId,typeId,value);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -65,14 +65,14 @@ public class ActionDetailsController {
 
 
 
-    @RequestMapping(value = BaseRoute.UPDATE_ACTION_DATA, method = RequestMethod.POST)
-    public ResponseEntity<?> updateActionData(@RequestParam long userId,
-                                              @RequestParam String actionId,
-                                              @RequestParam String dataId,
-                                              @RequestParam long dataTypeId,
-                                              @RequestParam String value) {
+    @RequestMapping(value = BaseRoute.UPDATE_ACTION_VARIABLE, method = RequestMethod.POST)
+    public ResponseEntity<?> updateActionVariable(@RequestParam long userId,
+                                                  @RequestParam String actionId,
+                                                  @RequestParam String variableId,
+                                                  @RequestParam long typeId,
+                                                  @RequestParam String value) {
 
-        ActionDataWSModel response = actionDetailsMiddleware.updateActionData(userId,actionId,dataId,dataTypeId,value);
+        ActionVariableWSModel response = actionDetailsMiddleware.updateActionVariable(userId,actionId,variableId,typeId,value);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -81,12 +81,12 @@ public class ActionDetailsController {
     }
 
 
-    @RequestMapping(value = BaseRoute.REMOVE_ACTION_DATA, method = RequestMethod.POST)
-    public ResponseEntity<?> removeActionData(@RequestParam long userId,
-                                              @RequestParam String actionId,
-                                              @RequestParam String dataId) {
+    @RequestMapping(value = BaseRoute.REMOVE_ACTION_VARIABLE, method = RequestMethod.POST)
+    public ResponseEntity<?> removeActionVariable(@RequestParam long userId,
+                                                  @RequestParam String actionId,
+                                                  @RequestParam String variableId) {
 
-        ActionDataWSModel response = actionDetailsMiddleware.removeActionData(userId,actionId,dataId);
+        ActionVariableWSModel response = actionDetailsMiddleware.removeActionVariable(userId,actionId,variableId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

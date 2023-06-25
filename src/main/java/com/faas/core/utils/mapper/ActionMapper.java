@@ -1,8 +1,8 @@
 package com.faas.core.utils.mapper;
 
-import com.faas.core.base.model.db.scenario.element.action.dao.ActionDataDAO;
-import com.faas.core.base.model.ws.scenario.element.action.details.dto.ActionDataWSDTO;
-import com.faas.core.base.repo.utils.variables.DataTypeRepository;
+import com.faas.core.base.model.db.scenario.element.action.dao.ActionVariableDAO;
+import com.faas.core.base.model.ws.scenario.element.action.details.dto.ActionVariableWSDTO;
+import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,10 +18,10 @@ public class ActionMapper {
     AppUtils appUtils;
 
 
-    public ActionDataWSDTO getProcessActionDataWSDTO(ActionDataDAO actionDataDAO) {
+    public ActionVariableWSDTO getProcessActionDataWSDTO(ActionVariableDAO actionVariableDAO) {
 
-        ActionDataWSDTO actionDataWSDTO = new ActionDataWSDTO();
-        return actionDataWSDTO;
+        ActionVariableWSDTO actionVariableWSDTO = new ActionVariableWSDTO();
+        return actionVariableWSDTO;
     }
 
 

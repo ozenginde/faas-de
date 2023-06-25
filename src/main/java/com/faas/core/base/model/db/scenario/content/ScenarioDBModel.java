@@ -1,6 +1,6 @@
 package com.faas.core.base.model.db.scenario.content;
 
-import com.faas.core.base.model.db.scenario.content.dao.ScenarioDataDAO;
+import com.faas.core.base.model.db.scenario.content.dao.ScenarioVariableDAO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -17,7 +17,7 @@ public class ScenarioDBModel {
     private long typeId;
     private String scenarioType;
     private String baseType;
-    private List<ScenarioDataDAO> scenarioDatas;
+    private List<ScenarioVariableDAO> scenarioVariables;
     private long uDate;
     private long cDate;
     private int status;
@@ -25,18 +25,19 @@ public class ScenarioDBModel {
     public ScenarioDBModel() {
     }
 
-    public ScenarioDBModel(String id, String scenario, String scenarioDesc, long typeId, String scenarioType, String baseType, List<ScenarioDataDAO> scenarioDatas, long uDate, long cDate, int status) {
+    public ScenarioDBModel(String id, String scenario, String scenarioDesc, long typeId, String scenarioType, String baseType, List<ScenarioVariableDAO> scenarioVariables, long uDate, long cDate, int status) {
         this.id = id;
         this.scenario = scenario;
         this.scenarioDesc = scenarioDesc;
         this.typeId = typeId;
         this.scenarioType = scenarioType;
         this.baseType = baseType;
-        this.scenarioDatas = scenarioDatas;
+        this.scenarioVariables = scenarioVariables;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
     }
+
 
     public String getId() {
         return id;
@@ -86,12 +87,12 @@ public class ScenarioDBModel {
         this.baseType = baseType;
     }
 
-    public List<ScenarioDataDAO> getScenarioDatas() {
-        return scenarioDatas;
+    public List<ScenarioVariableDAO> getScenarioVariables() {
+        return scenarioVariables;
     }
 
-    public void setScenarioDatas(List<ScenarioDataDAO> scenarioDatas) {
-        this.scenarioDatas = scenarioDatas;
+    public void setScenarioVariables(List<ScenarioVariableDAO> scenarioVariables) {
+        this.scenarioVariables = scenarioVariables;
     }
 
     public long getuDate() {

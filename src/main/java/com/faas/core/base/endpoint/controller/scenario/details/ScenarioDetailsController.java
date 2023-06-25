@@ -1,7 +1,7 @@
 package com.faas.core.base.endpoint.controller.scenario.details;
 
 import com.faas.core.base.middleware.scenario.details.ScenarioDetailsMiddleware;
-import com.faas.core.base.model.ws.scenario.details.ScenarioDataWSModel;
+import com.faas.core.base.model.ws.scenario.details.ScenarioVariableWSModel;
 import com.faas.core.base.model.ws.scenario.details.ScenarioElementWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
@@ -35,25 +35,13 @@ public class ScenarioDetailsController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
-    @RequestMapping(value = BaseRoute.GET_SCENARIO_DATAS, method = RequestMethod.POST)
-    public ResponseEntity<?> getScenarioDatas(@RequestParam long userId,
-                                              @RequestParam String scenarioId) {
-
-        ScenarioDataWSModel response = scenarioDetailsMiddleware.getScenarioDatas(userId,scenarioId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
-    @RequestMapping(value = BaseRoute.GET_SCENARIO_DATA, method = RequestMethod.POST)
-    public ResponseEntity<?> getScenarioData(@RequestParam long userId,
-                                             @RequestParam String scenarioId,
-                                             @RequestParam String dataId) {
+    @RequestMapping(value = BaseRoute.GET_SCENARIO_VARIABLES, method = RequestMethod.POST)
+    public ResponseEntity<?> getScenarioVariables(@RequestParam long userId,
+                                                  @RequestParam String scenarioId) {
 
-        ScenarioDataWSModel response = scenarioDetailsMiddleware.getScenarioData(userId,scenarioId,dataId);
+        ScenarioVariableWSModel response = scenarioDetailsMiddleware.getScenarioVariables(userId,scenarioId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -62,29 +50,12 @@ public class ScenarioDetailsController {
     }
 
 
-    @RequestMapping(value = BaseRoute.CREATE_SCENARIO_DATA, method = RequestMethod.POST)
-    public ResponseEntity<?> createScenarioData(@RequestParam long userId,
-                                                @RequestParam String scenarioId,
-                                                @RequestParam long dataTypeId,
-                                                @RequestParam String value) {
+    @RequestMapping(value = BaseRoute.GET_SCENARIO_VARIABLE, method = RequestMethod.POST)
+    public ResponseEntity<?> getScenarioVariable(@RequestParam long userId,
+                                                 @RequestParam String scenarioId,
+                                                 @RequestParam String variableId) {
 
-        ScenarioDataWSModel response = scenarioDetailsMiddleware.createScenarioData(userId,scenarioId,dataTypeId,value);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.UPDATE_SCENARIO_DATA, method = RequestMethod.POST)
-    public ResponseEntity<?> updateScenarioData(@RequestParam long userId,
-                                                @RequestParam String scenarioId,
-                                                @RequestParam String dataId,
-                                                @RequestParam long dataTypeId,
-                                                @RequestParam String value) {
-
-        ScenarioDataWSModel response = scenarioDetailsMiddleware.updateScenarioData(userId,scenarioId,dataId,dataTypeId,value);
+        ScenarioVariableWSModel response = scenarioDetailsMiddleware.getScenarioVariable(userId,scenarioId,variableId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -93,12 +64,43 @@ public class ScenarioDetailsController {
     }
 
 
-    @RequestMapping(value = BaseRoute.REMOVE_SCENARIO_DATA, method = RequestMethod.POST)
-    public ResponseEntity<?> removeScenarioData(@RequestParam long userId,
-                                                @RequestParam String scenarioId,
-                                                @RequestParam String dataId) {
+    @RequestMapping(value = BaseRoute.CREATE_SCENARIO_VARIABLE, method = RequestMethod.POST)
+    public ResponseEntity<?> createScenarioVariable(@RequestParam long userId,
+                                                    @RequestParam String scenarioId,
+                                                    @RequestParam long typeId,
+                                                    @RequestParam String value) {
 
-        ScenarioDataWSModel response = scenarioDetailsMiddleware.removeScenarioData(userId,scenarioId,dataId);
+        ScenarioVariableWSModel response = scenarioDetailsMiddleware.createScenarioVariable(userId,scenarioId,typeId,value);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.UPDATE_SCENARIO_VARIABLE, method = RequestMethod.POST)
+    public ResponseEntity<?> updateScenarioVariable(@RequestParam long userId,
+                                                    @RequestParam String scenarioId,
+                                                    @RequestParam String variableId,
+                                                    @RequestParam long typeId,
+                                                    @RequestParam String value) {
+
+        ScenarioVariableWSModel response = scenarioDetailsMiddleware.updateScenarioVariable(userId,scenarioId,variableId,typeId,value);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.REMOVE_SCENARIO_VARIABLE, method = RequestMethod.POST)
+    public ResponseEntity<?> removeScenarioVariable(@RequestParam long userId,
+                                                    @RequestParam String scenarioId,
+                                                    @RequestParam String variableId) {
+
+        ScenarioVariableWSModel response = scenarioDetailsMiddleware.removeScenarioVariable(userId,scenarioId,variableId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
