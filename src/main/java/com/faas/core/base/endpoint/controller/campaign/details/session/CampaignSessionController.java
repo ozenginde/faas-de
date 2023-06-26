@@ -1,10 +1,10 @@
 package com.faas.core.base.endpoint.controller.campaign.details.session;
 
 import com.faas.core.base.middleware.campaign.details.session.CampaignSessionMiddleware;
-import com.faas.core.base.model.ws.campaign.details.client.CampaignClientWSModel;
 import com.faas.core.base.model.ws.campaign.details.session.CampaignSessionWSModel;
-import com.faas.core.base.model.ws.client.content.CreateClientRequestModel;
-import com.faas.core.base.model.ws.session.content.CreateSessionRequestModel;
+import com.faas.core.base.model.ws.session.content.CreateSessionModel;
+import com.faas.core.base.model.ws.session.content.SessionWSModel;
+import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,9 +60,21 @@ public class CampaignSessionController {
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_SESSION, method = RequestMethod.POST)
     public ResponseEntity<?> getCampaignSession(@RequestParam long userId,
                                                 @RequestParam long sessionId,
-                                                @RequestParam String campaignId) {
+                                                @RequestParam long clientId) {
 
-        CampaignSessionWSModel response = campaignSessionMiddleware.getCampaignSession(userId,sessionId,campaignId);
+        SessionWSModel response = campaignSessionMiddleware.getCampaignSession(userId,sessionId,clientId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.CREATE_CAMPAIGN_SESSIONS, method = RequestMethod.POST)
+    public ResponseEntity<?> createCampaignSessions(@RequestBody CreateSessionModel createSession) {
+
+        SessionWSModel response = campaignSessionMiddleware.createCampaignSessions(createSession);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -77,19 +89,7 @@ public class CampaignSessionController {
                                                    @RequestParam long clientId,
                                                    @RequestParam long agentId) {
 
-        CampaignSessionWSModel response = campaignSessionMiddleware.createCampaignSession(userId,campaignId,clientId,agentId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.CREATE_CAMPAIGN_SESSIONS, method = RequestMethod.POST)
-    public ResponseEntity<?> createCampaignSessions(@RequestBody CreateSessionRequestModel sessionRequest) {
-
-        CampaignSessionWSModel response = campaignSessionMiddleware.createCampaignSessions(sessionRequest);
+        SessionWSModel response = campaignSessionMiddleware.createCampaignSession(userId,campaignId,clientId,agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -102,10 +102,10 @@ public class CampaignSessionController {
     public ResponseEntity<?> updateCampaignSession(@RequestParam long userId,
                                                    @RequestParam long sessionId,
                                                    @RequestParam long agentId,
-                                                   @RequestParam String processId,
+                                                   @RequestParam String campaignId,
                                                    @RequestParam String sessionState) {
 
-        CampaignSessionWSModel response = campaignSessionMiddleware.updateCampaignSession(userId,sessionId,agentId,processId,sessionState);
+        SessionWSModel response = campaignSessionMiddleware.updateCampaignSession(userId,sessionId,agentId,campaignId,sessionState);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -117,32 +117,16 @@ public class CampaignSessionController {
     @RequestMapping(value = BaseRoute.REMOVE_CAMPAIGN_SESSION, method = RequestMethod.POST)
     public ResponseEntity<?> removeCampaignSession(@RequestParam long userId,
                                                    @RequestParam long sessionId,
-                                                   @RequestParam String campaignId) {
+                                                   @RequestParam long clientId) {
 
-        CampaignSessionWSModel response = campaignSessionMiddleware.removeCampaignSession(userId,sessionId,campaignId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.SEARCH_CAMPAIGN_CLIENTS, method = RequestMethod.POST)
-    public ResponseEntity<?> searchCampaignClients(@RequestParam long userId,
-                                                   @RequestParam String cityQuery,
-                                                   @RequestParam String countryQuery,
-                                                   @RequestParam String clientState,
-                                                   @RequestParam int reqPage,
-                                                   @RequestParam int reqSize) {
-
-        CampaignClientWSModel response = campaignSessionMiddleware.searchCampaignClients(userId,cityQuery,countryQuery,clientState,reqPage,reqSize);
+        SessionWSModel response = campaignSessionMiddleware.removeCampaignSession(userId,sessionId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
 
 
 

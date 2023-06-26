@@ -1,16 +1,16 @@
 package com.faas.core.base.model.ws.session.content.dto;
 
-public class CreateSessionRequestWSDTO {
+public class CreateSessionWSDTO {
 
     private long userId;
     private String campaignId;
     private long clientId;
     private long agentId;
 
-    public CreateSessionRequestWSDTO() {
+    public CreateSessionWSDTO() {
     }
 
-    public CreateSessionRequestWSDTO(long userId, String campaignId, long clientId, long agentId) {
+    public CreateSessionWSDTO(long userId, String campaignId, long clientId, long agentId) {
         this.userId = userId;
         this.campaignId = campaignId;
         this.clientId = clientId;

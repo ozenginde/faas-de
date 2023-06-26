@@ -103,13 +103,9 @@ public class BaseRoute {
     public static final String UPDATE_CAMPAIGN_SESSION = "updatecampaignsession";
     public static final String REMOVE_CAMPAIGN_SESSION = "removecampaignsession";
 
-    public static final String SEARCH_CAMPAIGN_CLIENTS = "searchcampaignclients";
-
 
     public static final String GET_CAMPAIGN_CLIENTS = "getcampaignclients";
-    public static final String GET_CAMPAIGN_CLIENTS_BY_STATE = "getcampaignclientsbystate";
-    public static final String GET_CAMPAIGN_CLIENT = "getcampaignclient";
-
+    public static final String SEARCH_CAMPAIGN_CLIENTS = "searchcampaignclients";
 
 
     public static final String GET_ALL_CLIENTS = "getallclients";

@@ -9,16 +9,14 @@ import java.util.List;
 public class CampaignSessionWSModel {
 
     private GeneralWSModel general;
-    private PaginationWSDTO pagination;
-    private List<CampaignSessionWSDTO> campaignSessions;
+    private CampaignSessionWSDTO campaignSession;
 
     public CampaignSessionWSModel() {
     }
 
-    public CampaignSessionWSModel(GeneralWSModel general, PaginationWSDTO pagination, List<CampaignSessionWSDTO> campaignSessions) {
+    public CampaignSessionWSModel(GeneralWSModel general, CampaignSessionWSDTO campaignSession) {
         this.general = general;
-        this.pagination = pagination;
-        this.campaignSessions = campaignSessions;
+        this.campaignSession = campaignSession;
     }
 
     public GeneralWSModel getGeneral() {
@@ -29,19 +27,11 @@ public class CampaignSessionWSModel {
         this.general = general;
     }
 
-    public PaginationWSDTO getPagination() {
-        return pagination;
+    public CampaignSessionWSDTO getCampaignSession() {
+        return campaignSession;
     }
 
-    public void setPagination(PaginationWSDTO pagination) {
-        this.pagination = pagination;
-    }
-
-    public List<CampaignSessionWSDTO> getCampaignSessions() {
-        return campaignSessions;
-    }
-
-    public void setCampaignSessions(List<CampaignSessionWSDTO> campaignSessions) {
-        this.campaignSessions = campaignSessions;
+    public void setCampaignSession(CampaignSessionWSDTO campaignSession) {
+        this.campaignSession = campaignSession;
     }
 }

@@ -2,23 +2,18 @@ package com.faas.core.base.model.ws.campaign.details.client;
 
 import com.faas.core.base.model.ws.campaign.details.client.dto.CampaignClientWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.general.PaginationWSDTO;
-
-import java.util.List;
 
 public class CampaignClientWSModel {
 
     private GeneralWSModel general;
-    private PaginationWSDTO pagination;
-    private List<CampaignClientWSDTO>campaignClients;
+    private CampaignClientWSDTO campaignClient;
 
     public CampaignClientWSModel() {
     }
 
-    public CampaignClientWSModel(GeneralWSModel general, PaginationWSDTO pagination, List<CampaignClientWSDTO> campaignClients) {
+    public CampaignClientWSModel(GeneralWSModel general, CampaignClientWSDTO campaignClient) {
         this.general = general;
-        this.pagination = pagination;
-        this.campaignClients = campaignClients;
+        this.campaignClient = campaignClient;
     }
 
     public GeneralWSModel getGeneral() {
@@ -29,19 +24,11 @@ public class CampaignClientWSModel {
         this.general = general;
     }
 
-    public PaginationWSDTO getPagination() {
-        return pagination;
+    public CampaignClientWSDTO getCampaignClient() {
+        return campaignClient;
     }
 
-    public void setPagination(PaginationWSDTO pagination) {
-        this.pagination = pagination;
-    }
-
-    public List<CampaignClientWSDTO> getCampaignClients() {
-        return campaignClients;
-    }
-
-    public void setCampaignClients(List<CampaignClientWSDTO> campaignClients) {
-        this.campaignClients = campaignClients;
+    public void setCampaignClient(CampaignClientWSDTO campaignClient) {
+        this.campaignClient = campaignClient;
     }
 }

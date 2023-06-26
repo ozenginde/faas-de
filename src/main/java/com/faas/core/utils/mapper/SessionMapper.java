@@ -11,6 +11,7 @@ import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
+import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
 import com.faas.core.base.repo.client.details.ClientAddressRepository;
@@ -92,6 +93,15 @@ public class SessionMapper {
     @Autowired
     AppUtils appUtils;
 
+
+    public List<SessionWSDTO> mapSessionWSDTOS(List<SessionDBModel>sessionDBModels){
+
+        List<SessionWSDTO> sessionWSDTOS = new ArrayList<>();
+        for (int i=0;i<sessionDBModels.size();i++){
+            sessionWSDTOS.add(new SessionWSDTO(sessionDBModels.get(i)));
+        }
+        return sessionWSDTOS;
+    }
 
 
     public SessionDBModel mapSessionDBModel(CampaignDBModel campaignDBModel,UserDBModel agentDBModel ,ClientDBModel clientDBModel ) {

@@ -30,6 +30,22 @@ public class CampaignClientFramework {
 
 
 
+    public Page<ClientDBModel> searchCampaignClientsService(String cityQuery,String countryQuery,String clientState,int reqPage,int reqSize) {
+
+        if (countryQuery.equalsIgnoreCase("")){
+            return clientRepository.findAllByClientState(clientState,PageRequest.of(reqPage,reqSize));
+        }
+
+        if (cityQuery.equalsIgnoreCase("") && !countryQuery.equalsIgnoreCase("")){
+            return clientRepository.findAllByClientCountryAndClientState(countryQuery,clientState,PageRequest.of(reqPage,reqSize));
+        }
+
+        if (!cityQuery.equalsIgnoreCase("") && !countryQuery.equalsIgnoreCase("")){
+            return clientRepository.findAllByClientCountryAndClientCityContainingIgnoreCaseAndClientState(countryQuery,cityQuery,clientState,PageRequest.of(reqPage,reqSize));
+        }
+        return null;
+    }
+
 
 
 }
