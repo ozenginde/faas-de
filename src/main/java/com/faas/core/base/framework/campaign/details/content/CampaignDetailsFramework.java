@@ -4,17 +4,23 @@ import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.campaign.content.dao.CampaignDataDAO;
 import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
+import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
 import com.faas.core.base.model.ws.campaign.details.agent.dto.CampaignAgentWSDTO;
 import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignDataWSDTO;
 import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignDetailsWSDTO;
+import com.faas.core.base.model.ws.campaign.details.session.dto.CampaignSessionWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
 import com.faas.core.base.repo.process.content.ProcessRepository;
+import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.mapper.CampaignMapper;
+import com.faas.core.utils.mapper.SessionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -29,6 +35,9 @@ public class CampaignDetailsFramework {
     CampaignMapper campaignMapper;
 
     @Autowired
+    SessionMapper sessionMapper;
+
+    @Autowired
     CampaignRepository campaignRepository;
 
     @Autowired
@@ -36,6 +45,9 @@ public class CampaignDetailsFramework {
 
     @Autowired
     CampaignAgentRepository campaignAgentRepository;
+
+    @Autowired
+    SessionRepository sessionRepository;
 
     @Autowired
     DataTypeRepository dataTypeRepository;
@@ -51,7 +63,6 @@ public class CampaignDetailsFramework {
 
             CampaignDetailsWSDTO campaignDetailsWSDTO = new CampaignDetailsWSDTO();
             List<CampaignAgentWSDTO> campaignAgentWSDTOS = new ArrayList<>();
-
             campaignDetailsWSDTO.setCampaign(campaignDBModel.get());
             Optional<ProcessDBModel> processDBModel = processRepository.findById(campaignDBModel.get().getProcessId());
             if (processDBModel.isPresent()) {
@@ -62,6 +73,10 @@ public class CampaignDetailsFramework {
                 campaignAgentWSDTOS.add(campaignMapper.createCampaignAgentWSDTO(campaignAgentDBModel));
             }
             campaignDetailsWSDTO.setCampaignAgents(campaignAgentWSDTOS);
+            CampaignSessionWSDTO campaignSessionWSDTO = sessionMapper.mapCampaignSessionWSDTO(sessionRepository.findAllByCampaignId(campaignId, PageRequest.of(0,20)));
+            if (campaignSessionWSDTO != null){
+                campaignDetailsWSDTO.setCampaignSession(campaignSessionWSDTO);
+            }
 
             return campaignDetailsWSDTO;
         }

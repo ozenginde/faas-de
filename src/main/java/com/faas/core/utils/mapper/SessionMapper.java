@@ -10,6 +10,7 @@ import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
+import com.faas.core.base.model.ws.campaign.details.session.dto.CampaignSessionWSDTO;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
@@ -94,11 +95,19 @@ public class SessionMapper {
     AppUtils appUtils;
 
 
+    public CampaignSessionWSDTO mapCampaignSessionWSDTO(Page<SessionDBModel> sessionDBModels){
+
+        CampaignSessionWSDTO campaignSessionWSDTO = new CampaignSessionWSDTO();
+
+        return campaignSessionWSDTO;
+    }
+
+
     public List<SessionWSDTO> mapSessionWSDTOS(List<SessionDBModel>sessionDBModels){
 
         List<SessionWSDTO> sessionWSDTOS = new ArrayList<>();
-        for (int i=0;i<sessionDBModels.size();i++){
-            sessionWSDTOS.add(new SessionWSDTO(sessionDBModels.get(i)));
+        for (SessionDBModel sessionDBModel : sessionDBModels) {
+            sessionWSDTOS.add(new SessionWSDTO(sessionDBModel));
         }
         return sessionWSDTOS;
     }
