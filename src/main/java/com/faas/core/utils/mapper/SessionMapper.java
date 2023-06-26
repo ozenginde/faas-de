@@ -111,7 +111,6 @@ public class SessionMapper {
         sessionDBModel.setCampaignId(campaignDBModel.getId());
         sessionDBModel.setCampaign(campaignDBModel.getCampaign());
         sessionDBModel.setCampaignType(campaignDBModel.getCampaignType());
-        sessionDBModel.setCampaignBaseType(campaignDBModel.getCampaignBaseType());
         sessionDBModel.setProcessId(campaignDBModel.getProcessId());
         sessionDBModel.setProcess(campaignDBModel.getProcess());
         sessionDBModel.setProcessType(campaignDBModel.getProcessType());

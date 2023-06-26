@@ -52,7 +52,6 @@ public class CampaignFramework {
             if (campaignTypeDBModel.isPresent()) {
                 campaignDBModel.setCampaignTypeId(campaignTypeId);
                 campaignDBModel.setCampaignType(campaignTypeDBModel.get().getCampaignType());
-                campaignDBModel.setCampaignBaseType(campaignTypeDBModel.get().getBaseType());
             }
             campaignDBModel.setCampaignCategory(campaignCategory);
             campaignDBModel.setProcessId(processId);

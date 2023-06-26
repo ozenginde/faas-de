@@ -56,7 +56,6 @@ public class ActionFramework {
         if (actionTempDBModel.isPresent()){
 
             ActionDBModel actionDBModel = new ActionDBModel();
-
             actionDBModel.setScenarioId(scenarioId);
             actionDBModel.setAction(action);
             actionDBModel.setActionDesc(actionDesc);

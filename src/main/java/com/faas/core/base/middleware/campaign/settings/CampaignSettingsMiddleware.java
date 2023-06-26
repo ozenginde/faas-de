@@ -76,13 +76,13 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public CampaignTypeWSModel createCampaignType(long userId, String campaignType, String baseType) {
+    public CampaignTypeWSModel createCampaignType(long userId, String campaignType) {
 
         CampaignTypeWSModel response = new CampaignTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<CampaignTypeWSDTO> campaignTypeWSDTOS = new ArrayList<>();
 
-        CampaignTypeDBModel campaignTypeDBModel = campaignSettingsFramework.createCampaignType(campaignType,baseType);
+        CampaignTypeDBModel campaignTypeDBModel = campaignSettingsFramework.createCampaignType(campaignType);
         if (campaignTypeDBModel != null) {
             campaignTypeWSDTOS.add(campaignSettingsFramework.fillCampaignTypeWSDTO(campaignTypeDBModel));
         }
@@ -98,13 +98,13 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public CampaignTypeWSModel updateCampaignType(long userId, long typeId, String campaignType, String baseType) {
+    public CampaignTypeWSModel updateCampaignType(long userId, long typeId, String campaignType) {
 
         CampaignTypeWSModel response = new CampaignTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<CampaignTypeWSDTO> campaignTypeWSDTOS = new ArrayList<>();
 
-        CampaignTypeDBModel campaignTypeDBModel = campaignSettingsFramework.updateCampaignType(typeId, campaignType,baseType);
+        CampaignTypeDBModel campaignTypeDBModel = campaignSettingsFramework.updateCampaignType(typeId, campaignType);
         if (campaignTypeDBModel != null) {
             campaignTypeWSDTOS.add(campaignSettingsFramework.fillCampaignTypeWSDTO(campaignTypeDBModel));
         }

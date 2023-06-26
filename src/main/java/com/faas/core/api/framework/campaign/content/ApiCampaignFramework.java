@@ -55,7 +55,7 @@ public class ApiCampaignFramework {
             if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.MANUAL_CAMPAIGN)) {
                 manualCampaigns.add(fillApiCampaignWSDTO(agentId, campaignDBModel.get()));
             }
-            if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignBaseType().equalsIgnoreCase(AppConstant.AUTOMATIC_CAMPAIGN)) {
+            if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.AUTOMATIC_CAMPAIGN)) {
                 automaticCampaigns.add(fillApiCampaignWSDTO(agentId, campaignDBModel.get()));
             }
         }

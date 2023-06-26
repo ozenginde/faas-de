@@ -13,9 +13,6 @@ public class CampaignTypeDBModel {
     @Column(name = "campaign_type")
     private String campaignType;
 
-    @Column(name = "base_type")
-    private String baseType;
-
     @Column(name = "u_date")
     private long uDate;
 
@@ -25,14 +22,12 @@ public class CampaignTypeDBModel {
     @Column(name = "status")
     private int status;
 
-
     public CampaignTypeDBModel() {
     }
 
-    public CampaignTypeDBModel(long id, String campaignType, String baseType, long uDate, long cDate, int status) {
+    public CampaignTypeDBModel(long id, String campaignType, long uDate, long cDate, int status) {
         this.id = id;
         this.campaignType = campaignType;
-        this.baseType = baseType;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -52,14 +47,6 @@ public class CampaignTypeDBModel {
 
     public void setCampaignType(String campaignType) {
         this.campaignType = campaignType;
-    }
-
-    public String getBaseType() {
-        return baseType;
-    }
-
-    public void setBaseType(String baseType) {
-        this.baseType = baseType;
     }
 
     public long getuDate() {

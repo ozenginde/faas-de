@@ -50,9 +50,6 @@ public class SessionDBModel {
     @Column(name = "campaign_type")
     private String campaignType;
 
-    @Column(name = "campaign_base_type")
-    private String campaignBaseType;
-
     @Column(name = "process_id")
     private String processId;
 
@@ -87,7 +84,7 @@ public class SessionDBModel {
     public SessionDBModel() {
     }
 
-    public SessionDBModel(long id, String sessionUUID, long clientId, String clientTitle, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String campaignBaseType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String sessionState, long uDate, long cDate, int status) {
+    public SessionDBModel(long id, String sessionUUID, long clientId, String clientTitle, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String sessionState, long uDate, long cDate, int status) {
         this.id = id;
         this.sessionUUID = sessionUUID;
         this.clientId = clientId;
@@ -102,7 +99,6 @@ public class SessionDBModel {
         this.campaignId = campaignId;
         this.campaign = campaign;
         this.campaignType = campaignType;
-        this.campaignBaseType = campaignBaseType;
         this.processId = processId;
         this.process = process;
         this.processType = processType;
@@ -225,14 +221,6 @@ public class SessionDBModel {
 
     public void setCampaignType(String campaignType) {
         this.campaignType = campaignType;
-    }
-
-    public String getCampaignBaseType() {
-        return campaignBaseType;
-    }
-
-    public void setCampaignBaseType(String campaignBaseType) {
-        this.campaignBaseType = campaignBaseType;
     }
 
     public String getProcessId() {

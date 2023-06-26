@@ -94,22 +94,23 @@ public class ProcessChannelFramework {
     public ProcessSipChannelWSDTO createProcessSipChannelService(String processId, String callerId, String sipStatus) {
 
         List<ProcessSipChannelDBModel> currentSipChannel = processSipChannelRepository.findByProcessId(processId);
-        if (currentSipChannel.size() > 0) {
-            currentSipChannel.get(0).setCallerId(callerId);
-            currentSipChannel.get(0).setSipStatus(sipStatus);
-            currentSipChannel.get(0).setuDate(appUtils.getCurrentTimeStamp());
+        if (currentSipChannel.size() == 0) {
 
-            return new ProcessSipChannelWSDTO(processSipChannelRepository.save(currentSipChannel.get(0)));
+            ProcessSipChannelDBModel processSipChannelDBModel = new ProcessSipChannelDBModel();
+            processSipChannelDBModel.setProcessId(processId);
+            processSipChannelDBModel.setCallerId(callerId);
+            processSipChannelDBModel.setSipStatus(sipStatus);
+            processSipChannelDBModel.setuDate(appUtils.getCurrentTimeStamp());
+            processSipChannelDBModel.setcDate(appUtils.getCurrentTimeStamp());
+            processSipChannelDBModel.setStatus(1);
+
+            return new ProcessSipChannelWSDTO(processSipChannelRepository.save(processSipChannelDBModel));
         }
+        currentSipChannel.get(0).setCallerId(callerId);
+        currentSipChannel.get(0).setSipStatus(sipStatus);
+        currentSipChannel.get(0).setuDate(appUtils.getCurrentTimeStamp());
 
-        ProcessSipChannelDBModel processSipChannelDBModel = new ProcessSipChannelDBModel();
-        processSipChannelDBModel.setProcessId(processId);
-        processSipChannelDBModel.setCallerId(callerId);
-        processSipChannelDBModel.setuDate(appUtils.getCurrentTimeStamp());
-        processSipChannelDBModel.setcDate(appUtils.getCurrentTimeStamp());
-        processSipChannelDBModel.setStatus(1);
-
-        return new ProcessSipChannelWSDTO(processSipChannelRepository.save(processSipChannelDBModel));
+        return new ProcessSipChannelWSDTO(processSipChannelRepository.save(currentSipChannel.get(0)));
     }
 
 

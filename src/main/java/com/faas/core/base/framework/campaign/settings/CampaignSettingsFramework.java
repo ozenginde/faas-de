@@ -29,11 +29,10 @@ public class CampaignSettingsFramework {
     }
 
 
-    public CampaignTypeDBModel createCampaignType(String campaignType,String baseType) {
+    public CampaignTypeDBModel createCampaignType(String campaignType) {
 
         CampaignTypeDBModel campaignTypeDBModel = new CampaignTypeDBModel();
         campaignTypeDBModel.setCampaignType(campaignType);
-        campaignTypeDBModel.setBaseType(baseType);
         campaignTypeDBModel.setuDate(appUtils.getCurrentTimeStamp());
         campaignTypeDBModel.setcDate(appUtils.getCurrentTimeStamp());
         campaignTypeDBModel.setStatus(1);
@@ -41,12 +40,11 @@ public class CampaignSettingsFramework {
         return campaignTypeRepository.save(campaignTypeDBModel);
     }
 
-    public CampaignTypeDBModel updateCampaignType(long typeId, String campaignType,String baseType) {
+    public CampaignTypeDBModel updateCampaignType(long typeId, String campaignType) {
 
         Optional<CampaignTypeDBModel> campaignTypeDBModel = campaignTypeRepository.findById(typeId);
         if (campaignTypeDBModel.isPresent()) {
             campaignTypeDBModel.get().setCampaignType(campaignType);
-            campaignTypeDBModel.get().setBaseType(baseType);
             campaignTypeDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             campaignTypeDBModel.get().setStatus(1);
 

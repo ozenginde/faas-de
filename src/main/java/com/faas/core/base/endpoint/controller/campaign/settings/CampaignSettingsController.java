@@ -49,10 +49,9 @@ public class CampaignSettingsController {
 
     @RequestMapping(value = BaseRoute.CREATE_CAMPAIGN_TYPE, method = RequestMethod.POST)
     public ResponseEntity<?> createCampaignType(@RequestParam long userId,
-                                                @RequestParam String campaignType,
-                                                @RequestParam String baseType) {
+                                                @RequestParam String campaignType) {
 
-        CampaignTypeWSModel response = campaignSettingsMiddleware.createCampaignType(userId, campaignType,baseType);
+        CampaignTypeWSModel response = campaignSettingsMiddleware.createCampaignType(userId, campaignType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -64,10 +63,9 @@ public class CampaignSettingsController {
     @RequestMapping(value = BaseRoute.UPDATE_CAMPAIGN_TYPE, method = RequestMethod.POST)
     public ResponseEntity<?> updateCampaignType(@RequestParam long userId,
                                                 @RequestParam long typeId,
-                                                @RequestParam String campaignType,
-                                                @RequestParam String baseType) {
+                                                @RequestParam String campaignType) {
 
-        CampaignTypeWSModel response = campaignSettingsMiddleware.updateCampaignType(userId, typeId, campaignType,baseType);
+        CampaignTypeWSModel response = campaignSettingsMiddleware.updateCampaignType(userId, typeId, campaignType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

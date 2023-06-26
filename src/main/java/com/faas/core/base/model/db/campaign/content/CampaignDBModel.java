@@ -15,7 +15,6 @@ public class CampaignDBModel {
     private String campaignDesc;
     private long campaignTypeId;
     private String campaignType;
-    private String campaignBaseType;
     private String campaignCategory;
     private String processId;
     private String process;
@@ -30,13 +29,12 @@ public class CampaignDBModel {
     public CampaignDBModel() {
     }
 
-    public CampaignDBModel(String id, String campaign, String campaignDesc, long campaignTypeId, String campaignType, String campaignBaseType, String campaignCategory, String processId, String process, String processType, String processCategory, List<CampaignDataDAO> campaignDatas, String campaignState, long uDate, long cDate, int status) {
+    public CampaignDBModel(String id, String campaign, String campaignDesc, long campaignTypeId, String campaignType, String campaignCategory, String processId, String process, String processType, String processCategory, List<CampaignDataDAO> campaignDatas, String campaignState, long uDate, long cDate, int status) {
         this.id = id;
         this.campaign = campaign;
         this.campaignDesc = campaignDesc;
         this.campaignTypeId = campaignTypeId;
         this.campaignType = campaignType;
-        this.campaignBaseType = campaignBaseType;
         this.campaignCategory = campaignCategory;
         this.processId = processId;
         this.process = process;
@@ -87,14 +85,6 @@ public class CampaignDBModel {
 
     public void setCampaignType(String campaignType) {
         this.campaignType = campaignType;
-    }
-
-    public String getCampaignBaseType() {
-        return campaignBaseType;
-    }
-
-    public void setCampaignBaseType(String campaignBaseType) {
-        this.campaignBaseType = campaignBaseType;
     }
 
     public String getCampaignCategory() {
