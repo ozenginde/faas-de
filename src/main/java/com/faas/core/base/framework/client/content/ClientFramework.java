@@ -125,12 +125,11 @@ public class ClientFramework {
     }
 
 
-    public ClientDBModel createClientService(String clientTitle,String clientName,String nationalId,String phoneNumber,String emailAddress,String clientCity,String clientCountry,long clientTypeId) {
+    public ClientDBModel createClientService(String clientName,String nationalId,String phoneNumber,String emailAddress,String clientCity,String clientCountry,long clientTypeId) {
 
         if (clientRepository.findByPhoneNumber(phoneNumber).size() == 0){
 
             ClientDBModel clientDBModel = new ClientDBModel();
-            clientDBModel.setClientTitle(clientTitle);
             clientDBModel.setClientName(clientName);
             clientDBModel.setNationalId(nationalId);
             clientDBModel.setPhoneNumber(phoneNumber);
@@ -162,7 +161,6 @@ public class ClientFramework {
         if (clientRepository.findByPhoneNumber(clientRequestWSDTO.getPhoneNumber()).size() == 0){
 
             ClientDBModel clientDBModel = new ClientDBModel();
-            clientDBModel.setClientTitle(clientRequestWSDTO.getClientTitle());
             clientDBModel.setClientName(clientRequestWSDTO.getClientName());
             clientDBModel.setNationalId(clientRequestWSDTO.getNationalId());
             clientDBModel.setPhoneNumber(clientRequestWSDTO.getPhoneNumber());
@@ -220,23 +218,20 @@ public class ClientFramework {
 
     public void createClientDetailsService(ClientDBModel clientDBModel){
 
-        if (clientDBModel.getPhoneNumber() != null &&
-                !clientDBModel.getPhoneNumber().equalsIgnoreCase("")){
-            clientDetailsFramework.createClientPhoneService(clientDBModel.getId(),clientDBModel.getPhoneNumber());
+        if (clientDBModel.getPhoneNumber() != null && !clientDBModel.getPhoneNumber().equalsIgnoreCase("")){
+            clientDetailsFramework.createClientPhoneService(clientDBModel.getId(),clientDBModel.getPhoneNumber(),"UNKNOWN");
         }
-        if (clientDBModel.getEmailAddress() != null &&
-                !clientDBModel.getEmailAddress().equalsIgnoreCase("")){
+        if (clientDBModel.getEmailAddress() != null && !clientDBModel.getEmailAddress().equalsIgnoreCase("")){
             clientDetailsFramework.createClientEmailService(clientDBModel.getId(),clientDBModel.getEmailAddress());
         }
     }
 
 
-    public ClientDBModel updateClientService(long clientId,String clientTitle,String clientName,String nationalId,String phoneNumber,String emailAddress,String clientCity,String clientCountry,long clientTypeId) {
+    public ClientDBModel updateClientService(long clientId,String clientName,String nationalId,String phoneNumber,String emailAddress,String clientCity,String clientCountry,long clientTypeId) {
 
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         if (clientDBModel.isPresent()) {
 
-            clientDBModel.get().setClientTitle(clientTitle);
             clientDBModel.get().setClientName(clientName);
             clientDBModel.get().setNationalId(nationalId);
             clientDBModel.get().setPhoneNumber(phoneNumber);

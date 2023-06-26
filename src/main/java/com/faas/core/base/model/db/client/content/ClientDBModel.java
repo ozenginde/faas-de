@@ -11,9 +11,6 @@ public class ClientDBModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "client_title")
-    private String clientTitle;
-
     @Column(name = "client_name")
     private String clientName;
 
@@ -54,9 +51,8 @@ public class ClientDBModel {
     public ClientDBModel() {
     }
 
-    public ClientDBModel(long id, String clientTitle, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, long clientTypeId, String clientType, String clientState, long uDate, long cDate, int status) {
+    public ClientDBModel(long id, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, long clientTypeId, String clientType, String clientState, long uDate, long cDate, int status) {
         this.id = id;
-        this.clientTitle = clientTitle;
         this.clientName = clientName;
         this.nationalId = nationalId;
         this.phoneNumber = phoneNumber;
@@ -77,14 +73,6 @@ public class ClientDBModel {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public String getClientTitle() {
-        return clientTitle;
-    }
-
-    public void setClientTitle(String clientTitle) {
-        this.clientTitle = clientTitle;
     }
 
     public String getClientName() {

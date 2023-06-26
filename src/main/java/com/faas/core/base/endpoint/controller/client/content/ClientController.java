@@ -70,7 +70,6 @@ public class  ClientController {
 
     @RequestMapping(value = BaseRoute.CREATE_CLIENT, method = RequestMethod.POST)
     public ResponseEntity<?> createClient(@RequestParam long userId,
-                                          @RequestParam String clientTitle,
                                           @RequestParam String clientName,
                                           @RequestParam String nationalId,
                                           @RequestParam String phoneNumber,
@@ -79,7 +78,7 @@ public class  ClientController {
                                           @RequestParam String clientCountry,
                                           @RequestParam long clientTypeId) {
 
-        ClientWSModel response = clientMiddleware.createClient(userId,clientTitle,clientName,nationalId,phoneNumber,emailAddress,clientCity,clientCountry,clientTypeId);
+        ClientWSModel response = clientMiddleware.createClient(userId,clientName,nationalId,phoneNumber,emailAddress,clientCity,clientCountry,clientTypeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -103,7 +102,6 @@ public class  ClientController {
     @RequestMapping(value = BaseRoute.UPDATE_CLIENT, method = RequestMethod.POST)
     public ResponseEntity<?> updateClient(@RequestParam long userId,
                                           @RequestParam long clientId,
-                                          @RequestParam String clientTitle,
                                           @RequestParam String clientName,
                                           @RequestParam String nationalId,
                                           @RequestParam String phoneNumber,
@@ -112,7 +110,7 @@ public class  ClientController {
                                           @RequestParam String clientCountry,
                                           @RequestParam long clientTypeId) {
 
-        ClientWSModel response = clientMiddleware.updateClient(userId,clientId,clientTitle,clientName,nationalId,phoneNumber,emailAddress,clientCity,clientCountry,clientTypeId);
+        ClientWSModel response = clientMiddleware.updateClient(userId,clientId,clientName,nationalId,phoneNumber,emailAddress,clientCity,clientCountry,clientTypeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

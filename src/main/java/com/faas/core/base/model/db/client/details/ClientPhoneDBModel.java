@@ -16,6 +16,9 @@ public class ClientPhoneDBModel {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "phone_carrier")
+    private String phoneCarrier;
+
     @Column(name = "u_date")
     private long uDate;
 
@@ -25,19 +28,18 @@ public class ClientPhoneDBModel {
     @Column(name = "status")
     private int status;
 
-
     public ClientPhoneDBModel() {
     }
 
-    public ClientPhoneDBModel(long id, long clientId, String phoneNumber, long uDate, long cDate, int status) {
+    public ClientPhoneDBModel(long id, long clientId, String phoneNumber, String phoneCarrier, long uDate, long cDate, int status) {
         this.id = id;
         this.clientId = clientId;
         this.phoneNumber = phoneNumber;
+        this.phoneCarrier = phoneCarrier;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
     }
-
 
     public long getId() {
         return id;
@@ -61,6 +63,14 @@ public class ClientPhoneDBModel {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getPhoneCarrier() {
+        return phoneCarrier;
+    }
+
+    public void setPhoneCarrier(String phoneCarrier) {
+        this.phoneCarrier = phoneCarrier;
     }
 
     public long getuDate() {

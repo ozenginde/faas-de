@@ -17,9 +17,6 @@ public class SessionDBModel {
     @Column(name = "client_id")
     private long clientId;
 
-    @Column(name = "client_title")
-    private String clientTitle;
-
     @Column(name = "client_name")
     private String clientName;
 
@@ -84,11 +81,10 @@ public class SessionDBModel {
     public SessionDBModel() {
     }
 
-    public SessionDBModel(long id, String sessionUUID, long clientId, String clientTitle, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String sessionState, long uDate, long cDate, int status) {
+    public SessionDBModel(long id, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String sessionState, long uDate, long cDate, int status) {
         this.id = id;
         this.sessionUUID = sessionUUID;
         this.clientId = clientId;
-        this.clientTitle = clientTitle;
         this.clientName = clientName;
         this.nationalId = nationalId;
         this.phoneNumber = phoneNumber;
@@ -133,14 +129,6 @@ public class SessionDBModel {
 
     public void setClientId(long clientId) {
         this.clientId = clientId;
-    }
-
-    public String getClientTitle() {
-        return clientTitle;
-    }
-
-    public void setClientTitle(String clientTitle) {
-        this.clientTitle = clientTitle;
     }
 
     public String getClientName() {

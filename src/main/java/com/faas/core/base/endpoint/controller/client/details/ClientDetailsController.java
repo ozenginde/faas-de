@@ -280,9 +280,10 @@ public class ClientDetailsController {
     @RequestMapping(value = BaseRoute.CREATE_CLIENT_PHONE, method = RequestMethod.POST)
     public ResponseEntity<?> createClientPhone(@RequestParam long userId,
                                                @RequestParam long clientId,
-                                               @RequestParam String phoneNumber) {
+                                               @RequestParam String phoneNumber,
+                                               @RequestParam String phoneCarrier) {
 
-        ClientPhoneWSModel response = clientDetailsMiddleware.createClientPhone(userId,clientId,phoneNumber);
+        ClientPhoneWSModel response = clientDetailsMiddleware.createClientPhone(userId,clientId,phoneNumber,phoneCarrier);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -294,9 +295,10 @@ public class ClientDetailsController {
     @RequestMapping(value = BaseRoute.UPDATE_CLIENT_PHONE, method = RequestMethod.POST)
     public ResponseEntity<?> updateClientPhone(@RequestParam long userId,
                                                @RequestParam long numberId,
-                                               @RequestParam String phoneNumber) {
+                                               @RequestParam String phoneNumber,
+                                               @RequestParam String phoneCarrier) {
 
-        ClientPhoneWSModel response = clientDetailsMiddleware.updateClientPhone(userId,numberId,phoneNumber);
+        ClientPhoneWSModel response = clientDetailsMiddleware.updateClientPhone(userId,numberId,phoneNumber,phoneCarrier);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

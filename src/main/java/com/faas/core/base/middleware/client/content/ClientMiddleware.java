@@ -112,13 +112,13 @@ public class ClientMiddleware {
     }
 
 
-    public ClientWSModel createClient(long userId,String clientTitle,String clientName,String nationalId,String phoneNumber,String emailAddress,String clientCity,String clientCountry,long clientTypeId) {
+    public ClientWSModel createClient(long userId,String clientName,String nationalId,String phoneNumber,String emailAddress,String clientCity,String clientCountry,long clientTypeId) {
 
         ClientWSModel response = new ClientWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ClientWSDTO> clientWSDTOS = new ArrayList<>();
 
-        ClientDBModel clientDBModel = clientFramework.createClientService(clientTitle,clientName,nationalId,phoneNumber,emailAddress,clientCity,clientCountry,clientTypeId);
+        ClientDBModel clientDBModel = clientFramework.createClientService(clientName,nationalId,phoneNumber,emailAddress,clientCity,clientCountry,clientTypeId);
         if (clientDBModel != null){
             clientWSDTOS.add(clientFramework.fillClientWSDTO(clientDBModel));
         }
@@ -161,13 +161,13 @@ public class ClientMiddleware {
 
 
 
-    public ClientWSModel updateClient(long userId,long clientId,String clientTitle,String clientName,String nationalId,String phoneNumber,String emailAddress,String clientCity,String clientCountry,long clientTypeId) {
+    public ClientWSModel updateClient(long userId,long clientId,String clientName,String nationalId,String phoneNumber,String emailAddress,String clientCity,String clientCountry,long clientTypeId) {
 
         ClientWSModel response = new ClientWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ClientWSDTO> clientWSDTOS = new ArrayList<>();
 
-        ClientDBModel clientDBModel = clientFramework.updateClientService(clientId,clientTitle,clientName,nationalId,phoneNumber,emailAddress,clientCity,clientCountry,clientTypeId);
+        ClientDBModel clientDBModel = clientFramework.updateClientService(clientId,clientName,nationalId,phoneNumber,emailAddress,clientCity,clientCountry,clientTypeId);
         if (clientDBModel != null) {
             clientWSDTOS.add(clientFramework.fillClientWSDTO(clientDBModel));
         }

@@ -442,13 +442,13 @@ public class ClientDetailsMiddleware {
     }
 
 
-    public ClientPhoneWSModel createClientPhone(long userId,long clientId,String phoneNumber) {
+    public ClientPhoneWSModel createClientPhone(long userId,long clientId,String phoneNumber,String phoneCarrier) {
 
         ClientPhoneWSModel response = new ClientPhoneWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ClientPhoneWSDTO> clientPhoneWSDTOS = new ArrayList<>();
 
-        ClientPhoneDBModel clientPhoneDBModel = clientDetailsFramework.createClientPhoneService(clientId,phoneNumber);
+        ClientPhoneDBModel clientPhoneDBModel = clientDetailsFramework.createClientPhoneService(clientId,phoneNumber,phoneCarrier);
         if (clientPhoneDBModel != null) {
             clientPhoneWSDTOS.add(clientDetailsFramework.fillClientPhoneWSDTO(clientPhoneDBModel));
         }
@@ -464,13 +464,13 @@ public class ClientDetailsMiddleware {
     }
 
 
-    public ClientPhoneWSModel updateClientPhone(long userId,long numberId,String phoneNumber) {
+    public ClientPhoneWSModel updateClientPhone(long userId,long numberId,String phoneNumber,String phoneCarrier) {
 
         ClientPhoneWSModel response = new ClientPhoneWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ClientPhoneWSDTO> clientPhoneWSDTOS = new ArrayList<>();
 
-        ClientPhoneDBModel clientPhoneDBModel = clientDetailsFramework.updateClientPhoneService(numberId,phoneNumber);
+        ClientPhoneDBModel clientPhoneDBModel = clientDetailsFramework.updateClientPhoneService(numberId,phoneNumber,phoneCarrier);
         if (clientPhoneDBModel != null) {
             clientPhoneWSDTOS.add(clientDetailsFramework.fillClientPhoneWSDTO(clientPhoneDBModel));
         }

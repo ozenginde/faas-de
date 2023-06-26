@@ -100,7 +100,6 @@ public class SessionMapper {
 
         sessionDBModel.setSessionUUID(appUtils.generateUUID());
         sessionDBModel.setClientId(clientDBModel.getId());
-        sessionDBModel.setClientTitle(clientDBModel.getClientTitle());
         sessionDBModel.setClientName(clientDBModel.getClientName());
         sessionDBModel.setNationalId(clientDBModel.getNationalId());
         sessionDBModel.setPhoneNumber(clientDBModel.getPhoneNumber());
@@ -166,40 +165,6 @@ public class SessionMapper {
         return sessionDetailsWSDTO;
     }
 
-
-
-
-    public List<ApiCampaignWSDTO> mapSessionCampaigns(long agentId){
-
-        List<ApiCampaignWSDTO>apiCampaignWSDTOS = new ArrayList<>();
-        List<CampaignAgentDBModel> campaignAgentDBModels = campaignAgentRepository.findByAgentId(agentId);
-        for (CampaignAgentDBModel campaignAgentDBModel : campaignAgentDBModels) {
-            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignAgentDBModel.getCampaignId());
-            if (campaignDBModel.isPresent()) {
-
-                ApiCampaignWSDTO apiCampaignWSDTO = new ApiCampaignWSDTO();
-                apiCampaignWSDTO.setCampaign(campaignDBModel.get());
-                Optional<ProcessDBModel> processDBModel = processRepository.findById(campaignDBModel.get().getProcessId());
-                processDBModel.ifPresent(apiCampaignWSDTO::setCampaignProcess);
-                apiCampaignWSDTO.setCampaignSummary(mapCampaignSummary(agentId,campaignDBModel.get().getId()));
-                apiCampaignWSDTOS.add(apiCampaignWSDTO);
-
-                return apiCampaignWSDTOS;
-            }
-        }
-        return apiCampaignWSDTOS;
-    }
-
-
-    public List<ApiSummaryWSDTO> mapCampaignSummary(long agentId,String campaignId){
-
-        List<ApiSummaryWSDTO> agentSessionSummaries = new ArrayList<>();
-        agentSessionSummaries.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndCampaignIdAndSessionState(agentId,campaignId,AppConstant.READY_SESSION))));
-        agentSessionSummaries.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndCampaignIdAndSessionState(agentId,campaignId,AppConstant.ACTIVE_SESSION))));
-        agentSessionSummaries.add(new ApiSummaryWSDTO(AppConstant.COMPLETED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndCampaignIdAndSessionState(agentId,campaignId,AppConstant.COMPLETED_SESSION))));
-
-        return agentSessionSummaries;
-    }
 
 
 

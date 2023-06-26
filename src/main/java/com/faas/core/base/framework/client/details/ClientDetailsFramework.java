@@ -230,11 +230,12 @@ public class ClientDetailsFramework {
     }
 
 
-    public ClientPhoneDBModel createClientPhoneService(long clientId,String phoneNumber) {
+    public ClientPhoneDBModel createClientPhoneService(long clientId,String phoneNumber,String phoneCarrier) {
 
         ClientPhoneDBModel clientPhoneDBModel = new ClientPhoneDBModel();
         clientPhoneDBModel.setClientId(clientId);
         clientPhoneDBModel.setPhoneNumber(phoneNumber);
+        clientPhoneDBModel.setPhoneCarrier(phoneCarrier);
         clientPhoneDBModel.setuDate(appUtils.getCurrentTimeStamp());
         clientPhoneDBModel.setcDate(appUtils.getCurrentTimeStamp());
         clientPhoneDBModel.setStatus(1);
@@ -242,12 +243,12 @@ public class ClientDetailsFramework {
         return clientPhoneRepository.save(clientPhoneDBModel);
     }
 
-    public ClientPhoneDBModel updateClientPhoneService(long numberId,String phoneNumber) {
+    public ClientPhoneDBModel updateClientPhoneService(long numberId,String phoneNumber,String phoneCarrier) {
 
         Optional<ClientPhoneDBModel> clientPhoneDBModel = clientPhoneRepository.findById(numberId);
         if (clientPhoneDBModel.isPresent()){
-
             clientPhoneDBModel.get().setPhoneNumber(phoneNumber);
+            clientPhoneDBModel.get().setPhoneCarrier(phoneCarrier);
             clientPhoneDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             clientPhoneDBModel.get().setStatus(1);
 

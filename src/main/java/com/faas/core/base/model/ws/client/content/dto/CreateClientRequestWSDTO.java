@@ -3,7 +3,6 @@ package com.faas.core.base.model.ws.client.content.dto;
 public class CreateClientRequestWSDTO {
 
     private long userId;
-    private String clientTitle;
     private String clientName;
     private String nationalId;
     private String phoneNumber;
@@ -15,9 +14,8 @@ public class CreateClientRequestWSDTO {
     public CreateClientRequestWSDTO() {
     }
 
-    public CreateClientRequestWSDTO(long userId, String clientTitle, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType) {
+    public CreateClientRequestWSDTO(long userId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType) {
         this.userId = userId;
-        this.clientTitle = clientTitle;
         this.clientName = clientName;
         this.nationalId = nationalId;
         this.phoneNumber = phoneNumber;
@@ -33,14 +31,6 @@ public class CreateClientRequestWSDTO {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public String getClientTitle() {
-        return clientTitle;
-    }
-
-    public void setClientTitle(String clientTitle) {
-        this.clientTitle = clientTitle;
     }
 
     public String getClientName() {
