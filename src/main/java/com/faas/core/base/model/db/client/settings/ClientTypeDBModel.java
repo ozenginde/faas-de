@@ -6,7 +6,6 @@ import javax.persistence.*;
 @Table(name = "client_type_table")
 public class ClientTypeDBModel {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
