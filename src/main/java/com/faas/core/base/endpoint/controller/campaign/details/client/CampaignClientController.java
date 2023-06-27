@@ -27,12 +27,12 @@ public class CampaignClientController {
 
 
     @RequestMapping(value = BaseRoute.SEARCH_CLIENTS, method = RequestMethod.POST)
-    public ResponseEntity<?> searchCampaignClients(@RequestParam long userId,
-                                                   @RequestParam String city,
-                                                   @RequestParam String country,
-                                                   @RequestParam String clientState,
-                                                   @RequestParam int reqPage,
-                                                   @RequestParam int reqSize) {
+    public ResponseEntity<?> searchClients(@RequestParam long userId,
+                                           @RequestParam String city,
+                                           @RequestParam String country,
+                                           @RequestParam String clientState,
+                                           @RequestParam int reqPage,
+                                           @RequestParam int reqSize) {
 
         CampaignClientWSModel response = campaignClientMiddleware.searchClients(userId,city,country,clientState,reqPage,reqSize);
 
