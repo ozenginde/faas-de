@@ -7,7 +7,7 @@ import com.faas.core.base.model.db.utils.location.CityDBModel;
 import com.faas.core.base.model.db.utils.location.CountryDBModel;
 import com.faas.core.base.model.ws.client.content.dto.ClientWSDTO;
 import com.faas.core.base.model.ws.client.content.dto.ClientsByStateWSDTO;
-import com.faas.core.base.model.ws.client.content.dto.CreateClientRequestWSDTO;
+import com.faas.core.base.model.ws.client.content.dto.CreateClientRequestDTO;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.ClientAddressRepository;
 import com.faas.core.base.repo.client.details.ClientDataRepository;
@@ -156,18 +156,18 @@ public class ClientFramework {
     }
 
 
-    public ClientDBModel createVolumeClientService(CreateClientRequestWSDTO clientRequestWSDTO) {
+    public ClientDBModel createVolumeClientService(CreateClientRequestDTO createClientRequestDTO) {
 
-        if (clientRepository.findByPhoneNumber(clientRequestWSDTO.getPhoneNumber()).size() == 0){
+        if (clientRepository.findByPhoneNumber(createClientRequestDTO.getPhoneNumber()).size() == 0){
 
             ClientDBModel clientDBModel = new ClientDBModel();
-            clientDBModel.setClientName(clientRequestWSDTO.getClientName());
-            clientDBModel.setNationalId(clientRequestWSDTO.getNationalId());
-            clientDBModel.setPhoneNumber(clientRequestWSDTO.getPhoneNumber());
-            clientDBModel.setEmailAddress(clientRequestWSDTO.getEmailAddress());
-            clientDBModel.setClientCity(clientRequestWSDTO.getClientCity());
-            clientDBModel.setClientCountry(clientRequestWSDTO.getClientCountry());
-            List<ClientTypeDBModel> clientTypeDBModels = clientTypeRepository.findByClientType(clientRequestWSDTO.getClientType());
+            clientDBModel.setClientName(createClientRequestDTO.getClientName());
+            clientDBModel.setNationalId(createClientRequestDTO.getNationalId());
+            clientDBModel.setPhoneNumber(createClientRequestDTO.getPhoneNumber());
+            clientDBModel.setEmailAddress(createClientRequestDTO.getEmailAddress());
+            clientDBModel.setClientCity(createClientRequestDTO.getClientCity());
+            clientDBModel.setClientCountry(createClientRequestDTO.getClientCountry());
+            List<ClientTypeDBModel> clientTypeDBModels = clientTypeRepository.findByClientType(createClientRequestDTO.getClientType());
             if (clientTypeDBModels.size()>0) {
                 clientDBModel.setClientTypeId(clientTypeDBModels.get(0).getId());
                 clientDBModel.setClientType(clientTypeDBModels.get(0).getClientType());
@@ -190,27 +190,28 @@ public class ClientFramework {
 
     public void checkAndInsertCityAndCountry(ClientDBModel clientDBModel){
 
-        if (!cityRepository.existsByCityAndCountry(clientDBModel.getClientCity().toLowerCase(),clientDBModel.getClientCountry().toLowerCase())){
+        if (!cityRepository.existsByCityAndCountry(clientDBModel.getClientCity().toUpperCase(),clientDBModel.getClientCountry().toLowerCase())){
 
             CityDBModel cityDBModel = new CityDBModel();
-            cityDBModel.setCity(clientDBModel.getClientCity().toLowerCase());
-            cityDBModel.setCountry(clientDBModel.getClientCountry().toLowerCase());
+            cityDBModel.setCity(clientDBModel.getClientCity().toUpperCase());
+            cityDBModel.setCountry(clientDBModel.getClientCountry().toUpperCase());
             cityDBModel.setuDate(appUtils.getCurrentTimeStamp());
             cityDBModel.setcDate(appUtils.getCurrentTimeStamp());
             cityDBModel.setStatus(1);
 
             cityRepository.save(cityDBModel);
         }
-        if (!countryRepository.existsByCountry(clientDBModel.getClientCountry().toLowerCase())){
+        if (!countryRepository.existsByCountry(clientDBModel.getClientCountry().toUpperCase())){
 
             CountryDBModel countryDBModel = new CountryDBModel();
-            countryDBModel.setCountry(clientDBModel.getClientCountry().toLowerCase());
+            countryDBModel.setCountry(clientDBModel.getClientCountry().toUpperCase());
             countryDBModel.setuDate(appUtils.getCurrentTimeStamp());
             countryDBModel.setcDate(appUtils.getCurrentTimeStamp());
             countryDBModel.setStatus(1);
 
             countryRepository.save(countryDBModel);
         }
+
     }
 
 

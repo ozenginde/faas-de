@@ -4,7 +4,7 @@ import com.faas.core.base.middleware.client.content.ClientMiddleware;
 import com.faas.core.base.model.ws.client.content.AllClientsWSModel;
 import com.faas.core.base.model.ws.client.content.ClientWSModel;
 import com.faas.core.base.model.ws.client.content.ClientsByStateWSModel;
-import com.faas.core.base.model.ws.client.content.CreateClientRequestModel;
+import com.faas.core.base.model.ws.client.content.CreateClientRequest;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,9 +88,9 @@ public class  ClientController {
 
 
     @RequestMapping(value = BaseRoute.CREATE_VOLUME_CLIENT, method = RequestMethod.POST)
-    public ResponseEntity<?> createVolumeClient(@RequestBody CreateClientRequestModel createClient) {
+    public ResponseEntity<?> createVolumeClient(@RequestBody CreateClientRequest createClientRequest) {
 
-        ClientWSModel response = clientMiddleware.createVolumeClient(createClient);
+        ClientWSModel response = clientMiddleware.createVolumeClient(createClientRequest);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

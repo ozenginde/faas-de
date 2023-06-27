@@ -5,7 +5,7 @@ import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.ws.client.content.AllClientsWSModel;
 import com.faas.core.base.model.ws.client.content.ClientWSModel;
 import com.faas.core.base.model.ws.client.content.ClientsByStateWSModel;
-import com.faas.core.base.model.ws.client.content.CreateClientRequestModel;
+import com.faas.core.base.model.ws.client.content.CreateClientRequest;
 import com.faas.core.base.model.ws.client.content.dto.AllClientsWSDTO;
 import com.faas.core.base.model.ws.client.content.dto.ClientWSDTO;
 import com.faas.core.base.model.ws.client.content.dto.ClientsByStateWSDTO;
@@ -134,15 +134,15 @@ public class ClientMiddleware {
     }
 
 
-    public ClientWSModel createVolumeClient(CreateClientRequestModel createClient) {
+    public ClientWSModel createVolumeClient(CreateClientRequest createClientRequest) {
 
         ClientWSModel response = new ClientWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ClientWSDTO> clientWSDTOS = new ArrayList<>();
 
-        if (createClient.getClientRequests() != null){
-            for (int i=0;i<createClient.getClientRequests().size();i++){
-                ClientDBModel clientDBModel = clientFramework.createVolumeClientService(createClient.getClientRequests().get(i));
+        if (createClientRequest.getCreateClients() != null){
+            for (int i=0;i<createClientRequest.getCreateClients().size();i++){
+                ClientDBModel clientDBModel = clientFramework.createVolumeClientService(createClientRequest.getCreateClients().get(i));
                 if (clientDBModel != null) {
                     clientWSDTOS.add(clientFramework.fillClientWSDTO(clientDBModel));
                 }

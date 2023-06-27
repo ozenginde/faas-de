@@ -6,8 +6,8 @@ import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.details.session.dto.CampaignSessionWSDTO;
-import com.faas.core.base.model.ws.session.content.CreateSessionModel;
-import com.faas.core.base.model.ws.session.content.dto.CreateSessionWSDTO;
+import com.faas.core.base.model.ws.session.content.CreateSessionRequest;
+import com.faas.core.base.model.ws.session.content.dto.CreateSessionRequestDTO;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -90,6 +90,12 @@ public class CampaignSessionFramework {
     }
 
 
+    public CampaignSessionWSDTO searchCampaignSessionsService() {
+
+        return null;
+    }
+
+
     public SessionWSDTO getCampaignSessionService(long userId, long sessionId, long clientId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
@@ -101,12 +107,12 @@ public class CampaignSessionFramework {
 
 
 
-    public List<SessionWSDTO> createCampaignSessionsService(CreateSessionModel createSession) {
+    public List<SessionWSDTO> createCampaignSessionsService(CreateSessionRequest createSession) {
 
         List<SessionWSDTO>sessionWSDTOS = new ArrayList<>();
         for (int i=0;i<createSession.getCreateSessions().size();i++){
-            CreateSessionWSDTO createSessionWSDTO = createSession.getCreateSessions().get(i);
-            SessionWSDTO sessionWSDTO = createCampaignSessionService(createSessionWSDTO.getUserId(),createSessionWSDTO.getCampaignId(),createSessionWSDTO.getAgentId(),createSessionWSDTO.getClientId());
+            CreateSessionRequestDTO createSessionRequestDTO = createSession.getCreateSessions().get(i);
+            SessionWSDTO sessionWSDTO = createCampaignSessionService(createSessionRequestDTO.getUserId(), createSessionRequestDTO.getCampaignId(), createSessionRequestDTO.getAgentId(), createSessionRequestDTO.getClientId());
             if (sessionWSDTO != null){
                 sessionWSDTOS.add(sessionWSDTO);
             }

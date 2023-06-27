@@ -1,6 +1,7 @@
 package com.faas.core.utils.mapper;
 
 import com.faas.core.base.model.db.client.content.ClientDBModel;
+import com.faas.core.base.model.ws.campaign.details.client.dto.CampaignClientWSDTO;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.ClientAddressRepository;
@@ -38,6 +39,16 @@ public class ClientMapper {
     @Autowired
     AppUtils appUtils;
 
+
+    public CampaignClientWSDTO mapCampaignClientWSDTO(Page<ClientDBModel>clientDBModels){
+
+        CampaignClientWSDTO campaignClientWSDTO = new CampaignClientWSDTO();
+
+
+        return campaignClientWSDTO;
+    }
+
+
     public PaginationWSDTO createClientPaginationWSDTO(Page<ClientDBModel> clientPage){
 
         PaginationWSDTO paginationWSDTO = new PaginationWSDTO();
@@ -48,6 +59,7 @@ public class ClientMapper {
 
         return paginationWSDTO;
     }
+
 
 
 }

@@ -4,7 +4,7 @@ import com.faas.core.base.framework.campaign.details.session.CampaignSessionFram
 import com.faas.core.base.model.ws.campaign.details.session.CampaignSessionWSModel;
 import com.faas.core.base.model.ws.campaign.details.session.dto.CampaignSessionWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.session.content.CreateSessionModel;
+import com.faas.core.base.model.ws.session.content.CreateSessionRequest;
 import com.faas.core.base.model.ws.session.content.SessionWSModel;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.utils.config.AppConstant;
@@ -61,6 +61,26 @@ public class CampaignSessionMiddleware {
     }
 
 
+    public CampaignSessionWSModel searchCampaignSessions(long userId,String campaignId,String sessionState,int reqPage,int reqSize) {
+
+        CampaignSessionWSModel response = new CampaignSessionWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        CampaignSessionWSDTO campaignSession =  campaignSessionFramework.searchCampaignSessionsService();
+        if (campaignSession != null){
+            response.setCampaignSession(campaignSession);
+        }
+
+        general.setOperation("getCampaignSessions");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
     public SessionWSModel getCampaignSession(long userId, long sessionId, long clientId) {
 
         SessionWSModel response = new SessionWSModel();
@@ -83,7 +103,7 @@ public class CampaignSessionMiddleware {
     }
 
 
-    public SessionWSModel createCampaignSessions(CreateSessionModel createSession) {
+    public SessionWSModel createCampaignSessions(CreateSessionRequest createSession) {
 
         SessionWSModel response = new SessionWSModel();
         GeneralWSModel general = new GeneralWSModel();

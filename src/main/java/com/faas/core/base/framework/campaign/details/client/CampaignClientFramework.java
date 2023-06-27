@@ -2,7 +2,8 @@ package com.faas.core.base.framework.campaign.details.client;
 
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.dto.CampaignClientWSDTO;
-import com.faas.core.base.model.ws.general.PaginationWSDTO;
+import com.faas.core.base.model.ws.client.content.GetClientRequest;
+import com.faas.core.base.model.ws.client.content.dto.ClientWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.utils.config.AppUtils;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Component
@@ -30,22 +33,33 @@ public class CampaignClientFramework {
 
 
 
-    public Page<ClientDBModel> searchCampaignClientsService(String cityQuery,String countryQuery,String clientState,int reqPage,int reqSize) {
+    public CampaignClientWSDTO searchClientsService(String city,String country,String clientState,int reqPage,int reqSize) {
 
-        if (countryQuery.equalsIgnoreCase("")){
-            return clientRepository.findAllByClientState(clientState,PageRequest.of(reqPage,reqSize));
+        if (country.equalsIgnoreCase("")){
+            return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientState(clientState,PageRequest.of(reqPage,reqSize)));
         }
 
-        if (cityQuery.equalsIgnoreCase("") && !countryQuery.equalsIgnoreCase("")){
-            return clientRepository.findAllByClientCountryAndClientState(countryQuery,clientState,PageRequest.of(reqPage,reqSize));
+        if (city.equalsIgnoreCase("") && !country.equalsIgnoreCase("")){
+            return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientCountryAndClientState(country,clientState,PageRequest.of(reqPage,reqSize)));
         }
 
-        if (!cityQuery.equalsIgnoreCase("") && !countryQuery.equalsIgnoreCase("")){
-            return clientRepository.findAllByClientCountryAndClientCityContainingIgnoreCaseAndClientState(countryQuery,cityQuery,clientState,PageRequest.of(reqPage,reqSize));
+        if (!city.equalsIgnoreCase("") && !country.equalsIgnoreCase("")){
+            return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientCountryAndClientCityContainingIgnoreCaseAndClientState(country,city,clientState,PageRequest.of(reqPage,reqSize)));
         }
         return null;
     }
 
+
+    public List<ClientWSDTO> getCampaignClientsService(GetClientRequest getClientRequest) {
+
+        return null;
+    }
+
+
+    public ClientWSDTO getCampaignClientService(long userId, long clientId) {
+
+        return null;
+    }
 
 
 }

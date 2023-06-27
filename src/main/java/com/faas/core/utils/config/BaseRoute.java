@@ -97,15 +97,16 @@ public class BaseRoute {
 
     public static final String GET_CAMPAIGN_SESSIONS = "getcampaignsessions";
     public static final String GET_CAMPAIGN_SESSIONS_BY_STATE = "getcampaignsessionsbystate";
+    public static final String SEARCH_CAMPAIGN_SESSIONS = "searchcampaignsessions";
     public static final String GET_CAMPAIGN_SESSION = "getcampaignsession";
     public static final String CREATE_CAMPAIGN_SESSION = "createcampaignsession";
     public static final String CREATE_CAMPAIGN_SESSIONS = "createcampaignsessions";
     public static final String UPDATE_CAMPAIGN_SESSION = "updatecampaignsession";
     public static final String REMOVE_CAMPAIGN_SESSION = "removecampaignsession";
 
-
+    public static final String SEARCH_CLIENTS = "searchclients";
     public static final String GET_CAMPAIGN_CLIENTS = "getcampaignclients";
-    public static final String SEARCH_CAMPAIGN_CLIENTS = "searchcampaignclients";
+    public static final String GET_CAMPAIGN_CLIENT = "getcampaignclient";
 
 
     public static final String GET_ALL_CLIENTS = "getallclients";
@@ -118,7 +119,6 @@ public class BaseRoute {
 
 
     public static final String GET_CLIENT_OS_INTELS = "getclientosintels";
-
 
     public static final String GET_CLIENT_DETAILS = "getclientdetails";
 

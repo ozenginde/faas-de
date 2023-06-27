@@ -59,6 +59,7 @@ public class CampaignController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
+
     @RequestMapping(value = BaseRoute.GET_CAMPAIGNS_BY_CATEGORY, method = RequestMethod.POST)
     public ResponseEntity<?> getCampaignsByCategory(@RequestParam long userId,
                                                     @RequestParam String campaignCategory) {
