@@ -1,28 +1,28 @@
-package com.faas.core.base.middleware.inquiry.content;
+package com.faas.core.base.middleware.inquiry.settings;
 
-import com.faas.core.base.framework.inquiry.content.InquiryFramework;
+import com.faas.core.base.framework.inquiry.settings.InquirySettingsFramework;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.inquiry.content.InquiryWSModel;
+import com.faas.core.base.model.ws.inquiry.settings.InquiryTypeWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class InquiryMiddleware {
+public class InquirySettingsMiddleware {
 
 
     @Autowired
-    InquiryFramework inquiryFramework;
+    InquirySettingsFramework inquirySettingsFramework;
 
 
-    public InquiryWSModel getAllInquiries(long userId, int reqPage, int reqSize) {
+    public InquiryTypeWSModel getAllInquiryTypes(long userId) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("getAllInquiries");
+        general.setOperation("getAllInquiryTypes");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -32,13 +32,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel getInquiriesByState(long userId, int reqPage, int reqSize) {
+    public InquiryTypeWSModel getInquiryType(long userId) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("getInquiriesByState");
+        general.setOperation("getInquiryType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -48,13 +48,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel getInquiry(long userId, int reqPage, int reqSize) {
+    public InquiryTypeWSModel createInquiryType(long userId) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("getInquiry");
+        general.setOperation("createInquiryType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -64,13 +64,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel createInquiry(long userId, int reqPage, int reqSize) {
+    public InquiryTypeWSModel updateInquiryType(long userId) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("createInquiry");
+        general.setOperation("updateInquiryType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -80,13 +80,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel updateInquiry(long userId, int reqPage, int reqSize) {
+    public InquiryTypeWSModel removeInquiryType(long userId) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("updateInquiry");
+        general.setOperation("removeInquiryType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -96,18 +96,4 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel removeInquiry(long userId, int reqPage, int reqSize) {
-
-        InquiryWSModel response = new InquiryWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-        general.setOperation("removeInquiry");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 }

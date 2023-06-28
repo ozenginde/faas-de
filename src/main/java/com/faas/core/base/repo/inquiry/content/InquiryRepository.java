@@ -1,6 +1,6 @@
-package com.faas.core.base.repo.inquiry;
+package com.faas.core.base.repo.inquiry.content;
 
-import com.faas.core.base.model.db.inquiry.InquiryDBModel;
+import com.faas.core.base.model.db.inquiry.content.InquiryDBModel;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

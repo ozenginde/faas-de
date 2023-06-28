@@ -9,7 +9,7 @@ import com.faas.core.base.repo.client.details.ClientAddressRepository;
 import com.faas.core.base.repo.client.details.ClientDataRepository;
 import com.faas.core.base.repo.client.details.ClientEmailRepository;
 import com.faas.core.base.repo.client.details.ClientPhoneRepository;
-import com.faas.core.base.repo.inquiry.InquiryRepository;
+import com.faas.core.base.repo.inquiry.content.InquiryRepository;
 import com.faas.core.base.repo.notification.NotificationRepository;
 import com.faas.core.base.repo.operation.channel.*;
 import com.faas.core.base.repo.operation.content.OperationRepository;

@@ -1,4 +1,4 @@
-package com.faas.core.base.framework.inquiry.content;
+package com.faas.core.base.framework.flow.content;
 
 import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
 import com.faas.core.base.repo.inquiry.content.InquiryRepository;
@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Component
-public class InquiryFramework {
+public class FlowFramework {
 
 
     @Autowired

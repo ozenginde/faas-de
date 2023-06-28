@@ -1,6 +1,7 @@
-package com.faas.core.base.middleware.inquiry.content;
+package com.faas.core.base.middleware.flow.content;
 
 import com.faas.core.base.framework.inquiry.content.InquiryFramework;
+import com.faas.core.base.model.ws.flow.content.FlowWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.model.ws.inquiry.content.InquiryWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -9,20 +10,20 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class InquiryMiddleware {
+public class FlowMiddleware {
 
 
     @Autowired
     InquiryFramework inquiryFramework;
 
 
-    public InquiryWSModel getAllInquiries(long userId, int reqPage, int reqSize) {
+    public FlowWSModel getAllFlows(long userId, int reqPage, int reqSize) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("getAllInquiries");
+        general.setOperation("getAllFlows");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -32,13 +33,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel getInquiriesByState(long userId, int reqPage, int reqSize) {
+    public FlowWSModel getFlowsByState(long userId, int reqPage, int reqSize) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("getInquiriesByState");
+        general.setOperation("getFlowsByState");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -48,13 +49,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel getInquiry(long userId, int reqPage, int reqSize) {
+    public FlowWSModel getFlow(long userId, int reqPage, int reqSize) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("getInquiry");
+        general.setOperation("getFlow");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -64,13 +65,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel createInquiry(long userId, int reqPage, int reqSize) {
+    public FlowWSModel createFlow(long userId, int reqPage, int reqSize) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("createInquiry");
+        general.setOperation("createFlow");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -80,13 +81,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel updateInquiry(long userId, int reqPage, int reqSize) {
+    public FlowWSModel updateFlow(long userId, int reqPage, int reqSize) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("updateInquiry");
+        general.setOperation("updateFlow");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -96,13 +97,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel removeInquiry(long userId, int reqPage, int reqSize) {
+    public FlowWSModel removeFlow(long userId, int reqPage, int reqSize) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("removeInquiry");
+        general.setOperation("removeFlow");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

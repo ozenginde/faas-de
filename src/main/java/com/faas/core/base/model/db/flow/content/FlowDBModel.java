@@ -1,11 +1,11 @@
-package com.faas.core.base.model.db.inquiry;
+package com.faas.core.base.model.db.flow.content;
 
 import javax.persistence.*;
 
 
 @Entity
-@Table(name = "inquiry_table")
-public class InquiryDBModel {
+@Table(name = "flow_table")
+public class FlowDBModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,10 +80,10 @@ public class InquiryDBModel {
     @Column(name = "status")
     private int status;
 
-    public InquiryDBModel() {
+    public FlowDBModel() {
     }
 
-    public InquiryDBModel(long id, long clientId, String clientName, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, long sessionId, String sessionUUID, String campaignId, String campaign, String campaignType, String campaignBaseType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String inquiryState, long uDate, long cDate, int status) {
+    public FlowDBModel(long id, long clientId, String clientName, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, long sessionId, String sessionUUID, String campaignId, String campaign, String campaignType, String campaignBaseType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String inquiryState, long uDate, long cDate, int status) {
         this.id = id;
         this.clientId = clientId;
         this.clientName = clientName;
