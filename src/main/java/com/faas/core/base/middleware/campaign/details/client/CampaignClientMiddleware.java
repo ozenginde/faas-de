@@ -4,7 +4,6 @@ import com.faas.core.base.framework.campaign.details.client.CampaignClientFramew
 import com.faas.core.base.model.ws.campaign.details.client.CampaignClientWSModel;
 import com.faas.core.base.model.ws.campaign.details.client.dto.CampaignClientWSDTO;
 import com.faas.core.base.model.ws.client.content.ClientWSModel;
-import com.faas.core.base.model.ws.client.content.GetClientRequest;
 import com.faas.core.base.model.ws.client.content.dto.ClientWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -41,25 +40,6 @@ public class CampaignClientMiddleware {
         return response;
     }
 
-
-    public ClientWSModel getCampaignClients(GetClientRequest getClientRequest) {
-
-        ClientWSModel response = new ClientWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        List<ClientWSDTO> clientWSDTOS = campaignClientFramework.getCampaignClientsService(getClientRequest);
-        if (clientWSDTOS != null){
-            response.setClients(clientWSDTOS);
-        }
-
-        general.setOperation("getCampaignClients");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
     public ClientWSModel getCampaignClient(long userId, long clientId) {

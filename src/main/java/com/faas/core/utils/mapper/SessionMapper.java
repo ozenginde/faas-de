@@ -1,10 +1,8 @@
 package com.faas.core.utils.mapper;
 
-import com.faas.core.api.model.ws.campaign.content.dto.ApiCampaignWSDTO;
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.session.details.dto.ApiSessionDetailsWSDTO;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
-import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
@@ -95,10 +93,11 @@ public class SessionMapper {
     AppUtils appUtils;
 
 
-    public CampaignSessionWSDTO mapCampaignSessionWSDTO(Page<SessionDBModel> sessionDBModels){
+    public CampaignSessionWSDTO mapCampaignSessionWSDTO(Page<SessionDBModel> sessionPageModels){
 
         CampaignSessionWSDTO campaignSessionWSDTO = new CampaignSessionWSDTO();
-
+        campaignSessionWSDTO.setSessions(mapSessionWSDTOS(sessionPageModels.getContent()));
+        campaignSessionWSDTO.setPagination(createSessionPaginationWSDTO(sessionPageModels));
         return campaignSessionWSDTO;
     }
 

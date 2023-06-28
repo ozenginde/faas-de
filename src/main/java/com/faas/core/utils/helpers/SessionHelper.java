@@ -49,7 +49,7 @@ public class SessionHelper {
 
 
 
-    public ApiSessionWSDTO getApiSessionHelper(long agentId, String sessionState, int reqPage, int reqSize) {
+    public ApiSessionWSDTO getApiSessionWSDTO(long agentId, String sessionState, int reqPage, int reqSize) {
 
         Page<SessionDBModel> sessionsPage = sessionRepository.findAllByAgentIdAndSessionState(agentId,sessionState,PageRequest.of(reqPage,reqSize));
         if (sessionsPage != null){

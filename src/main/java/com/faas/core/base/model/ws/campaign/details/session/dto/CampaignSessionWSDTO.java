@@ -7,22 +7,14 @@ import java.util.List;
 
 public class CampaignSessionWSDTO {
 
-    private PaginationWSDTO pagination;
     private List<SessionWSDTO> sessions;
+    private PaginationWSDTO pagination;
 
     public CampaignSessionWSDTO() {
     }
 
-    public CampaignSessionWSDTO(PaginationWSDTO pagination, List<SessionWSDTO> sessions) {
-        this.pagination = pagination;
+    public CampaignSessionWSDTO(List<SessionWSDTO> sessions, PaginationWSDTO pagination) {
         this.sessions = sessions;
-    }
-
-    public PaginationWSDTO getPagination() {
-        return pagination;
-    }
-
-    public void setPagination(PaginationWSDTO pagination) {
         this.pagination = pagination;
     }
 
@@ -32,5 +24,13 @@ public class CampaignSessionWSDTO {
 
     public void setSessions(List<SessionWSDTO> sessions) {
         this.sessions = sessions;
+    }
+
+    public PaginationWSDTO getPagination() {
+        return pagination;
+    }
+
+    public void setPagination(PaginationWSDTO pagination) {
+        this.pagination = pagination;
     }
 }

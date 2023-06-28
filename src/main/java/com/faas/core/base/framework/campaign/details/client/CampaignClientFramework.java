@@ -1,19 +1,14 @@
 package com.faas.core.base.framework.campaign.details.client;
 
-import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.dto.CampaignClientWSDTO;
-import com.faas.core.base.model.ws.client.content.GetClientRequest;
 import com.faas.core.base.model.ws.client.content.dto.ClientWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.mapper.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 
 @Component
@@ -49,11 +44,6 @@ public class CampaignClientFramework {
         return null;
     }
 
-
-    public List<ClientWSDTO> getCampaignClientsService(GetClientRequest getClientRequest) {
-
-        return null;
-    }
 
 
     public ClientWSDTO getCampaignClientService(long userId, long clientId) {

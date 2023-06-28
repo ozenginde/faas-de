@@ -1,12 +1,8 @@
 package com.faas.core.api.framework.session.content;
 
-import com.faas.core.api.model.ws.campaign.content.dto.ApiAgentCampaignWSDTO;
-import com.faas.core.api.model.ws.campaign.content.dto.ApiCampaignWSDTO;
-import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
-import com.faas.core.api.model.ws.session.content.dto.*;
-import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
-import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
-import com.faas.core.base.model.db.process.content.ProcessDBModel;
+import com.faas.core.api.model.ws.session.content.dto.ApiAgentSessionWSDTO;
+import com.faas.core.api.model.ws.session.content.dto.ApiCampaignSessionWSDTO;
+import com.faas.core.api.model.ws.session.content.dto.ApiSessionWSDTO;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
@@ -23,9 +19,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @Component
@@ -59,8 +53,8 @@ public class ApiSessionFramework {
     public ApiAgentSessionWSDTO apiGetAgentSessionService(long agentId, int reqPage, int reqSize) {
 
         ApiAgentSessionWSDTO agentSessionWSDTO = new ApiAgentSessionWSDTO();
-        agentSessionWSDTO.setReadySession(sessionHelper.getApiSessionHelper(agentId,AppConstant.READY_SESSION,reqPage,reqSize));
-        agentSessionWSDTO.setActiveSession(sessionHelper.getApiSessionHelper(agentId,AppConstant.ACTIVE_SESSION,reqPage,reqSize));
+        agentSessionWSDTO.setReadySession(sessionHelper.getApiSessionWSDTO(agentId,AppConstant.READY_SESSION,reqPage,reqSize));
+        agentSessionWSDTO.setActiveSession(sessionHelper.getApiSessionWSDTO(agentId,AppConstant.ACTIVE_SESSION,reqPage,reqSize));
         agentSessionWSDTO.setSessionSummary(sessionMapper.mapSessionSummary((agentId)));
 
         return agentSessionWSDTO;
