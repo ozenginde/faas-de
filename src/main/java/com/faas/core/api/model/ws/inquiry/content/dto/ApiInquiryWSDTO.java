@@ -1,6 +1,6 @@
 package com.faas.core.api.model.ws.inquiry.content.dto;
 
-import com.faas.core.base.model.db.inquiry.content.InquiryDBModel;
+import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 
 public class ApiInquiryWSDTO {
 

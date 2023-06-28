@@ -3,7 +3,6 @@ package com.faas.core.base.middleware.flow.content;
 import com.faas.core.base.framework.inquiry.content.InquiryFramework;
 import com.faas.core.base.model.ws.flow.content.FlowWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.inquiry.content.InquiryWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

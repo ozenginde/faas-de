@@ -1,7 +1,7 @@
 package com.faas.core.base.framework.inquiry.content;
 
 import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
-import com.faas.core.base.repo.inquiry.content.InquiryRepository;
+import com.faas.core.base.repo.inquiry.InquiryRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

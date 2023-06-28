@@ -2,7 +2,6 @@ package com.faas.core.base.endpoint.controller.flow.content;
 
 import com.faas.core.base.middleware.flow.content.FlowMiddleware;
 import com.faas.core.base.model.ws.flow.content.FlowWSModel;
-import com.faas.core.base.model.ws.inquiry.content.InquiryWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;

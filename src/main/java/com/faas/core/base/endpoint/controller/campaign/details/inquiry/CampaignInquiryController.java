@@ -1,6 +1,6 @@
 package com.faas.core.base.endpoint.controller.campaign.details.inquiry;
 
-import com.faas.core.base.middleware.campaign.inquiry.CampaignInquiryMiddleware;
+import com.faas.core.base.middleware.campaign.details.inquiry.CampaignInquiryMiddleware;
 import com.faas.core.base.model.ws.campaign.details.client.CampaignClientWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
@@ -22,15 +22,15 @@ public class CampaignInquiryController {
     CampaignInquiryMiddleware campaignInquiryMiddleware;
 
 
-    @RequestMapping(value = BaseRoute.SEARCH_CLIENTS, method = RequestMethod.POST)
-    public ResponseEntity<?> searchClients(@RequestParam long userId,
-                                           @RequestParam String city,
-                                           @RequestParam String country,
-                                           @RequestParam String clientState,
-                                           @RequestParam int reqPage,
-                                           @RequestParam int reqSize) {
+    @RequestMapping(value = BaseRoute.GET_CAMPAIGN_INQUIRIES, method = RequestMethod.POST)
+    public ResponseEntity<?> getCampaignInquiries(@RequestParam long userId,
+                                                  @RequestParam String city,
+                                                  @RequestParam String country,
+                                                  @RequestParam String clientState,
+                                                  @RequestParam int reqPage,
+                                                  @RequestParam int reqSize) {
 
-        CampaignClientWSModel response = campaignInquiryMiddleware.searchClients(userId,city,country,clientState,reqPage,reqSize);
+        CampaignClientWSModel response = campaignInquiryMiddleware.getCampaignInquiries(userId,city,country,clientState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

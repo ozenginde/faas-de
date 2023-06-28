@@ -1,6 +1,6 @@
 package com.faas.core.base.model.ws.flow.content.dto;
 
-import com.faas.core.base.model.db.flow.content.FlowDBModel;
+import com.faas.core.base.model.db.flow.FlowDBModel;
 
 public class FlowWSDTO {
 

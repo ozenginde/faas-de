@@ -1,5 +1,6 @@
 package com.faas.core.base.framework.client.settings;
 
+import com.faas.core.base.model.db.campaign.settings.CampaignTypeDBModel;
 import com.faas.core.base.model.db.client.settings.ClientTypeDBModel;
 import com.faas.core.base.model.ws.client.settings.dto.ClientTypeWSDTO;
 import com.faas.core.base.repo.client.settings.ClientTypeRepository;
@@ -61,6 +62,71 @@ public class ClientSettingsFramework {
             clientTypeRepository.delete(clientTypeDBModel.get());
             return clientTypeDBModel.get();
         }
+        return null;
+    }
+
+
+
+
+
+    public CampaignTypeDBModel getAllInquiryTypesService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel getInquiryTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel createInquiryTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel updateInquiryTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel removeInquiryTypeService(long typeId) {
+
+        return null;
+    }
+
+
+
+
+    public CampaignTypeDBModel getAllFlowTypesService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel getFlowTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel createFlowTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel updateFlowTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel removeFlowTypeService(long typeId) {
+
         return null;
     }
 
