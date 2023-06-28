@@ -17,8 +17,29 @@ import java.util.List;
 @Component
 public class CampaignSessionMiddleware {
 
+
     @Autowired
     CampaignSessionFramework campaignSessionFramework;
+
+
+    public CampaignSessionWSModel searchCampaignSessions(long userId,String campaignId,String sessionState,int reqPage,int reqSize) {
+
+        CampaignSessionWSModel response = new CampaignSessionWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        CampaignSessionWSDTO campaignSession =  campaignSessionFramework.searchCampaignSessionsService();
+        if (campaignSession != null){
+            response.setCampaignSession(campaignSession);
+        }
+
+        general.setOperation("searchCampaignSessions");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
 
 
     public CampaignSessionWSModel getCampaignSessions(long userId,String campaignId,int reqPage,int reqSize) {
@@ -60,25 +81,6 @@ public class CampaignSessionMiddleware {
         return response;
     }
 
-
-    public CampaignSessionWSModel searchCampaignSessions(long userId,String campaignId,String sessionState,int reqPage,int reqSize) {
-
-        CampaignSessionWSModel response = new CampaignSessionWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        CampaignSessionWSDTO campaignSession =  campaignSessionFramework.searchCampaignSessionsService();
-        if (campaignSession != null){
-            response.setCampaignSession(campaignSession);
-        }
-
-        general.setOperation("getCampaignSessions");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
     public SessionWSModel getCampaignSession(long userId, long sessionId, long clientId) {

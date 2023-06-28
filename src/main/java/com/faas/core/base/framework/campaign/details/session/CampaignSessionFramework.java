@@ -64,6 +64,12 @@ public class CampaignSessionFramework {
     AppUtils appUtils;
 
 
+    public CampaignSessionWSDTO searchCampaignSessionsService() {
+
+        return null;
+    }
+
+
     public CampaignSessionWSDTO getCampaignSessionsService(String campaignId,int reqPage,int reqSize) {
 
         Page<SessionDBModel> sessionModels = sessionRepository.findAllByCampaignId(campaignId, PageRequest.of(reqPage,reqSize));
@@ -89,11 +95,6 @@ public class CampaignSessionFramework {
         return null;
     }
 
-
-    public CampaignSessionWSDTO searchCampaignSessionsService() {
-
-        return null;
-    }
 
 
     public SessionWSDTO getCampaignSessionService(long userId, long sessionId, long clientId) {

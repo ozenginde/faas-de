@@ -95,9 +95,10 @@ public class BaseRoute {
     public static final String GET_CAMPAIGN_ASSIGNABLE_PROCESSES = "getcampaignassignableprocesses";
 
 
+    public static final String SEARCH_CAMPAIGN_SESSIONS = "searchcampaignsessions";
+
     public static final String GET_CAMPAIGN_SESSIONS = "getcampaignsessions";
     public static final String GET_CAMPAIGN_SESSIONS_BY_STATE = "getcampaignsessionsbystate";
-    public static final String SEARCH_CAMPAIGN_SESSIONS = "searchcampaignsessions";
     public static final String GET_CAMPAIGN_SESSION = "getcampaignsession";
     public static final String CREATE_CAMPAIGN_SESSION = "createcampaignsession";
     public static final String CREATE_CAMPAIGN_SESSIONS = "createcampaignsessions";

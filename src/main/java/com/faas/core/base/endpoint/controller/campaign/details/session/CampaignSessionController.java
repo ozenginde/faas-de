@@ -25,6 +25,23 @@ public class CampaignSessionController {
     CampaignSessionMiddleware campaignSessionMiddleware;
 
 
+    @RequestMapping(value = BaseRoute.SEARCH_CAMPAIGN_SESSIONS, method = RequestMethod.POST)
+    public ResponseEntity<?> searchCampaignSessions(@RequestParam long userId,
+                                                    @RequestParam String campaignId,
+                                                    @RequestParam String sessionState,
+                                                    @RequestParam int reqPage,
+                                                    @RequestParam int reqSize) {
+
+        CampaignSessionWSModel response = campaignSessionMiddleware.searchCampaignSessions(userId,campaignId,sessionState,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_SESSIONS, method = RequestMethod.POST)
     public ResponseEntity<?> getCampaignSessions(@RequestParam long userId,
                                                  @RequestParam String campaignId,
@@ -55,21 +72,6 @@ public class CampaignSessionController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
-
-    @RequestMapping(value = BaseRoute.SEARCH_CAMPAIGN_SESSIONS, method = RequestMethod.POST)
-    public ResponseEntity<?> searchCampaignSessions(@RequestParam long userId,
-                                                    @RequestParam String campaignId,
-                                                    @RequestParam String sessionState,
-                                                    @RequestParam int reqPage,
-                                                    @RequestParam int reqSize) {
-
-        CampaignSessionWSModel response = campaignSessionMiddleware.searchCampaignSessions(userId,campaignId,sessionState,reqPage,reqSize);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_SESSION, method = RequestMethod.POST)
