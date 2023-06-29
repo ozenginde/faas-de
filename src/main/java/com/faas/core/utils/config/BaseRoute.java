@@ -165,7 +165,6 @@ public class BaseRoute {
     public static final String REMOVE_CLIENT_EMAIL = "removeclientemail";
 
 
-
     public static final String GET_ALL_CLIENT_TYPES = "getallclienttypes";
     public static final String GET_CLIENT_TYPE = "getclienttype";
     public static final String CREATE_CLIENT_TYPE = "createclienttype";
@@ -177,9 +176,6 @@ public class BaseRoute {
     public static final String CREATE_SESSION_TYPE = "createsessiontype";
     public static final String UPDATE_SESSION_TYPE = "updatesessiontype";
     public static final String REMOVE_SESSION_TYPE = "removesessiontype";
-
-
-
 
 
 
