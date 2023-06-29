@@ -88,6 +88,7 @@ public class ClientSettingsController {
     }
 
 
+
     @RequestMapping(value = BaseRoute.GET_ALL_SESSION_TYPES, method = RequestMethod.POST)
     public ResponseEntity<?> getAllSessionTypes(@RequestParam long userId) {
 
