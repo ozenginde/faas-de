@@ -6,6 +6,8 @@ import com.faas.core.base.model.ws.campaign.settings.CampaignTypeWSModel;
 import com.faas.core.base.model.ws.campaign.settings.dto.CampaignTypeWSDTO;
 import com.faas.core.base.model.ws.campaign.settings.FlowTypeWSModel;
 import com.faas.core.base.model.ws.campaign.settings.InquiryTypeWSModel;
+import com.faas.core.base.model.ws.campaign.settings.dto.FlowTypeWSDTO;
+import com.faas.core.base.model.ws.campaign.settings.dto.InquiryTypeWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.repo.campaign.settings.CampaignTypeRepository;
 import com.faas.core.utils.config.AppConstant;
@@ -145,12 +147,15 @@ public class CampaignSettingsMiddleware {
 
 
 
-
     public InquiryTypeWSModel getAllInquiryTypes(long userId) {
 
         InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
+        List<InquiryTypeWSDTO> inquiryTypeWSDTOS = campaignSettingsFramework.getAllInquiryTypesService(userId);
+        if (inquiryTypeWSDTOS != null){
+            response.setInquiryTypes(inquiryTypeWSDTOS);
+        }
 
         general.setOperation("getAllInquiryTypes");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -162,12 +167,18 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public InquiryTypeWSModel getInquiryType(long userId) {
+    public InquiryTypeWSModel getInquiryType(long userId,long typeId) {
 
         InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<InquiryTypeWSDTO> inquiryTypeWSDTOS = new ArrayList<>();
 
+        InquiryTypeWSDTO inquiryTypeWSDTO = campaignSettingsFramework.getInquiryTypeService(typeId);
+        if (inquiryTypeWSDTO != null){
+            inquiryTypeWSDTOS.add(inquiryTypeWSDTO);
+        }
 
+        response.setInquiryTypes(inquiryTypeWSDTOS);
         general.setOperation("getInquiryType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -178,12 +189,18 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public InquiryTypeWSModel createInquiryType(long userId) {
+    public InquiryTypeWSModel createInquiryType(long userId,String inquiryType) {
 
         InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<InquiryTypeWSDTO> inquiryTypeWSDTOS = new ArrayList<>();
 
+        InquiryTypeWSDTO inquiryTypeWSDTO = campaignSettingsFramework.createInquiryTypeService(inquiryType);
+        if (inquiryTypeWSDTO != null){
+            inquiryTypeWSDTOS.add(inquiryTypeWSDTO);
+        }
 
+        response.setInquiryTypes(inquiryTypeWSDTOS);
         general.setOperation("createInquiryType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -194,12 +211,18 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public InquiryTypeWSModel updateInquiryType(long userId) {
+    public InquiryTypeWSModel updateInquiryType(long userId,long typeId,String inquiryType) {
 
         InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<InquiryTypeWSDTO> inquiryTypeWSDTOS = new ArrayList<>();
 
+        InquiryTypeWSDTO inquiryTypeWSDTO = campaignSettingsFramework.updateInquiryTypeService(typeId,inquiryType);
+        if (inquiryTypeWSDTO != null){
+            inquiryTypeWSDTOS.add(inquiryTypeWSDTO);
+        }
 
+        response.setInquiryTypes(inquiryTypeWSDTOS);
         general.setOperation("updateInquiryType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -210,12 +233,18 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public InquiryTypeWSModel removeInquiryType(long userId) {
+    public InquiryTypeWSModel removeInquiryType(long userId,long typeId) {
 
         InquiryTypeWSModel response = new InquiryTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<InquiryTypeWSDTO> inquiryTypeWSDTOS = new ArrayList<>();
 
+        InquiryTypeWSDTO inquiryTypeWSDTO = campaignSettingsFramework.removeInquiryTypeService(typeId);
+        if (inquiryTypeWSDTO != null){
+            inquiryTypeWSDTOS.add(inquiryTypeWSDTO);
+        }
 
+        response.setInquiryTypes(inquiryTypeWSDTOS);
         general.setOperation("removeInquiryType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -233,7 +262,10 @@ public class CampaignSettingsMiddleware {
         FlowTypeWSModel response = new FlowTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-
+        List<FlowTypeWSDTO> flowTypeWSDTOS = campaignSettingsFramework.getAllFlowTypesService(userId);
+        if (flowTypeWSDTOS != null){
+            response.setFlowTypes(flowTypeWSDTOS);
+        }
 
         general.setOperation("getAllFlowTypes");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -245,13 +277,18 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public FlowTypeWSModel getFlowType(long userId) {
+    public FlowTypeWSModel getFlowType(long userId,long typeId) {
 
         FlowTypeWSModel response = new FlowTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<FlowTypeWSDTO> flowTypeWSDTOS = new ArrayList<>();
 
+        FlowTypeWSDTO flowTypeWSDTO = campaignSettingsFramework.getFlowTypeService(typeId);
+        if (flowTypeWSDTO != null){
+            flowTypeWSDTOS.add(flowTypeWSDTO);
+        }
 
-
+        response.setFlowTypes(flowTypeWSDTOS);
         general.setOperation("getFlowType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -262,13 +299,18 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public FlowTypeWSModel createFlowType(long userId) {
+    public FlowTypeWSModel createFlowType(long userId,String flowType) {
 
         FlowTypeWSModel response = new FlowTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<FlowTypeWSDTO> flowTypeWSDTOS = new ArrayList<>();
 
+        FlowTypeWSDTO flowTypeWSDTO = campaignSettingsFramework.createFlowTypeService(flowType);
+        if (flowTypeWSDTO != null){
+            flowTypeWSDTOS.add(flowTypeWSDTO);
+        }
 
-
+        response.setFlowTypes(flowTypeWSDTOS);
         general.setOperation("createFlowType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -279,13 +321,18 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public FlowTypeWSModel updateFlowType(long userId) {
+    public FlowTypeWSModel updateFlowType(long userId,long typeId,String flowType) {
 
         FlowTypeWSModel response = new FlowTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<FlowTypeWSDTO> flowTypeWSDTOS = new ArrayList<>();
 
+        FlowTypeWSDTO flowTypeWSDTO = campaignSettingsFramework.updateFlowTypeService(typeId,flowType);
+        if (flowTypeWSDTO != null){
+            flowTypeWSDTOS.add(flowTypeWSDTO);
+        }
 
-
+        response.setFlowTypes(flowTypeWSDTOS);
         general.setOperation("updateFlowType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -296,13 +343,18 @@ public class CampaignSettingsMiddleware {
     }
 
 
-    public FlowTypeWSModel removeFlowType(long userId) {
+    public FlowTypeWSModel removeFlowType(long userId,long typeId) {
 
         FlowTypeWSModel response = new FlowTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<FlowTypeWSDTO> flowTypeWSDTOS = new ArrayList<>();
 
+        FlowTypeWSDTO flowTypeWSDTO = campaignSettingsFramework.removeFlowTypeService(typeId);
+        if (flowTypeWSDTO != null){
+            flowTypeWSDTOS.add(flowTypeWSDTO);
+        }
 
-
+        response.setFlowTypes(flowTypeWSDTOS);
         general.setOperation("removeFlowType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);

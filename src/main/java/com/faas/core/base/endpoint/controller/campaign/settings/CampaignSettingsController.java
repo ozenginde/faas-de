@@ -90,8 +90,6 @@ public class CampaignSettingsController {
 
 
 
-
-
     @RequestMapping(value = BaseRoute.GET_ALL_INQUIRY_TYPES, method = RequestMethod.POST)
     public ResponseEntity<?> getAllInquiryTypes(@RequestParam long userId) {
 
@@ -105,9 +103,10 @@ public class CampaignSettingsController {
 
 
     @RequestMapping(value = BaseRoute.GET_INQUIRY_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> getInquiryType(@RequestParam long userId) {
+    public ResponseEntity<?> getInquiryType(@RequestParam long userId,
+                                            @RequestParam long typeId) {
 
-        InquiryTypeWSModel response = campaignSettingsMiddleware.getInquiryType(userId);
+        InquiryTypeWSModel response = campaignSettingsMiddleware.getInquiryType(userId,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -117,9 +116,10 @@ public class CampaignSettingsController {
 
 
     @RequestMapping(value = BaseRoute.CREATE_INQUIRY_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> createInquiryType(@RequestParam long userId) {
+    public ResponseEntity<?> createInquiryType(@RequestParam long userId,
+                                               @RequestParam String inquiryType) {
 
-        InquiryTypeWSModel response = campaignSettingsMiddleware.createInquiryType(userId);
+        InquiryTypeWSModel response = campaignSettingsMiddleware.createInquiryType(userId,inquiryType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -129,9 +129,11 @@ public class CampaignSettingsController {
 
 
     @RequestMapping(value = BaseRoute.UPDATE_INQUIRY_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> updateInquiryType(@RequestParam long userId) {
+    public ResponseEntity<?> updateInquiryType(@RequestParam long userId,
+                                               @RequestParam long typeId,
+                                               @RequestParam String inquiryType) {
 
-        InquiryTypeWSModel response = campaignSettingsMiddleware.updateInquiryType(userId);
+        InquiryTypeWSModel response = campaignSettingsMiddleware.updateInquiryType(userId,typeId,inquiryType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -141,9 +143,10 @@ public class CampaignSettingsController {
 
 
     @RequestMapping(value = BaseRoute.REMOVE_INQUIRY_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> removeInquiryType(@RequestParam long userId) {
+    public ResponseEntity<?> removeInquiryType(@RequestParam long userId,
+                                               @RequestParam long typeId) {
 
-        InquiryTypeWSModel response = campaignSettingsMiddleware.removeInquiryType(userId);
+        InquiryTypeWSModel response = campaignSettingsMiddleware.removeInquiryType(userId,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -166,9 +169,10 @@ public class CampaignSettingsController {
 
 
     @RequestMapping(value = BaseRoute.GET_FLOW_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> getFlowType(@RequestParam long userId) {
+    public ResponseEntity<?> getFlowType(@RequestParam long userId,
+                                         @RequestParam long typeId) {
 
-        FlowTypeWSModel response = campaignSettingsMiddleware.getFlowType(userId);
+        FlowTypeWSModel response = campaignSettingsMiddleware.getFlowType(userId,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -178,9 +182,10 @@ public class CampaignSettingsController {
 
 
     @RequestMapping(value = BaseRoute.CREATE_FLOW_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> createFlowType(@RequestParam long userId) {
+    public ResponseEntity<?> createFlowType(@RequestParam long userId,
+                                            @RequestParam String flowType) {
 
-        FlowTypeWSModel response = campaignSettingsMiddleware.createFlowType(userId);
+        FlowTypeWSModel response = campaignSettingsMiddleware.createFlowType(userId,flowType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -190,9 +195,11 @@ public class CampaignSettingsController {
 
 
     @RequestMapping(value = BaseRoute.UPDATE_FLOW_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> updateFlowType(@RequestParam long userId) {
+    public ResponseEntity<?> updateFlowType(@RequestParam long userId,
+                                            @RequestParam long typeId,
+                                            @RequestParam String flowType) {
 
-        FlowTypeWSModel response = campaignSettingsMiddleware.updateFlowType(userId);
+        FlowTypeWSModel response = campaignSettingsMiddleware.updateFlowType(userId,typeId,flowType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -202,9 +209,10 @@ public class CampaignSettingsController {
 
 
     @RequestMapping(value = BaseRoute.REMOVE_FLOW_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> removeFlowType(@RequestParam long userId) {
+    public ResponseEntity<?> removeFlowType(@RequestParam long userId,
+                                            @RequestParam long typeId) {
 
-        FlowTypeWSModel response = campaignSettingsMiddleware.removeFlowType(userId);
+        FlowTypeWSModel response = campaignSettingsMiddleware.removeFlowType(userId,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
