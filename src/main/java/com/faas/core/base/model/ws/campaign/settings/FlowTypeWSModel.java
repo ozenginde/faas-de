@@ -1,6 +1,6 @@
-package com.faas.core.base.model.ws.client.settings;
+package com.faas.core.base.model.ws.campaign.settings;
 
-import com.faas.core.base.model.ws.client.settings.dto.FlowTypeWSDTO;
+import com.faas.core.base.model.ws.campaign.settings.dto.FlowTypeWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;

@@ -1,23 +1,24 @@
 package com.faas.core.base.model.ws.client.settings.dto;
 
-import com.faas.core.base.model.db.client.settings.FlowTypeDBModel;
+import com.faas.core.base.model.db.client.settings.SessionTypeDBModel;
 
 public class SessionTypeWSDTO {
 
-    private FlowTypeDBModel flowType;
+    private SessionTypeDBModel sessionType;
 
     public SessionTypeWSDTO() {
     }
 
-    public SessionTypeWSDTO(FlowTypeDBModel flowType) {
-        this.flowType = flowType;
+    public SessionTypeWSDTO(SessionTypeDBModel sessionType) {
+        this.sessionType = sessionType;
     }
 
-    public FlowTypeDBModel getFlowType() {
-        return flowType;
+    public SessionTypeDBModel getSessionType() {
+        return sessionType;
     }
 
-    public void setFlowType(FlowTypeDBModel flowType) {
-        this.flowType = flowType;
+    public void setSessionType(SessionTypeDBModel sessionType) {
+        this.sessionType = sessionType;
     }
 }
+

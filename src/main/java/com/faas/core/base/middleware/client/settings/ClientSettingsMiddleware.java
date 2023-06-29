@@ -3,10 +3,9 @@ package com.faas.core.base.middleware.client.settings;
 import com.faas.core.base.framework.client.settings.ClientSettingsFramework;
 import com.faas.core.base.model.db.client.settings.ClientTypeDBModel;
 import com.faas.core.base.model.ws.client.settings.ClientTypeWSModel;
-import com.faas.core.base.model.ws.client.settings.FlowTypeWSModel;
-import com.faas.core.base.model.ws.client.settings.InquiryTypeWSModel;
 import com.faas.core.base.model.ws.client.settings.SessionTypeWSModel;
 import com.faas.core.base.model.ws.client.settings.dto.ClientTypeWSDTO;
+import com.faas.core.base.model.ws.client.settings.dto.SessionTypeWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.repo.client.settings.ClientTypeRepository;
 import com.faas.core.utils.config.AppConstant;
@@ -150,6 +149,10 @@ public class ClientSettingsMiddleware {
         SessionTypeWSModel response = new SessionTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
+        List<SessionTypeWSDTO> sessionTypeWSDTOS = clientSettingsFramework.getAllSessionTypesService(userId);
+        if (sessionTypeWSDTOS != null){
+            response.setSessionTypes(sessionTypeWSDTOS);
+        }
 
         general.setOperation("getAllSessionTypes");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -161,12 +164,18 @@ public class ClientSettingsMiddleware {
     }
 
 
-    public SessionTypeWSModel getSessionType(long userId) {
+    public SessionTypeWSModel getSessionType(long userId,long typeId) {
 
         SessionTypeWSModel response = new SessionTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<SessionTypeWSDTO> sessionTypeWSDTOS = new ArrayList<>();
 
+        SessionTypeWSDTO sessionTypeWSDTO = clientSettingsFramework.getSessionTypeService(userId,typeId);
+        if (sessionTypeWSDTO != null){
+            sessionTypeWSDTOS.add(sessionTypeWSDTO);
+        }
 
+        response.setSessionTypes(sessionTypeWSDTOS);
         general.setOperation("getSessionType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -177,12 +186,18 @@ public class ClientSettingsMiddleware {
     }
 
 
-    public SessionTypeWSModel createSessionType(long userId) {
+    public SessionTypeWSModel createSessionType(long userId,String sessionType) {
 
         SessionTypeWSModel response = new SessionTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<SessionTypeWSDTO> sessionTypeWSDTOS = new ArrayList<>();
 
+        SessionTypeWSDTO sessionTypeWSDTO = clientSettingsFramework.createSessionTypeService(userId,sessionType);
+        if (sessionTypeWSDTO != null){
+            sessionTypeWSDTOS.add(sessionTypeWSDTO);
+        }
 
+        response.setSessionTypes(sessionTypeWSDTOS);
         general.setOperation("createSessionType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -193,12 +208,18 @@ public class ClientSettingsMiddleware {
     }
 
 
-    public SessionTypeWSModel updateSessionType(long userId) {
+    public SessionTypeWSModel updateSessionType(long userId,long typeId,String sessionType) {
 
         SessionTypeWSModel response = new SessionTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<SessionTypeWSDTO> sessionTypeWSDTOS = new ArrayList<>();
 
+        SessionTypeWSDTO sessionTypeWSDTO = clientSettingsFramework.updateSessionTypeService(userId,typeId,sessionType);
+        if (sessionTypeWSDTO != null){
+            sessionTypeWSDTOS.add(sessionTypeWSDTO);
+        }
 
+        response.setSessionTypes(sessionTypeWSDTOS);
         general.setOperation("updateSessionType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -209,12 +230,18 @@ public class ClientSettingsMiddleware {
     }
 
 
-    public SessionTypeWSModel removeSessionType(long userId) {
+    public SessionTypeWSModel removeSessionType(long userId,long typeId) {
 
         SessionTypeWSModel response = new SessionTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<SessionTypeWSDTO> sessionTypeWSDTOS = new ArrayList<>();
 
+        SessionTypeWSDTO sessionTypeWSDTO = clientSettingsFramework.removeSessionTypeService(userId,typeId);
+        if (sessionTypeWSDTO != null){
+            sessionTypeWSDTOS.add(sessionTypeWSDTO);
+        }
 
+        response.setSessionTypes(sessionTypeWSDTOS);
         general.setOperation("removeSessionType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -225,174 +252,6 @@ public class ClientSettingsMiddleware {
     }
 
 
-
-
-
-    public InquiryTypeWSModel getAllInquiryTypes(long userId) {
-
-        InquiryTypeWSModel response = new InquiryTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-        general.setOperation("getAllInquiryTypes");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public InquiryTypeWSModel getInquiryType(long userId) {
-
-        InquiryTypeWSModel response = new InquiryTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-        general.setOperation("getInquiryType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public InquiryTypeWSModel createInquiryType(long userId) {
-
-        InquiryTypeWSModel response = new InquiryTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-        general.setOperation("createInquiryType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public InquiryTypeWSModel updateInquiryType(long userId) {
-
-        InquiryTypeWSModel response = new InquiryTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-        general.setOperation("updateInquiryType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public InquiryTypeWSModel removeInquiryType(long userId) {
-
-        InquiryTypeWSModel response = new InquiryTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-        general.setOperation("removeInquiryType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-
-
-    public FlowTypeWSModel getAllFlowTypes(long userId) {
-
-        FlowTypeWSModel response = new FlowTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-
-        general.setOperation("getAllFlowTypes");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public FlowTypeWSModel getFlowType(long userId) {
-
-        FlowTypeWSModel response = new FlowTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-
-        general.setOperation("getFlowType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public FlowTypeWSModel createFlowType(long userId) {
-
-        FlowTypeWSModel response = new FlowTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-
-        general.setOperation("createFlowType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public FlowTypeWSModel updateFlowType(long userId) {
-
-        FlowTypeWSModel response = new FlowTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-
-        general.setOperation("updateFlowType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public FlowTypeWSModel removeFlowType(long userId) {
-
-        FlowTypeWSModel response = new FlowTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-
-        general.setOperation("removeFlowType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
 }

@@ -65,4 +65,71 @@ public class CampaignSettingsFramework {
     }
 
 
+
+
+
+    public CampaignTypeDBModel getAllInquiryTypesService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel getInquiryTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel createInquiryTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel updateInquiryTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel removeInquiryTypeService(long typeId) {
+
+        return null;
+    }
+
+
+
+
+    public CampaignTypeDBModel getAllFlowTypesService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel getFlowTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel createFlowTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel updateFlowTypeService(long typeId) {
+
+        return null;
+    }
+
+
+    public CampaignTypeDBModel removeFlowTypeService(long typeId) {
+
+        return null;
+    }
+
+
+
+
 }

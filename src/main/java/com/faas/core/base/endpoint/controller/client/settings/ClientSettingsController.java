@@ -2,8 +2,6 @@ package com.faas.core.base.endpoint.controller.client.settings;
 
 import com.faas.core.base.middleware.client.settings.ClientSettingsMiddleware;
 import com.faas.core.base.model.ws.client.settings.ClientTypeWSModel;
-import com.faas.core.base.model.ws.client.settings.FlowTypeWSModel;
-import com.faas.core.base.model.ws.client.settings.InquiryTypeWSModel;
 import com.faas.core.base.model.ws.client.settings.SessionTypeWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
@@ -104,9 +102,10 @@ public class ClientSettingsController {
 
 
     @RequestMapping(value = BaseRoute.GET_SESSION_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> getSessionType(@RequestParam long userId) {
+    public ResponseEntity<?> getSessionType(@RequestParam long userId,
+                                            @RequestParam long typeId) {
 
-        SessionTypeWSModel response = clientSettingsMiddleware.getSessionType(userId);
+        SessionTypeWSModel response = clientSettingsMiddleware.getSessionType(userId,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -116,9 +115,10 @@ public class ClientSettingsController {
 
 
     @RequestMapping(value = BaseRoute.CREATE_SESSION_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> createSessionType(@RequestParam long userId) {
+    public ResponseEntity<?> createSessionType(@RequestParam long userId,
+                                               @RequestParam String sessionType) {
 
-        SessionTypeWSModel response = clientSettingsMiddleware.createSessionType(userId);
+        SessionTypeWSModel response = clientSettingsMiddleware.createSessionType(userId,sessionType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -128,9 +128,11 @@ public class ClientSettingsController {
 
 
     @RequestMapping(value = BaseRoute.UPDATE_SESSION_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> updateSessionType(@RequestParam long userId) {
+    public ResponseEntity<?> updateSessionType(@RequestParam long userId,
+                                               @RequestParam long typeId,
+                                               @RequestParam String sessionType) {
 
-        SessionTypeWSModel response = clientSettingsMiddleware.updateSessionType(userId);
+        SessionTypeWSModel response = clientSettingsMiddleware.updateSessionType(userId,typeId,sessionType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -140,23 +142,10 @@ public class ClientSettingsController {
 
 
     @RequestMapping(value = BaseRoute.REMOVE_SESSION_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> removeSessionType(@RequestParam long userId) {
+    public ResponseEntity<?> removeSessionType(@RequestParam long userId,
+                                               @RequestParam long typeId) {
 
-        SessionTypeWSModel response = clientSettingsMiddleware.removeSessionType(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-
-
-    @RequestMapping(value = BaseRoute.GET_ALL_INQUIRY_TYPES, method = RequestMethod.POST)
-    public ResponseEntity<?> getAllInquiryTypes(@RequestParam long userId) {
-
-        InquiryTypeWSModel response = clientSettingsMiddleware.getAllInquiryTypes(userId);
+        SessionTypeWSModel response = clientSettingsMiddleware.removeSessionType(userId,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -165,113 +154,6 @@ public class ClientSettingsController {
     }
 
 
-    @RequestMapping(value = BaseRoute.GET_INQUIRY_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> getInquiryType(@RequestParam long userId) {
-
-        InquiryTypeWSModel response = clientSettingsMiddleware.getInquiryType(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.CREATE_INQUIRY_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> createInquiryType(@RequestParam long userId) {
-
-        InquiryTypeWSModel response = clientSettingsMiddleware.createInquiryType(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.UPDATE_INQUIRY_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> updateInquiryType(@RequestParam long userId) {
-
-        InquiryTypeWSModel response = clientSettingsMiddleware.updateInquiryType(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.REMOVE_INQUIRY_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> removeInquiryType(@RequestParam long userId) {
-
-        InquiryTypeWSModel response = clientSettingsMiddleware.removeInquiryType(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-
-    @RequestMapping(value = BaseRoute.GET_ALL_FLOW_TYPES, method = RequestMethod.POST)
-    public ResponseEntity<?> getAllFlowTypes(@RequestParam long userId) {
-
-        FlowTypeWSModel response = clientSettingsMiddleware.getAllFlowTypes(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.GET_FLOW_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> getFlowType(@RequestParam long userId) {
-
-        FlowTypeWSModel response = clientSettingsMiddleware.getFlowType(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.CREATE_FLOW_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> createFlowType(@RequestParam long userId) {
-
-        FlowTypeWSModel response = clientSettingsMiddleware.createFlowType(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.UPDATE_FLOW_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> updateFlowType(@RequestParam long userId) {
-
-        FlowTypeWSModel response = clientSettingsMiddleware.updateFlowType(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.REMOVE_FLOW_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> removeFlowType(@RequestParam long userId) {
-
-        FlowTypeWSModel response = clientSettingsMiddleware.removeFlowType(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
 

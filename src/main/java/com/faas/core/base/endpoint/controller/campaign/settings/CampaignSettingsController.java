@@ -2,6 +2,8 @@ package com.faas.core.base.endpoint.controller.campaign.settings;
 
 import com.faas.core.base.middleware.campaign.settings.CampaignSettingsMiddleware;
 import com.faas.core.base.model.ws.campaign.settings.CampaignTypeWSModel;
+import com.faas.core.base.model.ws.campaign.settings.FlowTypeWSModel;
+import com.faas.core.base.model.ws.campaign.settings.InquiryTypeWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +87,131 @@ public class CampaignSettingsController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
+
+
+
+
+    @RequestMapping(value = BaseRoute.GET_ALL_INQUIRY_TYPES, method = RequestMethod.POST)
+    public ResponseEntity<?> getAllInquiryTypes(@RequestParam long userId) {
+
+        InquiryTypeWSModel response = campaignSettingsMiddleware.getAllInquiryTypes(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.GET_INQUIRY_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> getInquiryType(@RequestParam long userId) {
+
+        InquiryTypeWSModel response = campaignSettingsMiddleware.getInquiryType(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.CREATE_INQUIRY_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> createInquiryType(@RequestParam long userId) {
+
+        InquiryTypeWSModel response = campaignSettingsMiddleware.createInquiryType(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.UPDATE_INQUIRY_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> updateInquiryType(@RequestParam long userId) {
+
+        InquiryTypeWSModel response = campaignSettingsMiddleware.updateInquiryType(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.REMOVE_INQUIRY_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> removeInquiryType(@RequestParam long userId) {
+
+        InquiryTypeWSModel response = campaignSettingsMiddleware.removeInquiryType(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+
+    @RequestMapping(value = BaseRoute.GET_ALL_FLOW_TYPES, method = RequestMethod.POST)
+    public ResponseEntity<?> getAllFlowTypes(@RequestParam long userId) {
+
+        FlowTypeWSModel response = campaignSettingsMiddleware.getAllFlowTypes(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.GET_FLOW_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> getFlowType(@RequestParam long userId) {
+
+        FlowTypeWSModel response = campaignSettingsMiddleware.getFlowType(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.CREATE_FLOW_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> createFlowType(@RequestParam long userId) {
+
+        FlowTypeWSModel response = campaignSettingsMiddleware.createFlowType(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.UPDATE_FLOW_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> updateFlowType(@RequestParam long userId) {
+
+        FlowTypeWSModel response = campaignSettingsMiddleware.updateFlowType(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.REMOVE_FLOW_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> removeFlowType(@RequestParam long userId) {
+
+        FlowTypeWSModel response = campaignSettingsMiddleware.removeFlowType(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
 
 
 }

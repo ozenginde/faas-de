@@ -1,6 +1,6 @@
 package com.faas.core.base.model.ws.client.settings;
 
-import com.faas.core.base.model.ws.client.settings.dto.FlowTypeWSDTO;
+import com.faas.core.base.model.ws.client.settings.dto.SessionTypeWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;
@@ -8,15 +8,14 @@ import java.util.List;
 public class SessionTypeWSModel {
 
     private GeneralWSModel general;
-    private List<FlowTypeWSDTO> flowTypes;
-
+    private List<SessionTypeWSDTO>sessionTypes;
 
     public SessionTypeWSModel() {
     }
 
-    public SessionTypeWSModel(GeneralWSModel general, List<FlowTypeWSDTO> flowTypes) {
+    public SessionTypeWSModel(GeneralWSModel general, List<SessionTypeWSDTO> sessionTypes) {
         this.general = general;
-        this.flowTypes = flowTypes;
+        this.sessionTypes = sessionTypes;
     }
 
     public GeneralWSModel getGeneral() {
@@ -27,11 +26,11 @@ public class SessionTypeWSModel {
         this.general = general;
     }
 
-    public List<FlowTypeWSDTO> getFlowTypes() {
-        return flowTypes;
+    public List<SessionTypeWSDTO> getSessionTypes() {
+        return sessionTypes;
     }
 
-    public void setFlowTypes(List<FlowTypeWSDTO> flowTypes) {
-        this.flowTypes = flowTypes;
+    public void setSessionTypes(List<SessionTypeWSDTO> sessionTypes) {
+        this.sessionTypes = sessionTypes;
     }
 }

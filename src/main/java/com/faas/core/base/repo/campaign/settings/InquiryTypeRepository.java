@@ -1,6 +1,6 @@
-package com.faas.core.base.repo.client.settings;
+package com.faas.core.base.repo.campaign.settings;
 
-import com.faas.core.base.model.db.client.settings.InquiryTypeDBModel;
+import com.faas.core.base.model.db.campaign.settings.InquiryTypeDBModel;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,17 +1,17 @@
-package com.faas.core.base.model.db.client.settings;
+package com.faas.core.base.model.db.campaign.settings;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "flow_type_table")
-public class FlowTypeDBModel {
+@Table(name = "inquiry_type_table")
+public class InquiryTypeDBModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "flow_type")
-    private String flowType;
+    @Column(name = "inquiry_type")
+    private String inquiryType;
 
     @Column(name = "u_date")
     private long uDate;
@@ -22,12 +22,12 @@ public class FlowTypeDBModel {
     @Column(name = "status")
     private int status;
 
-    public FlowTypeDBModel() {
+    public InquiryTypeDBModel() {
     }
 
-    public FlowTypeDBModel(long id, String flowType, long uDate, long cDate, int status) {
+    public InquiryTypeDBModel(long id, String inquiryType, long uDate, long cDate, int status) {
         this.id = id;
-        this.flowType = flowType;
+        this.inquiryType = inquiryType;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -41,12 +41,12 @@ public class FlowTypeDBModel {
         this.id = id;
     }
 
-    public String getFlowType() {
-        return flowType;
+    public String getInquiryType() {
+        return inquiryType;
     }
 
-    public void setFlowType(String flowType) {
-        this.flowType = flowType;
+    public void setInquiryType(String inquiryType) {
+        this.inquiryType = inquiryType;
     }
 
     public long getuDate() {

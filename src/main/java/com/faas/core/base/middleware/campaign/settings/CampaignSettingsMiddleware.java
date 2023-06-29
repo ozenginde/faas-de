@@ -4,6 +4,8 @@ import com.faas.core.base.framework.campaign.settings.CampaignSettingsFramework;
 import com.faas.core.base.model.db.campaign.settings.CampaignTypeDBModel;
 import com.faas.core.base.model.ws.campaign.settings.CampaignTypeWSModel;
 import com.faas.core.base.model.ws.campaign.settings.dto.CampaignTypeWSDTO;
+import com.faas.core.base.model.ws.campaign.settings.FlowTypeWSModel;
+import com.faas.core.base.model.ws.campaign.settings.InquiryTypeWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.repo.campaign.settings.CampaignTypeRepository;
 import com.faas.core.utils.config.AppConstant;
@@ -140,6 +142,176 @@ public class CampaignSettingsMiddleware {
 
         return response;
     }
+
+
+
+
+    public InquiryTypeWSModel getAllInquiryTypes(long userId) {
+
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+        general.setOperation("getAllInquiryTypes");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public InquiryTypeWSModel getInquiryType(long userId) {
+
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+        general.setOperation("getInquiryType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public InquiryTypeWSModel createInquiryType(long userId) {
+
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+        general.setOperation("createInquiryType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public InquiryTypeWSModel updateInquiryType(long userId) {
+
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+        general.setOperation("updateInquiryType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public InquiryTypeWSModel removeInquiryType(long userId) {
+
+        InquiryTypeWSModel response = new InquiryTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+        general.setOperation("removeInquiryType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+
+
+    public FlowTypeWSModel getAllFlowTypes(long userId) {
+
+        FlowTypeWSModel response = new FlowTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+
+        general.setOperation("getAllFlowTypes");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public FlowTypeWSModel getFlowType(long userId) {
+
+        FlowTypeWSModel response = new FlowTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+
+        general.setOperation("getFlowType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public FlowTypeWSModel createFlowType(long userId) {
+
+        FlowTypeWSModel response = new FlowTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+
+        general.setOperation("createFlowType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public FlowTypeWSModel updateFlowType(long userId) {
+
+        FlowTypeWSModel response = new FlowTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+
+        general.setOperation("updateFlowType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public FlowTypeWSModel removeFlowType(long userId) {
+
+        FlowTypeWSModel response = new FlowTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+
+        general.setOperation("removeFlowType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
 
 
 }
