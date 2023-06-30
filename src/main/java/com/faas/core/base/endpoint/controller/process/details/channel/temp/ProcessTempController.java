@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value = AppConstant.API_VERSION + "/base/process/details/channel/temp/")
 public class ProcessTempController {
 
+
     @Autowired
     ProcessTempMiddleware processTempMiddleware;
 
