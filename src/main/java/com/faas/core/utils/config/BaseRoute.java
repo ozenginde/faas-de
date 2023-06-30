@@ -361,11 +361,11 @@ public class BaseRoute {
     public static final String CREATE_PROCESS_SCENARIO = "createprocessscenario";
     public static final String REMOVE_PROCESS_SCENARIO = "removeprocessscenario";
 
-    public static final String GET_PROCESS_SCENARIO_DATAS = "getprocessscenariodatas";
-    public static final String GET_PROCESS_SCENARIO_DATA = "getprocessscenariodata";
-    public static final String CREATE_PROCESS_SCENARIO_DATA = "createprocessscenariodata";
-    public static final String UPDATE_PROCESS_SCENARIO_DATA = "updateprocessscenariodata";
-    public static final String REMOVE_PROCESS_SCENARIO_DATA = "removeprocessscenariodata";
+    public static final String GET_PROCESS_SCENARIO_VARIABLES = "getprocessscenariovariables";
+    public static final String GET_PROCESS_SCENARIO_VARIABLE = "getprocessscenariovariable";
+    public static final String CREATE_PROCESS_SCENARIO_VARIABLE = "createprocessscenariovariable";
+    public static final String UPDATE_PROCESS_SCENARIO_VARIABLE = "updateprocessscenariovariable";
+    public static final String REMOVE_PROCESS_SCENARIO_VARIABLE = "removeprocessscenariovariable";
 
 
     public static final String GET_PROCESS_ASSETS = "getprocessassets";

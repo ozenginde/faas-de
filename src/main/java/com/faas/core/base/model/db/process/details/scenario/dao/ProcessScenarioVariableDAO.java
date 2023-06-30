@@ -1,38 +1,38 @@
 package com.faas.core.base.model.db.process.details.scenario.dao;
 
-public class ProcessScenarioDataDAO {
+public class ProcessScenarioVariableDAO {
 
-    private String dataId;
-    private String dataType;
+    private String variableId;
+    private String variableType;
     private String value;
     private long cDate;
     private int status;
 
-    public ProcessScenarioDataDAO() {
+    public ProcessScenarioVariableDAO() {
     }
 
-    public ProcessScenarioDataDAO(String dataId, String dataType, String value, long cDate, int status) {
-        this.dataId = dataId;
-        this.dataType = dataType;
+    public ProcessScenarioVariableDAO(String variableId, String variableType, String value, long cDate, int status) {
+        this.variableId = variableId;
+        this.variableType = variableType;
         this.value = value;
         this.cDate = cDate;
         this.status = status;
     }
 
-    public String getDataId() {
-        return dataId;
+    public String getVariableId() {
+        return variableId;
     }
 
-    public void setDataId(String dataId) {
-        this.dataId = dataId;
+    public void setVariableId(String variableId) {
+        this.variableId = variableId;
     }
 
-    public String getDataType() {
-        return dataType;
+    public String getVariableType() {
+        return variableType;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setVariableType(String variableType) {
+        this.variableType = variableType;
     }
 
     public String getValue() {
