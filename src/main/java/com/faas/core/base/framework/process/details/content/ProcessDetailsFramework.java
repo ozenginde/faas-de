@@ -8,7 +8,7 @@ import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDataWSDTO;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDetailsWSDTO;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessUrlWSDTO;
-import com.faas.core.base.model.ws.process.details.path.dto.ProcessPathWSDTO;
+import com.faas.core.base.model.ws.process.details.content.dto.ProcessPathWSDTO;
 import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;

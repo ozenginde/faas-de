@@ -3,7 +3,7 @@ package com.faas.core.api.model.ws.operation.channel.message.wapp.dto;
 import com.faas.core.api.model.ws.operation.channel.call.wapp.dto.ApiWappAccountWSDTO;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
 import com.faas.core.base.model.db.operation.channel.WappMessageDBModel;
-import com.faas.core.base.model.db.process.details.temp.WappMessageTempDBModel;
+import com.faas.core.base.model.db.process.details.channel.temp.WappMessageTempDBModel;
 
 import java.util.List;
 

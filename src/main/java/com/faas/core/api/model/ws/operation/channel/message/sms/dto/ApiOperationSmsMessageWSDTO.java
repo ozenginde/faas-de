@@ -2,7 +2,7 @@ package com.faas.core.api.model.ws.operation.channel.message.sms.dto;
 
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
 import com.faas.core.base.model.db.operation.channel.SmsMessageDBModel;
-import com.faas.core.base.model.db.process.details.temp.SmsMessageTempDBModel;
+import com.faas.core.base.model.db.process.details.channel.temp.SmsMessageTempDBModel;
 
 import java.util.List;
 

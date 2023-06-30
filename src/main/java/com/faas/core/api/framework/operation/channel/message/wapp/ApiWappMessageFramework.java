@@ -10,7 +10,7 @@ import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.ClientPhoneRepository;
 import com.faas.core.base.repo.operation.channel.WappMessageRepository;
-import com.faas.core.base.repo.process.details.temp.WappMessageTempRepository;
+import com.faas.core.base.repo.process.details.channel.temp.WappMessageTempRepository;
 import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.mapper.OperationMapper;

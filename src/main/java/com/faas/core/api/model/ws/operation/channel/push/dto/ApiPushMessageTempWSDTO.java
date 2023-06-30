@@ -1,6 +1,6 @@
 package com.faas.core.api.model.ws.operation.channel.push.dto;
 
-import com.faas.core.base.model.db.process.details.temp.PushTempDBModel;
+import com.faas.core.base.model.db.process.details.channel.temp.PushTempDBModel;
 
 public class ApiPushMessageTempWSDTO {
 

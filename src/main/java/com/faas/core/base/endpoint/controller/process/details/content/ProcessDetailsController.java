@@ -4,7 +4,7 @@ import com.faas.core.base.middleware.process.details.content.ProcessDetailsMiddl
 import com.faas.core.base.model.ws.process.details.content.ProcessDataWSModel;
 import com.faas.core.base.model.ws.process.details.content.ProcessDetailsWSModel;
 import com.faas.core.base.model.ws.process.details.content.ProcessUrlWSModel;
-import com.faas.core.base.model.ws.process.details.path.ProcessPathWSModel;
+import com.faas.core.base.model.ws.process.details.content.ProcessPathWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
