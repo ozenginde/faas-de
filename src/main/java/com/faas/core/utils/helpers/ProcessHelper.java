@@ -117,30 +117,25 @@ public class ProcessHelper {
     public ProcessTempWSDTO createProcessTempWSDTO(String processId){
 
         ProcessTempWSDTO processTempWSDTO = new ProcessTempWSDTO();
-
         List<EmailTempWSDTO>emailTempWSDTOS = new ArrayList<>();
         List<PushTempWSDTO>pushTempWSDTOS = new ArrayList<>();
         List<WappMessageTempWSDTO>wappMessageTempWSDTOS = new ArrayList<>();
         List<SmsMessageTempWSDTO>smsMessageTempWSDTOS = new ArrayList<>();
-
         List<EmailTempDBModel> emailTempDBModels = emailTempRepository.findByProcessId(processId);
         for (EmailTempDBModel emailTempDBModel : emailTempDBModels) {
             emailTempWSDTOS.add(new EmailTempWSDTO(emailTempDBModel));
         }
         processTempWSDTO.setEmailTemps(emailTempWSDTOS);
-
         List<PushTempDBModel> pushTempDBModels = pushTempRepository.findByProcessId(processId);
         for (PushTempDBModel pushTempDBModel : pushTempDBModels) {
             pushTempWSDTOS.add(new PushTempWSDTO(pushTempDBModel));
         }
         processTempWSDTO.setPushTemps(pushTempWSDTOS);
-
         List<SmsMessageTempDBModel>smsMessageTempDBModels = smsMessageTempRepository.findByProcessId(processId);
         for (SmsMessageTempDBModel smsMessageTempDBModel : smsMessageTempDBModels) {
             smsMessageTempWSDTOS.add(new SmsMessageTempWSDTO(smsMessageTempDBModel));
         }
         processTempWSDTO.setSmsMessageTemps(smsMessageTempWSDTOS);
-
         List<WappMessageTempDBModel>wappMessageTempDBModels = wappMessageTempRepository.findByProcessId(processId);
         for (WappMessageTempDBModel wappMessageTempDBModel : wappMessageTempDBModels) {
             wappMessageTempWSDTOS.add(new WappMessageTempWSDTO(wappMessageTempDBModel));
@@ -149,6 +144,7 @@ public class ProcessHelper {
 
         return processTempWSDTO;
     }
+
 
 
     public ProcessChannelWSDTO createProcessChannelWSDTO(String processId){
