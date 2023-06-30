@@ -5,8 +5,8 @@ import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiScenarioAuto
 import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiScenarioDetailsWSDTO;
 import com.faas.core.base.repo.process.details.scenario.ProcessScenarioRepository;
 import com.faas.core.base.repo.scenario.content.ScenarioRepository;
-import com.faas.core.base.repo.scenario.element.action.ActionRepository;
-import com.faas.core.base.repo.scenario.element.automation.AutomationRepository;
+import com.faas.core.base.repo.scenario.details.action.ActionRepository;
+import com.faas.core.base.repo.scenario.details.automation.AutomationRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
