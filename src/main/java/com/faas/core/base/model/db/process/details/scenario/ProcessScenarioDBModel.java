@@ -14,7 +14,7 @@ public class ProcessScenarioDBModel {
     private String id;
     private String processId;
     private String scenarioId;
-    private List<ProcessScenarioVariableDAO> scenarioVariables;
+    private List<ProcessScenarioVariableDAO> processScenarioVariables;
     private long uDate;
     private long cDate;
     private int status;
@@ -22,11 +22,11 @@ public class ProcessScenarioDBModel {
     public ProcessScenarioDBModel() {
     }
 
-    public ProcessScenarioDBModel(String id, String processId, String scenarioId, List<ProcessScenarioVariableDAO> scenarioVariables, long uDate, long cDate, int status) {
+    public ProcessScenarioDBModel(String id, String processId, String scenarioId, List<ProcessScenarioVariableDAO> processScenarioVariables, long uDate, long cDate, int status) {
         this.id = id;
         this.processId = processId;
         this.scenarioId = scenarioId;
-        this.scenarioVariables = scenarioVariables;
+        this.processScenarioVariables = processScenarioVariables;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -56,12 +56,12 @@ public class ProcessScenarioDBModel {
         this.scenarioId = scenarioId;
     }
 
-    public List<ProcessScenarioVariableDAO> getScenarioVariables() {
-        return scenarioVariables;
+    public List<ProcessScenarioVariableDAO> getProcessScenarioVariables() {
+        return processScenarioVariables;
     }
 
-    public void setScenarioVariables(List<ProcessScenarioVariableDAO> scenarioVariables) {
-        this.scenarioVariables = scenarioVariables;
+    public void setProcessScenarioVariables(List<ProcessScenarioVariableDAO> processScenarioVariables) {
+        this.processScenarioVariables = processScenarioVariables;
     }
 
     public long getuDate() {

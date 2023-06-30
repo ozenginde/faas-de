@@ -83,7 +83,7 @@ public class ProcessScenarioFramework {
             ProcessScenarioDBModel processScenarioDBModel = new ProcessScenarioDBModel();
             processScenarioDBModel.setProcessId(processId);
             processScenarioDBModel.setScenarioId(scenarioId);
-            processScenarioDBModel.setScenarioVariables(new ArrayList<>());
+            processScenarioDBModel.setProcessScenarioVariables(new ArrayList<>());
             processScenarioDBModel.setuDate(appUtils.getCurrentTimeStamp());
             processScenarioDBModel.setcDate(appUtils.getCurrentTimeStamp());
             processScenarioDBModel.setStatus(1);
@@ -109,9 +109,9 @@ public class ProcessScenarioFramework {
 
         List<ProcessScenarioVariableWSDTO> scenarioVariableWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioVariables() != null) {
-            for (int i = 0; i < scenarioDBModels.get(0).getScenarioVariables().size(); i++) {
-                scenarioVariableWSDTOS.add(new ProcessScenarioVariableWSDTO(scenarioDBModels.get(0).getScenarioVariables().get(i)));
+        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getProcessScenarioVariables() != null) {
+            for (int i = 0; i < scenarioDBModels.get(0).getProcessScenarioVariables().size(); i++) {
+                scenarioVariableWSDTOS.add(new ProcessScenarioVariableWSDTO(scenarioDBModels.get(0).getProcessScenarioVariables().get(i)));
             }
         }
         return scenarioVariableWSDTOS;
@@ -121,10 +121,10 @@ public class ProcessScenarioFramework {
     public ProcessScenarioVariableWSDTO getProcessScenarioVariableService(String processId, String scenarioId, String variableId) {
 
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioVariables() != null) {
-            for (int i = 0; i < scenarioDBModels.get(0).getScenarioVariables().size(); i++) {
-                if (scenarioDBModels.get(0).getScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
-                    return new ProcessScenarioVariableWSDTO(scenarioDBModels.get(0).getScenarioVariables().get(i));
+        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getProcessScenarioVariables() != null) {
+            for (int i = 0; i < scenarioDBModels.get(0).getProcessScenarioVariables().size(); i++) {
+                if (scenarioDBModels.get(0).getProcessScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
+                    return new ProcessScenarioVariableWSDTO(scenarioDBModels.get(0).getProcessScenarioVariables().get(i));
                 }
             }
         }
@@ -145,12 +145,12 @@ public class ProcessScenarioFramework {
             scenarioVariableDAO.setcDate(appUtils.getCurrentTimeStamp());
             scenarioVariableDAO.setStatus(1);
 
-            if (scenarioDBModels.get(0).getScenarioVariables() != null) {
-                scenarioDBModels.get(0).getScenarioVariables().add(scenarioVariableDAO);
+            if (scenarioDBModels.get(0).getProcessScenarioVariables() != null) {
+                scenarioDBModels.get(0).getProcessScenarioVariables().add(scenarioVariableDAO);
             } else {
                 List<ProcessScenarioVariableDAO> scenarioVariableDAOS = new ArrayList<>();
                 scenarioVariableDAOS.add(scenarioVariableDAO);
-                scenarioDBModels.get(0).setScenarioVariables(scenarioVariableDAOS);
+                scenarioDBModels.get(0).setProcessScenarioVariables(scenarioVariableDAOS);
             }
             scenarioDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             processScenarioRepository.save(scenarioDBModels.get(0));
@@ -165,16 +165,16 @@ public class ProcessScenarioFramework {
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
         Optional<VariableTypeDBModel> variableTypeDBModel = variableTypeRepository.findById(typeId);
         if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioId() != null && variableTypeDBModel.isPresent()) {
-            for (int i = 0; i < scenarioDBModels.get(0).getScenarioVariables().size(); i++) {
+            for (int i = 0; i < scenarioDBModels.get(0).getProcessScenarioVariables().size(); i++) {
+                if (scenarioDBModels.get(0).getProcessScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
 
-                if (scenarioDBModels.get(0).getScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
-
-                    scenarioDBModels.get(0).getScenarioVariables().get(i).setVariableId(variableTypeDBModel.get().getVariableType());
-                    scenarioDBModels.get(0).getScenarioVariables().get(i).setValue(value);
-                    scenarioDBModels.get(0).getScenarioVariables().get(i).setcDate(appUtils.getCurrentTimeStamp());
+                    scenarioDBModels.get(0).getProcessScenarioVariables().get(i).setVariableId(variableTypeDBModel.get().getVariableType());
+                    scenarioDBModels.get(0).getProcessScenarioVariables().get(i).setValue(value);
+                    scenarioDBModels.get(0).getProcessScenarioVariables().get(i).setcDate(appUtils.getCurrentTimeStamp());
                     scenarioDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
                     processScenarioRepository.save(scenarioDBModels.get(0));
-                    return new ProcessScenarioVariableWSDTO(scenarioDBModels.get(0).getScenarioVariables().get(i));
+
+                    return new ProcessScenarioVariableWSDTO(scenarioDBModels.get(0).getProcessScenarioVariables().get(i));
                 }
             }
         }
@@ -185,13 +185,11 @@ public class ProcessScenarioFramework {
     public ProcessScenarioVariableWSDTO removeProcessScenarioVariableService(String processId, String scenarioId, String variableId) {
 
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioVariables() != null) {
-            for (int i = 0; i < scenarioDBModels.get(0).getScenarioVariables().size(); i++) {
-
-                if (scenarioDBModels.get(0).getScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
-
-                    ProcessScenarioVariableDAO scenarioVariableDAO = scenarioDBModels.get(0).getScenarioVariables().get(i);
-                    scenarioDBModels.get(0).getScenarioVariables().remove(scenarioVariableDAO);
+        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getProcessScenarioVariables() != null) {
+            for (int i = 0; i < scenarioDBModels.get(0).getProcessScenarioVariables().size(); i++) {
+                if (scenarioDBModels.get(0).getProcessScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
+                    ProcessScenarioVariableDAO scenarioVariableDAO = scenarioDBModels.get(0).getProcessScenarioVariables().get(i);
+                    scenarioDBModels.get(0).getProcessScenarioVariables().remove(scenarioVariableDAO);
                     scenarioDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
                     processScenarioRepository.save(scenarioDBModels.get(0));
 
