@@ -25,13 +25,13 @@ public class ProcessScenarioFramework {
 
 
     @Autowired
-    ProcessScenarioRepository processScenarioRepository;
-
-    @Autowired
     ScenarioRepository scenarioRepository;
 
     @Autowired
     ProcessRepository processRepository;
+
+    @Autowired
+    ProcessScenarioRepository processScenarioRepository;
 
     @Autowired
     DataTypeRepository dataTypeRepository;
