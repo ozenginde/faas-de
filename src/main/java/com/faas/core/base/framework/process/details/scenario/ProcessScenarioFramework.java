@@ -2,16 +2,15 @@ package com.faas.core.base.framework.process.details.scenario;
 
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
-import com.faas.core.base.model.db.process.details.scenario.dao.ProcessScenarioVariableDAO;
+import com.faas.core.base.model.db.process.details.scenario.dao.ProcessScenarioDataDAO;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
-import com.faas.core.base.model.db.scenario.settings.VariableTypeDBModel;
 import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
-import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioVariableWSDTO;
+import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioDataWSDTO;
 import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
 import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.base.repo.process.details.scenario.ProcessScenarioRepository;
 import com.faas.core.base.repo.scenario.content.ScenarioRepository;
-import com.faas.core.base.repo.scenario.settings.VariableTypeRepository;
+import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +34,7 @@ public class ProcessScenarioFramework {
     ProcessRepository processRepository;
 
     @Autowired
-    VariableTypeRepository variableTypeRepository;
+    DataTypeRepository dataTypeRepository;
 
     @Autowired
     AppUtils appUtils;
@@ -83,7 +82,7 @@ public class ProcessScenarioFramework {
             ProcessScenarioDBModel processScenarioDBModel = new ProcessScenarioDBModel();
             processScenarioDBModel.setProcessId(processId);
             processScenarioDBModel.setScenarioId(scenarioId);
-            processScenarioDBModel.setProcessScenarioVariables(new ArrayList<>());
+            processScenarioDBModel.setScenarioDatas(new ArrayList<>());
             processScenarioDBModel.setuDate(appUtils.getCurrentTimeStamp());
             processScenarioDBModel.setcDate(appUtils.getCurrentTimeStamp());
             processScenarioDBModel.setStatus(1);
@@ -105,26 +104,26 @@ public class ProcessScenarioFramework {
     }
 
 
-    public List<ProcessScenarioVariableWSDTO> getProcessScenarioVariablesService(String processId, String scenarioId) {
+    public List<ProcessScenarioDataWSDTO> getProcessScenarioDatasService(String processId, String scenarioId) {
 
-        List<ProcessScenarioVariableWSDTO> scenarioVariableWSDTOS = new ArrayList<>();
+        List<ProcessScenarioDataWSDTO> scenarioDataWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getProcessScenarioVariables() != null) {
-            for (int i = 0; i < scenarioDBModels.get(0).getProcessScenarioVariables().size(); i++) {
-                scenarioVariableWSDTOS.add(new ProcessScenarioVariableWSDTO(scenarioDBModels.get(0).getProcessScenarioVariables().get(i)));
+        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioDatas() != null) {
+            for (int i = 0; i < scenarioDBModels.get(0).getScenarioDatas().size(); i++) {
+                scenarioDataWSDTOS.add(new ProcessScenarioDataWSDTO(scenarioDBModels.get(0).getScenarioDatas().get(i)));
             }
         }
-        return scenarioVariableWSDTOS;
+        return scenarioDataWSDTOS;
     }
 
 
-    public ProcessScenarioVariableWSDTO getProcessScenarioVariableService(String processId, String scenarioId, String variableId) {
+    public ProcessScenarioDataWSDTO getProcessScenarioDataService(String processId, String scenarioId, String dataId) {
 
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getProcessScenarioVariables() != null) {
-            for (int i = 0; i < scenarioDBModels.get(0).getProcessScenarioVariables().size(); i++) {
-                if (scenarioDBModels.get(0).getProcessScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
-                    return new ProcessScenarioVariableWSDTO(scenarioDBModels.get(0).getProcessScenarioVariables().get(i));
+        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioDatas() != null) {
+            for (int i = 0; i < scenarioDBModels.get(0).getScenarioDatas().size(); i++) {
+                if (scenarioDBModels.get(0).getScenarioDatas().get(i).getDataId().equalsIgnoreCase(dataId)) {
+                    return new ProcessScenarioDataWSDTO(scenarioDBModels.get(0).getScenarioDatas().get(i));
                 }
             }
         }
@@ -132,49 +131,49 @@ public class ProcessScenarioFramework {
     }
 
 
-    public ProcessScenarioVariableWSDTO createProcessScenarioVariableService(String processId, String scenarioId, long typeId, String value) {
+    public ProcessScenarioDataWSDTO createProcessScenarioDataService(String processId, String scenarioId, long typeId, String value) {
 
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        Optional<VariableTypeDBModel> variableTypeDBModel = variableTypeRepository.findById(typeId);
-        if (scenarioDBModels.size() > 0 && variableTypeDBModel.isPresent()) {
+        Optional<DataTypeDBModel> dataTypeDBModel = dataTypeRepository.findById(typeId);
+        if (scenarioDBModels.size() > 0 && dataTypeDBModel.isPresent()) {
 
-            ProcessScenarioVariableDAO scenarioVariableDAO = new ProcessScenarioVariableDAO();
-            scenarioVariableDAO.setVariableId(appUtils.generateUUID());
-            scenarioVariableDAO.setVariableType(variableTypeDBModel.get().getVariableType());
-            scenarioVariableDAO.setValue(value);
-            scenarioVariableDAO.setcDate(appUtils.getCurrentTimeStamp());
-            scenarioVariableDAO.setStatus(1);
+            ProcessScenarioDataDAO scenarioDataDAO = new ProcessScenarioDataDAO();
+            scenarioDataDAO.setDataId(appUtils.generateUUID());
+            scenarioDataDAO.setDataType(dataTypeDBModel.get().getDataType());
+            scenarioDataDAO.setValue(value);
+            scenarioDataDAO.setcDate(appUtils.getCurrentTimeStamp());
+            scenarioDataDAO.setStatus(1);
 
-            if (scenarioDBModels.get(0).getProcessScenarioVariables() != null) {
-                scenarioDBModels.get(0).getProcessScenarioVariables().add(scenarioVariableDAO);
+            if (scenarioDBModels.get(0).getScenarioDatas() != null) {
+                scenarioDBModels.get(0).getScenarioDatas().add(scenarioDataDAO);
             } else {
-                List<ProcessScenarioVariableDAO> scenarioVariableDAOS = new ArrayList<>();
-                scenarioVariableDAOS.add(scenarioVariableDAO);
-                scenarioDBModels.get(0).setProcessScenarioVariables(scenarioVariableDAOS);
+                List<ProcessScenarioDataDAO> scenarioDataDAOS = new ArrayList<>();
+                scenarioDataDAOS.add(scenarioDataDAO);
+                scenarioDBModels.get(0).setScenarioDatas(scenarioDataDAOS);
             }
             scenarioDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             processScenarioRepository.save(scenarioDBModels.get(0));
 
-            return new ProcessScenarioVariableWSDTO(scenarioVariableDAO);
+            return new ProcessScenarioDataWSDTO(scenarioDataDAO);
         }
         return null;
     }
 
-    public ProcessScenarioVariableWSDTO updateProcessScenarioVariableService(String processId, String scenarioId, String variableId, long typeId, String value) {
+    public ProcessScenarioDataWSDTO updateProcessScenarioDataService(String processId, String scenarioId, String dataId, long typeId, String value) {
 
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        Optional<VariableTypeDBModel> variableTypeDBModel = variableTypeRepository.findById(typeId);
-        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioId() != null && variableTypeDBModel.isPresent()) {
-            for (int i = 0; i < scenarioDBModels.get(0).getProcessScenarioVariables().size(); i++) {
-                if (scenarioDBModels.get(0).getProcessScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
+        Optional<DataTypeDBModel> dataTypeDBModel = dataTypeRepository.findById(typeId);
+        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioDatas() != null && dataTypeDBModel.isPresent()) {
+            for (int i = 0; i < scenarioDBModels.get(0).getScenarioDatas().size(); i++) {
+                if (scenarioDBModels.get(0).getScenarioDatas().get(i).getDataId().equalsIgnoreCase(dataId)) {
 
-                    scenarioDBModels.get(0).getProcessScenarioVariables().get(i).setVariableId(variableTypeDBModel.get().getVariableType());
-                    scenarioDBModels.get(0).getProcessScenarioVariables().get(i).setValue(value);
-                    scenarioDBModels.get(0).getProcessScenarioVariables().get(i).setcDate(appUtils.getCurrentTimeStamp());
+                    scenarioDBModels.get(0).getScenarioDatas().get(i).setDataType(dataTypeDBModel.get().getDataType());
+                    scenarioDBModels.get(0).getScenarioDatas().get(i).setValue(value);
+                    scenarioDBModels.get(0).getScenarioDatas().get(i).setcDate(appUtils.getCurrentTimeStamp());
                     scenarioDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
                     processScenarioRepository.save(scenarioDBModels.get(0));
 
-                    return new ProcessScenarioVariableWSDTO(scenarioDBModels.get(0).getProcessScenarioVariables().get(i));
+                    return new ProcessScenarioDataWSDTO(scenarioDBModels.get(0).getScenarioDatas().get(i));
                 }
             }
         }
@@ -182,18 +181,19 @@ public class ProcessScenarioFramework {
     }
 
 
-    public ProcessScenarioVariableWSDTO removeProcessScenarioVariableService(String processId, String scenarioId, String variableId) {
+    public ProcessScenarioDataWSDTO removeProcessScenarioDataService(String processId, String scenarioId, String dataId) {
 
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getProcessScenarioVariables() != null) {
-            for (int i = 0; i < scenarioDBModels.get(0).getProcessScenarioVariables().size(); i++) {
-                if (scenarioDBModels.get(0).getProcessScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)) {
-                    ProcessScenarioVariableDAO scenarioVariableDAO = scenarioDBModels.get(0).getProcessScenarioVariables().get(i);
-                    scenarioDBModels.get(0).getProcessScenarioVariables().remove(scenarioVariableDAO);
+        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioDatas() != null) {
+            for (int i = 0; i < scenarioDBModels.get(0).getScenarioDatas().size(); i++) {
+                if (scenarioDBModels.get(0).getScenarioDatas().get(i).getDataId().equalsIgnoreCase(dataId)) {
+
+                    ProcessScenarioDataDAO scenarioDataDAO = scenarioDBModels.get(0).getScenarioDatas().get(i);
+                    scenarioDBModels.get(0).getScenarioDatas().remove(scenarioDataDAO);
                     scenarioDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
                     processScenarioRepository.save(scenarioDBModels.get(0));
 
-                    return new ProcessScenarioVariableWSDTO(scenarioVariableDAO);
+                    return new ProcessScenarioDataWSDTO(scenarioDataDAO);
                 }
             }
         }

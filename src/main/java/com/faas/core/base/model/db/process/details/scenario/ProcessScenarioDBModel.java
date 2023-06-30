@@ -1,6 +1,6 @@
 package com.faas.core.base.model.db.process.details.scenario;
 
-import com.faas.core.base.model.db.process.details.scenario.dao.ProcessScenarioVariableDAO;
+import com.faas.core.base.model.db.process.details.scenario.dao.ProcessScenarioDataDAO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,7 +14,7 @@ public class ProcessScenarioDBModel {
     private String id;
     private String processId;
     private String scenarioId;
-    private List<ProcessScenarioVariableDAO> processScenarioVariables;
+    private List<ProcessScenarioDataDAO> scenarioDatas;
     private long uDate;
     private long cDate;
     private int status;
@@ -22,11 +22,11 @@ public class ProcessScenarioDBModel {
     public ProcessScenarioDBModel() {
     }
 
-    public ProcessScenarioDBModel(String id, String processId, String scenarioId, List<ProcessScenarioVariableDAO> processScenarioVariables, long uDate, long cDate, int status) {
+    public ProcessScenarioDBModel(String id, String processId, String scenarioId, List<ProcessScenarioDataDAO> scenarioDatas, long uDate, long cDate, int status) {
         this.id = id;
         this.processId = processId;
         this.scenarioId = scenarioId;
-        this.processScenarioVariables = processScenarioVariables;
+        this.scenarioDatas = scenarioDatas;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -56,12 +56,12 @@ public class ProcessScenarioDBModel {
         this.scenarioId = scenarioId;
     }
 
-    public List<ProcessScenarioVariableDAO> getProcessScenarioVariables() {
-        return processScenarioVariables;
+    public List<ProcessScenarioDataDAO> getScenarioDatas() {
+        return scenarioDatas;
     }
 
-    public void setProcessScenarioVariables(List<ProcessScenarioVariableDAO> processScenarioVariables) {
-        this.processScenarioVariables = processScenarioVariables;
+    public void setScenarioDatas(List<ProcessScenarioDataDAO> scenarioDatas) {
+        this.scenarioDatas = scenarioDatas;
     }
 
     public long getuDate() {

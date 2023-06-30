@@ -2,9 +2,9 @@ package com.faas.core.base.middleware.process.details.scenario;
 
 import com.faas.core.base.framework.process.details.scenario.ProcessScenarioFramework;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.process.details.scenario.ProcessScenarioVariableWSModel;
+import com.faas.core.base.model.ws.process.details.scenario.ProcessScenarioDataWSModel;
 import com.faas.core.base.model.ws.process.details.scenario.ProcessScenarioWSModel;
-import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioVariableWSDTO;
+import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioDataWSDTO;
 import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,17 +109,17 @@ public class ProcessScenarioMiddleware {
 
 
 
-    public ProcessScenarioVariableWSModel getProcessScenarioVariables(long userId, String processId, String scenarioId) {
+    public ProcessScenarioDataWSModel getProcessScenarioDatas(long userId, String processId, String scenarioId) {
 
-        ProcessScenarioVariableWSModel response = new ProcessScenarioVariableWSModel();
+        ProcessScenarioDataWSModel response = new ProcessScenarioDataWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ProcessScenarioVariableWSDTO> scenarioVariableWSDTOS = processScenarioFramework.getProcessScenarioVariablesService(processId,scenarioId);
-        if (scenarioVariableWSDTOS != null){
-            response.setScenarioVariables(scenarioVariableWSDTOS);
+        List<ProcessScenarioDataWSDTO> scenarioDataWSDTOS = processScenarioFramework.getProcessScenarioDatasService(processId,scenarioId);
+        if (scenarioDataWSDTOS != null){
+            response.setScenarioDatas(scenarioDataWSDTOS);
         }
 
-        general.setOperation("getProcessScenarioVariables");
+        general.setOperation("getProcessScenarioDatas");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -129,19 +129,19 @@ public class ProcessScenarioMiddleware {
     }
 
 
-    public ProcessScenarioVariableWSModel getProcessScenarioVariable(long userId, String processId, String scenarioId, String variableId) {
+    public ProcessScenarioDataWSModel getProcessScenarioData(long userId, String processId, String scenarioId, String dataId) {
 
-        ProcessScenarioVariableWSModel response = new ProcessScenarioVariableWSModel();
+        ProcessScenarioDataWSModel response = new ProcessScenarioDataWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ProcessScenarioVariableWSDTO> scenarioVariableWSDTOS = new ArrayList<>();
+        List<ProcessScenarioDataWSDTO> scenarioDataWSDTOS = new ArrayList<>();
 
-        ProcessScenarioVariableWSDTO scenarioVariableWSDTO = processScenarioFramework.getProcessScenarioVariableService(processId,scenarioId,variableId);
-        if (scenarioVariableWSDTO != null){
-            scenarioVariableWSDTOS.add(scenarioVariableWSDTO);
+        ProcessScenarioDataWSDTO scenarioDataWSDTO = processScenarioFramework.getProcessScenarioDataService(processId,scenarioId,dataId);
+        if (scenarioDataWSDTO != null){
+            scenarioDataWSDTOS.add(scenarioDataWSDTO);
         }
 
-        response.setScenarioVariables(scenarioVariableWSDTOS);
-        general.setOperation("getProcessScenarioVariable");
+        response.setScenarioDatas(scenarioDataWSDTOS);
+        general.setOperation("getProcessScenarioData");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -151,19 +151,19 @@ public class ProcessScenarioMiddleware {
     }
 
 
-    public ProcessScenarioVariableWSModel createProcessScenarioVariable(long userId, String processId, String scenarioId, long typeId, String value) {
+    public ProcessScenarioDataWSModel createProcessScenarioData(long userId, String processId, String scenarioId, long typeId, String value) {
 
-        ProcessScenarioVariableWSModel response = new ProcessScenarioVariableWSModel();
+        ProcessScenarioDataWSModel response = new ProcessScenarioDataWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ProcessScenarioVariableWSDTO> scenarioVariableWSDTOS = new ArrayList<>();
+        List<ProcessScenarioDataWSDTO> scenarioDataWSDTOS = new ArrayList<>();
 
-        ProcessScenarioVariableWSDTO scenarioVariableWSDTO = processScenarioFramework.createProcessScenarioVariableService(processId,scenarioId,typeId,value);
-        if (scenarioVariableWSDTO != null){
-            scenarioVariableWSDTOS.add(scenarioVariableWSDTO);
+        ProcessScenarioDataWSDTO scenarioDataWSDTO = processScenarioFramework.createProcessScenarioDataService(processId,scenarioId,typeId,value);
+        if (scenarioDataWSDTO != null){
+            scenarioDataWSDTOS.add(scenarioDataWSDTO);
         }
 
-        response.setScenarioVariables(scenarioVariableWSDTOS);
-        general.setOperation("createProcessScenarioVariable");
+        response.setScenarioDatas(scenarioDataWSDTOS);
+        general.setOperation("createProcessScenarioData");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -173,19 +173,19 @@ public class ProcessScenarioMiddleware {
     }
 
 
-    public ProcessScenarioVariableWSModel updateProcessScenarioVariable(long userId, String processId, String scenarioId, String variableId, long typeId, String value) {
+    public ProcessScenarioDataWSModel updateProcessScenarioData(long userId, String processId, String scenarioId, String dataId, long typeId, String value) {
 
-        ProcessScenarioVariableWSModel response = new ProcessScenarioVariableWSModel();
+        ProcessScenarioDataWSModel response = new ProcessScenarioDataWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ProcessScenarioVariableWSDTO> scenarioVariableWSDTOS = new ArrayList<>();
+        List<ProcessScenarioDataWSDTO> scenarioDataWSDTOS = new ArrayList<>();
 
-        ProcessScenarioVariableWSDTO scenarioVariableWSDTO = processScenarioFramework.updateProcessScenarioVariableService(processId,scenarioId,variableId,typeId,value);
-        if (scenarioVariableWSDTO != null){
-            scenarioVariableWSDTOS.add(scenarioVariableWSDTO);
+        ProcessScenarioDataWSDTO scenarioDataWSDTO = processScenarioFramework.updateProcessScenarioDataService(processId,scenarioId,dataId,typeId,value);
+        if (scenarioDataWSDTO != null){
+            scenarioDataWSDTOS.add(scenarioDataWSDTO);
         }
 
-        response.setScenarioVariables(scenarioVariableWSDTOS);
-        general.setOperation("updateProcessScenarioVariable");
+        response.setScenarioDatas(scenarioDataWSDTOS);
+        general.setOperation("updateProcessScenarioData");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -195,19 +195,19 @@ public class ProcessScenarioMiddleware {
     }
 
 
-    public ProcessScenarioVariableWSModel removeProcessScenarioVariable(long userId, String processId, String scenarioId, String variableId) {
+    public ProcessScenarioDataWSModel removeProcessScenarioData(long userId, String processId, String scenarioId, String dataId) {
 
-        ProcessScenarioVariableWSModel response = new ProcessScenarioVariableWSModel();
+        ProcessScenarioDataWSModel response = new ProcessScenarioDataWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ProcessScenarioVariableWSDTO> scenarioVariableWSDTOS = new ArrayList<>();
+        List<ProcessScenarioDataWSDTO> scenarioDataWSDTOS = new ArrayList<>();
 
-        ProcessScenarioVariableWSDTO scenarioVariableWSDTO = processScenarioFramework.removeProcessScenarioVariableService(processId,scenarioId,variableId);
-        if (scenarioVariableWSDTO != null){
-            scenarioVariableWSDTOS.add(scenarioVariableWSDTO);
+        ProcessScenarioDataWSDTO scenarioDataWSDTO = processScenarioFramework.removeProcessScenarioDataService(processId,scenarioId,dataId);
+        if (scenarioDataWSDTO != null){
+            scenarioDataWSDTOS.add(scenarioDataWSDTO);
         }
 
-        response.setScenarioVariables(scenarioVariableWSDTOS);
-        general.setOperation("removeProcessScenarioVariable");
+        response.setScenarioDatas(scenarioDataWSDTOS);
+        general.setOperation("removeProcessScenarioData");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
