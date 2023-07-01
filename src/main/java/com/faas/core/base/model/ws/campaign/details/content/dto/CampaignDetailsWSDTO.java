@@ -2,7 +2,7 @@ package com.faas.core.base.model.ws.campaign.details.content.dto;
 
 
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
-import com.faas.core.base.model.ws.campaign.details.manual.agent.dto.CampaignAgentWSDTO;
+import com.faas.core.base.model.ws.campaign.details.agent.dto.CampaignAgentWSDTO;
 
 import java.util.List;
 

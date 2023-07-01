@@ -1,35 +1,37 @@
 package com.faas.core.base.model.ws.campaign.details.content.dto;
 
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
-import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
+import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
+
+import java.util.List;
 
 
 public class CampaignProcessWSDTO {
 
-    private ProcessScenarioDBModel process;
-    private ProcessDBModel processDetails;
+    private ProcessDBModel process;
+    private List<ProcessScenarioWSDTO> processScenarios;
 
     public CampaignProcessWSDTO() {
     }
 
-    public CampaignProcessWSDTO(ProcessScenarioDBModel process, ProcessDBModel processDetails) {
+    public CampaignProcessWSDTO(ProcessDBModel process, List<ProcessScenarioWSDTO> processScenarios) {
         this.process = process;
-        this.processDetails = processDetails;
+        this.processScenarios = processScenarios;
     }
 
-    public ProcessScenarioDBModel getProcess() {
+    public ProcessDBModel getProcess() {
         return process;
     }
 
-    public void setProcess(ProcessScenarioDBModel process) {
+    public void setProcess(ProcessDBModel process) {
         this.process = process;
     }
 
-    public ProcessDBModel getProcessDetails() {
-        return processDetails;
+    public List<ProcessScenarioWSDTO> getProcessScenarios() {
+        return processScenarios;
     }
 
-    public void setProcessDetails(ProcessDBModel processDetails) {
-        this.processDetails = processDetails;
+    public void setProcessScenarios(List<ProcessScenarioWSDTO> processScenarios) {
+        this.processScenarios = processScenarios;
     }
 }

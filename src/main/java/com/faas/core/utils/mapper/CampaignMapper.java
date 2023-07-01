@@ -6,7 +6,7 @@ import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
-import com.faas.core.base.model.ws.campaign.details.manual.agent.dto.CampaignAgentWSDTO;
+import com.faas.core.base.model.ws.campaign.details.agent.dto.CampaignAgentWSDTO;
 import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignProcessWSDTO;
 import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
 import com.faas.core.base.repo.automation.content.AutomationTempRepository;
@@ -80,20 +80,26 @@ public class CampaignMapper {
     public CampaignProcessWSDTO mapCampaignProcessWSDTO(ProcessDBModel processDBModel){
 
         CampaignProcessWSDTO campaignProcessWSDTO = new CampaignProcessWSDTO();
-
         List<ProcessScenarioWSDTO> processScenarioWSDTOS = new ArrayList<>();
+
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processDBModel.getId());
         for (ProcessScenarioDBModel processScenarioDBModel : processScenarioDBModels) {
-            ProcessScenarioWSDTO processScenarioWSDTO = new ProcessScenarioWSDTO();
-            processScenarioWSDTO.setProcessScenario(processScenarioDBModel);
-            Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
-            scenarioDBModel.ifPresent(processScenarioWSDTO::setProcessScenarioDetails);
-
-            processScenarioWSDTOS.add(processScenarioWSDTO);
+            processScenarioWSDTOS.add(mapProcessScenarioWSDTO(processScenarioDBModel));
         }
-
+        campaignProcessWSDTO.setProcessScenarios(processScenarioWSDTOS);
 
         return campaignProcessWSDTO;
+    }
+
+    public ProcessScenarioWSDTO mapProcessScenarioWSDTO(ProcessScenarioDBModel processScenarioDBModel){
+
+        ProcessScenarioWSDTO processScenarioWSDTO = new ProcessScenarioWSDTO();
+        processScenarioWSDTO.setProcessScenario(processScenarioDBModel);
+        Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
+        if (scenarioDBModel.isPresent()){
+            processScenarioWSDTO.setProcessScenarioDetails(scenarioDBModel.get());
+        }
+        return processScenarioWSDTO;
     }
 
 

@@ -4,14 +4,17 @@ import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.campaign.content.dao.CampaignDataDAO;
 import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
+import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
-import com.faas.core.base.model.ws.campaign.details.manual.agent.dto.CampaignAgentWSDTO;
+import com.faas.core.base.model.ws.campaign.details.agent.dto.CampaignAgentWSDTO;
 import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignDataWSDTO;
 import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignDetailsWSDTO;
 import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignProcessWSDTO;
+import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
 import com.faas.core.base.repo.process.content.ProcessRepository;
+import com.faas.core.base.repo.process.details.scenario.ProcessScenarioRepository;
 import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
@@ -41,6 +44,9 @@ public class CampaignDetailsFramework {
     ProcessRepository processRepository;
 
     @Autowired
+    ProcessScenarioRepository processScenarioRepository;
+
+    @Autowired
     CampaignAgentRepository campaignAgentRepository;
 
     @Autowired
@@ -62,6 +68,10 @@ public class CampaignDetailsFramework {
             List<CampaignAgentWSDTO> campaignAgentWSDTOS = new ArrayList<>();
 
             campaignDetailsWSDTO.setCampaign(campaignDBModel.get());
+            Optional<ProcessDBModel> processDBModel = processRepository.findById(campaignDBModel.get().getProcessId());
+            if (processDBModel.isPresent()) {
+                campaignDetailsWSDTO.setCampaignProcess(campaignMapper.mapCampaignProcessWSDTO(processDBModel.get()));
+            }
 
             List<CampaignAgentDBModel> campaignAgentDBModels = campaignAgentRepository.findByCampaignId(campaignId);
             for (CampaignAgentDBModel campaignAgentDBModel : campaignAgentDBModels) {
@@ -77,8 +87,7 @@ public class CampaignDetailsFramework {
 
     public CampaignProcessWSDTO fillCampaignProcessWSDTO(ProcessDBModel processDBModel) {
 
-        CampaignProcessWSDTO campaignProcessWSDTO = new CampaignProcessWSDTO();
-        return campaignProcessWSDTO;
+        return campaignMapper.mapCampaignProcessWSDTO(processDBModel);
     }
 
 
