@@ -5,11 +5,9 @@ import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
-import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
-import com.faas.core.base.model.ws.campaign.details.agent.dto.CampaignAgentWSDTO;
-import com.faas.core.base.model.ws.campaign.details.process.dto.CampaignProcessWSDTO;
-import com.faas.core.base.model.ws.campaign.details.session.dto.CampaignSessionWSDTO;
+import com.faas.core.base.model.ws.campaign.details.manual.agent.dto.CampaignAgentWSDTO;
+import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignProcessWSDTO;
 import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
 import com.faas.core.base.repo.automation.content.AutomationTempRepository;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
@@ -22,7 +20,6 @@ import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -83,7 +80,6 @@ public class CampaignMapper {
     public CampaignProcessWSDTO mapCampaignProcessWSDTO(ProcessDBModel processDBModel){
 
         CampaignProcessWSDTO campaignProcessWSDTO = new CampaignProcessWSDTO();
-        campaignProcessWSDTO.setCampaignProcess(processDBModel);
 
         List<ProcessScenarioWSDTO> processScenarioWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processDBModel.getId());
@@ -95,7 +91,6 @@ public class CampaignMapper {
 
             processScenarioWSDTOS.add(processScenarioWSDTO);
         }
-        campaignProcessWSDTO.setProcessScenarios(processScenarioWSDTOS);
 
 
         return campaignProcessWSDTO;

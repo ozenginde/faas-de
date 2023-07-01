@@ -3,6 +3,7 @@ package com.faas.core.base.endpoint.controller.campaign.details.content;
 import com.faas.core.base.middleware.campaign.details.content.CampaignDetailsMiddleware;
 import com.faas.core.base.model.ws.campaign.details.content.CampaignDataWSModel;
 import com.faas.core.base.model.ws.campaign.details.content.CampaignDetailsWSModel;
+import com.faas.core.base.model.ws.campaign.details.content.CampaignProcessWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,19 @@ public class CampaignDetailsController {
                                                 @RequestParam String campaignId) {
 
         CampaignDetailsWSModel response = campaignDetailsMiddleware.getCampaignDetails(userId,campaignId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.GET_CAMPAIGN_PROCESS, method = RequestMethod.POST)
+    public ResponseEntity<?> getCampaignProcess(@RequestParam long userId,
+                                                @RequestParam String campaignId) {
+
+        CampaignProcessWSModel response = campaignDetailsMiddleware.getCampaignProcess(userId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

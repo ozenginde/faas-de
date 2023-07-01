@@ -75,11 +75,13 @@ public class BaseRoute {
 
 
     public static final String GET_CAMPAIGN_DETAILS = "getcampaigndetails";
+    public static final String GET_CAMPAIGN_PROCESS = "getcampaignprocess";
     public static final String GET_CAMPAIGN_DATAS = "getcampaigndatas";
     public static final String GET_CAMPAIGN_DATA = "getcampaigndata";
     public static final String CREATE_CAMPAIGN_DATA = "createcampaigndata";
     public static final String UPDATE_CAMPAIGN_DATA = "updatecampaigndata";
     public static final String REMOVE_CAMPAIGN_DATA = "removecampaigndata";
+
 
 
     public static final String GET_CAMPAIGN_AGENTS = "getcampaignagents";
@@ -89,24 +91,24 @@ public class BaseRoute {
     public static final String GET_CAMPAIGN_ASSIGNABLE_AGENTS = "getcampaignassignableagents";
 
 
-    public static final String GET_CAMPAIGN_PROCESS = "getcampaignprocess";
-    public static final String UPDATE_CAMPAIGN_PROCESS = "updatecampaignprocess";
-    public static final String REMOVE_CAMPAIGN_PROCESS = "removecampaignprocess";
-    public static final String GET_CAMPAIGN_ASSIGNABLE_PROCESSES = "getcampaignassignableprocesses";
+
+
 
 
     public static final String SEARCH_CAMPAIGN_SESSIONS = "searchcampaignsessions";
 
     public static final String GET_CAMPAIGN_SESSIONS = "getcampaignsessions";
-    public static final String GET_CAMPAIGN_SESSIONS_BY_STATE = "getcampaignsessionsbystate";
     public static final String GET_CAMPAIGN_SESSION = "getcampaignsession";
     public static final String CREATE_CAMPAIGN_SESSION = "createcampaignsession";
     public static final String CREATE_CAMPAIGN_SESSIONS = "createcampaignsessions";
     public static final String UPDATE_CAMPAIGN_SESSION = "updatecampaignsession";
     public static final String REMOVE_CAMPAIGN_SESSION = "removecampaignsession";
 
+
+    public static final String GET_CAMPAIGN_CLIENTS = "getcampaignclients";
     public static final String SEARCH_CLIENTS = "searchclients";
     public static final String GET_CAMPAIGN_CLIENT = "getcampaignclient";
+    public static final String UPDATE_CAMPAIGN_CLIENT = "updatecampaignclient";
 
 
     public static final String GET_CAMPAIGN_INQUIRIES = "getcampaigninquiries";
@@ -170,13 +172,6 @@ public class BaseRoute {
     public static final String CREATE_CLIENT_TYPE = "createclienttype";
     public static final String UPDATE_CLIENT_TYPE = "updateclienttype";
     public static final String REMOVE_CLIENT_TYPE = "removeclienttype";
-
-    public static final String GET_ALL_SESSION_TYPES = "getallsessiontypes";
-    public static final String GET_SESSION_TYPE = "getsessiontype";
-    public static final String CREATE_SESSION_TYPE = "createsessiontype";
-    public static final String UPDATE_SESSION_TYPE = "updatesessiontype";
-    public static final String REMOVE_SESSION_TYPE = "removesessiontype";
-
 
 
     public static final String GET_ALL_INQUIRIES = "getallinquiries";

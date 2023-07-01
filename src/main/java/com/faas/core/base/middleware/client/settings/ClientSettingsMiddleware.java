@@ -3,9 +3,7 @@ package com.faas.core.base.middleware.client.settings;
 import com.faas.core.base.framework.client.settings.ClientSettingsFramework;
 import com.faas.core.base.model.db.client.settings.ClientTypeDBModel;
 import com.faas.core.base.model.ws.client.settings.ClientTypeWSModel;
-import com.faas.core.base.model.ws.client.settings.SessionTypeWSModel;
 import com.faas.core.base.model.ws.client.settings.dto.ClientTypeWSDTO;
-import com.faas.core.base.model.ws.client.settings.dto.SessionTypeWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.repo.client.settings.ClientTypeRepository;
 import com.faas.core.utils.config.AppConstant;
@@ -140,117 +138,6 @@ public class ClientSettingsMiddleware {
 
         return response;
     }
-
-
-
-
-    public SessionTypeWSModel getAllSessionTypes(long userId) {
-
-        SessionTypeWSModel response = new SessionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        List<SessionTypeWSDTO> sessionTypeWSDTOS = clientSettingsFramework.getAllSessionTypesService(userId);
-        if (sessionTypeWSDTOS != null){
-            response.setSessionTypes(sessionTypeWSDTOS);
-        }
-
-        general.setOperation("getAllSessionTypes");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public SessionTypeWSModel getSessionType(long userId,long typeId) {
-
-        SessionTypeWSModel response = new SessionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<SessionTypeWSDTO> sessionTypeWSDTOS = new ArrayList<>();
-
-        SessionTypeWSDTO sessionTypeWSDTO = clientSettingsFramework.getSessionTypeService(userId,typeId);
-        if (sessionTypeWSDTO != null){
-            sessionTypeWSDTOS.add(sessionTypeWSDTO);
-        }
-
-        response.setSessionTypes(sessionTypeWSDTOS);
-        general.setOperation("getSessionType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public SessionTypeWSModel createSessionType(long userId,String sessionType) {
-
-        SessionTypeWSModel response = new SessionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<SessionTypeWSDTO> sessionTypeWSDTOS = new ArrayList<>();
-
-        SessionTypeWSDTO sessionTypeWSDTO = clientSettingsFramework.createSessionTypeService(userId,sessionType);
-        if (sessionTypeWSDTO != null){
-            sessionTypeWSDTOS.add(sessionTypeWSDTO);
-        }
-
-        response.setSessionTypes(sessionTypeWSDTOS);
-        general.setOperation("createSessionType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public SessionTypeWSModel updateSessionType(long userId,long typeId,String sessionType) {
-
-        SessionTypeWSModel response = new SessionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<SessionTypeWSDTO> sessionTypeWSDTOS = new ArrayList<>();
-
-        SessionTypeWSDTO sessionTypeWSDTO = clientSettingsFramework.updateSessionTypeService(userId,typeId,sessionType);
-        if (sessionTypeWSDTO != null){
-            sessionTypeWSDTOS.add(sessionTypeWSDTO);
-        }
-
-        response.setSessionTypes(sessionTypeWSDTOS);
-        general.setOperation("updateSessionType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public SessionTypeWSModel removeSessionType(long userId,long typeId) {
-
-        SessionTypeWSModel response = new SessionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<SessionTypeWSDTO> sessionTypeWSDTOS = new ArrayList<>();
-
-        SessionTypeWSDTO sessionTypeWSDTO = clientSettingsFramework.removeSessionTypeService(userId,typeId);
-        if (sessionTypeWSDTO != null){
-            sessionTypeWSDTOS.add(sessionTypeWSDTO);
-        }
-
-        response.setSessionTypes(sessionTypeWSDTOS);
-        general.setOperation("removeSessionType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
 
 
 

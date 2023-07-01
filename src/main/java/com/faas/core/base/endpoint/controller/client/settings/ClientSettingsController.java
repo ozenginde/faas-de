@@ -2,7 +2,6 @@ package com.faas.core.base.endpoint.controller.client.settings;
 
 import com.faas.core.base.middleware.client.settings.ClientSettingsMiddleware;
 import com.faas.core.base.model.ws.client.settings.ClientTypeWSModel;
-import com.faas.core.base.model.ws.client.settings.SessionTypeWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,73 +85,6 @@ public class ClientSettingsController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
-
-
-    @RequestMapping(value = BaseRoute.GET_ALL_SESSION_TYPES, method = RequestMethod.POST)
-    public ResponseEntity<?> getAllSessionTypes(@RequestParam long userId) {
-
-        SessionTypeWSModel response = clientSettingsMiddleware.getAllSessionTypes(userId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.GET_SESSION_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> getSessionType(@RequestParam long userId,
-                                            @RequestParam long typeId) {
-
-        SessionTypeWSModel response = clientSettingsMiddleware.getSessionType(userId,typeId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.CREATE_SESSION_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> createSessionType(@RequestParam long userId,
-                                               @RequestParam String sessionType) {
-
-        SessionTypeWSModel response = clientSettingsMiddleware.createSessionType(userId,sessionType);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.UPDATE_SESSION_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> updateSessionType(@RequestParam long userId,
-                                               @RequestParam long typeId,
-                                               @RequestParam String sessionType) {
-
-        SessionTypeWSModel response = clientSettingsMiddleware.updateSessionType(userId,typeId,sessionType);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.REMOVE_SESSION_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> removeSessionType(@RequestParam long userId,
-                                               @RequestParam long typeId) {
-
-        SessionTypeWSModel response = clientSettingsMiddleware.removeSessionType(userId,typeId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
 
 
 

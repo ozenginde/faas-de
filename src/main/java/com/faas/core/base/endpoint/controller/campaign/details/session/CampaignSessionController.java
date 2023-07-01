@@ -1,7 +1,7 @@
 package com.faas.core.base.endpoint.controller.campaign.details.session;
 
-import com.faas.core.base.middleware.campaign.details.session.CampaignSessionMiddleware;
-import com.faas.core.base.model.ws.campaign.details.session.CampaignSessionWSModel;
+import com.faas.core.base.middleware.campaign.details.manual.session.CampaignSessionMiddleware;
+import com.faas.core.base.model.ws.campaign.details.manual.session.CampaignSessionWSModel;
 import com.faas.core.base.model.ws.session.content.CreateSessionRequest;
 import com.faas.core.base.model.ws.session.content.SessionWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping(value = AppConstant.API_VERSION + "/base/campaign/details/session/")
+@RequestMapping(value = AppConstant.API_VERSION + "/base/campaign/details/client/session/")
 public class CampaignSessionController {
 
 
@@ -28,50 +28,35 @@ public class CampaignSessionController {
     @RequestMapping(value = BaseRoute.SEARCH_CAMPAIGN_SESSIONS, method = RequestMethod.POST)
     public ResponseEntity<?> searchCampaignSessions(@RequestParam long userId,
                                                     @RequestParam String campaignId,
+                                                    @RequestParam String city,
+                                                    @RequestParam String country,
                                                     @RequestParam String sessionState,
                                                     @RequestParam int reqPage,
                                                     @RequestParam int reqSize) {
 
-        CampaignSessionWSModel response = campaignSessionMiddleware.searchCampaignSessions(userId,campaignId,sessionState,reqPage,reqSize);
+        CampaignSessionWSModel response = campaignSessionMiddleware.searchCampaignSessions(userId,campaignId,city,country,sessionState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
 
 
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_SESSIONS, method = RequestMethod.POST)
     public ResponseEntity<?> getCampaignSessions(@RequestParam long userId,
                                                  @RequestParam String campaignId,
+                                                 @RequestParam String sessionState,
                                                  @RequestParam int reqPage,
                                                  @RequestParam int reqSize) {
 
-        CampaignSessionWSModel response = campaignSessionMiddleware.getCampaignSessions(userId,campaignId,reqPage,reqSize);
+        CampaignSessionWSModel response = campaignSessionMiddleware.getCampaignSessions(userId,campaignId,sessionState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
-
-    @RequestMapping(value = BaseRoute.GET_CAMPAIGN_SESSIONS_BY_STATE, method = RequestMethod.POST)
-    public ResponseEntity<?> getCampaignSessionsByState(@RequestParam long userId,
-                                                        @RequestParam String campaignId,
-                                                        @RequestParam String sessionState,
-                                                        @RequestParam int reqPage,
-                                                        @RequestParam int reqSize) {
-
-        CampaignSessionWSModel response = campaignSessionMiddleware.getCampaignSessionsByState(userId,campaignId,sessionState,reqPage,reqSize);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
 
 
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_SESSION, method = RequestMethod.POST)

@@ -7,6 +7,8 @@ import com.faas.core.base.model.ws.campaign.details.content.CampaignDataWSModel;
 import com.faas.core.base.model.ws.campaign.details.content.CampaignDetailsWSModel;
 import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignDataWSDTO;
 import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignDetailsWSDTO;
+import com.faas.core.base.model.ws.campaign.details.content.CampaignProcessWSModel;
+import com.faas.core.base.model.ws.campaign.details.content.dto.CampaignProcessWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.utils.config.AppConstant;
@@ -43,6 +45,26 @@ public class CampaignDetailsMiddleware {
         }
 
         general.setOperation("getCampaignDetails");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public CampaignProcessWSModel getCampaignProcess(long userId, String campaignId) {
+
+        CampaignProcessWSModel response = new CampaignProcessWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        CampaignProcessWSDTO campaignProcessWSDTO = campaignDetailsFramework.getCampaignProcessService(campaignId);
+        if (campaignProcessWSDTO != null){
+            response.setCampaignProcess(campaignProcessWSDTO);
+        }
+
+        general.setOperation("getCampaignProcess");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
