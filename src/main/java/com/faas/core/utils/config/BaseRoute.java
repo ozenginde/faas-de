@@ -121,7 +121,7 @@ public class BaseRoute {
     public static final String GET_CAMPAIGN_FLOW = "getcampaignflow";
     public static final String CREATE_CAMPAIGN_FLOW = "createcampaignflow";
     public static final String UPDATE_CAMPAIGN_FLOW = "updatecampaignflow";
-    public static final String REMOVE_CAMPAIGN_FLOW = "createcampaignflow";
+    public static final String REMOVE_CAMPAIGN_FLOW = "removecampaignflow";
 
 
 
