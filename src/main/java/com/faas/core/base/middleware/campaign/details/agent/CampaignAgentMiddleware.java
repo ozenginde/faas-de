@@ -85,22 +85,19 @@ public class CampaignAgentMiddleware {
     }
 
 
-    public CampaignAgentWSModel assignCampaignAgent(long userId, String campaignId,long agentId) {
+    public CampaignAgentWSModel createCampaignAgent(long userId, String campaignId,long agentId) {
 
         CampaignAgentWSModel response = new CampaignAgentWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<CampaignAgentWSDTO> campaignAgentWSDTOS = new ArrayList<>();
 
-        CampaignAgentDBModel campaignAgentDBModel = campaignAgentFramework.assignCampaignAgentService(campaignId, agentId);
-        if (campaignAgentDBModel != null) {
-            CampaignAgentWSDTO campaignAgentWSDTO = campaignAgentFramework.fillCampaignAgentWSDTO(campaignAgentDBModel);
-            if (campaignAgentWSDTO != null){
-                campaignAgentWSDTOS.add(campaignAgentWSDTO);
-            }
+        CampaignAgentWSDTO campaignAgentWSDTO = campaignAgentFramework.createCampaignAgentService(campaignId, agentId);
+        if (campaignAgentWSDTO != null) {
+            campaignAgentWSDTOS.add(campaignAgentWSDTO);
         }
 
         response.setCampaignAgents(campaignAgentWSDTOS);
-        general.setOperation("assignCampaignAgent");
+        general.setOperation("createCampaignAgent");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -136,19 +133,19 @@ public class CampaignAgentMiddleware {
     }
 
 
-    public UserWSModel getCampaignAssignableAgents(long userId,String campaignId) {
+    public UserWSModel getAssignableAgents(long userId,String campaignId) {
 
         UserWSModel response = new UserWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<UserWSDTO>agentWSDTOS = new ArrayList<>();
 
-        List<UserDBModel> agentDBModels = campaignAgentFramework.getCampaignAssignableAgentsService(campaignId);
+        List<UserDBModel> agentDBModels = campaignAgentFramework.getAssignableAgentsService(campaignId);
         for (UserDBModel agentDBModel : agentDBModels) {
             agentWSDTOS.add(userFramework.fillUserWSDTO(agentDBModel));
         }
 
         response.setUsers(agentWSDTOS);
-        general.setOperation("getCampaignAssignableAgents");
+        general.setOperation("getAssignableAgents");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

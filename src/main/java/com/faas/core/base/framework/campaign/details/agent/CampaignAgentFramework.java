@@ -48,7 +48,7 @@ public class CampaignAgentFramework {
 
 
 
-    public CampaignAgentDBModel assignCampaignAgentService(String campaignId, long agentId) {
+    public CampaignAgentWSDTO createCampaignAgentService(String campaignId, long agentId) {
 
         if (!(campaignAgentRepository.findByCampaignIdAndAgentId(campaignId,agentId).size()>0) && campaignRepository.findById(campaignId).isPresent()
                 && userRepository.findById(agentId).isPresent()){
@@ -60,7 +60,7 @@ public class CampaignAgentFramework {
             campaignAgentDBModel.setcDate(appUtils.getCurrentTimeStamp());
             campaignAgentDBModel.setStatus(1);
 
-            return campaignAgentRepository.save(campaignAgentDBModel);
+            return fillCampaignAgentWSDTO(campaignAgentRepository.save(campaignAgentDBModel));
         }
         return null;
     }
@@ -77,7 +77,7 @@ public class CampaignAgentFramework {
     }
 
 
-    public List<UserDBModel> getCampaignAssignableAgentsService(String campaignId) {
+    public List<UserDBModel> getAssignableAgentsService(String campaignId) {
 
         List<UserDBModel>assignableAgents = new ArrayList<>();
         List<UserDBModel> agentDBModels = userRepository.findByUserTypeAndStatus(AppConstant.AGENT_USER,1);

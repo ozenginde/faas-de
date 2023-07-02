@@ -50,12 +50,12 @@ public class CampaignAgentController {
     }
 
 
-    @RequestMapping(value = BaseRoute.ASSIGN_CAMPAIGN_AGENT, method = RequestMethod.POST)
-    public ResponseEntity<?> assignCampaignAgent(@RequestParam long userId,
+    @RequestMapping(value = BaseRoute.CREATE_CAMPAIGN_AGENT, method = RequestMethod.POST)
+    public ResponseEntity<?> createCampaignAgent(@RequestParam long userId,
                                                  @RequestParam String campaignId,
                                                  @RequestParam long agentId) {
 
-        CampaignAgentWSModel response = campaignAgentMiddleware.assignCampaignAgent(userId, campaignId, agentId);
+        CampaignAgentWSModel response = campaignAgentMiddleware.createCampaignAgent(userId, campaignId, agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -78,11 +78,11 @@ public class CampaignAgentController {
     }
 
 
-    @RequestMapping(value = BaseRoute.GET_CAMPAIGN_ASSIGNABLE_AGENTS, method = RequestMethod.POST)
-    public ResponseEntity<?> getCampaignAssignableAgents(@RequestParam long userId,
-                                                       @RequestParam String campaignId) {
+    @RequestMapping(value = BaseRoute.GET_ASSIGNABLE_AGENTS, method = RequestMethod.POST)
+    public ResponseEntity<?> getAssignableAgents(@RequestParam long userId,
+                                                 @RequestParam String campaignId) {
 
-        UserWSModel response = campaignAgentMiddleware.getCampaignAssignableAgents(userId,campaignId);
+        UserWSModel response = campaignAgentMiddleware.getAssignableAgents(userId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
