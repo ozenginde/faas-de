@@ -9,16 +9,17 @@ import java.util.List;
 public class CampaignDetailsWSDTO {
 
     private CampaignDBModel campaign;
-    private CampaignProcessWSDTO campaignProcess;
     private List<CampaignAgentWSDTO> campaignAgents;
+    private CampaignProcessWSDTO campaignProcess;
+
 
     public CampaignDetailsWSDTO() {
     }
 
-    public CampaignDetailsWSDTO(CampaignDBModel campaign, CampaignProcessWSDTO campaignProcess, List<CampaignAgentWSDTO> campaignAgents) {
+    public CampaignDetailsWSDTO(CampaignDBModel campaign, List<CampaignAgentWSDTO> campaignAgents, CampaignProcessWSDTO campaignProcess) {
         this.campaign = campaign;
-        this.campaignProcess = campaignProcess;
         this.campaignAgents = campaignAgents;
+        this.campaignProcess = campaignProcess;
     }
 
     public CampaignDBModel getCampaign() {
@@ -29,19 +30,19 @@ public class CampaignDetailsWSDTO {
         this.campaign = campaign;
     }
 
-    public CampaignProcessWSDTO getCampaignProcess() {
-        return campaignProcess;
-    }
-
-    public void setCampaignProcess(CampaignProcessWSDTO campaignProcess) {
-        this.campaignProcess = campaignProcess;
-    }
-
     public List<CampaignAgentWSDTO> getCampaignAgents() {
         return campaignAgents;
     }
 
     public void setCampaignAgents(List<CampaignAgentWSDTO> campaignAgents) {
         this.campaignAgents = campaignAgents;
+    }
+
+    public CampaignProcessWSDTO getCampaignProcess() {
+        return campaignProcess;
+    }
+
+    public void setCampaignProcess(CampaignProcessWSDTO campaignProcess) {
+        this.campaignProcess = campaignProcess;
     }
 }

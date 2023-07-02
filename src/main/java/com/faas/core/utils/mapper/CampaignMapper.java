@@ -67,15 +67,31 @@ public class CampaignMapper {
     }
 
 
-    public CampaignAgentWSDTO mapCampaignAgentWSDTO(CampaignAgentDBModel campaignAgentDBModel) {
+    public List<CampaignAgentWSDTO> mapCampaignAgentWSDTOS(List<CampaignAgentDBModel> agentDBModels) {
 
-        Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgentDBModel.getAgentId());
+        List<CampaignAgentWSDTO>campaignAgentWSDTOS = new ArrayList<>();
+        for (CampaignAgentDBModel agentDBModel : agentDBModels) {
+            CampaignAgentWSDTO campaignAgentWSDTO = mapCampaignAgentWSDTO(agentDBModel);
+            if (campaignAgentWSDTO != null) {
+                campaignAgentWSDTOS.add(campaignAgentWSDTO);
+            }
+        }
+        return campaignAgentWSDTOS;
+    }
+
+
+    public CampaignAgentWSDTO mapCampaignAgentWSDTO(CampaignAgentDBModel agentDBModels) {
+
+        Optional<UserDBModel> agentDBModel = userRepository.findById(agentDBModels.getAgentId());
         if (agentDBModel.isPresent()){
             agentDBModel.get().setPassword("");
             return mapCampaignAgentWSDTO(agentDBModel.get());
         }
         return null;
     }
+
+
+
 
     public CampaignProcessWSDTO mapCampaignProcessWSDTO(ProcessDBModel processDBModel){
 

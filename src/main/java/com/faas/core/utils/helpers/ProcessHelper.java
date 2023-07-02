@@ -104,10 +104,10 @@ public class ProcessHelper {
     public ProcessScenarioWSDTO mapProcessScenarioWSDTO(ProcessScenarioDBModel processScenarioDBModel){
 
         ProcessScenarioWSDTO processScenarioWSDTO = new ProcessScenarioWSDTO();
-        processScenarioWSDTO.setProcessScenario(processScenarioDBModel);
+        processScenarioWSDTO.setScenario(processScenarioDBModel);
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
         if (scenarioDBModel.isPresent()){
-            processScenarioWSDTO.setProcessScenarioDetails(scenarioDBModel.get());
+            processScenarioWSDTO.setScenarioDetails(scenarioDBModel.get());
         }
         return processScenarioWSDTO;
     }
