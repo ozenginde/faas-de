@@ -75,20 +75,17 @@ public class CampaignDetailsFramework {
     }
 
 
-
-
     public CampaignProcessWSDTO getCampaignProcessService(String campaignId) {
 
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-        if (campaignDBModel.isPresent()){
+        if (campaignDBModel.isPresent()) {
             Optional<ProcessDBModel> processDBModel = processRepository.findById(campaignDBModel.get().getProcessId());
-            if (processDBModel.isPresent()){
+            if (processDBModel.isPresent()) {
                 return campaignMapper.mapCampaignProcessWSDTO(processDBModel.get());
             }
         }
         return null;
     }
-
 
 
     public CampaignDataWSDTO fillCampaignDataWSDTO(CampaignDataDAO campaignDataDAO) {
@@ -167,8 +164,6 @@ public class CampaignDetailsFramework {
         }
         return null;
     }
-
-
 
 
 }
