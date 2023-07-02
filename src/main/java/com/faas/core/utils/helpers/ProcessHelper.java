@@ -12,7 +12,7 @@ import com.faas.core.base.model.ws.process.details.channel.content.dto.*;
 import com.faas.core.base.model.ws.process.details.channel.temp.dto.*;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDetailsWSDTO;
 import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
-import com.faas.core.base.repo.automation.content.AutomationTempRepository;
+import com.faas.core.base.repo.scenario.automation.AutomationTempRepository;
 import com.faas.core.base.repo.process.details.channel.content.*;
 import com.faas.core.base.repo.process.details.channel.temp.EmailTempRepository;
 import com.faas.core.base.repo.process.details.channel.temp.PushTempRepository;
@@ -121,6 +121,7 @@ public class ProcessHelper {
         List<PushTempWSDTO>pushTempWSDTOS = new ArrayList<>();
         List<WappMessageTempWSDTO>wappMessageTempWSDTOS = new ArrayList<>();
         List<SmsMessageTempWSDTO>smsMessageTempWSDTOS = new ArrayList<>();
+
         List<EmailTempDBModel> emailTempDBModels = emailTempRepository.findByProcessId(processId);
         for (EmailTempDBModel emailTempDBModel : emailTempDBModels) {
             emailTempWSDTOS.add(new EmailTempWSDTO(emailTempDBModel));
@@ -150,7 +151,6 @@ public class ProcessHelper {
     public ProcessChannelWSDTO createProcessChannelWSDTO(String processId){
 
         ProcessChannelWSDTO processChannelWSDTO = new ProcessChannelWSDTO();
-
         List<ProcessSipChannelDBModel> sipChannelDBModels =  processSipChannelRepository.findByProcessId(processId);
         if (sipChannelDBModels.size()>0){
             processChannelWSDTO.setSipChannel(new ProcessSipChannelWSDTO(sipChannelDBModels.get(0)));

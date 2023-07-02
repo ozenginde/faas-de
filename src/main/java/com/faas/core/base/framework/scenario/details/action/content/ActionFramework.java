@@ -1,9 +1,9 @@
 package com.faas.core.base.framework.scenario.details.action.content;
 
-import com.faas.core.base.model.db.action.content.ActionTempDBModel;
+import com.faas.core.base.model.db.scenario.action.ActionTempDBModel;
 import com.faas.core.base.model.db.scenario.details.action.ActionDBModel;
 import com.faas.core.base.model.ws.scenario.details.action.content.dto.ActionWSDTO;
-import com.faas.core.base.repo.action.content.ActionTempRepository;
+import com.faas.core.base.repo.scenario.action.ActionTempRepository;
 import com.faas.core.base.repo.scenario.details.action.ActionRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;

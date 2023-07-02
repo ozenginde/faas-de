@@ -1,9 +1,9 @@
 package com.faas.core.base.framework.scenario.details.automation.content;
 
-import com.faas.core.base.model.db.automation.content.AutomationTempDBModel;
+import com.faas.core.base.model.db.scenario.automation.AutomationTempDBModel;
 import com.faas.core.base.model.db.scenario.details.automation.AutomationDBModel;
 import com.faas.core.base.model.ws.scenario.details.automation.content.dto.AutomationWSDTO;
-import com.faas.core.base.repo.automation.content.AutomationTempRepository;
+import com.faas.core.base.repo.scenario.automation.AutomationTempRepository;
 import com.faas.core.base.repo.scenario.details.automation.AutomationRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
