@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping(value = AppConstant.API_VERSION + "/base/action/temp/")
+@RequestMapping(value = AppConstant.API_VERSION + "/base/scenario/temp/action/")
 public class ActionTempController {
 
 
