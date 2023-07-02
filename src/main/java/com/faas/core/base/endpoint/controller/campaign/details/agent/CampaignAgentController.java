@@ -50,12 +50,12 @@ public class CampaignAgentController {
     }
 
 
-    @RequestMapping(value = BaseRoute.CREATE_CAMPAIGN_AGENT, method = RequestMethod.POST)
-    public ResponseEntity<?> createCampaignAgent(@RequestParam long userId,
+    @RequestMapping(value = BaseRoute.ASSIGN_CAMPAIGN_AGENT, method = RequestMethod.POST)
+    public ResponseEntity<?> assignCampaignAgent(@RequestParam long userId,
                                                  @RequestParam String campaignId,
                                                  @RequestParam long agentId) {
 
-        CampaignAgentWSModel response = campaignAgentMiddleware.createCampaignAgent(userId, campaignId, agentId);
+        CampaignAgentWSModel response = campaignAgentMiddleware.assignCampaignAgent(userId, campaignId, agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

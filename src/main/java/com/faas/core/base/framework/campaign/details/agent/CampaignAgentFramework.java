@@ -48,7 +48,7 @@ public class CampaignAgentFramework {
 
 
 
-    public CampaignAgentWSDTO createCampaignAgentService(String campaignId, long agentId) {
+    public CampaignAgentWSDTO assignCampaignAgentService(String campaignId, long agentId) {
 
         if (!(campaignAgentRepository.findByCampaignIdAndAgentId(campaignId,agentId).size()>0) && campaignRepository.findById(campaignId).isPresent()
                 && userRepository.findById(agentId).isPresent()){

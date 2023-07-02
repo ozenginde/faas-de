@@ -1,7 +1,7 @@
 package com.faas.core.utils.mapper;
 
 import com.faas.core.base.model.db.client.content.ClientDBModel;
-import com.faas.core.base.model.ws.campaign.details.client.dto.CampaignClientWSDTO;
+import com.faas.core.base.model.ws.campaign.details.client.content.dto.CampaignClientWSDTO;
 import com.faas.core.base.model.ws.client.content.dto.ClientWSDTO;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
 import com.faas.core.base.repo.client.content.ClientRepository;
