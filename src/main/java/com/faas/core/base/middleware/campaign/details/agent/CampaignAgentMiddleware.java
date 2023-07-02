@@ -133,18 +133,16 @@ public class CampaignAgentMiddleware {
     }
 
 
-    public UserWSModel getAssignableAgents(long userId,String campaignId) {
+    public CampaignAgentWSModel getAssignableAgents(long userId,String campaignId) {
 
-        UserWSModel response = new UserWSModel();
+        CampaignAgentWSModel response = new CampaignAgentWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<UserWSDTO>agentWSDTOS = new ArrayList<>();
 
-        List<UserDBModel> agentDBModels = campaignAgentFramework.getAssignableAgentsService(campaignId);
-        for (UserDBModel agentDBModel : agentDBModels) {
-            agentWSDTOS.add(userFramework.fillUserWSDTO(agentDBModel));
+        List<CampaignAgentWSDTO> campaignAgentWSDTOS = campaignAgentFramework.getAssignableAgentsService(campaignId);
+        if (campaignAgentWSDTOS != null) {
+            response.setCampaignAgents(campaignAgentWSDTOS);
         }
 
-        response.setUsers(agentWSDTOS);
         general.setOperation("getAssignableAgents");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);

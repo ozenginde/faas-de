@@ -13,7 +13,14 @@ public class AppConstant {
     public static final String STATE_OK = "OK";
 
     public static final String MANAGER_USER = "MANAGER_USER";
+    public static final String BASIC_MANAGER = "BASIC_MANAGER";
+    public static final String SUPER_MANAGER = "SUPER_MANAGER";
+
     public static final String AGENT_USER = "AGENT_USER";
+    public static final String BASIC_AGENT = "BASIC_AGENT";
+    public static final String AUTO_AGENT = "AUTO_AGENT";
+
+
 
     public static final String ACTIVE_STATUS = "ACTIVE_STATUS";
     public static final String PASSIVE_STATUS = "PASSIVE_STATUS";
@@ -34,8 +41,8 @@ public class AppConstant {
     public static final String INBOUND_CAMPAIGN = "INBOUND";
 
     public static final String MANUAL_CAMPAIGN = "MANUAL";
+    public static final String INQUIRY_CAMPAIGN = "INQUIRY";
     public static final String AUTOMATIC_CAMPAIGN = "AUTOMATIC";
-
 
 
     public static final String ACTIVE_PROCESS = "ACTIVE_PROCESS";

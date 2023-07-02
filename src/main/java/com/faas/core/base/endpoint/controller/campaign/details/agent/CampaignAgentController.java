@@ -82,7 +82,7 @@ public class CampaignAgentController {
     public ResponseEntity<?> getAssignableAgents(@RequestParam long userId,
                                                  @RequestParam String campaignId) {
 
-        UserWSModel response = campaignAgentMiddleware.getAssignableAgents(userId,campaignId);
+        CampaignAgentWSModel response = campaignAgentMiddleware.getAssignableAgents(userId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

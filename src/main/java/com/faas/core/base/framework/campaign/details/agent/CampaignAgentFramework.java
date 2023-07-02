@@ -1,5 +1,6 @@
 package com.faas.core.base.framework.campaign.details.agent;
 
+import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.details.agent.dto.CampaignAgentWSDTO;
@@ -39,7 +40,7 @@ public class CampaignAgentFramework {
     public CampaignAgentWSDTO fillCampaignAgentWSDTO(CampaignAgentDBModel campaignAgentDBModel) {
 
         Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgentDBModel.getAgentId());
-        if (agentDBModel.isPresent()){
+        if (agentDBModel.isPresent()) {
             agentDBModel.get().setPassword("");
             return campaignMapper.mapCampaignAgentWSDTO(agentDBModel.get());
         }
@@ -47,11 +48,10 @@ public class CampaignAgentFramework {
     }
 
 
-
     public CampaignAgentWSDTO assignCampaignAgentService(String campaignId, long agentId) {
 
-        if (!(campaignAgentRepository.findByCampaignIdAndAgentId(campaignId,agentId).size()>0) && campaignRepository.findById(campaignId).isPresent()
-                && userRepository.findById(agentId).isPresent()){
+        if (!(campaignAgentRepository.findByCampaignIdAndAgentId(campaignId, agentId).size() > 0)
+                && campaignRepository.findById(campaignId).isPresent() && userRepository.findById(agentId).isPresent()) {
 
             CampaignAgentDBModel campaignAgentDBModel = new CampaignAgentDBModel();
             campaignAgentDBModel.setCampaignId(campaignId);
@@ -68,8 +68,8 @@ public class CampaignAgentFramework {
 
     public CampaignAgentDBModel removeCampaignAgentService(String campaignId, long agentId) {
 
-        List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByCampaignIdAndAgentId(campaignId,agentId);
-        if (campaignAgents.size()>0){
+        List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByCampaignIdAndAgentId(campaignId, agentId);
+        if (campaignAgents.size() > 0) {
             campaignAgentRepository.deleteAll(campaignAgents);
             return campaignAgents.get(0);
         }
@@ -77,21 +77,30 @@ public class CampaignAgentFramework {
     }
 
 
-    public List<UserDBModel> getAssignableAgentsService(String campaignId) {
+    public List<CampaignAgentWSDTO> getAssignableAgentsService(String campaignId) {
 
-        List<UserDBModel>assignableAgents = new ArrayList<>();
-        List<UserDBModel> agentDBModels = userRepository.findByUserTypeAndStatus(AppConstant.AGENT_USER,1);
-        if (agentDBModels != null && agentDBModels.size()>0){
-            for (UserDBModel agentDBModel : agentDBModels) {
-                if (!(campaignAgentRepository.findByCampaignIdAndAgentId(campaignId, agentDBModel.getId()).size() > 0)) {
-                    assignableAgents.add(agentDBModel);
-                }
+        Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
+        if (campaignDBModel.isPresent()) {
+            if (campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.MANUAL_CAMPAIGN) || campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.INQUIRY_CAMPAIGN)) {
+                return filterAssignableAgents(campaignId, userRepository.findByUserRoleAndUserTypeAndStatus(AppConstant.BASIC_AGENT, AppConstant.AGENT_USER, 1));
+            }
+            if (campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.AUTOMATIC_CAMPAIGN)) {
+                return filterAssignableAgents(campaignId, userRepository.findByUserRoleAndUserTypeAndStatus(AppConstant.AUTO_AGENT, AppConstant.AGENT_USER, 1));
             }
         }
-        return assignableAgents;
+        return null;
     }
 
+    public List<CampaignAgentWSDTO> filterAssignableAgents(String campaignId, List<UserDBModel> agentDBModels) {
 
+        List<CampaignAgentWSDTO> campaignAgentWSDTOS = new ArrayList<>();
+        for (UserDBModel agentDBModel : agentDBModels) {
+            if (!(campaignAgentRepository.findByCampaignIdAndAgentId(campaignId, agentDBModel.getId()).size() > 0)) {
+                campaignAgentWSDTOS.add(new CampaignAgentWSDTO(agentDBModel));
+            }
+        }
+        return campaignAgentWSDTOS;
+    }
 
 
 }
