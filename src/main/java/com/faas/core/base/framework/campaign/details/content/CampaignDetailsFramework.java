@@ -63,32 +63,18 @@ public class CampaignDetailsFramework {
 
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
         if (campaignDBModel.isPresent()) {
-
             CampaignDetailsWSDTO campaignDetailsWSDTO = new CampaignDetailsWSDTO();
-            List<CampaignAgentWSDTO> campaignAgentWSDTOS = new ArrayList<>();
-
             campaignDetailsWSDTO.setCampaign(campaignDBModel.get());
             Optional<ProcessDBModel> processDBModel = processRepository.findById(campaignDBModel.get().getProcessId());
             if (processDBModel.isPresent()) {
                 campaignDetailsWSDTO.setCampaignProcess(campaignMapper.mapCampaignProcessWSDTO(processDBModel.get()));
             }
-
-            List<CampaignAgentDBModel> campaignAgentDBModels = campaignAgentRepository.findByCampaignId(campaignId);
-            for (CampaignAgentDBModel campaignAgentDBModel : campaignAgentDBModels) {
-                campaignAgentWSDTOS.add(campaignMapper.createCampaignAgentWSDTO(campaignAgentDBModel));
-            }
-            campaignDetailsWSDTO.setCampaignAgents(campaignAgentWSDTOS);
-
             return campaignDetailsWSDTO;
         }
         return null;
     }
 
 
-    public CampaignProcessWSDTO fillCampaignProcessWSDTO(ProcessDBModel processDBModel) {
-
-        return campaignMapper.mapCampaignProcessWSDTO(processDBModel);
-    }
 
 
     public CampaignProcessWSDTO getCampaignProcessService(String campaignId) {
@@ -97,7 +83,7 @@ public class CampaignDetailsFramework {
         if (campaignDBModel.isPresent()){
             Optional<ProcessDBModel> processDBModel = processRepository.findById(campaignDBModel.get().getProcessId());
             if (processDBModel.isPresent()){
-                return fillCampaignProcessWSDTO(processDBModel.get());
+                return campaignMapper.mapCampaignProcessWSDTO(processDBModel.get());
             }
         }
         return null;

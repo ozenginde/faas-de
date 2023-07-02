@@ -67,7 +67,7 @@ public class CampaignMapper {
     }
 
 
-    public CampaignAgentWSDTO createCampaignAgentWSDTO(CampaignAgentDBModel campaignAgentDBModel) {
+    public CampaignAgentWSDTO mapCampaignAgentWSDTO(CampaignAgentDBModel campaignAgentDBModel) {
 
         Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgentDBModel.getAgentId());
         if (agentDBModel.isPresent()){
@@ -80,14 +80,13 @@ public class CampaignMapper {
     public CampaignProcessWSDTO mapCampaignProcessWSDTO(ProcessDBModel processDBModel){
 
         CampaignProcessWSDTO campaignProcessWSDTO = new CampaignProcessWSDTO();
+        campaignProcessWSDTO.setProcess(processDBModel);
         List<ProcessScenarioWSDTO> processScenarioWSDTOS = new ArrayList<>();
-
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processDBModel.getId());
         for (ProcessScenarioDBModel processScenarioDBModel : processScenarioDBModels) {
             processScenarioWSDTOS.add(mapProcessScenarioWSDTO(processScenarioDBModel));
         }
         campaignProcessWSDTO.setProcessScenarios(processScenarioWSDTOS);
-
         return campaignProcessWSDTO;
     }
 
