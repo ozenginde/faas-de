@@ -107,6 +107,7 @@ public class CampaignDetailsFramework {
             campaignDataDAO.setValue(value);
             campaignDataDAO.setcDate(appUtils.getCurrentTimeStamp());
             campaignDataDAO.setStatus(1);
+
             if (campaignDBModel.get().getCampaignDatas() == null) {
                 List<CampaignDataDAO> campaignDataDAOS = new ArrayList<>();
                 campaignDataDAOS.add(campaignDataDAO);
