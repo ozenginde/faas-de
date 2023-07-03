@@ -16,6 +16,26 @@ public class CampaignFlowMiddleware {
     CampaignFlowFramework campaignFlowFramework;
 
 
+    public CampaignClientWSModel searchCampaignFlows(long userId,String city,String country,String flowState,int reqPage,int reqSize) {
+
+        CampaignClientWSModel response = new CampaignClientWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        CampaignClientWSDTO campaignClientWSDTO = campaignFlowFramework.getCampaignFlowsService(userId,city,country,flowState,reqPage,reqSize);
+        if (campaignClientWSDTO != null){
+            response.setCampaignClient(campaignClientWSDTO);
+        }
+
+        general.setOperation("getCampaignFlows");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
     public CampaignClientWSModel getCampaignFlows(long userId,String city,String country,String flowState,int reqPage,int reqSize) {
 
         CampaignClientWSModel response = new CampaignClientWSModel();

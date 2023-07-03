@@ -16,7 +16,8 @@ public class CampaignInquiryMiddleware {
     CampaignInquiryFramework campaignInquiryFramework;
 
 
-    public CampaignClientWSModel getCampaignInquiries(long userId, String city, String country, String inquiryState, int reqPage, int reqSize) {
+
+    public CampaignClientWSModel searchCampaignInquiries(long userId, String city, String country, String inquiryState, int reqPage, int reqSize) {
 
         CampaignClientWSModel response = new CampaignClientWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -35,6 +36,25 @@ public class CampaignInquiryMiddleware {
         return response;
     }
 
+
+    public CampaignClientWSModel getCampaignInquiries(long userId, String city, String country, String inquiryState, int reqPage, int reqSize) {
+
+        CampaignClientWSModel response = new CampaignClientWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        CampaignClientWSDTO campaignClientWSDTO = campaignInquiryFramework.getCampaignInquiriesService(userId,city,country,inquiryState,reqPage,reqSize);
+        if (campaignClientWSDTO != null){
+            response.setCampaignClient(campaignClientWSDTO);
+        }
+
+        general.setOperation("getCampaignInquiries");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
 
 
     public CampaignClientWSModel getCampaignInquiry(long userId, String city, String country, String inquiryState, int reqPage, int reqSize) {

@@ -40,21 +40,6 @@ public class CampaignClientController {
     }
 
 
-    @RequestMapping(value = BaseRoute.GET_CAMPAIGN_CLIENTS, method = RequestMethod.POST)
-    public ResponseEntity<?> getCampaignClients(@RequestParam long userId,
-                                                @RequestParam String campaignId,
-                                                @RequestParam int reqPage,
-                                                @RequestParam int reqSize) {
-
-        CampaignClientWSModel response = campaignClientMiddleware.getCampaignClients(userId,campaignId,reqPage,reqSize);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_CLIENT, method = RequestMethod.POST)
     public ResponseEntity<?> getCampaignClient(@RequestParam long userId,
                                                @RequestParam long clientId) {

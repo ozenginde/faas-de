@@ -92,9 +92,7 @@ public class BaseRoute {
 
 
 
-
     public static final String SEARCH_CAMPAIGN_SESSIONS = "searchcampaignsessions";
-
     public static final String GET_CAMPAIGN_SESSIONS = "getcampaignsessions";
     public static final String GET_CAMPAIGN_SESSION = "getcampaignsession";
     public static final String CREATE_CAMPAIGN_SESSION = "createcampaignsession";
@@ -103,18 +101,20 @@ public class BaseRoute {
     public static final String REMOVE_CAMPAIGN_SESSION = "removecampaignsession";
 
 
-    public static final String GET_CAMPAIGN_CLIENTS = "getcampaignclients";
     public static final String SEARCH_CLIENTS = "searchclients";
     public static final String GET_CAMPAIGN_CLIENT = "getcampaignclient";
     public static final String UPDATE_CAMPAIGN_CLIENT = "updatecampaignclient";
 
 
+    public static final String SEARCH_CAMPAIGN_INQUIRIES = "searchcampaigninquiries";
     public static final String GET_CAMPAIGN_INQUIRIES = "getcampaigninquiries";
     public static final String GET_CAMPAIGN_INQUIRY = "getcampaigninquiry";
     public static final String CREATE_CAMPAIGN_INQUIRY = "createcampaigninquiry";
     public static final String UPDATE_CAMPAIGN_INQUIRY = "updatecampaigninquiry";
     public static final String REMOVE_CAMPAIGN_INQUIRY = "removecampaigninquiry";
 
+
+    public static final String SEARCH_CAMPAIGN_FLOWS = "serchcampaignflows";
     public static final String GET_CAMPAIGN_FLOWS = "getcampaignflows";
     public static final String GET_CAMPAIGN_FLOW = "getcampaignflow";
     public static final String CREATE_CAMPAIGN_FLOW = "createcampaignflow";

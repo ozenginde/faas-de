@@ -21,7 +21,6 @@ public class CampaignClientMiddleware {
     CampaignClientFramework campaignClientFramework;
 
 
-
     public CampaignClientWSModel searchClients(long userId, String city, String country, String clientState, int reqPage, int reqSize) {
 
         CampaignClientWSModel response = new CampaignClientWSModel();
@@ -33,27 +32,6 @@ public class CampaignClientMiddleware {
         }
 
         general.setOperation("searchClients");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-
-    public CampaignClientWSModel getCampaignClients(long userId, String campaignId,int reqPage,int reqSize) {
-
-        CampaignClientWSModel response = new CampaignClientWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        CampaignClientWSDTO campaignClientWSDTO = campaignClientFramework.getCampaignClientsService(userId,campaignId,reqPage,reqSize);
-        if (campaignClientWSDTO != null){
-            response.setCampaignClient(campaignClientWSDTO);
-        }
-
-        general.setOperation("getCampaignClients");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

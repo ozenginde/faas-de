@@ -21,7 +21,6 @@ public class AppConstant {
     public static final String AUTO_AGENT = "AUTO_AGENT";
 
 
-
     public static final String ACTIVE_STATUS = "ACTIVE_STATUS";
     public static final String PASSIVE_STATUS = "PASSIVE_STATUS";
 

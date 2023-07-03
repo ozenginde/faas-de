@@ -44,11 +44,6 @@ public class CampaignClientFramework {
     }
 
 
-    public CampaignClientWSDTO getCampaignClientsService(long userId, String campaignId,int reqPage,int reqSize) {
-
-        return null;
-    }
-
 
     public ClientWSDTO getCampaignClientService(long userId, long clientId) {
 

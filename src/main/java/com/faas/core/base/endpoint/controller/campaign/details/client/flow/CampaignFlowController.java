@@ -22,6 +22,24 @@ public class CampaignFlowController {
     CampaignFlowMiddleware campaignFlowMiddleware;
 
 
+    @RequestMapping(value = BaseRoute.SEARCH_CAMPAIGN_FLOWS, method = RequestMethod.POST)
+    public ResponseEntity<?> searchCampaignFlows(@RequestParam long userId,
+                                              @RequestParam String city,
+                                              @RequestParam String country,
+                                              @RequestParam String flowState,
+                                              @RequestParam int reqPage,
+                                              @RequestParam int reqSize) {
+
+        CampaignClientWSModel response = campaignFlowMiddleware.searchCampaignFlows(userId,city,country,flowState,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_FLOWS, method = RequestMethod.POST)
     public ResponseEntity<?> getCampaignFlows(@RequestParam long userId,
                                               @RequestParam String city,

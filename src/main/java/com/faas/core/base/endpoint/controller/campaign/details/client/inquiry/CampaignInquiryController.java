@@ -22,6 +22,23 @@ public class CampaignInquiryController {
     CampaignInquiryMiddleware campaignInquiryMiddleware;
 
 
+    @RequestMapping(value = BaseRoute.SEARCH_CAMPAIGN_INQUIRIES, method = RequestMethod.POST)
+    public ResponseEntity<?> searchCampaignInquiries(@RequestParam long userId,
+                                                      @RequestParam String city,
+                                                      @RequestParam String country,
+                                                      @RequestParam String inquiryState,
+                                                      @RequestParam int reqPage,
+                                                      @RequestParam int reqSize) {
+
+        CampaignClientWSModel response = campaignInquiryMiddleware.searchCampaignInquiries(userId,city,country,inquiryState,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_INQUIRIES, method = RequestMethod.POST)
     public ResponseEntity<?> getCampaignInquiries(@RequestParam long userId,
                                                   @RequestParam String city,
