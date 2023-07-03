@@ -42,12 +42,12 @@ public class CampaignSessionMiddleware {
     }
 
 
-    public CampaignSessionWSModel getCampaignSessions(long userId,String campaignId,String sessionState,int reqPage,int reqSize) {
+    public CampaignSessionWSModel getCampaignSessions(long userId,String campaignId,int reqPage,int reqSize) {
 
         CampaignSessionWSModel response = new CampaignSessionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        CampaignSessionWSDTO campaignSession =  campaignSessionFramework.getCampaignSessionsService(userId,campaignId,sessionState,reqPage,reqSize);
+        CampaignSessionWSDTO campaignSession =  campaignSessionFramework.getCampaignSessionsService(userId,campaignId,reqPage,reqSize);
         if (campaignSession != null){
             response.setCampaignSession(campaignSession);
         }

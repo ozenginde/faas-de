@@ -70,9 +70,9 @@ public class CampaignSessionFramework {
     }
 
 
-    public CampaignSessionWSDTO getCampaignSessionsService(long userId,String campaignId,String sessionState,int reqPage,int reqSize) {
+    public CampaignSessionWSDTO getCampaignSessionsService(long userId,String campaignId,int reqPage,int reqSize) {
 
-        Page<SessionDBModel> sessionModels = sessionRepository.findAllByCampaignIdAndSessionState(campaignId,sessionState, PageRequest.of(reqPage,reqSize));
+        Page<SessionDBModel> sessionModels = sessionRepository.findAllByCampaignId(campaignId, PageRequest.of(reqPage,reqSize));
         if (sessionModels != null){
             CampaignSessionWSDTO campaignSessionWSDTO = new CampaignSessionWSDTO();
             campaignSessionWSDTO.setPagination(sessionMapper.createSessionPaginationWSDTO(sessionModels));
