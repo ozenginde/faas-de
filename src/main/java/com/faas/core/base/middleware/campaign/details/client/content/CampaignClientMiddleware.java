@@ -65,26 +65,7 @@ public class CampaignClientMiddleware {
 
 
 
-    public ClientWSModel updateCampaignClient(long userId, long clientId,String clientState) {
 
-        ClientWSModel response = new ClientWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<ClientWSDTO>clientWSDTOS = new ArrayList<>();
-
-        ClientWSDTO clientWSDTO = campaignClientFramework.updateCampaignClientService(userId,clientId,clientState);
-        if (clientWSDTO != null){
-            clientWSDTOS.add(clientWSDTO);
-        }
-
-        response.setClients(clientWSDTOS);
-        general.setOperation("updateCampaignClient");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
 }

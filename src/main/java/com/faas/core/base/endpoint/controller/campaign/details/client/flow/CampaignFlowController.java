@@ -24,11 +24,11 @@ public class CampaignFlowController {
 
     @RequestMapping(value = BaseRoute.SEARCH_CAMPAIGN_FLOWS, method = RequestMethod.POST)
     public ResponseEntity<?> searchCampaignFlows(@RequestParam long userId,
-                                              @RequestParam String city,
-                                              @RequestParam String country,
-                                              @RequestParam String flowState,
-                                              @RequestParam int reqPage,
-                                              @RequestParam int reqSize) {
+                                                 @RequestParam String city,
+                                                 @RequestParam String country,
+                                                 @RequestParam String flowState,
+                                                 @RequestParam int reqPage,
+                                                 @RequestParam int reqSize) {
 
         CampaignClientWSModel response = campaignFlowMiddleware.searchCampaignFlows(userId,city,country,flowState,reqPage,reqSize);
 

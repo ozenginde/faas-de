@@ -44,17 +44,11 @@ public class CampaignClientFramework {
     }
 
 
-
     public ClientWSDTO getCampaignClientService(long userId, long clientId) {
 
         return null;
     }
 
-
-    public ClientWSDTO updateCampaignClientService(long userId, long clientId,String clientState) {
-
-        return null;
-    }
 
 
 }
