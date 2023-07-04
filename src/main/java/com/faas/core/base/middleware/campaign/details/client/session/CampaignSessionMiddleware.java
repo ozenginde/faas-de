@@ -4,7 +4,7 @@ import com.faas.core.base.framework.campaign.details.client.session.CampaignSess
 import com.faas.core.base.model.ws.campaign.details.client.session.CampaignSessionWSModel;
 import com.faas.core.base.model.ws.campaign.details.client.session.dto.CampaignSessionWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.session.content.CreateSessionRequest;
+import com.faas.core.base.model.ws.session.content.SessionRequest;
 import com.faas.core.base.model.ws.session.content.SessionWSModel;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.utils.config.AppConstant;
@@ -22,12 +22,12 @@ public class CampaignSessionMiddleware {
     CampaignSessionFramework campaignSessionFramework;
 
 
-    public CampaignSessionWSModel searchCampaignSessions(long userId,String campaignId,String city,String country,String sessionState,int reqPage,int reqSize) {
+    public CampaignSessionWSModel searchCampaignSessions(long userId,String campaignId,String city,String country,int reqPage,int reqSize) {
 
         CampaignSessionWSModel response = new CampaignSessionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        CampaignSessionWSDTO campaignSession =  campaignSessionFramework.searchCampaignSessionsService(userId,campaignId,city,country,sessionState,reqPage,reqSize);
+        CampaignSessionWSDTO campaignSession =  campaignSessionFramework.searchCampaignSessionsService(userId,campaignId,city,country,reqPage,reqSize);
         if (campaignSession != null){
             response.setCampaignSession(campaignSession);
         }
@@ -42,12 +42,12 @@ public class CampaignSessionMiddleware {
     }
 
 
-    public CampaignSessionWSModel getCampaignSessions(long userId,String campaignId,int reqPage,int reqSize) {
+    public CampaignSessionWSModel getCampaignSessions(long userId,String campaignId,String sessionState,int reqPage,int reqSize) {
 
         CampaignSessionWSModel response = new CampaignSessionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        CampaignSessionWSDTO campaignSession =  campaignSessionFramework.getCampaignSessionsService(userId,campaignId,reqPage,reqSize);
+        CampaignSessionWSDTO campaignSession =  campaignSessionFramework.getCampaignSessionsService(userId,campaignId,sessionState,reqPage,reqSize);
         if (campaignSession != null){
             response.setCampaignSession(campaignSession);
         }
@@ -84,39 +84,17 @@ public class CampaignSessionMiddleware {
     }
 
 
-    public SessionWSModel createCampaignSessions(CreateSessionRequest createSession) {
+    public SessionWSModel createCampaignSession(SessionRequest sessionRequest) {
 
         SessionWSModel response = new SessionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<SessionWSDTO> sessionWSDTOS = campaignSessionFramework.createCampaignSessionsService(createSession);
+        List<SessionWSDTO> sessionWSDTOS = campaignSessionFramework.createCampaignSessionService(sessionRequest);
         if (sessionWSDTOS != null){
             response.setSessions(sessionWSDTOS);
         }
 
         general.setOperation("createCampaignSessions");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public SessionWSModel createCampaignSession(long userId,String campaignId,long clientId,long agentId) {
-
-        SessionWSModel response = new SessionWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<SessionWSDTO>sessionWSDTOS = new ArrayList<>();
-
-        SessionWSDTO sessionWSDTO = campaignSessionFramework.createCampaignSessionService(userId,campaignId,agentId,clientId);
-        if (sessionWSDTO != null){
-            sessionWSDTOS.add(sessionWSDTO);
-        }
-
-        response.setSessions(sessionWSDTOS);
-        general.setOperation("createCampaignSession");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

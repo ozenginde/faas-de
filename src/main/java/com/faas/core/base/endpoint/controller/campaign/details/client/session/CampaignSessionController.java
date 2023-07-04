@@ -2,7 +2,7 @@ package com.faas.core.base.endpoint.controller.campaign.details.client.session;
 
 import com.faas.core.base.middleware.campaign.details.client.session.CampaignSessionMiddleware;
 import com.faas.core.base.model.ws.campaign.details.client.session.CampaignSessionWSModel;
-import com.faas.core.base.model.ws.session.content.CreateSessionRequest;
+import com.faas.core.base.model.ws.session.content.SessionRequest;
 import com.faas.core.base.model.ws.session.content.SessionWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
@@ -30,11 +30,10 @@ public class CampaignSessionController {
                                                     @RequestParam String campaignId,
                                                     @RequestParam String city,
                                                     @RequestParam String country,
-                                                    @RequestParam String sessionState,
                                                     @RequestParam int reqPage,
                                                     @RequestParam int reqSize) {
 
-        CampaignSessionWSModel response = campaignSessionMiddleware.searchCampaignSessions(userId,campaignId,city,country,sessionState,reqPage,reqSize);
+        CampaignSessionWSModel response = campaignSessionMiddleware.searchCampaignSessions(userId,campaignId,city,country,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -46,10 +45,11 @@ public class CampaignSessionController {
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_SESSIONS, method = RequestMethod.POST)
     public ResponseEntity<?> getCampaignSessions(@RequestParam long userId,
                                                  @RequestParam String campaignId,
+                                                 @RequestParam String sessionState,
                                                  @RequestParam int reqPage,
                                                  @RequestParam int reqSize) {
 
-        CampaignSessionWSModel response = campaignSessionMiddleware.getCampaignSessions(userId,campaignId,reqPage,reqSize);
+        CampaignSessionWSModel response = campaignSessionMiddleware.getCampaignSessions(userId,campaignId,sessionState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -72,25 +72,10 @@ public class CampaignSessionController {
     }
 
 
-    @RequestMapping(value = BaseRoute.CREATE_CAMPAIGN_SESSIONS, method = RequestMethod.POST)
-    public ResponseEntity<?> createCampaignSessions(@RequestBody CreateSessionRequest createSession) {
-
-        SessionWSModel response = campaignSessionMiddleware.createCampaignSessions(createSession);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
     @RequestMapping(value = BaseRoute.CREATE_CAMPAIGN_SESSION, method = RequestMethod.POST)
-    public ResponseEntity<?> createCampaignSession(@RequestParam long userId,
-                                                   @RequestParam String campaignId,
-                                                   @RequestParam long clientId,
-                                                   @RequestParam long agentId) {
+    public ResponseEntity<?> createCampaignSession(@RequestBody SessionRequest sessionRequest) {
 
-        SessionWSModel response = campaignSessionMiddleware.createCampaignSession(userId,campaignId,clientId,agentId);
+        SessionWSModel response = campaignSessionMiddleware.createCampaignSession(sessionRequest);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -127,8 +112,6 @@ public class CampaignSessionController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
-
 
 
 }

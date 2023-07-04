@@ -6,8 +6,8 @@ import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.session.dto.CampaignSessionWSDTO;
-import com.faas.core.base.model.ws.session.content.CreateSessionRequest;
-import com.faas.core.base.model.ws.session.content.dto.CreateSessionRequestDTO;
+import com.faas.core.base.model.ws.session.content.SessionRequest;
+import com.faas.core.base.model.ws.session.content.dto.SessionRequestDTO;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -64,13 +64,13 @@ public class CampaignSessionFramework {
     AppUtils appUtils;
 
 
-    public CampaignSessionWSDTO searchCampaignSessionsService(long userId,String campaignId,String city,String country,String sessionState,int reqPage,int reqSize) {
+    public CampaignSessionWSDTO searchCampaignSessionsService(long userId,String campaignId,String city,String country,int reqPage,int reqSize) {
 
         return null;
     }
 
 
-    public CampaignSessionWSDTO getCampaignSessionsService(long userId,String campaignId,int reqPage,int reqSize) {
+    public CampaignSessionWSDTO getCampaignSessionsService(long userId,String campaignId,String sessionState,int reqPage,int reqSize) {
 
         Page<SessionDBModel> sessionModels = sessionRepository.findAllByCampaignId(campaignId, PageRequest.of(reqPage,reqSize));
         if (sessionModels != null){
@@ -95,12 +95,12 @@ public class CampaignSessionFramework {
 
 
 
-    public List<SessionWSDTO> createCampaignSessionsService(CreateSessionRequest createSession) {
+    public List<SessionWSDTO> createCampaignSessionService(SessionRequest sessionRequest) {
 
         List<SessionWSDTO>sessionWSDTOS = new ArrayList<>();
-        for (int i=0;i<createSession.getCreateSessions().size();i++){
-            CreateSessionRequestDTO createSessionRequestDTO = createSession.getCreateSessions().get(i);
-            SessionWSDTO sessionWSDTO = createCampaignSessionService(createSessionRequestDTO.getUserId(), createSessionRequestDTO.getCampaignId(), createSessionRequestDTO.getAgentId(), createSessionRequestDTO.getClientId());
+        for (int i=0;i<sessionRequest.getSessionRequests().size();i++){
+            SessionRequestDTO sessionRequestDTO = sessionRequest.getSessionRequests().get(i);
+            SessionWSDTO sessionWSDTO = createCampaignSession(sessionRequestDTO.getUserId(), sessionRequestDTO.getCampaignId(), sessionRequestDTO.getAgentId(), sessionRequestDTO.getClientId());
             if (sessionWSDTO != null){
                 sessionWSDTOS.add(sessionWSDTO);
             }
@@ -110,7 +110,7 @@ public class CampaignSessionFramework {
 
 
 
-    public SessionWSDTO createCampaignSessionService(long userId,String campaignId,long agentId,long clientId) {
+    public SessionWSDTO createCampaignSession(long userId,String campaignId,long agentId,long clientId) {
 
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
         Optional<UserDBModel> agentDBModel = userRepository.findById(agentId);
