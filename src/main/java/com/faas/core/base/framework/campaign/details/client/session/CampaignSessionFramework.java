@@ -106,38 +106,27 @@ public class CampaignSessionFramework {
 
         List<SessionWSDTO>sessionWSDTOS = new ArrayList<>();
         for (int i=0;i<sessionRequest.getSessionRequests().size();i++){
-            SessionRequestDTO sessionRequestDTO = sessionRequest.getSessionRequests().get(i);
-            SessionWSDTO sessionWSDTO = createCampaignSession(sessionRequestDTO.getUserId(), sessionRequestDTO.getCampaignId(), sessionRequestDTO.getAgentId(), sessionRequestDTO.getClientId());
-            if (sessionWSDTO != null){
-                sessionWSDTOS.add(sessionWSDTO);
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionRequest.getSessionRequests().get(i).getClientId());
+            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(sessionRequest.getSessionRequests().get(i).getCampaignId());
+            Optional<UserDBModel> agentDBModel = userRepository.findById(sessionRequest.getSessionRequests().get(i).getAgentId());
+            if (clientDBModel.isPresent() && campaignDBModel.isPresent() && agentDBModel.isPresent()){
+
+                clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
+                clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+                clientRepository.save(clientDBModel.get());
+
+                SessionDBModel sessionDBModel = sessionRepository.save(sessionMapper.mapSessionDBModel(campaignDBModel.get(),agentDBModel.get(),clientDBModel.get()));
+                OperationDBModel operationDBModel = operationRepository.save(operationHelper.createOperationHelper(sessionDBModel));
+
+                activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
+                activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
+
+                sessionWSDTOS.add(new SessionWSDTO(sessionDBModel));
             }
         }
         return sessionWSDTOS;
     }
 
-
-
-    public SessionWSDTO createCampaignSession(long userId,String campaignId,long agentId,long clientId) {
-
-        Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-        Optional<UserDBModel> agentDBModel = userRepository.findById(agentId);
-        Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
-        if (campaignDBModel.isPresent() && agentDBModel.isPresent() && clientDBModel.isPresent()){
-
-            clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
-            clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
-            clientRepository.save(clientDBModel.get());
-
-            SessionDBModel createdSession = sessionRepository.save(sessionMapper.mapSessionDBModel(campaignDBModel.get(),agentDBModel.get(),clientDBModel.get()));
-            OperationDBModel createdOperation = operationRepository.save(operationHelper.createOperationHelper(createdSession));
-
-            activityHelper.createOperationActivity(createdSession.getId(),createdOperation.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(userId),AppConstant.USER_TYPE,String.valueOf(createdSession.getId()),AppConstant.SESSION_TYPE);
-            activityHelper.createOperationActivity(createdSession.getId(),createdOperation.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(userId),AppConstant.USER_TYPE,String.valueOf(createdSession.getId()),AppConstant.OPERATION_TYPE);
-
-            return new SessionWSDTO(createdSession);
-        }
-        return null;
-    }
 
 
 

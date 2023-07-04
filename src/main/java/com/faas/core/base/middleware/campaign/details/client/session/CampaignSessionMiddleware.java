@@ -94,7 +94,7 @@ public class CampaignSessionMiddleware {
             response.setSessions(sessionWSDTOS);
         }
 
-        general.setOperation("createCampaignSessions");
+        general.setOperation("createCampaignSession");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

@@ -131,6 +131,7 @@ public class SessionMapper {
         sessionDBModel.setAgentId(agentDBModel.getId());
         sessionDBModel.setAgentName(agentDBModel.getUserName());
         sessionDBModel.setSessionState(AppConstant.READY_SESSION);
+        sessionDBModel.setSessionType(campaignDBModel.getCampaignCategory());
         sessionDBModel.setuDate(appUtils.getCurrentTimeStamp());
         sessionDBModel.setcDate(appUtils.getCurrentTimeStamp());
         sessionDBModel.setStatus(1);

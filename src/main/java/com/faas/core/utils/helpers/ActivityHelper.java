@@ -70,11 +70,10 @@ public class ActivityHelper {
     public OperationActivityDAO mapOperationActivityCreatorData(String creatorId, String creatorType, OperationActivityDAO operationActivityDAO){
 
         if (creatorType.equalsIgnoreCase(AppConstant.USER_TYPE)){
-            UserDBModel userDBModel = getActivityUserDBModel(Integer.parseInt(creatorId));
-            if (userDBModel != null){
-
+            Optional<UserDBModel> userDBModel = userRepository.findById(Long.parseLong(creatorId));
+            if (userDBModel.isPresent()){
                 operationActivityDAO.setCreatorId(creatorId);
-                operationActivityDAO.setCreatorName(userDBModel.getUserName());
+                operationActivityDAO.setCreatorName(userDBModel.get().getUserName());
                 operationActivityDAO.setCreatorType(creatorType);
 
                 return operationActivityDAO;
@@ -107,15 +106,6 @@ public class ActivityHelper {
 
 
 
-    public UserDBModel getActivityUserDBModel(long userId){
-
-        Optional<UserDBModel> userDBModel = userRepository.findById(userId);
-        if (userDBModel.isPresent()){
-            userDBModel.get().setPassword("");
-            return userDBModel.get();
-        }
-        return null;
-    }
 
 
 

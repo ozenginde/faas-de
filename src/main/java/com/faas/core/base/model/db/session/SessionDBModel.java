@@ -68,6 +68,9 @@ public class SessionDBModel {
     @Column(name = "session_state")
     private String sessionState;
 
+    @Column(name = "session_type")
+    private String sessionType;
+
     @Column(name = "u_date")
     private long uDate;
 
@@ -77,11 +80,10 @@ public class SessionDBModel {
     @Column(name = "status")
     private int status;
 
-
     public SessionDBModel() {
     }
 
-    public SessionDBModel(long id, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String sessionState, long uDate, long cDate, int status) {
+    public SessionDBModel(long id, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String sessionState, String sessionType, long uDate, long cDate, int status) {
         this.id = id;
         this.sessionUUID = sessionUUID;
         this.clientId = clientId;
@@ -102,6 +104,7 @@ public class SessionDBModel {
         this.agentId = agentId;
         this.agentName = agentName;
         this.sessionState = sessionState;
+        this.sessionType = sessionType;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -265,6 +268,14 @@ public class SessionDBModel {
 
     public void setSessionState(String sessionState) {
         this.sessionState = sessionState;
+    }
+
+    public String getSessionType() {
+        return sessionType;
+    }
+
+    public void setSessionType(String sessionType) {
+        this.sessionType = sessionType;
     }
 
     public long getuDate() {
