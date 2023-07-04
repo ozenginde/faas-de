@@ -66,6 +66,13 @@ public class CampaignSessionFramework {
 
     public CampaignSessionWSDTO searchCampaignSessionsService(long userId,String campaignId,String city,String country,int reqPage,int reqSize) {
 
+        Page<SessionDBModel> sessionModels = sessionRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId,city,country,PageRequest.of(reqPage,reqSize));
+        if (sessionModels != null){
+            CampaignSessionWSDTO campaignSessionWSDTO = new CampaignSessionWSDTO();
+            campaignSessionWSDTO.setPagination(sessionMapper.createSessionPaginationWSDTO(sessionModels));
+            campaignSessionWSDTO.setSessions(sessionMapper.mapSessionWSDTOS(sessionModels.getContent()));
+            return campaignSessionWSDTO;
+        }
         return null;
     }
 
@@ -116,6 +123,7 @@ public class CampaignSessionFramework {
         Optional<UserDBModel> agentDBModel = userRepository.findById(agentId);
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         if (campaignDBModel.isPresent() && agentDBModel.isPresent() && clientDBModel.isPresent()){
+
             clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
             clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             clientRepository.save(clientDBModel.get());

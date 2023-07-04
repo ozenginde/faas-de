@@ -4,7 +4,6 @@ import com.faas.core.base.model.db.user.details.dao.UserDataDAO;
 import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
 import com.faas.core.base.repo.channel.account.SipAccountRepository;
 import com.faas.core.base.repo.channel.account.WappAccountRepository;
-import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.base.repo.user.details.UserDetailsRepository;
 import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
@@ -15,9 +14,6 @@ import java.util.Optional;
 
 @Component
 public class UserMapper {
-
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
     UserDetailsRepository userDetailsRepository;

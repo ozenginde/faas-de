@@ -103,7 +103,6 @@ public class UserFramework {
 
         Optional<UserRoleDBModel> userRoles = userRoleRepository.findById(roleId);
         Optional<UserDBModel> userDBModel = userRepository.findById(selectedId);
-
         if (userDBModel.isPresent() && userRoles.isPresent()) {
 
             userDBModel.get().setUserName(userName);

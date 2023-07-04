@@ -26,7 +26,6 @@ import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.base.repo.process.details.channel.temp.SmsMessageTempRepository;
 import com.faas.core.base.repo.process.details.channel.temp.WappMessageTempRepository;
 import com.faas.core.base.repo.session.SessionRepository;
-import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +39,6 @@ import java.util.Optional;
 @Component
 public class SessionMapper {
 
-
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
     SessionRepository sessionRepository;

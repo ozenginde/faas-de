@@ -6,7 +6,6 @@ import com.faas.core.api.model.ws.agent.content.dto.ApiAgentWSDTO;
 import com.faas.core.api.model.ws.agent.content.ApiAgentSipAccountWSModel;
 import com.faas.core.api.model.ws.agent.content.dto.ApiAgentSipAccountWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,6 @@ public class ApiAgentMiddleware {
 
     @Autowired
     ApiAgentFramework apiAgentFramework;
-
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
     AppUtils appUtils;

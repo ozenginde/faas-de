@@ -1,10 +1,8 @@
 package com.faas.core.base.middleware.user.details;
 
 import com.faas.core.base.framework.user.details.UserDetailsFramework;
-import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.db.user.details.UserDetailsDBModel;
 import com.faas.core.base.model.db.user.details.dao.UserDataDAO;
-import com.faas.core.base.model.db.user.details.dao.UserSipChannelDAO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.model.ws.user.details.UserDataWSModel;
 import com.faas.core.base.model.ws.user.details.UserDetailsWSModel;
@@ -14,7 +12,6 @@ import com.faas.core.base.model.ws.user.details.dto.UserDataWSDTO;
 import com.faas.core.base.model.ws.user.details.dto.UserDetailsWSDTO;
 import com.faas.core.base.model.ws.user.details.dto.UserSipChannelWSDTO;
 import com.faas.core.base.model.ws.user.details.dto.UserWappChannelWSDTO;
-import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.base.repo.user.details.UserDetailsRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
@@ -30,9 +27,6 @@ public class UserDetailsMiddleware {
 
     @Autowired
     UserDetailsFramework userDetailsFramework;
-
-    @Autowired
-    UserRepository userRepository;
 
     @Autowired
     UserDetailsRepository userDetailsRepository;
