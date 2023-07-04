@@ -170,13 +170,17 @@ public class CampaignSessionFramework {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         if (sessionDBModels.size()>0){
-            Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionDBModels.get(0).getClientId());
+            sessionRepository.delete(sessionDBModels.get(0));
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
             if (clientDBModel.isPresent()){
                 clientDBModel.get().setClientState(AppConstant.READY_CLIENT);
                 clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                 clientRepository.save(clientDBModel.get());
             }
-            sessionRepository.delete(sessionDBModels.get(0));
+            List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientId(sessionId,clientId);
+            if (operationDBModels.size()>0){
+                operationRepository.delete(operationDBModels.get(0));
+            }
             return new SessionWSDTO(sessionDBModels.get(0));
         }
         return null;
