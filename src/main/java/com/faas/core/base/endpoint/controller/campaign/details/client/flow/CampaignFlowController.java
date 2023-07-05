@@ -40,7 +40,6 @@ public class CampaignFlowController {
     }
 
 
-
     @RequestMapping(value = BaseRoute.GET_CAMPAIGN_FLOWS, method = RequestMethod.POST)
     public ResponseEntity<?> getCampaignFlows(@RequestParam long userId,
                                               @RequestParam String campaignId,
@@ -111,5 +110,7 @@ public class CampaignFlowController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
+
 
 }
