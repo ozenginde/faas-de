@@ -2,12 +2,9 @@ package com.faas.core.base.framework.campaign.details.client.inquiry;
 
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
-import com.faas.core.base.model.db.flow.FlowDBModel;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
-import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.inquiry.dto.CampaignInquiryWSDTO;
-import com.faas.core.base.model.ws.flow.content.dto.FlowWSDTO;
 import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -85,7 +82,6 @@ public class CampaignInquiryFramework {
     }
 
 
-
     public CampaignInquiryWSDTO getCampaignInquiriesService(long userId,String campaignId,int reqPage,int reqSize) {
 
         Page<InquiryDBModel> inquiryDBModelPage = inquiryRepository.findAllByCampaignId(campaignId, PageRequest.of(reqPage,reqSize));
@@ -97,7 +93,6 @@ public class CampaignInquiryFramework {
         }
         return null;
     }
-
 
 
     public InquiryWSDTO getCampaignInquiryService(long userId,long inquiryId,long clientId) {
@@ -124,7 +119,6 @@ public class CampaignInquiryFramework {
         }
         return null;
     }
-
 
 
     public InquiryWSDTO updateCampaignInquiryService(long userId,long inquiryId,long clientId,String inquiryState) {
