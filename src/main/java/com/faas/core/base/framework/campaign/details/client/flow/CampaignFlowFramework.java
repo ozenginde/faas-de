@@ -114,14 +114,14 @@ public class CampaignFlowFramework {
     }
 
 
-    public FlowWSDTO createCampaignFlowService(long userId, String campaignId, long clientId) {
+    public FlowWSDTO createCampaignFlowService(long userId,String campaignId,long clientId) {
 
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
-        List<CampaignAgentDBModel> campaignAgentDBModels = campaignAgentRepository.findByCampaignId(campaignId);
+        List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByCampaignId(campaignId);
 
-        if (campaignDBModel.isPresent() && clientDBModel.isPresent() && campaignAgentDBModels.size() > 0) {
-            Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgentDBModels.get(0).getAgentId());
+        if (campaignDBModel.isPresent() && clientDBModel.isPresent() && campaignAgents.size() > 0) {
+            Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgents.get(0).getAgentId());
             if (agentDBModel.isPresent()) {
                 clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
                 clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());

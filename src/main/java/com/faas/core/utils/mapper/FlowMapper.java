@@ -26,6 +26,7 @@ public class FlowMapper {
     public FlowDBModel mapFlowDBModel(CampaignDBModel campaignDBModel,ClientDBModel clientDBModel, UserDBModel agentDBModel){
 
         FlowDBModel flowDBModel = new FlowDBModel();
+
         flowDBModel.setSessionId(0);
         flowDBModel.setSessionUUID("");
         flowDBModel.setClientId(clientDBModel.getId());
