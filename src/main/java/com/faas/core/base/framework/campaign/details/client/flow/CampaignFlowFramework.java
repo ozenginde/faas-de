@@ -76,24 +76,10 @@ public class CampaignFlowFramework {
     AppUtils appUtils;
 
 
-    public CampaignFlowWSDTO searchCampaignFlowsService(long userId,String campaignId,String city,String country,int reqPage,int reqSize) {
+    public CampaignFlowWSDTO searchCampaignFlowsService(long userId, String campaignId, String city, String country, int reqPage, int reqSize) {
 
-        Page<FlowDBModel> flowDBModelPage = flowRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId,city,country, PageRequest.of(reqPage,reqSize));
-        if (flowDBModelPage != null){
-            CampaignFlowWSDTO campaignFlowWSDTO = new CampaignFlowWSDTO();
-            campaignFlowWSDTO.setFlows(flowMapper.createFlowWSDTOS(flowDBModelPage.getContent()));
-            campaignFlowWSDTO.setPagination(flowMapper.createFlowPaginationWSDTO(flowDBModelPage));
-
-            return campaignFlowWSDTO;
-        }
-       return null;
-    }
-
-
-    public CampaignFlowWSDTO getCampaignFlowsService(long userId,String campaignId,int reqPage,int reqSize) {
-
-        Page<FlowDBModel> flowDBModelPage = flowRepository.findAllByCampaignId(campaignId,PageRequest.of(reqPage,reqSize));
-        if (flowDBModelPage != null){
+        Page<FlowDBModel> flowDBModelPage = flowRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId, city, country, PageRequest.of(reqPage, reqSize));
+        if (flowDBModelPage != null) {
             CampaignFlowWSDTO campaignFlowWSDTO = new CampaignFlowWSDTO();
             campaignFlowWSDTO.setFlows(flowMapper.createFlowWSDTOS(flowDBModelPage.getContent()));
             campaignFlowWSDTO.setPagination(flowMapper.createFlowPaginationWSDTO(flowDBModelPage));
@@ -104,41 +90,54 @@ public class CampaignFlowFramework {
     }
 
 
-    public FlowWSDTO getCampaignFlowService(long userId,long flowId,long clientId) {
+    public CampaignFlowWSDTO getCampaignFlowsService(long userId, String campaignId, int reqPage, int reqSize) {
 
-        List<FlowDBModel>flowDBModels = flowRepository.findByIdAndClientId(flowId,clientId);
-        if (flowDBModels.size()>0){
+        Page<FlowDBModel> flowDBModelPage = flowRepository.findAllByCampaignId(campaignId, PageRequest.of(reqPage, reqSize));
+        if (flowDBModelPage != null) {
+            CampaignFlowWSDTO campaignFlowWSDTO = new CampaignFlowWSDTO();
+            campaignFlowWSDTO.setFlows(flowMapper.createFlowWSDTOS(flowDBModelPage.getContent()));
+            campaignFlowWSDTO.setPagination(flowMapper.createFlowPaginationWSDTO(flowDBModelPage));
+
+            return campaignFlowWSDTO;
+        }
+        return null;
+    }
+
+
+    public FlowWSDTO getCampaignFlowService(long userId, long flowId, long clientId) {
+
+        List<FlowDBModel> flowDBModels = flowRepository.findByIdAndClientId(flowId, clientId);
+        if (flowDBModels.size() > 0) {
             return new FlowWSDTO(flowDBModels.get(0));
         }
         return null;
     }
 
 
-    public FlowWSDTO createCampaignFlowService(long userId,String campaignId,long clientId) {
+    public FlowWSDTO createCampaignFlowService(long userId, String campaignId, long clientId) {
 
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         List<CampaignAgentDBModel> campaignAgentDBModels = campaignAgentRepository.findByCampaignId(campaignId);
 
-        if (campaignDBModel.isPresent() && clientDBModel.isPresent() && campaignAgentDBModels.size()>0){
+        if (campaignDBModel.isPresent() && clientDBModel.isPresent() && campaignAgentDBModels.size() > 0) {
             Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgentDBModels.get(0).getAgentId());
-            if (agentDBModel.isPresent()){
-
+            if (agentDBModel.isPresent()) {
                 clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
                 clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                 clientRepository.save(clientDBModel.get());
 
-                return new FlowWSDTO(flowRepository.save(flowMapper.mapFlowDBModel(campaignDBModel.get(),clientDBModel.get(),agentDBModel.get())));
+                return new FlowWSDTO(flowRepository.save(flowMapper.mapFlowDBModel(campaignDBModel.get(), clientDBModel.get(), agentDBModel.get())));
             }
         }
         return null;
     }
 
 
-    public FlowWSDTO updateCampaignFlowService(long userId,long flowId,long clientId,String flowState) {
+    public FlowWSDTO updateCampaignFlowService(long userId, long flowId, long clientId, String flowState) {
 
-        List<FlowDBModel> flowDBModels = flowRepository.findByIdAndClientId(flowId,clientId);
-        if (flowDBModels.size()>0){
+        List<FlowDBModel> flowDBModels = flowRepository.findByIdAndClientId(flowId, clientId);
+        if (flowDBModels.size() > 0) {
             flowDBModels.get(0).setFlowState(flowState);
             flowDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             return new FlowWSDTO(flowRepository.save(flowDBModels.get(0)));
@@ -147,10 +146,10 @@ public class CampaignFlowFramework {
     }
 
 
-    public FlowWSDTO removeCampaignFlowService(long userId,long flowId,long clientId) {
+    public FlowWSDTO removeCampaignFlowService(long userId, long flowId, long clientId) {
 
-        List<FlowDBModel> flowDBModels = flowRepository.findByIdAndClientId(flowId,clientId);
-        if (flowDBModels.size()>0){
+        List<FlowDBModel> flowDBModels = flowRepository.findByIdAndClientId(flowId, clientId);
+        if (flowDBModels.size() > 0) {
             flowRepository.delete(flowDBModels.get(0));
             return new FlowWSDTO(flowDBModels.get(0));
         }

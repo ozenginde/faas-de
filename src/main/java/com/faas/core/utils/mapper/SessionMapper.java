@@ -124,19 +124,15 @@ public class SessionMapper {
         sessionDBModel.setCampaignId(campaignDBModel.getId());
         sessionDBModel.setCampaign(campaignDBModel.getCampaign());
         sessionDBModel.setCampaignType(campaignDBModel.getCampaignType());
+        sessionDBModel.setCampaignCategory(campaignDBModel.getCampaignCategory());
         sessionDBModel.setProcessId(campaignDBModel.getProcessId());
         sessionDBModel.setProcess(campaignDBModel.getProcess());
         sessionDBModel.setProcessType(campaignDBModel.getProcessType());
         sessionDBModel.setProcessCategory(campaignDBModel.getProcessCategory());
-        if (agentDBModel != null){
-            sessionDBModel.setAgentId(agentDBModel.getId());
-            sessionDBModel.setAgentName(agentDBModel.getUserName());
-        }else {
-            sessionDBModel.setAgentId(0);
-            sessionDBModel.setAgentName("");
-        }
-        sessionDBModel.setSessionState(AppConstant.READY_SESSION);
+        sessionDBModel.setAgentId(agentDBModel.getId());
+        sessionDBModel.setAgentName(agentDBModel.getUserName());
         sessionDBModel.setSessionType(campaignDBModel.getCampaignCategory());
+        sessionDBModel.setSessionState(AppConstant.READY_SESSION);
         sessionDBModel.setuDate(appUtils.getCurrentTimeStamp());
         sessionDBModel.setcDate(appUtils.getCurrentTimeStamp());
         sessionDBModel.setStatus(1);
