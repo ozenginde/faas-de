@@ -142,11 +142,23 @@ public class CampaignInquiryFramework {
     public InquiryWSDTO removeCampaignInquiryService(long userId,long inquiryId,long clientId) {
 
         List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndClientId(inquiryId,clientId);
-        if (inquiryDBModels.size()>0){
+        if (inquiryDBModels.size() > 0) {
             inquiryRepository.delete(inquiryDBModels.get(0));
+            Optional<SessionDBModel>sessionDBModel = sessionRepository.findById(inquiryDBModels.get(0).getSessionId());
+            if(sessionDBModel.isPresent()){
+                sessionRepository.delete(sessionDBModel.get());
+                operationRepository.deleteAll(operationRepository.findBySessionIdAndClientId(sessionDBModel.get().getId(),clientId));
+            }
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
+            if (clientDBModel.isPresent()){
+                clientDBModel.get().setClientState(AppConstant.READY_CLIENT);
+                clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+                clientRepository.save(clientDBModel.get());
+            }
             return new InquiryWSDTO(inquiryDBModels.get(0));
         }
         return null;
     }
+
 
 }

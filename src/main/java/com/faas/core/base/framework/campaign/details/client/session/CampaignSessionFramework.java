@@ -164,9 +164,11 @@ public class CampaignSessionFramework {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         if (sessionDBModels.size()>0){
+
             sessionRepository.delete(sessionDBModels.get(0));
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
             if (clientDBModel.isPresent()){
+
                 clientDBModel.get().setClientState(AppConstant.READY_CLIENT);
                 clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                 clientRepository.save(clientDBModel.get());

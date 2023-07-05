@@ -152,6 +152,17 @@ public class CampaignFlowFramework {
         List<FlowDBModel> flowDBModels = flowRepository.findByIdAndClientId(flowId, clientId);
         if (flowDBModels.size() > 0) {
             flowRepository.delete(flowDBModels.get(0));
+            Optional<SessionDBModel>sessionDBModel = sessionRepository.findById(flowDBModels.get(0).getSessionId());
+            if(sessionDBModel.isPresent()){
+                sessionRepository.delete(sessionDBModel.get());
+                operationRepository.deleteAll(operationRepository.findBySessionIdAndClientId(sessionDBModel.get().getId(),clientId));
+            }
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
+            if (clientDBModel.isPresent()){
+                clientDBModel.get().setClientState(AppConstant.READY_CLIENT);
+                clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+                clientRepository.save(clientDBModel.get());
+            }
             return new FlowWSDTO(flowDBModels.get(0));
         }
         return null;
