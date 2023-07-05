@@ -115,7 +115,7 @@ public class CampaignInquiryFramework {
             clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             clientRepository.save(clientDBModel.get());
 
-            return new InquiryWSDTO(inquiryMapper.mapInquiryDBModel(campaignDBModel.get(),clientDBModel.get()));
+            return new InquiryWSDTO(inquiryRepository.save(inquiryMapper.mapInquiryDBModel(campaignDBModel.get(),clientDBModel.get())));
         }
         return null;
     }
