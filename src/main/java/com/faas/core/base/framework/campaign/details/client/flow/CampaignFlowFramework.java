@@ -116,21 +116,27 @@ public class CampaignFlowFramework {
 
     public FlowWSDTO createCampaignFlowService(long userId,String campaignId,long clientId) {
 
-        Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-        Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
-        List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByCampaignId(campaignId);
+        if (!flowRepository.existsByClientIdAndCampaignIdAndFlowState(clientId,campaignId,AppConstant.READY_FLOW)
+                && !flowRepository.existsByClientIdAndCampaignIdAndFlowState(clientId,campaignId,AppConstant.ACTIVE_FLOW) ){
 
-        if (campaignDBModel.isPresent() && clientDBModel.isPresent() && campaignAgents.size() > 0) {
-            Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgents.get(0).getAgentId());
-            if (agentDBModel.isPresent()) {
+            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
+            List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByCampaignId(campaignId);
 
-                clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
-                clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
-                clientRepository.save(clientDBModel.get());
+            if (campaignDBModel.isPresent() && clientDBModel.isPresent() && campaignAgents.size() > 0) {
+                Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgents.get(0).getAgentId());
+                if (agentDBModel.isPresent()) {
 
-                return new FlowWSDTO(flowRepository.save(flowMapper.mapFlowDBModel(campaignDBModel.get(), clientDBModel.get(), agentDBModel.get())));
+                    clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
+                    clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+                    clientRepository.save(clientDBModel.get());
+
+                    return new FlowWSDTO(flowRepository.save(flowMapper.mapFlowDBModel(campaignDBModel.get(), clientDBModel.get(), agentDBModel.get())));
+                }
             }
         }
+
+
         return null;
     }
 
