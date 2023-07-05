@@ -105,13 +105,13 @@ public class CampaignSessionMiddleware {
 
 
 
-    public SessionWSModel updateCampaignSession(long userId,long sessionId,long agentId,String campaignId,String sessionState) {
+    public SessionWSModel updateCampaignSession(long userId,long sessionId,long clientId,long agentId,String campaignId,String sessionState) {
 
         SessionWSModel response = new SessionWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<SessionWSDTO>sessionWSDTOS = new ArrayList<>();
 
-        SessionWSDTO sessionWSDTO = campaignSessionFramework.updateCampaignSessionService(userId,sessionId,agentId,campaignId,sessionState);
+        SessionWSDTO sessionWSDTO = campaignSessionFramework.updateCampaignSessionService(userId,sessionId,clientId,agentId,campaignId,sessionState);
         if (sessionWSDTO != null){
             sessionWSDTOS.add(sessionWSDTO);
         }

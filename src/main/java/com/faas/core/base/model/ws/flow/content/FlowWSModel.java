@@ -1,21 +1,21 @@
 package com.faas.core.base.model.ws.flow.content;
 
+import com.faas.core.base.model.ws.flow.content.dto.FlowWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
 
 import java.util.List;
 
 public class FlowWSModel {
 
     private GeneralWSModel general;
-    private List<InquiryWSDTO> inquiries;
+    private List<FlowWSDTO>flows;
 
     public FlowWSModel() {
     }
 
-    public FlowWSModel(GeneralWSModel general, List<InquiryWSDTO> inquiries) {
+    public FlowWSModel(GeneralWSModel general, List<FlowWSDTO> flows) {
         this.general = general;
-        this.inquiries = inquiries;
+        this.flows = flows;
     }
 
     public GeneralWSModel getGeneral() {
@@ -26,11 +26,11 @@ public class FlowWSModel {
         this.general = general;
     }
 
-    public List<InquiryWSDTO> getInquiries() {
-        return inquiries;
+    public List<FlowWSDTO> getFlows() {
+        return flows;
     }
 
-    public void setInquiries(List<InquiryWSDTO> inquiries) {
-        this.inquiries = inquiries;
+    public void setFlows(List<FlowWSDTO> flows) {
+        this.flows = flows;
     }
 }

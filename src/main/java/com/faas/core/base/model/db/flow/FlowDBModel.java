@@ -11,11 +11,20 @@ public class FlowDBModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "session_id")
+    private long sessionId;
+
+    @Column(name = "session_uuid")
+    private String sessionUUID;
+
     @Column(name = "client_id")
     private long clientId;
 
     @Column(name = "client_name")
     private String clientName;
+
+    @Column(name = "national_id")
+    private String nationalId;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -32,12 +41,6 @@ public class FlowDBModel {
     @Column(name = "client_type")
     private String clientType;
 
-    @Column(name = "session_id")
-    private long sessionId;
-
-    @Column(name = "session_uuid")
-    private String sessionUUID;
-
     @Column(name = "campaign_id")
     private String campaignId;
 
@@ -47,8 +50,8 @@ public class FlowDBModel {
     @Column(name = "campaign_type")
     private String campaignType;
 
-    @Column(name = "campaign_base_type")
-    private String campaignBaseType;
+    @Column(name = "campaign_category")
+    private String campaignCategory;
 
     @Column(name = "process_id")
     private String processId;
@@ -68,8 +71,8 @@ public class FlowDBModel {
     @Column(name = "agent_name")
     private String agentName;
 
-    @Column(name = "inquiry_state")
-    private String inquiryState;
+    @Column(name = "flow_state")
+    private String flowState;
 
     @Column(name = "u_date")
     private long uDate;
@@ -83,28 +86,29 @@ public class FlowDBModel {
     public FlowDBModel() {
     }
 
-    public FlowDBModel(long id, long clientId, String clientName, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, long sessionId, String sessionUUID, String campaignId, String campaign, String campaignType, String campaignBaseType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String inquiryState, long uDate, long cDate, int status) {
+    public FlowDBModel(long id, long sessionId, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String campaignCategory, String processId, String process, String processType, String processCategory, long agentId, String agentName, String flowState, long uDate, long cDate, int status) {
         this.id = id;
+        this.sessionId = sessionId;
+        this.sessionUUID = sessionUUID;
         this.clientId = clientId;
         this.clientName = clientName;
+        this.nationalId = nationalId;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.clientCity = clientCity;
         this.clientCountry = clientCountry;
         this.clientType = clientType;
-        this.sessionId = sessionId;
-        this.sessionUUID = sessionUUID;
         this.campaignId = campaignId;
         this.campaign = campaign;
         this.campaignType = campaignType;
-        this.campaignBaseType = campaignBaseType;
+        this.campaignCategory = campaignCategory;
         this.processId = processId;
         this.process = process;
         this.processType = processType;
         this.processCategory = processCategory;
         this.agentId = agentId;
         this.agentName = agentName;
-        this.inquiryState = inquiryState;
+        this.flowState = flowState;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -116,6 +120,22 @@ public class FlowDBModel {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public long getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(long sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public String getSessionUUID() {
+        return sessionUUID;
+    }
+
+    public void setSessionUUID(String sessionUUID) {
+        this.sessionUUID = sessionUUID;
     }
 
     public long getClientId() {
@@ -132,6 +152,14 @@ public class FlowDBModel {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
+    }
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
     }
 
     public String getPhoneNumber() {
@@ -174,22 +202,6 @@ public class FlowDBModel {
         this.clientType = clientType;
     }
 
-    public long getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(long sessionId) {
-        this.sessionId = sessionId;
-    }
-
-    public String getSessionUUID() {
-        return sessionUUID;
-    }
-
-    public void setSessionUUID(String sessionUUID) {
-        this.sessionUUID = sessionUUID;
-    }
-
     public String getCampaignId() {
         return campaignId;
     }
@@ -214,12 +226,12 @@ public class FlowDBModel {
         this.campaignType = campaignType;
     }
 
-    public String getCampaignBaseType() {
-        return campaignBaseType;
+    public String getCampaignCategory() {
+        return campaignCategory;
     }
 
-    public void setCampaignBaseType(String campaignBaseType) {
-        this.campaignBaseType = campaignBaseType;
+    public void setCampaignCategory(String campaignCategory) {
+        this.campaignCategory = campaignCategory;
     }
 
     public String getProcessId() {
@@ -270,12 +282,12 @@ public class FlowDBModel {
         this.agentName = agentName;
     }
 
-    public String getInquiryState() {
-        return inquiryState;
+    public String getFlowState() {
+        return flowState;
     }
 
-    public void setInquiryState(String inquiryState) {
-        this.inquiryState = inquiryState;
+    public void setFlowState(String flowState) {
+        this.flowState = flowState;
     }
 
     public long getuDate() {

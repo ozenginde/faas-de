@@ -48,28 +48,6 @@ public class OperationHelper {
     AppUtils appUtils;
 
 
-    public OperationDBModel createOperationHelper(SessionDBModel sessionDBModel) {
-
-        if (!operationRepository.existsBySessionIdAndClientId(sessionDBModel.getId(),sessionDBModel.getClientId())){
-
-            OperationDBModel operationDBModel = new OperationDBModel();
-            operationDBModel.setSessionId(sessionDBModel.getId());
-            operationDBModel.setSessionUUID(sessionDBModel.getSessionUUID());
-            operationDBModel.setClientId(sessionDBModel.getClientId());
-            operationDBModel.setAgentId(sessionDBModel.getAgentId());
-            operationDBModel.setCampaignId(sessionDBModel.getCampaignId());
-            operationDBModel.setProcessId(sessionDBModel.getProcessId());
-            operationDBModel.setActivities(new ArrayList<>());
-            operationDBModel.setOperationState(AppConstant.OPERATION_READY);
-            operationDBModel.setOperationResult(AppConstant.RESULT_NONE);
-            operationDBModel.setuDate(appUtils.getCurrentTimeStamp());
-            operationDBModel.setcDate(appUtils.getCurrentTimeStamp());
-            operationDBModel.setStatus(1);
-
-            return operationDBModel;
-        }
-        return null;
-    }
 
 
     public ApiSipAccountWSDTO createApiSipCallAccountWSDTO(long agentId, long sessionId, long clientId, String campaignId, String processId){

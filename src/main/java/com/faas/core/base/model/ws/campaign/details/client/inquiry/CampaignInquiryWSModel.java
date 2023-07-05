@@ -1,19 +1,19 @@
 package com.faas.core.base.model.ws.campaign.details.client.inquiry;
 
-import com.faas.core.base.model.ws.campaign.details.client.content.dto.CampaignClientWSDTO;
+import com.faas.core.base.model.ws.campaign.details.client.inquiry.dto.CampaignInquiryWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 public class CampaignInquiryWSModel {
 
     private GeneralWSModel general;
-    private CampaignClientWSDTO campaignClient;
+    private CampaignInquiryWSDTO campaignInquiry;
 
     public CampaignInquiryWSModel() {
     }
 
-    public CampaignInquiryWSModel(GeneralWSModel general, CampaignClientWSDTO campaignClient) {
+    public CampaignInquiryWSModel(GeneralWSModel general, CampaignInquiryWSDTO campaignInquiry) {
         this.general = general;
-        this.campaignClient = campaignClient;
+        this.campaignInquiry = campaignInquiry;
     }
 
     public GeneralWSModel getGeneral() {
@@ -24,11 +24,11 @@ public class CampaignInquiryWSModel {
         this.general = general;
     }
 
-    public CampaignClientWSDTO getCampaignClient() {
-        return campaignClient;
+    public CampaignInquiryWSDTO getCampaignInquiry() {
+        return campaignInquiry;
     }
 
-    public void setCampaignClient(CampaignClientWSDTO campaignClient) {
-        this.campaignClient = campaignClient;
+    public void setCampaignInquiry(CampaignInquiryWSDTO campaignInquiry) {
+        this.campaignInquiry = campaignInquiry;
     }
 }

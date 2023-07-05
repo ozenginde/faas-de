@@ -86,11 +86,12 @@ public class CampaignSessionController {
     @RequestMapping(value = BaseRoute.UPDATE_CAMPAIGN_SESSION, method = RequestMethod.POST)
     public ResponseEntity<?> updateCampaignSession(@RequestParam long userId,
                                                    @RequestParam long sessionId,
+                                                   @RequestParam long clientId,
                                                    @RequestParam long agentId,
                                                    @RequestParam String campaignId,
                                                    @RequestParam String sessionState) {
 
-        SessionWSModel response = campaignSessionMiddleware.updateCampaignSession(userId,sessionId,agentId,campaignId,sessionState);
+        SessionWSModel response = campaignSessionMiddleware.updateCampaignSession(userId,sessionId,clientId,agentId,campaignId,sessionState);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

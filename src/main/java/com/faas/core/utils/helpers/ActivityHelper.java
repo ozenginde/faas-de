@@ -32,7 +32,6 @@ public class ActivityHelper {
 
 
 
-
     public void createOperationActivity(long sessionId,String operationId,String activity,String activityType,
                                         String creatorId, String creatorType, String createdId, String createdType) {
 

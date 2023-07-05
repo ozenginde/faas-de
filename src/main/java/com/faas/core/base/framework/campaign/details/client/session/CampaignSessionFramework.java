@@ -19,6 +19,7 @@ import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.ActivityHelper;
 import com.faas.core.utils.helpers.OperationHelper;
+import com.faas.core.utils.mapper.OperationMapper;
 import com.faas.core.utils.mapper.SessionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,9 @@ public class CampaignSessionFramework {
 
     @Autowired
     OperationHelper operationHelper;
+
+    @Autowired
+    OperationMapper operationMapper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -116,7 +120,7 @@ public class CampaignSessionFramework {
                 clientRepository.save(clientDBModel.get());
 
                 SessionDBModel sessionDBModel = sessionRepository.save(sessionMapper.mapSessionDBModel(campaignDBModel.get(),agentDBModel.get(),clientDBModel.get()));
-                OperationDBModel operationDBModel = operationRepository.save(operationHelper.createOperationHelper(sessionDBModel));
+                OperationDBModel operationDBModel = operationRepository.save(operationMapper.mapOperationDBModel(sessionDBModel));
 
                 activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
                 activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
@@ -130,26 +134,27 @@ public class CampaignSessionFramework {
 
 
 
-    public SessionWSDTO updateCampaignSessionService(long userId,long sessionId,long agentId,String campaignId,String sessionState) {
+    public SessionWSDTO updateCampaignSessionService(long userId,long sessionId,long clientId,long agentId,String campaignId,String sessionState) {
 
-        Optional<SessionDBModel> sessionDBModel = sessionRepository.findById(sessionId);
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         Optional<UserDBModel> agentDBModel = userRepository.findById(agentId);
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-        if (sessionDBModel.isPresent() && campaignDBModel.isPresent() && agentDBModel.isPresent()){
 
-            sessionDBModel.get().setCampaignId(campaignDBModel.get().getCampaign());
-            sessionDBModel.get().setCampaign(campaignDBModel.get().getCampaign());
-            sessionDBModel.get().setCampaignType(campaignDBModel.get().getCampaignType());
-            sessionDBModel.get().setProcessId(campaignDBModel.get().getProcessId());
-            sessionDBModel.get().setProcess(campaignDBModel.get().getProcess());
-            sessionDBModel.get().setProcessType(campaignDBModel.get().getProcessType());
-            sessionDBModel.get().setProcessCategory(campaignDBModel.get().getProcessCategory());
-            sessionDBModel.get().setAgentId(agentDBModel.get().getId());
-            sessionDBModel.get().setAgentName(agentDBModel.get().getUserName());
-            sessionDBModel.get().setSessionState(sessionState);
-            sessionDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+        if (sessionDBModels.size()>0 && campaignDBModel.isPresent() && agentDBModel.isPresent()){
 
-            return new SessionWSDTO(sessionRepository.save(sessionDBModel.get()));
+            sessionDBModels.get(0).setCampaignId(campaignDBModel.get().getCampaign());
+            sessionDBModels.get(0).setCampaign(campaignDBModel.get().getCampaign());
+            sessionDBModels.get(0).setCampaignType(campaignDBModel.get().getCampaignType());
+            sessionDBModels.get(0).setProcessId(campaignDBModel.get().getProcessId());
+            sessionDBModels.get(0).setProcess(campaignDBModel.get().getProcess());
+            sessionDBModels.get(0).setProcessType(campaignDBModel.get().getProcessType());
+            sessionDBModels.get(0).setProcessCategory(campaignDBModel.get().getProcessCategory());
+            sessionDBModels.get(0).setAgentId(agentDBModel.get().getId());
+            sessionDBModels.get(0).setAgentName(agentDBModel.get().getUserName());
+            sessionDBModels.get(0).setSessionState(sessionState);
+            sessionDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
+
+            return new SessionWSDTO(sessionRepository.save(sessionDBModels.get(0)));
         }
         return null;
     }

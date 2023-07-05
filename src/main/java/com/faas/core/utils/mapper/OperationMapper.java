@@ -36,6 +36,7 @@ import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBMod
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.details.UserDetailsDBModel;
+import com.faas.core.base.repo.operation.content.OperationRepository;
 import com.faas.core.base.repo.scenario.automation.AutomationTempRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.*;
@@ -69,6 +70,9 @@ public class OperationMapper {
 
     @Autowired
     SessionRepository sessionRepository;
+
+    @Autowired
+    OperationRepository operationRepository;
 
     @Autowired
     ClientRepository clientRepository;
@@ -150,6 +154,31 @@ public class OperationMapper {
 
     @Autowired
     AppUtils appUtils;
+
+
+
+    public OperationDBModel mapOperationDBModel(SessionDBModel sessionDBModel) {
+
+        if (!operationRepository.existsBySessionIdAndClientId(sessionDBModel.getId(),sessionDBModel.getClientId())){
+
+            OperationDBModel operationDBModel = new OperationDBModel();
+            operationDBModel.setSessionId(sessionDBModel.getId());
+            operationDBModel.setSessionUUID(sessionDBModel.getSessionUUID());
+            operationDBModel.setClientId(sessionDBModel.getClientId());
+            operationDBModel.setAgentId(sessionDBModel.getAgentId());
+            operationDBModel.setCampaignId(sessionDBModel.getCampaignId());
+            operationDBModel.setProcessId(sessionDBModel.getProcessId());
+            operationDBModel.setActivities(new ArrayList<>());
+            operationDBModel.setOperationState(AppConstant.OPERATION_READY);
+            operationDBModel.setOperationResult(AppConstant.RESULT_NONE);
+            operationDBModel.setuDate(appUtils.getCurrentTimeStamp());
+            operationDBModel.setcDate(appUtils.getCurrentTimeStamp());
+            operationDBModel.setStatus(1);
+
+            return operationDBModel;
+        }
+        return null;
+    }
 
 
     public ApiOperationDetailsWSDTO mapApiOperationDetailsWSDTO(SessionDBModel sessionDBModel, ClientDBModel clientDBModel, OperationDBModel operationDBModel, CampaignDBModel campaignDBModel, ProcessDBModel processDBModel) {

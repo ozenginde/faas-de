@@ -35,7 +35,6 @@ public class SessionHelper {
 
 
 
-
     public ApiSessionWSDTO createApiSessionWSDTO(Page<SessionDBModel> sessionsPage) {
 
         ApiSessionWSDTO apiSessionWSDTO = new ApiSessionWSDTO();

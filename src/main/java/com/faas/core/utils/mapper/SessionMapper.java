@@ -128,8 +128,13 @@ public class SessionMapper {
         sessionDBModel.setProcess(campaignDBModel.getProcess());
         sessionDBModel.setProcessType(campaignDBModel.getProcessType());
         sessionDBModel.setProcessCategory(campaignDBModel.getProcessCategory());
-        sessionDBModel.setAgentId(agentDBModel.getId());
-        sessionDBModel.setAgentName(agentDBModel.getUserName());
+        if (agentDBModel != null){
+            sessionDBModel.setAgentId(agentDBModel.getId());
+            sessionDBModel.setAgentName(agentDBModel.getUserName());
+        }else {
+            sessionDBModel.setAgentId(0);
+            sessionDBModel.setAgentName("");
+        }
         sessionDBModel.setSessionState(AppConstant.READY_SESSION);
         sessionDBModel.setSessionType(campaignDBModel.getCampaignCategory());
         sessionDBModel.setuDate(appUtils.getCurrentTimeStamp());
@@ -138,6 +143,7 @@ public class SessionMapper {
 
         return sessionDBModel;
     }
+
 
 
     public PaginationWSDTO createSessionPaginationWSDTO(Page<SessionDBModel> sessionPage){

@@ -47,6 +47,9 @@ public class SessionDBModel {
     @Column(name = "campaign_type")
     private String campaignType;
 
+    @Column(name = "campaign_category")
+    private String campaignCategory;
+
     @Column(name = "process_id")
     private String processId;
 
@@ -65,11 +68,11 @@ public class SessionDBModel {
     @Column(name = "agent_name")
     private String agentName;
 
-    @Column(name = "session_state")
-    private String sessionState;
-
     @Column(name = "session_type")
     private String sessionType;
+
+    @Column(name = "session_state")
+    private String sessionState;
 
     @Column(name = "u_date")
     private long uDate;
@@ -83,7 +86,7 @@ public class SessionDBModel {
     public SessionDBModel() {
     }
 
-    public SessionDBModel(long id, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String processId, String process, String processType, String processCategory, long agentId, String agentName, String sessionState, String sessionType, long uDate, long cDate, int status) {
+    public SessionDBModel(long id, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String campaignCategory, String processId, String process, String processType, String processCategory, long agentId, String agentName, String sessionType, String sessionState, long uDate, long cDate, int status) {
         this.id = id;
         this.sessionUUID = sessionUUID;
         this.clientId = clientId;
@@ -97,14 +100,15 @@ public class SessionDBModel {
         this.campaignId = campaignId;
         this.campaign = campaign;
         this.campaignType = campaignType;
+        this.campaignCategory = campaignCategory;
         this.processId = processId;
         this.process = process;
         this.processType = processType;
         this.processCategory = processCategory;
         this.agentId = agentId;
         this.agentName = agentName;
-        this.sessionState = sessionState;
         this.sessionType = sessionType;
+        this.sessionState = sessionState;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -214,6 +218,14 @@ public class SessionDBModel {
         this.campaignType = campaignType;
     }
 
+    public String getCampaignCategory() {
+        return campaignCategory;
+    }
+
+    public void setCampaignCategory(String campaignCategory) {
+        this.campaignCategory = campaignCategory;
+    }
+
     public String getProcessId() {
         return processId;
     }
@@ -262,20 +274,20 @@ public class SessionDBModel {
         this.agentName = agentName;
     }
 
-    public String getSessionState() {
-        return sessionState;
-    }
-
-    public void setSessionState(String sessionState) {
-        this.sessionState = sessionState;
-    }
-
     public String getSessionType() {
         return sessionType;
     }
 
     public void setSessionType(String sessionType) {
         this.sessionType = sessionType;
+    }
+
+    public String getSessionState() {
+        return sessionState;
+    }
+
+    public void setSessionState(String sessionState) {
+        this.sessionState = sessionState;
     }
 
     public long getuDate() {

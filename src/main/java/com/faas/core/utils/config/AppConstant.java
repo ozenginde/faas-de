@@ -48,12 +48,12 @@ public class AppConstant {
 
     public static final String ACTIVE_PROCESS = "ACTIVE_PROCESS";
     public static final String PASSIVE_PROCESS = "PASSIVE_PROCESS";
-    public static final String FINISHED_PROCESS = "FINISHED_PROCESS";
+    public static final String COMPLETED_PROCESS = "COMPLETED_PROCESS";
     public static final String ALL_PROCESSES = "ALL_PROCESSES";
 
     public static final String READY_SCENARIO = "READY_SCENARIO";
     public static final String ACTIVE_SCENARIO = "ACTIVE_SCENARIO";
-    public static final String FINISHED_SCENARIO = "FINISHED_SCENARIO";
+    public static final String COMPLETED_SCENARIO = "COMPLETED_SCENARIO";
     public static final String ALL_SCENARIOS = "ALL_SCENARIOS";
 
 
@@ -66,6 +66,11 @@ public class AppConstant {
     public static final String ACTIVE_INQUIRY = "ACTIVE_INQUIRY";
     public static final String COMPLETED_INQUIRY = "COMPLETED_INQUIRY";
     public static final String ALL_INQUIRIES = "ALL_INQUIRIES";
+
+    public static final String READY_FLOW = "READY_FLOW";
+    public static final String ACTIVE_FLOW = "ACTIVE_FLOW";
+    public static final String COMPLETED_FLOW = "COMPLETED_FLOW";
+    public static final String ALL_FLOWS = "ALL_FLOWS";
 
 
     public static final String READY_SESSION = "READY_SESSION";
@@ -141,6 +146,15 @@ public class AppConstant {
     public static final String SESSION_ACTIVITY = "SESSION_ACTIVITY";
     public static final String CREATE_SESSION_ACTIVITY = "CREATE_SESSION_ACTIVITY";
     public static final String CREATE_SESSION_ACTIVITY_DESC = "session created by";
+
+    public static final String FLOW_ACTIVITY = "FLOW_ACTIVITY";
+    public static final String CREATE_FLOW_ACTIVITY = "CREATE_FLOW_ACTIVITY";
+    public static final String CREATE_FLOW_ACTIVITY_DESC = "flow created by";
+
+
+    public static final String INQUIRY_ACTIVITY = "INQUIRY_ACTIVITY";
+    public static final String CREATE_INQUIRY_ACTIVITY = "CREATE_INQUIRY_ACTIVITY";
+    public static final String CREATE_INQUIRY_ACTIVITY_DESC = "inquiry created by";
 
 
     public static final String OPERATION_ACTIVITY = "OPERATION_ACTIVITY";
