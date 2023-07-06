@@ -72,7 +72,6 @@ public class AppConstant {
     public static final String COMPLETED_FLOW = "COMPLETED_FLOW";
     public static final String ALL_FLOWS = "ALL_FLOWS";
 
-
     public static final String READY_SESSION = "READY_SESSION";
     public static final String ACTIVE_SESSION = "ACTIVE_SESSION";
     public static final String COMPLETED_SESSION = "COMPLETED_SESSION";

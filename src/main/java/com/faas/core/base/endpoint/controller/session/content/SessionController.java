@@ -1,6 +1,7 @@
 package com.faas.core.base.endpoint.controller.session.content;
 
 import com.faas.core.base.middleware.session.content.SessionMiddleware;
+import com.faas.core.base.model.ws.session.content.SessionRequest;
 import com.faas.core.base.model.ws.session.content.SessionWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,10 +40,11 @@ public class SessionController {
 
     @RequestMapping(value = BaseRoute.GET_SESSIONS_BY_STATE, method = RequestMethod.POST)
     public ResponseEntity<?> getSessionsByState(@RequestParam long userId,
+                                                @RequestParam String sessionState,
                                                 @RequestParam int reqPage,
                                                 @RequestParam int reqSize) {
 
-        SessionWSModel response = sessionMiddleware.getSessionsByStateService(userId,reqPage,reqSize);
+        SessionWSModel response = sessionMiddleware.getSessionsByState(userId,sessionState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -52,10 +55,10 @@ public class SessionController {
 
     @RequestMapping(value = BaseRoute.GET_SESSION, method = RequestMethod.POST)
     public ResponseEntity<?> getSession(@RequestParam long userId,
-                                            @RequestParam int reqPage,
-                                            @RequestParam int reqSize) {
+                                        @RequestParam long sessionId,
+                                        @RequestParam long clientId) {
 
-        SessionWSModel response = sessionMiddleware.getSession(userId,reqPage,reqSize);
+        SessionWSModel response = sessionMiddleware.getSession(userId,sessionId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -66,10 +69,10 @@ public class SessionController {
 
     @RequestMapping(value = BaseRoute.CREATE_SESSION, method = RequestMethod.POST)
     public ResponseEntity<?> createSession(@RequestParam long userId,
-                                           @RequestParam int reqPage,
-                                           @RequestParam int reqSize) {
+                                           @RequestParam long clientId,
+                                           @RequestParam String campaign) {
 
-        SessionWSModel response = sessionMiddleware.createSession(userId,reqPage,reqSize);
+        SessionWSModel response = sessionMiddleware.createSession(userId,clientId,campaign);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -79,11 +82,9 @@ public class SessionController {
 
 
     @RequestMapping(value = BaseRoute.CREATE_SESSIONS, method = RequestMethod.POST)
-    public ResponseEntity<?> createSessions(@RequestParam long userId,
-                                            @RequestParam int reqPage,
-                                            @RequestParam int reqSize) {
+    public ResponseEntity<?> createSessions(@RequestBody SessionRequest sessionRequest) {
 
-        SessionWSModel response = sessionMiddleware.createSessions(userId,reqPage,reqSize);
+        SessionWSModel response = sessionMiddleware.createSessions(sessionRequest);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -94,10 +95,10 @@ public class SessionController {
 
     @RequestMapping(value = BaseRoute.UPDATE_SESSION, method = RequestMethod.POST)
     public ResponseEntity<?> updateSession(@RequestParam long userId,
-                                           @RequestParam int reqPage,
-                                           @RequestParam int reqSize) {
+                                           @RequestParam long sessionId,
+                                           @RequestParam long clientId) {
 
-        SessionWSModel response = sessionMiddleware.updateSession(userId,reqPage,reqSize);
+        SessionWSModel response = sessionMiddleware.updateSession(userId,sessionId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -108,10 +109,10 @@ public class SessionController {
 
     @RequestMapping(value = BaseRoute.REMOVE_SESSION, method = RequestMethod.POST)
     public ResponseEntity<?> removeSession(@RequestParam long userId,
-                                           @RequestParam int reqPage,
-                                           @RequestParam int reqSize) {
+                                           @RequestParam long sessionId,
+                                           @RequestParam long clientId) {
 
-        SessionWSModel response = sessionMiddleware.removeSession(userId,reqPage,reqSize);
+        SessionWSModel response = sessionMiddleware.removeSession(userId,sessionId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
