@@ -65,25 +65,21 @@ public class SessionFramework {
 
 
     public SessionWSDTO createSessionService(long userId,long clientId,String campaign) {
-
         return null;
     }
 
 
     public SessionWSDTO createSessionsService(SessionRequest sessionRequest) {
-
         return null;
     }
 
 
     public SessionWSDTO updateSessionService(long userId,long sessionId,long clientId) {
-
         return null;
     }
 
 
     public SessionWSDTO removeSessionService(long userId,long sessionId,long clientId) {
-
         return null;
     }
 
