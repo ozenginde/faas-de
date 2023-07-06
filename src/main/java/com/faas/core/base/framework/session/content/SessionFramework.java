@@ -1,8 +1,11 @@
 package com.faas.core.base.framework.session.content;
 
+import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.ws.session.content.SessionRequest;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
+import com.faas.core.base.repo.client.content.ClientRepository;
+import com.faas.core.base.repo.client.details.*;
 import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Component
@@ -21,6 +25,24 @@ public class SessionFramework {
     SessionRepository sessionRepository;
 
     @Autowired
+    ClientRepository clientRepository;
+
+    @Autowired
+    ClientDataRepository clientDataRepository;
+
+    @Autowired
+    ClientNoteRepository clientNoteRepository;
+
+    @Autowired
+    ClientAddressRepository clientAddressRepository;
+
+    @Autowired
+    ClientPhoneRepository clientPhoneRepository;
+
+    @Autowired
+    ClientEmailRepository clientEmailRepository;
+
+    @Autowired
     AppUtils appUtils;
 
 
@@ -28,6 +50,15 @@ public class SessionFramework {
 
         SessionWSDTO sessionWSDTO =  new SessionWSDTO();
         sessionWSDTO.setSession(sessionDBModel);
+        Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionDBModel.getClientId());
+        if (clientDBModel.isPresent()){
+            sessionWSDTO.setClient(clientDBModel.get());
+            sessionWSDTO.setClientDatas(clientDataRepository.findByClientId(clientDBModel.get().getId()));
+            sessionWSDTO.setClientNotes(clientNoteRepository.findByClientId(clientDBModel.get().getId()));
+            sessionWSDTO.setClientAddresses(clientAddressRepository.findByClientId(clientDBModel.get().getId()));
+            sessionWSDTO.setClientPhones(clientPhoneRepository.findByClientId(clientDBModel.get().getId()));
+            sessionWSDTO.setClientEmails(clientEmailRepository.findByClientId(clientDBModel.get().getId()));
+        }
         return sessionWSDTO;
     }
 
