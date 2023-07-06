@@ -7,7 +7,6 @@ import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.session.dto.CampaignSessionWSDTO;
 import com.faas.core.base.model.ws.session.content.SessionRequest;
-import com.faas.core.base.model.ws.session.content.dto.SessionRequestDTO;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -94,7 +93,6 @@ public class CampaignSessionFramework {
     }
 
 
-
     public SessionWSDTO getCampaignSessionService(long userId, long sessionId, long clientId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
@@ -103,7 +101,6 @@ public class CampaignSessionFramework {
         }
         return null;
     }
-
 
 
     public List<SessionWSDTO> createCampaignSessionService(SessionRequest sessionRequest) {
@@ -130,8 +127,6 @@ public class CampaignSessionFramework {
         }
         return sessionWSDTOS;
     }
-
-
 
 
     public SessionWSDTO updateCampaignSessionService(long userId,long sessionId,long clientId,long agentId,String campaignId,String sessionState) {
@@ -181,7 +176,6 @@ public class CampaignSessionFramework {
         }
         return null;
     }
-
 
 
 }
