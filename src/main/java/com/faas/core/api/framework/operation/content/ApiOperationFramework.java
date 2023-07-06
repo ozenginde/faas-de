@@ -86,14 +86,14 @@ public class ApiOperationFramework {
     public ApiOperationWSDTO apiStartOperationService(long agentId, long sessionId, long clientId, String campaignId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(sessionId, clientId, agentId, campaignId, AppConstant.READY_SESSION);
-        List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentIdAndCampaignIdAndOperationState(sessionId, clientId, agentId, campaignId, AppConstant.OPERATION_READY);
+        List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentIdAndCampaignIdAndOperationState(sessionId, clientId, agentId, campaignId, AppConstant.READY_OPERATION);
         if (sessionDBModels.size() > 0 && operationDBModels.size() > 0) {
 
             sessionDBModels.get(0).setSessionState(AppConstant.ACTIVE_SESSION);
             sessionDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             SessionDBModel updatedSession = sessionRepository.save(sessionDBModels.get(0));
 
-            operationDBModels.get(0).setOperationState(AppConstant.OPERATION_ACTIVE);
+            operationDBModels.get(0).setOperationState(AppConstant.ACTIVE_OPERATION);
             operationDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             OperationDBModel updatedOperation = operationRepository.save(operationDBModels.get(0));
 
@@ -113,12 +113,12 @@ public class ApiOperationFramework {
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         if (sessionDBModels.size() > 0 && operationDBModels.size() > 0 && clientDBModel.isPresent()) {
 
-            sessionDBModels.get(0).setSessionState(AppConstant.COMPLETED_SESSION);
+            sessionDBModels.get(0).setSessionState(AppConstant.FINISHED_SESSION);
             sessionDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             SessionDBModel updatedSession = sessionRepository.save(sessionDBModels.get(0));
 
             operationDBModels.get(0).setOperationResult(operationResult);
-            operationDBModels.get(0).setOperationState(AppConstant.OPERATION_COMPLETED);
+            operationDBModels.get(0).setOperationState(AppConstant.FINISHED_OPERATION);
             operationDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             OperationDBModel updatedOperation = operationRepository.save(operationDBModels.get(0));
 

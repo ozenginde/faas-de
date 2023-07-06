@@ -38,10 +38,11 @@ public class InquiryController {
 
     @RequestMapping(value = BaseRoute.GET_INQUIRIES_BY_STATE, method = RequestMethod.POST)
     public ResponseEntity<?> getInquiriesByState(@RequestParam long userId,
-                                             @RequestParam int reqPage,
-                                             @RequestParam int reqSize) {
+                                                 @RequestParam String inquiryState,
+                                                 @RequestParam int reqPage,
+                                                 @RequestParam int reqSize) {
 
-        InquiryWSModel response = inquiryMiddleware.getInquiriesByState(userId,reqPage,reqSize);
+        InquiryWSModel response = inquiryMiddleware.getInquiriesByState(userId,inquiryState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -52,10 +53,10 @@ public class InquiryController {
 
     @RequestMapping(value = BaseRoute.GET_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> getInquiry(@RequestParam long userId,
-                                                 @RequestParam int reqPage,
-                                                 @RequestParam int reqSize) {
+                                        @RequestParam long inquiryId,
+                                        @RequestParam long clientId) {
 
-        InquiryWSModel response = inquiryMiddleware.getInquiry(userId,reqPage,reqSize);
+        InquiryWSModel response = inquiryMiddleware.getInquiry(userId,inquiryId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -65,11 +66,9 @@ public class InquiryController {
 
 
     @RequestMapping(value = BaseRoute.CREATE_INQUIRY, method = RequestMethod.POST)
-    public ResponseEntity<?> createInquiry(@RequestParam long userId,
-                                        @RequestParam int reqPage,
-                                        @RequestParam int reqSize) {
+    public ResponseEntity<?> createInquiry(@RequestParam long userId) {
 
-        InquiryWSModel response = inquiryMiddleware.createInquiry(userId,reqPage,reqSize);
+        InquiryWSModel response = inquiryMiddleware.createInquiry(userId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -80,10 +79,10 @@ public class InquiryController {
 
     @RequestMapping(value = BaseRoute.UPDATE_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> updateInquiry(@RequestParam long userId,
-                                           @RequestParam int reqPage,
-                                           @RequestParam int reqSize) {
+                                           @RequestParam long inquiryId,
+                                           @RequestParam long clientId) {
 
-        InquiryWSModel response = inquiryMiddleware.updateInquiry(userId,reqPage,reqSize);
+        InquiryWSModel response = inquiryMiddleware.updateInquiry(userId,inquiryId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -94,10 +93,10 @@ public class InquiryController {
 
     @RequestMapping(value = BaseRoute.REMOVE_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> removeInquiry(@RequestParam long userId,
-                                           @RequestParam int reqPage,
-                                           @RequestParam int reqSize) {
+                                           @RequestParam long inquiryId,
+                                           @RequestParam long clientId) {
 
-        InquiryWSModel response = inquiryMiddleware.removeInquiry(userId,reqPage,reqSize);
+        InquiryWSModel response = inquiryMiddleware.removeInquiry(userId,inquiryId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

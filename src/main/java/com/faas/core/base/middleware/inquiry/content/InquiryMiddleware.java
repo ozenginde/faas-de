@@ -32,7 +32,7 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel getInquiriesByState(long userId, int reqPage, int reqSize) {
+    public InquiryWSModel getInquiriesByState(long userId,String inquiryState, int reqPage, int reqSize) {
 
         InquiryWSModel response = new InquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -48,7 +48,7 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel getInquiry(long userId, int reqPage, int reqSize) {
+    public InquiryWSModel getInquiry(long userId, long inquiryId,long clientId) {
 
         InquiryWSModel response = new InquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -64,7 +64,7 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel createInquiry(long userId, int reqPage, int reqSize) {
+    public InquiryWSModel createInquiry(long userId) {
 
         InquiryWSModel response = new InquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -80,7 +80,7 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel updateInquiry(long userId, int reqPage, int reqSize) {
+    public InquiryWSModel updateInquiry(long userId, long inquiryId,long clientId) {
 
         InquiryWSModel response = new InquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -96,7 +96,7 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel removeInquiry(long userId, int reqPage, int reqSize) {
+    public InquiryWSModel removeInquiry(long userId,long inquiryId,long clientId) {
 
         InquiryWSModel response = new InquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();

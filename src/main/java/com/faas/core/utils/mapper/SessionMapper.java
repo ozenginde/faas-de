@@ -161,7 +161,7 @@ public class SessionMapper {
         sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.TOTAL_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentId(agentId))));
         sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.READY_SESSION))));
         sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.ACTIVE_SESSION))));
-        sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.COMPLETED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.COMPLETED_SESSION))));
+        sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.FINISHED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.FINISHED_SESSION))));
 
         return sessionSummaries;
     }
@@ -192,7 +192,7 @@ public class SessionMapper {
         sessionSummary.add(new ApiSummaryWSDTO(AppConstant.TOTAL_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentId(agentId))));
         sessionSummary.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.READY_SESSION))));
         sessionSummary.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.ACTIVE_SESSION))));
-        sessionSummary.add(new ApiSummaryWSDTO(AppConstant.COMPLETED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.COMPLETED_SESSION))));
+        sessionSummary.add(new ApiSummaryWSDTO(AppConstant.FINISHED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.FINISHED_SESSION))));
 
         return sessionSummary;
     }

@@ -48,12 +48,12 @@ public class AppConstant {
 
     public static final String ACTIVE_PROCESS = "ACTIVE_PROCESS";
     public static final String PASSIVE_PROCESS = "PASSIVE_PROCESS";
-    public static final String COMPLETED_PROCESS = "COMPLETED_PROCESS";
+    public static final String FINISHED_PROCESS = "FINISHED_PROCESS";
     public static final String ALL_PROCESSES = "ALL_PROCESSES";
 
     public static final String READY_SCENARIO = "READY_SCENARIO";
     public static final String ACTIVE_SCENARIO = "ACTIVE_SCENARIO";
-    public static final String COMPLETED_SCENARIO = "COMPLETED_SCENARIO";
+    public static final String FINISHED_SCENARIO = "FINISHED_SCENARIO";
     public static final String ALL_SCENARIOS = "ALL_SCENARIOS";
 
 
@@ -64,23 +64,23 @@ public class AppConstant {
 
     public static final String READY_INQUIRY = "READY_INQUIRY";
     public static final String ACTIVE_INQUIRY = "ACTIVE_INQUIRY";
-    public static final String COMPLETED_INQUIRY = "COMPLETED_INQUIRY";
+    public static final String FINISHED_INQUIRY = "FINISHED_INQUIRY";
     public static final String ALL_INQUIRIES = "ALL_INQUIRIES";
 
     public static final String READY_FLOW = "READY_FLOW";
     public static final String ACTIVE_FLOW = "ACTIVE_FLOW";
-    public static final String COMPLETED_FLOW = "COMPLETED_FLOW";
+    public static final String FINISHED_FLOW = "FINISHED_FLOW";
     public static final String ALL_FLOWS = "ALL_FLOWS";
 
     public static final String READY_SESSION = "READY_SESSION";
     public static final String ACTIVE_SESSION = "ACTIVE_SESSION";
-    public static final String COMPLETED_SESSION = "COMPLETED_SESSION";
+    public static final String FINISHED_SESSION = "FINISHED_SESSION";
     public static final String ALL_SESSIONS = "ALL_SESSIONS";
 
 
-    public static final String OPERATION_READY = "OPERATION_READY";
-    public static final String OPERATION_ACTIVE = "OPERATION_ACTIVE";
-    public static final String OPERATION_COMPLETED = "OPERATION_COMPLETED";
+    public static final String READY_OPERATION = "READY_OPERATION";
+    public static final String ACTIVE_OPERATION = "ACTIVE_OPERATION";
+    public static final String FINISHED_OPERATION = "FINISHED_OPERATION";
 
 
     public static final String RESULT_NONE = "RESULT_NONE";
@@ -121,7 +121,7 @@ public class AppConstant {
 
     public static final String READY_SESSIONS_SUMMARY = "READY_SESSIONS_SUMMARY";
     public static final String ACTIVE_SESSIONS_SUMMARY = "ACTIVE_SESSIONS_SUMMARY";
-    public static final String COMPLETED_SESSIONS_SUMMARY = "COMPLETED_SESSIONS_SUMMARY";
+    public static final String FINISHED_SESSIONS_SUMMARY = "FINISHED_SESSIONS_SUMMARY";
     public static final String TOTAL_SESSIONS_SUMMARY = "TOTAL_SESSIONS_SUMMARY";
 
 

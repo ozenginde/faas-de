@@ -169,7 +169,7 @@ public class OperationMapper {
             operationDBModel.setCampaignId(sessionDBModel.getCampaignId());
             operationDBModel.setProcessId(sessionDBModel.getProcessId());
             operationDBModel.setActivities(new ArrayList<>());
-            operationDBModel.setOperationState(AppConstant.OPERATION_READY);
+            operationDBModel.setOperationState(AppConstant.READY_OPERATION);
             operationDBModel.setOperationResult(AppConstant.RESULT_NONE);
             operationDBModel.setuDate(appUtils.getCurrentTimeStamp());
             operationDBModel.setcDate(appUtils.getCurrentTimeStamp());

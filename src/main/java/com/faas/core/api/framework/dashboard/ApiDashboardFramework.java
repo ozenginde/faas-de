@@ -114,7 +114,7 @@ public class ApiDashboardFramework {
         List<ApiSummaryWSDTO> apiSummaryWSDTOS = new ArrayList<>();
         apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndCampaignIdAndSessionState(agentId,campaignId, AppConstant.READY_SESSION))));
         apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndCampaignIdAndSessionState(agentId, campaignId,AppConstant.ACTIVE_SESSION))));
-        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.COMPLETED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndCampaignIdAndSessionState(agentId, campaignId,AppConstant.COMPLETED_SESSION))));
+        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.FINISHED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndCampaignIdAndSessionState(agentId, campaignId,AppConstant.FINISHED_SESSION))));
 
         return apiSummaryWSDTOS;
     }
@@ -127,7 +127,7 @@ public class ApiDashboardFramework {
         apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.TOTAL_CAMPAIGNS_SUMMARY,String.valueOf(campaignAgentRepository.countByAgentId(agentId))));
         apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.READY_SESSION))));
         apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.ACTIVE_SESSION))));
-        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.COMPLETED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.COMPLETED_SESSION))));
+        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.FINISHED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.FINISHED_SESSION))));
 
         return apiSummaryWSDTOS;
     }

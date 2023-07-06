@@ -32,7 +32,7 @@ public class FlowMiddleware {
     }
 
 
-    public FlowWSModel getFlowsByState(long userId, int reqPage, int reqSize) {
+    public FlowWSModel getFlowsByState(long userId,String flowState, int reqPage, int reqSize) {
 
         FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -48,7 +48,7 @@ public class FlowMiddleware {
     }
 
 
-    public FlowWSModel getFlow(long userId, int reqPage, int reqSize) {
+    public FlowWSModel getFlow(long userId,long flowId,long clientId) {
 
         FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -64,7 +64,7 @@ public class FlowMiddleware {
     }
 
 
-    public FlowWSModel createFlow(long userId, int reqPage, int reqSize) {
+    public FlowWSModel createFlow(long userId, long clientId) {
 
         FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -80,7 +80,7 @@ public class FlowMiddleware {
     }
 
 
-    public FlowWSModel updateFlow(long userId, int reqPage, int reqSize) {
+    public FlowWSModel updateFlow(long userId,long flowId,long clientId) {
 
         FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -96,7 +96,7 @@ public class FlowMiddleware {
     }
 
 
-    public FlowWSModel removeFlow(long userId, int reqPage, int reqSize) {
+    public FlowWSModel removeFlow(long userId,long flowId,long clientId) {
 
         FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
