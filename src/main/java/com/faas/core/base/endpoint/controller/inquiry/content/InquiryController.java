@@ -104,4 +104,5 @@ public class InquiryController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
+
 }
