@@ -99,7 +99,7 @@ public class CampaignSessionFramework {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         if (sessionDBModels.size()>0){
-            return new SessionWSDTO(sessionDBModels.get(0));
+            return sessionMapper.mapSessionWSDTO(sessionDBModels.get(0));
         }
         return null;
     }
@@ -125,7 +125,7 @@ public class CampaignSessionFramework {
                 activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
                 activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
 
-                sessionWSDTOS.add(new SessionWSDTO(sessionDBModel));
+                sessionWSDTOS.add(sessionMapper.mapSessionWSDTO(sessionDBModel));
             }
         }
         return sessionWSDTOS;
@@ -154,7 +154,7 @@ public class CampaignSessionFramework {
             sessionDBModels.get(0).setSessionState(sessionState);
             sessionDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
 
-            return new SessionWSDTO(sessionRepository.save(sessionDBModels.get(0)));
+            return sessionMapper.mapSessionWSDTO(sessionRepository.save(sessionDBModels.get(0)));
         }
         return null;
     }
@@ -177,7 +177,7 @@ public class CampaignSessionFramework {
             if (operationDBModels.size()>0){
                 operationRepository.delete(operationDBModels.get(0));
             }
-            return new SessionWSDTO(sessionDBModels.get(0));
+            return sessionMapper.mapSessionWSDTO(sessionDBModels.get(0));
         }
         return null;
     }

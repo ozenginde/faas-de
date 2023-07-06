@@ -13,10 +13,8 @@ import com.faas.core.base.model.ws.general.PaginationWSDTO;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
-import com.faas.core.base.repo.client.details.ClientAddressRepository;
-import com.faas.core.base.repo.client.details.ClientDataRepository;
-import com.faas.core.base.repo.client.details.ClientEmailRepository;
-import com.faas.core.base.repo.client.details.ClientPhoneRepository;
+import com.faas.core.base.repo.client.content.ClientRepository;
+import com.faas.core.base.repo.client.details.*;
 import com.faas.core.base.repo.operation.channel.SipCallRepository;
 import com.faas.core.base.repo.operation.channel.SmsMessageRepository;
 import com.faas.core.base.repo.operation.channel.WappCallRepository;
@@ -47,7 +45,13 @@ public class SessionMapper {
     OperationRepository operationRepository;
 
     @Autowired
+    ClientRepository clientRepository;
+
+    @Autowired
     ClientDataRepository clientDataRepository;
+
+    @Autowired
+    ClientNoteRepository clientNoteRepository;
 
     @Autowired
     ClientPhoneRepository clientPhoneRepository;
@@ -102,9 +106,37 @@ public class SessionMapper {
 
         List<SessionWSDTO> sessionWSDTOS = new ArrayList<>();
         for (SessionDBModel sessionDBModel : sessionDBModels) {
-            sessionWSDTOS.add(new SessionWSDTO(sessionDBModel));
+            SessionWSDTO sessionWSDTO =  new SessionWSDTO();
+            sessionWSDTO.setSession(sessionDBModel);
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionDBModel.getClientId());
+            if (clientDBModel.isPresent()){
+                sessionWSDTO.setClient(clientDBModel.get());
+                sessionWSDTO.setClientDatas(clientDataRepository.findByClientId(clientDBModel.get().getId()));
+                sessionWSDTO.setClientNotes(clientNoteRepository.findByClientId(clientDBModel.get().getId()));
+                sessionWSDTO.setClientAddresses(clientAddressRepository.findByClientId(clientDBModel.get().getId()));
+                sessionWSDTO.setClientPhones(clientPhoneRepository.findByClientId(clientDBModel.get().getId()));
+                sessionWSDTO.setClientEmails(clientEmailRepository.findByClientId(clientDBModel.get().getId()));
+            }
+            sessionWSDTOS.add(sessionWSDTO);
         }
         return sessionWSDTOS;
+    }
+
+
+    public SessionWSDTO mapSessionWSDTO(SessionDBModel sessionDBModel){
+
+        SessionWSDTO sessionWSDTO =  new SessionWSDTO();
+        sessionWSDTO.setSession(sessionDBModel);
+        Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionDBModel.getClientId());
+        if (clientDBModel.isPresent()){
+            sessionWSDTO.setClient(clientDBModel.get());
+            sessionWSDTO.setClientDatas(clientDataRepository.findByClientId(clientDBModel.get().getId()));
+            sessionWSDTO.setClientNotes(clientNoteRepository.findByClientId(clientDBModel.get().getId()));
+            sessionWSDTO.setClientAddresses(clientAddressRepository.findByClientId(clientDBModel.get().getId()));
+            sessionWSDTO.setClientPhones(clientPhoneRepository.findByClientId(clientDBModel.get().getId()));
+            sessionWSDTO.setClientEmails(clientEmailRepository.findByClientId(clientDBModel.get().getId()));
+        }
+        return sessionWSDTO;
     }
 
 
