@@ -1,15 +1,15 @@
-package com.faas.core.base.model.ws.inquiry.details.dto;
+package com.faas.core.base.model.ws.inquiry.manager.dto;
 
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 
-public class InquiryDetailsWSDTO {
+public class InquiryManagerWSDTO {
 
     private InquiryDBModel inquiry;
 
-    public InquiryDetailsWSDTO() {
+    public InquiryManagerWSDTO() {
     }
 
-    public InquiryDetailsWSDTO(InquiryDBModel inquiry) {
+    public InquiryManagerWSDTO(InquiryDBModel inquiry) {
         this.inquiry = inquiry;
     }
 

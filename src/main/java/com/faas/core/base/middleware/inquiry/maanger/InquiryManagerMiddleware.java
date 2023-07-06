@@ -1,6 +1,6 @@
-package com.faas.core.base.middleware.inquiry.details;
+package com.faas.core.base.middleware.inquiry.maanger;
 
-import com.faas.core.base.framework.inquiry.details.InquiryDetailsFramework;
+import com.faas.core.base.framework.inquiry.manager.InquiryManagerFramework;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.model.ws.inquiry.content.InquiryWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class InquiryDetailsMiddleware {
+public class InquiryManagerMiddleware {
 
 
     @Autowired
-    InquiryDetailsFramework inquiryDetailsFramework;
+    InquiryManagerFramework inquiryManagerFramework;
 
 
     public InquiryWSModel getInquiryDetails(long userId, int reqPage, int reqSize) {

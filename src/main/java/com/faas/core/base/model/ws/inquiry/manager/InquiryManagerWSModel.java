@@ -1,19 +1,19 @@
-package com.faas.core.base.model.ws.inquiry.details;
+package com.faas.core.base.model.ws.inquiry.manager;
 
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
 
 import java.util.List;
 
-public class InquiryDetailsWSModel {
+public class InquiryManagerWSModel {
 
     private GeneralWSModel general;
     private List<InquiryWSDTO> inquiries;
 
-    public InquiryDetailsWSModel() {
+    public InquiryManagerWSModel() {
     }
 
-    public InquiryDetailsWSModel(GeneralWSModel general, List<InquiryWSDTO> inquiries) {
+    public InquiryManagerWSModel(GeneralWSModel general, List<InquiryWSDTO> inquiries) {
         this.general = general;
         this.inquiries = inquiries;
     }

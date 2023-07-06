@@ -32,11 +32,9 @@ public class CampaignClientFramework {
         if (country.equalsIgnoreCase("")){
             return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientState(clientState,PageRequest.of(reqPage,reqSize)));
         }
-
         if (city.equalsIgnoreCase("") && !country.equalsIgnoreCase("")){
             return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientCountryAndClientState(country,clientState,PageRequest.of(reqPage,reqSize)));
         }
-
         if (!city.equalsIgnoreCase("") && !country.equalsIgnoreCase("")){
             return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientCountryAndClientCityContainingIgnoreCaseAndClientState(country,city,clientState,PageRequest.of(reqPage,reqSize)));
         }

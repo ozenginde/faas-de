@@ -1,4 +1,4 @@
-package com.faas.core.base.framework.inquiry.details;
+package com.faas.core.base.framework.inquiry.manager;
 
 import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
 import com.faas.core.base.repo.inquiry.InquiryRepository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class InquiryDetailsFramework {
+public class InquiryManagerFramework {
 
 
     @Autowired

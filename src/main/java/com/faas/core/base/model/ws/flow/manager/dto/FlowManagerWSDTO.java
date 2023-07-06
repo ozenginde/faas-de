@@ -1,15 +1,15 @@
-package com.faas.core.base.model.ws.flow.details.dto;
+package com.faas.core.base.model.ws.flow.manager.dto;
 
 import com.faas.core.base.model.db.flow.FlowDBModel;
 
-public class FlowDetailsWSDTO {
+public class FlowManagerWSDTO {
 
     private FlowDBModel flow;
 
-    public FlowDetailsWSDTO() {
+    public FlowManagerWSDTO() {
     }
 
-    public FlowDetailsWSDTO(FlowDBModel flow) {
+    public FlowManagerWSDTO(FlowDBModel flow) {
         this.flow = flow;
     }
 

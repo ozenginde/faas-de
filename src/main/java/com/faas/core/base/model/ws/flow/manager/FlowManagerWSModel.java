@@ -1,19 +1,19 @@
-package com.faas.core.base.model.ws.flow.details;
+package com.faas.core.base.model.ws.flow.manager;
 
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
 
 import java.util.List;
 
-public class FlowDetailsWSModel {
+public class FlowManagerWSModel {
 
     private GeneralWSModel general;
     private List<InquiryWSDTO> inquiries;
 
-    public FlowDetailsWSModel() {
+    public FlowManagerWSModel() {
     }
 
-    public FlowDetailsWSModel(GeneralWSModel general, List<InquiryWSDTO> inquiries) {
+    public FlowManagerWSModel(GeneralWSModel general, List<InquiryWSDTO> inquiries) {
         this.general = general;
         this.inquiries = inquiries;
     }

@@ -1,4 +1,4 @@
-package com.faas.core.base.framework.flow.details;
+package com.faas.core.base.framework.flow.manager;
 
 import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
 import com.faas.core.utils.config.AppUtils;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class FlowDetailsFramework {
+public class FlowManagerFramework {
 
 
     @Autowired
