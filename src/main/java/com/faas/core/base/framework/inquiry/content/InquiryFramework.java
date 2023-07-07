@@ -142,5 +142,4 @@ public class InquiryFramework {
         return null;
     }
 
-
 }
