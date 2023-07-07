@@ -67,7 +67,7 @@ public class InquiryFramework {
     public List<InquiryCampaignWSDTO> getInquiryCampaignsService(long userId,int reqPage,int reqSize) {
 
         List<InquiryCampaignWSDTO> inquiryCampaignWSDTOS = new ArrayList<>();
-        List<CampaignDBModel> campaignDBModels = campaignRepository.findByCampaignCategory(AppConstant.AUTOMATIC_CAMPAIGN);
+        List<CampaignDBModel> campaignDBModels = campaignRepository.findByCampaignCategory(AppConstant.INQUIRY_CAMPAIGN);
         for (CampaignDBModel campaignDBModel : campaignDBModels) {
             InquiryCampaignWSDTO inquiryCampaignWSDTO = new InquiryCampaignWSDTO();
             inquiryCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel));
@@ -76,7 +76,6 @@ public class InquiryFramework {
             inquiryCampaignWSDTO.setPagination(inquiryMapper.createInquiryPaginationWSDTO(inquiryModelPage));
 
             inquiryCampaignWSDTOS.add(inquiryCampaignWSDTO);
-
         }
         return inquiryCampaignWSDTOS;
     }
