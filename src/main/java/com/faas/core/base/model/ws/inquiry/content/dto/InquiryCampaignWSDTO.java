@@ -8,16 +8,16 @@ import java.util.List;
 public class InquiryCampaignWSDTO {
 
     private CampaignWSDTO campaign;
+    private PaginationWSDTO pagination;
     private List<InquiryWSDTO>inquiries;
-    public PaginationWSDTO pagination;
 
     public InquiryCampaignWSDTO() {
     }
 
-    public InquiryCampaignWSDTO(CampaignWSDTO campaign, List<InquiryWSDTO> inquiries, PaginationWSDTO pagination) {
+    public InquiryCampaignWSDTO(CampaignWSDTO campaign, PaginationWSDTO pagination, List<InquiryWSDTO> inquiries) {
         this.campaign = campaign;
-        this.inquiries = inquiries;
         this.pagination = pagination;
+        this.inquiries = inquiries;
     }
 
     public CampaignWSDTO getCampaign() {
@@ -28,19 +28,19 @@ public class InquiryCampaignWSDTO {
         this.campaign = campaign;
     }
 
-    public List<InquiryWSDTO> getInquiries() {
-        return inquiries;
-    }
-
-    public void setInquiries(List<InquiryWSDTO> inquiries) {
-        this.inquiries = inquiries;
-    }
-
     public PaginationWSDTO getPagination() {
         return pagination;
     }
 
     public void setPagination(PaginationWSDTO pagination) {
         this.pagination = pagination;
+    }
+
+    public List<InquiryWSDTO> getInquiries() {
+        return inquiries;
+    }
+
+    public void setInquiries(List<InquiryWSDTO> inquiries) {
+        this.inquiries = inquiries;
     }
 }

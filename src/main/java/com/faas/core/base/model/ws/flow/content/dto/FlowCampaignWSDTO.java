@@ -8,16 +8,16 @@ import java.util.List;
 public class FlowCampaignWSDTO {
 
     private CampaignWSDTO campaign;
+    private PaginationWSDTO pagination;
     private List<FlowWSDTO>flows;
-    public PaginationWSDTO pagination;
 
     public FlowCampaignWSDTO() {
     }
 
-    public FlowCampaignWSDTO(CampaignWSDTO campaign, List<FlowWSDTO> flows, PaginationWSDTO pagination) {
+    public FlowCampaignWSDTO(CampaignWSDTO campaign, PaginationWSDTO pagination, List<FlowWSDTO> flows) {
         this.campaign = campaign;
-        this.flows = flows;
         this.pagination = pagination;
+        this.flows = flows;
     }
 
     public CampaignWSDTO getCampaign() {
@@ -28,19 +28,19 @@ public class FlowCampaignWSDTO {
         this.campaign = campaign;
     }
 
-    public List<FlowWSDTO> getFlows() {
-        return flows;
-    }
-
-    public void setFlows(List<FlowWSDTO> flows) {
-        this.flows = flows;
-    }
-
     public PaginationWSDTO getPagination() {
         return pagination;
     }
 
     public void setPagination(PaginationWSDTO pagination) {
         this.pagination = pagination;
+    }
+
+    public List<FlowWSDTO> getFlows() {
+        return flows;
+    }
+
+    public void setFlows(List<FlowWSDTO> flows) {
+        this.flows = flows;
     }
 }
