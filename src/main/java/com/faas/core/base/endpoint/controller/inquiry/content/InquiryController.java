@@ -1,6 +1,7 @@
 package com.faas.core.base.endpoint.controller.inquiry.content;
 
 import com.faas.core.base.middleware.inquiry.content.InquiryMiddleware;
+import com.faas.core.base.model.ws.inquiry.content.InquiryCampaignWSModel;
 import com.faas.core.base.model.ws.inquiry.content.InquiryWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
@@ -24,8 +25,8 @@ public class InquiryController {
 
     @RequestMapping(value = BaseRoute.GET_ALL_INQUIRIES, method = RequestMethod.POST)
     public ResponseEntity<?> getAllInquiries(@RequestParam long userId,
-                                           @RequestParam int reqPage,
-                                           @RequestParam int reqSize) {
+                                             @RequestParam int reqPage,
+                                             @RequestParam int reqSize) {
 
         InquiryWSModel response = inquiryMiddleware.getAllInquiries(userId,reqPage,reqSize);
 
@@ -51,6 +52,31 @@ public class InquiryController {
     }
 
 
+    @RequestMapping(value = BaseRoute.GET_INQUIRY_CAMPAIGNS, method = RequestMethod.POST)
+    public ResponseEntity<?> getInquiryCampaigns(@RequestParam long userId) {
+
+        InquiryCampaignWSModel response = inquiryMiddleware.getInquiryCampaigns(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.GET_INQUIRY_CAMPAIGN, method = RequestMethod.POST)
+    public ResponseEntity<?> getInquiryCampaign(@RequestParam long userId,
+                                                @RequestParam String campaignId) {
+
+        InquiryCampaignWSModel response = inquiryMiddleware.getInquiryCampaign(userId,campaignId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
     @RequestMapping(value = BaseRoute.GET_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> getInquiry(@RequestParam long userId,
                                         @RequestParam long inquiryId,
@@ -66,9 +92,11 @@ public class InquiryController {
 
 
     @RequestMapping(value = BaseRoute.CREATE_INQUIRY, method = RequestMethod.POST)
-    public ResponseEntity<?> createInquiry(@RequestParam long userId) {
+    public ResponseEntity<?> createInquiry(@RequestParam long userId,
+                                           @RequestParam String campaignId,
+                                           @RequestParam long clientId) {
 
-        InquiryWSModel response = inquiryMiddleware.createInquiry(userId);
+        InquiryWSModel response = inquiryMiddleware.createInquiry(userId,campaignId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

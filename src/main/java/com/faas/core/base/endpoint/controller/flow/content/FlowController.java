@@ -1,6 +1,7 @@
 package com.faas.core.base.endpoint.controller.flow.content;
 
 import com.faas.core.base.middleware.flow.content.FlowMiddleware;
+import com.faas.core.base.model.ws.flow.content.FlowCampaignWSModel;
 import com.faas.core.base.model.ws.flow.content.FlowWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
@@ -51,6 +52,31 @@ public class FlowController {
     }
 
 
+    @RequestMapping(value = BaseRoute.GET_FLOW_CAMPAIGNS, method = RequestMethod.POST)
+    public ResponseEntity<?> getFlowCampaigns(@RequestParam long userId) {
+
+        FlowCampaignWSModel response = flowMiddleware.getFlowCampaigns(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.GET_FLOW_CAMPAIGN, method = RequestMethod.POST)
+    public ResponseEntity<?> getFlowCampaign(@RequestParam long userId,
+                                             @RequestParam String campaignId) {
+
+        FlowCampaignWSModel response = flowMiddleware.getFlowCampaign(userId,campaignId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
     @RequestMapping(value = BaseRoute.GET_FLOW, method = RequestMethod.POST)
     public ResponseEntity<?> getFlow(@RequestParam long userId,
                                      @RequestParam long flowId,
@@ -67,9 +93,10 @@ public class FlowController {
 
     @RequestMapping(value = BaseRoute.CREATE_FLOW, method = RequestMethod.POST)
     public ResponseEntity<?> createFlow(@RequestParam long userId,
-                                        @RequestParam long clientId) {
+                                        @RequestParam long clientId,
+                                        @RequestParam String campaignId) {
 
-        FlowWSModel response = flowMiddleware.createFlow(userId,clientId);
+        FlowWSModel response = flowMiddleware.createFlow(userId,clientId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

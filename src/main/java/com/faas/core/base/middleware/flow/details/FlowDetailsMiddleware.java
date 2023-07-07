@@ -1,6 +1,6 @@
-package com.faas.core.base.middleware.flow.manager;
+package com.faas.core.base.middleware.flow.details;
 
-import com.faas.core.base.framework.flow.manager.FlowManagerFramework;
+import com.faas.core.base.framework.flow.details.FlowDetailsFramework;
 import com.faas.core.base.model.ws.flow.content.FlowWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class FlowManagerMiddleware {
+public class FlowDetailsMiddleware {
 
 
     @Autowired
-    FlowManagerFramework flowManagerFramework;
+    FlowDetailsFramework flowDetailsFramework;
 
 
     public FlowWSModel getFlowDetails(long userId, int reqPage, int reqSize) {

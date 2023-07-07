@@ -1,7 +1,8 @@
 package com.faas.core.base.framework.flow.content;
 
-import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
-import com.faas.core.base.repo.inquiry.InquiryRepository;
+import com.faas.core.base.model.ws.flow.content.dto.FlowCampaignWSDTO;
+import com.faas.core.base.model.ws.flow.content.dto.FlowWSDTO;
+import com.faas.core.base.repo.flow.FlowRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,38 +15,50 @@ public class FlowFramework {
 
 
     @Autowired
-    InquiryRepository inquiryRepository;
+    FlowRepository flowRepository;
 
     @Autowired
     AppUtils appUtils;
 
 
-    public List<InquiryWSDTO> getAllFlowsService(long userId, String clientState, int reqPage, int reqSize) {
+    public List<FlowWSDTO> getAllFlowsService(long userId, int reqPage, int reqSize) {
 
         return null;
     }
 
-    public List<InquiryWSDTO> getFlowsByStateService(long userId, String clientState, int reqPage, int reqSize) {
+    public List<FlowWSDTO> getFlowsByStateService(long userId,String flowState, int reqPage, int reqSize) {
 
         return null;
     }
 
-    public InquiryWSDTO getFlowService(long userId, String clientState, int reqPage, int reqSize) {
+
+    public List<FlowCampaignWSDTO> getFlowCampaignsService(long userId) {
 
         return null;
     }
 
-    public InquiryWSDTO createFlowService(long userId, String clientState, int reqPage, int reqSize) {
+    public FlowCampaignWSDTO getFlowCampaignService(long userId,String campaignId) {
 
         return null;
     }
 
-    public InquiryWSDTO updateFlowService(long userId, String clientState, int reqPage, int reqSize) {
+
+    public FlowWSDTO getFlowService(long userId,long flowId,long clientId) {
 
         return null;
     }
 
-    public InquiryWSDTO removeFlowService(long userId, String clientState, int reqPage, int reqSize) {
+    public FlowWSDTO createFlowService(long userId, long clientId,String campaignId) {
+
+        return null;
+    }
+
+    public FlowWSDTO updateFlowService(long userId,long flowId,long clientId) {
+
+        return null;
+    }
+
+    public FlowWSDTO removeFlowService(long userId,long flowId,long clientId) {
 
         return null;
     }
