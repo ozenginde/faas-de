@@ -53,9 +53,11 @@ public class InquiryController {
 
 
     @RequestMapping(value = BaseRoute.GET_INQUIRY_CAMPAIGNS, method = RequestMethod.POST)
-    public ResponseEntity<?> getInquiryCampaigns(@RequestParam long userId) {
+    public ResponseEntity<?> getInquiryCampaigns(@RequestParam long userId,
+                                                 @RequestParam int reqPage,
+                                                 @RequestParam int reqSize) {
 
-        InquiryCampaignWSModel response = inquiryMiddleware.getInquiryCampaigns(userId);
+        InquiryCampaignWSModel response = inquiryMiddleware.getInquiryCampaigns(userId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -66,9 +68,11 @@ public class InquiryController {
 
     @RequestMapping(value = BaseRoute.GET_INQUIRY_CAMPAIGN, method = RequestMethod.POST)
     public ResponseEntity<?> getInquiryCampaign(@RequestParam long userId,
-                                                @RequestParam String campaignId) {
+                                                @RequestParam String campaignId,
+                                                @RequestParam int reqPage,
+                                                @RequestParam int reqSize) {
 
-        InquiryCampaignWSModel response = inquiryMiddleware.getInquiryCampaign(userId,campaignId);
+        InquiryCampaignWSModel response = inquiryMiddleware.getInquiryCampaign(userId,campaignId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

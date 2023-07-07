@@ -53,9 +53,11 @@ public class FlowController {
 
 
     @RequestMapping(value = BaseRoute.GET_FLOW_CAMPAIGNS, method = RequestMethod.POST)
-    public ResponseEntity<?> getFlowCampaigns(@RequestParam long userId) {
+    public ResponseEntity<?> getFlowCampaigns(@RequestParam long userId,
+                                              @RequestParam int reqPage,
+                                              @RequestParam int reqSize) {
 
-        FlowCampaignWSModel response = flowMiddleware.getFlowCampaigns(userId);
+        FlowCampaignWSModel response = flowMiddleware.getFlowCampaigns(userId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -66,9 +68,11 @@ public class FlowController {
 
     @RequestMapping(value = BaseRoute.GET_FLOW_CAMPAIGN, method = RequestMethod.POST)
     public ResponseEntity<?> getFlowCampaign(@RequestParam long userId,
-                                             @RequestParam String campaignId) {
+                                             @RequestParam String campaignId,
+                                             @RequestParam int reqPage,
+                                             @RequestParam int reqSize) {
 
-        FlowCampaignWSModel response = flowMiddleware.getFlowCampaign(userId,campaignId);
+        FlowCampaignWSModel response = flowMiddleware.getFlowCampaign(userId,campaignId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

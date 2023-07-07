@@ -62,12 +62,12 @@ public class FlowMiddleware {
     }
 
 
-    public FlowCampaignWSModel getFlowCampaigns(long userId) {
+    public FlowCampaignWSModel getFlowCampaigns(long userId,int reqPage,int reqSize) {
 
         FlowCampaignWSModel response = new FlowCampaignWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<FlowCampaignWSDTO> flowCampaignWSDTOS = flowFramework.getFlowCampaignsService(userId);
+        List<FlowCampaignWSDTO> flowCampaignWSDTOS = flowFramework.getFlowCampaignsService(userId,reqPage,reqSize);
         if (flowCampaignWSDTOS != null){
             response.setFlowCampaigns(flowCampaignWSDTOS);
         }
@@ -82,13 +82,13 @@ public class FlowMiddleware {
     }
 
 
-    public FlowCampaignWSModel getFlowCampaign(long userId,String campaignId) {
+    public FlowCampaignWSModel getFlowCampaign(long userId,String campaignId,int reqPage,int reqSize) {
 
         FlowCampaignWSModel response = new FlowCampaignWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<FlowCampaignWSDTO>flowCampaignWSDTOS = new ArrayList<>();
 
-        FlowCampaignWSDTO flowCampaignWSDTO = flowFramework.getFlowCampaignService(userId,campaignId);
+        FlowCampaignWSDTO flowCampaignWSDTO = flowFramework.getFlowCampaignService(userId,campaignId,reqPage,reqSize);
         if (flowCampaignWSDTO != null){
             flowCampaignWSDTOS.add(flowCampaignWSDTO);
         }

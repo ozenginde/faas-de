@@ -62,12 +62,12 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryCampaignWSModel getInquiryCampaigns(long userId) {
+    public InquiryCampaignWSModel getInquiryCampaigns(long userId,int reqPage,int reqSize) {
 
         InquiryCampaignWSModel response = new InquiryCampaignWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<InquiryCampaignWSDTO> inquiryCampaignWSDTOS =  inquiryFramework.getInquiryCampaignsService(userId);
+        List<InquiryCampaignWSDTO> inquiryCampaignWSDTOS =  inquiryFramework.getInquiryCampaignsService(userId,reqPage,reqSize);
         if (inquiryCampaignWSDTOS != null){
             response.setInquiryCampaigns(inquiryCampaignWSDTOS);
         }
@@ -82,13 +82,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryCampaignWSModel getInquiryCampaign(long userId,String campaignId) {
+    public InquiryCampaignWSModel getInquiryCampaign(long userId,String campaignId,int reqPage,int reqSize) {
 
         InquiryCampaignWSModel response = new InquiryCampaignWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<InquiryCampaignWSDTO> inquiryCampaignWSDTOS = new ArrayList<>();
 
-        InquiryCampaignWSDTO inquiryCampaignWSDTO =  inquiryFramework.getInquiryCampaignService(userId,campaignId);
+        InquiryCampaignWSDTO inquiryCampaignWSDTO =  inquiryFramework.getInquiryCampaignService(userId,campaignId,reqPage,reqSize);
         if (inquiryCampaignWSDTO != null){
             inquiryCampaignWSDTOS.add(inquiryCampaignWSDTO);
         }

@@ -20,6 +20,7 @@ public interface FlowRepository extends PagingAndSortingRepository<FlowDBModel, 
     List<FlowDBModel>findByCampaignIdAndAgentIdAndFlowState(String campaignId,long agentId,String flowState);
     List<FlowDBModel>findBySessionIdAndClientId(long sessionId,long clientId);
     Page<FlowDBModel>findAllByCampaignId(String campaignId,Pageable pageable);
+    Page<FlowDBModel>findAllByFlowState(String flowState,Pageable pageable);
     Page<FlowDBModel>findAllByCampaignIdAndClientCityAndClientCountry(String campaignId, String city, String country, Pageable pageable);
 
 }
