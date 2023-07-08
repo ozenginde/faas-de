@@ -37,7 +37,7 @@ import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.details.UserDetailsDBModel;
 import com.faas.core.base.repo.operation.content.OperationRepository;
-import com.faas.core.base.repo.scenario.automation.AutomationTempRepository;
+import com.faas.core.base.repo.automation.content.AutomationTempRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.*;
 import com.faas.core.base.repo.operation.channel.*;

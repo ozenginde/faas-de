@@ -9,7 +9,7 @@ import com.faas.core.base.model.ws.scenario.details.content.dto.ScenarioVariable
 import com.faas.core.base.model.ws.scenario.details.content.dto.ScenarioElementWSDTO;
 import com.faas.core.base.model.ws.scenario.details.action.content.dto.ActionWSDTO;
 import com.faas.core.base.model.ws.scenario.details.automation.content.dto.AutomationWSDTO;
-import com.faas.core.base.repo.scenario.action.ActionTempRepository;
+import com.faas.core.base.repo.action.content.ActionTempRepository;
 import com.faas.core.base.repo.scenario.content.ScenarioRepository;
 import com.faas.core.base.repo.scenario.details.action.ActionRepository;
 import com.faas.core.base.repo.scenario.details.automation.AutomationRepository;

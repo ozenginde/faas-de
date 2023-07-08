@@ -12,7 +12,7 @@ import com.faas.core.base.model.ws.process.details.channel.content.dto.*;
 import com.faas.core.base.model.ws.process.details.channel.temp.dto.*;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDetailsWSDTO;
 import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
-import com.faas.core.base.repo.scenario.automation.AutomationTempRepository;
+import com.faas.core.base.repo.automation.content.AutomationTempRepository;
 import com.faas.core.base.repo.process.details.channel.content.*;
 import com.faas.core.base.repo.process.details.channel.temp.EmailTempRepository;
 import com.faas.core.base.repo.process.details.channel.temp.PushTempRepository;

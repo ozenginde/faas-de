@@ -1,19 +1,12 @@
 package com.faas.core.base.middleware.scenario.settings;
 
 import com.faas.core.base.framework.scenario.settings.ScenarioSettingsFramework;
-import com.faas.core.base.model.db.scenario.settings.ActionTypeDBModel;
 import com.faas.core.base.model.db.scenario.settings.ScenarioTypeDBModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.scenario.settings.ActionTypeWSModel;
-import com.faas.core.base.model.ws.scenario.settings.AutomationTypeWSModel;
 import com.faas.core.base.model.ws.scenario.settings.ScenarioTypeWSModel;
 import com.faas.core.base.model.ws.scenario.settings.VariableTypeWSModel;
-import com.faas.core.base.model.ws.scenario.settings.dto.ActionTypeWSDTO;
-import com.faas.core.base.model.ws.scenario.settings.dto.AutomationTypeWSDTO;
 import com.faas.core.base.model.ws.scenario.settings.dto.ScenarioTypeWSDTO;
 import com.faas.core.base.model.ws.scenario.settings.dto.VariableTypeWSDTO;
-import com.faas.core.base.repo.scenario.settings.ActionTypeRepository;
-import com.faas.core.base.repo.scenario.settings.AutomationTypeRepository;
 import com.faas.core.base.repo.scenario.settings.ScenarioTypeRepository;
 import com.faas.core.base.repo.scenario.settings.VariableTypeRepository;
 import com.faas.core.utils.config.AppConstant;
@@ -37,12 +30,6 @@ public class ScenarioSettingsMiddleware {
 
     @Autowired
     VariableTypeRepository variableTypeRepository;
-
-    @Autowired
-    ActionTypeRepository actionTypeRepository;
-
-    @Autowired
-    AutomationTypeRepository automationTypeRepository;
 
     @Autowired
     AppUtils appUtils;
@@ -288,227 +275,6 @@ public class ScenarioSettingsMiddleware {
         return response;
     }
 
-
-
-
-    public ActionTypeWSModel getActionTypes(long userId) {
-
-        ActionTypeWSModel response = new ActionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<ActionTypeWSDTO> actionTypeWSDTOS = new ArrayList<>();
-
-        List<ActionTypeDBModel> actionTypeDBModels = actionTypeRepository.findByStatus(1);
-        for (ActionTypeDBModel actionTypeDBModel : actionTypeDBModels) {
-            actionTypeWSDTOS.add(scenarioSettingsFramework.fillActionTypeWSDTO(actionTypeDBModel));
-        }
-
-        response.setActionTypes(actionTypeWSDTOS);
-        general.setOperation("getAllActionTypes");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-
-    public ActionTypeWSModel getActionType(long userId,long typeId) {
-
-        ActionTypeWSModel response = new ActionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<ActionTypeWSDTO> actionTypeWSDTOS = new ArrayList<>();
-
-        Optional<ActionTypeDBModel> actionTypeDBModel = actionTypeRepository.findById(typeId);
-        if (actionTypeDBModel.isPresent()) {
-            actionTypeWSDTOS.add(scenarioSettingsFramework.fillActionTypeWSDTO(actionTypeDBModel.get()));
-        }
-
-        response.setActionTypes(actionTypeWSDTOS);
-        general.setOperation("getActionType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public ActionTypeWSModel createActionType(long userId,String actionType) {
-
-        ActionTypeWSModel response = new ActionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<ActionTypeWSDTO> actionTypeWSDTOS = new ArrayList<>();
-
-        ActionTypeDBModel actionTypeDBModel = scenarioSettingsFramework.createActionTypeService(actionType);
-        if (actionTypeDBModel != null) {
-            actionTypeWSDTOS.add(scenarioSettingsFramework.fillActionTypeWSDTO(actionTypeDBModel));
-        }
-
-        response.setActionTypes(actionTypeWSDTOS);
-        general.setOperation("createActionType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public ActionTypeWSModel updateActionType(long userId,long typeId,String actionType) {
-
-        ActionTypeWSModel response = new ActionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<ActionTypeWSDTO> actionTypeWSDTOS = new ArrayList<>();
-
-        ActionTypeDBModel actionTypeDBModel = scenarioSettingsFramework.updateActionTypeService(typeId,actionType);
-        if (actionTypeDBModel != null) {
-            actionTypeWSDTOS.add(scenarioSettingsFramework.fillActionTypeWSDTO(actionTypeDBModel));
-        }
-
-        response.setActionTypes(actionTypeWSDTOS);
-        general.setOperation("updateActionType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public ActionTypeWSModel removeActionType(long userId, long typeId) {
-
-        ActionTypeWSModel response = new ActionTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<ActionTypeWSDTO> actionTypeWSDTOS = new ArrayList<>();
-
-        ActionTypeDBModel actionTypeDBModel = scenarioSettingsFramework.removeActionTypeService(typeId);
-        if (actionTypeDBModel != null) {
-            actionTypeWSDTOS.add(scenarioSettingsFramework.fillActionTypeWSDTO(actionTypeDBModel));
-        }
-
-        response.setActionTypes(actionTypeWSDTOS);
-        general.setOperation("removeActionType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-
-    public AutomationTypeWSModel getAutomationTypes(long userId) {
-
-        AutomationTypeWSModel response = new AutomationTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        List<AutomationTypeWSDTO> automationTypeWSDTOS = scenarioSettingsFramework.getAutomationTypesService(userId);
-        if (automationTypeWSDTOS != null){
-            response.setAutomationTypes(automationTypeWSDTOS);
-        }
-
-        general.setOperation("getAutomationTypes");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public AutomationTypeWSModel getAutomationType(long userId, long typeId) {
-
-        AutomationTypeWSModel response = new AutomationTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<AutomationTypeWSDTO>automationTypeWSDTOS = new ArrayList<>();
-
-        AutomationTypeWSDTO automationTypeWSDTO = scenarioSettingsFramework.getAutomationTypeService(userId,typeId);
-        if (automationTypeWSDTO != null){
-            automationTypeWSDTOS.add(automationTypeWSDTO);
-        }
-
-        response.setAutomationTypes(automationTypeWSDTOS);
-        general.setOperation("getAutomationType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public AutomationTypeWSModel createAutomationType(long userId,String automationType,String baseType) {
-
-        AutomationTypeWSModel response = new AutomationTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<AutomationTypeWSDTO>automationTypeWSDTOS = new ArrayList<>();
-
-        AutomationTypeWSDTO automationTypeWSDTO = scenarioSettingsFramework.createAutomationTypeService(userId,automationType,baseType);
-        if (automationTypeWSDTO != null){
-            automationTypeWSDTOS.add(automationTypeWSDTO);
-        }
-
-        response.setAutomationTypes(automationTypeWSDTOS);
-        general.setOperation("createAutomationType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public AutomationTypeWSModel updateAutomationType(long userId,long typeId,String automationType,String baseType) {
-
-        AutomationTypeWSModel response = new AutomationTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<AutomationTypeWSDTO>automationTypeWSDTOS = new ArrayList<>();
-
-        AutomationTypeWSDTO automationTypeWSDTO = scenarioSettingsFramework.updateAutomationTypeService(userId,typeId,automationType,baseType);
-        if (automationTypeWSDTO != null){
-            automationTypeWSDTOS.add(automationTypeWSDTO);
-        }
-
-        response.setAutomationTypes(automationTypeWSDTOS);
-        general.setOperation("updateAutomationType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public AutomationTypeWSModel removeAutomationType(long userId,long typeId) {
-
-        AutomationTypeWSModel response = new AutomationTypeWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<AutomationTypeWSDTO>automationTypeWSDTOS = new ArrayList<>();
-
-        AutomationTypeWSDTO automationTypeWSDTO = scenarioSettingsFramework.removeAutomationTypeService(userId,typeId);
-        if (automationTypeWSDTO != null){
-            automationTypeWSDTOS.add(automationTypeWSDTO);
-        }
-
-        response.setAutomationTypes(automationTypeWSDTOS);
-        general.setOperation("removeAutomationType");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
 }
