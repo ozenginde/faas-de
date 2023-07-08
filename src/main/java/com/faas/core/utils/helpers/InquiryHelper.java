@@ -1,7 +1,7 @@
 package com.faas.core.utils.helpers;
 
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
-import com.faas.core.base.repo.inquiry.InquiryRepository;
+import com.faas.core.base.repo.inquiry.ClientInquiryRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
 public class InquiryHelper {
 
     @Autowired
-    InquiryRepository inquiryRepository;
+    ClientInquiryRepository clientInquiryRepository;
 
     @Autowired
     AppUtils appUtils;
@@ -25,8 +25,8 @@ public class InquiryHelper {
     public List<ApiSummaryWSDTO> agentInquirySummaryHelper(long agentId) {
 
         List<ApiSummaryWSDTO> apiSummaryWSDTOS = new ArrayList<>();
-        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.READY_INQUIRY_SUMMARY, String.valueOf(inquiryRepository.countByAgentIdAndInquiryState(agentId,AppConstant.READY_INQUIRY))));
-        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_INQUIRY_SUMMARY, String.valueOf(inquiryRepository.countByAgentIdAndInquiryState(agentId,AppConstant.ACTIVE_INQUIRY))));
+        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.READY_INQUIRY_SUMMARY, String.valueOf(clientInquiryRepository.countByAgentIdAndInquiryState(agentId,AppConstant.READY_INQUIRY))));
+        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_INQUIRY_SUMMARY, String.valueOf(clientInquiryRepository.countByAgentIdAndInquiryState(agentId,AppConstant.ACTIVE_INQUIRY))));
 
         return apiSummaryWSDTOS;
     }

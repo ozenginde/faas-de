@@ -4,8 +4,8 @@ import com.faas.core.base.framework.campaign.details.client.inquiry.CampaignInqu
 import com.faas.core.base.model.ws.campaign.details.client.inquiry.CampaignInquiryWSModel;
 import com.faas.core.base.model.ws.campaign.details.client.inquiry.dto.CampaignInquiryWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.inquiry.content.InquiryWSModel;
-import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
+import com.faas.core.base.model.ws.inquiry.content.ClientInquiryWSModel;
+import com.faas.core.base.model.ws.inquiry.content.dto.ClientInquiryWSDTO;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -61,18 +61,18 @@ public class CampaignInquiryMiddleware {
     }
 
 
-    public InquiryWSModel getCampaignInquiry(long userId,long inquiryId,long clientId) {
+    public ClientInquiryWSModel getCampaignInquiry(long userId, long inquiryId, long clientId) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        ClientInquiryWSModel response = new ClientInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<InquiryWSDTO>inquiryWSDTOS = new ArrayList<>();
+        List<ClientInquiryWSDTO> clientInquiryWSDTOS = new ArrayList<>();
 
-        InquiryWSDTO inquiryWSDTO = campaignInquiryFramework.getCampaignInquiryService(userId,inquiryId,clientId);
-        if (inquiryWSDTO != null){
-            inquiryWSDTOS.add(inquiryWSDTO);
+        ClientInquiryWSDTO clientInquiryWSDTO = campaignInquiryFramework.getCampaignInquiryService(userId,inquiryId,clientId);
+        if (clientInquiryWSDTO != null){
+            clientInquiryWSDTOS.add(clientInquiryWSDTO);
         }
 
-        response.setInquiries(inquiryWSDTOS);
+        response.setClientInquiries(clientInquiryWSDTOS);
         general.setOperation("getCampaignInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -84,18 +84,18 @@ public class CampaignInquiryMiddleware {
 
 
 
-    public InquiryWSModel createCampaignInquiry(long userId,String campaignId,long clientId) {
+    public ClientInquiryWSModel createCampaignInquiry(long userId, String campaignId, long clientId) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        ClientInquiryWSModel response = new ClientInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<InquiryWSDTO>inquiryWSDTOS = new ArrayList<>();
+        List<ClientInquiryWSDTO> clientInquiryWSDTOS = new ArrayList<>();
 
-        InquiryWSDTO inquiryWSDTO = campaignInquiryFramework.createCampaignInquiryService(userId,campaignId,clientId);
-        if (inquiryWSDTO != null){
-            inquiryWSDTOS.add(inquiryWSDTO);
+        ClientInquiryWSDTO clientInquiryWSDTO = campaignInquiryFramework.createCampaignInquiryService(userId,campaignId,clientId);
+        if (clientInquiryWSDTO != null){
+            clientInquiryWSDTOS.add(clientInquiryWSDTO);
         }
 
-        response.setInquiries(inquiryWSDTOS);
+        response.setClientInquiries(clientInquiryWSDTOS);
         general.setOperation("createCampaignInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -106,19 +106,18 @@ public class CampaignInquiryMiddleware {
     }
 
 
+    public ClientInquiryWSModel updateCampaignInquiry(long userId, long inquiryId, long clientId, String inquiryState) {
 
-    public InquiryWSModel updateCampaignInquiry(long userId,long inquiryId,long clientId,String inquiryState) {
-
-        InquiryWSModel response = new InquiryWSModel();
+        ClientInquiryWSModel response = new ClientInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<InquiryWSDTO>inquiryWSDTOS = new ArrayList<>();
+        List<ClientInquiryWSDTO> clientInquiryWSDTOS = new ArrayList<>();
 
-        InquiryWSDTO inquiryWSDTO = campaignInquiryFramework.updateCampaignInquiryService(userId,inquiryId,clientId,inquiryState);
-        if (inquiryWSDTO != null){
-            inquiryWSDTOS.add(inquiryWSDTO);
+        ClientInquiryWSDTO clientInquiryWSDTO = campaignInquiryFramework.updateCampaignInquiryService(userId,inquiryId,clientId,inquiryState);
+        if (clientInquiryWSDTO != null){
+            clientInquiryWSDTOS.add(clientInquiryWSDTO);
         }
 
-        response.setInquiries(inquiryWSDTOS);
+        response.setClientInquiries(clientInquiryWSDTOS);
         general.setOperation("updateCampaignInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -130,18 +129,18 @@ public class CampaignInquiryMiddleware {
 
 
 
-    public InquiryWSModel removeCampaignInquiry(long userId,long inquiryId,long clientId) {
+    public ClientInquiryWSModel removeCampaignInquiry(long userId, long inquiryId, long clientId) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        ClientInquiryWSModel response = new ClientInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<InquiryWSDTO>inquiryWSDTOS = new ArrayList<>();
+        List<ClientInquiryWSDTO> clientInquiryWSDTOS = new ArrayList<>();
 
-        InquiryWSDTO inquiryWSDTO = campaignInquiryFramework.removeCampaignInquiryService(userId,inquiryId,clientId);
-        if (inquiryWSDTO != null){
-            inquiryWSDTOS.add(inquiryWSDTO);
+        ClientInquiryWSDTO clientInquiryWSDTO = campaignInquiryFramework.removeCampaignInquiryService(userId,inquiryId,clientId);
+        if (clientInquiryWSDTO != null){
+            clientInquiryWSDTOS.add(clientInquiryWSDTO);
         }
 
-        response.setInquiries(inquiryWSDTOS);
+        response.setClientInquiries(clientInquiryWSDTOS);
         general.setOperation("removeCampaignInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);

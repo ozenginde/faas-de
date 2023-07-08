@@ -1,7 +1,7 @@
 package com.faas.core.utils.helpers;
 
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
-import com.faas.core.base.repo.inquiry.InquiryRepository;
+import com.faas.core.base.repo.inquiry.ClientInquiryRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import java.util.List;
 public class FlowHelper {
 
     @Autowired
-    InquiryRepository inquiryRepository;
+    ClientInquiryRepository clientInquiryRepository;
 
     @Autowired
     AppUtils appUtils;

@@ -1,20 +1,17 @@
 package com.faas.core.base.model.ws.flow.details;
 
-import com.faas.core.base.model.ws.flow.details.dto.FlowDetailsWSDTO;
+import com.faas.core.base.model.ws.flow.details.dto.ClientFlowDetailsWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
 
-import java.util.List;
-
-public class FlowDetailsWSModel {
+public class ClientFlowDetailsWSModel {
 
     private GeneralWSModel general;
-    private FlowDetailsWSDTO flowDetails;
+    private ClientFlowDetailsWSDTO flowDetails;
 
-    public FlowDetailsWSModel() {
+    public ClientFlowDetailsWSModel() {
     }
 
-    public FlowDetailsWSModel(GeneralWSModel general, FlowDetailsWSDTO flowDetails) {
+    public ClientFlowDetailsWSModel(GeneralWSModel general, ClientFlowDetailsWSDTO flowDetails) {
         this.general = general;
         this.flowDetails = flowDetails;
     }
@@ -27,11 +24,11 @@ public class FlowDetailsWSModel {
         this.general = general;
     }
 
-    public FlowDetailsWSDTO getFlowDetails() {
+    public ClientFlowDetailsWSDTO getFlowDetails() {
         return flowDetails;
     }
 
-    public void setFlowDetails(FlowDetailsWSDTO flowDetails) {
+    public void setFlowDetails(ClientFlowDetailsWSDTO flowDetails) {
         this.flowDetails = flowDetails;
     }
 }

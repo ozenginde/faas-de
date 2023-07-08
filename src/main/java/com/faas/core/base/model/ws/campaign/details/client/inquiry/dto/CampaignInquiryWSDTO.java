@@ -1,29 +1,29 @@
 package com.faas.core.base.model.ws.campaign.details.client.inquiry.dto;
 
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
-import com.faas.core.base.model.ws.inquiry.content.dto.InquiryWSDTO;
+import com.faas.core.base.model.ws.inquiry.content.dto.ClientInquiryWSDTO;
 
 import java.util.List;
 
 public class CampaignInquiryWSDTO {
 
-    private List<InquiryWSDTO>inquiries;
+    private List<ClientInquiryWSDTO>clientInquiries;
     private PaginationWSDTO pagination;
 
     public CampaignInquiryWSDTO() {
     }
 
-    public CampaignInquiryWSDTO(List<InquiryWSDTO> inquiries, PaginationWSDTO pagination) {
-        this.inquiries = inquiries;
+    public CampaignInquiryWSDTO(List<ClientInquiryWSDTO> clientInquiries, PaginationWSDTO pagination) {
+        this.clientInquiries = clientInquiries;
         this.pagination = pagination;
     }
 
-    public List<InquiryWSDTO> getInquiries() {
-        return inquiries;
+    public List<ClientInquiryWSDTO> getClientInquiries() {
+        return clientInquiries;
     }
 
-    public void setInquiries(List<InquiryWSDTO> inquiries) {
-        this.inquiries = inquiries;
+    public void setClientInquiries(List<ClientInquiryWSDTO> clientInquiries) {
+        this.clientInquiries = clientInquiries;
     }
 
     public PaginationWSDTO getPagination() {

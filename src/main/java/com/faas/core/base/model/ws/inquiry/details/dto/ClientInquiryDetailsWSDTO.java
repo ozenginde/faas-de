@@ -1,15 +1,15 @@
-package com.faas.core.api.model.ws.inquiry.content.dto;
+package com.faas.core.base.model.ws.inquiry.details.dto;
 
 import com.faas.core.base.model.db.inquiry.ClientInquiryDBModel;
 
-public class ApiInquiryWSDTO {
+public class ClientInquiryDetailsWSDTO {
 
     private ClientInquiryDBModel inquiry;
 
-    public ApiInquiryWSDTO() {
+    public ClientInquiryDetailsWSDTO() {
     }
 
-    public ApiInquiryWSDTO(ClientInquiryDBModel inquiry) {
+    public ClientInquiryDetailsWSDTO(ClientInquiryDBModel inquiry) {
         this.inquiry = inquiry;
     }
 

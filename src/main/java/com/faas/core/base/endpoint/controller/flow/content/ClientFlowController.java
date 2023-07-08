@@ -1,8 +1,8 @@
 package com.faas.core.base.endpoint.controller.flow.content;
 
-import com.faas.core.base.middleware.flow.content.FlowMiddleware;
+import com.faas.core.base.middleware.flow.content.ClientFlowMiddleware;
 import com.faas.core.base.model.ws.flow.content.FlowCampaignWSModel;
-import com.faas.core.base.model.ws.flow.content.FlowWSModel;
+import com.faas.core.base.model.ws.flow.content.ClientFlowWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = AppConstant.API_VERSION + "/base/flow/")
-public class FlowController {
+public class ClientFlowController {
 
 
     @Autowired
-    FlowMiddleware flowMiddleware;
+    ClientFlowMiddleware clientFlowMiddleware;
 
 
-    @RequestMapping(value = BaseRoute.GET_ALL_FLOWS, method = RequestMethod.POST)
-    public ResponseEntity<?> getAllFlows(@RequestParam long userId,
-                                         @RequestParam int reqPage,
-                                         @RequestParam int reqSize) {
+    @RequestMapping(value = BaseRoute.GET_ALL_CLIENT_FLOWS, method = RequestMethod.POST)
+    public ResponseEntity<?> getAllClientFlows(@RequestParam long userId,
+                                               @RequestParam int reqPage,
+                                               @RequestParam int reqSize) {
 
-        FlowWSModel response = flowMiddleware.getAllFlows(userId,reqPage,reqSize);
+        ClientFlowWSModel response = clientFlowMiddleware.getAllClientFlows(userId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -37,13 +37,13 @@ public class FlowController {
     }
 
 
-    @RequestMapping(value = BaseRoute.GET_FLOWS_BY_STATE, method = RequestMethod.POST)
-    public ResponseEntity<?> getFlowsByState(@RequestParam long userId,
-                                             @RequestParam String flowState,
-                                             @RequestParam int reqPage,
-                                             @RequestParam int reqSize) {
+    @RequestMapping(value = BaseRoute.GET_CLIENT_FLOWS_BY_STATE, method = RequestMethod.POST)
+    public ResponseEntity<?> getClientFlowsByState(@RequestParam long userId,
+                                                   @RequestParam String flowState,
+                                                   @RequestParam int reqPage,
+                                                   @RequestParam int reqSize) {
 
-        FlowWSModel response = flowMiddleware.getFlowsByState(userId,flowState,reqPage,reqSize);
+        ClientFlowWSModel response = clientFlowMiddleware.getClientFlowsByState(userId,flowState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -57,7 +57,7 @@ public class FlowController {
                                               @RequestParam int reqPage,
                                               @RequestParam int reqSize) {
 
-        FlowCampaignWSModel response = flowMiddleware.getFlowCampaigns(userId,reqPage,reqSize);
+        FlowCampaignWSModel response = clientFlowMiddleware.getFlowCampaigns(userId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -72,7 +72,7 @@ public class FlowController {
                                              @RequestParam int reqPage,
                                              @RequestParam int reqSize) {
 
-        FlowCampaignWSModel response = flowMiddleware.getFlowCampaign(userId,campaignId,reqPage,reqSize);
+        FlowCampaignWSModel response = clientFlowMiddleware.getFlowCampaign(userId,campaignId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -81,26 +81,12 @@ public class FlowController {
     }
 
 
-    @RequestMapping(value = BaseRoute.GET_FLOW, method = RequestMethod.POST)
-    public ResponseEntity<?> getFlow(@RequestParam long userId,
-                                     @RequestParam long flowId,
-                                     @RequestParam long clientId) {
+    @RequestMapping(value = BaseRoute.GET_CLIENT_FLOW, method = RequestMethod.POST)
+    public ResponseEntity<?> getClientFlow(@RequestParam long userId,
+                                           @RequestParam long flowId,
+                                           @RequestParam long clientId) {
 
-        FlowWSModel response = flowMiddleware.getFlow(userId,flowId,clientId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.CREATE_FLOW, method = RequestMethod.POST)
-    public ResponseEntity<?> createFlow(@RequestParam long userId,
-                                        @RequestParam long clientId,
-                                        @RequestParam String campaignId) {
-
-        FlowWSModel response = flowMiddleware.createFlow(userId,clientId,campaignId);
+        ClientFlowWSModel response = clientFlowMiddleware.getClientFlow(userId,flowId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -109,12 +95,12 @@ public class FlowController {
     }
 
 
-    @RequestMapping(value = BaseRoute.UPDATE_FLOW, method = RequestMethod.POST)
-    public ResponseEntity<?> updateFlow(@RequestParam long userId,
-                                        @RequestParam long flowId,
-                                        @RequestParam long clientId) {
+    @RequestMapping(value = BaseRoute.CREATE_CLIENT_FLOW, method = RequestMethod.POST)
+    public ResponseEntity<?> createClientFlow(@RequestParam long userId,
+                                              @RequestParam long clientId,
+                                              @RequestParam String campaignId) {
 
-        FlowWSModel response = flowMiddleware.updateFlow(userId,flowId,clientId);
+        ClientFlowWSModel response = clientFlowMiddleware.createClientFlow(userId,clientId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -123,12 +109,26 @@ public class FlowController {
     }
 
 
-    @RequestMapping(value = BaseRoute.REMOVE_FLOW, method = RequestMethod.POST)
-    public ResponseEntity<?> removeFlow(@RequestParam long userId,
-                                        @RequestParam long flowId,
-                                        @RequestParam long clientId) {
+    @RequestMapping(value = BaseRoute.UPDATE_CLIENT_FLOW, method = RequestMethod.POST)
+    public ResponseEntity<?> updateClientFlow(@RequestParam long userId,
+                                              @RequestParam long flowId,
+                                              @RequestParam long clientId) {
 
-        FlowWSModel response = flowMiddleware.removeFlow(userId,flowId,clientId);
+        ClientFlowWSModel response = clientFlowMiddleware.updateClientFlow(userId,flowId,clientId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.REMOVE_CLIENT_FLOW, method = RequestMethod.POST)
+    public ResponseEntity<?> removeClientFlow(@RequestParam long userId,
+                                              @RequestParam long flowId,
+                                              @RequestParam long clientId) {
+
+        ClientFlowWSModel response = clientFlowMiddleware.removeClientFlow(userId,flowId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

@@ -9,15 +9,15 @@ public class InquiryCampaignWSDTO {
 
     private CampaignWSDTO campaign;
     private PaginationWSDTO pagination;
-    private List<InquiryWSDTO>inquiries;
+    private List<ClientInquiryWSDTO>clientInquiries;
 
     public InquiryCampaignWSDTO() {
     }
 
-    public InquiryCampaignWSDTO(CampaignWSDTO campaign, PaginationWSDTO pagination, List<InquiryWSDTO> inquiries) {
+    public InquiryCampaignWSDTO(CampaignWSDTO campaign, PaginationWSDTO pagination, List<ClientInquiryWSDTO> clientInquiries) {
         this.campaign = campaign;
         this.pagination = pagination;
-        this.inquiries = inquiries;
+        this.clientInquiries = clientInquiries;
     }
 
     public CampaignWSDTO getCampaign() {
@@ -36,11 +36,11 @@ public class InquiryCampaignWSDTO {
         this.pagination = pagination;
     }
 
-    public List<InquiryWSDTO> getInquiries() {
-        return inquiries;
+    public List<ClientInquiryWSDTO> getClientInquiries() {
+        return clientInquiries;
     }
 
-    public void setInquiries(List<InquiryWSDTO> inquiries) {
-        this.inquiries = inquiries;
+    public void setClientInquiries(List<ClientInquiryWSDTO> clientInquiries) {
+        this.clientInquiries = clientInquiries;
     }
 }

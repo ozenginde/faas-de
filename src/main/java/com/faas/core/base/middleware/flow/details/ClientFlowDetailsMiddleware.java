@@ -1,28 +1,28 @@
-package com.faas.core.base.middleware.inquiry.details;
+package com.faas.core.base.middleware.flow.details;
 
-import com.faas.core.base.framework.inquiry.details.InquiryDetailsFramework;
+import com.faas.core.base.framework.flow.details.ClientFlowDetailsFramework;
+import com.faas.core.base.model.ws.flow.content.ClientFlowWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.inquiry.content.InquiryWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class InquiryDetailsMiddleware {
+public class ClientFlowDetailsMiddleware {
 
 
     @Autowired
-    InquiryDetailsFramework inquiryDetailsFramework;
+    ClientFlowDetailsFramework clientFlowDetailsFramework;
 
 
-    public InquiryWSModel getInquiryDetails(long userId, int reqPage, int reqSize) {
+    public ClientFlowWSModel getClientFlowDetails(long userId, int reqPage, int reqSize) {
 
-        InquiryWSModel response = new InquiryWSModel();
+        ClientFlowWSModel response = new ClientFlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("getInquiryDetails");
+        general.setOperation("getClientFlowDetails");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

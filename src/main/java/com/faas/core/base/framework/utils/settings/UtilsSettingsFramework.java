@@ -9,7 +9,7 @@ import com.faas.core.base.repo.client.details.ClientAddressRepository;
 import com.faas.core.base.repo.client.details.ClientDataRepository;
 import com.faas.core.base.repo.client.details.ClientEmailRepository;
 import com.faas.core.base.repo.client.details.ClientPhoneRepository;
-import com.faas.core.base.repo.inquiry.InquiryRepository;
+import com.faas.core.base.repo.inquiry.ClientInquiryRepository;
 import com.faas.core.base.repo.notification.NotificationRepository;
 import com.faas.core.base.repo.operation.channel.*;
 import com.faas.core.base.repo.operation.content.OperationRepository;
@@ -71,7 +71,7 @@ public class UtilsSettingsFramework {
     WappMessageRepository wappMessageRepository;
 
     @Autowired
-    InquiryRepository inquiryRepository;
+    ClientInquiryRepository clientInquiryRepository;
 
     @Autowired
     NotificationRepository notificationRepository;
@@ -181,7 +181,7 @@ public class UtilsSettingsFramework {
 
     public void cleanSystemTablesService() {
 
-        inquiryRepository.deleteAll();
+        clientInquiryRepository.deleteAll();
         notificationRepository.deleteAll();
         actionTempRepository.deleteAll();
         assetRepository.deleteAll();

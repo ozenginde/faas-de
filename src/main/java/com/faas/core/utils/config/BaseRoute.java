@@ -177,29 +177,29 @@ public class BaseRoute {
     public static final String REMOVE_CLIENT_TYPE = "removeclienttype";
 
 
-    public static final String GET_ALL_INQUIRIES = "getallinquiries";
-    public static final String GET_INQUIRIES_BY_STATE = "getinquiriesbystate";
+    public static final String GET_ALL_CLIENT_INQUIRIES = "getallclientinquiries";
+    public static final String GET_CLIENT_INQUIRIES_BY_STATE = "getclientinquiriesbystate";
     public static final String GET_INQUIRY_CAMPAIGNS = "getinquirycampaigns";
     public static final String GET_INQUIRY_CAMPAIGN = "getinquirycampaign";
-    public static final String GET_INQUIRY = "getinquiry";
-    public static final String CREATE_INQUIRY = "createinquiry";
-    public static final String UPDATE_INQUIRY = "updateinquiry";
-    public static final String REMOVE_INQUIRY = "removeinquiry";
+    public static final String GET_CLIENT_INQUIRY = "getclientinquiry";
+    public static final String CREATE_CLIENT_INQUIRY = "createclientinquiry";
+    public static final String UPDATE_CLIENT_INQUIRY = "updateclientinquiry";
+    public static final String REMOVE_CLIENT_INQUIRY = "removeclientinquiry";
 
-    public static final String GET_INQUIRY_DETAILS = "getinquirydetails";
+    public static final String GET_INQUIRY_DETAILS = "getclientinquirydetails";
 
 
-    public static final String GET_ALL_FLOWS = "getallflows";
-    public static final String GET_FLOWS_BY_STATE = "getflowsbystate";
+    public static final String GET_ALL_CLIENT_FLOWS = "getallclientflows";
+    public static final String GET_CLIENT_FLOWS_BY_STATE = "getclientflowsbystate";
     public static final String GET_FLOW_CAMPAIGNS = "getflowcampaigns";
     public static final String GET_FLOW_CAMPAIGN = "getflowcampaign";
-    public static final String GET_FLOW = "getflow";
-    public static final String CREATE_FLOW = "createflow";
-    public static final String UPDATE_FLOW = "updateflow";
-    public static final String REMOVE_FLOW = "removeflow";
+    public static final String GET_CLIENT_FLOW = "getclientflow";
+    public static final String CREATE_CLIENT_FLOW = "createclientflow";
+    public static final String UPDATE_CLIENT_FLOW = "updateclientflow";
+    public static final String REMOVE_CLIENT_FLOW = "removeclientflow";
 
 
-    public static final String GET_FLOW_DETAILS = "getflowdetails";
+    public static final String GET_CLIENT_FLOW_DETAILS = "getclientflowdetails";
 
 
 

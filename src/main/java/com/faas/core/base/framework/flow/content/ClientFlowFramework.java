@@ -3,19 +3,19 @@ package com.faas.core.base.framework.flow.content;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
-import com.faas.core.base.model.db.flow.FlowDBModel;
+import com.faas.core.base.model.db.flow.ClientFlowDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.content.dto.CampaignWSDTO;
 import com.faas.core.base.model.ws.flow.content.dto.FlowCampaignWSDTO;
-import com.faas.core.base.model.ws.flow.content.dto.FlowWSDTO;
+import com.faas.core.base.model.ws.flow.content.dto.ClientFlowWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
-import com.faas.core.base.repo.flow.FlowRepository;
+import com.faas.core.base.repo.flow.ClientFlowRepository;
 import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.FlowMapper;
+import com.faas.core.utils.mapper.ClientFlowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,10 +27,10 @@ import java.util.Optional;
 
 
 @Component
-public class FlowFramework {
+public class ClientFlowFramework {
 
     @Autowired
-    FlowMapper flowMapper;
+    ClientFlowMapper clientFlowMapper;
 
     @Autowired
     ClientRepository clientRepository;
@@ -45,30 +45,30 @@ public class FlowFramework {
     UserRepository userRepository;
 
     @Autowired
-    FlowRepository flowRepository;
+    ClientFlowRepository clientFlowRepository;
 
     @Autowired
     AppUtils appUtils;
 
 
-    public List<FlowWSDTO> getAllFlowsService(long userId, int reqPage, int reqSize) {
+    public List<ClientFlowWSDTO> getAllClientFlowsService(long userId, int reqPage, int reqSize) {
 
-        List<FlowWSDTO>flowWSDTOS = new ArrayList<>();
-        Page<FlowDBModel> flowModelPage = flowRepository.findAll(PageRequest.of(reqPage,reqSize));
+        List<ClientFlowWSDTO> clientFlowWSDTOS = new ArrayList<>();
+        Page<ClientFlowDBModel> flowModelPage = clientFlowRepository.findAll(PageRequest.of(reqPage,reqSize));
         for (int i=0;i<flowModelPage.getContent().size();i++){
-            flowWSDTOS.add(new FlowWSDTO(flowModelPage.getContent().get(i)));
+            clientFlowWSDTOS.add(new ClientFlowWSDTO(flowModelPage.getContent().get(i)));
         }
-        return flowWSDTOS;
+        return clientFlowWSDTOS;
     }
 
-    public List<FlowWSDTO> getFlowsByStateService(long userId,String flowState, int reqPage, int reqSize) {
+    public List<ClientFlowWSDTO> getClientFlowsByStateService(long userId, String flowState, int reqPage, int reqSize) {
 
-        List<FlowWSDTO>flowWSDTOS = new ArrayList<>();
-        Page<FlowDBModel> flowModelPage = flowRepository.findAllByFlowState(flowState,PageRequest.of(reqPage,reqSize));
+        List<ClientFlowWSDTO> clientFlowWSDTOS = new ArrayList<>();
+        Page<ClientFlowDBModel> flowModelPage = clientFlowRepository.findAllByFlowState(flowState,PageRequest.of(reqPage,reqSize));
         for (int i=0;i<flowModelPage.getContent().size();i++){
-            flowWSDTOS.add(new FlowWSDTO(flowModelPage.getContent().get(i)));
+            clientFlowWSDTOS.add(new ClientFlowWSDTO(flowModelPage.getContent().get(i)));
         }
-        return flowWSDTOS;
+        return clientFlowWSDTOS;
     }
 
 
@@ -80,9 +80,9 @@ public class FlowFramework {
             for (CampaignDBModel campaignDBModel : campaignDBModels) {
                 FlowCampaignWSDTO flowCampaignWSDTO = new FlowCampaignWSDTO();
                 flowCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel));
-                Page<FlowDBModel> flowModelPage = flowRepository.findAllByCampaignId(campaignDBModel.getId(), PageRequest.of(reqPage, reqSize));
-                flowCampaignWSDTO.setFlows(flowMapper.createFlowWSDTOS(flowModelPage.getContent()));
-                flowCampaignWSDTO.setPagination(flowMapper.createFlowPaginationWSDTO(flowModelPage));
+                Page<ClientFlowDBModel> flowModelPage = clientFlowRepository.findAllByCampaignId(campaignDBModel.getId(), PageRequest.of(reqPage, reqSize));
+                flowCampaignWSDTO.setFlows(clientFlowMapper.createClientFlowWSDTOS(flowModelPage.getContent()));
+                flowCampaignWSDTO.setPagination(clientFlowMapper.createClientFlowPagination(flowModelPage));
 
                 flowCampaignWSDTOS.add(flowCampaignWSDTO);
             }
@@ -97,9 +97,9 @@ public class FlowFramework {
         if (campaignDBModel.isPresent()){
             FlowCampaignWSDTO flowCampaignWSDTO = new FlowCampaignWSDTO();
             flowCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel.get()));
-            Page<FlowDBModel> flowModelPage = flowRepository.findAllByCampaignId(campaignId,PageRequest.of(reqPage,reqSize));
-            flowCampaignWSDTO.setFlows(flowMapper.createFlowWSDTOS(flowModelPage.getContent()));
-            flowCampaignWSDTO.setPagination(flowMapper.createFlowPaginationWSDTO(flowModelPage));
+            Page<ClientFlowDBModel> flowModelPage = clientFlowRepository.findAllByCampaignId(campaignId,PageRequest.of(reqPage,reqSize));
+            flowCampaignWSDTO.setFlows(clientFlowMapper.createClientFlowWSDTOS(flowModelPage.getContent()));
+            flowCampaignWSDTO.setPagination(clientFlowMapper.createClientFlowPagination(flowModelPage));
 
             return flowCampaignWSDTO;
         }
@@ -107,17 +107,17 @@ public class FlowFramework {
     }
 
 
-    public FlowWSDTO getFlowService(long userId,long flowId,long clientId) {
+    public ClientFlowWSDTO getClientFlowService(long userId, long flowId, long clientId) {
 
-        List<FlowDBModel> flowDBModels = flowRepository.findByIdAndClientId(flowId,clientId);
-        if (flowDBModels.size()>0){
-            return new FlowWSDTO(flowDBModels.get(0));
+        List<ClientFlowDBModel> clientFlowDBModels = clientFlowRepository.findByIdAndClientId(flowId,clientId);
+        if (clientFlowDBModels.size()>0){
+            return new ClientFlowWSDTO(clientFlowDBModels.get(0));
         }
         return null;
     }
 
 
-    public FlowWSDTO createFlowService(long userId, long clientId,String campaignId) {
+    public ClientFlowWSDTO createClientFlowService(long userId, long clientId, String campaignId) {
 
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
@@ -126,9 +126,9 @@ public class FlowFramework {
                 && campaignAgentDBModels.size()>0 && clientDBModel.isPresent()){
             Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgentDBModels.get(0).getAgentId());
             if (agentDBModel.isPresent()){
-                FlowDBModel flowDBModel = flowMapper.mapFlowDBModel(campaignDBModel.get(),clientDBModel.get(),agentDBModel.get());
-                if (flowDBModel != null){
-                    return new FlowWSDTO(flowRepository.save(flowDBModel));
+                ClientFlowDBModel clientFlowDBModel = clientFlowMapper.mapFlowDBModel(campaignDBModel.get(),clientDBModel.get(),agentDBModel.get());
+                if (clientFlowDBModel != null){
+                    return new ClientFlowWSDTO(clientFlowRepository.save(clientFlowDBModel));
                 }
             }
         }
@@ -136,21 +136,21 @@ public class FlowFramework {
     }
 
 
-    public FlowWSDTO updateFlowService(long userId,long flowId,long clientId) {
+    public ClientFlowWSDTO updateClientFlowService(long userId, long flowId, long clientId) {
 
-        List<FlowDBModel> flowDBModels = flowRepository.findByIdAndClientId(flowId,clientId);
-        if (flowDBModels.size()>0){
-            return new FlowWSDTO(flowDBModels.get(0));
+        List<ClientFlowDBModel> clientFlowDBModels = clientFlowRepository.findByIdAndClientId(flowId,clientId);
+        if (clientFlowDBModels.size()>0){
+            return new ClientFlowWSDTO(clientFlowDBModels.get(0));
         }
         return null;
     }
 
-    public FlowWSDTO removeFlowService(long userId,long flowId,long clientId) {
+    public ClientFlowWSDTO removeClientFlowService(long userId, long flowId, long clientId) {
 
-        List<FlowDBModel> flowDBModels = flowRepository.findByIdAndClientId(flowId,clientId);
-        if (flowDBModels.size()>0){
-            flowRepository.delete(flowDBModels.get(0));
-            return new FlowWSDTO(flowDBModels.get(0));
+        List<ClientFlowDBModel> clientFlowDBModels = clientFlowRepository.findByIdAndClientId(flowId,clientId);
+        if (clientFlowDBModels.size()>0){
+            clientFlowRepository.delete(clientFlowDBModels.get(0));
+            return new ClientFlowWSDTO(clientFlowDBModels.get(0));
         }
         return null;
     }
