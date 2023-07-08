@@ -100,7 +100,6 @@ public class ProcessHelper {
 
 
 
-
     public ProcessScenarioWSDTO mapProcessScenarioWSDTO(ProcessScenarioDBModel processScenarioDBModel){
 
         ProcessScenarioWSDTO processScenarioWSDTO = new ProcessScenarioWSDTO();
