@@ -2,7 +2,7 @@ package com.faas.core.base.endpoint.controller.campaign.details.client.flow;
 
 import com.faas.core.base.middleware.campaign.details.client.flow.CampaignFlowMiddleware;
 import com.faas.core.base.model.ws.campaign.details.client.flow.CampaignFlowWSModel;
-import com.faas.core.base.model.ws.flow.content.ClientFlowWSModel;
+import com.faas.core.base.model.ws.flow.ClientFlowWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;

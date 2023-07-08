@@ -4,7 +4,7 @@ import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.inquiry.ClientInquiryDBModel;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
-import com.faas.core.base.model.ws.inquiry.content.dto.ClientInquiryWSDTO;
+import com.faas.core.base.model.ws.inquiry.dto.ClientInquiryWSDTO;
 import com.faas.core.base.repo.inquiry.ClientInquiryRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;

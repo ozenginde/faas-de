@@ -4,7 +4,7 @@ import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.flow.ClientFlowDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
-import com.faas.core.base.model.ws.flow.content.dto.ClientFlowWSDTO;
+import com.faas.core.base.model.ws.flow.dto.ClientFlowWSDTO;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
