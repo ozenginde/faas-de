@@ -21,6 +21,7 @@ public class ClientFlowDetailsController {
     @Autowired
     ClientFlowDetailsMiddleware clientFlowDetailsMiddleware;
 
+
     @RequestMapping(value = BaseRoute.GET_CLIENT_FLOW_DETAILS, method = RequestMethod.POST)
     public ResponseEntity<?> getClientFlowDetails(@RequestParam long userId,
                                                   @RequestParam int reqPage,

@@ -22,7 +22,7 @@ public class ClientInquiryDetailsController {
     ClientInquiryDetailsMiddleware clientInquiryDetailsMiddleware;
 
 
-    @RequestMapping(value = BaseRoute.GET_INQUIRY_DETAILS, method = RequestMethod.POST)
+    @RequestMapping(value = BaseRoute.GET_CLIENT_INQUIRY_DETAILS, method = RequestMethod.POST)
     public ResponseEntity<?> getClientInquiryDetails(@RequestParam long userId,
                                                      @RequestParam int reqPage,
                                                      @RequestParam int reqSize) {

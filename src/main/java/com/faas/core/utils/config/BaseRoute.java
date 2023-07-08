@@ -186,7 +186,7 @@ public class BaseRoute {
     public static final String UPDATE_CLIENT_INQUIRY = "updateclientinquiry";
     public static final String REMOVE_CLIENT_INQUIRY = "removeclientinquiry";
 
-    public static final String GET_INQUIRY_DETAILS = "getclientinquirydetails";
+    public static final String GET_CLIENT_INQUIRY_DETAILS = "getclientinquirydetails";
 
 
     public static final String GET_ALL_CLIENT_FLOWS = "getallclientflows";
@@ -198,9 +198,7 @@ public class BaseRoute {
     public static final String UPDATE_CLIENT_FLOW = "updateclientflow";
     public static final String REMOVE_CLIENT_FLOW = "removeclientflow";
 
-
     public static final String GET_CLIENT_FLOW_DETAILS = "getclientflowdetails";
-
 
 
 
