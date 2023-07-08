@@ -43,10 +43,10 @@ public class ProcessScenarioFramework {
     public ProcessScenarioWSDTO fillProcessScenarioWSDTO(ProcessScenarioDBModel processScenarioDBModel) {
 
         ProcessScenarioWSDTO processScenarioWSDTO = new ProcessScenarioWSDTO();
-        processScenarioWSDTO.setScenario(processScenarioDBModel);
+        processScenarioWSDTO.setProcessScenario(processScenarioDBModel);
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
         if (scenarioDBModel.isPresent()) {
-            processScenarioWSDTO.setScenarioDetails(scenarioDBModel.get());
+            processScenarioWSDTO.setProcessScenarioDetails(scenarioDBModel.get());
         }
         return processScenarioWSDTO;
     }
