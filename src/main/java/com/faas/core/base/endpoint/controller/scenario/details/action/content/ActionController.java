@@ -52,11 +52,10 @@ public class ActionController {
     public ResponseEntity<?> createAction(@RequestParam long userId,
                                           @RequestParam String scenarioId,
                                           @RequestParam String action,
-                                          @RequestParam String actionDesc,
                                           @RequestParam long actionTempId,
                                           @RequestParam int order) {
 
-        ActionWSModel response = actionMiddleware.createAction(userId,scenarioId,action,actionDesc,actionTempId,order);
+        ActionWSModel response = actionMiddleware.createAction(userId,scenarioId,action,actionTempId,order);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -69,11 +68,10 @@ public class ActionController {
     public ResponseEntity<?> updateAction(@RequestParam long userId,
                                           @RequestParam String actionId,
                                           @RequestParam String action,
-                                          @RequestParam String actionDesc,
                                           @RequestParam long actionTempId,
                                           @RequestParam int order) {
 
-        ActionWSModel response = actionMiddleware.updateAction(userId,actionId,action,actionDesc,actionTempId,order);
+        ActionWSModel response = actionMiddleware.updateAction(userId,actionId,action,actionTempId,order);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

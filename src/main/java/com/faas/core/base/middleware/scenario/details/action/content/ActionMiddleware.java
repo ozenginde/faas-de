@@ -62,13 +62,13 @@ public class ActionMiddleware {
     }
 
 
-    public ActionWSModel createAction(long userId, String scenarioId, String action, String actionDesc, long actionTempId, int order) {
+    public ActionWSModel createAction(long userId, String scenarioId, String action, long actionTempId, int order) {
 
         ActionWSModel response = new ActionWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ActionWSDTO> actionWSDTOS = new ArrayList<>();
 
-        ActionWSDTO actionWSDTO = actionFramework.createActionService(scenarioId,action,actionDesc,actionTempId,order);
+        ActionWSDTO actionWSDTO = actionFramework.createActionService(scenarioId,action,actionTempId,order);
         if (actionWSDTO != null){
             actionWSDTOS.add(actionWSDTO);
         }
@@ -84,13 +84,13 @@ public class ActionMiddleware {
     }
 
 
-    public ActionWSModel updateAction(long userId, String actionId, String action, String actionDesc, long actionTempId, int order) {
+    public ActionWSModel updateAction(long userId, String actionId, String action, long actionTempId, int order) {
 
         ActionWSModel response = new ActionWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ActionWSDTO> actionWSDTOS = new ArrayList<>();
 
-        ActionWSDTO actionWSDTO = actionFramework.updateActionService(actionId,action,actionDesc,actionTempId,order);
+        ActionWSDTO actionWSDTO = actionFramework.updateActionService(actionId,action,actionTempId,order);
         if (actionWSDTO != null){
             actionWSDTOS.add(actionWSDTO);
         }

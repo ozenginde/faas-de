@@ -14,7 +14,6 @@ public class ActionDBModel {
     private String id;
     private String scenarioId;
     private String action;
-    private String actionDesc;
     private long actionTempId;
     private String actionTemp;
     private long actionTypeId;
@@ -28,11 +27,10 @@ public class ActionDBModel {
     public ActionDBModel() {
     }
 
-    public ActionDBModel(String id, String scenarioId, String action, String actionDesc, long actionTempId, String actionTemp, long actionTypeId, String actionType, List<ActionVariableDAO> actionVariables, int order, long uDate, long cDate, int status) {
+    public ActionDBModel(String id, String scenarioId, String action, long actionTempId, String actionTemp, long actionTypeId, String actionType, List<ActionVariableDAO> actionVariables, int order, long uDate, long cDate, int status) {
         this.id = id;
         this.scenarioId = scenarioId;
         this.action = action;
-        this.actionDesc = actionDesc;
         this.actionTempId = actionTempId;
         this.actionTemp = actionTemp;
         this.actionTypeId = actionTypeId;
@@ -66,14 +64,6 @@ public class ActionDBModel {
 
     public void setAction(String action) {
         this.action = action;
-    }
-
-    public String getActionDesc() {
-        return actionDesc;
-    }
-
-    public void setActionDesc(String actionDesc) {
-        this.actionDesc = actionDesc;
     }
 
     public long getActionTempId() {

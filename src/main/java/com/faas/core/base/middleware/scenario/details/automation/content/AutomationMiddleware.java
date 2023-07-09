@@ -62,13 +62,13 @@ public class AutomationMiddleware {
     }
 
 
-    public AutomationWSModel createAutomation(long userId, String scenarioId, String automation, String automationDesc, long automationTempId, int order) {
+    public AutomationWSModel createAutomation(long userId, String scenarioId, String automation, long automationTempId, int order) {
 
         AutomationWSModel response = new AutomationWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<AutomationWSDTO> automationWSDTOS = new ArrayList<>();
 
-        AutomationWSDTO automationWSDTO = automationFramework.createAutomationService(scenarioId,automation,automationDesc,automationTempId,order);
+        AutomationWSDTO automationWSDTO = automationFramework.createAutomationService(scenarioId,automation,automationTempId,order);
         if (automationWSDTO != null){
             automationWSDTOS.add(automationWSDTO);
         }
@@ -84,13 +84,13 @@ public class AutomationMiddleware {
     }
 
 
-    public AutomationWSModel updateAutomation(long userId, String automationId, String automation, String automationDesc, long automationTempId, int order) {
+    public AutomationWSModel updateAutomation(long userId, String automationId, String automation, long automationTempId, int order) {
 
         AutomationWSModel response = new AutomationWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<AutomationWSDTO> automationWSDTOS = new ArrayList<>();
 
-        AutomationWSDTO automationWSDTO = automationFramework.updateAutomationService(automationId,automation,automationDesc,automationTempId,order);
+        AutomationWSDTO automationWSDTO = automationFramework.updateAutomationService(automationId,automation,automationTempId,order);
         if (automationWSDTO != null){
             automationWSDTOS.add(automationWSDTO);
         }

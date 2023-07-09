@@ -50,7 +50,7 @@ public class ActionFramework {
     }
 
 
-    public ActionWSDTO createActionService(String scenarioId, String action, String actionDesc, long actionTempId, int order) {
+    public ActionWSDTO createActionService(String scenarioId, String action, long actionTempId, int order) {
 
         Optional<ActionTempDBModel> actionTempDBModel = actionTempRepository.findById(actionTempId);
         if (actionTempDBModel.isPresent()){
@@ -58,7 +58,6 @@ public class ActionFramework {
             ActionDBModel actionDBModel = new ActionDBModel();
             actionDBModel.setScenarioId(scenarioId);
             actionDBModel.setAction(action);
-            actionDBModel.setActionDesc(actionDesc);
             actionDBModel.setActionTempId(actionTempId);
             actionDBModel.setActionTemp(actionTempDBModel.get().getActionTemp());
             actionDBModel.setActionTypeId(actionTempDBModel.get().getTypeId());
@@ -75,14 +74,13 @@ public class ActionFramework {
     }
 
 
-    public ActionWSDTO updateActionService(String actionId, String action, String actionDesc, long actionTempId, int order) {
+    public ActionWSDTO updateActionService(String actionId, String action, long actionTempId, int order) {
 
         Optional<ActionTempDBModel> actionTempDBModel = actionTempRepository.findById(actionTempId);
         Optional<ActionDBModel>actionDBModel = actionRepository.findById(actionId);
         if (actionDBModel.isPresent() && actionTempDBModel.isPresent()){
 
             actionDBModel.get().setAction(action);
-            actionDBModel.get().setActionDesc(actionDesc);
             actionDBModel.get().setActionTempId(actionTempId);
             actionDBModel.get().setActionTemp(actionTempDBModel.get().getActionTemp());
             actionDBModel.get().setActionTypeId(actionTempDBModel.get().getTypeId());

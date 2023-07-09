@@ -52,11 +52,10 @@ public class AutomationController {
     public ResponseEntity<?> createAutomation(@RequestParam long userId,
                                               @RequestParam String scenarioId,
                                               @RequestParam String automation,
-                                              @RequestParam String automationDesc,
                                               @RequestParam long automationTempId,
                                               @RequestParam int order) {
 
-        AutomationWSModel response = automationMiddleware.createAutomation(userId,scenarioId,automation,automationDesc,automationTempId,order);
+        AutomationWSModel response = automationMiddleware.createAutomation(userId,scenarioId,automation,automationTempId,order);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -69,11 +68,10 @@ public class AutomationController {
     public ResponseEntity<?> updateAutomation(@RequestParam long userId,
                                               @RequestParam String automationId,
                                               @RequestParam String automation,
-                                              @RequestParam String automationDesc,
                                               @RequestParam long automationTempId,
                                               @RequestParam int order) {
 
-        AutomationWSModel response = automationMiddleware.updateAutomation(userId,automationId,automation,automationDesc,automationTempId,order);
+        AutomationWSModel response = automationMiddleware.updateAutomation(userId,automationId,automation,automationTempId,order);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

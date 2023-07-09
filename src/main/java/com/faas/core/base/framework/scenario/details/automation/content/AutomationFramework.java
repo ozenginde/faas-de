@@ -51,7 +51,7 @@ public class AutomationFramework {
     }
 
 
-    public AutomationWSDTO createAutomationService(String scenarioId, String automation, String automationDesc, long automationTempId, int order) {
+    public AutomationWSDTO createAutomationService(String scenarioId, String automation, long automationTempId, int order) {
 
         Optional<AutomationTempDBModel> automationTempDBModel = automationTempRepository.findById(automationTempId);
         if (automationTempDBModel.isPresent()){
@@ -59,7 +59,6 @@ public class AutomationFramework {
             AutomationDBModel automationDBModel = new AutomationDBModel();
             automationDBModel.setScenarioId(scenarioId);
             automationDBModel.setAutomation(automation);
-            automationDBModel.setAutomationDesc(automationDesc);
             automationDBModel.setAutomationTempId(automationTempId);
             automationDBModel.setAutomationTemp(automationTempDBModel.get().getAutomationTemp());
             automationDBModel.setAutomationTypeId(automationTempDBModel.get().getTypeId());
@@ -77,14 +76,13 @@ public class AutomationFramework {
     }
 
 
-    public AutomationWSDTO updateAutomationService(String automationId, String automation, String automationDesc, long automationTempId, int order) {
+    public AutomationWSDTO updateAutomationService(String automationId, String automation, long automationTempId, int order) {
 
         Optional<AutomationTempDBModel> automationTempDBModel = automationTempRepository.findById(automationTempId);
         Optional<AutomationDBModel> automationDBModel = automationRepository.findById(automationId);
         if (automationDBModel.isPresent() && automationTempDBModel.isPresent()){
 
             automationDBModel.get().setAutomation(automation);
-            automationDBModel.get().setAutomationDesc(automationDesc);
             automationDBModel.get().setAutomationTempId(automationTempId);
             automationDBModel.get().setAutomationTemp(automationTempDBModel.get().getAutomationTemp());
             automationDBModel.get().setAutomationTypeId(automationTempDBModel.get().getTypeId());

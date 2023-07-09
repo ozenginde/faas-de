@@ -13,7 +13,6 @@ public class AutomationDBModel {
     private String id;
     private String scenarioId;
     private String automation;
-    private String automationDesc;
     private long automationTempId;
     private String automationTemp;
     private long automationTypeId;
@@ -28,11 +27,10 @@ public class AutomationDBModel {
     public AutomationDBModel() {
     }
 
-    public AutomationDBModel(String id, String scenarioId, String automation, String automationDesc, long automationTempId, String automationTemp, long automationTypeId, String automationType, String baseType, List<AutomationVariableDAO> automationVariables, int order, long uDate, long cDate, int status) {
+    public AutomationDBModel(String id, String scenarioId, String automation, long automationTempId, String automationTemp, long automationTypeId, String automationType, String baseType, List<AutomationVariableDAO> automationVariables, int order, long uDate, long cDate, int status) {
         this.id = id;
         this.scenarioId = scenarioId;
         this.automation = automation;
-        this.automationDesc = automationDesc;
         this.automationTempId = automationTempId;
         this.automationTemp = automationTemp;
         this.automationTypeId = automationTypeId;
@@ -67,14 +65,6 @@ public class AutomationDBModel {
 
     public void setAutomation(String automation) {
         this.automation = automation;
-    }
-
-    public String getAutomationDesc() {
-        return automationDesc;
-    }
-
-    public void setAutomationDesc(String automationDesc) {
-        this.automationDesc = automationDesc;
     }
 
     public long getAutomationTempId() {
