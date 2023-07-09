@@ -147,15 +147,15 @@ public class ProcessSettingsMiddleware {
 
 
 
-
-
     public TriggerTypeWSModel getAllTriggerTypes(long userId) {
 
         TriggerTypeWSModel response = new TriggerTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
 
-
+        List<TriggerTypeWSDTO> triggerTypeWSDTOS = processSettingsFramework.getAllTriggerTypesService(userId);
+        if (triggerTypeWSDTOS != null){
+            response.setTriggerTypes(triggerTypeWSDTOS);
+        }
 
         general.setOperation("getAllTriggerTypes");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -167,15 +167,18 @@ public class ProcessSettingsMiddleware {
     }
 
 
-
     public TriggerTypeWSModel getTriggerType(long userId, long typeId) {
 
         TriggerTypeWSModel response = new TriggerTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
 
+        TriggerTypeWSDTO triggerTypeWSDTO = processSettingsFramework.getTriggerTypeService(userId,typeId);
+        if (triggerTypeWSDTO != null){
+            triggerTypeWSDTOS.add(triggerTypeWSDTO);
+        }
 
-
+        response.setTriggerTypes(triggerTypeWSDTOS);
         general.setOperation("getTriggerType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -192,7 +195,12 @@ public class ProcessSettingsMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
 
+        TriggerTypeWSDTO triggerTypeWSDTO = processSettingsFramework.createTriggerTypeService(userId,triggerType);
+        if (triggerTypeWSDTO != null){
+            triggerTypeWSDTOS.add(triggerTypeWSDTO);
+        }
 
+        response.setTriggerTypes(triggerTypeWSDTOS);
         general.setOperation("createTriggerType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -209,7 +217,12 @@ public class ProcessSettingsMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
 
+        TriggerTypeWSDTO triggerTypeWSDTO = processSettingsFramework.updateTriggerTypeService(userId,typeId,triggerType);
+        if (triggerTypeWSDTO != null){
+            triggerTypeWSDTOS.add(triggerTypeWSDTO);
+        }
 
+        response.setTriggerTypes(triggerTypeWSDTOS);
         general.setOperation("updateTriggerType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -220,14 +233,18 @@ public class ProcessSettingsMiddleware {
     }
 
 
-    public TriggerTypeWSModel removeTriggerType(long userId, long typeId) {
+    public TriggerTypeWSModel removeTriggerType(long userId,long typeId) {
 
         TriggerTypeWSModel response = new TriggerTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
 
+        TriggerTypeWSDTO triggerTypeWSDTO = processSettingsFramework.removeTriggerTypeService(userId,typeId);
+        if (triggerTypeWSDTO != null){
+            triggerTypeWSDTOS.add(triggerTypeWSDTO);
+        }
 
-
+        response.setTriggerTypes(triggerTypeWSDTOS);
         general.setOperation("removeTriggerType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
