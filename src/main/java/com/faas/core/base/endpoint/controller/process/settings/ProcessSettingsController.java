@@ -2,6 +2,7 @@ package com.faas.core.base.endpoint.controller.process.settings;
 
 import com.faas.core.base.middleware.process.settings.ProcessSettingsMiddleware;
 import com.faas.core.base.model.ws.process.settings.ProcessTypeWSModel;
+import com.faas.core.base.model.ws.process.settings.TriggerTypeWSModel;
 import com.faas.core.base.model.ws.scenario.settings.ScenarioTypeWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
@@ -90,5 +91,69 @@ public class ProcessSettingsController {
     }
 
 
+
+    @RequestMapping(value = BaseRoute.GET_ALL_TRIGGER_TYPES, method = RequestMethod.POST)
+    public ResponseEntity<?> getAllTriggerTypes(@RequestParam long userId) {
+
+        TriggerTypeWSModel response = processSettingsMiddleware.getAllTriggerTypes(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.GET_TRIGGER_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> getTriggerType(@RequestParam long userId,
+                                            @RequestParam long typeId) {
+
+        TriggerTypeWSModel response = processSettingsMiddleware.getTriggerType(userId,typeId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.CREATE_TRIGGER_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> createTriggerType(@RequestParam long userId,
+                                               @RequestParam String triggerType) {
+
+        TriggerTypeWSModel response = processSettingsMiddleware.createTriggerType(userId,triggerType);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.UPDATE_TRIGGER_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> updateTriggerType(@RequestParam long userId,
+                                               @RequestParam long typeId,
+                                               @RequestParam String triggerType) {
+
+        TriggerTypeWSModel response = processSettingsMiddleware.updateTriggerType(userId,typeId,triggerType);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.REMOVE_TRIGGER_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> removeTriggerType(@RequestParam long userId,
+                                               @RequestParam long typeId) {
+
+        TriggerTypeWSModel response = processSettingsMiddleware.removeTriggerType(userId,typeId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
 
 }

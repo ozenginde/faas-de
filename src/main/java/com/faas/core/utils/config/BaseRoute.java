@@ -425,12 +425,17 @@ public class BaseRoute {
     public static final String REMOVE_PUSH_TEMP = "removepushtemp";
 
 
-
     public static final String GET_ALL_PROCESS_TYPES = "getallprocesstypes";
     public static final String GET_PROCESS_TYPE = "getprocesstype";
     public static final String CREATE_PROCESS_TYPE = "createprocesstype";
     public static final String UPDATE_PROCESS_TYPE = "updateprocesstype";
     public static final String REMOVE_PROCESS_TYPE = "removeprocesstype";
+
+    public static final String GET_ALL_TRIGGER_TYPES = "getalltriggertypes";
+    public static final String GET_TRIGGER_TYPE = "gettriggertype";
+    public static final String CREATE_TRIGGER_TYPE = "createtriggertype";
+    public static final String UPDATE_TRIGGER_TYPE = "updatetriggertype";
+    public static final String REMOVE_TRIGGER_TYPE = "removeptriggertype";
 
 
     public static final String GET_SCENARIOS = "getscenarios";

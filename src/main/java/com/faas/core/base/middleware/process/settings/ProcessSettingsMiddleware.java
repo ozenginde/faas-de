@@ -3,6 +3,8 @@ package com.faas.core.base.middleware.process.settings;
 import com.faas.core.base.framework.process.settings.ProcessSettingsFramework;
 import com.faas.core.base.model.db.process.settings.ProcessTypeDBModel;
 import com.faas.core.base.model.db.scenario.settings.ScenarioTypeDBModel;
+import com.faas.core.base.model.ws.process.settings.TriggerTypeWSModel;
+import com.faas.core.base.model.ws.process.settings.dto.TriggerTypeWSDTO;
 import com.faas.core.base.model.ws.scenario.settings.ScenarioTypeWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.model.ws.process.settings.ProcessTypeWSModel;
@@ -144,6 +146,96 @@ public class ProcessSettingsMiddleware {
     }
 
 
+
+
+
+    public TriggerTypeWSModel getAllTriggerTypes(long userId) {
+
+        TriggerTypeWSModel response = new TriggerTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
+
+
+
+        general.setOperation("getAllTriggerTypes");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+
+    public TriggerTypeWSModel getTriggerType(long userId, long typeId) {
+
+        TriggerTypeWSModel response = new TriggerTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
+
+
+
+        general.setOperation("getTriggerType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public TriggerTypeWSModel createTriggerType(long userId, String triggerType) {
+
+        TriggerTypeWSModel response = new TriggerTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
+
+
+        general.setOperation("createTriggerType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public TriggerTypeWSModel updateTriggerType(long userId, long typeId,String triggerType) {
+
+        TriggerTypeWSModel response = new TriggerTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
+
+
+        general.setOperation("updateTriggerType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public TriggerTypeWSModel removeTriggerType(long userId, long typeId) {
+
+        TriggerTypeWSModel response = new TriggerTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
+
+
+
+        general.setOperation("removeTriggerType");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
 
 
 }
