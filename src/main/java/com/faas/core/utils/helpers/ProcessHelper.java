@@ -7,11 +7,13 @@ import com.faas.core.base.model.db.process.details.channel.temp.PushTempDBModel;
 import com.faas.core.base.model.db.process.details.channel.temp.SmsMessageTempDBModel;
 import com.faas.core.base.model.db.process.details.channel.temp.WappMessageTempDBModel;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
+import com.faas.core.base.model.db.process.details.trigger.ProcessTriggerDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.model.ws.process.details.channel.content.dto.*;
 import com.faas.core.base.model.ws.process.details.channel.temp.dto.*;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDetailsWSDTO;
 import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
+import com.faas.core.base.model.ws.process.details.trigger.dto.ProcessTriggerWSDTO;
 import com.faas.core.base.repo.automation.content.AutomationTempRepository;
 import com.faas.core.base.repo.process.details.channel.content.*;
 import com.faas.core.base.repo.process.details.channel.temp.EmailTempRepository;
@@ -19,6 +21,7 @@ import com.faas.core.base.repo.process.details.channel.temp.PushTempRepository;
 import com.faas.core.base.repo.process.details.channel.temp.SmsMessageTempRepository;
 import com.faas.core.base.repo.process.details.channel.temp.WappMessageTempRepository;
 import com.faas.core.base.repo.process.details.scenario.ProcessScenarioRepository;
+import com.faas.core.base.repo.process.details.trigger.ProcessTriggerRepository;
 import com.faas.core.base.repo.scenario.content.ScenarioRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,10 +66,10 @@ public class ProcessHelper {
     ProcessPushChannelRepository processPushChannelRepository;
 
     @Autowired
-    ScenarioRepository scenarioRepository;
+    ProcessTriggerRepository processTriggerRepository;
 
     @Autowired
-    AutomationTempRepository automationTempRepository;
+    ScenarioRepository scenarioRepository;
 
     @Autowired
     AppUtils appUtils;
@@ -76,12 +79,25 @@ public class ProcessHelper {
 
         ProcessDetailsWSDTO processDetailsWSDTO = new ProcessDetailsWSDTO();
         processDetailsWSDTO.setProcess(processDBModel);
+        processDetailsWSDTO.setProcessTrigger(createProcessTriggerWSDTO(processDBModel));
         processDetailsWSDTO.setProcessScenarios(createProcessScenarioWSDTOS(processDBModel));
         processDetailsWSDTO.setProcessTemps(createProcessTempWSDTO(processDBModel.getId()));
         processDetailsWSDTO.setProcessChannels(createProcessChannelWSDTO(processDBModel.getId()));
         processDetailsWSDTO.setProcessAssets(new ArrayList<>());
 
         return processDetailsWSDTO;
+    }
+
+
+    public ProcessTriggerWSDTO createProcessTriggerWSDTO(ProcessDBModel processDBModel){
+
+        List<ProcessTriggerDBModel> processTriggerDBModels = processTriggerRepository.findByProcessId(processDBModel.getId());
+        if (processTriggerDBModels.size()>0){
+            ProcessTriggerWSDTO processTriggerWSDTO = new ProcessTriggerWSDTO();
+            processTriggerWSDTO.setProcessTrigger(processTriggerDBModels.get(0));
+            return processTriggerWSDTO;
+        }
+        return null;
     }
 
 
@@ -97,6 +113,8 @@ public class ProcessHelper {
         }
         return processScenarioWSDTOS;
     }
+
+
 
 
 

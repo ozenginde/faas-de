@@ -352,6 +352,9 @@ public class BaseRoute {
     public static final String UPDATE_PROCESS_PATH = "updateprocesspath";
     public static final String REMOVE_PROCESS_PATH = "removeprocesspath";
 
+    public static final String GET_PROCESS_TRIGGER = "getprocesstrigger";
+
+
 
     public static final String GET_PROCESS_SCENARIOS = "getprocessscenarios";
     public static final String GET_PROCESS_SCENARIO = "getprocessscenario";

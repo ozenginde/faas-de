@@ -64,7 +64,6 @@ public class ActionDetailsController {
     }
 
 
-
     @RequestMapping(value = BaseRoute.UPDATE_ACTION_VARIABLE, method = RequestMethod.POST)
     public ResponseEntity<?> updateActionVariable(@RequestParam long userId,
                                                   @RequestParam String actionId,

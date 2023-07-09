@@ -1,7 +1,7 @@
-package com.faas.core.base.endpoint.controller.process.details.flow;
+package com.faas.core.base.endpoint.controller.process.details.trigger;
 
-import com.faas.core.base.middleware.process.details.flow.ProcessFlowMiddleware;
-import com.faas.core.base.model.ws.process.details.content.ProcessDetailsWSModel;
+import com.faas.core.base.middleware.process.details.trigger.ProcessTriggerMiddleware;
+import com.faas.core.base.model.ws.process.details.trigger.ProcessTriggerWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping(value = AppConstant.API_VERSION + "/base/process/details/flow/")
-public class ProcessFlowController {
+@RequestMapping(value = AppConstant.API_VERSION + "/base/process/details/trigger/")
+public class ProcessTriggerController {
 
 
     @Autowired
-    ProcessFlowMiddleware processFlowMiddleware;
+    ProcessTriggerMiddleware processTriggerMiddleware;
 
 
-    @RequestMapping(value = BaseRoute.GET_PROCESS_DETAILS, method = RequestMethod.POST)
-    public ResponseEntity<?> getProcessDetails(@RequestParam long userId,
+    @RequestMapping(value = BaseRoute.GET_PROCESS_TRIGGER, method = RequestMethod.POST)
+    public ResponseEntity<?> getProcessTrigger(@RequestParam long userId,
                                                @RequestParam String processId) {
 
-        ProcessDetailsWSModel response = processFlowMiddleware.getProcessDetails(userId,processId);
+        ProcessTriggerWSModel response = processTriggerMiddleware.getProcessTrigger(userId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

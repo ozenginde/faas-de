@@ -36,7 +36,6 @@ public class ScenarioDetailsController {
     }
 
 
-
     @RequestMapping(value = BaseRoute.GET_SCENARIO_VARIABLES, method = RequestMethod.POST)
     public ResponseEntity<?> getScenarioVariables(@RequestParam long userId,
                                                   @RequestParam String scenarioId) {

@@ -53,9 +53,10 @@ public class ProcessScenarioController {
     @RequestMapping(value = BaseRoute.CREATE_PROCESS_SCENARIO, method = RequestMethod.POST)
     public ResponseEntity<?> createProcessScenario(@RequestParam long userId,
                                                    @RequestParam String processId,
-                                                   @RequestParam String scenarioId) {
+                                                   @RequestParam String scenarioId,
+                                                   @RequestParam int order) {
 
-        ProcessScenarioWSModel response = processScenarioMiddleware.createProcessScenario(userId,processId,scenarioId);
+        ProcessScenarioWSModel response = processScenarioMiddleware.createProcessScenario(userId,processId,scenarioId,order);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
