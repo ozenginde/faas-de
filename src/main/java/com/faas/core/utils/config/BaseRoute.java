@@ -435,7 +435,7 @@ public class BaseRoute {
     public static final String GET_TRIGGER_TYPE = "gettriggertype";
     public static final String CREATE_TRIGGER_TYPE = "createtriggertype";
     public static final String UPDATE_TRIGGER_TYPE = "updatetriggertype";
-    public static final String REMOVE_TRIGGER_TYPE = "removeptriggertype";
+    public static final String REMOVE_TRIGGER_TYPE = "removetriggertype";
 
 
     public static final String GET_SCENARIOS = "getscenarios";

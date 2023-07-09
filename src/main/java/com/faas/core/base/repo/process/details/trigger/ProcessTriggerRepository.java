@@ -12,6 +12,5 @@ public interface ProcessTriggerRepository extends MongoRepository<ProcessTrigger
     List<ProcessTriggerDBModel>findByStatus(int status);
     List<ProcessTriggerDBModel>findByProcessId(String processId);
 
-
 }
 
