@@ -20,16 +20,17 @@ import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationCamp
 import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationDetailsWSDTO;
 import com.faas.core.api.model.ws.operation.details.note.dto.ApiOperationNoteWSDTO;
 import com.faas.core.api.model.ws.operation.details.osint.dto.ApiOperationOsIntWSDTO;
-import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationScenarioWSDTO;
-import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioWSDTO;
-import com.faas.core.api.model.ws.operation.scenario.execute.dto.ApiScenarioExecuteWSDTO;
+import com.faas.core.api.model.ws.operation.details.scenario.content.dto.ApiOperationScenarioWSDTO;
+import com.faas.core.api.model.ws.operation.details.scenario.content.dto.ApiScenarioWSDTO;
+import com.faas.core.api.model.ws.operation.details.scenario.execution.ApiScenarioExecutionWSModel;
+import com.faas.core.api.model.ws.operation.details.scenario.execution.dto.ApiScenarioExecutionWSDTO;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
 import com.faas.core.base.model.db.operation.channel.SipCallDBModel;
 import com.faas.core.base.model.db.operation.channel.WappCallDBModel;
 import com.faas.core.base.model.db.operation.content.OperationDBModel;
-import com.faas.core.base.model.db.operation.scenario.ScenarioExecuteDBModel;
+import com.faas.core.base.model.db.operation.details.ScenarioExecutionDBModel;
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.db.process.details.channel.content.*;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
@@ -254,21 +255,26 @@ public class OperationMapper {
 
         ApiOperationScenarioWSDTO operationScenarioWSDTO = new ApiOperationScenarioWSDTO();
         List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
-        List<ApiScenarioExecuteWSDTO>scenarioExecuteWSDTOS = new ArrayList<>();
-
+        List<ApiScenarioExecutionWSDTO> scenarioExecutionWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processId);
         for (ProcessScenarioDBModel processScenarioDBModel : processScenarioDBModels) {
             Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
             if (scenarioDBModel.isPresent()) {
-                scenarioWSDTOS.add(new ApiScenarioWSDTO(processScenarioDBModel, scenarioDBModel.get()));
+
+                ApiScenarioWSDTO scenarioWSDTO = new ApiScenarioWSDTO();
+                scenarioWSDTO.setScenario(scenarioDBModel.get());
+                scenarioWSDTO.setProcessScenario(processScenarioDBModel);
+                scenarioWSDTOS.add(scenarioWSDTO);
             }
         }
         operationScenarioWSDTO.setScenarios(scenarioWSDTOS);
-        List<ScenarioExecuteDBModel> scenarioExecuteDBModels = scenarioExecuteRepository.findBySessionIdAndClientIdAndProcessId(sessionId,clientId,processId);
-        for (ScenarioExecuteDBModel scenarioExecuteDBModel : scenarioExecuteDBModels) {
-            scenarioExecuteWSDTOS.add(new ApiScenarioExecuteWSDTO(scenarioExecuteDBModel));
+        List<ScenarioExecutionDBModel> scenarioExecutionDBModels = scenarioExecuteRepository.findBySessionIdAndClientIdAndProcessId(sessionId,clientId,processId);
+        for (ScenarioExecutionDBModel scenarioExecutionDBModel : scenarioExecutionDBModels) {
+            ApiScenarioExecutionWSDTO scenarioExecutionWSDTO = new ApiScenarioExecutionWSDTO();
+            scenarioExecutionWSDTO.setScenarioExecution(scenarioExecutionDBModel);
+            scenarioExecutionWSDTOS.add(scenarioExecutionWSDTO);
         }
-        operationScenarioWSDTO.setScenarioExecutes(scenarioExecuteWSDTOS);
+        operationScenarioWSDTO.setScenarioExecutions(scenarioExecutionWSDTOS);
 
         return operationScenarioWSDTO;
     }

@@ -1,19 +1,19 @@
 package com.faas.core.base.repo.operation.scenario;
 
-import com.faas.core.base.model.db.operation.scenario.ScenarioExecuteDBModel;
+import com.faas.core.base.model.db.operation.details.ScenarioExecutionDBModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface ScenarioExecuteRepository extends MongoRepository<ScenarioExecuteDBModel, String> {
+public interface ScenarioExecuteRepository extends MongoRepository<ScenarioExecutionDBModel, String> {
 
-    List<ScenarioExecuteDBModel>findByCampaignId(String campaignId);
-    List<ScenarioExecuteDBModel>findByProcessId(String processId);
-    List<ScenarioExecuteDBModel>findByScenarioId(String scenarioId);
-    List<ScenarioExecuteDBModel>findBySessionIdAndProcessId(long sessionId,String processId);
-    List<ScenarioExecuteDBModel>findBySessionIdAndClientIdAndProcessId(long sessionId,long clientId,String processId);
+    List<ScenarioExecutionDBModel>findByCampaignId(String campaignId);
+    List<ScenarioExecutionDBModel>findByProcessId(String processId);
+    List<ScenarioExecutionDBModel>findByScenarioId(String scenarioId);
+    List<ScenarioExecutionDBModel>findBySessionIdAndProcessId(long sessionId, String processId);
+    List<ScenarioExecutionDBModel>findBySessionIdAndClientIdAndProcessId(long sessionId, long clientId, String processId);
 
 
 }
