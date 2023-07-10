@@ -267,7 +267,7 @@ public class OperationMapper {
 
         List<ScenarioExecutionDBModel> scenarioExecutionDBModels = scenarioExecuteRepository.findBySessionIdAndClientIdAndProcessId(sessionId,clientId,processId);
         for (ScenarioExecutionDBModel scenarioExecutionDBModel : scenarioExecutionDBModels) {
-            scenarioExecutionWSDTOS.add(mapApiScenarioExecutionWSDTO(scenarioExecutionDBModel))
+            scenarioExecutionWSDTOS.add(mapApiScenarioExecutionWSDTO(scenarioExecutionDBModel));
         }
         operationScenarioWSDTO.setScenarioExecutions(scenarioExecutionWSDTOS);
 
