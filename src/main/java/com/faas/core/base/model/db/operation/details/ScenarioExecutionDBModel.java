@@ -15,7 +15,6 @@ public class ScenarioExecutionDBModel {
     private String operationId;
     private long sessionId;
     private long clientId;
-    private String sessionUUID;
     private String campaignId;
     private String processId;
     private String scenarioId;
@@ -29,12 +28,11 @@ public class ScenarioExecutionDBModel {
     public ScenarioExecutionDBModel() {
     }
 
-    public ScenarioExecutionDBModel(String id, String operationId, long sessionId, long clientId, String sessionUUID, String campaignId, String processId, String scenarioId, long agentId, List<ScenarioElementDAO> scenarioElements, String executeState, long uDate, long cDate, int status) {
+    public ScenarioExecutionDBModel(String id, String operationId, long sessionId, long clientId, String campaignId, String processId, String scenarioId, long agentId, List<ScenarioElementDAO> scenarioElements, String executeState, long uDate, long cDate, int status) {
         this.id = id;
         this.operationId = operationId;
         this.sessionId = sessionId;
         this.clientId = clientId;
-        this.sessionUUID = sessionUUID;
         this.campaignId = campaignId;
         this.processId = processId;
         this.scenarioId = scenarioId;
@@ -76,14 +74,6 @@ public class ScenarioExecutionDBModel {
 
     public void setClientId(long clientId) {
         this.clientId = clientId;
-    }
-
-    public String getSessionUUID() {
-        return sessionUUID;
-    }
-
-    public void setSessionUUID(String sessionUUID) {
-        this.sessionUUID = sessionUUID;
     }
 
     public String getCampaignId() {
