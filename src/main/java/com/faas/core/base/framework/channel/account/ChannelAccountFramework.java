@@ -90,10 +90,10 @@ public class ChannelAccountFramework {
         return sipAccountWSDTO;
     }
 
-    public SipAccountDBModel createSipAccountService(String accountName,String userName,String authUser,String password,String sipUrl,String provider) {
+    public SipAccountDBModel createSipAccountService(String account,String userName,String authUser,String password,String sipUrl,String provider) {
 
         SipAccountDBModel sipAccountDBModel = new SipAccountDBModel();
-        sipAccountDBModel.setAccountName(accountName);
+        sipAccountDBModel.setAccount(account);
         sipAccountDBModel.setUserName(userName);
         sipAccountDBModel.setAuthUser(authUser);
         sipAccountDBModel.setPassword(password);
@@ -107,12 +107,12 @@ public class ChannelAccountFramework {
         return sipAccountRepository.save(sipAccountDBModel);
     }
 
-    public SipAccountDBModel updateSipAccountService(String accountId,String accountName,String userName,String authUser,String password,String sipUrl,String provider) {
+    public SipAccountDBModel updateSipAccountService(String accountId,String account,String userName,String authUser,String password,String sipUrl,String provider) {
 
         Optional<SipAccountDBModel> sipAccountDBModel = sipAccountRepository.findById(accountId);
         if (sipAccountDBModel.isPresent()){
 
-            sipAccountDBModel.get().setAccountName(accountName);
+            sipAccountDBModel.get().setAccount(account);
             sipAccountDBModel.get().setUserName(userName);
             sipAccountDBModel.get().setAuthUser(authUser);
             sipAccountDBModel.get().setPassword(password);
@@ -145,10 +145,10 @@ public class ChannelAccountFramework {
     }
 
 
-    public SmsAccountDBModel createSmsAccountService(String accountName,String userName,String password,String apiToken,String apiUrl,String provider) {
+    public SmsAccountDBModel createSmsAccountService(String account,String userName,String password,String apiToken,String apiUrl,String provider) {
 
         SmsAccountDBModel smsAccountDBModel = new SmsAccountDBModel();
-        smsAccountDBModel.setAccountName(accountName);
+        smsAccountDBModel.setAccount(account);
         smsAccountDBModel.setUserName(userName);
         smsAccountDBModel.setPassword(password);
         smsAccountDBModel.setApiToken(apiToken);
@@ -162,11 +162,11 @@ public class ChannelAccountFramework {
         return smsAccountRepository.save(smsAccountDBModel);
     }
 
-    public SmsAccountDBModel updateSmsAccountService(String accountId,String accountName,String userName,String password,String apiToken,String apiUrl,String provider) {
+    public SmsAccountDBModel updateSmsAccountService(String accountId,String account,String userName,String password,String apiToken,String apiUrl,String provider) {
 
         Optional<SmsAccountDBModel> smsAccountDBModel = smsAccountRepository.findById(accountId);
         if (smsAccountDBModel.isPresent()){
-            smsAccountDBModel.get().setAccountName(accountName);
+            smsAccountDBModel.get().setAccount(account);
             smsAccountDBModel.get().setUserName(userName);
             smsAccountDBModel.get().setPassword(password);
             smsAccountDBModel.get().setApiToken(apiToken);
@@ -215,7 +215,7 @@ public class ChannelAccountFramework {
     }
 
 
-    public WappAccountDBModel createWappAccountService(String accountName,String phoneNumber, String serverUrl) throws IOException {
+    public WappAccountDBModel createWappAccountService(String account,String phoneNumber, String serverUrl) throws IOException {
 
         String instanceKey = wappManagerService.initWappInstanceService(serverUrl);
         if (instanceKey == null){
@@ -223,7 +223,8 @@ public class ChannelAccountFramework {
         }
 
         WappAccountDBModel wappAccountDBModel = new WappAccountDBModel();
-        wappAccountDBModel.setAccountName(accountName);
+
+        wappAccountDBModel.setAccount(account);
         wappAccountDBModel.setInstanceKey(instanceKey);
         wappAccountDBModel.setPhoneNumber(phoneNumber);
         wappAccountDBModel.setServerUrl(serverUrl);
@@ -237,11 +238,12 @@ public class ChannelAccountFramework {
 
 
 
-    public WappAccountDBModel updateWappAccountService(String accountId,String accountName,String instanceKey,String phoneNumber,String serverUrl) {
+    public WappAccountDBModel updateWappAccountService(String accountId,String account,String instanceKey,String phoneNumber,String serverUrl) {
 
         Optional<WappAccountDBModel> whatsappAccountDBModel = wappAccountRepository.findById(accountId);
         if (whatsappAccountDBModel.isPresent()){
-            whatsappAccountDBModel.get().setAccountName(accountName);
+
+            whatsappAccountDBModel.get().setAccount(account);
             whatsappAccountDBModel.get().setInstanceKey(instanceKey);
             whatsappAccountDBModel.get().setPhoneNumber(phoneNumber);
             whatsappAccountDBModel.get().setServerUrl(serverUrl);
@@ -273,10 +275,11 @@ public class ChannelAccountFramework {
     }
 
 
-    public EmailAccountDBModel createEmailAccountService(String accountName,String provider) {
+    public EmailAccountDBModel createEmailAccountService(String account,String provider) {
 
         EmailAccountDBModel emailAccountDBModel = new EmailAccountDBModel();
-        emailAccountDBModel.setAccountName(accountName);
+
+        emailAccountDBModel.setAccount(account);
         emailAccountDBModel.setAccountDatas(new ArrayList<>());
         emailAccountDBModel.setProvider(provider);
         emailAccountDBModel.setuDate(appUtils.getCurrentTimeStamp());
@@ -286,12 +289,12 @@ public class ChannelAccountFramework {
         return emailAccountRepository.save(emailAccountDBModel);
     }
 
-    public EmailAccountDBModel updateEmailAccountService(String accountId,String accountName,String provider) {
+    public EmailAccountDBModel updateEmailAccountService(String accountId,String account,String provider) {
 
         Optional<EmailAccountDBModel> emailAccountDBModel = emailAccountRepository.findById(accountId);
         if (emailAccountDBModel.isPresent()){
 
-            emailAccountDBModel.get().setAccountName(accountName);
+            emailAccountDBModel.get().setAccount(account);
             emailAccountDBModel.get().setProvider(provider);
             emailAccountDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             emailAccountDBModel.get().setStatus(1);
@@ -313,7 +316,6 @@ public class ChannelAccountFramework {
     }
 
 
-
     public PushAccountWSDTO fillPushAccountWSDTO(PushAccountDBModel pushAccountDBModel) {
 
         PushAccountWSDTO pushAccountWSDTO = new PushAccountWSDTO();
@@ -321,10 +323,11 @@ public class ChannelAccountFramework {
         return pushAccountWSDTO;
     }
 
-    public PushAccountDBModel createPushAccountService(String accountName, String provider) {
+    public PushAccountDBModel createPushAccountService(String account, String provider) {
 
         PushAccountDBModel pushAccountDBModel =  new PushAccountDBModel();
-        pushAccountDBModel.setAccountName(accountName);
+
+        pushAccountDBModel.setAccount(account);
         pushAccountDBModel.setAccountDatas(new ArrayList<>());
         pushAccountDBModel.setProvider(provider);
         pushAccountDBModel.setuDate(appUtils.getCurrentTimeStamp());
@@ -334,12 +337,12 @@ public class ChannelAccountFramework {
         return pushAccountRepository.save(pushAccountDBModel);
     }
 
-    public PushAccountDBModel updatePushAccountService(String accountId, String accountName, String provider) {
+    public PushAccountDBModel updatePushAccountService(String accountId, String account, String provider) {
 
         Optional<PushAccountDBModel> pushAccountDBModel =  pushAccountRepository.findById(accountId);
         if (pushAccountDBModel.isPresent()){
 
-            pushAccountDBModel.get().setAccountName(accountName);
+            pushAccountDBModel.get().setAccount(account);
             pushAccountDBModel.get().setProvider(provider);
             pushAccountDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             pushAccountDBModel.get().setStatus(1);

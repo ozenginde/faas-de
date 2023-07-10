@@ -150,7 +150,7 @@ public class UserDetailsFramework {
             UserSipChannelDAO userSipChannelDAO = new UserSipChannelDAO();
 
             userSipChannelDAO.setAccountId(sipAccountDBModel.get().getId());
-            userSipChannelDAO.setAccount(sipAccountDBModel.get().getAccountName());
+            userSipChannelDAO.setAccount(sipAccountDBModel.get().getAccount());
             userSipChannelDAO.setUserName(sipAccountDBModel.get().getUserName());
             userSipChannelDAO.setAuthUser(sipAccountDBModel.get().getAuthUser());
             userSipChannelDAO.setPassword(sipAccountDBModel.get().getPassword());
@@ -208,7 +208,7 @@ public class UserDetailsFramework {
 
             UserWappChannelDAO userWappChannelDAO = new UserWappChannelDAO();
             userWappChannelDAO.setAccountId(accountId);
-            userWappChannelDAO.setAccount(wappAccountDBModel.get().getAccountName());
+            userWappChannelDAO.setAccount(wappAccountDBModel.get().getAccount());
             userWappChannelDAO.setInstanceKey(wappAccountDBModel.get().getInstanceKey());
             userWappChannelDAO.setPhoneNumber(wappAccountDBModel.get().getPhoneNumber());
             userWappChannelDAO.setServerUrl(wappAccountDBModel.get().getServerUrl());

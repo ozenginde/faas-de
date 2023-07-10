@@ -63,14 +63,14 @@ public class ChannelAccountsController {
 
     @RequestMapping(value = BaseRoute.CREATE_SIP_ACCOUNT, method = RequestMethod.POST)
     public ResponseEntity<?> createSipAccount(@RequestParam long userId,
-                                              @RequestParam String accountName,
+                                              @RequestParam String account,
                                               @RequestParam String userName,
                                               @RequestParam String authUser,
                                               @RequestParam String password,
                                               @RequestParam String sipUrl,
                                               @RequestParam String provider) {
 
-        SipAccountWSModel response = channelAccountsMiddleware.createSipAccount(userId,accountName,userName,authUser,password,sipUrl,provider);
+        SipAccountWSModel response = channelAccountsMiddleware.createSipAccount(userId,account,userName,authUser,password,sipUrl,provider);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -82,14 +82,14 @@ public class ChannelAccountsController {
     @RequestMapping(value = BaseRoute.UPDATE_SIP_ACCOUNT, method = RequestMethod.POST)
     public ResponseEntity<?> updateSipAccount(@RequestParam long userId,
                                               @RequestParam String accountId,
-                                              @RequestParam String accountName,
+                                              @RequestParam String account,
                                               @RequestParam String userName,
                                               @RequestParam String authUser,
                                               @RequestParam String password,
                                               @RequestParam String sipUrl,
                                               @RequestParam String provider) {
 
-        SipAccountWSModel response = channelAccountsMiddleware.updateSipAccount(userId,accountId,accountName,userName,authUser,password,sipUrl,provider);
+        SipAccountWSModel response = channelAccountsMiddleware.updateSipAccount(userId,accountId,account,userName,authUser,password,sipUrl,provider);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -139,14 +139,14 @@ public class ChannelAccountsController {
 
     @RequestMapping(value = BaseRoute.CREATE_SMS_ACCOUNT, method = RequestMethod.POST)
     public ResponseEntity<?> createSmsAccount(@RequestParam long userId,
-                                              @RequestParam String accountName,
+                                              @RequestParam String account,
                                               @RequestParam String userName,
                                               @RequestParam String password,
                                               @RequestParam String apiToken,
                                               @RequestParam String apiUrl,
                                               @RequestParam String provider) {
 
-        SmsAccountWSModel response = channelAccountsMiddleware.createSmsAccount(userId,accountName,userName,password,apiToken,apiUrl,provider);
+        SmsAccountWSModel response = channelAccountsMiddleware.createSmsAccount(userId,account,userName,password,apiToken,apiUrl,provider);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -158,14 +158,14 @@ public class ChannelAccountsController {
     @RequestMapping(value = BaseRoute.UPDATE_SMS_ACCOUNT, method = RequestMethod.POST)
     public ResponseEntity<?> updateSmsAccount(@RequestParam long userId,
                                               @RequestParam String accountId,
-                                              @RequestParam String accountName,
+                                              @RequestParam String account,
                                               @RequestParam String userName,
                                               @RequestParam String password,
                                               @RequestParam String apiToken,
                                               @RequestParam String apiUrl,
                                               @RequestParam String provider) {
 
-        SmsAccountWSModel response = channelAccountsMiddleware.updateSmsAccount(userId,accountId,accountName,userName,password,apiToken,apiUrl,provider);
+        SmsAccountWSModel response = channelAccountsMiddleware.updateSmsAccount(userId,accountId,account,userName,password,apiToken,apiUrl,provider);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -228,11 +228,11 @@ public class ChannelAccountsController {
 
     @RequestMapping(value = BaseRoute.CREATE_WAPP_ACCOUNT, method = RequestMethod.POST)
     public ResponseEntity<?> createWappAccount(@RequestParam long userId,
-                                               @RequestParam String accountName,
+                                               @RequestParam String account,
                                                @RequestParam String phoneNumber,
                                                @RequestParam String serverUrl) throws IOException {
 
-        WappAccountWSModel response = channelAccountsMiddleware.createWappAccount(userId,accountName,phoneNumber,serverUrl);
+        WappAccountWSModel response = channelAccountsMiddleware.createWappAccount(userId,account,phoneNumber,serverUrl);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -244,12 +244,12 @@ public class ChannelAccountsController {
     @RequestMapping(value = BaseRoute.UPDATE_WAPP_ACCOUNT, method = RequestMethod.POST)
     public ResponseEntity<?> updateWappAccount(@RequestParam long userId,
                                                @RequestParam String accountId,
-                                               @RequestParam String accountName,
+                                               @RequestParam String account,
                                                @RequestParam String instanceKey,
                                                @RequestParam String phoneNumber,
                                                @RequestParam String serverUrl) {
 
-        WappAccountWSModel response = channelAccountsMiddleware.updateWappAccount(userId,accountId,accountName,instanceKey,phoneNumber,serverUrl);
+        WappAccountWSModel response = channelAccountsMiddleware.updateWappAccount(userId,accountId,account,instanceKey,phoneNumber,serverUrl);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -298,10 +298,10 @@ public class ChannelAccountsController {
 
     @RequestMapping(value = BaseRoute.CREATE_EMAIL_ACCOUNT, method= RequestMethod.POST)
     public ResponseEntity<?> createEmailAccount(@RequestParam long userId,
-                                                @RequestParam String accountName,
+                                                @RequestParam String account,
                                                 @RequestParam String provider) {
 
-        EmailAccountWSModel response = channelAccountsMiddleware.createEmailAccount(userId,accountName,provider);
+        EmailAccountWSModel response = channelAccountsMiddleware.createEmailAccount(userId,account,provider);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -312,10 +312,10 @@ public class ChannelAccountsController {
     @RequestMapping(value = BaseRoute.UPDATE_EMAIL_ACCOUNT, method = RequestMethod.POST)
     public ResponseEntity<?> updateEmailAccount(@RequestParam long userId,
                                                 @RequestParam String accountId,
-                                                @RequestParam String accountName,
+                                                @RequestParam String account,
                                                 @RequestParam String provider) {
 
-        EmailAccountWSModel response = channelAccountsMiddleware.updateEmailAccount(userId,accountId,accountName,provider);
+        EmailAccountWSModel response = channelAccountsMiddleware.updateEmailAccount(userId,accountId,account,provider);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -363,10 +363,10 @@ public class ChannelAccountsController {
 
     @RequestMapping(value = BaseRoute.CREATE_PUSH_ACCOUNT, method = RequestMethod.POST)
     public ResponseEntity<?> createPushAccount(@RequestParam long userId,
-                                               @RequestParam String accountName,
+                                               @RequestParam String account,
                                                @RequestParam String provider) {
 
-        PushAccountWSModel response = channelAccountsMiddleware.createPushAccount(userId,accountName,provider);
+        PushAccountWSModel response = channelAccountsMiddleware.createPushAccount(userId,account,provider);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -378,10 +378,10 @@ public class ChannelAccountsController {
     @RequestMapping(value = BaseRoute.UPDATE_PUSH_ACCOUNT, method = RequestMethod.POST)
     public ResponseEntity<?> updatePushAccount(@RequestParam long userId,
                                                @RequestParam String accountId,
-                                               @RequestParam String accountName,
+                                               @RequestParam String account,
                                                @RequestParam String provider) {
 
-        PushAccountWSModel response = channelAccountsMiddleware.updatePushAccount(userId,accountId,accountName,provider);
+        PushAccountWSModel response = channelAccountsMiddleware.updatePushAccount(userId,accountId,account,provider);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

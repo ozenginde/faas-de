@@ -25,7 +25,7 @@ public class ChannelMapper {
 
         SmsAccountDAO smsAccountDAO = new SmsAccountDAO();
         smsAccountDAO.setAccountId(smsAccountDBModel.getId());
-        smsAccountDAO.setAccount(smsAccountDBModel.getAccountName());
+        smsAccountDAO.setAccount(smsAccountDBModel.getAccount());
         smsAccountDAO.setUserName(smsAccountDBModel.getUserName());
         smsAccountDAO.setPassword(smsAccountDBModel.getPassword());
         smsAccountDAO.setApiToken(smsAccountDBModel.getApiToken());
@@ -47,7 +47,7 @@ public class ChannelMapper {
 
         EmailAccountDAO emailAccountDAO = new EmailAccountDAO();
         emailAccountDAO.setAccountId(emailAccountDBModel.getId());
-        emailAccountDAO.setAccount(emailAccountDBModel.getAccountName());
+        emailAccountDAO.setAccount(emailAccountDBModel.getAccount());
         if (emailAccountDBModel.getAccountDatas() != null){
             emailAccountDAO.setAccountDatas(emailAccountDBModel.getAccountDatas());
         }else {
@@ -65,7 +65,7 @@ public class ChannelMapper {
 
         PushAccountDAO pushAccountDAO = new PushAccountDAO();
         pushAccountDAO.setAccountId(pushAccountDBModel.getId());
-        pushAccountDAO.setAccount(pushAccountDBModel.getAccountName());
+        pushAccountDAO.setAccount(pushAccountDBModel.getAccount());
         if (pushAccountDBModel.getAccountDatas() != null){
             pushAccountDAO.setAccountDatas(pushAccountDBModel.getAccountDatas());
         }else {
