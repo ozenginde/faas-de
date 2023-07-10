@@ -229,6 +229,7 @@ public class UserDetailsFramework {
         return null;
     }
 
+
     public UserWappChannelWSDTO removeUserWappChannelService(long selectedId){
 
         List<UserDetailsDBModel> userDetailsDBModels = userDetailsRepository.findByUserId(selectedId);
