@@ -35,4 +35,82 @@ public class ProcessTriggerController {
     }
 
 
+    @RequestMapping(value = BaseRoute.CREATE_SMS_TRIGGER, method = RequestMethod.POST)
+    public ResponseEntity<?> createSmsTrigger(@RequestParam long userId,
+                                               @RequestParam String processId) {
+
+        ProcessTriggerWSModel response = processTriggerMiddleware.getProcessTrigger(userId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.UPDATE_SMS_TRIGGER, method = RequestMethod.POST)
+    public ResponseEntity<?> updateSmsTrigger(@RequestParam long userId,
+                                              @RequestParam String processId) {
+
+        ProcessTriggerWSModel response = processTriggerMiddleware.getProcessTrigger(userId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.REMOVE_SMS_TRIGGER, method = RequestMethod.POST)
+    public ResponseEntity<?> removeSmsTrigger(@RequestParam long userId,
+                                              @RequestParam String processId) {
+
+        ProcessTriggerWSModel response = processTriggerMiddleware.getProcessTrigger(userId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+
+    @RequestMapping(value = BaseRoute.CREATE_WAPP_TRIGGER, method = RequestMethod.POST)
+    public ResponseEntity<?> createWappTrigger(@RequestParam long userId,
+                                              @RequestParam String processId) {
+
+        ProcessTriggerWSModel response = processTriggerMiddleware.getProcessTrigger(userId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.UPDATE_WAPP_TRIGGER, method = RequestMethod.POST)
+    public ResponseEntity<?> updateWappTrigger(@RequestParam long userId,
+                                               @RequestParam String processId) {
+
+        ProcessTriggerWSModel response = processTriggerMiddleware.getProcessTrigger(userId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.REMOVE_WAPP_TRIGGER, method = RequestMethod.POST)
+    public ResponseEntity<?> removeWappTrigger(@RequestParam long userId,
+                                               @RequestParam String processId) {
+
+        ProcessTriggerWSModel response = processTriggerMiddleware.getProcessTrigger(userId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
 }
