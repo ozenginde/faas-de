@@ -42,6 +42,7 @@ public class ProcessSettingsFramework {
         return processTypeWSDTO;
     }
 
+
     public ProcessTypeDBModel createProcessTypeService(String processType,String baseType) {
 
         ProcessTypeDBModel processTypeDBModel = new ProcessTypeDBModel();
@@ -53,6 +54,7 @@ public class ProcessSettingsFramework {
 
         return processTypeRepository.save(processTypeDBModel);
     }
+
 
     public ProcessTypeDBModel updateProcessTypeService(long typeId, String processType,String baseType) {
 
@@ -67,6 +69,7 @@ public class ProcessSettingsFramework {
         }
         return null;
     }
+
 
     public ProcessTypeDBModel removeProcessTypeService(long typeId) {
 

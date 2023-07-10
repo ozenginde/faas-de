@@ -11,20 +11,19 @@ public class PushAccountDBModel {
 
     @Id
     private String id;
-    private String accountName;
+    private String account;
     private List<AccountDataDAO>accountDatas;
     private String provider;
     private long uDate;
     private long cDate;
     private int status;
 
-
     public PushAccountDBModel() {
     }
 
-    public PushAccountDBModel(String id, String accountName, List<AccountDataDAO> accountDatas, String provider, long uDate, long cDate, int status) {
+    public PushAccountDBModel(String id, String account, List<AccountDataDAO> accountDatas, String provider, long uDate, long cDate, int status) {
         this.id = id;
-        this.accountName = accountName;
+        this.account = account;
         this.accountDatas = accountDatas;
         this.provider = provider;
         this.uDate = uDate;
@@ -40,12 +39,12 @@ public class PushAccountDBModel {
         this.id = id;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getAccount() {
+        return account;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public List<AccountDataDAO> getAccountDatas() {

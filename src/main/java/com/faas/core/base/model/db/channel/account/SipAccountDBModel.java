@@ -11,7 +11,7 @@ public class SipAccountDBModel {
 
     @Id
     private String id;
-    private String accountName;
+    private String account;
     private String userName;
     private String authUser;
     private String password;
@@ -26,9 +26,9 @@ public class SipAccountDBModel {
     public SipAccountDBModel() {
     }
 
-    public SipAccountDBModel(String id, String accountName, String userName, String authUser, String password, String sipUrl, List<AccountDataDAO> accountDatas, String provider, long uDate, long cDate, int status) {
+    public SipAccountDBModel(String id, String account, String userName, String authUser, String password, String sipUrl, List<AccountDataDAO> accountDatas, String provider, long uDate, long cDate, int status) {
         this.id = id;
-        this.accountName = accountName;
+        this.account = account;
         this.userName = userName;
         this.authUser = authUser;
         this.password = password;
@@ -48,12 +48,12 @@ public class SipAccountDBModel {
         this.id = id;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getAccount() {
+        return account;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getUserName() {

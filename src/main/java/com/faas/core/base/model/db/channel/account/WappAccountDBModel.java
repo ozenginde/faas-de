@@ -11,7 +11,7 @@ public class WappAccountDBModel {
 
     @Id
     private String id;
-    private String accountName;
+    private String account;
     private String instanceKey;
     private String phoneNumber;
     private String serverUrl;
@@ -23,9 +23,9 @@ public class WappAccountDBModel {
     public WappAccountDBModel() {
     }
 
-    public WappAccountDBModel(String id, String accountName, String instanceKey, String phoneNumber, String serverUrl, List<AccountDataDAO> accountDatas, long uDate, long cDate, int status) {
+    public WappAccountDBModel(String id, String account, String instanceKey, String phoneNumber, String serverUrl, List<AccountDataDAO> accountDatas, long uDate, long cDate, int status) {
         this.id = id;
-        this.accountName = accountName;
+        this.account = account;
         this.instanceKey = instanceKey;
         this.phoneNumber = phoneNumber;
         this.serverUrl = serverUrl;
@@ -43,12 +43,12 @@ public class WappAccountDBModel {
         this.id = id;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getAccount() {
+        return account;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getInstanceKey() {
