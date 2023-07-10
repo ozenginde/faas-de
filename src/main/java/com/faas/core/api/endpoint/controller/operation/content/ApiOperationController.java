@@ -50,13 +50,13 @@ public class ApiOperationController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_START_OPERATION, method = RequestMethod.POST)
-    public ResponseEntity<?> apiStartOperation(@RequestParam long agentId,
-                                               @RequestParam long sessionId,
-                                               @RequestParam long clientId,
-                                               @RequestParam String campaignId) {
+    @RequestMapping(value = ApiRoute.API_LAUNCH_OPERATION, method = RequestMethod.POST)
+    public ResponseEntity<?> apiLaunchOperation(@RequestParam long agentId,
+                                                @RequestParam long sessionId,
+                                                @RequestParam long clientId,
+                                                @RequestParam String campaignId) {
 
-        ApiOperationWSModel response = apiOperationMiddleware.apiStartOperation(agentId,sessionId,clientId,campaignId);
+        ApiOperationWSModel response = apiOperationMiddleware.apiLaunchOperation(agentId,sessionId,clientId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

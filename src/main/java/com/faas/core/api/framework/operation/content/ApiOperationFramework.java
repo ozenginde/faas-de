@@ -83,7 +83,7 @@ public class ApiOperationFramework {
     }
 
 
-    public ApiOperationWSDTO apiStartOperationService(long agentId, long sessionId, long clientId, String campaignId) {
+    public ApiOperationWSDTO apiLaunchOperationService(long agentId, long sessionId, long clientId, String campaignId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(sessionId, clientId, agentId, campaignId, AppConstant.READY_SESSION);
         List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentIdAndCampaignIdAndOperationState(sessionId, clientId, agentId, campaignId, AppConstant.READY_OPERATION);

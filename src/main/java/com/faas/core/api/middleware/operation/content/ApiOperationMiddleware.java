@@ -71,19 +71,19 @@ public class ApiOperationMiddleware {
     }
 
 
-    public ApiOperationWSModel apiStartOperation(long agentId,long sessionId,long clientId,String campaignId) {
+    public ApiOperationWSModel apiLaunchOperation(long agentId,long sessionId,long clientId,String campaignId) {
 
         ApiOperationWSModel response = new ApiOperationWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ApiOperationWSDTO>operationWSDTOS = new ArrayList<>();
 
-        ApiOperationWSDTO operationWSDTO = apiOperationFramework.apiStartOperationService(agentId,sessionId,clientId,campaignId);
+        ApiOperationWSDTO operationWSDTO = apiOperationFramework.apiLaunchOperationService(agentId,sessionId,clientId,campaignId);
         if (operationWSDTO != null){
             operationWSDTOS.add(operationWSDTO);
         }
 
         response.setOperations(operationWSDTOS);
-        general.setOperation("apiStartOperation");
+        general.setOperation("apiLaunchOperation");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

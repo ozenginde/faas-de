@@ -76,7 +76,7 @@ public class ApiRoute {
 
     public static final String API_OPERATION_VALIDATE = "apioperationvalidate";
     public static final String API_GET_OPERATION = "apigetoperation";
-    public static final String API_START_OPERATION = "apistartoperation";
+    public static final String API_LAUNCH_OPERATION = "apilaunchoperation";
     public static final String API_UPDATE_OPERATION = "apiupdateoperation";
     public static final String API_REMOVE_OPERATION = "apiremoveoperation";
 
@@ -85,11 +85,8 @@ public class ApiRoute {
     public static final String API_GET_OPERATION_DETAILS = "apigetoperationdetails";
     public static final String API_GET_OPERATION_CAMPAIGN = "apigetoperationcampaign";
 
-
     public static final String API_GET_OPERATION_CLIENT = "apigetoperationclient";
-
     public static final String API_GET_OPERATION_OS_INT = "apigetoperationosint";
-
     public static final String API_GET_OPERATION_HOOKS = "apigetoperationhooks";
 
 
@@ -117,6 +114,7 @@ public class ApiRoute {
     public static final String API_GET_SCENARIO_ACTION = "apigetscenarioaction";
     public static final String API_GET_SCENARIO_AUTOMATIONS = "apigetscenarioautomations";
     public static final String API_GET_SCENARIO_AUTOMATION = "apigetscenarioautomation";
+
 
     public static final String API_EXECUTE_SCENARIO = "apiexecutescenario";
     public static final String API_GET_SCENARIO_EXECUTIONS = "apigetscenarioexecutions";
