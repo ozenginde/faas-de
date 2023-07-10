@@ -1,5 +1,7 @@
 package com.faas.core.base.model.db.process.details.trigger;
 
+import com.faas.core.base.model.db.process.details.trigger.dao.SmsTriggerDAO;
+import com.faas.core.base.model.db.process.details.trigger.dao.WappTriggerDAO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,6 +11,9 @@ public class ProcessTriggerDBModel {
     @Id
     private String id;
     private String processId;
+    private SmsTriggerDAO smsTrigger;
+    private WappTriggerDAO wappTrigger;
+    private String triggerType;
     private long uDate;
     private long cDate;
     private int status;
@@ -16,9 +21,12 @@ public class ProcessTriggerDBModel {
     public ProcessTriggerDBModel() {
     }
 
-    public ProcessTriggerDBModel(String id, String processId, long uDate, long cDate, int status) {
+    public ProcessTriggerDBModel(String id, String processId, SmsTriggerDAO smsTrigger, WappTriggerDAO wappTrigger, String triggerType, long uDate, long cDate, int status) {
         this.id = id;
         this.processId = processId;
+        this.smsTrigger = smsTrigger;
+        this.wappTrigger = wappTrigger;
+        this.triggerType = triggerType;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -38,6 +46,30 @@ public class ProcessTriggerDBModel {
 
     public void setProcessId(String processId) {
         this.processId = processId;
+    }
+
+    public SmsTriggerDAO getSmsTrigger() {
+        return smsTrigger;
+    }
+
+    public void setSmsTrigger(SmsTriggerDAO smsTrigger) {
+        this.smsTrigger = smsTrigger;
+    }
+
+    public WappTriggerDAO getWappTrigger() {
+        return wappTrigger;
+    }
+
+    public void setWappTrigger(WappTriggerDAO wappTrigger) {
+        this.wappTrigger = wappTrigger;
+    }
+
+    public String getTriggerType() {
+        return triggerType;
+    }
+
+    public void setTriggerType(String triggerType) {
+        this.triggerType = triggerType;
     }
 
     public long getuDate() {

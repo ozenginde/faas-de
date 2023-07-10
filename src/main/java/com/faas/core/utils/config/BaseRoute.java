@@ -354,10 +354,8 @@ public class BaseRoute {
 
     public static final String GET_PROCESS_TRIGGER = "getprocesstrigger";
     public static final String CREATE_SMS_TRIGGER = "createsmstrigger";
-    public static final String UPDATE_SMS_TRIGGER = "updatesmstrigger";
     public static final String REMOVE_SMS_TRIGGER = "removesmstrigger";
     public static final String CREATE_WAPP_TRIGGER = "createwapptrigger";
-    public static final String UPDATE_WAPP_TRIGGER = "updatewapptrigger";
     public static final String REMOVE_WAPP_TRIGGER = "removewapptrigger";
 
 
