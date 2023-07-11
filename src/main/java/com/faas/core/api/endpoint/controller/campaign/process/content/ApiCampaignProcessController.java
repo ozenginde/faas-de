@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping(value = AppConstant.API_VERSION + "/api/process/")
+@RequestMapping(value = AppConstant.API_VERSION + "/api/campaign/process/")
 public class ApiCampaignProcessController {
 
 

@@ -3,7 +3,6 @@ package com.faas.core.api.endpoint.controller.campaign.content;
 import com.faas.core.api.middleware.campaign.content.ApiCampaignMiddleware;
 import com.faas.core.api.model.ws.campaign.content.ApiAgentCampaignWSModel;
 import com.faas.core.api.model.ws.campaign.content.ApiCampaignWSModel;
-import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
