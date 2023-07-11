@@ -54,9 +54,12 @@ public class ApiScenarioFramework {
 
         List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processId);
+
         for (ProcessScenarioDBModel processScenarioDBModel : processScenarioDBModels) {
             Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
+
             if (scenarioDBModel.isPresent()){
+
                 ApiScenarioWSDTO scenarioWSDTO = new ApiScenarioWSDTO();
                 scenarioWSDTO.setScenario(scenarioDBModel.get());
                 scenarioWSDTO.setProcessScenario(processScenarioDBModel);
