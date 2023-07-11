@@ -37,8 +37,6 @@ public class AppConstant {
 
     public static final String ALL_CAMPAIGNS = "ALL_CAMPAIGNS";
 
-    public static final String OUTBOUND_CAMPAIGN = "OUTBOUND";
-    public static final String INBOUND_CAMPAIGN = "INBOUND";
 
     public static final String MANUAL_CAMPAIGN = "MANUAL";
     public static final String INQUIRY_CAMPAIGN = "INQUIRY";
@@ -46,15 +44,11 @@ public class AppConstant {
     public static final String AI_CAMPAIGN = "AI";
 
 
-    public static final String ACTIVE_PROCESS = "ACTIVE_PROCESS";
-    public static final String PASSIVE_PROCESS = "PASSIVE_PROCESS";
-    public static final String FINISHED_PROCESS = "FINISHED_PROCESS";
-    public static final String ALL_PROCESSES = "ALL_PROCESSES";
+    public static final String EXECUTION_READY = "EXECUTION_READY";
+    public static final String EXECUTION_ACTIVE = "EXECUTION_ACTIVE";
+    public static final String EXECUTION_SUCCESS = "EXECUTION_SUCCESS";
+    public static final String EXECUTION_FAIL = "EXECUTION_FAIL";
 
-    public static final String READY_SCENARIO = "READY_SCENARIO";
-    public static final String ACTIVE_SCENARIO = "ACTIVE_SCENARIO";
-    public static final String FINISHED_SCENARIO = "FINISHED_SCENARIO";
-    public static final String ALL_SCENARIOS = "ALL_SCENARIOS";
 
 
     public static final String READY_CLIENT = "READY_CLIENT";

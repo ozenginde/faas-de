@@ -37,6 +37,7 @@ import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.details.UserDetailsDBModel;
 import com.faas.core.base.repo.automation.content.AutomationTempRepository;
+import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.*;
 import com.faas.core.base.repo.operation.channel.*;
@@ -64,6 +65,7 @@ import java.util.Optional;
 
 @Component
 public class OperationMapper {
+
 
     @Autowired
     OperationHelper operationHelper;
@@ -151,6 +153,9 @@ public class OperationMapper {
 
     @Autowired
     AutomationTempRepository automationTempRepository;
+
+    @Autowired
+    CampaignRepository campaignRepository;
 
     @Autowired
     AppUtils appUtils;
@@ -287,11 +292,17 @@ public class OperationMapper {
     public ApiScenarioExecutionWSDTO mapApiScenarioExecutionWSDTO(ScenarioExecutionDBModel scenarioExecutionDBModel){
 
         ApiScenarioExecutionWSDTO scenarioExecutionWSDTO = new ApiScenarioExecutionWSDTO();
+
         scenarioExecutionWSDTO.setScenarioExecution(scenarioExecutionDBModel);
+        Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(scenarioExecutionDBModel.getCampaignId());
+        campaignDBModel.ifPresent(scenarioExecutionWSDTO::setCampaign);
+
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioExecutionDBModel.getScenarioId());
+        scenarioDBModel.ifPresent(scenarioExecutionWSDTO::setScenario);
+
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(scenarioExecutionDBModel.getProcessId(),scenarioExecutionDBModel.getScenarioId());
-        if (scenarioDBModel.isPresent() && processScenarioDBModels.size()>0){
-            scenarioExecutionWSDTO.setScenario(mapApiScenarioWSDTO(scenarioDBModel.get(),processScenarioDBModels.get(0)));
+        if (processScenarioDBModels.size()>0){
+            scenarioExecutionWSDTO.setProcessScenario(processScenarioDBModels.get(0));
         }
         return scenarioExecutionWSDTO;
     }
