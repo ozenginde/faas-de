@@ -78,7 +78,6 @@ public class ApiScenarioExecutionFramework {
     }
 
 
-
     public List<ApiScenarioExecutionWSDTO> apiGetScenarioExecutionsService(long agentId, long sessionId,long clientId) {
 
         List<ApiScenarioExecutionWSDTO> scenarioExecutionWSDTOS = new ArrayList<>();
