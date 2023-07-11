@@ -26,13 +26,11 @@ public class ApiOperationActivityFramework {
 
     public List<OperationActivityDAO> apiGetOperationActivitiesService(long sessionId, long clientId) {
 
-
         return null;
     }
 
 
     public OperationActivityDAO apiGetOperationActivityService(long sessionId, long clientId, String activityId) {
-
 
         return null;
     }
@@ -51,7 +49,6 @@ public class ApiOperationActivityFramework {
 
 
     public OperationActivityDAO apiRemoveOperationActivityService(long sessionId, long clientId, String activityId) {
-
 
         return null;
     }
