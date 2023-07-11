@@ -8,7 +8,6 @@ import java.util.List;
 public class ApiAgentCampaignWSDTO {
 
     private List<ApiCampaignWSDTO> manualCampaigns;
-    private List<ApiCampaignWSDTO> automaticCampaigns;
     private List<ApiCampaignWSDTO> inquiryCampaigns;
     private List<ApiInquiryWSDTO> campaignInquiries;
     private List<ApiSummaryWSDTO> campaignSummary;
@@ -16,9 +15,8 @@ public class ApiAgentCampaignWSDTO {
     public ApiAgentCampaignWSDTO() {
     }
 
-    public ApiAgentCampaignWSDTO(List<ApiCampaignWSDTO> manualCampaigns, List<ApiCampaignWSDTO> automaticCampaigns, List<ApiCampaignWSDTO> inquiryCampaigns, List<ApiInquiryWSDTO> campaignInquiries, List<ApiSummaryWSDTO> campaignSummary) {
+    public ApiAgentCampaignWSDTO(List<ApiCampaignWSDTO> manualCampaigns, List<ApiCampaignWSDTO> inquiryCampaigns, List<ApiInquiryWSDTO> campaignInquiries, List<ApiSummaryWSDTO> campaignSummary) {
         this.manualCampaigns = manualCampaigns;
-        this.automaticCampaigns = automaticCampaigns;
         this.inquiryCampaigns = inquiryCampaigns;
         this.campaignInquiries = campaignInquiries;
         this.campaignSummary = campaignSummary;
@@ -30,14 +28,6 @@ public class ApiAgentCampaignWSDTO {
 
     public void setManualCampaigns(List<ApiCampaignWSDTO> manualCampaigns) {
         this.manualCampaigns = manualCampaigns;
-    }
-
-    public List<ApiCampaignWSDTO> getAutomaticCampaigns() {
-        return automaticCampaigns;
-    }
-
-    public void setAutomaticCampaigns(List<ApiCampaignWSDTO> automaticCampaigns) {
-        this.automaticCampaigns = automaticCampaigns;
     }
 
     public List<ApiCampaignWSDTO> getInquiryCampaigns() {
