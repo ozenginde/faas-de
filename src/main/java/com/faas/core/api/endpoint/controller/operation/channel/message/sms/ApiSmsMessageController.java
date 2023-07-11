@@ -40,7 +40,6 @@ public class ApiSmsMessageController {
     }
 
 
-
     @RequestMapping(value = ApiRoute.API_GET_SMS_MESSAGES, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetSmsMessages(@RequestParam long agentId,
                                                @RequestParam long sessionId,
@@ -54,7 +53,6 @@ public class ApiSmsMessageController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
 
 
     @RequestMapping(value = ApiRoute.API_GET_SMS_MESSAGE, method = RequestMethod.POST)
@@ -120,7 +118,6 @@ public class ApiSmsMessageController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
 
 
 

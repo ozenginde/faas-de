@@ -39,7 +39,7 @@ public class ApiEmailMessageController {
 
     @RequestMapping(value = ApiRoute.API_GET_EMAIL_MESSAGES, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetEmailMessages(@RequestParam long agentId,
-                                                  @RequestParam long sessionId) {
+                                                 @RequestParam long sessionId) {
 
         ApiEmailMessageWSModel response = apiEmailMessageMiddleware.apiGetEmailMessages(agentId,sessionId);
 
@@ -102,9 +102,10 @@ public class ApiEmailMessageController {
     }
 
 
+
     @RequestMapping(value = ApiRoute.API_GET_EMAIL_MESSAGE_TEMPS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetEmailMessageTemps(@RequestParam long agentId,
-                                                   @RequestParam long sessionId) {
+                                                     @RequestParam long sessionId) {
 
         ApiEmailMessageTempWSModel response = apiEmailMessageMiddleware.apiGetEmailMessageTemps(agentId,sessionId);
 
@@ -117,7 +118,7 @@ public class ApiEmailMessageController {
 
     @RequestMapping(value = ApiRoute.API_GET_EMAIL_MESSAGE_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetEmailMessageTemp(@RequestParam long agentId,
-                                                     @RequestParam long sessionId) {
+                                                    @RequestParam long sessionId) {
 
         ApiEmailMessageTempWSModel response = apiEmailMessageMiddleware.apiGetEmailMessageTemp(agentId,sessionId);
 

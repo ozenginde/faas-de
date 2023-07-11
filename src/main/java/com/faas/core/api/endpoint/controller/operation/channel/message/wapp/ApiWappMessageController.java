@@ -26,7 +26,6 @@ public class ApiWappMessageController {
     ApiWappMessageMiddleware apiWappMessageMiddleware;
 
 
-
     @RequestMapping(value = ApiRoute.API_GET_OPERATION_WAPP_MESSAGE, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetOperationWappMessage(@RequestParam long agentId,
                                                         @RequestParam long sessionId,
@@ -39,7 +38,6 @@ public class ApiWappMessageController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
 
 
     @RequestMapping(value = ApiRoute.API_GET_WAPP_MESSAGES, method = RequestMethod.POST)
@@ -71,7 +69,6 @@ public class ApiWappMessageController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
 
 
     @RequestMapping(value = ApiRoute.API_SEND_WAPP_MESSAGE, method = RequestMethod.POST)
@@ -124,7 +121,6 @@ public class ApiWappMessageController {
 
 
 
-
     @RequestMapping(value = ApiRoute.API_GET_WAPP_MESSAGE_TEMPS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetWappMessageTemps(@RequestParam long agentId,
                                                     @RequestParam long sessionId,
@@ -154,5 +150,6 @@ public class ApiWappMessageController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
 
 }

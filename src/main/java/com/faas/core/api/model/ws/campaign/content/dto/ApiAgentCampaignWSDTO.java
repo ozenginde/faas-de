@@ -9,18 +9,19 @@ public class ApiAgentCampaignWSDTO {
 
     private List<ApiCampaignWSDTO> manualCampaigns;
     private List<ApiCampaignWSDTO> automaticCampaigns;
-    private List<ApiSummaryWSDTO> campaignSummary;
+    private List<ApiCampaignWSDTO> inquiryCampaigns;
     private List<ApiInquiryWSDTO> campaignInquiries;
+    private List<ApiSummaryWSDTO> campaignSummary;
 
     public ApiAgentCampaignWSDTO() {
     }
 
-
-    public ApiAgentCampaignWSDTO(List<ApiCampaignWSDTO> manualCampaigns, List<ApiCampaignWSDTO> automaticCampaigns, List<ApiSummaryWSDTO> campaignSummary, List<ApiInquiryWSDTO> campaignInquiries) {
+    public ApiAgentCampaignWSDTO(List<ApiCampaignWSDTO> manualCampaigns, List<ApiCampaignWSDTO> automaticCampaigns, List<ApiCampaignWSDTO> inquiryCampaigns, List<ApiInquiryWSDTO> campaignInquiries, List<ApiSummaryWSDTO> campaignSummary) {
         this.manualCampaigns = manualCampaigns;
         this.automaticCampaigns = automaticCampaigns;
-        this.campaignSummary = campaignSummary;
+        this.inquiryCampaigns = inquiryCampaigns;
         this.campaignInquiries = campaignInquiries;
+        this.campaignSummary = campaignSummary;
     }
 
     public List<ApiCampaignWSDTO> getManualCampaigns() {
@@ -39,12 +40,12 @@ public class ApiAgentCampaignWSDTO {
         this.automaticCampaigns = automaticCampaigns;
     }
 
-    public List<ApiSummaryWSDTO> getCampaignSummary() {
-        return campaignSummary;
+    public List<ApiCampaignWSDTO> getInquiryCampaigns() {
+        return inquiryCampaigns;
     }
 
-    public void setCampaignSummary(List<ApiSummaryWSDTO> campaignSummary) {
-        this.campaignSummary = campaignSummary;
+    public void setInquiryCampaigns(List<ApiCampaignWSDTO> inquiryCampaigns) {
+        this.inquiryCampaigns = inquiryCampaigns;
     }
 
     public List<ApiInquiryWSDTO> getCampaignInquiries() {
@@ -53,5 +54,13 @@ public class ApiAgentCampaignWSDTO {
 
     public void setCampaignInquiries(List<ApiInquiryWSDTO> campaignInquiries) {
         this.campaignInquiries = campaignInquiries;
+    }
+
+    public List<ApiSummaryWSDTO> getCampaignSummary() {
+        return campaignSummary;
+    }
+
+    public void setCampaignSummary(List<ApiSummaryWSDTO> campaignSummary) {
+        this.campaignSummary = campaignSummary;
     }
 }

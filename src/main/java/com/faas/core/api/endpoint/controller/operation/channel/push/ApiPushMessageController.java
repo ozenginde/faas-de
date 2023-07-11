@@ -65,7 +65,6 @@ public class ApiPushMessageController {
     }
 
 
-
     @RequestMapping(value = ApiRoute.API_SEND_PUSH_MESSAGE, method = RequestMethod.POST)
     public ResponseEntity<?> apiSendPushMessage(@RequestParam long agentId,
                                                   @RequestParam long sessionId) {
@@ -77,6 +76,7 @@ public class ApiPushMessageController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
 
     @RequestMapping(value = ApiRoute.API_UPDATE_PUSH_MESSAGE, method = RequestMethod.POST)
     public ResponseEntity<?> apiUpdatePushMessage(@RequestParam long agentId,
@@ -102,6 +102,7 @@ public class ApiPushMessageController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
 
 
     @RequestMapping(value = ApiRoute.API_GET_PUSH_MESSAGE_TEMPS, method = RequestMethod.POST)

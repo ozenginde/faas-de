@@ -46,6 +46,7 @@ public class ApiCampaignFramework {
 
         ApiAgentCampaignWSDTO apiAgentCampaignWSDTO = new ApiAgentCampaignWSDTO();
         List<ApiCampaignWSDTO> manualCampaigns = new ArrayList<>();
+        List<ApiCampaignWSDTO> inquiryCampaigns = new ArrayList<>();
         List<ApiCampaignWSDTO> automaticCampaigns = new ArrayList<>();
 
         List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByAgentId(agentId);
@@ -54,12 +55,16 @@ public class ApiCampaignFramework {
             if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.MANUAL_CAMPAIGN)) {
                 manualCampaigns.add(fillApiCampaignWSDTO(agentId, campaignDBModel.get()));
             }
+            if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.INQUIRY_CAMPAIGN)) {
+                inquiryCampaigns.add(fillApiCampaignWSDTO(agentId, campaignDBModel.get()));
+            }
             if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.AUTOMATIC_CAMPAIGN)) {
                 automaticCampaigns.add(fillApiCampaignWSDTO(agentId, campaignDBModel.get()));
             }
         }
 
         apiAgentCampaignWSDTO.setManualCampaigns(manualCampaigns);
+        apiAgentCampaignWSDTO.setInquiryCampaigns(inquiryCampaigns);
         apiAgentCampaignWSDTO.setAutomaticCampaigns(automaticCampaigns);
         apiAgentCampaignWSDTO.setCampaignSummary(campaignMapper.mapCampaignSummary(agentId));
         apiAgentCampaignWSDTO.setCampaignInquiries(new ArrayList<>());

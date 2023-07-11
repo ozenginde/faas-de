@@ -1,7 +1,6 @@
 package com.faas.core.api.endpoint.controller.operation.channel.messenger;
 
 import com.faas.core.api.middleware.operation.channel.messenger.ApiMessengerMiddleware;
-import com.faas.core.api.model.ws.operation.channel.messenger.ApiMessengerWSModel;
 import com.faas.core.api.model.ws.operation.channel.messenger.ApiOperationMessengerWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
@@ -34,6 +33,7 @@ public class ApiMessengerController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
 
 
 }

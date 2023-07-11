@@ -35,7 +35,6 @@ public class ApiOperationNoteController {
     }
 
 
-
     @RequestMapping(value = ApiRoute.API_GET_OPERATION_NOTES, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetOperationNotes(@RequestParam long agentId,
                                                   @RequestParam long sessionId,
