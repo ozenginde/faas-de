@@ -16,31 +16,27 @@ public class ApiScenarioExecutionFramework {
     AppUtils appUtils;
 
 
-    public ApiScenarioExecutionWSDTO apiExecuteScenarioService(long agentId, long sessionId) {
+    public ApiScenarioExecutionWSDTO apiExecuteScenarioService(long agentId, long sessionId,long clientId,String scenarioId) {
 
         return null;
     }
 
-
-    public List<ApiScenarioExecutionWSDTO> apiGetScenarioExecutionsService(long agentId, long sessionId) {
-
-        return null;
-    }
-
-
-    public ApiScenarioExecutionWSDTO apiGetScenarioExecutionService(long agentId, long sessionId) {
+    public List<ApiScenarioExecutionWSDTO> apiGetScenarioExecutionsService(long agentId, long sessionId,long clientId) {
 
         return null;
     }
 
-
-    public ApiScenarioExecutionWSDTO apiUpdateScenarioExecutionService(long agentId, long sessionId) {
+    public ApiScenarioExecutionWSDTO apiGetScenarioExecutionService(long agentId, long sessionId,long clientId,String executionId) {
 
         return null;
     }
 
+    public ApiScenarioExecutionWSDTO apiUpdateScenarioExecutionService(long agentId,long sessionId,long clientId,String executionId) {
 
-    public ApiScenarioExecutionWSDTO apiRemoveScenarioExecutionService(long agentId, long sessionId) {
+        return null;
+    }
+
+    public ApiScenarioExecutionWSDTO apiRemoveScenarioExecutionService(long agentId,long sessionId,long clientId,String executionId) {
 
         return null;
     }
