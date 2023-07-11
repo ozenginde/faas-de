@@ -54,9 +54,9 @@ public class ApiScenarioController {
 
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenario(@RequestParam long agentId,
-                                                   @RequestParam long sessionId,
-                                                   @RequestParam String processId,
-                                                   @RequestParam String scenarioId) {
+                                            @RequestParam long sessionId,
+                                            @RequestParam String processId,
+                                            @RequestParam String scenarioId) {
 
         ApiScenarioWSModel response = apiScenarioMiddleware.apiGetScenario(agentId,sessionId,processId,scenarioId);
 

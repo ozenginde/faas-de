@@ -1,6 +1,6 @@
-package com.faas.core.api.model.ws.asset;
+package com.faas.core.api.model.ws.assets;
 
-import com.faas.core.api.model.ws.asset.dto.ApiAssetWSDTO;
+import com.faas.core.api.model.ws.assets.dto.ApiAssetWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;

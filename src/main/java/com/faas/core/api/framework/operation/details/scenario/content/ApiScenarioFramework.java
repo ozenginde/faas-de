@@ -50,35 +50,36 @@ public class ApiScenarioFramework {
     }
 
 
-
-    public List<ApiScenarioWSDTO> apiGetProcessScenariosService(long agentId, long sessionId, String processId) {
+    public List<ApiScenarioWSDTO> apiGetScenariosService(long agentId,long sessionId, String processId) {
 
         List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processId);
         for (ProcessScenarioDBModel processScenarioDBModel : processScenarioDBModels) {
             Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
-            if (scenarioDBModel.isPresent()) {
+            if (scenarioDBModel.isPresent()){
+                ApiScenarioWSDTO scenarioWSDTO = new ApiScenarioWSDTO();
+                scenarioWSDTO.setScenario(scenarioDBModel.get());
+                scenarioWSDTO.setProcessScenario(processScenarioDBModel);
+                scenarioWSDTOS.add(scenarioWSDTO);
             }
         }
         return scenarioWSDTOS;
     }
 
 
-    public ApiScenarioWSDTO apiGetProcessScenarioService(long agentId, long sessionId, String processId, String scenarioId) {
+    public ApiScenarioWSDTO apiGetScenarioService(long agentId,long sessionId,String processId, String scenarioId) {
 
         List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
         if (processScenarioDBModel.size()>0 && scenarioDBModel.isPresent()){
+            ApiScenarioWSDTO scenarioWSDTO = new ApiScenarioWSDTO();
+            scenarioWSDTO.setScenario(scenarioDBModel.get());
+            scenarioWSDTO.setProcessScenario(processScenarioDBModel.get(0));
 
-            ApiScenarioWSDTO apiScenarioWSDTO = new ApiScenarioWSDTO();
-
-            return apiScenarioWSDTO;
+            return scenarioWSDTO;
         }
         return null;
     }
-
-
-
 
 
 

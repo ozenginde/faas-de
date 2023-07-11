@@ -1,7 +1,7 @@
-package com.faas.core.api.middleware.asset;
+package com.faas.core.api.middleware.assets;
 
-import com.faas.core.api.framework.asset.ApiAssetFramework;
-import com.faas.core.api.model.ws.asset.ApiAssetWSModel;
+import com.faas.core.api.framework.assets.ApiAssetFramework;
+import com.faas.core.api.model.ws.assets.ApiAssetWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;

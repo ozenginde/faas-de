@@ -1,4 +1,4 @@
-package com.faas.core.api.framework.asset;
+package com.faas.core.api.framework.assets;
 
 import com.faas.core.api.model.ws.campaign.content.dto.ApiCampaignWSDTO;
 import com.faas.core.utils.config.AppUtils;

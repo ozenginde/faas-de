@@ -1,4 +1,4 @@
-package com.faas.core.api.model.ws.asset.dto;
+package com.faas.core.api.model.ws.assets.dto;
 
 import com.faas.core.api.model.ws.session.details.dto.ApiSessionClientWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
