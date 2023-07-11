@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ScenarioExecuteRepository extends MongoRepository<ScenarioExecutionDBModel, String> {
+public interface ScenarioExecutionRepository extends MongoRepository<ScenarioExecutionDBModel, String> {
 
     List<ScenarioExecutionDBModel>findByCampaignId(String campaignId);
     List<ScenarioExecutionDBModel>findByProcessId(String processId);

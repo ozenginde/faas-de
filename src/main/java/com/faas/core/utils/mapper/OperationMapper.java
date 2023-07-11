@@ -41,7 +41,7 @@ import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.*;
 import com.faas.core.base.repo.operation.channel.*;
 import com.faas.core.base.repo.operation.content.OperationRepository;
-import com.faas.core.base.repo.operation.scenario.ScenarioExecuteRepository;
+import com.faas.core.base.repo.operation.scenario.ScenarioExecutionRepository;
 import com.faas.core.base.repo.process.details.channel.content.*;
 import com.faas.core.base.repo.process.details.channel.temp.EmailTempRepository;
 import com.faas.core.base.repo.process.details.channel.temp.PushTempRepository;
@@ -147,7 +147,7 @@ public class OperationMapper {
     ProcessScenarioRepository processScenarioRepository;
 
     @Autowired
-    ScenarioExecuteRepository scenarioExecuteRepository;
+    ScenarioExecutionRepository scenarioExecutionRepository;
 
     @Autowired
     AutomationTempRepository automationTempRepository;
@@ -265,7 +265,7 @@ public class OperationMapper {
         }
         operationScenarioWSDTO.setScenarios(scenarioWSDTOS);
 
-        List<ScenarioExecutionDBModel> scenarioExecutionDBModels = scenarioExecuteRepository.findBySessionIdAndClientIdAndProcessId(sessionId,clientId,processId);
+        List<ScenarioExecutionDBModel> scenarioExecutionDBModels = scenarioExecutionRepository.findBySessionIdAndClientIdAndProcessId(sessionId,clientId,processId);
         for (ScenarioExecutionDBModel scenarioExecutionDBModel : scenarioExecutionDBModels) {
             scenarioExecutionWSDTOS.add(mapApiScenarioExecutionWSDTO(scenarioExecutionDBModel));
         }
