@@ -20,7 +20,6 @@ public class ApiNotificationFramework {
     }
 
 
-
     public ApiSessionClientWSDTO apiGetNotificationsService() {
 
         return null;

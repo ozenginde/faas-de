@@ -1,9 +1,7 @@
 package com.faas.core.api.middleware.notification.content;
 
 import com.faas.core.api.framework.notification.content.ApiNotificationFramework;
-import com.faas.core.api.model.ws.notification.content.ApiAgentNotificationWSModel;
 import com.faas.core.api.model.ws.notification.content.ApiNotificationWSModel;
-import com.faas.core.api.model.ws.session.details.ApiSessionClientWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,22 +14,6 @@ public class ApiNotificationMiddleware {
 
     @Autowired
     ApiNotificationFramework apiNotificationFramework;
-
-
-    public ApiAgentNotificationWSModel apiGetAgentNotification(long agentId) {
-
-        ApiAgentNotificationWSModel response = new ApiAgentNotificationWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-        general.setOperation("apiGetAgentNotification");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
     public ApiNotificationWSModel apiGetNotifications(long agentId) {

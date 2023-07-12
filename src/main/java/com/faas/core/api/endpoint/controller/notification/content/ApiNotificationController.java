@@ -1,9 +1,7 @@
 package com.faas.core.api.endpoint.controller.notification.content;
 
 import com.faas.core.api.middleware.notification.content.ApiNotificationMiddleware;
-import com.faas.core.api.model.ws.notification.content.ApiAgentNotificationWSModel;
 import com.faas.core.api.model.ws.notification.content.ApiNotificationWSModel;
-import com.faas.core.api.model.ws.session.details.ApiSessionClientWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +20,6 @@ public class ApiNotificationController {
 
     @Autowired
     ApiNotificationMiddleware apiNotificationMiddleware;
-
-
-    @RequestMapping(value = ApiRoute.API_GET_AGENT_NOTIFICATION, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetAgentNotification(@RequestParam long agentId) {
-
-        ApiAgentNotificationWSModel response = apiNotificationMiddleware.apiGetAgentNotification(agentId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
     @RequestMapping(value = ApiRoute.API_GET_NOTIFICATIONS, method = RequestMethod.POST)
