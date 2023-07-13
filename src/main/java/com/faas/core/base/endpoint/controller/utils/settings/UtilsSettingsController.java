@@ -56,7 +56,7 @@ public class UtilsSettingsController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
-    @RequestMapping(value = BaseRoute.REMOVE_ALL_FLOWS, method = RequestMethod.POST)
+    @RequestMapping(value = BaseRoute.REMOVE_ALL_INQUIRIES, method = RequestMethod.POST)
     public ResponseEntity<?> removeAllInquiries(@RequestParam long userId) {
 
         UtilSettingsWSModel response = utilsSettingsMiddleware.removeAllInquiries(userId);
