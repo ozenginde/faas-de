@@ -12,6 +12,7 @@ import java.util.List;
 public interface FlowRepository extends PagingAndSortingRepository<FlowDBModel, Long> {
 
     boolean existsByClientIdAndCampaignIdAndFlowState(long clientId,String campaignId,String flowState);
+    boolean existsByClientIdAndCampaignId(long clientId,String campaignId);
     List<FlowDBModel>findByStatus(int status);
     List<FlowDBModel>findBySessionId(long sessionId);
     List<FlowDBModel>findByIdAndClientId(long flowId, long clientId);

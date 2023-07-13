@@ -113,8 +113,7 @@ public class CampaignFlowFramework {
 
     public FlowWSDTO createCampaignFlowService(long userId, String campaignId, long clientId) {
 
-        if (!flowRepository.existsByClientIdAndCampaignIdAndFlowState(clientId,campaignId,AppConstant.READY_FLOW)
-                && !flowRepository.existsByClientIdAndCampaignIdAndFlowState(clientId,campaignId,AppConstant.ACTIVE_FLOW) ){
+        if (!flowRepository.existsByClientIdAndCampaignId(clientId,campaignId)){
 
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
@@ -127,7 +126,10 @@ public class CampaignFlowFramework {
                     clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                     clientRepository.save(clientDBModel.get());
 
-                    return new FlowWSDTO(flowRepository.save(flowMapper.mapFlowDBModel(campaignDBModel.get(), clientDBModel.get(), agentDBModel.get())));
+                    FlowDBModel flowDBModel = flowMapper.mapFlowDBModel(campaignDBModel.get(), clientDBModel.get(), agentDBModel.get());
+                    if (flowDBModel != null){
+                        return new FlowWSDTO(flowRepository.save(flowDBModel));
+                    }
                 }
             }
         }
