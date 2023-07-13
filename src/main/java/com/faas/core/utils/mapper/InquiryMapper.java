@@ -50,7 +50,7 @@ public class InquiryMapper {
         inquiryDBModel.setProcessCategory(campaignDBModel.getProcessCategory());
         inquiryDBModel.setAgentId(0);
         inquiryDBModel.setAgentName("");
-        inquiryDBModel.setInquiryState(AppConstant.READY_INQUIRY);
+        inquiryDBModel.setInquiryState(AppConstant.NEW_INQUIRY);
         inquiryDBModel.setuDate(appUtils.getCurrentTimeStamp());
         inquiryDBModel.setcDate(appUtils.getCurrentTimeStamp());
         inquiryDBModel.setStatus(1);

@@ -114,7 +114,7 @@ public class CampaignInquiryFramework {
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
 
-            clientDBModel.get().setClientState(AppConstant.NEW_INQUIRY);
+            clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
             clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             clientRepository.save(clientDBModel.get());
 
