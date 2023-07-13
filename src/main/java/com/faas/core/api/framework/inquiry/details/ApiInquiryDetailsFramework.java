@@ -20,7 +20,7 @@ public class ApiInquiryDetailsFramework {
     }
 
 
-    public List<ApiSummaryWSDTO> apiGetAgentInquirySummaryService(long agentId){
+    public List<ApiSummaryWSDTO> apiGetInquirySummaryService(long agentId){
 
         return null;
     }

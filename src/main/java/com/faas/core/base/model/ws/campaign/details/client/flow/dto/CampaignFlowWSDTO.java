@@ -1,29 +1,22 @@
 package com.faas.core.base.model.ws.campaign.details.client.flow.dto;
 
-import com.faas.core.base.model.ws.flow.dto.ClientFlowWSDTO;
+import com.faas.core.base.model.ws.flow.dto.FlowWSDTO;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
 
 import java.util.List;
 
 public class CampaignFlowWSDTO {
 
-    private List<ClientFlowWSDTO> clientFlows;
     private PaginationWSDTO pagination;
+    private List<FlowWSDTO> flows;
+
 
     public CampaignFlowWSDTO() {
     }
 
-    public CampaignFlowWSDTO(List<ClientFlowWSDTO> clientFlows, PaginationWSDTO pagination) {
-        this.clientFlows = clientFlows;
+    public CampaignFlowWSDTO(PaginationWSDTO pagination, List<FlowWSDTO> flows) {
         this.pagination = pagination;
-    }
-
-    public List<ClientFlowWSDTO> getClientFlows() {
-        return clientFlows;
-    }
-
-    public void setClientFlows(List<ClientFlowWSDTO> clientFlows) {
-        this.clientFlows = clientFlows;
+        this.flows = flows;
     }
 
     public PaginationWSDTO getPagination() {
@@ -32,5 +25,13 @@ public class CampaignFlowWSDTO {
 
     public void setPagination(PaginationWSDTO pagination) {
         this.pagination = pagination;
+    }
+
+    public List<FlowWSDTO> getFlows() {
+        return flows;
+    }
+
+    public void setFlows(List<FlowWSDTO> flows) {
+        this.flows = flows;
     }
 }

@@ -4,8 +4,8 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "client_flow_table")
-public class ClientFlowDBModel {
+@Table(name = "flow_table")
+public class FlowDBModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,10 +83,10 @@ public class ClientFlowDBModel {
     @Column(name = "status")
     private int status;
 
-    public ClientFlowDBModel() {
+    public FlowDBModel() {
     }
 
-    public ClientFlowDBModel(long id, long sessionId, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String campaignCategory, String processId, String process, String processType, String processCategory, long agentId, String agentName, String flowState, long uDate, long cDate, int status) {
+    public FlowDBModel(long id, long sessionId, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String campaignCategory, String processId, String process, String processType, String processCategory, long agentId, String agentName, String flowState, long uDate, long cDate, int status) {
         this.id = id;
         this.sessionId = sessionId;
         this.sessionUUID = sessionUUID;

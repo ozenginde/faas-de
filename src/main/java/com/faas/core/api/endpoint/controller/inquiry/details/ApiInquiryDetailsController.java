@@ -37,10 +37,10 @@ public class ApiInquiryDetailsController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_AGENT_INQUIRY_SUMMARY, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetAgentInquirySummary(@RequestParam long agentId) {
+    @RequestMapping(value = ApiRoute.API_GET_INQUIRY_SUMMARY, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetInquirySummary(@RequestParam long agentId) {
 
-        ApiSummaryWSModel response = apiInquiryDetailsMiddleware.apiGetAgentInquirySummary(agentId);
+        ApiSummaryWSModel response = apiInquiryDetailsMiddleware.apiGetInquirySummary(agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

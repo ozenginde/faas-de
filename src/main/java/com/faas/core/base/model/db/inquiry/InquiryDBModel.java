@@ -4,8 +4,8 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "client_inquiry_table")
-public class ClientInquiryDBModel {
+@Table(name = "inquiry_table")
+public class InquiryDBModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -83,10 +83,10 @@ public class ClientInquiryDBModel {
     @Column(name = "status")
     private int status;
 
-    public ClientInquiryDBModel() {
+    public InquiryDBModel() {
     }
 
-    public ClientInquiryDBModel(long id, long sessionId, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String campaignCategory, String processId, String process, String processType, String processCategory, long agentId, String agentName, String inquiryState, long uDate, long cDate, int status) {
+    public InquiryDBModel(long id, long sessionId, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String campaignCategory, String processId, String process, String processType, String processCategory, long agentId, String agentName, String inquiryState, long uDate, long cDate, int status) {
         this.id = id;
         this.sessionId = sessionId;
         this.sessionUUID = sessionUUID;

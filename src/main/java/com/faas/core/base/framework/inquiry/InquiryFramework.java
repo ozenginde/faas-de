@@ -2,16 +2,16 @@ package com.faas.core.base.framework.inquiry;
 
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
-import com.faas.core.base.model.db.inquiry.ClientInquiryDBModel;
+import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 import com.faas.core.base.model.ws.campaign.content.dto.CampaignWSDTO;
 import com.faas.core.base.model.ws.inquiry.dto.InquiryCampaignWSDTO;
-import com.faas.core.base.model.ws.inquiry.dto.ClientInquiryWSDTO;
+import com.faas.core.base.model.ws.inquiry.dto.InquiryWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
-import com.faas.core.base.repo.inquiry.ClientInquiryRepository;
+import com.faas.core.base.repo.inquiry.InquiryRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.ClientInquiryMapper;
+import com.faas.core.utils.mapper.InquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +27,7 @@ public class InquiryFramework {
 
 
     @Autowired
-    ClientInquiryMapper clientInquiryMapper;
+    InquiryMapper inquiryMapper;
 
     @Autowired
     ClientRepository clientRepository;
@@ -36,32 +36,12 @@ public class InquiryFramework {
     CampaignRepository campaignRepository;
 
     @Autowired
-    ClientInquiryRepository clientInquiryRepository;
+    InquiryRepository inquiryRepository;
 
     @Autowired
     AppUtils appUtils;
 
 
-    public List<ClientInquiryWSDTO> getAllClientInquiriesService(long userId, int reqPage, int reqSize) {
-
-        List<ClientInquiryWSDTO> clientInquiryWSDTOS = new ArrayList<>();
-        Page<ClientInquiryDBModel> inquiryModelPage = clientInquiryRepository.findAll(PageRequest.of(reqPage,reqSize));
-        for (int i=0;i<inquiryModelPage.getContent().size();i++){
-            clientInquiryWSDTOS.add(new ClientInquiryWSDTO(inquiryModelPage.getContent().get(i)));
-        }
-        return clientInquiryWSDTOS;
-    }
-
-
-    public List<ClientInquiryWSDTO> getClientInquiriesByStateService(long userId, String inquiryState, int reqPage, int reqSize) {
-
-        List<ClientInquiryWSDTO> clientInquiryWSDTOS = new ArrayList<>();
-        Page<ClientInquiryDBModel> inquiryModelPage = clientInquiryRepository.findAllByInquiryState(inquiryState,PageRequest.of(reqPage,reqSize));
-        for (int i=0;i<inquiryModelPage.getContent().size();i++){
-            clientInquiryWSDTOS.add(new ClientInquiryWSDTO(inquiryModelPage.getContent().get(i)));
-        }
-        return clientInquiryWSDTOS;
-    }
 
 
     public List<InquiryCampaignWSDTO> getInquiryCampaignsService(long userId,int reqPage,int reqSize) {
@@ -72,9 +52,9 @@ public class InquiryFramework {
 
             InquiryCampaignWSDTO inquiryCampaignWSDTO = new InquiryCampaignWSDTO();
             inquiryCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel));
-            Page<ClientInquiryDBModel> clientInquiryModelPage = clientInquiryRepository.findAllByCampaignId(campaignDBModel.getId(), PageRequest.of(reqPage, reqSize));
-            inquiryCampaignWSDTO.setClientInquiries(clientInquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
-            inquiryCampaignWSDTO.setPagination(clientInquiryMapper.createClientInquiryPagination(clientInquiryModelPage));
+            Page<InquiryDBModel> clientInquiryModelPage = inquiryRepository.findAllByCampaignId(campaignDBModel.getId(), PageRequest.of(reqPage, reqSize));
+            inquiryCampaignWSDTO.setClientInquiries(inquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
+            inquiryCampaignWSDTO.setPagination(inquiryMapper.createInquiryPagination(clientInquiryModelPage));
 
             inquiryCampaignWSDTOS.add(inquiryCampaignWSDTO);
         }
@@ -89,9 +69,9 @@ public class InquiryFramework {
 
             InquiryCampaignWSDTO inquiryCampaignWSDTO = new InquiryCampaignWSDTO();
             inquiryCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel.get()));
-            Page<ClientInquiryDBModel> clientInquiryModelPage = clientInquiryRepository.findAllByCampaignId(campaignDBModel.get().getId(), PageRequest.of(reqPage, reqSize));
-            inquiryCampaignWSDTO.setClientInquiries(clientInquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
-            inquiryCampaignWSDTO.setPagination(clientInquiryMapper.createClientInquiryPagination(clientInquiryModelPage));
+            Page<InquiryDBModel> clientInquiryModelPage = inquiryRepository.findAllByCampaignId(campaignDBModel.get().getId(), PageRequest.of(reqPage, reqSize));
+            inquiryCampaignWSDTO.setPagination(inquiryMapper.createInquiryPagination(clientInquiryModelPage));
+            inquiryCampaignWSDTO.setClientInquiries(inquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
 
             return inquiryCampaignWSDTO;
         }
@@ -99,46 +79,68 @@ public class InquiryFramework {
     }
 
 
-    public ClientInquiryWSDTO getClientInquiryService(long userId, long inquiryId, long clientId) {
+    public List<InquiryWSDTO> getAllInquiriesService(long userId, int reqPage, int reqSize) {
 
-        List<ClientInquiryDBModel> clientInquiryDBModels = clientInquiryRepository.findByIdAndClientId(inquiryId,clientId);
-        if (clientInquiryDBModels.size()>0){
-            return new ClientInquiryWSDTO(clientInquiryDBModels.get(0));
+        List<InquiryWSDTO> inquiryWSDTOS = new ArrayList<>();
+        Page<InquiryDBModel> inquiryModelPage = inquiryRepository.findAll(PageRequest.of(reqPage,reqSize));
+        for (int i=0;i<inquiryModelPage.getContent().size();i++){
+            inquiryWSDTOS.add(new InquiryWSDTO(inquiryModelPage.getContent().get(i)));
+        }
+        return inquiryWSDTOS;
+    }
+
+
+    public List<InquiryWSDTO> getInquiriesByStateService(long userId, String inquiryState, int reqPage, int reqSize) {
+
+        List<InquiryWSDTO> inquiryWSDTOS = new ArrayList<>();
+        Page<InquiryDBModel> inquiryModelPage = inquiryRepository.findAllByInquiryState(inquiryState,PageRequest.of(reqPage,reqSize));
+        for (int i=0;i<inquiryModelPage.getContent().size();i++){
+            inquiryWSDTOS.add(new InquiryWSDTO(inquiryModelPage.getContent().get(i)));
+        }
+        return inquiryWSDTOS;
+    }
+
+
+    public InquiryWSDTO getInquiryService(long userId, long inquiryId, long clientId) {
+
+        List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndClientId(inquiryId,clientId);
+        if (inquiryDBModels.size()>0){
+            return new InquiryWSDTO(inquiryDBModels.get(0));
         }
         return null;
     }
 
 
-    public ClientInquiryWSDTO createClientInquiryService(long userId, String campaignId, long clientId) {
+    public InquiryWSDTO createInquiryService(long userId, String campaignId, long clientId) {
 
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
-            ClientInquiryDBModel clientInquiryDBModel = clientInquiryMapper.mapInquiryDBModel(campaignDBModel.get(),clientDBModel.get());
-            if (clientInquiryDBModel != null){
-                return new ClientInquiryWSDTO(clientInquiryRepository.save(clientInquiryDBModel));
+            InquiryDBModel inquiryDBModel = inquiryMapper.mapInquiryDBModel(campaignDBModel.get(),clientDBModel.get());
+            if (inquiryDBModel != null){
+                return new InquiryWSDTO(inquiryRepository.save(inquiryDBModel));
             }
         }
         return null;
     }
 
 
-    public ClientInquiryWSDTO updateClientInquiryService(long userId, long inquiryId, long clientId) {
+    public InquiryWSDTO updateInquiryService(long userId, long inquiryId, long clientId) {
 
-        List<ClientInquiryDBModel> clientInquiryDBModels = clientInquiryRepository.findByIdAndClientId(inquiryId,clientId);
-        if (clientInquiryDBModels.size()>0){
-            return new ClientInquiryWSDTO(clientInquiryDBModels.get(0));
+        List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndClientId(inquiryId,clientId);
+        if (inquiryDBModels.size()>0){
+            return new InquiryWSDTO(inquiryDBModels.get(0));
         }
         return null;
     }
 
 
-    public ClientInquiryWSDTO removeClientInquiryService(long userId, long inquiryId, long clientId) {
+    public InquiryWSDTO removeInquiryService(long userId, long inquiryId, long clientId) {
 
-        List<ClientInquiryDBModel> clientInquiryDBModels = clientInquiryRepository.findByIdAndClientId(inquiryId,clientId);
-        if (clientInquiryDBModels.size()>0){
-            clientInquiryRepository.delete(clientInquiryDBModels.get(0));
-            return new ClientInquiryWSDTO(clientInquiryDBModels.get(0));
+        List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndClientId(inquiryId,clientId);
+        if (inquiryDBModels.size()>0){
+            inquiryRepository.delete(inquiryDBModels.get(0));
+            return new InquiryWSDTO(inquiryDBModels.get(0));
         }
         return null;
     }

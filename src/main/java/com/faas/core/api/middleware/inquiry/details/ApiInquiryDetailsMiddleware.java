@@ -41,17 +41,17 @@ public class ApiInquiryDetailsMiddleware {
 
 
 
-    public ApiSummaryWSModel apiGetAgentInquirySummary(long agentId) {
+    public ApiSummaryWSModel apiGetInquirySummary(long agentId) {
 
         ApiSummaryWSModel response = new ApiSummaryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiSummaryWSDTO> inquirySummaries  = apiClientInquiryDetailsFramework.apiGetAgentInquirySummaryService(agentId);
+        List<ApiSummaryWSDTO> inquirySummaries  = apiClientInquiryDetailsFramework.apiGetInquirySummaryService(agentId);
         if (inquirySummaries != null){
             response.setSummaries(inquirySummaries);
         }
 
-        general.setOperation("apiGetAgentInquirySummary");
+        general.setOperation("apiGetInquirySummary");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

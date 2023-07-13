@@ -24,10 +24,10 @@ public class ApiInquiryController {
     ApiInquiryMiddleware apiInquiryMiddleware;
 
 
-    @RequestMapping(value = ApiRoute.API_GET_INQUIRIES, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetInquiries(@RequestParam long agentId) {
+    @RequestMapping(value = ApiRoute.API_GET_AGENT_INQUIRY, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetAgentInquiry(@RequestParam long agentId) {
 
-        ApiAgentInquiryWSModel response = apiInquiryMiddleware.apiGetInquiries(agentId);
+        ApiAgentInquiryWSModel response = apiInquiryMiddleware.apiGetAgentInquiry(agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -36,11 +36,24 @@ public class ApiInquiryController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_INQUIRIES_BY_STATE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetInquiriesByState(@RequestParam long agentId,
-                                                    @RequestParam String inquiryState) {
+    @RequestMapping(value = ApiRoute.API_GET_CAMPAIGN_INQUIRY, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetCampaignInquiry(@RequestParam long agentId,
+                                                   @RequestParam String campaignId) {
 
-        ApiAgentInquiryWSModel response = apiInquiryMiddleware.apiGetInquiriesByState(agentId,inquiryState);
+        ApiAgentInquiryWSModel response = apiInquiryMiddleware.apiGetCampaignInquiry(agentId,campaignId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_INQUIRIES, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetInquiries(@RequestParam long agentId,
+                                             @RequestParam String inquiryState) {
+
+        ApiAgentInquiryWSModel response = apiInquiryMiddleware.apiGetInquiries(agentId,inquiryState);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -64,9 +77,10 @@ public class ApiInquiryController {
 
     @RequestMapping(value = ApiRoute.API_UPDATE_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> apiUpdateInquiry(@RequestParam long agentId,
-                                                    @RequestParam long inquiryId) {
+                                              @RequestParam long inquiryId,
+                                              @RequestParam String inquiryState) {
 
-        ApiInquiryWSModel response = apiInquiryMiddleware.apiUpdateInquiry(agentId,inquiryId);
+        ApiInquiryWSModel response = apiInquiryMiddleware.apiUpdateInquiry(agentId,inquiryId,inquiryState);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -77,7 +91,7 @@ public class ApiInquiryController {
 
     @RequestMapping(value = ApiRoute.API_REMOVE_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> apiRemoveInquiry(@RequestParam long agentId,
-                                                    @RequestParam long inquiryId) {
+                                              @RequestParam long inquiryId) {
 
         ApiInquiryWSModel response = apiInquiryMiddleware.apiRemoveInquiry(agentId,inquiryId);
 
