@@ -1,9 +1,9 @@
 
 package com.faas.core.api.endpoint.controller.inquiry.details;
 
-import com.faas.core.api.middleware.inquiry.details.ApiClientInquiryDetailsMiddleware;
+import com.faas.core.api.middleware.inquiry.details.ApiInquiryDetailsMiddleware;
 import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
-import com.faas.core.api.model.ws.inquiry.details.ApiClientInquiryDetailsWSModel;
+import com.faas.core.api.model.ws.inquiry.details.ApiInquiryDetailsWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,18 +17,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = AppConstant.API_VERSION + "/api/inquiry/details/")
-public class ApiClientInquiryDetailsController {
+public class ApiInquiryDetailsController {
 
 
     @Autowired
-    ApiClientInquiryDetailsMiddleware apiClientInquiryDetailsMiddleware;
+    ApiInquiryDetailsMiddleware apiInquiryDetailsMiddleware;
 
 
-    @RequestMapping(value = ApiRoute.API_GET_CLIENT_INQUIRY_DETAILS, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetClientInquiryDetails(@RequestParam long agentId,
-                                                        @RequestParam long inquiryId) {
+    @RequestMapping(value = ApiRoute.API_GET_INQUIRY_DETAILS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetInquiryDetails(@RequestParam long agentId,
+                                                  @RequestParam long inquiryId) {
 
-        ApiClientInquiryDetailsWSModel response = apiClientInquiryDetailsMiddleware.apiGetClientInquiryDetails(agentId,inquiryId);
+        ApiInquiryDetailsWSModel response = apiInquiryDetailsMiddleware.apiGetInquiryDetails(agentId,inquiryId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -37,10 +37,10 @@ public class ApiClientInquiryDetailsController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_CLIENT_INQUIRY_SUMMARY, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetClientInquirySummary(@RequestParam long agentId) {
+    @RequestMapping(value = ApiRoute.API_GET_AGENT_INQUIRY_SUMMARY, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetAgentInquirySummary(@RequestParam long agentId) {
 
-        ApiSummaryWSModel response = apiClientInquiryDetailsMiddleware.apiGetClientInquirySummary(agentId);
+        ApiSummaryWSModel response = apiInquiryDetailsMiddleware.apiGetAgentInquirySummary(agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

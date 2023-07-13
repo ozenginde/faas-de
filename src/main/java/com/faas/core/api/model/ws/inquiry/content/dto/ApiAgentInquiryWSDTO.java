@@ -6,40 +6,40 @@ import java.util.List;
 
 public class ApiAgentInquiryWSDTO {
 
-    private List<ApiSummaryWSDTO> clientInquirySummary;
-    private List<ApiClientInquiryWSDTO>readyInquiries;
-    private List<ApiClientInquiryWSDTO>activeInquiries;
+    private List<ApiSummaryWSDTO> inquirySummary;
+    private List<ApiInquiryWSDTO>readyInquiries;
+    private List<ApiInquiryWSDTO>activeInquiries;
 
     public ApiAgentInquiryWSDTO() {
     }
 
-    public ApiAgentInquiryWSDTO(List<ApiSummaryWSDTO> clientInquirySummary, List<ApiClientInquiryWSDTO> readyInquiries, List<ApiClientInquiryWSDTO> activeInquiries) {
-        this.clientInquirySummary = clientInquirySummary;
+    public ApiAgentInquiryWSDTO(List<ApiSummaryWSDTO> inquirySummary, List<ApiInquiryWSDTO> readyInquiries, List<ApiInquiryWSDTO> activeInquiries) {
+        this.inquirySummary = inquirySummary;
         this.readyInquiries = readyInquiries;
         this.activeInquiries = activeInquiries;
     }
 
-    public List<ApiSummaryWSDTO> getClientInquirySummary() {
-        return clientInquirySummary;
+    public List<ApiSummaryWSDTO> getInquirySummary() {
+        return inquirySummary;
     }
 
-    public void setClientInquirySummary(List<ApiSummaryWSDTO> clientInquirySummary) {
-        this.clientInquirySummary = clientInquirySummary;
+    public void setInquirySummary(List<ApiSummaryWSDTO> inquirySummary) {
+        this.inquirySummary = inquirySummary;
     }
 
-    public List<ApiClientInquiryWSDTO> getReadyInquiries() {
+    public List<ApiInquiryWSDTO> getReadyInquiries() {
         return readyInquiries;
     }
 
-    public void setReadyInquiries(List<ApiClientInquiryWSDTO> readyInquiries) {
+    public void setReadyInquiries(List<ApiInquiryWSDTO> readyInquiries) {
         this.readyInquiries = readyInquiries;
     }
 
-    public List<ApiClientInquiryWSDTO> getActiveInquiries() {
+    public List<ApiInquiryWSDTO> getActiveInquiries() {
         return activeInquiries;
     }
 
-    public void setActiveInquiries(List<ApiClientInquiryWSDTO> activeInquiries) {
+    public void setActiveInquiries(List<ApiInquiryWSDTO> activeInquiries) {
         this.activeInquiries = activeInquiries;
     }
 }

@@ -5,16 +5,16 @@ import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;
 
-public class ApiClientInquiryDetailsWSDTO {
+public class ApiInquiryDetailsWSDTO {
 
     private GeneralWSModel general;
     private List<ApiProcessWSDTO>processes;
 
 
-    public ApiClientInquiryDetailsWSDTO() {
+    public ApiInquiryDetailsWSDTO() {
     }
 
-    public ApiClientInquiryDetailsWSDTO(GeneralWSModel general, List<ApiProcessWSDTO> processes) {
+    public ApiInquiryDetailsWSDTO(GeneralWSModel general, List<ApiProcessWSDTO> processes) {
         this.general = general;
         this.processes = processes;
     }

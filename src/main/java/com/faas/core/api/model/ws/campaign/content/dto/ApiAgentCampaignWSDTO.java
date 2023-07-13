@@ -1,7 +1,7 @@
 package com.faas.core.api.model.ws.campaign.content.dto;
 
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
-import com.faas.core.api.model.ws.inquiry.content.dto.ApiClientInquiryWSDTO;
+import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 
 import java.util.List;
 
@@ -9,13 +9,13 @@ public class ApiAgentCampaignWSDTO {
 
     private List<ApiCampaignWSDTO> manualCampaigns;
     private List<ApiCampaignWSDTO> inquiryCampaigns;
-    private List<ApiClientInquiryWSDTO> campaignInquiries;
+    private List<ApiInquiryWSDTO> campaignInquiries;
     private List<ApiSummaryWSDTO> campaignSummary;
 
     public ApiAgentCampaignWSDTO() {
     }
 
-    public ApiAgentCampaignWSDTO(List<ApiCampaignWSDTO> manualCampaigns, List<ApiCampaignWSDTO> inquiryCampaigns, List<ApiClientInquiryWSDTO> campaignInquiries, List<ApiSummaryWSDTO> campaignSummary) {
+    public ApiAgentCampaignWSDTO(List<ApiCampaignWSDTO> manualCampaigns, List<ApiCampaignWSDTO> inquiryCampaigns, List<ApiInquiryWSDTO> campaignInquiries, List<ApiSummaryWSDTO> campaignSummary) {
         this.manualCampaigns = manualCampaigns;
         this.inquiryCampaigns = inquiryCampaigns;
         this.campaignInquiries = campaignInquiries;
@@ -38,11 +38,11 @@ public class ApiAgentCampaignWSDTO {
         this.inquiryCampaigns = inquiryCampaigns;
     }
 
-    public List<ApiClientInquiryWSDTO> getCampaignInquiries() {
+    public List<ApiInquiryWSDTO> getCampaignInquiries() {
         return campaignInquiries;
     }
 
-    public void setCampaignInquiries(List<ApiClientInquiryWSDTO> campaignInquiries) {
+    public void setCampaignInquiries(List<ApiInquiryWSDTO> campaignInquiries) {
         this.campaignInquiries = campaignInquiries;
     }
 

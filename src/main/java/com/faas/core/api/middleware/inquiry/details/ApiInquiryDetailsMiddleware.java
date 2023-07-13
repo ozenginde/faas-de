@@ -1,10 +1,10 @@
 package com.faas.core.api.middleware.inquiry.details;
 
-import com.faas.core.api.framework.inquiry.details.ApiClientInquiryDetailsFramework;
+import com.faas.core.api.framework.inquiry.details.ApiInquiryDetailsFramework;
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
-import com.faas.core.api.model.ws.inquiry.details.ApiClientInquiryDetailsWSModel;
-import com.faas.core.api.model.ws.inquiry.details.dto.ApiClientInquiryDetailsWSDTO;
+import com.faas.core.api.model.ws.inquiry.details.ApiInquiryDetailsWSModel;
+import com.faas.core.api.model.ws.inquiry.details.dto.ApiInquiryDetailsWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,24 +13,24 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class ApiClientInquiryDetailsMiddleware {
+public class ApiInquiryDetailsMiddleware {
 
 
     @Autowired
-    ApiClientInquiryDetailsFramework apiClientInquiryDetailsFramework;
+    ApiInquiryDetailsFramework apiClientInquiryDetailsFramework;
 
 
-    public ApiClientInquiryDetailsWSModel apiGetClientInquiryDetails(long agentId, long inquiryId) {
+    public ApiInquiryDetailsWSModel apiGetInquiryDetails(long agentId, long inquiryId) {
 
-        ApiClientInquiryDetailsWSModel response = new ApiClientInquiryDetailsWSModel();
+        ApiInquiryDetailsWSModel response = new ApiInquiryDetailsWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiClientInquiryDetailsWSDTO clientInquiryDetailsWSDTO  = apiClientInquiryDetailsFramework.apiGetClientInquiryDetailsService(agentId,inquiryId);
-        if (clientInquiryDetailsWSDTO != null){
-            response.setClientInquiryDetails(clientInquiryDetailsWSDTO);
+        ApiInquiryDetailsWSDTO inquiryDetailsWSDTO  = apiClientInquiryDetailsFramework.apiGetInquiryDetailsService(agentId,inquiryId);
+        if (inquiryDetailsWSDTO != null){
+            response.setInquiryDetails(inquiryDetailsWSDTO);
         }
 
-        general.setOperation("apiGetClientInquiryDetails");
+        general.setOperation("apiGetInquiryDetails");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -41,17 +41,17 @@ public class ApiClientInquiryDetailsMiddleware {
 
 
 
-    public ApiSummaryWSModel apiGetClientInquirySummary(long agentId) {
+    public ApiSummaryWSModel apiGetAgentInquirySummary(long agentId) {
 
         ApiSummaryWSModel response = new ApiSummaryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiSummaryWSDTO> inquirySummaries  = apiClientInquiryDetailsFramework.apiGetClientInquirySummaryService(agentId);
+        List<ApiSummaryWSDTO> inquirySummaries  = apiClientInquiryDetailsFramework.apiGetAgentInquirySummaryService(agentId);
         if (inquirySummaries != null){
             response.setSummaries(inquirySummaries);
         }
 
-        general.setOperation("apiGetClientInquirySummary");
+        general.setOperation("apiGetAgentInquirySummary");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

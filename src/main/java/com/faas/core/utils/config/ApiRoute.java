@@ -38,15 +38,14 @@ public class ApiRoute {
     public static final String API_GET_CLIENT_OS_INT = "apigetclientosint";
 
 
-    public static final String API_GET_AGENT_INQUIRY = "apigetagentinquiry";
-    public static final String API_GET_CLIENT_INQUIRIES = "apigetclientinquiries";
-    public static final String API_GET_CLIENT_INQUIRIES_BY_STATE = "apigetclientinquiriesbystate";
-    public static final String API_GET_CLIENT_INQUIRY = "apigetclientinquiry";
-    public static final String API_UPDATE_CLIENT_INQUIRY = "apiupdateclientinquiry";
-    public static final String API_REMOVE_CLIENT_INQUIRY = "apiremoveclientinquiry";
+    public static final String API_GET_INQUIRIES = "apigetinquiries";
+    public static final String API_GET_INQUIRIES_BY_STATE = "apigetinquiriesbystate";
+    public static final String API_GET_INQUIRY = "apigetinquiry";
+    public static final String API_UPDATE_INQUIRY = "apiupdateinquiry";
+    public static final String API_REMOVE_INQUIRY = "apiremoveinquiry";
 
-    public static final String API_GET_CLIENT_INQUIRY_DETAILS = "apigetclientinquirydetails";
-    public static final String API_GET_CLIENT_INQUIRY_SUMMARY = "apigetclientinquirysummary";
+    public static final String API_GET_INQUIRY_DETAILS = "apigetinquirydetails";
+    public static final String API_GET_AGENT_INQUIRY_SUMMARY = "apigetagentinquirysummary";
 
 
     public static final String API_GET_NOTIFICATIONS = "apigetnotifications";
