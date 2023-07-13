@@ -2,8 +2,10 @@ package com.faas.core.api.middleware.inquiry.content;
 
 import com.faas.core.api.framework.inquiry.content.ApiInquiryFramework;
 import com.faas.core.api.model.ws.inquiry.content.ApiAgentInquiryWSModel;
+import com.faas.core.api.model.ws.inquiry.content.ApiCampaignInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
+import com.faas.core.api.model.ws.inquiry.content.dto.ApiCampaignInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -22,12 +24,12 @@ public class ApiInquiryMiddleware {
     ApiInquiryFramework apiInquiryFramework;
 
 
-    public ApiAgentInquiryWSModel apiGetAgentInquiry(long agentId) {
+    public ApiAgentInquiryWSModel apiGetAgentInquiry(long agentId,int reqPage,int reqSize) {
 
         ApiAgentInquiryWSModel response = new ApiAgentInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiAgentInquiryWSDTO agentInquiryWSDTO = apiInquiryFramework.apiGetInquiriesService(agentId);
+        ApiAgentInquiryWSDTO agentInquiryWSDTO = apiInquiryFramework.apiGetAgentInquiryService(agentId,reqPage,reqSize);
         if (agentInquiryWSDTO != null){
             response.setAgentInquiry(agentInquiryWSDTO);
         }
@@ -42,14 +44,14 @@ public class ApiInquiryMiddleware {
     }
 
 
-    public ApiAgentInquiryWSModel apiGetCampaignInquiry(long agentId, String campaignId) {
+    public ApiCampaignInquiryWSModel apiGetCampaignInquiry(long agentId, String campaignId,int reqPage,int reqSize) {
 
-        ApiAgentInquiryWSModel response = new ApiAgentInquiryWSModel();
+        ApiCampaignInquiryWSModel response = new ApiCampaignInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiAgentInquiryWSDTO agentInquiryWSDTO = apiInquiryFramework.apiGetInquiriesByStateService(agentId,campaignId);
-        if (agentInquiryWSDTO != null){
-            response.setAgentInquiry(agentInquiryWSDTO);
+        ApiCampaignInquiryWSDTO campaignInquiryWSDTO = apiInquiryFramework.apiGetCampaignInquiryService(agentId,campaignId,reqPage,reqSize);
+        if (campaignInquiryWSDTO != null){
+            response.setCampaignInquiry(campaignInquiryWSDTO);
         }
 
         general.setOperation("apiGetCampaignInquiry");
@@ -62,12 +64,12 @@ public class ApiInquiryMiddleware {
     }
 
 
-    public ApiAgentInquiryWSModel apiGetInquiries(long agentId,String inquiryState) {
+    public ApiAgentInquiryWSModel apiGetInquiries(long agentId,String inquiryState,int reqPage,int reqSize) {
 
         ApiAgentInquiryWSModel response = new ApiAgentInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiAgentInquiryWSDTO agentInquiryWSDTO = apiInquiryFramework.apiGetInquiriesService(agentId);
+        ApiAgentInquiryWSDTO agentInquiryWSDTO = apiInquiryFramework.apiGetInquiriesService(agentId,inquiryState,reqPage,reqSize);
         if (agentInquiryWSDTO != null){
             response.setAgentInquiry(agentInquiryWSDTO);
         }

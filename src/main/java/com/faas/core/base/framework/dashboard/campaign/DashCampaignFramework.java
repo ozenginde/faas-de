@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class DashboardCampaignFramework {
+public class DashCampaignFramework {
 
     @Autowired
     AppUtils appUtils;

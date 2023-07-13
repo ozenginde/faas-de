@@ -1,8 +1,7 @@
-package com.faas.core.base.endpoint.controller.dashboard.operation;
+package com.faas.core.base.endpoint.controller.dashboard.session;
 
-import com.faas.core.base.middleware.dashboard.operation.DashboardOperationMiddleware;
-import com.faas.core.base.model.ws.client.content.AllClientsWSModel;
-import com.faas.core.base.model.ws.dashboard.operation.DashboardOperationWSModel;
+import com.faas.core.base.middleware.dashboard.session.DashSessionMiddleware;
+import com.faas.core.base.model.ws.dashboard.session.DashboardSessionWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping(value = AppConstant.API_VERSION + "/base/dashboard/operation/")
-public class DashboardOperationController {
+@RequestMapping(value = AppConstant.API_VERSION + "/base/dashboard/session/")
+public class DashSessionController {
 
 
     @Autowired
-    DashboardOperationMiddleware dashboardOperationMiddleware;
+    DashSessionMiddleware dashSessionMiddleware;
 
 
     @RequestMapping(value = BaseRoute.GET_ALL_CLIENTS, method = RequestMethod.POST)
-    public ResponseEntity<?> getDashboardOperations(@RequestParam long userId,
-                                                    @RequestParam int reqPage,
-                                                    @RequestParam int reqSize) {
+    public ResponseEntity<?> getDashboardSessions(@RequestParam long userId,
+                                                   @RequestParam int reqPage,
+                                                   @RequestParam int reqSize) {
 
-        DashboardOperationWSModel response = dashboardOperationMiddleware.getDashboardOperations(userId,reqPage,reqSize);
+        DashboardSessionWSModel response = dashSessionMiddleware.getDashboardSessions(userId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

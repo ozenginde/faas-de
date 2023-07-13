@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class DashboardInquiryFramework {
+public class DashInquiryFramework {
 
     @Autowired
     AppUtils appUtils;

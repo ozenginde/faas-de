@@ -1,6 +1,6 @@
 package com.faas.core.base.endpoint.controller.dashboard.content;
 
-import com.faas.core.base.middleware.dashboard.content.DashboardMiddleware;
+import com.faas.core.base.middleware.dashboard.content.DashMiddleware;
 import com.faas.core.base.model.ws.dashboard.content.DashboardWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = AppConstant.API_VERSION + "/base/dashboard/")
-public class DashboardController {
+public class DashController {
 
 
     @Autowired
-    DashboardMiddleware dashboardMiddleware;
+    DashMiddleware dashMiddleware;
 
 
     @RequestMapping(value = BaseRoute.GET_ALL_CLIENTS, method = RequestMethod.POST)
@@ -27,7 +27,7 @@ public class DashboardController {
                                           @RequestParam int reqPage,
                                           @RequestParam int reqSize) {
 
-        DashboardWSModel response = dashboardMiddleware.getDashboard(userId,reqPage,reqSize);
+        DashboardWSModel response = dashMiddleware.getDashboard(userId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

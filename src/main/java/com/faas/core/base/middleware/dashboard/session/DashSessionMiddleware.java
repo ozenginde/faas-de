@@ -1,6 +1,6 @@
 package com.faas.core.base.middleware.dashboard.session;
 
-import com.faas.core.base.framework.dashboard.session.DashboardSessionFramework;
+import com.faas.core.base.framework.dashboard.session.DashSessionFramework;
 import com.faas.core.base.model.ws.client.content.dto.AllClientsWSDTO;
 import com.faas.core.base.model.ws.dashboard.session.DashboardSessionWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class DashboardSessionMiddleware {
+public class DashSessionMiddleware {
 
 
     @Autowired
-    DashboardSessionFramework dashboardSessionFramework;
+    DashSessionFramework dashSessionFramework;
 
 
     public DashboardSessionWSModel getDashboardSessions(long userId, int reqPage, int reqSize) {

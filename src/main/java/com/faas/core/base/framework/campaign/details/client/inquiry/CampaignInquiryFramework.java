@@ -91,6 +91,7 @@ public class CampaignInquiryFramework {
             CampaignInquiryWSDTO campaignInquiryWSDTO = new CampaignInquiryWSDTO();
             campaignInquiryWSDTO.setPagination(inquiryMapper.createInquiryPagination(inquiryDBModelPage));
             campaignInquiryWSDTO.setInquiries(inquiryMapper.createInquiryWSDTOS(inquiryDBModelPage.getContent()));
+
             return campaignInquiryWSDTO;
         }
         return null;
@@ -113,7 +114,7 @@ public class CampaignInquiryFramework {
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
 
-            clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
+            clientDBModel.get().setClientState(AppConstant.NEW_INQUIRY);
             clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             clientRepository.save(clientDBModel.get());
 

@@ -1,7 +1,7 @@
-package com.faas.core.base.endpoint.controller.dashboard.flow;
+package com.faas.core.base.endpoint.controller.dashboard.campaign;
 
-import com.faas.core.base.middleware.dashboard.flow.DashboardFlowMiddleware;
-import com.faas.core.base.model.ws.dashboard.flow.DashboardFlowWSModel;
+import com.faas.core.base.middleware.dashboard.campaign.DashCampaignMiddleware;
+import com.faas.core.base.model.ws.dashboard.campaign.DashboardCampaignWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping(value = AppConstant.API_VERSION + "/base/dashboard/flow/")
-public class DashboardFlowController {
+@RequestMapping(value = AppConstant.API_VERSION + "/base/dashboard/campaign/")
+public class DashCampaignController {
 
 
     @Autowired
-    DashboardFlowMiddleware dashboardFlowMiddleware;
+    DashCampaignMiddleware dashCampaignMiddleware;
 
 
     @RequestMapping(value = BaseRoute.GET_ALL_CLIENTS, method = RequestMethod.POST)
-    public ResponseEntity<?> getDashboardFlows(@RequestParam long userId,
-                                               @RequestParam int reqPage,
-                                               @RequestParam int reqSize) {
+    public ResponseEntity<?> getDashCampaigns(@RequestParam long userId,
+                                              @RequestParam int reqPage,
+                                              @RequestParam int reqSize) {
 
-        DashboardFlowWSModel response = dashboardFlowMiddleware.getDashboardFlows(userId,reqPage,reqSize);
+        DashboardCampaignWSModel response = dashCampaignMiddleware.getDashCampaigns(userId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

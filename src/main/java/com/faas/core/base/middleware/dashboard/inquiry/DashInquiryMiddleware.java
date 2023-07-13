@@ -1,7 +1,7 @@
-package com.faas.core.base.middleware.dashboard.flow;
+package com.faas.core.base.middleware.dashboard.inquiry;
 
-import com.faas.core.base.framework.dashboard.inquiry.DashboardInquiryFramework;
-import com.faas.core.base.model.ws.dashboard.flow.DashboardFlowWSModel;
+import com.faas.core.base.framework.dashboard.inquiry.DashInquiryFramework;
+import com.faas.core.base.model.ws.dashboard.inquiry.DashboardInquiryWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +9,20 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class DashboardFlowMiddleware {
+public class DashInquiryMiddleware {
 
 
     @Autowired
-    DashboardInquiryFramework dashboardInquiryFramework;
+    DashInquiryFramework dashInquiryFramework;
 
 
-    public DashboardFlowWSModel getDashboardFlows(long userId, int reqPage, int reqSize) {
+    public DashboardInquiryWSModel getDashboardInquiries(long userId, int reqPage, int reqSize) {
 
-        DashboardFlowWSModel response = new DashboardFlowWSModel();
+        DashboardInquiryWSModel response = new DashboardInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
-        general.setOperation("getDashboardFlows");
+        general.setOperation("getDashboardInquiries");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

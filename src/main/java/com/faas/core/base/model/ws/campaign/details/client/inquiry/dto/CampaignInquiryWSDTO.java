@@ -10,7 +10,6 @@ public class CampaignInquiryWSDTO {
     private PaginationWSDTO pagination;
     private List<InquiryWSDTO>inquiries;
 
-
     public CampaignInquiryWSDTO() {
     }
 

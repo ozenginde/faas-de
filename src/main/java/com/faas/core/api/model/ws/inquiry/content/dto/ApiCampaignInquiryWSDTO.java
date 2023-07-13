@@ -4,16 +4,16 @@ import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 
 import java.util.List;
 
-public class ApiAgentInquiryWSDTO {
+public class ApiCampaignInquiryWSDTO {
 
     private List<ApiSummaryWSDTO>inquirySummary;
     private List<ApiInquiryWSDTO>readyInquiries;
     private List<ApiInquiryWSDTO>activeInquiries;
 
-    public ApiAgentInquiryWSDTO() {
+    public ApiCampaignInquiryWSDTO() {
     }
 
-    public ApiAgentInquiryWSDTO(List<ApiSummaryWSDTO> inquirySummary, List<ApiInquiryWSDTO> readyInquiries, List<ApiInquiryWSDTO> activeInquiries) {
+    public ApiCampaignInquiryWSDTO(List<ApiSummaryWSDTO> inquirySummary, List<ApiInquiryWSDTO> readyInquiries, List<ApiInquiryWSDTO> activeInquiries) {
         this.inquirySummary = inquirySummary;
         this.readyInquiries = readyInquiries;
         this.activeInquiries = activeInquiries;

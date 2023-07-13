@@ -1,4 +1,4 @@
-package com.faas.core.base.framework.dashboard.content;
+package com.faas.core.base.framework.dashboard.session;
 
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.ws.client.content.dto.ClientsByStateWSDTO;
@@ -9,20 +9,19 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class DashboardFramework {
-
+public class DashSessionFramework {
 
     @Autowired
     AppUtils appUtils;
 
 
-    public ClientsByStateWSDTO getDashboardService() {
+    public ClientsByStateWSDTO fillClientsWSDTO(Page<ClientDBModel> clientDBModelPage) {
 
         ClientsByStateWSDTO clientsByStateWSDTO = new ClientsByStateWSDTO();
 
-
         return clientsByStateWSDTO;
     }
+
 
 
 

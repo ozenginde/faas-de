@@ -1,7 +1,7 @@
-package com.faas.core.base.endpoint.controller.dashboard.campaign;
+package com.faas.core.base.endpoint.controller.dashboard.inquiry;
 
-import com.faas.core.base.middleware.dashboard.campaign.DashboardCampaignMiddleware;
-import com.faas.core.base.model.ws.dashboard.campaign.DashboardCampaignWSModel;
+import com.faas.core.base.middleware.dashboard.inquiry.DashInquiryMiddleware;
+import com.faas.core.base.model.ws.dashboard.inquiry.DashboardInquiryWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping(value = AppConstant.API_VERSION + "/base/dashboard/campaign/")
-public class DashboardCampaignController {
+@RequestMapping(value = AppConstant.API_VERSION + "/base/dashboard/inquiry/")
+public class DashInquiryController {
 
 
     @Autowired
-    DashboardCampaignMiddleware dashboardCampaignMiddleware;
+    DashInquiryMiddleware dashInquiryMiddleware;
 
 
     @RequestMapping(value = BaseRoute.GET_ALL_CLIENTS, method = RequestMethod.POST)
-    public ResponseEntity<?> getDashboardCampaigns(@RequestParam long userId,
+    public ResponseEntity<?> getDashboardInquiries(@RequestParam long userId,
                                                    @RequestParam int reqPage,
                                                    @RequestParam int reqSize) {
 
-        DashboardCampaignWSModel response = dashboardCampaignMiddleware.getDashboardCampaigns(userId,reqPage,reqSize);
+        DashboardInquiryWSModel response = dashInquiryMiddleware.getDashboardInquiries(userId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

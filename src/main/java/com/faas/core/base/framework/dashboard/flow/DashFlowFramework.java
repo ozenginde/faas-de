@@ -1,4 +1,4 @@
-package com.faas.core.base.framework.dashboard.session;
+package com.faas.core.base.framework.dashboard.flow;
 
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.ws.client.content.dto.ClientsByStateWSDTO;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class DashboardSessionFramework {
+public class DashFlowFramework {
 
     @Autowired
     AppUtils appUtils;
