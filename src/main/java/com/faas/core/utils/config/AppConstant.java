@@ -62,6 +62,7 @@ public class AppConstant {
     public static final String FINISHED_INQUIRY = "FINISHED_INQUIRY";
     public static final String ALL_INQUIRIES = "ALL_INQUIRIES";
 
+    public static final String NEW_FLOW = "NEW_FLOW";
     public static final String READY_FLOW = "READY_FLOW";
     public static final String ACTIVE_FLOW = "ACTIVE_FLOW";
     public static final String FINISHED_FLOW = "FINISHED_FLOW";

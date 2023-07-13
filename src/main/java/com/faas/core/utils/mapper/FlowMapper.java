@@ -47,7 +47,7 @@ public class FlowMapper {
         flowDBModel.setProcessCategory(campaignDBModel.getProcessCategory());
         flowDBModel.setAgentId(agentDBModel.getId());
         flowDBModel.setAgentName(agentDBModel.getUserName());
-        flowDBModel.setFlowState(AppConstant.READY_FLOW);
+        flowDBModel.setFlowState(AppConstant.NEW_FLOW);
         flowDBModel.setuDate(appUtils.getCurrentTimeStamp());
         flowDBModel.setcDate(appUtils.getCurrentTimeStamp());
         flowDBModel.setStatus(1);
