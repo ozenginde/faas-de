@@ -48,6 +48,39 @@ public class UtilsSettingsMiddleware {
         return response;
     }
 
+    public UtilSettingsWSModel removeAllFlows(long userId) {
+
+        UtilSettingsWSModel response = new UtilSettingsWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        utilsSettingsFramework.removeAllFlowsService();
+
+        general.setOperation("removeAllFlows");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public UtilSettingsWSModel removeAllInquiries(long userId) {
+
+        UtilSettingsWSModel response = new UtilSettingsWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        utilsSettingsFramework.removeAllInquiriesService();
+
+        general.setOperation("removeAllInquiries");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
 
     public UtilSettingsWSModel removeSelectedTables(long userId,String selected) {
 

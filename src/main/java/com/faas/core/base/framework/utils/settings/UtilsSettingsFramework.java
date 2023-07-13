@@ -164,6 +164,46 @@ public class UtilsSettingsFramework {
     }
 
 
+    public void removeAllFlowsService() {
+
+        clientRepository.deleteAll();
+        clientDataRepository.deleteAll();
+        clientEmailRepository.deleteAll();
+        clientPhoneRepository.deleteAll();
+        clientAddressRepository.deleteAll();
+        sessionRepository.deleteAll();
+        operationRepository.deleteAll();
+        emailMessageRepository.deleteAll();
+        pushMessageRepository.deleteAll();
+        sipCallRepository.deleteAll();
+        smsMessageRepository.deleteAll();
+        wappCallRepository.deleteAll();
+        wappMessageRepository.deleteAll();
+    }
+
+
+
+
+    public void removeAllInquiriesService() {
+
+        clientRepository.deleteAll();
+        clientDataRepository.deleteAll();
+        clientEmailRepository.deleteAll();
+        clientPhoneRepository.deleteAll();
+        clientAddressRepository.deleteAll();
+        sessionRepository.deleteAll();
+        operationRepository.deleteAll();
+        emailMessageRepository.deleteAll();
+        pushMessageRepository.deleteAll();
+        sipCallRepository.deleteAll();
+        smsMessageRepository.deleteAll();
+        wappCallRepository.deleteAll();
+        wappMessageRepository.deleteAll();
+    }
+
+
+
+
     public void removeSelectedTablesService(String selected) {
 
         if (selected.equalsIgnoreCase(AppConstant.SCENARIO_TABLES)){

@@ -45,6 +45,29 @@ public class UtilsSettingsController {
     }
 
 
+    @RequestMapping(value = BaseRoute.REMOVE_ALL_FLOWS, method = RequestMethod.POST)
+    public ResponseEntity<?> removeAllFlows(@RequestParam long userId) {
+
+        UtilSettingsWSModel response = utilsSettingsMiddleware.removeAllFlows(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+    @RequestMapping(value = BaseRoute.REMOVE_ALL_FLOWS, method = RequestMethod.POST)
+    public ResponseEntity<?> removeAllInquiries(@RequestParam long userId) {
+
+        UtilSettingsWSModel response = utilsSettingsMiddleware.removeAllInquiries(userId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
     @RequestMapping(value = BaseRoute.REMOVE_SELECTED_TABLES, method = RequestMethod.POST)
     public ResponseEntity<?> removeSelectedTables(@RequestParam long userId,
                                                   @RequestParam String selected) {
