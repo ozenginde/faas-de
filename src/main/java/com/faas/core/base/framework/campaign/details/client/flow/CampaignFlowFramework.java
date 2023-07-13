@@ -123,7 +123,6 @@ public class CampaignFlowFramework {
             if (campaignDBModel.isPresent() && clientDBModel.isPresent() && campaignAgents.size() > 0) {
                 Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgents.get(0).getAgentId());
                 if (agentDBModel.isPresent()) {
-
                     clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
                     clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                     clientRepository.save(clientDBModel.get());
