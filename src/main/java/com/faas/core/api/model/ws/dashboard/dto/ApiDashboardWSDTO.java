@@ -8,45 +8,45 @@ import java.util.List;
 
 public class ApiDashboardWSDTO {
 
-    private ApiSessionWSDTO readySessions;
-    private ApiSessionWSDTO activeSessions;
-    private ApiInquiryWSDTO dashInquiries;
+    private ApiSessionWSDTO readySession;
+    private ApiSessionWSDTO activeSession;
+    private ApiInquiryWSDTO dashInquiry;
     private List<ApiCampaignWSDTO> dashCampaigns;
     private List<ApiDashSummaryWSDTO> dashSummaries;
 
     public ApiDashboardWSDTO() {
     }
 
-    public ApiDashboardWSDTO(ApiSessionWSDTO readySessions, ApiSessionWSDTO activeSessions, ApiInquiryWSDTO dashInquiries, List<ApiCampaignWSDTO> dashCampaigns, List<ApiDashSummaryWSDTO> dashSummaries) {
-        this.readySessions = readySessions;
-        this.activeSessions = activeSessions;
-        this.dashInquiries = dashInquiries;
+    public ApiDashboardWSDTO(ApiSessionWSDTO readySession, ApiSessionWSDTO activeSession, ApiInquiryWSDTO dashInquiry, List<ApiCampaignWSDTO> dashCampaigns, List<ApiDashSummaryWSDTO> dashSummaries) {
+        this.readySession = readySession;
+        this.activeSession = activeSession;
+        this.dashInquiry = dashInquiry;
         this.dashCampaigns = dashCampaigns;
         this.dashSummaries = dashSummaries;
     }
 
-    public ApiSessionWSDTO getReadySessions() {
-        return readySessions;
+    public ApiSessionWSDTO getReadySession() {
+        return readySession;
     }
 
-    public void setReadySessions(ApiSessionWSDTO readySessions) {
-        this.readySessions = readySessions;
+    public void setReadySession(ApiSessionWSDTO readySession) {
+        this.readySession = readySession;
     }
 
-    public ApiSessionWSDTO getActiveSessions() {
-        return activeSessions;
+    public ApiSessionWSDTO getActiveSession() {
+        return activeSession;
     }
 
-    public void setActiveSessions(ApiSessionWSDTO activeSessions) {
-        this.activeSessions = activeSessions;
+    public void setActiveSession(ApiSessionWSDTO activeSession) {
+        this.activeSession = activeSession;
     }
 
-    public ApiInquiryWSDTO getDashInquiries() {
-        return dashInquiries;
+    public ApiInquiryWSDTO getDashInquiry() {
+        return dashInquiry;
     }
 
-    public void setDashInquiries(ApiInquiryWSDTO dashInquiries) {
-        this.dashInquiries = dashInquiries;
+    public void setDashInquiry(ApiInquiryWSDTO dashInquiry) {
+        this.dashInquiry = dashInquiry;
     }
 
     public List<ApiCampaignWSDTO> getDashCampaigns() {
