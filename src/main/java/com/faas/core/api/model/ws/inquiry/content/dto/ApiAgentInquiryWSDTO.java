@@ -6,17 +6,34 @@ import java.util.List;
 
 public class ApiAgentInquiryWSDTO {
 
+    private ApiInquiryWSDTO readyInquiry;
+    private ApiInquiryWSDTO activeInquiry;
     private List<ApiSummaryWSDTO>inquirySummary;
-    private List<ApiInquiryWSDTO>readyInquiries;
-    private List<ApiInquiryWSDTO>activeInquiries;
+
 
     public ApiAgentInquiryWSDTO() {
     }
 
-    public ApiAgentInquiryWSDTO(List<ApiSummaryWSDTO> inquirySummary, List<ApiInquiryWSDTO> readyInquiries, List<ApiInquiryWSDTO> activeInquiries) {
+    public ApiAgentInquiryWSDTO(ApiInquiryWSDTO readyInquiry, ApiInquiryWSDTO activeInquiry, List<ApiSummaryWSDTO> inquirySummary) {
+        this.readyInquiry = readyInquiry;
+        this.activeInquiry = activeInquiry;
         this.inquirySummary = inquirySummary;
-        this.readyInquiries = readyInquiries;
-        this.activeInquiries = activeInquiries;
+    }
+
+    public ApiInquiryWSDTO getReadyInquiry() {
+        return readyInquiry;
+    }
+
+    public void setReadyInquiry(ApiInquiryWSDTO readyInquiry) {
+        this.readyInquiry = readyInquiry;
+    }
+
+    public ApiInquiryWSDTO getActiveInquiry() {
+        return activeInquiry;
+    }
+
+    public void setActiveInquiry(ApiInquiryWSDTO activeInquiry) {
+        this.activeInquiry = activeInquiry;
     }
 
     public List<ApiSummaryWSDTO> getInquirySummary() {
@@ -25,21 +42,5 @@ public class ApiAgentInquiryWSDTO {
 
     public void setInquirySummary(List<ApiSummaryWSDTO> inquirySummary) {
         this.inquirySummary = inquirySummary;
-    }
-
-    public List<ApiInquiryWSDTO> getReadyInquiries() {
-        return readyInquiries;
-    }
-
-    public void setReadyInquiries(List<ApiInquiryWSDTO> readyInquiries) {
-        this.readyInquiries = readyInquiries;
-    }
-
-    public List<ApiInquiryWSDTO> getActiveInquiries() {
-        return activeInquiries;
-    }
-
-    public void setActiveInquiries(List<ApiInquiryWSDTO> activeInquiries) {
-        this.activeInquiries = activeInquiries;
     }
 }

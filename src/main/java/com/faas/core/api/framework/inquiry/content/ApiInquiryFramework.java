@@ -54,9 +54,6 @@ public class ApiInquiryFramework {
         List<ApiInquiryWSDTO> readyInquiries = new ArrayList<>();
         List<ApiInquiryWSDTO> activeInquiries = new ArrayList<>();
 
-
-        agentInquiryWSDTO.setActiveInquiries(activeInquiries);
-
         return agentInquiryWSDTO;
     }
 

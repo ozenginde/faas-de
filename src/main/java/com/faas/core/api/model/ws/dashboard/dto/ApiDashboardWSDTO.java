@@ -1,36 +1,36 @@
 package com.faas.core.api.model.ws.dashboard.dto;
 
-import com.faas.core.api.model.ws.campaign.content.dto.ApiCampaignWSDTO;
+import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.session.content.dto.ApiAgentSessionWSDTO;
 
 import java.util.List;
 
 public class ApiDashboardWSDTO {
 
-    private ApiAgentSessionWSDTO agentSession;
-    private List<ApiCampaignWSDTO> dashCampaigns;
+    private ApiAgentSessionWSDTO dashSession;
+    private List<ApiSummaryWSDTO> dashSummaries;
 
     public ApiDashboardWSDTO() {
     }
 
-    public ApiDashboardWSDTO(ApiAgentSessionWSDTO agentSession, List<ApiCampaignWSDTO> dashCampaigns) {
-        this.agentSession = agentSession;
-        this.dashCampaigns = dashCampaigns;
+    public ApiDashboardWSDTO(ApiAgentSessionWSDTO dashSession, List<ApiSummaryWSDTO> dashSummaries) {
+        this.dashSession = dashSession;
+        this.dashSummaries = dashSummaries;
     }
 
-    public ApiAgentSessionWSDTO getAgentSession() {
-        return agentSession;
+    public ApiAgentSessionWSDTO getDashSession() {
+        return dashSession;
     }
 
-    public void setAgentSession(ApiAgentSessionWSDTO agentSession) {
-        this.agentSession = agentSession;
+    public void setDashSession(ApiAgentSessionWSDTO dashSession) {
+        this.dashSession = dashSession;
     }
 
-    public List<ApiCampaignWSDTO> getDashCampaigns() {
-        return dashCampaigns;
+    public List<ApiSummaryWSDTO> getDashSummaries() {
+        return dashSummaries;
     }
 
-    public void setDashCampaigns(List<ApiCampaignWSDTO> dashCampaigns) {
-        this.dashCampaigns = dashCampaigns;
+    public void setDashSummaries(List<ApiSummaryWSDTO> dashSummaries) {
+        this.dashSummaries = dashSummaries;
     }
 }

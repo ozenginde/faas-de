@@ -9,16 +9,14 @@ public class ApiAgentCampaignWSDTO {
 
     private List<ApiCampaignWSDTO> manualCampaigns;
     private List<ApiCampaignWSDTO> inquiryCampaigns;
-    private List<ApiInquiryWSDTO> campaignInquiries;
     private List<ApiSummaryWSDTO> campaignSummary;
 
     public ApiAgentCampaignWSDTO() {
     }
 
-    public ApiAgentCampaignWSDTO(List<ApiCampaignWSDTO> manualCampaigns, List<ApiCampaignWSDTO> inquiryCampaigns, List<ApiInquiryWSDTO> campaignInquiries, List<ApiSummaryWSDTO> campaignSummary) {
+    public ApiAgentCampaignWSDTO(List<ApiCampaignWSDTO> manualCampaigns, List<ApiCampaignWSDTO> inquiryCampaigns, List<ApiSummaryWSDTO> campaignSummary) {
         this.manualCampaigns = manualCampaigns;
         this.inquiryCampaigns = inquiryCampaigns;
-        this.campaignInquiries = campaignInquiries;
         this.campaignSummary = campaignSummary;
     }
 
@@ -36,14 +34,6 @@ public class ApiAgentCampaignWSDTO {
 
     public void setInquiryCampaigns(List<ApiCampaignWSDTO> inquiryCampaigns) {
         this.inquiryCampaigns = inquiryCampaigns;
-    }
-
-    public List<ApiInquiryWSDTO> getCampaignInquiries() {
-        return campaignInquiries;
-    }
-
-    public void setCampaignInquiries(List<ApiInquiryWSDTO> campaignInquiries) {
-        this.campaignInquiries = campaignInquiries;
     }
 
     public List<ApiSummaryWSDTO> getCampaignSummary() {

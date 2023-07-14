@@ -44,9 +44,9 @@ public class ApiDashboardMiddleware {
         ApiSummaryWSModel response = new ApiSummaryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiSummaryWSDTO> dashboardSummaries = apiDashboardFramework.apiGetDashboardSummaryService(agentId);
-        if (dashboardSummaries != null){
-            response.setSummaries(dashboardSummaries);
+        List<ApiSummaryWSDTO> dashSummaries = apiDashboardFramework.apiGetDashboardSummaryService(agentId);
+        if (dashSummaries != null){
+            response.setSummaries(dashSummaries);
         }
 
         general.setOperation("apiGetDashboardSummary");

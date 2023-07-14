@@ -7,22 +7,14 @@ import java.util.List;
 
 public class ApiSessionWSDTO {
 
-    private PaginationWSDTO pagination;
     private List<SessionDBModel> sessions;
+    private PaginationWSDTO pagination;
 
     public ApiSessionWSDTO() {
     }
 
-    public ApiSessionWSDTO(PaginationWSDTO pagination, List<SessionDBModel> sessions) {
-        this.pagination = pagination;
+    public ApiSessionWSDTO(List<SessionDBModel> sessions, PaginationWSDTO pagination) {
         this.sessions = sessions;
-    }
-
-    public PaginationWSDTO getPagination() {
-        return pagination;
-    }
-
-    public void setPagination(PaginationWSDTO pagination) {
         this.pagination = pagination;
     }
 
@@ -32,5 +24,13 @@ public class ApiSessionWSDTO {
 
     public void setSessions(List<SessionDBModel> sessions) {
         this.sessions = sessions;
+    }
+
+    public PaginationWSDTO getPagination() {
+        return pagination;
+    }
+
+    public void setPagination(PaginationWSDTO pagination) {
+        this.pagination = pagination;
     }
 }

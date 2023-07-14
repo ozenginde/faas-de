@@ -1,9 +1,10 @@
 package com.faas.core.api.endpoint.controller.session.content;
 
-import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
-import com.faas.core.api.model.ws.session.content.*;
-import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.api.middleware.session.content.ApiSessionMiddleware;
+import com.faas.core.api.model.ws.session.content.ApiAgentSessionWSModel;
+import com.faas.core.api.model.ws.session.content.ApiCampaignSessionWSModel;
+import com.faas.core.api.model.ws.session.content.ApiSessionWSModel;
+import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

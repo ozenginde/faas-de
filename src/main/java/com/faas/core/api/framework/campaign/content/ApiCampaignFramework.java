@@ -62,7 +62,6 @@ public class ApiCampaignFramework {
         apiAgentCampaignWSDTO.setManualCampaigns(manualCampaigns);
         apiAgentCampaignWSDTO.setInquiryCampaigns(inquiryCampaigns);
         apiAgentCampaignWSDTO.setCampaignSummary(campaignMapper.mapCampaignSummary(agentId));
-        apiAgentCampaignWSDTO.setCampaignInquiries(new ArrayList<>());
 
         return apiAgentCampaignWSDTO;
     }
@@ -76,7 +75,6 @@ public class ApiCampaignFramework {
         if (processDBModel.isPresent()) {
             campaignWSDTO.setCampaignProcess(processDBModel.get());
         }
-        campaignWSDTO.setCampaignSummary(campaignMapper.mapCampaignSummary(agentId));
         return campaignWSDTO;
     }
 

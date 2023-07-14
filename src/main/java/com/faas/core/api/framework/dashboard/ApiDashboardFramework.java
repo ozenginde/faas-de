@@ -53,8 +53,7 @@ public class ApiDashboardFramework {
     public ApiDashboardWSDTO apiGetDashboardService(long agentId){
 
         ApiDashboardWSDTO dashboardWSDTO = new ApiDashboardWSDTO();
-        dashboardWSDTO.setAgentSession(getApiDashboardSessions(agentId,AppConstant.ALL_SESSIONS,0,20));
-        dashboardWSDTO.setDashCampaigns(getDashCampaignsService(agentId));
+
         return dashboardWSDTO;
     }
 
@@ -102,8 +101,6 @@ public class ApiDashboardFramework {
         if (processDBModels.size()>0){
             campaignWSDTO.setCampaignProcess(processDBModels.get(0));
         }
-        campaignWSDTO.setCampaignSummary(getAgentCampaignSummary(agentId,campaignDBModel.getId()));
-
         return campaignWSDTO;
     }
 
