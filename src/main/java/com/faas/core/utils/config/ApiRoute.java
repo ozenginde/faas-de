@@ -8,7 +8,10 @@ public class ApiRoute {
 
 
     public static final String API_GET_DASHBOARD = "apigetdashboard";
-    public static final String API_GET_DASHBOARD_SUMMARY = "apigetdashboardsummary";
+    public static final String API_GET_DASH_SESSION = "apigetdashsession";
+    public static final String API_GET_DASH_INQUIRY = "apigetdashinquiry";
+    public static final String API_GET_DASH_CAMPAIGN = "apigetdashcampaign";
+    public static final String API_GET_DASH_SUMMARY = "apigetdashsummary";
 
 
     public static final String API_GET_AGENT_CAMPAIGN = "apigetagentcampaign";
@@ -33,7 +36,6 @@ public class ApiRoute {
 
 
     public static final String API_GET_AGENT_INQUIRY = "apigetagentinquiry";
-    public static final String API_GET_CAMPAIGN_INQUIRY = "apigetcampaigninquiry";
     public static final String API_GET_INQUIRIES = "apigetinquiries";
     public static final String API_GET_INQUIRY = "apigetinquiry";
     public static final String API_UPDATE_INQUIRY = "apiupdateinquiry";

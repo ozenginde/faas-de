@@ -39,6 +39,7 @@ public interface SessionRepository extends PagingAndSortingRepository<SessionDBM
     Page<SessionDBModel>findAllBySessionState(String sessionState, Pageable pageable);
     Page<SessionDBModel>findAllByAgentId(long agentId, Pageable pageable);
     Page<SessionDBModel>findAllByAgentIdAndSessionState(long agentId, String sessionState, Pageable pageable);
+    Page<SessionDBModel>findAllByAgentIdAndSessionStateAndSessionType(long agentId, String sessionState,String sessionType, Pageable pageable);
     Page<SessionDBModel>findAllByCampaignId(String campaignId, Pageable pageable);
     Page<SessionDBModel>findAllByCampaignIdAndSessionState(String campaignId, String sessionState, Pageable pageable);
     Page<SessionDBModel>findAllByProcessId(String processId, Pageable pageable);

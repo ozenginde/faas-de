@@ -2,10 +2,8 @@ package com.faas.core.api.middleware.inquiry.content;
 
 import com.faas.core.api.framework.inquiry.content.ApiInquiryFramework;
 import com.faas.core.api.model.ws.inquiry.content.ApiAgentInquiryWSModel;
-import com.faas.core.api.model.ws.inquiry.content.ApiCampaignInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
-import com.faas.core.api.model.ws.inquiry.content.dto.ApiCampaignInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -44,24 +42,6 @@ public class ApiInquiryMiddleware {
     }
 
 
-    public ApiCampaignInquiryWSModel apiGetCampaignInquiry(long agentId, String campaignId,int reqPage,int reqSize) {
-
-        ApiCampaignInquiryWSModel response = new ApiCampaignInquiryWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        ApiCampaignInquiryWSDTO campaignInquiryWSDTO = apiInquiryFramework.apiGetCampaignInquiryService(agentId,campaignId,reqPage,reqSize);
-        if (campaignInquiryWSDTO != null){
-            response.setCampaignInquiry(campaignInquiryWSDTO);
-        }
-
-        general.setOperation("apiGetCampaignInquiry");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
     public ApiAgentInquiryWSModel apiGetInquiries(long agentId,String inquiryState,int reqPage,int reqSize) {
@@ -95,7 +75,6 @@ public class ApiInquiryMiddleware {
             inquiryWSDTOS.add(inquiryWSDTO);
         }
 
-        response.setInquiries(inquiryWSDTOS);
         general.setOperation("apiGetInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -117,7 +96,6 @@ public class ApiInquiryMiddleware {
             inquiryWSDTOS.add(inquiryWSDTO);
         }
 
-        response.setInquiries(inquiryWSDTOS);
         general.setOperation("apiUpdateInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -139,7 +117,6 @@ public class ApiInquiryMiddleware {
             inquiryWSDTOS.add(inquiryWSDTO);
         }
 
-        response.setInquiries(inquiryWSDTOS);
         general.setOperation("apiRemoveInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);

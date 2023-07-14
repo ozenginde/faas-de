@@ -3,7 +3,6 @@ package com.faas.core.api.endpoint.controller.inquiry.content;
 
 import com.faas.core.api.middleware.inquiry.content.ApiInquiryMiddleware;
 import com.faas.core.api.model.ws.inquiry.content.ApiAgentInquiryWSModel;
-import com.faas.core.api.model.ws.inquiry.content.ApiCampaignInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
@@ -38,20 +37,6 @@ public class ApiInquiryController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
-
-    @RequestMapping(value = ApiRoute.API_GET_CAMPAIGN_INQUIRY, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetCampaignInquiry(@RequestParam long agentId,
-                                                   @RequestParam String campaignId,
-                                                   @RequestParam int reqPage,
-                                                   @RequestParam int reqSize) {
-
-        ApiCampaignInquiryWSModel response = apiInquiryMiddleware.apiGetCampaignInquiry(agentId,campaignId,reqPage,reqSize);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
     @RequestMapping(value = ApiRoute.API_GET_INQUIRIES, method = RequestMethod.POST)

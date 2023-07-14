@@ -35,11 +35,11 @@ public class SessionHelper {
 
 
 
-    public ApiSessionWSDTO createApiSessionWSDTO(Page<SessionDBModel> sessionsPage) {
+    public ApiSessionWSDTO mapApiSessionWSDTO(Page<SessionDBModel> sessionPage) {
 
         ApiSessionWSDTO apiSessionWSDTO = new ApiSessionWSDTO();
-        apiSessionWSDTO.setSessions(sessionsPage.getContent());
-        PaginationWSDTO paginationWSDTO = sessionMapper.createSessionPaginationWSDTO(sessionsPage);
+        apiSessionWSDTO.setSessions(sessionPage.getContent());
+        PaginationWSDTO paginationWSDTO = sessionMapper.createSessionPaginationWSDTO(sessionPage);
         if (paginationWSDTO != null){
             apiSessionWSDTO.setPagination(paginationWSDTO);
         }

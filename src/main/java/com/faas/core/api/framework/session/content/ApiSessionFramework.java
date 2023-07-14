@@ -55,7 +55,6 @@ public class ApiSessionFramework {
         ApiAgentSessionWSDTO agentSessionWSDTO = new ApiAgentSessionWSDTO();
         agentSessionWSDTO.setReadySession(sessionHelper.getApiSessionWSDTO(agentId,AppConstant.READY_SESSION,reqPage,reqSize));
         agentSessionWSDTO.setActiveSession(sessionHelper.getApiSessionWSDTO(agentId,AppConstant.ACTIVE_SESSION,reqPage,reqSize));
-        agentSessionWSDTO.setSessionSummary(sessionMapper.mapSessionSummary((agentId)));
 
         return agentSessionWSDTO;
     }

@@ -1,7 +1,6 @@
 package com.faas.core.api.framework.inquiry.content;
 
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
-import com.faas.core.api.model.ws.inquiry.content.dto.ApiCampaignInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.InquiryHelper;
@@ -33,18 +32,6 @@ public class ApiInquiryFramework {
         return agentInquiryWSDTO;
     }
 
-
-    public ApiCampaignInquiryWSDTO apiGetCampaignInquiryService(long agentId,String campaignId,int reqPage,int reqSize){
-
-        ApiCampaignInquiryWSDTO campaignInquiryWSDTO = new ApiCampaignInquiryWSDTO();
-        List<ApiInquiryWSDTO> readyInquiries = new ArrayList<>();
-        List<ApiInquiryWSDTO> activeInquiries = new ArrayList<>();
-
-
-        campaignInquiryWSDTO.setActiveInquiries(activeInquiries);
-
-        return campaignInquiryWSDTO;
-    }
 
 
 

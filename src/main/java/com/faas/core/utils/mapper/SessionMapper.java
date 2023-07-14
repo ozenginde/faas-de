@@ -1,6 +1,7 @@
 package com.faas.core.utils.mapper;
 
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
+import com.faas.core.api.model.ws.session.content.dto.ApiSessionWSDTO;
 import com.faas.core.api.model.ws.session.details.dto.ApiSessionDetailsWSDTO;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
@@ -92,14 +93,6 @@ public class SessionMapper {
     @Autowired
     AppUtils appUtils;
 
-
-    public CampaignSessionWSDTO mapCampaignSessionWSDTO(Page<SessionDBModel> sessionPageModels){
-
-        CampaignSessionWSDTO campaignSessionWSDTO = new CampaignSessionWSDTO();
-        campaignSessionWSDTO.setSessions(mapSessionWSDTOS(sessionPageModels.getContent()));
-        campaignSessionWSDTO.setPagination(createSessionPaginationWSDTO(sessionPageModels));
-        return campaignSessionWSDTO;
-    }
 
 
     public List<SessionWSDTO> mapSessionWSDTOS(List<SessionDBModel>sessionDBModels){
@@ -199,6 +192,7 @@ public class SessionMapper {
     }
 
 
+
     public ApiSessionDetailsWSDTO mapApiSessionDetailsWSDTO(SessionDBModel sessionDBModel){
 
         ApiSessionDetailsWSDTO sessionDetailsWSDTO = new ApiSessionDetailsWSDTO();
@@ -216,18 +210,6 @@ public class SessionMapper {
 
 
 
-
-    public List<ApiSummaryWSDTO> mapSessionSummary(long agentId){
-
-        List<ApiSummaryWSDTO> sessionSummary = new ArrayList<>();
-        sessionSummary.add(new ApiSummaryWSDTO(AppConstant.TOTAL_CAMPAIGNS_SUMMARY,String.valueOf(campaignAgentRepository.countByAgentId(agentId))));
-        sessionSummary.add(new ApiSummaryWSDTO(AppConstant.TOTAL_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentId(agentId))));
-        sessionSummary.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.READY_SESSION))));
-        sessionSummary.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.ACTIVE_SESSION))));
-        sessionSummary.add(new ApiSummaryWSDTO(AppConstant.FINISHED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.FINISHED_SESSION))));
-
-        return sessionSummary;
-    }
 
 
 }
