@@ -30,12 +30,6 @@ public class ApiRoute {
 
     public static final String API_GET_AGENT_ASSETS = "apigetagentassets";
 
-    public static final String API_GET_CLIENTS = "apigetclients";
-    public static final String API_GET_CLIENT = "apigetclient";
-
-    public static final String API_GET_CLIENT_DETAILS = "apigetclientdetails";
-    public static final String API_GET_CLIENT_HOOK = "apigetclienthook";
-    public static final String API_GET_CLIENT_OS_INT = "apigetclientosint";
 
 
     public static final String API_GET_AGENT_INQUIRY = "apigetagentinquiry";

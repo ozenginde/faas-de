@@ -54,7 +54,6 @@ public class ApiDashboardFramework {
 
         ApiDashboardWSDTO dashboardWSDTO = new ApiDashboardWSDTO();
         dashboardWSDTO.setAgentSession(getApiDashboardSessions(agentId,AppConstant.ALL_SESSIONS,0,20));
-        dashboardWSDTO.setClientInquiries(new ArrayList<>());
         dashboardWSDTO.setDashCampaigns(getDashCampaignsService(agentId));
         return dashboardWSDTO;
     }
