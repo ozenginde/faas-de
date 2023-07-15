@@ -10,15 +10,15 @@ public class ApiDashCampaignWSDTO {
 
     private CampaignDBModel campaign;
     private ProcessDBModel campaignProcess;
-    private List<ApiSummaryWSDTO> campaignSummary;
+    private List<ApiSummaryWSDTO> summaries;
 
     public ApiDashCampaignWSDTO() {
     }
 
-    public ApiDashCampaignWSDTO(CampaignDBModel campaign, ProcessDBModel campaignProcess, List<ApiSummaryWSDTO> campaignSummary) {
+    public ApiDashCampaignWSDTO(CampaignDBModel campaign, ProcessDBModel campaignProcess, List<ApiSummaryWSDTO> summaries) {
         this.campaign = campaign;
         this.campaignProcess = campaignProcess;
-        this.campaignSummary = campaignSummary;
+        this.summaries = summaries;
     }
 
     public CampaignDBModel getCampaign() {
@@ -37,11 +37,11 @@ public class ApiDashCampaignWSDTO {
         this.campaignProcess = campaignProcess;
     }
 
-    public List<ApiSummaryWSDTO> getCampaignSummary() {
-        return campaignSummary;
+    public List<ApiSummaryWSDTO> getSummaries() {
+        return summaries;
     }
 
-    public void setCampaignSummary(List<ApiSummaryWSDTO> campaignSummary) {
-        this.campaignSummary = campaignSummary;
+    public void setSummaries(List<ApiSummaryWSDTO> summaries) {
+        this.summaries = summaries;
     }
 }

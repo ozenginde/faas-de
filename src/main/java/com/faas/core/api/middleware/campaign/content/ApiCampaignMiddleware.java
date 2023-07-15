@@ -5,6 +5,7 @@ import com.faas.core.api.model.ws.campaign.content.ApiAgentCampaignWSModel;
 import com.faas.core.api.model.ws.campaign.content.ApiCampaignWSModel;
 import com.faas.core.api.model.ws.campaign.content.dto.ApiAgentCampaignWSDTO;
 import com.faas.core.api.model.ws.campaign.content.dto.ApiCampaignWSDTO;
+import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
@@ -52,12 +53,12 @@ public class ApiCampaignMiddleware {
     }
 
 
-    public ApiCampaignWSModel apiGetCampaigns(long agentId) {
+    public ApiCampaignWSModel apiGetCampaigns(long agentId,String category) {
 
         ApiCampaignWSModel response = new ApiCampaignWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiCampaignWSDTO> apiCampaignWSDTOS = apiCampaignFramework.apiGetCampaignsService(agentId);
+        List<ApiCampaignWSDTO> apiCampaignWSDTOS = apiCampaignFramework.apiGetCampaignsService(agentId,category);
         if (apiCampaignWSDTOS != null){
             response.setCampaigns(apiCampaignWSDTOS);
         }
@@ -71,45 +72,6 @@ public class ApiCampaignMiddleware {
         return response;
     }
 
-
-    public ApiCampaignWSModel apiGetCampaignsByState(long agentId,String campaignState) {
-
-        ApiCampaignWSModel response = new ApiCampaignWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        List<ApiCampaignWSDTO> campaignWSDTOS = apiCampaignFramework.apiGetCampaignsByStateService(agentId,campaignState);
-        if (campaignWSDTOS != null){
-            response.setCampaigns(campaignWSDTOS);
-        }
-
-        general.setOperation("apiGetCampaignsByState");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public ApiCampaignWSModel apiGetCampaignsByCategory(long agentId, String campaignCategory) {
-
-        ApiCampaignWSModel response = new ApiCampaignWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        List<ApiCampaignWSDTO> campaignWSDTOS = apiCampaignFramework.apiGetCampaignsByCategoryService(agentId,campaignCategory);
-        if (campaignWSDTOS != null){
-            response.setCampaigns(campaignWSDTOS);
-        }
-
-        general.setOperation("apiGetCampaignsByCategory");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
     public ApiCampaignWSModel apiGetCampaign(long agentId,String campaignId) {
@@ -134,6 +96,22 @@ public class ApiCampaignMiddleware {
     }
 
 
+
+    public ApiSummaryWSModel apiGetAgentCampaignSummary(long agentId) {
+
+        ApiSummaryWSModel response = new ApiSummaryWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+
+
+        general.setOperation("getApiCampaign");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
 
 
 }

@@ -16,9 +16,8 @@ public class ApiRoute {
 
     public static final String API_GET_AGENT_CAMPAIGN = "apigetagentcampaign";
     public static final String API_GET_CAMPAIGNS = "apigetcampaigns";
-    public static final String API_GET_CAMPAIGNS_BY_STATE = "apigetcampaignsbystate";
-    public static final String API_GET_CAMPAIGNS_BY_CATEGORY = "apigetcampaignsbycategory";
     public static final String API_GET_CAMPAIGN = "apigetcampaign";
+    public static final String API_GET_AGENT_CAMPAIGN_SUMMARY = "apigetagentcampaignsummary";
 
 
     public static final String API_GET_CAMPAIGN_DETAILS = "apigetcampaigndetails";

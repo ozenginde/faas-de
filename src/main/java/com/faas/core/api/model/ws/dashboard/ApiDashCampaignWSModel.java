@@ -1,7 +1,6 @@
 package com.faas.core.api.model.ws.dashboard;
 
 import com.faas.core.api.model.ws.dashboard.dto.ApiDashCampaignWSDTO;
-import com.faas.core.api.model.ws.dashboard.dto.ApiDashSummaryWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;

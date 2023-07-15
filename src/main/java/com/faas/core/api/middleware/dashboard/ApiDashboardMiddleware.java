@@ -2,11 +2,11 @@ package com.faas.core.api.middleware.dashboard;
 
 import com.faas.core.api.framework.dashboard.ApiDashboardFramework;
 import com.faas.core.api.model.ws.dashboard.ApiDashCampaignWSModel;
-import com.faas.core.api.model.ws.dashboard.ApiDashSummaryWSModel;
 import com.faas.core.api.model.ws.dashboard.ApiDashboardWSModel;
 import com.faas.core.api.model.ws.dashboard.dto.ApiDashCampaignWSDTO;
-import com.faas.core.api.model.ws.dashboard.dto.ApiDashSummaryWSDTO;
 import com.faas.core.api.model.ws.dashboard.dto.ApiDashboardWSDTO;
+import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
+import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.api.model.ws.session.content.ApiSessionWSModel;
@@ -106,14 +106,14 @@ public class ApiDashboardMiddleware {
     }
 
 
-    public ApiDashSummaryWSModel apiGetDashSummary(long agentId) {
+    public ApiSummaryWSModel apiGetDashSummary(long agentId) {
 
-        ApiDashSummaryWSModel response = new ApiDashSummaryWSModel();
+        ApiSummaryWSModel response = new ApiSummaryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiDashSummaryWSDTO> dashSummaries = apiDashboardFramework.apiGetDashSummaryService(agentId);
-        if (dashSummaries != null){
-            response.setDashSummaries(dashSummaries);
+        List<ApiSummaryWSDTO> summaries = apiDashboardFramework.apiGetDashSummaryService(agentId);
+        if (summaries != null){
+            response.setSummaries(summaries);
         }
 
         general.setOperation("apiGetDashSummary");

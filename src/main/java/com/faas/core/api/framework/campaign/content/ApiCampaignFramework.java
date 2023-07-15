@@ -42,6 +42,18 @@ public class ApiCampaignFramework {
     AppUtils appUtils;
 
 
+    public ApiCampaignWSDTO fillApiCampaignWSDTO(long agentId, CampaignDBModel campaignDBModel) {
+
+        ApiCampaignWSDTO campaignWSDTO = new ApiCampaignWSDTO();
+        campaignWSDTO.setCampaign(campaignDBModel);
+        Optional<ProcessDBModel> processDBModel = processRepository.findById(campaignDBModel.getProcessId());
+        if (processDBModel.isPresent()) {
+            campaignWSDTO.setCampaignProcess(processDBModel.get());
+        }
+        return campaignWSDTO;
+    }
+
+
     public ApiAgentCampaignWSDTO apiGetAgentCampaignService(long agentId) {
 
         ApiAgentCampaignWSDTO apiAgentCampaignWSDTO = new ApiAgentCampaignWSDTO();
@@ -58,7 +70,6 @@ public class ApiCampaignFramework {
                 inquiryCampaigns.add(fillApiCampaignWSDTO(agentId, campaignDBModel.get()));
             }
         }
-
         apiAgentCampaignWSDTO.setManualCampaigns(manualCampaigns);
         apiAgentCampaignWSDTO.setInquiryCampaigns(inquiryCampaigns);
 
@@ -66,60 +77,21 @@ public class ApiCampaignFramework {
     }
 
 
-    public ApiCampaignWSDTO fillApiCampaignWSDTO(long agentId, CampaignDBModel campaignDBModel) {
-
-        ApiCampaignWSDTO campaignWSDTO = new ApiCampaignWSDTO();
-        campaignWSDTO.setCampaign(campaignDBModel);
-        Optional<ProcessDBModel> processDBModel = processRepository.findById(campaignDBModel.getProcessId());
-        if (processDBModel.isPresent()) {
-            campaignWSDTO.setCampaignProcess(processDBModel.get());
-        }
-        return campaignWSDTO;
-    }
-
-
-    public List<ApiCampaignWSDTO> apiGetCampaignsService(long agentId) {
+    public List<ApiCampaignWSDTO> apiGetCampaignsService(long agentId,String category) {
 
         List<ApiCampaignWSDTO> campaignWSDTOS = new ArrayList<>();
         List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByAgentId(agentId);
         for (CampaignAgentDBModel campaignAgent : campaignAgents) {
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignAgent.getCampaignId());
             if (campaignDBModel.isPresent()) {
-                campaignWSDTOS.add(fillApiCampaignWSDTO(agentId, campaignDBModel.get()));
-            }
-        }
-        return campaignWSDTOS;
-    }
-
-
-    public List<ApiCampaignWSDTO> apiGetCampaignsByStateService(long agentId, String campaignState) {
-
-        List<ApiCampaignWSDTO> campaignWSDTOS = new ArrayList<>();
-        List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByAgentId(agentId);
-        for (CampaignAgentDBModel campaignAgent : campaignAgents) {
-            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignAgent.getCampaignId());
-            if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignState().equalsIgnoreCase(campaignState)) {
-                campaignWSDTOS.add(fillApiCampaignWSDTO(agentId, campaignDBModel.get()));
-            }
-        }
-        return campaignWSDTOS;
-    }
-
-
-    public List<ApiCampaignWSDTO> apiGetCampaignsByCategoryService(long agentId, String campaignCategory) {
-
-        List<ApiCampaignWSDTO> campaignWSDTOS = new ArrayList<>();
-        List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByAgentId(agentId);
-        for (CampaignAgentDBModel campaignAgent : campaignAgents) {
-            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignAgent.getCampaignId());
-            if (campaignDBModel.isPresent()) {
-                if (campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(campaignCategory) || campaignCategory.equalsIgnoreCase(AppConstant.ALL_CAMPAIGNS)) {
+                if (campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(category) || category.equalsIgnoreCase(AppConstant.ALL_CAMPAIGNS)) {
                     campaignWSDTOS.add(fillApiCampaignWSDTO(agentId, campaignDBModel.get()));
                 }
             }
         }
         return campaignWSDTOS;
     }
+
 
 
     public ApiCampaignWSDTO getApiCampaignService(String campaignId) {

@@ -1,8 +1,6 @@
 package com.faas.core.api.framework.dashboard;
 
-import com.faas.core.api.model.ws.campaign.content.dto.ApiCampaignWSDTO;
 import com.faas.core.api.model.ws.dashboard.dto.ApiDashCampaignWSDTO;
-import com.faas.core.api.model.ws.dashboard.dto.ApiDashSummaryWSDTO;
 import com.faas.core.api.model.ws.dashboard.dto.ApiDashboardWSDTO;
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
@@ -98,31 +96,30 @@ public class ApiDashboardFramework {
     public ApiDashCampaignWSDTO fillApiDashCampaignWSDTO(long agentId,CampaignDBModel campaignDBModel){
 
         ApiDashCampaignWSDTO dashCampaignWSDTO = new ApiDashCampaignWSDTO();
-        List<ApiSummaryWSDTO> campaignSummary = new ArrayList<>();
-
+        List<ApiSummaryWSDTO> summaries = new ArrayList<>();
         dashCampaignWSDTO.setCampaign(campaignDBModel);
         List<ProcessDBModel> processDBModels = processRepository.findByIdAndStatus(campaignDBModel.getProcessId(),1);
         if (processDBModels.size()>0){
             dashCampaignWSDTO.setCampaignProcess(processDBModels.get(0));
         }
-        campaignSummary.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId,AppConstant.READY_SESSION))));
-        campaignSummary.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId,AppConstant.ACTIVE_SESSION))));
-        dashCampaignWSDTO.setCampaignSummary(campaignSummary);
+        summaries.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId,AppConstant.READY_SESSION))));
+        summaries.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId,AppConstant.ACTIVE_SESSION))));
+        dashCampaignWSDTO.setSummaries(summaries);
 
         return dashCampaignWSDTO;
     }
 
 
 
-    public List<ApiDashSummaryWSDTO> apiGetDashSummaryService(long agentId) {
+    public List<ApiSummaryWSDTO> apiGetDashSummaryService(long agentId) {
 
-        List<ApiDashSummaryWSDTO> dashSummaryWSDTOS = new ArrayList<>();
-        dashSummaryWSDTOS.add(new ApiDashSummaryWSDTO(AppConstant.TOTAL_CAMPAIGNS_SUMMARY,String.valueOf(campaignAgentRepository.countByAgentId(agentId))));
-        dashSummaryWSDTOS.add(new ApiDashSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.READY_SESSION))));
-        dashSummaryWSDTOS.add(new ApiDashSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.ACTIVE_SESSION))));
-        dashSummaryWSDTOS.add(new ApiDashSummaryWSDTO(AppConstant.FINISHED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.FINISHED_SESSION))));
+        List<ApiSummaryWSDTO> summaryWSDTOS = new ArrayList<>();
+        summaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.TOTAL_CAMPAIGNS_SUMMARY,String.valueOf(campaignAgentRepository.countByAgentId(agentId))));
+        summaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.READY_SESSION))));
+        summaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.ACTIVE_SESSION))));
+        summaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.FINISHED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.FINISHED_SESSION))));
 
-        return dashSummaryWSDTOS;
+        return summaryWSDTOS;
     }
 
 
