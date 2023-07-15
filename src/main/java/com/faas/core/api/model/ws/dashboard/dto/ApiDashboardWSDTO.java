@@ -12,17 +12,15 @@ public class ApiDashboardWSDTO {
     private ApiSessionWSDTO activeSession;
     private ApiInquiryWSDTO dashInquiry;
     private List<ApiCampaignWSDTO> dashCampaigns;
-    private List<ApiDashSummaryWSDTO> dashSummaries;
 
     public ApiDashboardWSDTO() {
     }
 
-    public ApiDashboardWSDTO(ApiSessionWSDTO readySession, ApiSessionWSDTO activeSession, ApiInquiryWSDTO dashInquiry, List<ApiCampaignWSDTO> dashCampaigns, List<ApiDashSummaryWSDTO> dashSummaries) {
+    public ApiDashboardWSDTO(ApiSessionWSDTO readySession, ApiSessionWSDTO activeSession, ApiInquiryWSDTO dashInquiry, List<ApiCampaignWSDTO> dashCampaigns) {
         this.readySession = readySession;
         this.activeSession = activeSession;
         this.dashInquiry = dashInquiry;
         this.dashCampaigns = dashCampaigns;
-        this.dashSummaries = dashSummaries;
     }
 
     public ApiSessionWSDTO getReadySession() {
@@ -55,13 +53,5 @@ public class ApiDashboardWSDTO {
 
     public void setDashCampaigns(List<ApiCampaignWSDTO> dashCampaigns) {
         this.dashCampaigns = dashCampaigns;
-    }
-
-    public List<ApiDashSummaryWSDTO> getDashSummaries() {
-        return dashSummaries;
-    }
-
-    public void setDashSummaries(List<ApiDashSummaryWSDTO> dashSummaries) {
-        this.dashSummaries = dashSummaries;
     }
 }

@@ -3,6 +3,7 @@ package com.faas.core.api.framework.dashboard;
 import com.faas.core.api.model.ws.campaign.content.dto.ApiCampaignWSDTO;
 import com.faas.core.api.model.ws.dashboard.dto.ApiDashSummaryWSDTO;
 import com.faas.core.api.model.ws.dashboard.dto.ApiDashboardWSDTO;
+import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.api.model.ws.session.content.dto.ApiSessionWSDTO;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
@@ -60,7 +61,6 @@ public class ApiDashboardFramework {
         dashboardWSDTO.setReadySession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,AppConstant.READY_SESSION,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setActiveSession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,AppConstant.ACTIVE_SESSION,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setDashCampaigns(apiGetDashCampaignService(agentId));
-        dashboardWSDTO.setDashSummaries(apiGetDashSummaryService(agentId));
 
         return dashboardWSDTO;
     }
@@ -84,7 +84,7 @@ public class ApiDashboardFramework {
         for (CampaignAgentDBModel agentCampaign : agentCampaigns) {
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(agentCampaign.getCampaignId());
             if (campaignDBModel.isPresent()) {
-                ApiCampaignWSDTO campaignWSDTO = fillApiCampaignWSDTO(campaignDBModel.get());
+                ApiCampaignWSDTO campaignWSDTO = fillDashApiCampaignWSDTO(agentId,campaignDBModel.get());
                 if (campaignWSDTO != null) {
                     campaignWSDTOS.add(campaignWSDTO);
                 }
@@ -94,14 +94,20 @@ public class ApiDashboardFramework {
     }
 
 
-    public ApiCampaignWSDTO fillApiCampaignWSDTO(CampaignDBModel campaignDBModel){
+    public ApiCampaignWSDTO fillDashApiCampaignWSDTO(long agentId,CampaignDBModel campaignDBModel){
 
         ApiCampaignWSDTO campaignWSDTO = new ApiCampaignWSDTO();
+        List<ApiSummaryWSDTO> campaignSummary = new ArrayList<>();
+
         campaignWSDTO.setCampaign(campaignDBModel);
         List<ProcessDBModel> processDBModels = processRepository.findByIdAndStatus(campaignDBModel.getProcessId(),1);
         if (processDBModels.size()>0){
             campaignWSDTO.setCampaignProcess(processDBModels.get(0));
         }
+        campaignSummary.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId,AppConstant.READY_SESSION))));
+        campaignSummary.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId,AppConstant.ACTIVE_SESSION))));
+        campaignWSDTO.setCampaignSummary(campaignSummary);
+
         return campaignWSDTO;
     }
 

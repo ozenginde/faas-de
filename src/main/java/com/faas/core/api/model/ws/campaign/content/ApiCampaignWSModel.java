@@ -10,7 +10,6 @@ public class ApiCampaignWSModel {
     private GeneralWSModel general;
     private List<ApiCampaignWSDTO> campaigns;
 
-
     public ApiCampaignWSModel() {
     }
 
