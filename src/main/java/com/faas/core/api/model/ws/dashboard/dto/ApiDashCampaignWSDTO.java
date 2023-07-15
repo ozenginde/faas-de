@@ -1,19 +1,24 @@
-package com.faas.core.api.model.ws.campaign.content.dto;
+package com.faas.core.api.model.ws.dashboard.dto;
 
+import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
 
-public class ApiCampaignWSDTO {
+import java.util.List;
+
+public class ApiDashCampaignWSDTO {
 
     private CampaignDBModel campaign;
     private ProcessDBModel campaignProcess;
+    private List<ApiSummaryWSDTO> campaignSummary;
 
-    public ApiCampaignWSDTO() {
+    public ApiDashCampaignWSDTO() {
     }
 
-    public ApiCampaignWSDTO(CampaignDBModel campaign, ProcessDBModel campaignProcess) {
+    public ApiDashCampaignWSDTO(CampaignDBModel campaign, ProcessDBModel campaignProcess, List<ApiSummaryWSDTO> campaignSummary) {
         this.campaign = campaign;
         this.campaignProcess = campaignProcess;
+        this.campaignSummary = campaignSummary;
     }
 
     public CampaignDBModel getCampaign() {
@@ -30,5 +35,13 @@ public class ApiCampaignWSDTO {
 
     public void setCampaignProcess(ProcessDBModel campaignProcess) {
         this.campaignProcess = campaignProcess;
+    }
+
+    public List<ApiSummaryWSDTO> getCampaignSummary() {
+        return campaignSummary;
+    }
+
+    public void setCampaignSummary(List<ApiSummaryWSDTO> campaignSummary) {
+        this.campaignSummary = campaignSummary;
     }
 }

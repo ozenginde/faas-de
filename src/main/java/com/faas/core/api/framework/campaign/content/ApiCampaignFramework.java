@@ -61,7 +61,6 @@ public class ApiCampaignFramework {
 
         apiAgentCampaignWSDTO.setManualCampaigns(manualCampaigns);
         apiAgentCampaignWSDTO.setInquiryCampaigns(inquiryCampaigns);
-        apiAgentCampaignWSDTO.setCampaignSummary(campaignMapper.mapCampaignSummary(agentId));
 
         return apiAgentCampaignWSDTO;
     }

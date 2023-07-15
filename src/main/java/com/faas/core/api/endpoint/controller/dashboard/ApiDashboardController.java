@@ -2,6 +2,7 @@ package com.faas.core.api.endpoint.controller.dashboard;
 
 import com.faas.core.api.middleware.dashboard.ApiDashboardMiddleware;
 import com.faas.core.api.model.ws.campaign.content.ApiCampaignWSModel;
+import com.faas.core.api.model.ws.dashboard.ApiDashCampaignWSModel;
 import com.faas.core.api.model.ws.dashboard.ApiDashSummaryWSModel;
 import com.faas.core.api.model.ws.dashboard.ApiDashboardWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
@@ -73,7 +74,7 @@ public class ApiDashboardController {
     @RequestMapping(value = ApiRoute.API_GET_DASH_CAMPAIGN, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetDashCampaign(@RequestParam long agentId) {
 
-        ApiCampaignWSModel response = apiDashboardMiddleware.apiGetDashCampaign(agentId);
+        ApiDashCampaignWSModel response = apiDashboardMiddleware.apiGetDashCampaign(agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

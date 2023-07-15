@@ -1,20 +1,20 @@
-package com.faas.core.api.model.ws.inquiry.details.dto;
+package com.faas.core.api.model.ws.campaign.details.process.content;
 
 import com.faas.core.api.model.ws.campaign.details.process.content.dto.ApiProcessWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;
 
-public class ApiInquiryDetailsWSDTO {
+public class ApiProcessWSModel {
 
     private GeneralWSModel general;
     private List<ApiProcessWSDTO>processes;
 
 
-    public ApiInquiryDetailsWSDTO() {
+    public ApiProcessWSModel() {
     }
 
-    public ApiInquiryDetailsWSDTO(GeneralWSModel general, List<ApiProcessWSDTO> processes) {
+    public ApiProcessWSModel(GeneralWSModel general, List<ApiProcessWSDTO> processes) {
         this.general = general;
         this.processes = processes;
     }

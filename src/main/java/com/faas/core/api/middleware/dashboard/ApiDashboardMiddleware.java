@@ -1,10 +1,10 @@
 package com.faas.core.api.middleware.dashboard;
 
 import com.faas.core.api.framework.dashboard.ApiDashboardFramework;
-import com.faas.core.api.model.ws.campaign.content.ApiCampaignWSModel;
-import com.faas.core.api.model.ws.campaign.content.dto.ApiCampaignWSDTO;
+import com.faas.core.api.model.ws.dashboard.ApiDashCampaignWSModel;
 import com.faas.core.api.model.ws.dashboard.ApiDashSummaryWSModel;
 import com.faas.core.api.model.ws.dashboard.ApiDashboardWSModel;
+import com.faas.core.api.model.ws.dashboard.dto.ApiDashCampaignWSDTO;
 import com.faas.core.api.model.ws.dashboard.dto.ApiDashSummaryWSDTO;
 import com.faas.core.api.model.ws.dashboard.dto.ApiDashboardWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
@@ -86,14 +86,14 @@ public class ApiDashboardMiddleware {
     }
 
 
-    public ApiCampaignWSModel apiGetDashCampaign(long agentId) {
+    public ApiDashCampaignWSModel apiGetDashCampaign(long agentId) {
 
-        ApiCampaignWSModel response = new ApiCampaignWSModel();
+        ApiDashCampaignWSModel response = new ApiDashCampaignWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiCampaignWSDTO> campaignWSDTOS = apiDashboardFramework.apiGetDashCampaignService(agentId);
-        if (campaignWSDTOS != null){
-            response.setCampaigns(campaignWSDTOS);
+        List<ApiDashCampaignWSDTO> dashCampaignWSDTOS = apiDashboardFramework.apiGetDashCampaignService(agentId);
+        if (dashCampaignWSDTOS != null){
+            response.setDashCampaigns(dashCampaignWSDTOS);
         }
 
         general.setOperation("apiGetDashCampaign");
