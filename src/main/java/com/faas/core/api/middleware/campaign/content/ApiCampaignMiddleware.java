@@ -104,7 +104,7 @@ public class ApiCampaignMiddleware {
 
 
 
-        general.setOperation("getApiCampaign");
+        general.setOperation("apiGetAgentCampaignSummary");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
