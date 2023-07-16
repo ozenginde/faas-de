@@ -1,9 +1,8 @@
 package com.faas.core.api.endpoint.controller.campaign.details.content;
 
-import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
-import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.api.middleware.campaign.details.content.ApiCampaignDetailsMiddleware;
 import com.faas.core.api.model.ws.campaign.details.content.ApiCampaignDetailsWSModel;
+import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,16 +35,6 @@ public class ApiCampaignDetailsController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_CAMPAIGN_SUMMARY, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetCampaignSummary(@RequestParam long agentId) {
-
-        ApiSummaryWSModel response = apiCampaignDetailsMiddleware.apiGetCampaignSummary(agentId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
 }

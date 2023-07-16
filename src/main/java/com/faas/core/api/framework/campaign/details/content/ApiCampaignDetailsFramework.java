@@ -33,14 +33,4 @@ public class ApiCampaignDetailsFramework {
 
 
 
-    public List<ApiSummaryWSDTO> getCampaignSummaryService(long agentId) {
-
-        List<ApiSummaryWSDTO> apiSummaryWSDTOS = new ArrayList<>();
-        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.TOTAL_CAMPAIGNS_SUMMARY, String.valueOf(campaignAgentRepository.countByAgentId(agentId))));
-        apiSummaryWSDTOS.add(new ApiSummaryWSDTO(AppConstant.TOTAL_SESSIONS_SUMMARY, String.valueOf(sessionRepository.countByAgentId(agentId))));
-
-        return apiSummaryWSDTOS;
-    }
-
-
 }

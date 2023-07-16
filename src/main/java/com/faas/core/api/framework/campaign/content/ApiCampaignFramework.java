@@ -93,7 +93,6 @@ public class ApiCampaignFramework {
                 campaignWSDTO.setCampaignProcess(processDBModel.get());
             }
             campaignWSDTO.setSummaries(campaignMapper.mapCampaignSummary(agentId, campaignDBModel.get().getCampaign()));
-
             return campaignWSDTO;
         }
         return null;
@@ -114,10 +113,8 @@ public class ApiCampaignFramework {
 
 
     public List<ApiSummaryWSDTO> apiGetAgentCampaignSummaryService(long agentId) {
-
         return campaignMapper.mapAgentCampaignSummary(agentId);
     }
-
 
 
 }
