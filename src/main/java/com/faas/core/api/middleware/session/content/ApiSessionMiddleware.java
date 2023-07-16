@@ -14,7 +14,6 @@ import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -64,8 +63,6 @@ public class ApiSessionMiddleware {
         return response;
     }
 
-
-
     public ApiCampaignSessionWSModel apiGetCampaignSessions(long agentId, String campaignId, String sessionState, int reqPage, int reqSize) {
 
         ApiCampaignSessionWSModel response = new ApiCampaignSessionWSModel();
@@ -84,7 +81,6 @@ public class ApiSessionMiddleware {
 
         return response;
     }
-
 
 
     public ApiSessionWSModel apiGetSession(long agentId, long sessionId) {
@@ -107,7 +103,24 @@ public class ApiSessionMiddleware {
     }
 
 
+    public ApiSummaryWSModel apiGetSessionSummary(long agentId) {
 
+        ApiSummaryWSModel response = new ApiSummaryWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        List<ApiSummaryWSDTO> sessionSummary = apiSessionFramework.apiGetSessionSummaryService(agentId);
+        if (sessionSummary != null){
+            response.setSummaries(sessionSummary);
+        }
+
+        general.setOperation("apiGetSessionSummary");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
 
 
 

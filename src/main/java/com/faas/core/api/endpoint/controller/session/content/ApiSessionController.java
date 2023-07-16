@@ -1,6 +1,7 @@
 package com.faas.core.api.endpoint.controller.session.content;
 
 import com.faas.core.api.middleware.session.content.ApiSessionMiddleware;
+import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.api.model.ws.session.content.ApiAgentSessionWSModel;
 import com.faas.core.api.model.ws.session.content.ApiCampaignSessionWSModel;
 import com.faas.core.api.model.ws.session.content.ApiSessionWSModel;
@@ -81,6 +82,19 @@ public class ApiSessionController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_SESSION_SUMMARY, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetSessionSummary(@RequestParam long agentId) {
+
+        ApiSummaryWSModel response = apiSessionMiddleware.apiGetSessionSummary(agentId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
 
 
 }

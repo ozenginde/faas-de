@@ -36,16 +36,6 @@ public class ApiSessionDetailsController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_SESSION_SUMMARY, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetSessionSummary(@RequestParam long agentId) {
-
-        ApiSummaryWSModel response = apiSessionDetailsMiddleware.apiGetSessionSummary(agentId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
 

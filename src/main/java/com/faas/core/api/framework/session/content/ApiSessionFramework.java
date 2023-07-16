@@ -1,5 +1,6 @@
 package com.faas.core.api.framework.session.content;
 
+import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.session.content.dto.ApiAgentSessionWSDTO;
 import com.faas.core.api.model.ws.session.content.dto.ApiCampaignSessionWSDTO;
 import com.faas.core.api.model.ws.session.content.dto.ApiSessionWSDTO;
@@ -93,7 +94,13 @@ public class ApiSessionFramework {
         return null;
     }
 
-    
+
+    public List<ApiSummaryWSDTO> apiGetSessionSummaryService(long agentId) {
+        return sessionMapper.getApiSessionSummary(agentId);
+    }
+
+
+
 
 
 }

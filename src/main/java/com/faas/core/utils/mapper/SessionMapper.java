@@ -179,14 +179,12 @@ public class SessionMapper {
     }
 
 
-    public List<ApiSummaryWSDTO> getApiSessionsSummary(long agentId){
+    public List<ApiSummaryWSDTO> getApiSessionSummary(long agentId){
 
         List<ApiSummaryWSDTO> sessionSummaries = new ArrayList<>();
-        sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.TOTAL_CAMPAIGNS_SUMMARY,String.valueOf(campaignAgentRepository.countByAgentId(agentId))));
-        sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.TOTAL_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentId(agentId))));
-        sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.READY_SESSION))));
         sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.ACTIVE_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.ACTIVE_SESSION))));
-        sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.FINISHED_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.FINISHED_SESSION))));
+        sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.READY_SESSIONS_SUMMARY,String.valueOf(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.READY_SESSION))));
+        sessionSummaries.add(new ApiSummaryWSDTO(AppConstant.TOTAL_CAMPAIGNS_SUMMARY,String.valueOf(campaignAgentRepository.countByAgentId(agentId))));
 
         return sessionSummaries;
     }

@@ -40,24 +40,6 @@ public class ApiSessionDetailsMiddleware {
     }
 
 
-    public ApiSummaryWSModel apiGetSessionSummary(long agentId) {
-
-        ApiSummaryWSModel response = new ApiSummaryWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        List<ApiSummaryWSDTO> sessionSummary = apiSessionDetailsFramework.apiGetSessionSummaryService(agentId);
-        if (sessionSummary != null){
-            response.setSummaries(sessionSummary);
-        }
-
-        general.setOperation("apiGetSessionSummary");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
 

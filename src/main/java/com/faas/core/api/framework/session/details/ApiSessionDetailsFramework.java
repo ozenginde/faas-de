@@ -52,10 +52,4 @@ public class ApiSessionDetailsFramework {
 
 
 
-    public List<ApiSummaryWSDTO> apiGetSessionSummaryService(long agentId) {
-        return sessionMapper.getApiSessionsSummary(agentId);
-    }
-
-
-
 }
