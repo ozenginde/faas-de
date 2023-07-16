@@ -5,6 +5,7 @@ import com.faas.core.api.model.ws.campaign.content.ApiAgentCampaignWSModel;
 import com.faas.core.api.model.ws.campaign.content.ApiCampaignWSModel;
 import com.faas.core.api.model.ws.campaign.content.dto.ApiAgentCampaignWSDTO;
 import com.faas.core.api.model.ws.campaign.content.dto.ApiCampaignWSDTO;
+import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
@@ -80,7 +81,7 @@ public class ApiCampaignMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<ApiCampaignWSDTO> campaignWSDTOS = new ArrayList<>();
 
-        ApiCampaignWSDTO campaignWSDTO = apiCampaignFramework.getApiCampaignService(campaignId);
+        ApiCampaignWSDTO campaignWSDTO = apiCampaignFramework.getApiCampaignService(agentId,campaignId);
         if (campaignWSDTO != null){
             campaignWSDTOS.add(campaignWSDTO);
         }
@@ -102,7 +103,10 @@ public class ApiCampaignMiddleware {
         ApiSummaryWSModel response = new ApiSummaryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-
+        List<ApiSummaryWSDTO> summaryWSDTOS = apiCampaignFramework.apiGetAgentCampaignSummaryService(agentId);
+        if (summaryWSDTOS != null){
+            response.setSummaries(summaryWSDTOS);
+        }
 
         general.setOperation("apiGetAgentCampaignSummary");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -112,6 +116,7 @@ public class ApiCampaignMiddleware {
 
         return response;
     }
+
 
 
 }
