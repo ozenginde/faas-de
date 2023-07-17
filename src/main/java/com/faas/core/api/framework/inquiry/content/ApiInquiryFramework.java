@@ -46,6 +46,17 @@ public class ApiInquiryFramework {
 
 
 
+    public ApiAgentInquiryWSDTO apiGetCampaignInquiriesService(long agentId,String inquiryState,int reqPage,int reqSize){
+
+        ApiAgentInquiryWSDTO agentInquiryWSDTO = new ApiAgentInquiryWSDTO();
+        List<ApiInquiryWSDTO> readyInquiries = new ArrayList<>();
+        List<ApiInquiryWSDTO> activeInquiries = new ArrayList<>();
+
+        return agentInquiryWSDTO;
+    }
+
+
+
     public ApiInquiryWSDTO apiGetInquiryService(long agentId, long inquiryId){
 
         ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
