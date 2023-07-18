@@ -28,7 +28,7 @@ public class ApiInquiryFramework {
     public ApiAgentInquiryWSDTO apiGetAgentInquiryService(long agentId,int reqPage,int reqSize){
 
         ApiAgentInquiryWSDTO agentInquiryWSDTO = new ApiAgentInquiryWSDTO();
-        agentInquiryWSDTO.setReadyInquiry(inquiryHelper.getApiInquiryWrapper(inquiryRepository.findAllByAgentIdAndInquiryState(agentId, AppConstant.READY_INQUIRY,PageRequest.of(reqPage,reqSize))));
+        agentInquiryWSDTO.setReadyInquiry(inquiryHelper.getApiInquiryWrapper(inquiryRepository.findAllByAgentIdAndInquiryState(agentId, AppConstant.NEW_INQUIRY,PageRequest.of(reqPage,reqSize))));
         agentInquiryWSDTO.setActiveInquiry(inquiryHelper.getApiInquiryWrapper(inquiryRepository.findAllByAgentIdAndInquiryState(agentId, AppConstant.ACTIVE_INQUIRY,PageRequest.of(reqPage,reqSize))));
 
         return agentInquiryWSDTO;

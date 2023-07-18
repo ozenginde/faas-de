@@ -117,7 +117,6 @@ public class InquiryFramework {
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
             if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
-
                 InquiryDBModel inquiryDBModel = inquiryMapper.mapInquiryDBModel(null);
                 if (inquiryDBModel != null){
                     return new InquiryWSDTO(inquiryRepository.save(inquiryDBModel));
