@@ -1,7 +1,7 @@
-package com.faas.core.api.middleware.notification.content;
+package com.faas.core.api.middleware.notification;
 
-import com.faas.core.api.framework.notification.content.ApiNotificationFramework;
-import com.faas.core.api.model.ws.notification.content.ApiNotificationWSModel;
+import com.faas.core.api.framework.notification.ApiNotificationFramework;
+import com.faas.core.api.model.ws.notification.ApiNotificationWSModel;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +30,6 @@ public class ApiNotificationMiddleware {
 
         return response;
     }
-
 
 
     public ApiNotificationWSModel apiGetNotificationsByState(long agentId) {
@@ -81,7 +80,6 @@ public class ApiNotificationMiddleware {
     }
 
 
-
     public ApiNotificationWSModel apiRemoveNotification(long agentId) {
 
         ApiNotificationWSModel response = new ApiNotificationWSModel();
@@ -96,8 +94,6 @@ public class ApiNotificationMiddleware {
 
         return response;
     }
-
-
 
 
 

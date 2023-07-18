@@ -2,7 +2,7 @@ package com.faas.core.utils.helpers;
 
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
-import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWrapper;
+import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryDTO;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -41,30 +41,29 @@ public class InquiryHelper {
     AppUtils appUtils;
 
 
-    public ApiInquiryWrapper getApiInquiryWrapper(Page<InquiryDBModel> inquiryModelPage){
+    public ApiInquiryWSDTO getApiInquiryWSDTO(Page<InquiryDBModel> inquiryModelPage){
 
-        ApiInquiryWrapper inquiryWrapper = new ApiInquiryWrapper();
-        List<ApiInquiryWSDTO> inquiryWSDTOS = new ArrayList<>();
+        ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
+        List<ApiInquiryDTO> inquiryDTOS = new ArrayList<>();
         for (int i=0;i<inquiryModelPage.getContent().size();i++){
-            inquiryWSDTOS.add(getApiInquiryWSDTO(inquiryModelPage.getContent().get(i)));
+            inquiryDTOS.add(getApiInquiryDTO(inquiryModelPage.getContent().get(i)));
         }
-        inquiryWrapper.setInquiries(inquiryWSDTOS);
-        inquiryWrapper.setPagination(inquiryMapper.createInquiryPagination(inquiryModelPage));
+        inquiryWSDTO.setInquiries(inquiryDTOS);
+        inquiryWSDTO.setPagination(inquiryMapper.createInquiryPagination(inquiryModelPage));
 
-        return inquiryWrapper;
+        return inquiryWSDTO;
     }
 
 
+    public ApiInquiryDTO getApiInquiryDTO(InquiryDBModel inquiryDBModel){
 
-    public ApiInquiryWSDTO getApiInquiryWSDTO(InquiryDBModel inquiryDBModel){
-
-        ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
-        inquiryWSDTO.setInquiry(inquiryDBModel);
+        ApiInquiryDTO inquiryWrapper = new ApiInquiryDTO();
+        inquiryWrapper.setInquiry(inquiryDBModel);
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(inquiryDBModel.getSessionId(),inquiryDBModel.getClientId());
         if (sessionDBModels.size()>0){
-            inquiryWSDTO.setInquirySession(sessionDBModels.get(0));
+            inquiryWrapper.setInquirySession(sessionDBModels.get(0));
         }
-        return inquiryWSDTO;
+        return inquiryWrapper;
     }
 
 

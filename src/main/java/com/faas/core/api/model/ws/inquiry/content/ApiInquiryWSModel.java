@@ -1,17 +1,17 @@
 package com.faas.core.api.model.ws.inquiry.content;
 
-import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWrapper;
+import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 public class ApiInquiryWSModel {
 
     private GeneralWSModel general;
-    private ApiInquiryWrapper inquiry;
+    private ApiInquiryWSDTO inquiry;
 
     public ApiInquiryWSModel() {
     }
 
-    public ApiInquiryWSModel(GeneralWSModel general, ApiInquiryWrapper inquiry) {
+    public ApiInquiryWSModel(GeneralWSModel general, ApiInquiryWSDTO inquiry) {
         this.general = general;
         this.inquiry = inquiry;
     }
@@ -24,11 +24,11 @@ public class ApiInquiryWSModel {
         this.general = general;
     }
 
-    public ApiInquiryWrapper getInquiry() {
+    public ApiInquiryWSDTO getInquiry() {
         return inquiry;
     }
 
-    public void setInquiry(ApiInquiryWrapper inquiry) {
+    public void setInquiry(ApiInquiryWSDTO inquiry) {
         this.inquiry = inquiry;
     }
 }

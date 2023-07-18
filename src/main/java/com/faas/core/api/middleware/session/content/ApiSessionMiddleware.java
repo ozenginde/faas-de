@@ -4,10 +4,8 @@ import com.faas.core.api.framework.session.content.ApiSessionFramework;
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.api.model.ws.session.content.ApiAgentSessionWSModel;
-import com.faas.core.api.model.ws.session.content.ApiCampaignSessionWSModel;
 import com.faas.core.api.model.ws.session.content.ApiSessionWSModel;
 import com.faas.core.api.model.ws.session.content.dto.ApiAgentSessionWSDTO;
-import com.faas.core.api.model.ws.session.content.dto.ApiCampaignSessionWSDTO;
 import com.faas.core.api.model.ws.session.content.dto.ApiSessionWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -63,14 +61,14 @@ public class ApiSessionMiddleware {
         return response;
     }
 
-    public ApiCampaignSessionWSModel apiGetCampaignSessions(long agentId, String campaignId, String sessionState, int reqPage, int reqSize) {
+    public ApiSessionWSModel apiGetCampaignSessions(long agentId, String campaignId, String sessionState, int reqPage, int reqSize) {
 
-        ApiCampaignSessionWSModel response = new ApiCampaignSessionWSModel();
+        ApiSessionWSModel response = new ApiSessionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiCampaignSessionWSDTO campaignSessionWSDTO = apiSessionFramework.apiGetCampaignSessionsService(agentId,campaignId,sessionState,reqPage,reqSize);
-        if (campaignSessionWSDTO != null){
-            response.setCampaignSession(campaignSessionWSDTO);
+        ApiSessionWSDTO sessionWSDTO = apiSessionFramework.apiGetCampaignSessionsService(agentId,campaignId,sessionState,reqPage,reqSize);
+        if (sessionWSDTO != null){
+            response.setSession(sessionWSDTO);
         }
 
         general.setOperation("apiGetCampaignSessions");

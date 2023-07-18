@@ -2,7 +2,6 @@ package com.faas.core.api.framework.session.content;
 
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.session.content.dto.ApiAgentSessionWSDTO;
-import com.faas.core.api.model.ws.session.content.dto.ApiCampaignSessionWSDTO;
 import com.faas.core.api.model.ws.session.content.dto.ApiSessionWSDTO;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
@@ -83,7 +82,7 @@ public class ApiSessionFramework {
 
 
 
-    public ApiCampaignSessionWSDTO apiGetCampaignSessionsService(long agentId, String campaignId, String sessionState, int reqPage, int reqSize) {
+    public ApiSessionWSDTO apiGetCampaignSessionsService(long agentId, String campaignId, String sessionState, int reqPage, int reqSize) {
 
         return null;
     }

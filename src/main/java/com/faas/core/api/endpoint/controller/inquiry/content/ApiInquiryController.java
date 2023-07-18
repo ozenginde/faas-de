@@ -3,7 +3,6 @@ package com.faas.core.api.endpoint.controller.inquiry.content;
 
 import com.faas.core.api.middleware.inquiry.content.ApiInquiryMiddleware;
 import com.faas.core.api.model.ws.inquiry.content.ApiAgentInquiryWSModel;
-import com.faas.core.api.model.ws.inquiry.content.ApiCampaignInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
@@ -39,14 +38,13 @@ public class ApiInquiryController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_CAMPAIGN_INQUIRY, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetCampaignInquiry(@RequestParam long agentId,
-                                                   @RequestParam String campaignId,
-                                                   @RequestParam String inquiryState,
-                                                   @RequestParam int reqPage,
-                                                   @RequestParam int reqSize) {
+    @RequestMapping(value = ApiRoute.API_GET_INQUIRIES, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetInquiries(@RequestParam long agentId,
+                                             @RequestParam String inquiryState,
+                                             @RequestParam int reqPage,
+                                             @RequestParam int reqSize) {
 
-        ApiCampaignInquiryWSModel response = apiInquiryMiddleware.apiGetCampaignInquiry(agentId,campaignId,inquiryState,reqPage,reqSize);
+        ApiInquiryWSModel response = apiInquiryMiddleware.apiGetInquiries(agentId,inquiryState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -55,13 +53,14 @@ public class ApiInquiryController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_INQUIRIES, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetInquiries(@RequestParam long agentId,
-                                             @RequestParam String inquiryState,
-                                             @RequestParam int reqPage,
-                                             @RequestParam int reqSize) {
+    @RequestMapping(value = ApiRoute.API_GET_CAMPAIGN_INQUIRIES, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetCampaignInquiries(@RequestParam long agentId,
+                                                     @RequestParam String campaignId,
+                                                     @RequestParam String inquiryState,
+                                                     @RequestParam int reqPage,
+                                                     @RequestParam int reqSize) {
 
-        ApiInquiryWSModel response = apiInquiryMiddleware.apiGetInquiries(agentId,inquiryState,reqPage,reqSize);
+        ApiInquiryWSModel response = apiInquiryMiddleware.apiGetCampaignInquiries(agentId,campaignId,inquiryState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

@@ -3,7 +3,6 @@ package com.faas.core.api.endpoint.controller.session.content;
 import com.faas.core.api.middleware.session.content.ApiSessionMiddleware;
 import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.api.model.ws.session.content.ApiAgentSessionWSModel;
-import com.faas.core.api.model.ws.session.content.ApiCampaignSessionWSModel;
 import com.faas.core.api.model.ws.session.content.ApiSessionWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
@@ -61,7 +60,7 @@ public class ApiSessionController {
                                                     @RequestParam int reqPage,
                                                     @RequestParam int reqSize) {
 
-        ApiCampaignSessionWSModel response = apiSessionMiddleware.apiGetCampaignSessions(agentId,campaignId,sessionState,reqPage,reqSize);
+        ApiSessionWSModel response = apiSessionMiddleware.apiGetCampaignSessions(agentId,campaignId,sessionState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

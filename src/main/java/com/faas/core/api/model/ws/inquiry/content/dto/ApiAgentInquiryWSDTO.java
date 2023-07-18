@@ -2,30 +2,30 @@ package com.faas.core.api.model.ws.inquiry.content.dto;
 
 public class ApiAgentInquiryWSDTO {
 
-    private ApiInquiryWrapper readyInquiry;
-    private ApiInquiryWrapper activeInquiry;
+    private ApiInquiryWSDTO readyInquiry;
+    private ApiInquiryWSDTO activeInquiry;
 
     public ApiAgentInquiryWSDTO() {
     }
 
-    public ApiAgentInquiryWSDTO(ApiInquiryWrapper readyInquiry, ApiInquiryWrapper activeInquiry) {
+    public ApiAgentInquiryWSDTO(ApiInquiryWSDTO readyInquiry, ApiInquiryWSDTO activeInquiry) {
         this.readyInquiry = readyInquiry;
         this.activeInquiry = activeInquiry;
     }
 
-    public ApiInquiryWrapper getReadyInquiry() {
+    public ApiInquiryWSDTO getReadyInquiry() {
         return readyInquiry;
     }
 
-    public void setReadyInquiry(ApiInquiryWrapper readyInquiry) {
+    public void setReadyInquiry(ApiInquiryWSDTO readyInquiry) {
         this.readyInquiry = readyInquiry;
     }
 
-    public ApiInquiryWrapper getActiveInquiry() {
+    public ApiInquiryWSDTO getActiveInquiry() {
         return activeInquiry;
     }
 
-    public void setActiveInquiry(ApiInquiryWrapper activeInquiry) {
+    public void setActiveInquiry(ApiInquiryWSDTO activeInquiry) {
         this.activeInquiry = activeInquiry;
     }
 }

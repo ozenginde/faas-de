@@ -1,6 +1,6 @@
-package com.faas.core.api.model.ws.notification.details;
+package com.faas.core.api.model.ws.notification;
 
-import com.faas.core.api.model.ws.notification.details.dto.ApiNotificationDetailsWSDTO;
+import com.faas.core.api.model.ws.notification.dto.ApiNotificationDetailsWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 public class ApiNotificationDetailsWSModel {

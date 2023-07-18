@@ -2,9 +2,6 @@ package com.faas.core.api.model.ws.session.content;
 
 import com.faas.core.api.model.ws.session.content.dto.ApiSessionWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.general.PaginationWSDTO;
-
-import java.util.List;
 
 public class ApiSessionWSModel {
 

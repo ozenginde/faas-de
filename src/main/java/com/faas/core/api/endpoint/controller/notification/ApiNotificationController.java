@@ -1,7 +1,7 @@
-package com.faas.core.api.endpoint.controller.notification.content;
+package com.faas.core.api.endpoint.controller.notification;
 
-import com.faas.core.api.middleware.notification.content.ApiNotificationMiddleware;
-import com.faas.core.api.model.ws.notification.content.ApiNotificationWSModel;
+import com.faas.core.api.middleware.notification.ApiNotificationMiddleware;
+import com.faas.core.api.model.ws.notification.ApiNotificationWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,8 +80,6 @@ public class ApiNotificationController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
-
 
 
 }

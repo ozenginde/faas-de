@@ -1,34 +1,35 @@
 package com.faas.core.api.model.ws.inquiry.content.dto;
 
-import com.faas.core.base.model.db.inquiry.InquiryDBModel;
-import com.faas.core.base.model.db.session.SessionDBModel;
+import com.faas.core.base.model.ws.general.PaginationWSDTO;
+
+import java.util.List;
 
 public class ApiInquiryWSDTO {
 
-    private InquiryDBModel inquiry;
-    private SessionDBModel inquirySession;
+    private List<ApiInquiryDTO> inquiries;
+    private PaginationWSDTO pagination;
 
     public ApiInquiryWSDTO() {
     }
 
-    public ApiInquiryWSDTO(InquiryDBModel inquiry, SessionDBModel inquirySession) {
-        this.inquiry = inquiry;
-        this.inquirySession = inquirySession;
+    public ApiInquiryWSDTO(List<ApiInquiryDTO> inquiries, PaginationWSDTO pagination) {
+        this.inquiries = inquiries;
+        this.pagination = pagination;
     }
 
-    public InquiryDBModel getInquiry() {
-        return inquiry;
+    public List<ApiInquiryDTO> getInquiries() {
+        return inquiries;
     }
 
-    public void setInquiry(InquiryDBModel inquiry) {
-        this.inquiry = inquiry;
+    public void setInquiries(List<ApiInquiryDTO> inquiries) {
+        this.inquiries = inquiries;
     }
 
-    public SessionDBModel getInquirySession() {
-        return inquirySession;
+    public PaginationWSDTO getPagination() {
+        return pagination;
     }
 
-    public void setInquirySession(SessionDBModel inquirySession) {
-        this.inquirySession = inquirySession;
+    public void setPagination(PaginationWSDTO pagination) {
+        this.pagination = pagination;
     }
 }
