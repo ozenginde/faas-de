@@ -2,8 +2,10 @@ package com.faas.core.api.middleware.inquiry.content;
 
 import com.faas.core.api.framework.inquiry.content.ApiInquiryFramework;
 import com.faas.core.api.model.ws.inquiry.content.ApiAgentInquiryWSModel;
+import com.faas.core.api.model.ws.inquiry.content.ApiCampaignInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
+import com.faas.core.api.model.ws.inquiry.content.dto.ApiCampaignInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -39,17 +41,17 @@ public class ApiInquiryMiddleware {
     }
 
 
-    public ApiAgentInquiryWSModel apiGetCampaignInquiries(long agentId,String campaignId,String inquiryState,int reqPage,int reqSize) {
+    public ApiCampaignInquiryWSModel apiGetCampaignInquiry(long agentId, String campaignId, String inquiryState, int reqPage, int reqSize) {
 
-        ApiAgentInquiryWSModel response = new ApiAgentInquiryWSModel();
+        ApiCampaignInquiryWSModel response = new ApiCampaignInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiAgentInquiryWSDTO agentInquiryWSDTO = apiInquiryFramework.apiGetCampaignInquiriesService(agentId,campaignId,inquiryState,reqPage,reqSize);
-        if (agentInquiryWSDTO != null){
-            response.setAgentInquiry(agentInquiryWSDTO);
+        ApiCampaignInquiryWSDTO campaignInquiryWSDTO = apiInquiryFramework.apiGetCampaignInquiryService(agentId,campaignId,inquiryState,reqPage,reqSize);
+        if (campaignInquiryWSDTO != null){
+            response.setCampaignInquiry(campaignInquiryWSDTO);
         }
 
-        general.setOperation("apiGetCampaignInquiries");
+        general.setOperation("apiGetCampaignInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
