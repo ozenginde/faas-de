@@ -4,6 +4,7 @@ import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.flow.FlowDBModel;
+import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.flow.dto.CampaignFlowWSDTO;
@@ -126,7 +127,10 @@ public class CampaignFlowFramework {
                     clientRepository.save(clientDBModel.get());
 
                     SessionDBModel sessionDBModel = flowMapper.mapFlowSession(agentDBModel.get(),campaignDBModel.get(),clientDBModel.get());
-                    operationRepository.save(flowMapper.mapFlowOperation(sessionDBModel));
+                    OperationDBModel operationDBModel = operationRepository.save(flowMapper.mapFlowOperation(sessionDBModel));
+
+                    activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
+                    activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
 
                     return new FlowWSDTO(flowRepository.save(flowMapper.mapFlowDBModel(sessionDBModel)));
                 }

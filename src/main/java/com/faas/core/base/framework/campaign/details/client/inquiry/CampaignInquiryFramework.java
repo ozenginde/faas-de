@@ -121,7 +121,10 @@ public class CampaignInquiryFramework {
                 clientRepository.save(clientDBModel.get());
 
                 SessionDBModel sessionDBModel = sessionRepository.save(inquiryMapper.mapInquirySession(campaignDBModel.get(),clientDBModel.get()));
-                operationRepository.save(inquiryMapper.mapInquiryOperation(sessionDBModel));
+                OperationDBModel operationDBModel = operationRepository.save(inquiryMapper.mapInquiryOperation(sessionDBModel));
+
+                activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
+                activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
 
                 return new InquiryWSDTO(inquiryRepository.save(inquiryMapper.mapInquiryDBModel(sessionDBModel)));
             }
