@@ -110,7 +110,7 @@ public class CampaignInquiryFramework {
 
     public InquiryWSDTO createCampaignInquiryService(long userId, String campaignId, long clientId) {
 
-        if (inquiryRepository.existsByClientIdAndCampaignId(clientId,campaignId)){
+        if (!inquiryRepository.existsByClientIdAndCampaignId(clientId,campaignId)){
 
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
