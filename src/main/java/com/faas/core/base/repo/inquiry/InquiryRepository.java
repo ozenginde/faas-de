@@ -20,8 +20,12 @@ public interface InquiryRepository extends PagingAndSortingRepository<InquiryDBM
     List<InquiryDBModel>findByCampaignIdAndInquiryState(String campaignId, String inquiryState);
     List<InquiryDBModel>findByCampaignIdAndAgentIdAndInquiryState(String campaignId, long agentId, String inquiryState);
     List<InquiryDBModel>findBySessionIdAndClientId(long sessionId, long clientId);
-    Page<InquiryDBModel>findAllByCampaignId(String campaignId, Pageable pageable);
     Page<InquiryDBModel>findAllByInquiryState(String inquiryState, Pageable pageable);
+    Page<InquiryDBModel>findAllByAgentId(long agentId,Pageable pageable);
+    Page<InquiryDBModel>findAllByAgentIdAndInquiryState(long agentId,String inquiryState,Pageable pageable);
+    Page<InquiryDBModel>findAllByCampaignId(String campaignId, Pageable pageable);
+    Page<InquiryDBModel>findAllByAgentIdAndCampaignId(long agentId,String campaignId);
+    Page<InquiryDBModel>findAllByAgentIdAndCampaignIdAndInquiryState(long agentId,String campaignId,String inquiryState);
     Page<InquiryDBModel>findAllByCampaignIdAndClientCityAndClientCountry(String campaignId,String clientCity,String clientCountry,Pageable pageable);
 
 }

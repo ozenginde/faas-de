@@ -73,7 +73,6 @@ public class ApiDashboardMiddleware {
 
         ApiInquiryWSDTO inquiryWSDTO = apiDashboardFramework.apiGetDashInquiryService(agentId,inquiryState,reqPage,reqSize);
         if (inquiryWSDTO != null){
-            response.setInquiry(inquiryWSDTO);
         }
 
         general.setOperation("apiGetDashInquiry");

@@ -3,9 +3,15 @@ package com.faas.core.api.framework.inquiry.content;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiCampaignInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
+import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWrapper;
+import com.faas.core.base.model.db.inquiry.InquiryDBModel;
+import com.faas.core.base.repo.inquiry.InquiryRepository;
+import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.InquiryHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,16 +25,17 @@ public class ApiInquiryFramework {
     InquiryHelper inquiryHelper;
 
     @Autowired
+    InquiryRepository inquiryRepository;
+
+    @Autowired
     AppUtils appUtils;
 
 
     public ApiAgentInquiryWSDTO apiGetAgentInquiryService(long agentId,int reqPage,int reqSize){
 
         ApiAgentInquiryWSDTO agentInquiryWSDTO = new ApiAgentInquiryWSDTO();
-        List<ApiInquiryWSDTO> readyInquiries = new ArrayList<>();
-        List<ApiInquiryWSDTO> activeInquiries = new ArrayList<>();
-
-
+        agentInquiryWSDTO.setReadyInquiry(inquiryHelper.getApiInquiryWrapper(inquiryRepository.findAllByAgentIdAndInquiryState(agentId, AppConstant.READY_INQUIRY,PageRequest.of(reqPage,reqSize))));
+        agentInquiryWSDTO.setActiveInquiry(inquiryHelper.getApiInquiryWrapper(inquiryRepository.findAllByAgentIdAndInquiryState(agentId, AppConstant.ACTIVE_INQUIRY,PageRequest.of(reqPage,reqSize))));
 
         return agentInquiryWSDTO;
     }
@@ -37,8 +44,8 @@ public class ApiInquiryFramework {
     public ApiCampaignInquiryWSDTO apiGetCampaignInquiryService(long agentId, String campaignId, String inquiryState, int reqPage, int reqSize){
 
         ApiCampaignInquiryWSDTO campaignInquiryWSDTO = new ApiCampaignInquiryWSDTO();
-        List<ApiInquiryWSDTO> readyInquiries = new ArrayList<>();
-        List<ApiInquiryWSDTO> activeInquiries = new ArrayList<>();
+        campaignInquiryWSDTO.setReadyInquiry(inquiryHelper.getApiInquiryWrapper(inquiryRepository.findAllByAgentIdAndInquiryState(agentId, AppConstant.READY_INQUIRY,PageRequest.of(reqPage,reqSize))));
+        campaignInquiryWSDTO.setActiveInquiry(inquiryHelper.getApiInquiryWrapper(inquiryRepository.findAllByAgentIdAndInquiryState(agentId, AppConstant.ACTIVE_INQUIRY,PageRequest.of(reqPage,reqSize))));
 
         return campaignInquiryWSDTO;
     }

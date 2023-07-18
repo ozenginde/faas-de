@@ -67,9 +67,7 @@ public class ApiInquiryMiddleware {
         GeneralWSModel general = new GeneralWSModel();
 
         ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiGetInquiriesService(agentId,inquiryState,reqPage,reqSize);
-        if (inquiryWSDTO != null){
-            response.setInquiry(inquiryWSDTO);
-        }
+
 
         general.setOperation("apiGetInquiries");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -88,9 +86,7 @@ public class ApiInquiryMiddleware {
         GeneralWSModel general = new GeneralWSModel();
 
         ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiGetInquiryService(agentId,inquiryId);
-        if (inquiryWSDTO != null){
-            response.setInquiry(inquiryWSDTO);
-        }
+
 
         general.setOperation("apiGetInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -108,9 +104,7 @@ public class ApiInquiryMiddleware {
         GeneralWSModel general = new GeneralWSModel();
 
         ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiUpdateInquiryService(agentId,inquiryId);
-        if (inquiryWSDTO != null){
-            response.setInquiry(inquiryWSDTO);
-        }
+
 
         general.setOperation("apiUpdateInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -128,9 +122,7 @@ public class ApiInquiryMiddleware {
         GeneralWSModel general = new GeneralWSModel();
 
         ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiRemoveInquiryService(agentId,inquiryId);
-        if (inquiryWSDTO != null){
-            response.setInquiry(inquiryWSDTO);
-        }
+
 
         general.setOperation("apiRemoveInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
