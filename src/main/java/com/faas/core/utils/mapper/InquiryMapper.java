@@ -78,6 +78,18 @@ public class InquiryMapper {
     }
 
 
+    public PaginationWSDTO createAgentInquiryPagination(int pageSize,int pageNumber,int totalPage,long totalElements){
+
+        PaginationWSDTO paginationWSDTO = new PaginationWSDTO();
+        paginationWSDTO.setPageSize(pageSize);
+        paginationWSDTO.setPageNumber(pageNumber);
+        paginationWSDTO.setTotalPage(totalPage);
+        paginationWSDTO.setTotalElements(totalElements);
+
+        return paginationWSDTO;
+    }
+
+
     public SessionDBModel mapInquirySession(CampaignDBModel campaignDBModel,ClientDBModel clientDBModel) {
 
         SessionDBModel sessionDBModel = new SessionDBModel();
