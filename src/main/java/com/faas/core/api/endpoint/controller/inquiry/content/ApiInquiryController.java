@@ -38,14 +38,14 @@ public class ApiInquiryController {
     }
 
 
+    @RequestMapping(value = ApiRoute.API_GET_CAMPAIGN_INQUIRIES, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetCampaignInquiries(@RequestParam long agentId,
+                                                     @RequestParam String campaignId,
+                                                     @RequestParam String inquiryState,
+                                                     @RequestParam int reqPage,
+                                                     @RequestParam int reqSize) {
 
-    @RequestMapping(value = ApiRoute.API_GET_INQUIRIES, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetInquiries(@RequestParam long agentId,
-                                             @RequestParam String inquiryState,
-                                             @RequestParam int reqPage,
-                                             @RequestParam int reqSize) {
-
-        ApiAgentInquiryWSModel response = apiInquiryMiddleware.apiGetInquiries(agentId,inquiryState,reqPage,reqSize);
+        ApiAgentInquiryWSModel response = apiInquiryMiddleware.apiGetCampaignInquiries(agentId,campaignId,inquiryState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -54,13 +54,13 @@ public class ApiInquiryController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_CAMPAIGN_INQUIRIES, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetCampaignInquiries(@RequestParam long agentId,
-                                                     @RequestParam String inquiryState,
-                                                     @RequestParam int reqPage,
-                                                     @RequestParam int reqSize) {
+    @RequestMapping(value = ApiRoute.API_GET_INQUIRIES, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetInquiries(@RequestParam long agentId,
+                                             @RequestParam String inquiryState,
+                                             @RequestParam int reqPage,
+                                             @RequestParam int reqSize) {
 
-        ApiAgentInquiryWSModel response = apiInquiryMiddleware.apiGetCampaignInquiries(agentId,inquiryState,reqPage,reqSize);
+        ApiInquiryWSModel response = apiInquiryMiddleware.apiGetInquiries(agentId,inquiryState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -107,6 +107,7 @@ public class ApiInquiryController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
 
 
 }

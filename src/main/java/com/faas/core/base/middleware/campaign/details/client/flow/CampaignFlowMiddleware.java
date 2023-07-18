@@ -21,12 +21,12 @@ public class CampaignFlowMiddleware {
     CampaignFlowFramework campaignFlowFramework;
 
 
-    public CampaignFlowWSModel searchCampaignFlows(long userId,String campaignId,String city,String country,int reqPage,int reqSize) {
+    public CampaignFlowWSModel searchCampaignFlows(long userId,String campaignId,String clientCity,String clientCountry,int reqPage,int reqSize) {
 
         CampaignFlowWSModel response = new CampaignFlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        CampaignFlowWSDTO campaignFlowWSDTO = campaignFlowFramework.searchCampaignFlowsService(userId,campaignId,city,country,reqPage,reqSize);
+        CampaignFlowWSDTO campaignFlowWSDTO = campaignFlowFramework.searchCampaignFlowsService(userId,campaignId,clientCity,clientCountry,reqPage,reqSize);
         if (campaignFlowWSDTO != null){
             response.setCampaignFlow(campaignFlowWSDTO);
         }

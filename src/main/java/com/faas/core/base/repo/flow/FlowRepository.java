@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface FlowRepository extends PagingAndSortingRepository<FlowDBModel, Long> {
+public interface FlowRepository extends PagingAndSortingRepository<FlowDBModel,Long> {
 
     boolean existsByClientIdAndCampaignIdAndFlowState(long clientId,String campaignId,String flowState);
     boolean existsByClientIdAndCampaignId(long clientId,String campaignId);
@@ -22,6 +22,6 @@ public interface FlowRepository extends PagingAndSortingRepository<FlowDBModel, 
     List<FlowDBModel>findBySessionIdAndClientId(long sessionId, long clientId);
     Page<FlowDBModel>findAllByCampaignId(String campaignId, Pageable pageable);
     Page<FlowDBModel>findAllByFlowState(String flowState, Pageable pageable);
-    Page<FlowDBModel>findAllByCampaignIdAndClientCityAndClientCountry(String campaignId, String city, String country, Pageable pageable);
+    Page<FlowDBModel>findAllByCampaignIdAndClientCityAndClientCountry(String campaignId,String clientCity,String clientCountry, Pageable pageable);
 
 }

@@ -5,7 +5,6 @@ public class ApiAgentInquiryWSDTO {
     private ApiInquiryWSDTO readyInquiry;
     private ApiInquiryWSDTO activeInquiry;
 
-
     public ApiAgentInquiryWSDTO() {
     }
 

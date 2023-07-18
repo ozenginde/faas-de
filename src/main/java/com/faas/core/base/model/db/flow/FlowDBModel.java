@@ -14,17 +14,11 @@ public class FlowDBModel {
     @Column(name = "session_id")
     private long sessionId;
 
-    @Column(name = "session_uuid")
-    private String sessionUUID;
-
     @Column(name = "client_id")
     private long clientId;
 
     @Column(name = "client_name")
     private String clientName;
-
-    @Column(name = "national_id")
-    private String nationalId;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -38,32 +32,17 @@ public class FlowDBModel {
     @Column(name = "client_country")
     private String clientCountry;
 
-    @Column(name = "client_type")
-    private String clientType;
-
     @Column(name = "campaign_id")
     private String campaignId;
 
     @Column(name = "campaign")
     private String campaign;
 
-    @Column(name = "campaign_type")
-    private String campaignType;
-
-    @Column(name = "campaign_category")
-    private String campaignCategory;
-
     @Column(name = "process_id")
     private String processId;
 
     @Column(name = "process")
     private String process;
-
-    @Column(name = "process_type")
-    private String processType;
-
-    @Column(name = "process_category")
-    private String processCategory;
 
     @Column(name = "agent_id")
     private long agentId;
@@ -86,26 +65,19 @@ public class FlowDBModel {
     public FlowDBModel() {
     }
 
-    public FlowDBModel(long id, long sessionId, String sessionUUID, long clientId, String clientName, String nationalId, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String clientType, String campaignId, String campaign, String campaignType, String campaignCategory, String processId, String process, String processType, String processCategory, long agentId, String agentName, String flowState, long uDate, long cDate, int status) {
+    public FlowDBModel(long id, long sessionId, long clientId, String clientName, String phoneNumber, String emailAddress, String clientCity, String clientCountry, String campaignId, String campaign, String processId, String process, long agentId, String agentName, String flowState, long uDate, long cDate, int status) {
         this.id = id;
         this.sessionId = sessionId;
-        this.sessionUUID = sessionUUID;
         this.clientId = clientId;
         this.clientName = clientName;
-        this.nationalId = nationalId;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.clientCity = clientCity;
         this.clientCountry = clientCountry;
-        this.clientType = clientType;
         this.campaignId = campaignId;
         this.campaign = campaign;
-        this.campaignType = campaignType;
-        this.campaignCategory = campaignCategory;
         this.processId = processId;
         this.process = process;
-        this.processType = processType;
-        this.processCategory = processCategory;
         this.agentId = agentId;
         this.agentName = agentName;
         this.flowState = flowState;
@@ -130,14 +102,6 @@ public class FlowDBModel {
         this.sessionId = sessionId;
     }
 
-    public String getSessionUUID() {
-        return sessionUUID;
-    }
-
-    public void setSessionUUID(String sessionUUID) {
-        this.sessionUUID = sessionUUID;
-    }
-
     public long getClientId() {
         return clientId;
     }
@@ -152,14 +116,6 @@ public class FlowDBModel {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
-    }
-
-    public String getNationalId() {
-        return nationalId;
-    }
-
-    public void setNationalId(String nationalId) {
-        this.nationalId = nationalId;
     }
 
     public String getPhoneNumber() {
@@ -194,14 +150,6 @@ public class FlowDBModel {
         this.clientCountry = clientCountry;
     }
 
-    public String getClientType() {
-        return clientType;
-    }
-
-    public void setClientType(String clientType) {
-        this.clientType = clientType;
-    }
-
     public String getCampaignId() {
         return campaignId;
     }
@@ -218,22 +166,6 @@ public class FlowDBModel {
         this.campaign = campaign;
     }
 
-    public String getCampaignType() {
-        return campaignType;
-    }
-
-    public void setCampaignType(String campaignType) {
-        this.campaignType = campaignType;
-    }
-
-    public String getCampaignCategory() {
-        return campaignCategory;
-    }
-
-    public void setCampaignCategory(String campaignCategory) {
-        this.campaignCategory = campaignCategory;
-    }
-
     public String getProcessId() {
         return processId;
     }
@@ -248,22 +180,6 @@ public class FlowDBModel {
 
     public void setProcess(String process) {
         this.process = process;
-    }
-
-    public String getProcessType() {
-        return processType;
-    }
-
-    public void setProcessType(String processType) {
-        this.processType = processType;
-    }
-
-    public String getProcessCategory() {
-        return processCategory;
-    }
-
-    public void setProcessCategory(String processCategory) {
-        this.processCategory = processCategory;
     }
 
     public long getAgentId() {

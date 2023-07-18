@@ -9,8 +9,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface InquiryRepository extends PagingAndSortingRepository<InquiryDBModel, Long> {
+public interface InquiryRepository extends PagingAndSortingRepository<InquiryDBModel,Long> {
 
+    boolean existsByClientIdAndCampaignId(long clientId,String campaignId);
     long countByAgentIdAndInquiryState(long agentId,String inquiryState);
     List<InquiryDBModel>findByStatus(int status);
     List<InquiryDBModel>findByIdAndClientId(long inquiryId, long clientId);
@@ -21,7 +22,6 @@ public interface InquiryRepository extends PagingAndSortingRepository<InquiryDBM
     List<InquiryDBModel>findBySessionIdAndClientId(long sessionId, long clientId);
     Page<InquiryDBModel>findAllByCampaignId(String campaignId, Pageable pageable);
     Page<InquiryDBModel>findAllByInquiryState(String inquiryState, Pageable pageable);
-    Page<InquiryDBModel>findAllByCampaignIdAndClientCityAndClientCountry(String campaignId, String city, String country, Pageable pageable);
-
+    Page<InquiryDBModel>findAllByCampaignIdAndClientCityAndClientCountry(String campaignId,String clientCity,String clientCountry,Pageable pageable);
 
 }

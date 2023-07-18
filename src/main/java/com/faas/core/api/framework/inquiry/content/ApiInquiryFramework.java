@@ -33,9 +33,7 @@ public class ApiInquiryFramework {
     }
 
 
-
-
-    public ApiAgentInquiryWSDTO apiGetInquiriesService(long agentId,String inquiryState,int reqPage,int reqSize){
+    public ApiAgentInquiryWSDTO apiGetCampaignInquiriesService(long agentId,String campaignId,String inquiryState,int reqPage,int reqSize){
 
         ApiAgentInquiryWSDTO agentInquiryWSDTO = new ApiAgentInquiryWSDTO();
         List<ApiInquiryWSDTO> readyInquiries = new ArrayList<>();
@@ -45,16 +43,12 @@ public class ApiInquiryFramework {
     }
 
 
+    public ApiInquiryWSDTO apiGetInquiriesService(long agentId,String inquiryState,int reqPage,int reqSize){
 
-    public ApiAgentInquiryWSDTO apiGetCampaignInquiriesService(long agentId,String inquiryState,int reqPage,int reqSize){
+        ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
 
-        ApiAgentInquiryWSDTO agentInquiryWSDTO = new ApiAgentInquiryWSDTO();
-        List<ApiInquiryWSDTO> readyInquiries = new ArrayList<>();
-        List<ApiInquiryWSDTO> activeInquiries = new ArrayList<>();
-
-        return agentInquiryWSDTO;
+        return inquiryWSDTO;
     }
-
 
 
     public ApiInquiryWSDTO apiGetInquiryService(long agentId, long inquiryId){

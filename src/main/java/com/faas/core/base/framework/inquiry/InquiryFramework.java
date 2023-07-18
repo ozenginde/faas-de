@@ -113,14 +113,19 @@ public class InquiryFramework {
 
     public InquiryWSDTO createInquiryService(long userId, String campaignId, long clientId) {
 
-        Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-        Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
-        if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
-            InquiryDBModel inquiryDBModel = inquiryMapper.mapInquiryDBModel(campaignDBModel.get(),clientDBModel.get());
-            if (inquiryDBModel != null){
-                return new InquiryWSDTO(inquiryRepository.save(inquiryDBModel));
+        if (!(inquiryRepository.existsByClientIdAndCampaignId(clientId,campaignId))){
+            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
+            if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
+
+                InquiryDBModel inquiryDBModel = inquiryMapper.mapInquiryDBModel(null);
+                if (inquiryDBModel != null){
+                    return new InquiryWSDTO(inquiryRepository.save(inquiryDBModel));
+                }
             }
         }
+
+
         return null;
     }
 

@@ -10,9 +10,6 @@ import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 @Component
 public class ApiInquiryMiddleware {
@@ -42,32 +39,12 @@ public class ApiInquiryMiddleware {
     }
 
 
-    public ApiAgentInquiryWSModel apiGetInquiries(long agentId,String inquiryState,int reqPage,int reqSize) {
+    public ApiAgentInquiryWSModel apiGetCampaignInquiries(long agentId,String campaignId,String inquiryState,int reqPage,int reqSize) {
 
         ApiAgentInquiryWSModel response = new ApiAgentInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiAgentInquiryWSDTO agentInquiryWSDTO = apiInquiryFramework.apiGetInquiriesService(agentId,inquiryState,reqPage,reqSize);
-        if (agentInquiryWSDTO != null){
-            response.setAgentInquiry(agentInquiryWSDTO);
-        }
-
-        general.setOperation("apiGetInquiries");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public ApiAgentInquiryWSModel apiGetCampaignInquiries(long agentId,String inquiryState,int reqPage,int reqSize) {
-
-        ApiAgentInquiryWSModel response = new ApiAgentInquiryWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        ApiAgentInquiryWSDTO agentInquiryWSDTO = apiInquiryFramework.apiGetCampaignInquiriesService(agentId,inquiryState,reqPage,reqSize);
+        ApiAgentInquiryWSDTO agentInquiryWSDTO = apiInquiryFramework.apiGetCampaignInquiriesService(agentId,campaignId,inquiryState,reqPage,reqSize);
         if (agentInquiryWSDTO != null){
             response.setAgentInquiry(agentInquiryWSDTO);
         }
@@ -82,15 +59,35 @@ public class ApiInquiryMiddleware {
     }
 
 
+    public ApiInquiryWSModel apiGetInquiries(long agentId,String inquiryState,int reqPage,int reqSize) {
+
+        ApiInquiryWSModel response = new ApiInquiryWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiGetInquiriesService(agentId,inquiryState,reqPage,reqSize);
+        if (inquiryWSDTO != null){
+            response.setInquiry(inquiryWSDTO);
+        }
+
+        general.setOperation("apiGetInquiries");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+
     public ApiInquiryWSModel apiGetInquiry(long agentId, long inquiryId) {
 
         ApiInquiryWSModel response = new ApiInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiInquiryWSDTO>inquiryWSDTOS = new ArrayList<>();
 
         ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiGetInquiryService(agentId,inquiryId);
         if (inquiryWSDTO != null){
-            inquiryWSDTOS.add(inquiryWSDTO);
+            response.setInquiry(inquiryWSDTO);
         }
 
         general.setOperation("apiGetInquiry");
@@ -107,11 +104,10 @@ public class ApiInquiryMiddleware {
 
         ApiInquiryWSModel response = new ApiInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiInquiryWSDTO>inquiryWSDTOS = new ArrayList<>();
 
         ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiUpdateInquiryService(agentId,inquiryId);
         if (inquiryWSDTO != null){
-            inquiryWSDTOS.add(inquiryWSDTO);
+            response.setInquiry(inquiryWSDTO);
         }
 
         general.setOperation("apiUpdateInquiry");
@@ -128,11 +124,10 @@ public class ApiInquiryMiddleware {
 
         ApiInquiryWSModel response = new ApiInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiInquiryWSDTO>inquiryWSDTOS = new ArrayList<>();
 
         ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiRemoveInquiryService(agentId,inquiryId);
         if (inquiryWSDTO != null){
-            inquiryWSDTOS.add(inquiryWSDTO);
+            response.setInquiry(inquiryWSDTO);
         }
 
         general.setOperation("apiRemoveInquiry");
@@ -143,6 +138,7 @@ public class ApiInquiryMiddleware {
 
         return response;
     }
+
 
 
 }

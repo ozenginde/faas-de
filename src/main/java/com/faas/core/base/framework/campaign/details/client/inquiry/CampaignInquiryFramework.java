@@ -3,6 +3,7 @@ package com.faas.core.base.framework.campaign.details.client.inquiry;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
+import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.inquiry.dto.CampaignInquiryWSDTO;
 import com.faas.core.base.model.ws.inquiry.dto.InquiryWSDTO;
@@ -73,7 +74,6 @@ public class CampaignInquiryFramework {
 
         Page<InquiryDBModel> inquiryDBModelPage = inquiryRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId,city,country, PageRequest.of(reqPage,reqSize));
         if (inquiryDBModelPage != null){
-
             CampaignInquiryWSDTO campaignInquiryWSDTO = new CampaignInquiryWSDTO();
             campaignInquiryWSDTO.setPagination(inquiryMapper.createInquiryPagination(inquiryDBModelPage));
             campaignInquiryWSDTO.setInquiries(inquiryMapper.createInquiryWSDTOS(inquiryDBModelPage.getContent()));
@@ -110,18 +110,20 @@ public class CampaignInquiryFramework {
 
     public InquiryWSDTO createCampaignInquiryService(long userId, String campaignId, long clientId) {
 
-        Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-        Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
+        if (inquiryRepository.existsByClientIdAndCampaignId(clientId,campaignId)){
 
-        if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
+            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
+            if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
 
-            clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
-            clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
-            clientRepository.save(clientDBModel.get());
+                clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
+                clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+                clientRepository.save(clientDBModel.get());
 
-            InquiryDBModel inquiryDBModel = inquiryMapper.mapInquiryDBModel(campaignDBModel.get(),clientDBModel.get());
-            if(inquiryDBModel != null){
-                return new InquiryWSDTO(inquiryRepository.save(inquiryDBModel));
+                SessionDBModel sessionDBModel = sessionRepository.save(inquiryMapper.mapInquirySession(campaignDBModel.get(),clientDBModel.get()));
+                operationRepository.save(inquiryMapper.mapInquiryOperation(sessionDBModel));
+
+                return new InquiryWSDTO(inquiryRepository.save(inquiryMapper.mapInquiryDBModel(sessionDBModel)));
             }
         }
         return null;

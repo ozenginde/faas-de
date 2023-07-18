@@ -4,6 +4,7 @@ import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.flow.FlowDBModel;
+import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.content.dto.CampaignWSDTO;
 import com.faas.core.base.model.ws.flow.dto.FlowCampaignWSDTO;
@@ -12,6 +13,8 @@ import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.flow.FlowRepository;
+import com.faas.core.base.repo.operation.content.OperationRepository;
+import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
@@ -34,6 +37,12 @@ public class FlowFramework {
 
     @Autowired
     ClientRepository clientRepository;
+
+    @Autowired
+    SessionRepository sessionRepository;
+
+    @Autowired
+    OperationRepository operationRepository;
 
     @Autowired
     CampaignRepository campaignRepository;
@@ -60,7 +69,6 @@ public class FlowFramework {
 
                 FlowCampaignWSDTO flowCampaignWSDTO = new FlowCampaignWSDTO();
                 flowCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel));
-
                 Page<FlowDBModel> flowModelPage = flowRepository.findAllByCampaignId(campaignDBModel.getId(), PageRequest.of(reqPage, reqSize));
                 flowCampaignWSDTO.setPagination(flowMapper.createFlowPagination(flowModelPage));
                 flowCampaignWSDTO.setFlows(flowMapper.createFlowWSDTOS(flowModelPage.getContent()));
@@ -125,13 +133,15 @@ public class FlowFramework {
 
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-        List<CampaignAgentDBModel> campaignAgentDBModels = campaignAgentRepository.findByCampaignId(campaignId);
-
-        if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.AUTOMATIC_CAMPAIGN)
-                && campaignAgentDBModels.size()>0 && clientDBModel.isPresent()){
-            Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgentDBModels.get(0).getAgentId());
+        List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByCampaignId(campaignId);
+        if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.AUTOMATIC_CAMPAIGN) && campaignAgents.size()>0 && clientDBModel.isPresent()) {
+            Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgents.get(0).getAgentId());
             if (agentDBModel.isPresent()){
-                FlowDBModel flowDBModel = flowMapper.mapFlowDBModel(campaignDBModel.get(),clientDBModel.get(),agentDBModel.get());
+
+                SessionDBModel sessionDBModel = sessionRepository.save(flowMapper.mapFlowSession(agentDBModel.get(),campaignDBModel.get(),clientDBModel.get()));
+                flowMapper.mapFlowOperation(sessionDBModel);
+
+                FlowDBModel flowDBModel = flowMapper.mapFlowDBModel(null);
                 if (flowDBModel != null){
                     return new FlowWSDTO(flowRepository.save(flowDBModel));
                 }

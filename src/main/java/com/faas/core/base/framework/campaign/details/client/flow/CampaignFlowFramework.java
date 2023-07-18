@@ -75,9 +75,9 @@ public class CampaignFlowFramework {
     AppUtils appUtils;
 
 
-    public CampaignFlowWSDTO searchCampaignFlowsService(long userId, String campaignId, String city, String country, int reqPage, int reqSize) {
+    public CampaignFlowWSDTO searchCampaignFlowsService(long userId, String campaignId, String clientCity, String clientCountry, int reqPage, int reqSize) {
 
-        Page<FlowDBModel> flowDBModelPage = flowRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId, city, country, PageRequest.of(reqPage, reqSize));
+        Page<FlowDBModel> flowDBModelPage = flowRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId, clientCity, clientCountry, PageRequest.of(reqPage, reqSize));
         if (flowDBModelPage != null) {
             CampaignFlowWSDTO campaignFlowWSDTO = new CampaignFlowWSDTO();
             campaignFlowWSDTO.setPagination(flowMapper.createFlowPagination(flowDBModelPage));
@@ -114,22 +114,21 @@ public class CampaignFlowFramework {
     public FlowWSDTO createCampaignFlowService(long userId, String campaignId, long clientId) {
 
         if (!flowRepository.existsByClientIdAndCampaignId(clientId,campaignId)){
-
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
             List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByCampaignId(campaignId);
-
             if (campaignDBModel.isPresent() && clientDBModel.isPresent() && campaignAgents.size() > 0) {
                 Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgents.get(0).getAgentId());
                 if (agentDBModel.isPresent()) {
+
                     clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
                     clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                     clientRepository.save(clientDBModel.get());
 
-                    FlowDBModel flowDBModel = flowMapper.mapFlowDBModel(campaignDBModel.get(), clientDBModel.get(), agentDBModel.get());
-                    if (flowDBModel != null){
-                        return new FlowWSDTO(flowRepository.save(flowDBModel));
-                    }
+                    SessionDBModel sessionDBModel = flowMapper.mapFlowSession(agentDBModel.get(),campaignDBModel.get(),clientDBModel.get());
+                    operationRepository.save(flowMapper.mapFlowOperation(sessionDBModel));
+
+                    return new FlowWSDTO(flowRepository.save(flowMapper.mapFlowDBModel(sessionDBModel)));
                 }
             }
         }

@@ -52,8 +52,6 @@ public class InquiryController {
     }
 
 
-
-
     @RequestMapping(value = BaseRoute.GET_ALL_INQUIRIES, method = RequestMethod.POST)
     public ResponseEntity<?> getAllInquiries(@RequestParam long userId,
                                                    @RequestParam int reqPage,
