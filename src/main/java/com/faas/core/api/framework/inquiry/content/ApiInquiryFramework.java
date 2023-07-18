@@ -3,19 +3,13 @@ package com.faas.core.api.framework.inquiry.content;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiCampaignInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
-import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWrapper;
-import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 import com.faas.core.base.repo.inquiry.InquiryRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.InquiryHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Component
