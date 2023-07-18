@@ -70,9 +70,9 @@ public class CampaignInquiryFramework {
     AppUtils appUtils;
 
 
-    public CampaignInquiryWSDTO searchCampaignInquiriesService(long userId, String campaignId,String city,String country,int reqPage,int reqSize) {
+    public CampaignInquiryWSDTO searchCampaignInquiriesService(long userId, String campaignId,String clientCity,String clientCountry,int reqPage,int reqSize) {
 
-        Page<InquiryDBModel> inquiryDBModelPage = inquiryRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId,city,country, PageRequest.of(reqPage,reqSize));
+        Page<InquiryDBModel> inquiryDBModelPage = inquiryRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId,clientCity,clientCountry, PageRequest.of(reqPage,reqSize));
         if (inquiryDBModelPage != null){
             CampaignInquiryWSDTO campaignInquiryWSDTO = new CampaignInquiryWSDTO();
             campaignInquiryWSDTO.setPagination(inquiryMapper.createInquiryPagination(inquiryDBModelPage));

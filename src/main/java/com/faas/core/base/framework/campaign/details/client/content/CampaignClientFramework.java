@@ -27,16 +27,16 @@ public class CampaignClientFramework {
     AppUtils appUtils;
 
 
-    public CampaignClientWSDTO searchClientsService(String city,String country,String clientState,int reqPage,int reqSize) {
+    public CampaignClientWSDTO searchClientsService(String clientCity,String clientCountry,String clientState,int reqPage,int reqSize) {
 
-        if (country.equalsIgnoreCase("")){
+        if (clientCountry.equalsIgnoreCase("")){
             return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientState(clientState,PageRequest.of(reqPage,reqSize)));
         }
-        if (city.equalsIgnoreCase("") && !country.equalsIgnoreCase("")){
-            return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientCountryAndClientState(country,clientState,PageRequest.of(reqPage,reqSize)));
+        if (clientCity.equalsIgnoreCase("") && !clientCountry.equalsIgnoreCase("")){
+            return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientCountryAndClientState(clientCountry,clientState,PageRequest.of(reqPage,reqSize)));
         }
-        if (!city.equalsIgnoreCase("") && !country.equalsIgnoreCase("")){
-            return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientCountryAndClientCityContainingIgnoreCaseAndClientState(country,city,clientState,PageRequest.of(reqPage,reqSize)));
+        if (!clientCity.equalsIgnoreCase("") && !clientCountry.equalsIgnoreCase("")){
+            return clientMapper.mapCampaignClientWSDTO(clientRepository.findAllByClientCountryAndClientCityContainingIgnoreCaseAndClientState(clientCountry,clientCity,clientState,PageRequest.of(reqPage,reqSize)));
         }
         return null;
     }

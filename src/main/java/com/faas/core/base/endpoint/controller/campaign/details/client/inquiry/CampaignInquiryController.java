@@ -26,12 +26,12 @@ public class CampaignInquiryController {
     @RequestMapping(value = BaseRoute.SEARCH_CAMPAIGN_INQUIRIES, method = RequestMethod.POST)
     public ResponseEntity<?> searchCampaignInquiries(@RequestParam long userId,
                                                      @RequestParam String campaignId,
-                                                     @RequestParam String city,
-                                                     @RequestParam String country,
+                                                     @RequestParam String clientCity,
+                                                     @RequestParam String clientCountry,
                                                      @RequestParam int reqPage,
                                                      @RequestParam int reqSize) {
 
-        CampaignInquiryWSModel response = campaignInquiryMiddleware.searchCampaignInquiries(userId,campaignId,city,country,reqPage,reqSize);
+        CampaignInquiryWSModel response = campaignInquiryMiddleware.searchCampaignInquiries(userId,campaignId,clientCity,clientCountry,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

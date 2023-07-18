@@ -21,12 +21,12 @@ public class CampaignInquiryMiddleware {
     CampaignInquiryFramework campaignInquiryFramework;
 
 
-    public CampaignInquiryWSModel searchCampaignInquiries(long userId, String campaignId,String city,String country,int reqPage,int reqSize) {
+    public CampaignInquiryWSModel searchCampaignInquiries(long userId, String campaignId,String clientCity,String clientCountry,int reqPage,int reqSize) {
 
         CampaignInquiryWSModel response = new CampaignInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        CampaignInquiryWSDTO campaignInquiryWSDTO = campaignInquiryFramework.searchCampaignInquiriesService(userId,campaignId,city,country,reqPage,reqSize);
+        CampaignInquiryWSDTO campaignInquiryWSDTO = campaignInquiryFramework.searchCampaignInquiriesService(userId,campaignId,clientCity,clientCountry,reqPage,reqSize);
         if (campaignInquiryWSDTO != null){
             response.setCampaignInquiry(campaignInquiryWSDTO);
         }
