@@ -1,7 +1,8 @@
-package com.faas.core.api.endpoint.controller.session.details;
+package com.faas.core.remote.endpoint.controller.robot.session;
 
-import com.faas.core.api.middleware.session.details.ApiSessionDetailsMiddleware;
-import com.faas.core.api.model.ws.session.details.ApiSessionDetailsWSModel;
+import com.faas.core.api.model.ws.agent.content.ApiAgentWSModel;
+import com.faas.core.remote.service.assets.RemoteAssetService;
+import com.faas.core.remote.service.robot.session.RobotSessionService;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +15,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
-@RequestMapping(value = AppConstant.API_VERSION + "/api/session/details/")
-public class ApiSessionDetailsController {
+@RequestMapping(value = AppConstant.API_VERSION + "/remote/robot/session/")
+public class RobotSessionController {
 
 
     @Autowired
-    ApiSessionDetailsMiddleware apiSessionDetailsMiddleware;
+    RobotSessionService robotSessionService;
 
 
-    @RequestMapping(value = ApiRoute.API_GET_SESSION_DETAILS, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetSessionDetails(@RequestParam long agentId,
-                                                  @RequestParam long sessionId) {
+    @RequestMapping(value = ApiRoute.API_AGENT_LOGIN, method = RequestMethod.POST)
+    public ResponseEntity<?> apiAgentLogin(@RequestParam long agentId) {
 
-        ApiSessionDetailsWSModel response = apiSessionDetailsMiddleware.apiGetSessionDetails(agentId,sessionId);
+        ApiAgentWSModel response = robotSessionService.remoteRobotService(agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

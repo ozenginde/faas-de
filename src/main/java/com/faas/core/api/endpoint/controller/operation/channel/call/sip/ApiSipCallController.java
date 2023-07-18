@@ -2,7 +2,6 @@ package com.faas.core.api.endpoint.controller.operation.channel.call.sip;
 
 import com.faas.core.api.middleware.operation.channel.call.sip.ApiSipCallMiddleware;
 import com.faas.core.api.model.ws.operation.channel.call.sip.ApiOperationSipCallWSModel;
-import com.faas.core.api.model.ws.operation.channel.call.sip.ApiSipCallWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;

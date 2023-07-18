@@ -3,7 +3,6 @@ package com.faas.core.api.endpoint.controller.notification.details;
 import com.faas.core.api.middleware.notification.details.ApiNotificationDetailsMiddleware;
 import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.api.model.ws.notification.details.ApiNotificationDetailsWSModel;
-import com.faas.core.api.model.ws.session.details.ApiSessionClientWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
