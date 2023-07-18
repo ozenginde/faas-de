@@ -3,6 +3,7 @@ package com.faas.core.base.middleware.campaign.details.client.flow;
 import com.faas.core.base.framework.campaign.details.client.flow.CampaignFlowFramework;
 import com.faas.core.base.model.ws.campaign.details.client.flow.CampaignFlowWSModel;
 import com.faas.core.base.model.ws.campaign.details.client.flow.dto.CampaignFlowWSDTO;
+import com.faas.core.base.model.ws.flow.FlowRequest;
 import com.faas.core.base.model.ws.flow.FlowWSModel;
 import com.faas.core.base.model.ws.flow.dto.FlowWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
@@ -83,18 +84,16 @@ public class CampaignFlowMiddleware {
     }
 
 
-    public FlowWSModel createCampaignFlow(long userId, String campaignId, long clientId) {
+    public FlowWSModel createCampaignFlow(FlowRequest flowRequest) {
 
         FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<FlowWSDTO> flowWSDTOS = new ArrayList<>();
 
-        FlowWSDTO flowWSDTO = campaignFlowFramework.createCampaignFlowService(userId,campaignId,clientId);
-        if (flowWSDTO != null){
-            flowWSDTOS.add(flowWSDTO);
+        List<FlowWSDTO> flowWSDTOS = campaignFlowFramework.createCampaignFlowService(flowRequest);
+        if (flowWSDTOS != null){
+            response.setFlows(flowWSDTOS);
         }
 
-        response.setFlows(flowWSDTOS);
         general.setOperation("createCampaignFlow");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);

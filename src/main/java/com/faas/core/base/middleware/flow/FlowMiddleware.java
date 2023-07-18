@@ -126,13 +126,13 @@ public class FlowMiddleware {
     }
 
 
-    public FlowWSModel createFlow(long userId, long clientId, String campaignId) {
+    public FlowWSModel createFlow(long userId,long clientId,long agentId, String campaignId) {
 
         FlowWSModel response = new FlowWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<FlowWSDTO> flowWSDTOS = new ArrayList<>();
 
-        FlowWSDTO flowWSDTO = flowFramework.createFlowService(userId,clientId,campaignId);
+        FlowWSDTO flowWSDTO = flowFramework.createFlowService(userId,clientId,agentId,campaignId);
         if (flowWSDTO != null){
             flowWSDTOS.add(flowWSDTO);
         }

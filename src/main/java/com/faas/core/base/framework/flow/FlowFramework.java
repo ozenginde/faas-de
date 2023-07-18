@@ -129,22 +129,16 @@ public class FlowFramework {
     }
 
 
-    public FlowWSDTO createFlowService(long userId, long clientId, String campaignId) {
+    public FlowWSDTO createFlowService(long userId,long clientId,long agentId, String campaignId) {
 
-        Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
-        Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-        List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByCampaignId(campaignId);
-        if (campaignDBModel.isPresent() && campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.AUTOMATIC_CAMPAIGN) && campaignAgents.size()>0 && clientDBModel.isPresent()) {
-            Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgents.get(0).getAgentId());
-            if (agentDBModel.isPresent()){
+        if (!(flowRepository.existsByClientIdAndCampaignId(clientId,campaignId))){
 
-                SessionDBModel sessionDBModel = sessionRepository.save(flowMapper.mapFlowSession(agentDBModel.get(),campaignDBModel.get(),clientDBModel.get()));
-                flowMapper.mapFlowOperation(sessionDBModel);
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
+            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
+            Optional<UserDBModel> agentDBModel = userRepository.findById(agentId);
+            if (campaignDBModel.isPresent() && clientDBModel.isPresent() && agentDBModel.isPresent() && campaignDBModel.get().getCampaignCategory().equalsIgnoreCase(AppConstant.AUTOMATIC_CAMPAIGN) ) {
 
-                FlowDBModel flowDBModel = flowMapper.mapFlowDBModel(null);
-                if (flowDBModel != null){
-                    return new FlowWSDTO(flowRepository.save(flowDBModel));
-                }
+
             }
         }
         return null;

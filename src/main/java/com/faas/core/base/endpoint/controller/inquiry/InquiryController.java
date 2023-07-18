@@ -97,10 +97,11 @@ public class InquiryController {
 
     @RequestMapping(value = BaseRoute.CREATE_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> createInquiry(@RequestParam long userId,
-                                           @RequestParam String campaignId,
-                                           @RequestParam long clientId) {
+                                           @RequestParam long clientId,
+                                           @RequestParam long agentId,
+                                           @RequestParam String campaignId) {
 
-        InquiryWSModel response = inquiryMiddleware.createInquiry(userId,campaignId,clientId);
+        InquiryWSModel response = inquiryMiddleware.createInquiry(userId,clientId,agentId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

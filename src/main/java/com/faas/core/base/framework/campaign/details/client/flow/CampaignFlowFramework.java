@@ -8,7 +8,10 @@ import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.flow.dto.CampaignFlowWSDTO;
+import com.faas.core.base.model.ws.flow.FlowRequest;
+import com.faas.core.base.model.ws.flow.dto.FlowRequestDTO;
 import com.faas.core.base.model.ws.flow.dto.FlowWSDTO;
+import com.faas.core.base.model.ws.inquiry.dto.InquiryWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -28,6 +31,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -112,28 +116,39 @@ public class CampaignFlowFramework {
     }
 
 
-    public FlowWSDTO createCampaignFlowService(long userId, String campaignId, long clientId) {
+    public List<FlowWSDTO> createCampaignFlowService(FlowRequest flowRequest) {
 
-        if (!flowRepository.existsByClientIdAndCampaignId(clientId,campaignId)){
-            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-            Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
-            List<CampaignAgentDBModel> campaignAgents = campaignAgentRepository.findByCampaignId(campaignId);
-            if (campaignDBModel.isPresent() && clientDBModel.isPresent() && campaignAgents.size() > 0) {
-                Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgents.get(0).getAgentId());
-                if (agentDBModel.isPresent()) {
+        List<FlowWSDTO>flowWSDTOS = new ArrayList<>();
+        for (int i=0;i<flowRequest.getFlowRequests().size();i++){
+            FlowWSDTO flowWSDTO = createCampaignFlow(flowRequest.getFlowRequests().get(i));
+            if (flowWSDTO != null){
+                flowWSDTOS.add(flowWSDTO);
+            }
+        }
+        return flowWSDTOS;
+    }
 
-                    clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
-                    clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
-                    clientRepository.save(clientDBModel.get());
 
-                    SessionDBModel sessionDBModel = flowMapper.mapFlowSession(agentDBModel.get(),campaignDBModel.get(),clientDBModel.get());
-                    OperationDBModel operationDBModel = operationRepository.save(flowMapper.mapFlowOperation(sessionDBModel));
+    public FlowWSDTO createCampaignFlow(FlowRequestDTO flowRequestDTO){
 
-                    activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
-                    activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
+        if (!flowRepository.existsByClientIdAndCampaignId(flowRequestDTO.getClientId(),flowRequestDTO.getCampaignId())){
+            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(flowRequestDTO.getCampaignId());
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(flowRequestDTO.getClientId());
+            Optional<UserDBModel> agentDBModel = userRepository.findById(flowRequestDTO.getAgentId());
 
-                    return new FlowWSDTO(flowRepository.save(flowMapper.mapFlowDBModel(sessionDBModel)));
-                }
+            if (clientDBModel.isPresent() && agentDBModel.isPresent() && campaignDBModel.isPresent() ) {
+
+                clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
+                clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+                clientRepository.save(clientDBModel.get());
+
+                SessionDBModel sessionDBModel = flowMapper.mapFlowSession(clientDBModel.get(),agentDBModel.get(),campaignDBModel.get());
+                OperationDBModel operationDBModel = operationRepository.save(flowMapper.mapFlowOperation(sessionDBModel));
+
+                activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
+                activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
+
+                return new FlowWSDTO(flowRepository.save(flowMapper.mapFlowDBModel(sessionDBModel)));
             }
         }
         return null;

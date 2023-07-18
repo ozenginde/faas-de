@@ -98,9 +98,10 @@ public class FlowController {
     @RequestMapping(value = BaseRoute.CREATE_FLOW, method = RequestMethod.POST)
     public ResponseEntity<?> createFlow(@RequestParam long userId,
                                         @RequestParam long clientId,
+                                        @RequestParam long agentId,
                                         @RequestParam String campaignId) {
 
-        FlowWSModel response = flowMiddleware.createFlow(userId,clientId,campaignId);
+        FlowWSModel response = flowMiddleware.createFlow(userId,clientId,agentId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

@@ -128,13 +128,13 @@ public class InquiryMiddleware {
     }
 
 
-    public InquiryWSModel createInquiry(long userId, String campaignId, long clientId) {
+    public InquiryWSModel createInquiry(long userId,long clientId,long agentId, String campaignId) {
 
         InquiryWSModel response = new InquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<InquiryWSDTO> inquiryWSDTOS = new ArrayList<>();
 
-        InquiryWSDTO inquiryWSDTO =  inquiryFramework.createInquiryService(userId,campaignId,clientId);
+        InquiryWSDTO inquiryWSDTO =  inquiryFramework.createInquiryService(userId,clientId,agentId,campaignId);
         if (inquiryWSDTO != null){
             inquiryWSDTOS.add(inquiryWSDTO);
         }

@@ -53,7 +53,7 @@ public class InquiryFramework {
             InquiryCampaignWSDTO inquiryCampaignWSDTO = new InquiryCampaignWSDTO();
             inquiryCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel));
             Page<InquiryDBModel> clientInquiryModelPage = inquiryRepository.findAllByCampaignId(campaignDBModel.getId(), PageRequest.of(reqPage, reqSize));
-            inquiryCampaignWSDTO.setClientInquiries(inquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
+            inquiryCampaignWSDTO.setInquiries(inquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
             inquiryCampaignWSDTO.setPagination(inquiryMapper.createInquiryPagination(clientInquiryModelPage));
 
             inquiryCampaignWSDTOS.add(inquiryCampaignWSDTO);
@@ -71,7 +71,7 @@ public class InquiryFramework {
             inquiryCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel.get()));
             Page<InquiryDBModel> clientInquiryModelPage = inquiryRepository.findAllByCampaignId(campaignDBModel.get().getId(), PageRequest.of(reqPage, reqSize));
             inquiryCampaignWSDTO.setPagination(inquiryMapper.createInquiryPagination(clientInquiryModelPage));
-            inquiryCampaignWSDTO.setClientInquiries(inquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
+            inquiryCampaignWSDTO.setInquiries(inquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
 
             return inquiryCampaignWSDTO;
         }
@@ -111,7 +111,7 @@ public class InquiryFramework {
     }
 
 
-    public InquiryWSDTO createInquiryService(long userId, String campaignId, long clientId) {
+    public InquiryWSDTO createInquiryService(long userId,long clientId,long agentId, String campaignId) {
 
         if (!(inquiryRepository.existsByClientIdAndCampaignId(clientId,campaignId))){
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);

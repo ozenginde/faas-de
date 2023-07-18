@@ -5,7 +5,10 @@ import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
+import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.inquiry.dto.CampaignInquiryWSDTO;
+import com.faas.core.base.model.ws.inquiry.InquiryRequest;
+import com.faas.core.base.model.ws.inquiry.dto.InquiryRequestDTO;
 import com.faas.core.base.model.ws.inquiry.dto.InquiryWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -25,6 +28,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -108,19 +112,33 @@ public class CampaignInquiryFramework {
     }
 
 
-    public InquiryWSDTO createCampaignInquiryService(long userId, String campaignId, long clientId) {
+    public List<InquiryWSDTO> createCampaignInquiryService(InquiryRequest inquiryRequest) {
 
-        if (!inquiryRepository.existsByClientIdAndCampaignId(clientId,campaignId)){
+        List<InquiryWSDTO>inquiryWSDTOS = new ArrayList<>();
+        for (int i=0;i<inquiryRequest.getInquiryRequests().size();i++){
+            InquiryWSDTO inquiryWSDTO = createCampaignInquiry(inquiryRequest.getInquiryRequests().get(i));
+            if (inquiryWSDTO != null){
+                inquiryWSDTOS.add(inquiryWSDTO);
+            }
+        }
+        return inquiryWSDTOS;
+    }
 
-            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-            Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
-            if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
+
+    public InquiryWSDTO createCampaignInquiry(InquiryRequestDTO inquiryRequestDTO) {
+
+        if (!inquiryRepository.existsByClientIdAndCampaignId(inquiryRequestDTO.getClientId(),inquiryRequestDTO.getCampaignId())){
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(inquiryRequestDTO.getClientId());
+            Optional<UserDBModel> agentDBModel = userRepository.findById(inquiryRequestDTO.getAgentId());
+            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(inquiryRequestDTO.getCampaignId());
+
+            if (clientDBModel.isPresent() && agentDBModel.isPresent() && campaignDBModel.isPresent() ){
 
                 clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
                 clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                 clientRepository.save(clientDBModel.get());
 
-                SessionDBModel sessionDBModel = sessionRepository.save(inquiryMapper.mapInquirySession(campaignDBModel.get(),clientDBModel.get()));
+                SessionDBModel sessionDBModel = sessionRepository.save(inquiryMapper.mapInquirySession(clientDBModel.get(),agentDBModel.get(),campaignDBModel.get()));
                 OperationDBModel operationDBModel = operationRepository.save(inquiryMapper.mapInquiryOperation(sessionDBModel));
 
                 activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
@@ -131,6 +149,7 @@ public class CampaignInquiryFramework {
         }
         return null;
     }
+
 
 
     public InquiryWSDTO updateCampaignInquiryService(long userId, long inquiryId, long clientId, String inquiryState) {

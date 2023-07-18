@@ -2,13 +2,16 @@ package com.faas.core.base.endpoint.controller.campaign.details.client.flow;
 
 import com.faas.core.base.middleware.campaign.details.client.flow.CampaignFlowMiddleware;
 import com.faas.core.base.model.ws.campaign.details.client.flow.CampaignFlowWSModel;
+import com.faas.core.base.model.ws.flow.FlowRequest;
 import com.faas.core.base.model.ws.flow.FlowWSModel;
+import com.faas.core.base.model.ws.inquiry.InquiryRequest;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,18 +73,15 @@ public class CampaignFlowController {
 
 
     @RequestMapping(value = BaseRoute.CREATE_CAMPAIGN_FLOW, method = RequestMethod.POST)
-    public ResponseEntity<?> createCampaignFlow(@RequestParam long userId,
-                                                @RequestParam String campaignId,
-                                                @RequestParam long clientId) {
+    public ResponseEntity<?> createCampaignFlow(@RequestBody FlowRequest flowRequest) {
 
-        FlowWSModel response = campaignFlowMiddleware.createCampaignFlow(userId,campaignId,clientId);
+        FlowWSModel response = campaignFlowMiddleware.createCampaignFlow(flowRequest);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
-
 
     @RequestMapping(value = BaseRoute.UPDATE_CAMPAIGN_FLOW, method = RequestMethod.POST)
     public ResponseEntity<?> updateCampaignFlow(@RequestParam long userId,

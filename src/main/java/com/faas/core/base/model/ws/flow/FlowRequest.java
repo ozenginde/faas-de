@@ -1,6 +1,5 @@
 package com.faas.core.base.model.ws.flow;
 
-
 import com.faas.core.base.model.ws.flow.dto.FlowRequestDTO;
 
 import java.util.List;

@@ -78,7 +78,7 @@ public class FlowMapper {
     }
 
 
-    public SessionDBModel mapFlowSession(UserDBModel agentDBModel,CampaignDBModel campaignDBModel,ClientDBModel clientDBModel) {
+    public SessionDBModel mapFlowSession(ClientDBModel clientDBModel,UserDBModel agentDBModel,CampaignDBModel campaignDBModel) {
 
         SessionDBModel sessionDBModel = new SessionDBModel();
 

@@ -90,7 +90,7 @@ public class InquiryMapper {
     }
 
 
-    public SessionDBModel mapInquirySession(CampaignDBModel campaignDBModel,ClientDBModel clientDBModel) {
+    public SessionDBModel mapInquirySession(ClientDBModel clientDBModel,UserDBModel agentDBModel,CampaignDBModel campaignDBModel) {
 
         SessionDBModel sessionDBModel = new SessionDBModel();
 
@@ -111,8 +111,8 @@ public class InquiryMapper {
         sessionDBModel.setProcess(campaignDBModel.getProcess());
         sessionDBModel.setProcessType(campaignDBModel.getProcessType());
         sessionDBModel.setProcessCategory(campaignDBModel.getProcessCategory());
-        sessionDBModel.setAgentId(0);
-        sessionDBModel.setAgentName("");
+        sessionDBModel.setAgentId(agentDBModel.getId());
+        sessionDBModel.setAgentName(agentDBModel.getUserName());
         sessionDBModel.setSessionType(campaignDBModel.getCampaignCategory());
         sessionDBModel.setSessionState(AppConstant.READY_SESSION);
         sessionDBModel.setuDate(appUtils.getCurrentTimeStamp());

@@ -4,6 +4,7 @@ import com.faas.core.base.framework.campaign.details.client.inquiry.CampaignInqu
 import com.faas.core.base.model.ws.campaign.details.client.inquiry.CampaignInquiryWSModel;
 import com.faas.core.base.model.ws.campaign.details.client.inquiry.dto.CampaignInquiryWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
+import com.faas.core.base.model.ws.inquiry.InquiryRequest;
 import com.faas.core.base.model.ws.inquiry.InquiryWSModel;
 import com.faas.core.base.model.ws.inquiry.dto.InquiryWSDTO;
 import com.faas.core.utils.config.AppConstant;
@@ -84,18 +85,16 @@ public class CampaignInquiryMiddleware {
 
 
 
-    public InquiryWSModel createCampaignInquiry(long userId, String campaignId, long clientId) {
+    public InquiryWSModel createCampaignInquiry(InquiryRequest inquiryRequest) {
 
         InquiryWSModel response = new InquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<InquiryWSDTO> inquiryWSDTOS = new ArrayList<>();
 
-        InquiryWSDTO inquiryWSDTO = campaignInquiryFramework.createCampaignInquiryService(userId,campaignId,clientId);
-        if (inquiryWSDTO != null){
-            inquiryWSDTOS.add(inquiryWSDTO);
+        List<InquiryWSDTO> inquiryWSDTOS = campaignInquiryFramework.createCampaignInquiryService(inquiryRequest);
+        if (inquiryWSDTOS != null){
+            response.setInquiries(inquiryWSDTOS);
         }
 
-        response.setInquiries(inquiryWSDTOS);
         general.setOperation("createCampaignInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
