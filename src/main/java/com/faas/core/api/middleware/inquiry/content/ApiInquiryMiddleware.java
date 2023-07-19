@@ -1,6 +1,8 @@
 package com.faas.core.api.middleware.inquiry.content;
 
 import com.faas.core.api.framework.inquiry.content.ApiInquiryFramework;
+import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
+import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiAgentInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
@@ -9,6 +11,8 @@ import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Component
@@ -124,6 +128,27 @@ public class ApiInquiryMiddleware {
 
 
         general.setOperation("apiRemoveInquiry");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+
+    public ApiSummaryWSModel apiGetInquirySummary(long agentId) {
+
+        ApiSummaryWSModel response = new ApiSummaryWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        List<ApiSummaryWSDTO> inquirySummaries  = apiInquiryFramework.apiGetInquirySummaryService(agentId);
+        if (inquirySummaries != null){
+            response.setSummaries(inquirySummaries);
+        }
+
+        general.setOperation("apiGetInquirySummary");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

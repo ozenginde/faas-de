@@ -39,9 +39,9 @@ public class ApiRoute {
     public static final String API_GET_INQUIRY = "apigetinquiry";
     public static final String API_UPDATE_INQUIRY = "apiupdateinquiry";
     public static final String API_REMOVE_INQUIRY = "apiremoveinquiry";
+    public static final String API_GET_INQUIRY_SUMMARY = "apigetinquirysummary";
 
     public static final String API_GET_INQUIRY_DETAILS = "apigetinquirydetails";
-    public static final String API_GET_INQUIRY_SUMMARY = "apigetinquirysummary";
 
 
 

@@ -2,6 +2,7 @@
 package com.faas.core.api.endpoint.controller.inquiry.content;
 
 import com.faas.core.api.middleware.inquiry.content.ApiInquiryMiddleware;
+import com.faas.core.api.model.ws.general.ApiSummaryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiAgentInquiryWSModel;
 import com.faas.core.api.model.ws.inquiry.content.ApiInquiryWSModel;
 import com.faas.core.utils.config.ApiRoute;
@@ -101,6 +102,18 @@ public class ApiInquiryController {
                                               @RequestParam long inquiryId) {
 
         ApiInquiryWSModel response = apiInquiryMiddleware.apiRemoveInquiry(agentId,inquiryId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_INQUIRY_SUMMARY, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetInquirySummary(@RequestParam long agentId) {
+
+        ApiSummaryWSModel response = apiInquiryMiddleware.apiGetInquirySummary(agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

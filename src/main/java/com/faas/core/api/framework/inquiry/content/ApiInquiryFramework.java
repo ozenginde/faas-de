@@ -1,5 +1,6 @@
 package com.faas.core.api.framework.inquiry.content;
 
+import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
@@ -11,6 +12,8 @@ import com.faas.core.utils.mapper.InquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Component
@@ -37,6 +40,7 @@ public class ApiInquiryFramework {
         ApiAgentInquiryWSDTO agentInquiryWSDTO = new ApiAgentInquiryWSDTO();
         agentInquiryWSDTO.setReadyInquiry(inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,AppConstant.NEW_INQUIRY,PageRequest.of(reqPage,reqSize))));
         agentInquiryWSDTO.setActiveInquiry(inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,AppConstant.ACTIVE_INQUIRY,PageRequest.of(reqPage,reqSize))));
+
         return agentInquiryWSDTO;
     }
 
@@ -73,8 +77,12 @@ public class ApiInquiryFramework {
     public ApiInquiryWSDTO apiRemoveInquiryService(long agentId, long inquiryId){
 
         ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
-
         return inquiryWSDTO;
+    }
+
+
+    public List<ApiSummaryWSDTO> apiGetInquirySummaryService(long agentId){
+        return inquiryHelper.getApiInquirySummary(agentId);
     }
 
 
