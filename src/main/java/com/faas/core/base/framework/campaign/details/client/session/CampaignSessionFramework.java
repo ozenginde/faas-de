@@ -107,9 +107,11 @@ public class CampaignSessionFramework {
 
         List<SessionWSDTO>sessionWSDTOS = new ArrayList<>();
         for (int i=0;i<sessionRequest.getSessionRequests().size();i++){
+
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionRequest.getSessionRequests().get(i).getClientId());
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(sessionRequest.getSessionRequests().get(i).getCampaignId());
             Optional<UserDBModel> agentDBModel = userRepository.findById(sessionRequest.getSessionRequests().get(i).getAgentId());
+
             if (clientDBModel.isPresent() && campaignDBModel.isPresent() && agentDBModel.isPresent()){
 
                 clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
