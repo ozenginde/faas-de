@@ -128,6 +128,7 @@ public class CampaignInquiryFramework {
     public InquiryWSDTO createCampaignInquiry(InquiryRequestDTO inquiryRequestDTO) {
 
         if (!inquiryRepository.existsByClientIdAndCampaignId(inquiryRequestDTO.getClientId(),inquiryRequestDTO.getCampaignId())){
+
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(inquiryRequestDTO.getClientId());
             Optional<UserDBModel> agentDBModel = userRepository.findById(inquiryRequestDTO.getAgentId());
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(inquiryRequestDTO.getCampaignId());

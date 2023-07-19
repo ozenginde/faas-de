@@ -31,7 +31,6 @@ public class FlowMapper {
     public FlowDBModel mapFlowDBModel(SessionDBModel sessionDBModel){
 
         FlowDBModel flowDBModel = new FlowDBModel();
-
         flowDBModel.setSessionId(sessionDBModel.getId());
         flowDBModel.setClientId(sessionDBModel.getClientId());
         flowDBModel.setClientName(sessionDBModel.getClientName());

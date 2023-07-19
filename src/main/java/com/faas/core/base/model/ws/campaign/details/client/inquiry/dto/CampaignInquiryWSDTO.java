@@ -7,8 +7,8 @@ import java.util.List;
 
 public class CampaignInquiryWSDTO {
 
-    private PaginationWSDTO pagination;
     private List<InquiryWSDTO>inquiries;
+    private PaginationWSDTO pagination;
 
     public CampaignInquiryWSDTO() {
     }

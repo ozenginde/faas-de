@@ -44,8 +44,8 @@ public class InquiryMapper {
         inquiryDBModel.setCampaign(sessionDBModel.getCampaign());
         inquiryDBModel.setProcessId(sessionDBModel.getProcessId());
         inquiryDBModel.setProcess(sessionDBModel.getProcess());
-        inquiryDBModel.setAgentId(0);
-        inquiryDBModel.setAgentName("");
+        inquiryDBModel.setAgentId(sessionDBModel.getAgentId());
+        inquiryDBModel.setAgentName(sessionDBModel.getAgentName());
         inquiryDBModel.setInquiryState(AppConstant.NEW_INQUIRY);
         inquiryDBModel.setuDate(appUtils.getCurrentTimeStamp());
         inquiryDBModel.setcDate(appUtils.getCurrentTimeStamp());
