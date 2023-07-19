@@ -22,4 +22,5 @@ public class FlowRequest {
     public void setFlowRequests(List<FlowRequestDTO> flowRequests) {
         this.flowRequests = flowRequests;
     }
+
 }
