@@ -81,7 +81,6 @@ public class ApiSessionFramework {
     }
 
 
-
     public ApiSessionWSDTO apiGetCampaignSessionsService(long agentId, String campaignId, String sessionState, int reqPage, int reqSize) {
 
         return null;
@@ -97,8 +96,6 @@ public class ApiSessionFramework {
     public List<ApiSummaryWSDTO> apiGetSessionSummaryService(long agentId) {
         return sessionMapper.getApiSessionSummary(agentId);
     }
-
-
 
 
 
