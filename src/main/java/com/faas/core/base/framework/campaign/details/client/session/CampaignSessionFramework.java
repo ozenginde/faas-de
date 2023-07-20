@@ -6,7 +6,9 @@ import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.session.dto.CampaignSessionWSDTO;
+import com.faas.core.base.model.ws.flow.dto.FlowWSDTO;
 import com.faas.core.base.model.ws.session.content.SessionRequest;
+import com.faas.core.base.model.ws.session.content.dto.SessionRequestDTO;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -107,28 +109,37 @@ public class CampaignSessionFramework {
 
         List<SessionWSDTO>sessionWSDTOS = new ArrayList<>();
         for (int i=0;i<sessionRequest.getSessionRequests().size();i++){
-
-            Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionRequest.getSessionRequests().get(i).getClientId());
-            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(sessionRequest.getSessionRequests().get(i).getCampaignId());
-            Optional<UserDBModel> agentDBModel = userRepository.findById(sessionRequest.getSessionRequests().get(i).getAgentId());
-
-            if (clientDBModel.isPresent() && campaignDBModel.isPresent() && agentDBModel.isPresent()){
-
-                clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
-                clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
-                clientRepository.save(clientDBModel.get());
-
-                SessionDBModel sessionDBModel = sessionRepository.save(sessionMapper.mapSessionDBModel(campaignDBModel.get(),agentDBModel.get(),clientDBModel.get()));
-                OperationDBModel operationDBModel = operationRepository.save(operationMapper.mapOperationDBModel(sessionDBModel));
-
-                activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
-                activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
-
-                sessionWSDTOS.add(sessionMapper.mapSessionWSDTO(sessionDBModel));
+            SessionWSDTO sessionWSDTO = createCampaignSession(sessionRequest.getSessionRequests().get(i));
+            if (sessionWSDTO != null){
+                sessionWSDTOS.add(sessionWSDTO);
             }
         }
         return sessionWSDTOS;
     }
+
+
+    public SessionWSDTO createCampaignSession(SessionRequestDTO sessionRequestDTO) {
+
+        Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionRequestDTO.getClientId());
+        Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(sessionRequestDTO.getCampaignId());
+        Optional<UserDBModel> agentDBModel = userRepository.findById(sessionRequestDTO.getAgentId());
+        if (clientDBModel.isPresent() && campaignDBModel.isPresent() && agentDBModel.isPresent()){
+
+            clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);
+            clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
+            clientRepository.save(clientDBModel.get());
+
+            SessionDBModel sessionDBModel = sessionRepository.save(sessionMapper.mapSessionDBModel(campaignDBModel.get(),agentDBModel.get(),clientDBModel.get()));
+            OperationDBModel operationDBModel = operationRepository.save(operationMapper.mapOperationDBModel(sessionDBModel));
+
+            activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
+            activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
+
+            return sessionMapper.mapSessionWSDTO(sessionDBModel);
+        }
+        return null;
+    }
+
 
 
     public SessionWSDTO updateCampaignSessionService(long userId,long sessionId,long clientId,long agentId,String campaignId,String sessionState) {
@@ -136,7 +147,6 @@ public class CampaignSessionFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         Optional<UserDBModel> agentDBModel = userRepository.findById(agentId);
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-
         if (sessionDBModels.size()>0 && campaignDBModel.isPresent() && agentDBModel.isPresent()){
 
             sessionDBModels.get(0).setCampaignId(campaignDBModel.get().getCampaign());

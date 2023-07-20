@@ -105,9 +105,6 @@ public class ActivityHelper {
 
 
 
-
-
-
     public String createOperationActivityDesc(String activity){
 
         if (activity.equalsIgnoreCase(AppConstant.CREATE_SESSION_ACTIVITY)){
@@ -116,8 +113,8 @@ public class ActivityHelper {
         if (activity.equalsIgnoreCase(AppConstant.CREATE_OPERATION_ACTIVITY)){
             return AppConstant.CREATE_OPERATION_ACTIVITY_DESC;
         }
-        if (activity.equalsIgnoreCase(AppConstant.START_OPERATION_ACTIVITY)){
-            return AppConstant.START_OPERATION_ACTIVITY_DESC;
+        if (activity.equalsIgnoreCase(AppConstant.LAUNCH_OPERATION_ACTIVITY)){
+            return AppConstant.LAUNCH_OPERATION_ACTIVITY_DESC;
         }
         if (activity.equalsIgnoreCase(AppConstant.FINISH_OPERATION_ACTIVITY)){
             return AppConstant.FINISH_OPERATION_ACTIVITY_DESC;

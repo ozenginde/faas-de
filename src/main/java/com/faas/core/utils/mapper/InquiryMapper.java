@@ -114,7 +114,7 @@ public class InquiryMapper {
         sessionDBModel.setAgentId(agentDBModel.getId());
         sessionDBModel.setAgentName(agentDBModel.getUserName());
         sessionDBModel.setSessionType(campaignDBModel.getCampaignCategory());
-        sessionDBModel.setSessionState(AppConstant.READY_SESSION);
+        sessionDBModel.setSessionState(AppConstant.NEW_SESSION);
         sessionDBModel.setuDate(appUtils.getCurrentTimeStamp());
         sessionDBModel.setcDate(appUtils.getCurrentTimeStamp());
         sessionDBModel.setStatus(1);
@@ -135,8 +135,8 @@ public class InquiryMapper {
             operationDBModel.setCampaignId(sessionDBModel.getCampaignId());
             operationDBModel.setProcessId(sessionDBModel.getProcessId());
             operationDBModel.setActivities(new ArrayList<>());
-            operationDBModel.setOperationState(AppConstant.READY_OPERATION);
-            operationDBModel.setOperationResult(AppConstant.RESULT_NONE);
+            operationDBModel.setOperationState(AppConstant.NEW_OPERATION);
+            operationDBModel.setOperationResult(AppConstant.RESULT_EMPTY);
             operationDBModel.setuDate(appUtils.getCurrentTimeStamp());
             operationDBModel.setcDate(appUtils.getCurrentTimeStamp());
             operationDBModel.setStatus(1);

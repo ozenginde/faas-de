@@ -135,7 +135,6 @@ public class CampaignFlowFramework {
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(flowRequestDTO.getCampaignId());
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(flowRequestDTO.getClientId());
             Optional<UserDBModel> agentDBModel = userRepository.findById(flowRequestDTO.getAgentId());
-
             if (clientDBModel.isPresent() && agentDBModel.isPresent() && campaignDBModel.isPresent() ) {
 
                 clientDBModel.get().setClientState(AppConstant.BUSY_CLIENT);

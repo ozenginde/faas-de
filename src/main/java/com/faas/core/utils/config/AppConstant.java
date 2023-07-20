@@ -68,18 +68,20 @@ public class AppConstant {
     public static final String FINISHED_FLOW = "FINISHED_FLOW";
     public static final String ALL_FLOWS = "ALL_FLOWS";
 
+    public static final String NEW_SESSION = "NEW_SESSION";
     public static final String READY_SESSION = "READY_SESSION";
     public static final String ACTIVE_SESSION = "ACTIVE_SESSION";
     public static final String FINISHED_SESSION = "FINISHED_SESSION";
     public static final String ALL_SESSIONS = "ALL_SESSIONS";
 
 
+    public static final String NEW_OPERATION = "NEW_OPERATION";
     public static final String READY_OPERATION = "READY_OPERATION";
     public static final String ACTIVE_OPERATION = "ACTIVE_OPERATION";
     public static final String FINISHED_OPERATION = "FINISHED_OPERATION";
 
 
-    public static final String RESULT_NONE = "RESULT_NONE";
+    public static final String RESULT_EMPTY = "RESULT_EMPTY";
     public static final String RESULT_SUCCESS = "RESULT_SUCCESS";
     public static final String RESULT_REJECTED = "RESULT_REJECTED";
     public static final String RESULT_NOT_RESPONDING = "RESULT_NOT_RESPONDING";
@@ -158,8 +160,8 @@ public class AppConstant {
     public static final String CREATE_OPERATION_ACTIVITY = "CREATE_OPERATION_ACTIVITY";
     public static final String CREATE_OPERATION_ACTIVITY_DESC = "operation created by";
 
-    public static final String START_OPERATION_ACTIVITY = "START_OPERATION_ACTIVITY";
-    public static final String START_OPERATION_ACTIVITY_DESC = "operation started by";
+    public static final String LAUNCH_OPERATION_ACTIVITY = "LAUNCH_OPERATION_ACTIVITY";
+    public static final String LAUNCH_OPERATION_ACTIVITY_DESC = "operation launched by";
 
     public static final String FINISH_OPERATION_ACTIVITY = "FINISH_OPERATION_ACTIVITY";
     public static final String FINISH_OPERATION_ACTIVITY_DESC = "operation finished by";

@@ -175,7 +175,7 @@ public class OperationMapper {
             operationDBModel.setProcessId(sessionDBModel.getProcessId());
             operationDBModel.setActivities(new ArrayList<>());
             operationDBModel.setOperationState(AppConstant.READY_OPERATION);
-            operationDBModel.setOperationResult(AppConstant.RESULT_NONE);
+            operationDBModel.setOperationResult(AppConstant.RESULT_EMPTY);
             operationDBModel.setuDate(appUtils.getCurrentTimeStamp());
             operationDBModel.setcDate(appUtils.getCurrentTimeStamp());
             operationDBModel.setStatus(1);
