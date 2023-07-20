@@ -15,8 +15,10 @@ import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
+import com.faas.core.utils.helpers.InquiryHelper;
 import com.faas.core.utils.helpers.SessionHelper;
 import com.faas.core.utils.mapper.CampaignMapper;
+import com.faas.core.utils.mapper.InquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,9 @@ public class ApiDashboardFramework {
 
     @Autowired
     SessionHelper sessionHelper;
+
+    @Autowired
+    InquiryHelper inquiryHelper;
 
     @Autowired
     CampaignMapper campaignMapper;
@@ -57,8 +62,10 @@ public class ApiDashboardFramework {
     public ApiDashboardWSDTO apiGetDashboardService(long agentId,int reqPage,int reqSize){
 
         ApiDashboardWSDTO dashboardWSDTO = new ApiDashboardWSDTO();
+
         dashboardWSDTO.setReadySession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,AppConstant.READY_SESSION,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setActiveSession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,AppConstant.ACTIVE_SESSION,PageRequest.of(reqPage,reqSize))));
+        dashboardWSDTO.setDashInquiry(inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,AppConstant.READY_INQUIRY,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setDashCampaigns(apiGetDashCampaignService(agentId));
 
         return dashboardWSDTO;
@@ -71,8 +78,8 @@ public class ApiDashboardFramework {
     }
 
 
-    public ApiInquiryWSDTO apiGetDashInquiryService(long agentId, String inquiryState, int reqPage, int reqSize){
-        return null;
+    public ApiInquiryWSDTO apiGetDashInquiryService(long agentId,  int reqPage, int reqSize){
+        return inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,AppConstant.READY_INQUIRY,PageRequest.of(reqPage,reqSize)));
     }
 
 

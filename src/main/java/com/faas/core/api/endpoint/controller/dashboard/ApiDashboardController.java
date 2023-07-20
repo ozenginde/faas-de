@@ -57,11 +57,10 @@ public class ApiDashboardController {
 
     @RequestMapping(value = ApiRoute.API_GET_DASH_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetDashInquiry(@RequestParam long agentId,
-                                               @RequestParam String inquiryState,
                                                @RequestParam int reqPage,
                                                @RequestParam int reqSize) {
 
-        ApiInquiryWSModel response = apiDashboardMiddleware.apiGetDashInquiry(agentId,inquiryState,reqPage,reqSize);
+        ApiInquiryWSModel response = apiDashboardMiddleware.apiGetDashInquiry(agentId,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

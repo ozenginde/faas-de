@@ -66,13 +66,14 @@ public class ApiDashboardMiddleware {
     }
 
 
-    public ApiInquiryWSModel apiGetDashInquiry(long agentId, String inquiryState, int reqPage, int reqSize) {
+    public ApiInquiryWSModel apiGetDashInquiry(long agentId, int reqPage, int reqSize) {
 
         ApiInquiryWSModel response = new ApiInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiInquiryWSDTO inquiryWSDTO = apiDashboardFramework.apiGetDashInquiryService(agentId,inquiryState,reqPage,reqSize);
+        ApiInquiryWSDTO inquiryWSDTO = apiDashboardFramework.apiGetDashInquiryService(agentId,reqPage,reqSize);
         if (inquiryWSDTO != null){
+            response.setInquiry(inquiryWSDTO);
         }
 
         general.setOperation("apiGetDashInquiry");
