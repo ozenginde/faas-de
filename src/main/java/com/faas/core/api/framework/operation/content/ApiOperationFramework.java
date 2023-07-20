@@ -106,28 +106,32 @@ public class ApiOperationFramework {
     }
 
 
-    public ApiOperationWSDTO apiUpdateOperationService(long agentId, long sessionId, long clientId, String campaignId, String operationResult) {
+    public ApiOperationWSDTO apiFinishOperationService(long agentId, long sessionId, long clientId, String campaignId,String operationResult) {
 
-        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(sessionId, clientId, agentId, campaignId, AppConstant.ACTIVE_SESSION);
-        List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentId(sessionId, clientId, agentId);
-        Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
-        if (sessionDBModels.size() > 0 && operationDBModels.size() > 0 && clientDBModel.isPresent()) {
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(sessionId, clientId, agentId, campaignId, AppConstant.READY_SESSION);
+        List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentIdAndCampaignIdAndOperationState(sessionId, clientId, agentId, campaignId, AppConstant.READY_OPERATION);
+        if (sessionDBModels.size() > 0 && operationDBModels.size() > 0) {
 
-            sessionDBModels.get(0).setSessionState(AppConstant.FINISHED_SESSION);
+            sessionDBModels.get(0).setSessionState(AppConstant.ACTIVE_SESSION);
             sessionDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             SessionDBModel updatedSession = sessionRepository.save(sessionDBModels.get(0));
 
-            operationDBModels.get(0).setOperationResult(operationResult);
-            operationDBModels.get(0).setOperationState(AppConstant.FINISHED_OPERATION);
+            operationDBModels.get(0).setOperationState(AppConstant.ACTIVE_OPERATION);
             operationDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             OperationDBModel updatedOperation = operationRepository.save(operationDBModels.get(0));
 
-            clientDBModel.get().setClientState(AppConstant.READY_CLIENT);
-            clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
-            clientRepository.save(clientDBModel.get());
+            activityHelper.createOperationActivity(updatedOperation.getSessionId(), updatedOperation.getId(), AppConstant.START_OPERATION_ACTIVITY,
+                    AppConstant.OPERATION_ACTIVITY, String.valueOf(updatedOperation.getAgentId()), AppConstant.USER_TYPE, updatedOperation.getId(), AppConstant.OPERATION_TYPE);
 
             return new ApiOperationWSDTO(updatedOperation, updatedSession);
         }
+        return null;
+    }
+
+
+
+    public ApiOperationWSDTO apiUpdateOperationService(long agentId, long sessionId, long clientId, String campaignId) {
+
         return null;
     }
 

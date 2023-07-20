@@ -92,6 +92,7 @@ public class AppConstant {
     public static final String ACTION_FAILED = "ACTION_FAILED";
 
 
+
     public static final String FLASH_SMS = "FLASH_SMS";
     public static final String STANDARD_SMS = "STANDARD_SMS";
 

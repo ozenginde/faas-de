@@ -65,14 +65,29 @@ public class ApiOperationController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_UPDATE_OPERATION, method = RequestMethod.POST)
-    public ResponseEntity<?> apiUpdateOperation(@RequestParam long agentId,
+    @RequestMapping(value = ApiRoute.API_FINISH_OPERATION, method = RequestMethod.POST)
+    public ResponseEntity<?> apiFinishOperation(@RequestParam long agentId,
                                                 @RequestParam long sessionId,
                                                 @RequestParam long clientId,
                                                 @RequestParam String campaignId,
                                                 @RequestParam String operationResult) {
 
-        ApiOperationWSModel response = apiOperationMiddleware.apiUpdateOperation(agentId,sessionId,clientId,campaignId,operationResult);
+        ApiOperationWSModel response = apiOperationMiddleware.apiFinishOperation(agentId,sessionId,clientId,campaignId,operationResult);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_UPDATE_OPERATION, method = RequestMethod.POST)
+    public ResponseEntity<?> apiUpdateOperation(@RequestParam long agentId,
+                                                @RequestParam long sessionId,
+                                                @RequestParam long clientId,
+                                                @RequestParam String campaignId) {
+
+        ApiOperationWSModel response = apiOperationMiddleware.apiUpdateOperation(agentId,sessionId,clientId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
