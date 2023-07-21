@@ -15,6 +15,8 @@ public interface InquiryRepository extends PagingAndSortingRepository<InquiryDBM
     long countByAgentIdAndInquiryState(long agentId,String inquiryState);
     List<InquiryDBModel>findByStatus(int status);
     List<InquiryDBModel>findByIdAndClientId(long inquiryId, long clientId);
+    List<InquiryDBModel>findByIdAndCampaignId(long inquiryId,String campaignId);
+    List<InquiryDBModel>findByIdAndAgentIdAndCampaignId(long inquiryId,long agentId,String campaignId);
     List<InquiryDBModel>findByInquiryState(String inquiryState);
     List<InquiryDBModel>findByAgentIdAndInquiryState(long agentId, String inquiryState);
     List<InquiryDBModel>findByCampaignIdAndInquiryState(String campaignId, String inquiryState);

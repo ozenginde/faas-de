@@ -83,13 +83,15 @@ public class ApiInquiryMiddleware {
     }
 
 
-    public ApiInquiryWSModel apiGetInquiry(long agentId, long inquiryId) {
+    public ApiInquiryWSModel apiGetInquiry(long agentId, long inquiryId,String campaignId) {
 
         ApiInquiryWSModel response = new ApiInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiGetInquiryService(agentId,inquiryId);
-
+        ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiGetInquiryService(agentId,inquiryId,campaignId);
+        if (inquiryWSDTO != null){
+            response.setInquiry(inquiryWSDTO);
+        }
 
         general.setOperation("apiGetInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);

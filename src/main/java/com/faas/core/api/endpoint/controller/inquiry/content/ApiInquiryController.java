@@ -72,9 +72,10 @@ public class ApiInquiryController {
 
     @RequestMapping(value = ApiRoute.API_GET_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetInquiry(@RequestParam long agentId,
-                                           @RequestParam long inquiryId) {
+                                           @RequestParam long inquiryId,
+                                           @RequestParam String campaignId) {
 
-        ApiInquiryWSModel response = apiInquiryMiddleware.apiGetInquiry(agentId,inquiryId);
+        ApiInquiryWSModel response = apiInquiryMiddleware.apiGetInquiry(agentId,inquiryId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
