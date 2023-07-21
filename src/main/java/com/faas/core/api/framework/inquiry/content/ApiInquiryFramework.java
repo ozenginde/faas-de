@@ -76,12 +76,13 @@ public class ApiInquiryFramework {
     }
 
 
-    public ApiInquiryWSDTO apiUpdateInquiryService(long agentId, long inquiryId){
+    public ApiInquiryWSDTO apiUpdateInquiryService(long agentId, long inquiryId,String inquiryState){
 
         ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
 
         return inquiryWSDTO;
     }
+
 
 
     public ApiInquiryWSDTO apiRemoveInquiryService(long agentId, long inquiryId){
@@ -89,6 +90,8 @@ public class ApiInquiryFramework {
         ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
         return inquiryWSDTO;
     }
+
+
 
 
     public List<ApiSummaryWSDTO> apiGetInquirySummaryService(long agentId){

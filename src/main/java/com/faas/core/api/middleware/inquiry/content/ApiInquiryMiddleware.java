@@ -108,8 +108,10 @@ public class ApiInquiryMiddleware {
         ApiInquiryWSModel response = new ApiInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiUpdateInquiryService(agentId,inquiryId);
-
+        ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiUpdateInquiryService(agentId,inquiryId,inquiryState);
+        if (inquiryWSDTO != null){
+            response.setInquiry(inquiryWSDTO);
+        }
 
         general.setOperation("apiUpdateInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -127,7 +129,9 @@ public class ApiInquiryMiddleware {
         GeneralWSModel general = new GeneralWSModel();
 
         ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiRemoveInquiryService(agentId,inquiryId);
-
+        if (inquiryWSDTO != null){
+            response.setInquiry(inquiryWSDTO);
+        }
 
         general.setOperation("apiRemoveInquiry");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -137,7 +141,6 @@ public class ApiInquiryMiddleware {
 
         return response;
     }
-
 
 
     public ApiSummaryWSModel apiGetInquirySummary(long agentId) {
