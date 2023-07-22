@@ -66,7 +66,6 @@ public class ApiInquiryFramework {
 
             ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
             List<ApiInquiryDTO>inquiryDTOS = new ArrayList<>();
-
             inquiryDTOS.add(inquiryHelper.getApiInquiryDTO(inquiryDBModels.get(0)));
             inquiryWSDTO.setInquiries(inquiryDTOS);
 
@@ -74,6 +73,14 @@ public class ApiInquiryFramework {
         }
        return null;
     }
+
+
+    public ApiInquiryWSDTO apiStartInquiryService(long agentId,long inquiryId,long sessionId,String campaignId){
+
+
+        return null;
+    }
+
 
 
     public ApiInquiryWSDTO apiUpdateInquiryService(long agentId, long inquiryId,String inquiryState){
@@ -90,7 +97,6 @@ public class ApiInquiryFramework {
         ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
         return inquiryWSDTO;
     }
-
 
 
 

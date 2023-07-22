@@ -84,6 +84,21 @@ public class ApiInquiryController {
     }
 
 
+    @RequestMapping(value = ApiRoute.API_START_INQUIRY, method = RequestMethod.POST)
+    public ResponseEntity<?> apiStartInquiry(@RequestParam long agentId,
+                                             @RequestParam long inquiryId,
+                                             @RequestParam long sessionId,
+                                             @RequestParam String campaignId) {
+
+        ApiInquiryWSModel response = apiInquiryMiddleware.apiStartInquiry(agentId,inquiryId,sessionId,campaignId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
     @RequestMapping(value = ApiRoute.API_UPDATE_INQUIRY, method = RequestMethod.POST)
     public ResponseEntity<?> apiUpdateInquiry(@RequestParam long agentId,
                                               @RequestParam long inquiryId,
