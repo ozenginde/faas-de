@@ -5,8 +5,12 @@ import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
+import com.faas.core.base.model.db.operation.content.OperationDBModel;
+import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
 import com.faas.core.base.repo.inquiry.InquiryRepository;
+import com.faas.core.base.repo.operation.content.OperationRepository;
+import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.InquiryHelper;
@@ -27,6 +31,12 @@ public class ApiInquiryFramework {
 
     @Autowired
     InquiryMapper inquiryMapper;
+
+    @Autowired
+    SessionRepository sessionRepository;
+
+    @Autowired
+    OperationRepository operationRepository;
 
     @Autowired
     InquiryRepository inquiryRepository;
@@ -63,13 +73,7 @@ public class ApiInquiryFramework {
 
         List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndAgentIdAndCampaignId(inquiryId,agentId,campaignId);
         if (inquiryDBModels.size()>0){
-
-            ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
-            List<ApiInquiryDTO>inquiryDTOS = new ArrayList<>();
-            inquiryDTOS.add(inquiryHelper.getApiInquiryDTO(inquiryDBModels.get(0)));
-            inquiryWSDTO.setInquiries(inquiryDTOS);
-
-            return inquiryWSDTO;
+            return inquiryMapper.mapApiInquiryWSDTO(inquiryDBModels.get(0));
         }
        return null;
     }
@@ -77,7 +81,25 @@ public class ApiInquiryFramework {
 
     public ApiInquiryWSDTO apiStartInquiryService(long agentId,long inquiryId,long sessionId,String campaignId){
 
+        List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndAgentIdAndCampaignIdAndInquiryState(inquiryId,agentId,campaignId,AppConstant.READY_INQUIRY);
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndCampaignIdAndSessionStateAndSessionType(sessionId,campaignId,AppConstant.READY_SESSION,AppConstant.INQUIRY_CAMPAIGN);
+        List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndCampaignIdAndOperationState(sessionId,campaignId,AppConstant.READY_OPERATION);
 
+        if (inquiryDBModels.size()>0 && sessionDBModels.size()>0 && operationDBModels.size()>0 ){
+
+            sessionDBModels.get(0).setSessionState(AppConstant.ACTIVE_SESSION);
+            sessionDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
+            sessionRepository.save(sessionDBModels.get(0));
+
+            operationDBModels.get(0).setOperationState(AppConstant.ACTIVE_OPERATION);
+            operationDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
+            operationRepository.save(operationDBModels.get(0));
+
+            inquiryDBModels.get(0).setInquiryState(AppConstant.ACTIVE_INQUIRY);
+            inquiryDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
+
+            return inquiryMapper.mapApiInquiryWSDTO(inquiryRepository.save(inquiryDBModels.get(0)));
+        }
         return null;
     }
 

@@ -2,13 +2,13 @@ package com.faas.core.base.framework.process.details.content;
 
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.db.process.content.dao.ProcessDataDAO;
-import com.faas.core.base.model.db.process.content.dao.ProcessPathDAO;
+import com.faas.core.base.model.db.process.content.dao.ProcessCallScriptDAO;
 import com.faas.core.base.model.db.process.content.dao.ProcessUrlDAO;
 import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDataWSDTO;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDetailsWSDTO;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessUrlWSDTO;
-import com.faas.core.base.model.ws.process.details.content.dto.ProcessPathWSDTO;
+import com.faas.core.base.model.ws.process.details.content.dto.ProcessCallScriptWSDTO;
 import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
@@ -184,27 +184,27 @@ public class ProcessDetailsFramework {
     }
 
 
-    public List<ProcessPathWSDTO> getProcessPathsService(String processId) {
+    public List<ProcessCallScriptWSDTO> getProcessCallScriptsService(String processId) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
-        if (processDBModel.isPresent() && processDBModel.get().getProcessPaths() != null) {
-            List<ProcessPathWSDTO> processPathWSDTOS = new ArrayList<>();
-            for (int i=0;i<processDBModel.get().getProcessPaths().size();i++){
-                processPathWSDTOS.add(new ProcessPathWSDTO(processDBModel.get().getProcessPaths().get(i)));
+        if (processDBModel.isPresent() && processDBModel.get().getCallScripts() != null) {
+            List<ProcessCallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
+            for (int i=0;i<processDBModel.get().getCallScripts().size();i++){
+                callScriptWSDTOS.add(new ProcessCallScriptWSDTO(processDBModel.get().getCallScripts().get(i)));
             }
-            return processPathWSDTOS;
+            return callScriptWSDTOS;
         }
         return null;
     }
 
 
-    public ProcessPathWSDTO getProcessPathService(String processId,String pathId) {
+    public ProcessCallScriptWSDTO getProcessCallScriptService(String processId, String scriptId) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
-        if (processDBModel.isPresent() && processDBModel.get().getProcessPaths() != null) {
-            for (int i=0;i<processDBModel.get().getProcessPaths().size();i++){
-                if (processDBModel.get().getProcessPaths().get(i).getPathId().equalsIgnoreCase(pathId)){
-                    return new ProcessPathWSDTO(processDBModel.get().getProcessPaths().get(i));
+        if (processDBModel.isPresent() && processDBModel.get().getCallScripts() != null) {
+            for (int i=0;i<processDBModel.get().getCallScripts().size();i++){
+                if (processDBModel.get().getCallScripts().get(i).getScriptId().equalsIgnoreCase(scriptId)){
+                    return new ProcessCallScriptWSDTO(processDBModel.get().getCallScripts().get(i));
                 }
             }
         }
@@ -212,47 +212,51 @@ public class ProcessDetailsFramework {
     }
 
 
-    public ProcessPathWSDTO createProcessPathService(String processId,int pathOrder,String processPath) {
+    public ProcessCallScriptWSDTO createProcessCallScriptService(String processId,int scriptOrder,String scriptTitle,String scriptBody) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
         if (processDBModel.isPresent()) {
-            ProcessPathDAO processPathDAO = new ProcessPathDAO();
-            processPathDAO.setPathId(appUtils.generateUUID());
-            processPathDAO.setPathOrder(pathOrder);
-            processPathDAO.setProcessPath(processPath);
-            processPathDAO.setuDate(appUtils.getCurrentTimeStamp());
-            processPathDAO.setcDate(appUtils.getCurrentTimeStamp());
-            processPathDAO.setStatus(1);
 
-            if (processDBModel.get().getProcessPaths() != null){
-                processDBModel.get().getProcessPaths().add(processPathDAO);
+            ProcessCallScriptDAO callScriptDAO = new ProcessCallScriptDAO();
+            callScriptDAO.setScriptId(appUtils.generateUUID());
+            callScriptDAO.setScriptOrder(scriptOrder);
+            callScriptDAO.setScriptTitle(scriptTitle);
+            callScriptDAO.setScriptBody(scriptBody);
+            callScriptDAO.setcDate(appUtils.getCurrentTimeStamp());
+            callScriptDAO.setStatus(1);
+
+            if (processDBModel.get().getCallScripts() != null){
+                processDBModel.get().getCallScripts().add(callScriptDAO);
             }else {
-                List<ProcessPathDAO> processPathDAOS = new ArrayList<>();
-                processPathDAOS.add(processPathDAO);
-                processDBModel.get().setProcessPaths(processPathDAOS);
+                List<ProcessCallScriptDAO> callScriptDAOS = new ArrayList<>();
+                callScriptDAOS.add(callScriptDAO);
+                processDBModel.get().setCallScripts(callScriptDAOS);
             }
             processDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             processRepository.save(processDBModel.get());
 
-            return new ProcessPathWSDTO(processPathDAO);
+            return new ProcessCallScriptWSDTO(callScriptDAO);
         }
         return null;
     }
 
 
-    public ProcessPathWSDTO updateProcessPathService(String processId, String pathId,int pathOrder,String processPath) {
+    public ProcessCallScriptWSDTO updateProcessCallScriptService(String processId,String scriptId,int scriptOrder,String scriptTitle,String scriptBody) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
-        if (processDBModel.isPresent() && processDBModel.get().getProcessPaths() != null) {
-            for (int i=0;i<processDBModel.get().getProcessPaths().size();i++){
-                if (processDBModel.get().getProcessPaths().get(i).getPathId().equalsIgnoreCase(pathId)){
-                    processDBModel.get().getProcessPaths().get(i).setPathOrder(pathOrder);
-                    processDBModel.get().getProcessPaths().get(i).setProcessPath(processPath);
-                    processDBModel.get().getProcessPaths().get(i).setuDate(appUtils.getCurrentTimeStamp());
+        if (processDBModel.isPresent() && processDBModel.get().getCallScripts() != null) {
+            for (int i=0;i<processDBModel.get().getCallScripts().size();i++){
+                if (processDBModel.get().getCallScripts().get(i).getScriptId().equalsIgnoreCase(scriptId)){
+
+                    processDBModel.get().getCallScripts().get(i).setScriptOrder(scriptOrder);
+                    processDBModel.get().getCallScripts().get(i).setScriptTitle(scriptTitle);
+                    processDBModel.get().getCallScripts().get(i).setScriptBody(scriptBody);
+                    processDBModel.get().getCallScripts().get(i).setcDate(appUtils.getCurrentTimeStamp());
+
                     processDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                     processRepository.save(processDBModel.get());
 
-                    return new ProcessPathWSDTO(processDBModel.get().getProcessPaths().get(i));
+                    return new ProcessCallScriptWSDTO(processDBModel.get().getCallScripts().get(i));
                 }
             }
         }
@@ -260,23 +264,25 @@ public class ProcessDetailsFramework {
     }
 
 
-    public ProcessPathWSDTO removeProcessPathService(String processId, String pathId) {
+    public ProcessCallScriptWSDTO removeProcessCallScriptService(String processId, String scriptId) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
-        if (processDBModel.isPresent() && processDBModel.get().getProcessPaths() != null) {
-            for (int i=0;i<processDBModel.get().getProcessPaths().size();i++){
-                if (processDBModel.get().getProcessPaths().get(i).getPathId().equalsIgnoreCase(pathId)){
-                    ProcessPathDAO processPathDAO = processDBModel.get().getProcessPaths().get(i);
-                    processDBModel.get().getProcessPaths().remove(processPathDAO);
+        if (processDBModel.isPresent() && processDBModel.get().getCallScripts() != null) {
+            for (int i=0;i<processDBModel.get().getCallScripts().size();i++){
+                if (processDBModel.get().getCallScripts().get(i).getScriptId().equalsIgnoreCase(scriptId)){
+
+                    ProcessCallScriptDAO callScriptDAO = processDBModel.get().getCallScripts().get(i);
+                    processDBModel.get().getCallScripts().remove(callScriptDAO);
                     processDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                     processRepository.save(processDBModel.get());
 
-                    return new ProcessPathWSDTO(processPathDAO);
+                    return new ProcessCallScriptWSDTO(callScriptDAO);
                 }
             }
         }
         return null;
     }
+
 
 
 }

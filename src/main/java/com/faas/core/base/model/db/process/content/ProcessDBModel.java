@@ -20,7 +20,7 @@ public class ProcessDBModel {
     private List<ProcessUrlDAO>processUrls;
     private List<ProcessDataDAO>processDatas;
     private List<ProcessAssetDAO>processAssets;
-    private List<ProcessPathDAO>processPaths;
+    private List<ProcessCallScriptDAO>callScripts;
     private String processState;
     private long uDate;
     private long cDate;
@@ -29,7 +29,7 @@ public class ProcessDBModel {
     public ProcessDBModel() {
     }
 
-    public ProcessDBModel(String id, String process, String processDesc, long processTypeId, String processType, String baseType, String processCategory, List<ProcessUrlDAO> processUrls, List<ProcessDataDAO> processDatas, List<ProcessAssetDAO> processAssets, List<ProcessPathDAO> processPaths, String processState, long uDate, long cDate, int status) {
+    public ProcessDBModel(String id, String process, String processDesc, long processTypeId, String processType, String baseType, String processCategory, List<ProcessUrlDAO> processUrls, List<ProcessDataDAO> processDatas, List<ProcessAssetDAO> processAssets, List<ProcessCallScriptDAO> callScripts, String processState, long uDate, long cDate, int status) {
         this.id = id;
         this.process = process;
         this.processDesc = processDesc;
@@ -40,7 +40,7 @@ public class ProcessDBModel {
         this.processUrls = processUrls;
         this.processDatas = processDatas;
         this.processAssets = processAssets;
-        this.processPaths = processPaths;
+        this.callScripts = callScripts;
         this.processState = processState;
         this.uDate = uDate;
         this.cDate = cDate;
@@ -127,12 +127,12 @@ public class ProcessDBModel {
         this.processAssets = processAssets;
     }
 
-    public List<ProcessPathDAO> getProcessPaths() {
-        return processPaths;
+    public List<ProcessCallScriptDAO> getCallScripts() {
+        return callScripts;
     }
 
-    public void setProcessPaths(List<ProcessPathDAO> processPaths) {
-        this.processPaths = processPaths;
+    public void setCallScripts(List<ProcessCallScriptDAO> callScripts) {
+        this.callScripts = callScripts;
     }
 
     public String getProcessState() {

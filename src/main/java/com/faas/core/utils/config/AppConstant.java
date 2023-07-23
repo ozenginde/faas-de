@@ -56,6 +56,7 @@ public class AppConstant {
     public static final String ALL_CLIENTS = "ALL_CLIENTS";
 
 
+
     public static final String NEW_INQUIRY = "NEW_INQUIRY";
     public static final String READY_INQUIRY = "READY_INQUIRY";
     public static final String ACTIVE_INQUIRY = "ACTIVE_INQUIRY";

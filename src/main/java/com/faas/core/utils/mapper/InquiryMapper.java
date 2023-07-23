@@ -1,5 +1,7 @@
 package com.faas.core.utils.mapper;
 
+import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryDTO;
+import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
@@ -11,6 +13,7 @@ import com.faas.core.base.model.ws.inquiry.dto.InquiryWSDTO;
 import com.faas.core.base.repo.operation.content.OperationRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
+import com.faas.core.utils.helpers.InquiryHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -21,6 +24,8 @@ import java.util.List;
 @Component
 public class InquiryMapper {
 
+    @Autowired
+    InquiryHelper inquiryHelper;
 
     @Autowired
     OperationRepository operationRepository;
@@ -133,6 +138,17 @@ public class InquiryMapper {
             return operationDBModel;
         }
         return null;
+    }
+
+
+    public ApiInquiryWSDTO mapApiInquiryWSDTO(InquiryDBModel inquiryDBModel){
+
+        ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
+        List<ApiInquiryDTO>inquiryDTOS = new ArrayList<>();
+        inquiryDTOS.add(inquiryHelper.getApiInquiryDTO(inquiryDBModel));
+        inquiryWSDTO.setInquiries(inquiryDTOS);
+
+        return inquiryWSDTO;
     }
 
 
