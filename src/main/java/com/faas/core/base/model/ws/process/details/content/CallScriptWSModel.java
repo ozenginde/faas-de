@@ -1,19 +1,19 @@
 package com.faas.core.base.model.ws.process.details.content;
 
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.model.ws.process.details.content.dto.ProcessCallScriptWSDTO;
+import com.faas.core.base.model.ws.process.details.content.dto.CallScriptWSDTO;
 
 import java.util.List;
 
-public class ProcessCallScriptWSModel {
+public class CallScriptWSModel {
 
     private GeneralWSModel general;
-    private List<ProcessCallScriptWSDTO>callScripts;
+    private List<CallScriptWSDTO>callScripts;
 
-    public ProcessCallScriptWSModel() {
+    public CallScriptWSModel() {
     }
 
-    public ProcessCallScriptWSModel(GeneralWSModel general, List<ProcessCallScriptWSDTO> callScripts) {
+    public CallScriptWSModel(GeneralWSModel general, List<CallScriptWSDTO> callScripts) {
         this.general = general;
         this.callScripts = callScripts;
     }
@@ -26,11 +26,11 @@ public class ProcessCallScriptWSModel {
         this.general = general;
     }
 
-    public List<ProcessCallScriptWSDTO> getCallScripts() {
+    public List<CallScriptWSDTO> getCallScripts() {
         return callScripts;
     }
 
-    public void setCallScripts(List<ProcessCallScriptWSDTO> callScripts) {
+    public void setCallScripts(List<CallScriptWSDTO> callScripts) {
         this.callScripts = callScripts;
     }
 }

@@ -2,13 +2,13 @@ package com.faas.core.base.framework.process.details.content;
 
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.db.process.content.dao.ProcessDataDAO;
-import com.faas.core.base.model.db.process.content.dao.ProcessCallScriptDAO;
+import com.faas.core.base.model.db.process.content.dao.CallScriptDAO;
 import com.faas.core.base.model.db.process.content.dao.ProcessUrlDAO;
 import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDataWSDTO;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDetailsWSDTO;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessUrlWSDTO;
-import com.faas.core.base.model.ws.process.details.content.dto.ProcessCallScriptWSDTO;
+import com.faas.core.base.model.ws.process.details.content.dto.CallScriptWSDTO;
 import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
@@ -184,13 +184,13 @@ public class ProcessDetailsFramework {
     }
 
 
-    public List<ProcessCallScriptWSDTO> getProcessCallScriptsService(String processId) {
+    public List<CallScriptWSDTO> getCallScriptsService(String processId) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
         if (processDBModel.isPresent() && processDBModel.get().getCallScripts() != null) {
-            List<ProcessCallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
+            List<CallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
             for (int i=0;i<processDBModel.get().getCallScripts().size();i++){
-                callScriptWSDTOS.add(new ProcessCallScriptWSDTO(processDBModel.get().getCallScripts().get(i)));
+                callScriptWSDTOS.add(new CallScriptWSDTO(processDBModel.get().getCallScripts().get(i)));
             }
             return callScriptWSDTOS;
         }
@@ -198,13 +198,13 @@ public class ProcessDetailsFramework {
     }
 
 
-    public ProcessCallScriptWSDTO getProcessCallScriptService(String processId, String scriptId) {
+    public CallScriptWSDTO getCallScriptService(String processId, String scriptId) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
         if (processDBModel.isPresent() && processDBModel.get().getCallScripts() != null) {
             for (int i=0;i<processDBModel.get().getCallScripts().size();i++){
                 if (processDBModel.get().getCallScripts().get(i).getScriptId().equalsIgnoreCase(scriptId)){
-                    return new ProcessCallScriptWSDTO(processDBModel.get().getCallScripts().get(i));
+                    return new CallScriptWSDTO(processDBModel.get().getCallScripts().get(i));
                 }
             }
         }
@@ -212,12 +212,12 @@ public class ProcessDetailsFramework {
     }
 
 
-    public ProcessCallScriptWSDTO createProcessCallScriptService(String processId,int scriptOrder,String scriptTitle,String scriptBody) {
+    public CallScriptWSDTO createCallScriptService(String processId, int scriptOrder, String scriptTitle, String scriptBody) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
         if (processDBModel.isPresent()) {
 
-            ProcessCallScriptDAO callScriptDAO = new ProcessCallScriptDAO();
+            CallScriptDAO callScriptDAO = new CallScriptDAO();
             callScriptDAO.setScriptId(appUtils.generateUUID());
             callScriptDAO.setScriptOrder(scriptOrder);
             callScriptDAO.setScriptTitle(scriptTitle);
@@ -228,20 +228,20 @@ public class ProcessDetailsFramework {
             if (processDBModel.get().getCallScripts() != null){
                 processDBModel.get().getCallScripts().add(callScriptDAO);
             }else {
-                List<ProcessCallScriptDAO> callScriptDAOS = new ArrayList<>();
+                List<CallScriptDAO> callScriptDAOS = new ArrayList<>();
                 callScriptDAOS.add(callScriptDAO);
                 processDBModel.get().setCallScripts(callScriptDAOS);
             }
             processDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             processRepository.save(processDBModel.get());
 
-            return new ProcessCallScriptWSDTO(callScriptDAO);
+            return new CallScriptWSDTO(callScriptDAO);
         }
         return null;
     }
 
 
-    public ProcessCallScriptWSDTO updateProcessCallScriptService(String processId,String scriptId,int scriptOrder,String scriptTitle,String scriptBody) {
+    public CallScriptWSDTO updateCallScriptService(String processId, String scriptId, int scriptOrder, String scriptTitle, String scriptBody) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
         if (processDBModel.isPresent() && processDBModel.get().getCallScripts() != null) {
@@ -256,7 +256,7 @@ public class ProcessDetailsFramework {
                     processDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                     processRepository.save(processDBModel.get());
 
-                    return new ProcessCallScriptWSDTO(processDBModel.get().getCallScripts().get(i));
+                    return new CallScriptWSDTO(processDBModel.get().getCallScripts().get(i));
                 }
             }
         }
@@ -264,19 +264,19 @@ public class ProcessDetailsFramework {
     }
 
 
-    public ProcessCallScriptWSDTO removeProcessCallScriptService(String processId, String scriptId) {
+    public CallScriptWSDTO removeCallScriptService(String processId, String scriptId) {
 
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
         if (processDBModel.isPresent() && processDBModel.get().getCallScripts() != null) {
             for (int i=0;i<processDBModel.get().getCallScripts().size();i++){
                 if (processDBModel.get().getCallScripts().get(i).getScriptId().equalsIgnoreCase(scriptId)){
 
-                    ProcessCallScriptDAO callScriptDAO = processDBModel.get().getCallScripts().get(i);
+                    CallScriptDAO callScriptDAO = processDBModel.get().getCallScripts().get(i);
                     processDBModel.get().getCallScripts().remove(callScriptDAO);
                     processDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                     processRepository.save(processDBModel.get());
 
-                    return new ProcessCallScriptWSDTO(callScriptDAO);
+                    return new CallScriptWSDTO(callScriptDAO);
                 }
             }
         }

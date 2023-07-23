@@ -20,7 +20,7 @@ public class ProcessDBModel {
     private List<ProcessUrlDAO>processUrls;
     private List<ProcessDataDAO>processDatas;
     private List<ProcessAssetDAO>processAssets;
-    private List<ProcessCallScriptDAO>callScripts;
+    private List<CallScriptDAO>callScripts;
     private String processState;
     private long uDate;
     private long cDate;
@@ -29,7 +29,7 @@ public class ProcessDBModel {
     public ProcessDBModel() {
     }
 
-    public ProcessDBModel(String id, String process, String processDesc, long processTypeId, String processType, String baseType, String processCategory, List<ProcessUrlDAO> processUrls, List<ProcessDataDAO> processDatas, List<ProcessAssetDAO> processAssets, List<ProcessCallScriptDAO> callScripts, String processState, long uDate, long cDate, int status) {
+    public ProcessDBModel(String id, String process, String processDesc, long processTypeId, String processType, String baseType, String processCategory, List<ProcessUrlDAO> processUrls, List<ProcessDataDAO> processDatas, List<ProcessAssetDAO> processAssets, List<CallScriptDAO> callScripts, String processState, long uDate, long cDate, int status) {
         this.id = id;
         this.process = process;
         this.processDesc = processDesc;
@@ -127,11 +127,11 @@ public class ProcessDBModel {
         this.processAssets = processAssets;
     }
 
-    public List<ProcessCallScriptDAO> getCallScripts() {
+    public List<CallScriptDAO> getCallScripts() {
         return callScripts;
     }
 
-    public void setCallScripts(List<ProcessCallScriptDAO> callScripts) {
+    public void setCallScripts(List<CallScriptDAO> callScripts) {
         this.callScripts = callScripts;
     }
 

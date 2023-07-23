@@ -346,11 +346,11 @@ public class BaseRoute {
     public static final String REMOVE_PROCESS_URL = "removeprocessurl";
 
 
-    public static final String GET_PROCESS_CALL_SCRIPTS = "getprocesscallscripts";
-    public static final String GET_PROCESS_CALL_SCRIPT = "getprocesscallscripts";
-    public static final String CREATE_PROCESS_CALL_SCRIPT = "createprocesscallscripts";
-    public static final String UPDATE_PROCESS_CALL_SCRIPT = "updateprocesscallscripts";
-    public static final String REMOVE_PROCESS_CALL_SCRIPT = "removeprocesscallscripts";
+    public static final String GET_CALL_SCRIPTS = "getcallscripts";
+    public static final String GET_CALL_SCRIPT = "getcallscript";
+    public static final String CREATE_CALL_SCRIPT = "createcallscript";
+    public static final String UPDATE_CALL_SCRIPT = "updatecallscript";
+    public static final String REMOVE_CALL_SCRIPT = "removecallscript";
 
     public static final String GET_PROCESS_TRIGGER = "getprocesstrigger";
     public static final String CREATE_SMS_TRIGGER = "createsmstrigger";

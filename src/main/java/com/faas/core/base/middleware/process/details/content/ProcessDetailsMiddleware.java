@@ -11,8 +11,8 @@ import com.faas.core.base.model.ws.process.details.content.ProcessUrlWSModel;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDataWSDTO;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessDetailsWSDTO;
 import com.faas.core.base.model.ws.process.details.content.dto.ProcessUrlWSDTO;
-import com.faas.core.base.model.ws.process.details.content.ProcessCallScriptWSModel;
-import com.faas.core.base.model.ws.process.details.content.dto.ProcessCallScriptWSDTO;
+import com.faas.core.base.model.ws.process.details.content.CallScriptWSModel;
+import com.faas.core.base.model.ws.process.details.content.dto.CallScriptWSDTO;
 import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
@@ -275,17 +275,17 @@ public class ProcessDetailsMiddleware {
 
 
 
-    public ProcessCallScriptWSModel getProcessCallScripts(long userId, String processId) {
+    public CallScriptWSModel getCallScripts(long userId, String processId) {
 
-        ProcessCallScriptWSModel response = new ProcessCallScriptWSModel();
+        CallScriptWSModel response = new CallScriptWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ProcessCallScriptWSDTO> callScriptWSDTOS = processDetailsFramework.getProcessCallScriptsService(processId);
+        List<CallScriptWSDTO> callScriptWSDTOS = processDetailsFramework.getCallScriptsService(processId);
         if (callScriptWSDTOS != null){
             response.setCallScripts(callScriptWSDTOS);
         }
 
-        general.setOperation("getProcessCallScripts");
+        general.setOperation("getCallScripts");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -295,19 +295,19 @@ public class ProcessDetailsMiddleware {
     }
 
 
-    public ProcessCallScriptWSModel getProcessCallScript(long userId,String processId, String scriptId) {
+    public CallScriptWSModel getCallScript(long userId, String processId, String scriptId) {
 
-        ProcessCallScriptWSModel response = new ProcessCallScriptWSModel();
+        CallScriptWSModel response = new CallScriptWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ProcessCallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
+        List<CallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
 
-        ProcessCallScriptWSDTO callScriptWSDTO = processDetailsFramework.getProcessCallScriptService(processId,scriptId);
+        CallScriptWSDTO callScriptWSDTO = processDetailsFramework.getCallScriptService(processId,scriptId);
         if (callScriptWSDTO != null){
             callScriptWSDTOS.add(callScriptWSDTO);
         }
 
         response.setCallScripts(callScriptWSDTOS);
-        general.setOperation("getProcessCallScript");
+        general.setOperation("getCallScript");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -317,13 +317,13 @@ public class ProcessDetailsMiddleware {
     }
 
 
-    public ProcessCallScriptWSModel createProcessCallScript(long userId,String processId,int scriptOrder,String scriptTitle,String scriptBody) {
+    public CallScriptWSModel createCallScript(long userId, String processId, int scriptOrder, String scriptTitle, String scriptBody) {
 
-        ProcessCallScriptWSModel response = new ProcessCallScriptWSModel();
+        CallScriptWSModel response = new CallScriptWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ProcessCallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
+        List<CallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
 
-        ProcessCallScriptWSDTO callScriptWSDTO = processDetailsFramework.createProcessCallScriptService(processId,scriptOrder,scriptTitle,scriptBody);
+        CallScriptWSDTO callScriptWSDTO = processDetailsFramework.createCallScriptService(processId,scriptOrder,scriptTitle,scriptBody);
         if (callScriptWSDTO != null){
             callScriptWSDTOS.add(callScriptWSDTO);
         }
@@ -340,19 +340,19 @@ public class ProcessDetailsMiddleware {
 
 
 
-    public ProcessCallScriptWSModel updateProcessCallScript(long userId,String processId,String scriptId,int scriptOrder,String scriptTitle,String scriptBody) {
+    public CallScriptWSModel updateCallScript(long userId, String processId, String scriptId, int scriptOrder, String scriptTitle, String scriptBody) {
 
-        ProcessCallScriptWSModel response = new ProcessCallScriptWSModel();
+        CallScriptWSModel response = new CallScriptWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ProcessCallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
+        List<CallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
 
-        ProcessCallScriptWSDTO callScriptWSDTO = processDetailsFramework.updateProcessCallScriptService(processId,scriptId,scriptOrder,scriptTitle,scriptBody);
+        CallScriptWSDTO callScriptWSDTO = processDetailsFramework.updateCallScriptService(processId,scriptId,scriptOrder,scriptTitle,scriptBody);
         if (callScriptWSDTO != null){
             callScriptWSDTOS.add(callScriptWSDTO);
         }
 
         response.setCallScripts(callScriptWSDTOS);
-        general.setOperation("updateProcessCallScript");
+        general.setOperation("updateCallScript");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -362,19 +362,19 @@ public class ProcessDetailsMiddleware {
     }
 
 
-    public ProcessCallScriptWSModel removeProcessCallScript(long userId,String processId,String scriptId) {
+    public CallScriptWSModel removeCallScript(long userId, String processId, String scriptId) {
 
-        ProcessCallScriptWSModel response = new ProcessCallScriptWSModel();
+        CallScriptWSModel response = new CallScriptWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ProcessCallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
+        List<CallScriptWSDTO> callScriptWSDTOS = new ArrayList<>();
 
-        ProcessCallScriptWSDTO callScriptWSDTO = processDetailsFramework.removeProcessCallScriptService(processId,scriptId);
+        CallScriptWSDTO callScriptWSDTO = processDetailsFramework.removeCallScriptService(processId,scriptId);
         if (callScriptWSDTO != null){
             callScriptWSDTOS.add(callScriptWSDTO);
         }
 
         response.setCallScripts(callScriptWSDTOS);
-        general.setOperation("removeProcessCallScript");
+        general.setOperation("removeCallScript");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
