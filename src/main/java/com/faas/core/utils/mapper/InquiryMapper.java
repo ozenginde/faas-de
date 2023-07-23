@@ -11,9 +11,9 @@ import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.general.PaginationWSDTO;
 import com.faas.core.base.model.ws.inquiry.dto.InquiryWSDTO;
 import com.faas.core.base.repo.operation.content.OperationRepository;
+import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.helpers.InquiryHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -24,11 +24,12 @@ import java.util.List;
 @Component
 public class InquiryMapper {
 
-    @Autowired
-    InquiryHelper inquiryHelper;
 
     @Autowired
     OperationRepository operationRepository;
+
+    @Autowired
+    SessionRepository sessionRepository;
 
     @Autowired
     AppUtils appUtils;
@@ -145,10 +146,23 @@ public class InquiryMapper {
 
         ApiInquiryWSDTO inquiryWSDTO = new ApiInquiryWSDTO();
         List<ApiInquiryDTO>inquiryDTOS = new ArrayList<>();
-        inquiryDTOS.add(inquiryHelper.getApiInquiryDTO(inquiryDBModel));
+        inquiryDTOS.add(mapApiInquiryDTO(inquiryDBModel));
         inquiryWSDTO.setInquiries(inquiryDTOS);
 
         return inquiryWSDTO;
+    }
+
+
+
+    public ApiInquiryDTO mapApiInquiryDTO(InquiryDBModel inquiryDBModel){
+
+        ApiInquiryDTO inquiryWrapper = new ApiInquiryDTO();
+        inquiryWrapper.setInquiry(inquiryDBModel);
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(inquiryDBModel.getSessionId(),inquiryDBModel.getClientId());
+        if (sessionDBModels.size()>0){
+            inquiryWrapper.setInquirySession(sessionDBModels.get(0));
+        }
+        return inquiryWrapper;
     }
 
 
