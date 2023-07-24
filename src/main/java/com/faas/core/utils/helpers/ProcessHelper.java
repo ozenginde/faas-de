@@ -78,7 +78,7 @@ public class ProcessHelper {
 
         ProcessDetailsWSDTO processDetailsWSDTO = new ProcessDetailsWSDTO();
         processDetailsWSDTO.setProcess(processDBModel);
-        processDetailsWSDTO.setProcessTrigger(createProcessTriggerWSDTO(processDBModel));
+        processDetailsWSDTO.setProcessTriggers(createProcessTriggersWSDTOS(processDBModel));
         processDetailsWSDTO.setProcessScenarios(createProcessScenarioWSDTOS(processDBModel));
         processDetailsWSDTO.setProcessTemps(createProcessTempWSDTO(processDBModel.getId()));
         processDetailsWSDTO.setProcessChannels(createProcessChannelWSDTO(processDBModel.getId()));
@@ -88,14 +88,14 @@ public class ProcessHelper {
     }
 
 
-    public TriggerWSDTO createProcessTriggerWSDTO(ProcessDBModel processDBModel){
+    public List<TriggerWSDTO> createProcessTriggersWSDTOS(ProcessDBModel processDBModel){
 
+        List<TriggerWSDTO>triggerWSDTOS = new ArrayList<>();
         List<TriggerDBModel> triggerDBModels = triggerRepository.findByProcessId(processDBModel.getId());
-        if (triggerDBModels.size()>0){
-            TriggerWSDTO triggerWSDTO = new TriggerWSDTO();
-            return triggerWSDTO;
+        for (TriggerDBModel triggerDBModel : triggerDBModels) {
+            triggerWSDTOS.add(new TriggerWSDTO(triggerDBModel));
         }
-        return null;
+        return triggerWSDTOS;
     }
 
 
