@@ -13,6 +13,9 @@ public class TriggerTypeDBModel {
     @Column(name = "trigger_type")
     private String triggerType;
 
+    @Column(name = "base_type")
+    private String baseType;
+
     @Column(name = "u_date")
     private long uDate;
 
@@ -25,13 +28,15 @@ public class TriggerTypeDBModel {
     public TriggerTypeDBModel() {
     }
 
-    public TriggerTypeDBModel(long id, String triggerType, long uDate, long cDate, int status) {
+    public TriggerTypeDBModel(long id, String triggerType, String baseType, long uDate, long cDate, int status) {
         this.id = id;
         this.triggerType = triggerType;
+        this.baseType = baseType;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
     }
+
 
     public long getId() {
         return id;
@@ -47,6 +52,14 @@ public class TriggerTypeDBModel {
 
     public void setTriggerType(String triggerType) {
         this.triggerType = triggerType;
+    }
+
+    public String getBaseType() {
+        return baseType;
+    }
+
+    public void setBaseType(String baseType) {
+        this.baseType = baseType;
     }
 
     public long getuDate() {

@@ -104,10 +104,11 @@ public class ProcessSettingsFramework {
     }
 
 
-    public TriggerTypeWSDTO createTriggerTypeService(long userId,String triggerType) {
+    public TriggerTypeWSDTO createTriggerTypeService(long userId,String triggerType,String baseType) {
 
         TriggerTypeDBModel triggerTypeDBModel = new TriggerTypeDBModel();
         triggerTypeDBModel.setTriggerType(triggerType);
+        triggerTypeDBModel.setBaseType(baseType);
         triggerTypeDBModel.setuDate(appUtils.getCurrentTimeStamp());
         triggerTypeDBModel.setcDate(appUtils.getCurrentTimeStamp());
         triggerTypeDBModel.setStatus(1);
@@ -116,11 +117,13 @@ public class ProcessSettingsFramework {
     }
 
 
-    public TriggerTypeWSDTO updateTriggerTypeService(long userId,long typeId,String triggerType) {
+    public TriggerTypeWSDTO updateTriggerTypeService(long userId,long typeId,String triggerType,String baseType) {
 
         Optional<TriggerTypeDBModel> triggerTypeDBModel = triggerTypeRepository.findById(typeId);
         if (triggerTypeDBModel.isPresent()){
+
             triggerTypeDBModel.get().setTriggerType(triggerType);
+            triggerTypeDBModel.get().setBaseType(baseType);
             triggerTypeDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
 
             return new TriggerTypeWSDTO(triggerTypeRepository.save(triggerTypeDBModel.get()));

@@ -119,9 +119,10 @@ public class ProcessSettingsController {
 
     @RequestMapping(value = BaseRoute.CREATE_TRIGGER_TYPE, method = RequestMethod.POST)
     public ResponseEntity<?> createTriggerType(@RequestParam long userId,
-                                               @RequestParam String triggerType) {
+                                               @RequestParam String triggerType,
+                                               @RequestParam String baseType) {
 
-        TriggerTypeWSModel response = processSettingsMiddleware.createTriggerType(userId,triggerType);
+        TriggerTypeWSModel response = processSettingsMiddleware.createTriggerType(userId,triggerType,baseType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -133,9 +134,10 @@ public class ProcessSettingsController {
     @RequestMapping(value = BaseRoute.UPDATE_TRIGGER_TYPE, method = RequestMethod.POST)
     public ResponseEntity<?> updateTriggerType(@RequestParam long userId,
                                                @RequestParam long typeId,
-                                               @RequestParam String triggerType) {
+                                               @RequestParam String triggerType,
+                                               @RequestParam String baseType) {
 
-        TriggerTypeWSModel response = processSettingsMiddleware.updateTriggerType(userId,typeId,triggerType);
+        TriggerTypeWSModel response = processSettingsMiddleware.updateTriggerType(userId,typeId,triggerType,baseType);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

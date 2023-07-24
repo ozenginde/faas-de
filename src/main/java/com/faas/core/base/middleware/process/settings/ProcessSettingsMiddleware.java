@@ -189,13 +189,13 @@ public class ProcessSettingsMiddleware {
     }
 
 
-    public TriggerTypeWSModel createTriggerType(long userId, String triggerType) {
+    public TriggerTypeWSModel createTriggerType(long userId, String triggerType,String baseType) {
 
         TriggerTypeWSModel response = new TriggerTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
 
-        TriggerTypeWSDTO triggerTypeWSDTO = processSettingsFramework.createTriggerTypeService(userId,triggerType);
+        TriggerTypeWSDTO triggerTypeWSDTO = processSettingsFramework.createTriggerTypeService(userId,triggerType,baseType);
         if (triggerTypeWSDTO != null){
             triggerTypeWSDTOS.add(triggerTypeWSDTO);
         }
@@ -211,13 +211,13 @@ public class ProcessSettingsMiddleware {
     }
 
 
-    public TriggerTypeWSModel updateTriggerType(long userId, long typeId,String triggerType) {
+    public TriggerTypeWSModel updateTriggerType(long userId, long typeId,String triggerType,String baseType) {
 
         TriggerTypeWSModel response = new TriggerTypeWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
 
-        TriggerTypeWSDTO triggerTypeWSDTO = processSettingsFramework.updateTriggerTypeService(userId,typeId,triggerType);
+        TriggerTypeWSDTO triggerTypeWSDTO = processSettingsFramework.updateTriggerTypeService(userId,typeId,triggerType,baseType);
         if (triggerTypeWSDTO != null){
             triggerTypeWSDTOS.add(triggerTypeWSDTO);
         }
