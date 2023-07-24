@@ -452,6 +452,7 @@ public class BaseRoute {
     public static final String REMOVE_PROCESS_TYPE = "removeprocesstype";
 
     public static final String GET_ALL_TRIGGER_TYPES = "getalltriggertypes";
+    public static final String GET_TRIGGER_TYPES_BY_BASE = "gettriggertypesbybase";
     public static final String GET_TRIGGER_TYPE = "gettriggertype";
     public static final String CREATE_TRIGGER_TYPE = "createtriggertype";
     public static final String UPDATE_TRIGGER_TYPE = "updatetriggertype";

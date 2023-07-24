@@ -10,6 +10,7 @@ import java.util.List;
 public interface TriggerTypeRepository extends PagingAndSortingRepository<TriggerTypeDBModel, Long> {
 
     List<TriggerTypeDBModel> findByStatus(int status);
+    List<TriggerTypeDBModel>findByBaseType(String baseType);
 
 
 }

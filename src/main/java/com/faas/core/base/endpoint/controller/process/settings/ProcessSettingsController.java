@@ -104,6 +104,19 @@ public class ProcessSettingsController {
     }
 
 
+    @RequestMapping(value = BaseRoute.GET_TRIGGER_TYPES_BY_BASE, method = RequestMethod.POST)
+    public ResponseEntity<?> getTriggerTypesByBase(@RequestParam long userId,
+                                                   @RequestParam String baseType) {
+
+        TriggerTypeWSModel response = processSettingsMiddleware.getTriggerTypesByBase(userId,baseType);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
     @RequestMapping(value = BaseRoute.GET_TRIGGER_TYPE, method = RequestMethod.POST)
     public ResponseEntity<?> getTriggerType(@RequestParam long userId,
                                             @RequestParam long typeId) {

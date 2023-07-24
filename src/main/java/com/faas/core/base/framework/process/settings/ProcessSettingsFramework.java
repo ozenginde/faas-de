@@ -94,6 +94,19 @@ public class ProcessSettingsFramework {
     }
 
 
+
+    public List<TriggerTypeWSDTO> getTriggerTypesByBaseService(long userId,String baseType) {
+
+        List<TriggerTypeWSDTO> triggerTypeWSDTOS = new ArrayList<>();
+        List<TriggerTypeDBModel> triggerTypeDBModels = triggerTypeRepository.findByBaseType(baseType);
+        for (TriggerTypeDBModel triggerTypeDBModel : triggerTypeDBModels) {
+            triggerTypeWSDTOS.add(new TriggerTypeWSDTO(triggerTypeDBModel));
+        }
+        return triggerTypeWSDTOS;
+    }
+
+
+
     public TriggerTypeWSDTO getTriggerTypeService(long userId,long typeId) {
 
         Optional<TriggerTypeDBModel> triggerTypeDBModel = triggerTypeRepository.findById(typeId);

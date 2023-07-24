@@ -167,6 +167,26 @@ public class ProcessSettingsMiddleware {
     }
 
 
+    public TriggerTypeWSModel getTriggerTypesByBase(long userId,String baseType) {
+
+        TriggerTypeWSModel response = new TriggerTypeWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        List<TriggerTypeWSDTO> triggerTypeWSDTOS = processSettingsFramework.getTriggerTypesByBaseService(userId,baseType);
+        if (triggerTypeWSDTOS != null){
+            response.setTriggerTypes(triggerTypeWSDTOS);
+        }
+
+        general.setOperation("getAllTriggerTypes");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
     public TriggerTypeWSModel getTriggerType(long userId, long typeId) {
 
         TriggerTypeWSModel response = new TriggerTypeWSModel();
