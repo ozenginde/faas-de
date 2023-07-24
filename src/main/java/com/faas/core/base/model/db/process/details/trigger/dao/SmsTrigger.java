@@ -1,35 +1,31 @@
-package com.faas.core.base.model.db.process.details.channel.temp;
+package com.faas.core.base.model.db.process.details.trigger.dao;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import java.util.List;
 
-@Document(collection = "sms_message_temp_table")
-public class SmsMessageTempDBModel {
+public class SmsTrigger {
 
-    @Id
     private String id;
-    private String processId;
+    private String accountId;
+    private String smsAccount;
     private String smsTitle;
     private String smsBody;
     private String senderId;
-    private long typeId;
-    private String messageType;
+    private List<TriggerData> datas;
     private long uDate;
     private long cDate;
     private int status;
 
-
-    public SmsMessageTempDBModel() {
+    public SmsTrigger() {
     }
 
-    public SmsMessageTempDBModel(String id, String processId, String smsTitle, String smsBody, String senderId, long typeId, String messageType, long uDate, long cDate, int status) {
+    public SmsTrigger(String id, String accountId, String smsAccount, String smsTitle, String smsBody, String senderId, List<TriggerData> datas, long uDate, long cDate, int status) {
         this.id = id;
-        this.processId = processId;
+        this.accountId = accountId;
+        this.smsAccount = smsAccount;
         this.smsTitle = smsTitle;
         this.smsBody = smsBody;
         this.senderId = senderId;
-        this.typeId = typeId;
-        this.messageType = messageType;
+        this.datas = datas;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -43,12 +39,20 @@ public class SmsMessageTempDBModel {
         this.id = id;
     }
 
-    public String getProcessId() {
-        return processId;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setProcessId(String processId) {
-        this.processId = processId;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
+
+    public String getSmsAccount() {
+        return smsAccount;
+    }
+
+    public void setSmsAccount(String smsAccount) {
+        this.smsAccount = smsAccount;
     }
 
     public String getSmsTitle() {
@@ -75,20 +79,12 @@ public class SmsMessageTempDBModel {
         this.senderId = senderId;
     }
 
-    public long getTypeId() {
-        return typeId;
+    public List<TriggerData> getDatas() {
+        return datas;
     }
 
-    public void setTypeId(long typeId) {
-        this.typeId = typeId;
-    }
-
-    public String getMessageType() {
-        return messageType;
-    }
-
-    public void setMessageType(String messageType) {
-        this.messageType = messageType;
+    public void setDatas(List<TriggerData> datas) {
+        this.datas = datas;
     }
 
     public long getuDate() {

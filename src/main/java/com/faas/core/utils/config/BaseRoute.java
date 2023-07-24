@@ -352,11 +352,27 @@ public class BaseRoute {
     public static final String UPDATE_CALL_SCRIPT = "updatecallscript";
     public static final String REMOVE_CALL_SCRIPT = "removecallscript";
 
-    public static final String GET_PROCESS_TRIGGER = "getprocesstrigger";
+
+    public static final String GET_TRIGGERS = "gettriggers";
+    public static final String GET_TRIGGERS_BY_TYPE = "gettriggersbytype";
+    public static final String GET_TRIGGER = "gettrigger";
+
+    public static final String CREATE_AI_TRIGGER = "createaitrigger";
+    public static final String UPDATE_AI_TRIGGER = "updateaitrigger";
+
+    public static final String CREATE_EMAIL_TRIGGER = "createemailtrigger";
+    public static final String UPDATE_EMAIL_TRIGGER = "updateemailtrigger";
+
+    public static final String CREATE_SIP_TRIGGER = "createsiptrigger";
+    public static final String UPDATE_SIP_TRIGGER = "updatesiptrigger";
+
     public static final String CREATE_SMS_TRIGGER = "createsmstrigger";
-    public static final String REMOVE_SMS_TRIGGER = "removesmstrigger";
+    public static final String UPDATE_SMS_TRIGGER = "updatesmstrigger";
+
     public static final String CREATE_WAPP_TRIGGER = "createwapptrigger";
-    public static final String REMOVE_WAPP_TRIGGER = "removewapptrigger";
+    public static final String UPDATE_WAPP_TRIGGER = "updatewapptrigger";
+
+    public static final String REMOVE_TRIGGER = "removetrigger";
 
 
 

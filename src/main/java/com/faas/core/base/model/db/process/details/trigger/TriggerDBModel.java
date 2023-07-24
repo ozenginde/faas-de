@@ -1,32 +1,33 @@
 package com.faas.core.base.model.db.process.details.trigger;
 
-import com.faas.core.base.model.db.process.details.trigger.dao.SmsTriggerDAO;
-import com.faas.core.base.model.db.process.details.trigger.dao.WappTriggerDAO;
+import com.faas.core.base.model.db.process.details.trigger.dao.TriggerDAO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "process_trigger_table")
-public class ProcessTriggerDBModel {
+@Document(collection = "trigger_table")
+public class TriggerDBModel {
 
     @Id
     private String id;
     private String processId;
-    private SmsTriggerDAO smsTrigger;
-    private WappTriggerDAO wappTrigger;
-    private String triggerType;
+    private TriggerDAO trigger;
+    private long typeId;
+    private String type;
+    private String baseType;
     private long uDate;
     private long cDate;
     private int status;
 
-    public ProcessTriggerDBModel() {
+    public TriggerDBModel() {
     }
 
-    public ProcessTriggerDBModel(String id, String processId, SmsTriggerDAO smsTrigger, WappTriggerDAO wappTrigger, String triggerType, long uDate, long cDate, int status) {
+    public TriggerDBModel(String id, String processId, TriggerDAO trigger, long typeId, String type, String baseType, long uDate, long cDate, int status) {
         this.id = id;
         this.processId = processId;
-        this.smsTrigger = smsTrigger;
-        this.wappTrigger = wappTrigger;
-        this.triggerType = triggerType;
+        this.trigger = trigger;
+        this.typeId = typeId;
+        this.type = type;
+        this.baseType = baseType;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -48,28 +49,36 @@ public class ProcessTriggerDBModel {
         this.processId = processId;
     }
 
-    public SmsTriggerDAO getSmsTrigger() {
-        return smsTrigger;
+    public TriggerDAO getTrigger() {
+        return trigger;
     }
 
-    public void setSmsTrigger(SmsTriggerDAO smsTrigger) {
-        this.smsTrigger = smsTrigger;
+    public void setTrigger(TriggerDAO trigger) {
+        this.trigger = trigger;
     }
 
-    public WappTriggerDAO getWappTrigger() {
-        return wappTrigger;
+    public long getTypeId() {
+        return typeId;
     }
 
-    public void setWappTrigger(WappTriggerDAO wappTrigger) {
-        this.wappTrigger = wappTrigger;
+    public void setTypeId(long typeId) {
+        this.typeId = typeId;
     }
 
-    public String getTriggerType() {
-        return triggerType;
+    public String getType() {
+        return type;
     }
 
-    public void setTriggerType(String triggerType) {
-        this.triggerType = triggerType;
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getBaseType() {
+        return baseType;
+    }
+
+    public void setBaseType(String baseType) {
+        this.baseType = baseType;
     }
 
     public long getuDate() {

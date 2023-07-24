@@ -13,11 +13,11 @@ public class WappMessageTempDBModel {
     @Id
     private String id;
     private String processId;
-    private String title;
-    private String body;
+    private String wappTitle;
+    private String wappBody;
     private long typeId;
     private String messageType;
-    private List<ChannelTempDataDAO>tempDatas;
+    private List<ChannelTempDataDAO>datas;
     private long uDate;
     private long cDate;
     private int status;
@@ -26,14 +26,14 @@ public class WappMessageTempDBModel {
     public WappMessageTempDBModel() {
     }
 
-    public WappMessageTempDBModel(String id, String processId, String title, String body, long typeId, String messageType, List<ChannelTempDataDAO> tempDatas, long uDate, long cDate, int status) {
+    public WappMessageTempDBModel(String id, String processId, String wappTitle, String wappBody, long typeId, String messageType, List<ChannelTempDataDAO> datas, long uDate, long cDate, int status) {
         this.id = id;
         this.processId = processId;
-        this.title = title;
-        this.body = body;
+        this.wappTitle = wappTitle;
+        this.wappBody = wappBody;
         this.typeId = typeId;
         this.messageType = messageType;
-        this.tempDatas = tempDatas;
+        this.datas = datas;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -55,20 +55,20 @@ public class WappMessageTempDBModel {
         this.processId = processId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getWappTitle() {
+        return wappTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setWappTitle(String wappTitle) {
+        this.wappTitle = wappTitle;
     }
 
-    public String getBody() {
-        return body;
+    public String getWappBody() {
+        return wappBody;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setWappBody(String wappBody) {
+        this.wappBody = wappBody;
     }
 
     public long getTypeId() {
@@ -87,12 +87,12 @@ public class WappMessageTempDBModel {
         this.messageType = messageType;
     }
 
-    public List<ChannelTempDataDAO> getTempDatas() {
-        return tempDatas;
+    public List<ChannelTempDataDAO> getDatas() {
+        return datas;
     }
 
-    public void setTempDatas(List<ChannelTempDataDAO> tempDatas) {
-        this.tempDatas = tempDatas;
+    public void setDatas(List<ChannelTempDataDAO> datas) {
+        this.datas = datas;
     }
 
     public long getuDate() {

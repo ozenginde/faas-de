@@ -1,20 +1,25 @@
 package com.faas.core.base.framework.process.details.trigger;
 
+import com.faas.core.base.model.db.channel.account.EmailAccountDBModel;
+import com.faas.core.base.model.db.channel.account.SipAccountDBModel;
 import com.faas.core.base.model.db.channel.account.SmsAccountDBModel;
 import com.faas.core.base.model.db.channel.account.WappAccountDBModel;
-import com.faas.core.base.model.db.process.details.trigger.ProcessTriggerDBModel;
-import com.faas.core.base.model.db.process.details.trigger.dao.SmsTriggerDAO;
-import com.faas.core.base.model.db.process.details.trigger.dao.WappTriggerDAO;
-import com.faas.core.base.model.ws.process.details.trigger.dto.ProcessTriggerWSDTO;
+import com.faas.core.base.model.db.process.details.trigger.TriggerDBModel;
+import com.faas.core.base.model.db.process.details.trigger.dao.*;
+import com.faas.core.base.model.db.process.settings.TriggerTypeDBModel;
+import com.faas.core.base.model.ws.process.details.trigger.dto.TriggerWSDTO;
+import com.faas.core.base.repo.channel.account.EmailAccountRepository;
+import com.faas.core.base.repo.channel.account.SipAccountRepository;
 import com.faas.core.base.repo.channel.account.SmsAccountRepository;
 import com.faas.core.base.repo.channel.account.WappAccountRepository;
 import com.faas.core.base.repo.channel.settings.MessageTypeRepository;
-import com.faas.core.base.repo.process.details.trigger.ProcessTriggerRepository;
+import com.faas.core.base.repo.process.details.trigger.TriggerRepository;
 import com.faas.core.base.repo.process.settings.TriggerTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,13 +27,19 @@ import java.util.Optional;
 public class ProcessTriggerFramework {
 
     @Autowired
-    ProcessTriggerRepository processTriggerRepository;
+    TriggerRepository triggerRepository;
 
     @Autowired
     SmsAccountRepository smsAccountRepository;
 
     @Autowired
     WappAccountRepository wappAccountRepository;
+
+    @Autowired
+    EmailAccountRepository emailAccountRepository;
+
+    @Autowired
+    SipAccountRepository sipAccountRepository;
 
     @Autowired
     MessageTypeRepository messageTypeRepository;
@@ -40,118 +51,296 @@ public class ProcessTriggerFramework {
     AppUtils appUtils;
 
 
-    public ProcessTriggerWSDTO getProcessTriggerService(long userId, String processId) {
+    public List<TriggerWSDTO> getTriggersService(long userId, String processId) {
 
-        List<ProcessTriggerDBModel> processTriggerDBModels = processTriggerRepository.findByProcessId(processId);
-        if (processTriggerDBModels.size()>0){
-            return new ProcessTriggerWSDTO(processTriggerDBModels.get(0));
+        List<TriggerWSDTO>triggerWSDTOS = new ArrayList<>();
+        List<TriggerDBModel> triggerDBModels = triggerRepository.findByProcessId(processId);
+        for (TriggerDBModel triggerDBModel : triggerDBModels) {
+            triggerWSDTOS.add(new TriggerWSDTO(triggerDBModel));
+        }
+        return triggerWSDTOS;
+    }
+
+
+    public List<TriggerWSDTO> getTriggersByTypeService(long userId, String processId,String baseType) {
+
+        List<TriggerWSDTO>triggerWSDTOS = new ArrayList<>();
+        List<TriggerDBModel> triggerDBModels = triggerRepository.findByProcessIdAndBaseType(processId,baseType);
+        for (TriggerDBModel triggerDBModel : triggerDBModels) {
+            triggerWSDTOS.add(new TriggerWSDTO(triggerDBModel));
+        }
+        return triggerWSDTOS;
+    }
+
+
+    public TriggerWSDTO getTriggerService(long userId, String processId,String triggerId) {
+
+        List<TriggerDBModel> triggerDBModels = triggerRepository.findByIdAndProcessId(triggerId,processId);
+        if (triggerDBModels.size()>0){
+            return new TriggerWSDTO(triggerDBModels.get(0));
         }
         return null;
     }
 
 
-    public ProcessTriggerWSDTO createSmsTriggerService(long userId,String processId,String title,String body,String senderId,String triggerType,String accountId) {
 
-        SmsTriggerDAO smsTriggerDAO = createSmsTriggerDAO(title,body,senderId,triggerType,accountId);
-        if (smsTriggerDAO != null){
-            processTriggerRepository.deleteAll(processTriggerRepository.findByProcessId(processId));
+    public TriggerWSDTO createAITriggerService(long userId,String processId,String accountId,long typeId) {
 
-            ProcessTriggerDBModel processTriggerDBModel = new ProcessTriggerDBModel();
-            processTriggerDBModel.setProcessId(processId);
-            processTriggerDBModel.setSmsTrigger(smsTriggerDAO);
-            processTriggerDBModel.setTriggerType(triggerType);
-            processTriggerDBModel.setuDate(appUtils.getCurrentTimeStamp());
-            processTriggerDBModel.setcDate(appUtils.getCurrentTimeStamp());
-            processTriggerDBModel.setStatus(1);
+        Optional<TriggerTypeDBModel> triggerTypeDBModel = triggerTypeRepository.findById(typeId);
+        if (triggerTypeDBModel.isPresent()){
 
-            return new ProcessTriggerWSDTO(processTriggerRepository.save(processTriggerDBModel));
+            TriggerDBModel triggerDBModel = new TriggerDBModel();
+            triggerDBModel.setProcessId(processId);
+            triggerDBModel.setTrigger(createAITrigger(accountId));
+            triggerDBModel.setTypeId(typeId);
+            triggerDBModel.setType(triggerTypeDBModel.get().getTriggerType());
+            triggerDBModel.setBaseType(triggerTypeDBModel.get().getBaseType());
+            triggerDBModel.setuDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setcDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setStatus(1);
+
+            return new TriggerWSDTO(triggerRepository.save(triggerDBModel));
         }
         return null;
     }
 
+    public TriggerDAO createAITrigger(String accountId) {
 
-    public SmsTriggerDAO createSmsTriggerDAO(String title,String body,String senderId,String triggerType,String accountId){
+        TriggerDAO triggerDAO = new TriggerDAO();
 
+        AITrigger aiTrigger = new AITrigger();
+        aiTrigger.setId(appUtils.generateUUID());
+        aiTrigger.setAccountId(accountId);
+        aiTrigger.setAiAccount("");
+        aiTrigger.setDatas(new ArrayList<>());
+        aiTrigger.setuDate(appUtils.getCurrentTimeStamp());
+        aiTrigger.setcDate(appUtils.getCurrentTimeStamp());
+        aiTrigger.setStatus(1);
+
+        triggerDAO.setAiTrigger(aiTrigger);
+        return triggerDAO;
+    }
+
+
+    public TriggerWSDTO updateAITriggerService(long userId,String processId,String triggerId,String accountId,long typeId) {
+
+        return null;
+    }
+
+
+
+
+    public TriggerWSDTO createEmailTriggerService(long userId,String processId,String accountId,String emailSubject,String emailTitle,String emailBody,String emailSender,long typeId) {
+
+        Optional<TriggerTypeDBModel> triggerTypeDBModel = triggerTypeRepository.findById(typeId);
+        if (triggerTypeDBModel.isPresent()){
+
+            TriggerDBModel triggerDBModel = new TriggerDBModel();
+            triggerDBModel.setProcessId(processId);
+            triggerDBModel.setTrigger(createEmailTrigger(accountId,emailSubject,emailTitle,emailBody,emailSender));
+            triggerDBModel.setTypeId(typeId);
+            triggerDBModel.setType(triggerTypeDBModel.get().getTriggerType());
+            triggerDBModel.setBaseType(triggerTypeDBModel.get().getBaseType());
+            triggerDBModel.setuDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setcDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setStatus(1);
+
+            return new TriggerWSDTO(triggerRepository.save(triggerDBModel));
+        }
+        return null;
+    }
+
+    public TriggerDAO createEmailTrigger(String accountId,String emailSubject,String emailTitle,String emailBody,String emailSender) {
+
+        TriggerDAO triggerDAO = new TriggerDAO();
+
+        EmailTrigger emailTrigger = new EmailTrigger();
+        emailTrigger.setId(appUtils.generateUUID());
+        Optional<EmailAccountDBModel> emailAccountDBModel = emailAccountRepository.findById(accountId);
+        if (emailAccountDBModel.isPresent()){
+            emailTrigger.setAccountId(accountId);
+            emailTrigger.setEmailAccount(emailAccountDBModel.get().getAccount());
+        }
+
+        emailTrigger.setEmailSubject(emailSubject);
+        emailTrigger.setEmailTitle(emailTitle);
+        emailTrigger.setEmailBody(emailBody);
+        emailTrigger.setEmailSender(emailSender);
+        emailTrigger.setDatas(new ArrayList<>());
+        emailTrigger.setuDate(appUtils.getCurrentTimeStamp());
+        emailTrigger.setcDate(appUtils.getCurrentTimeStamp());
+        emailTrigger.setStatus(1);
+
+        triggerDAO.setEmailTrigger(emailTrigger);
+        return triggerDAO;
+    }
+
+
+    public TriggerWSDTO updateEmailTriggerService(long userId,String processId,String triggerId,String accountId,String emailSubject,String emailTitle,String emailBody,String emailSender,long typeId) {
+
+        return null;
+    }
+
+
+
+
+    public TriggerWSDTO createSipTriggerService(long userId,String processId,String accountId,String callerId,long typeId) {
+
+        Optional<TriggerTypeDBModel> triggerTypeDBModel = triggerTypeRepository.findById(typeId);
+        if (triggerTypeDBModel.isPresent()){
+
+            TriggerDBModel triggerDBModel = new TriggerDBModel();
+            triggerDBModel.setProcessId(processId);
+            triggerDBModel.setTrigger(createSipTrigger(accountId,callerId));
+            triggerDBModel.setTypeId(typeId);
+            triggerDBModel.setType(triggerTypeDBModel.get().getTriggerType());
+            triggerDBModel.setBaseType(triggerTypeDBModel.get().getBaseType());
+            triggerDBModel.setuDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setcDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setStatus(1);
+
+            return new TriggerWSDTO(triggerRepository.save(triggerDBModel));
+        }
+        return null;
+    }
+
+    public TriggerDAO createSipTrigger(String accountId,String callerId) {
+
+        TriggerDAO triggerDAO = new TriggerDAO();
+
+        SipTrigger sipTrigger = new SipTrigger();
+        sipTrigger.setId(appUtils.generateUUID());
+        Optional<SipAccountDBModel> sipAccountDBModel = sipAccountRepository.findById(accountId);
+        if (sipAccountDBModel.isPresent()){
+            sipTrigger.setAccountId(accountId);
+            sipTrigger.setSipAccount(sipAccountDBModel.get().getAccount());
+        }
+        sipTrigger.setCallerId(accountId);
+        sipTrigger.setDatas(new ArrayList<>());
+        sipTrigger.setuDate(appUtils.getCurrentTimeStamp());
+        sipTrigger.setcDate(appUtils.getCurrentTimeStamp());
+        sipTrigger.setStatus(1);
+
+        triggerDAO.setSipTrigger(sipTrigger);
+        return triggerDAO;
+    }
+
+    public TriggerWSDTO updateSipTriggerService(long userId,String processId,String triggerId,String accountId,String callerId,long typeId) {
+
+        return null;
+    }
+
+
+
+    public TriggerWSDTO createSmsTriggerService(long userId,String processId,String accountId,String smsTitle,String smsBody,String senderId,long typeId) {
+
+        Optional<TriggerTypeDBModel> triggerTypeDBModel = triggerTypeRepository.findById(typeId);
+        if (triggerTypeDBModel.isPresent()){
+
+            TriggerDBModel triggerDBModel = new TriggerDBModel();
+            triggerDBModel.setProcessId(processId);
+            triggerDBModel.setTrigger(createSmsTrigger(accountId,smsTitle,smsBody,senderId));
+            triggerDBModel.setTypeId(typeId);
+            triggerDBModel.setType(triggerTypeDBModel.get().getTriggerType());
+            triggerDBModel.setBaseType(triggerTypeDBModel.get().getBaseType());
+            triggerDBModel.setuDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setcDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setStatus(1);
+
+            return new TriggerWSDTO(triggerRepository.save(triggerDBModel));
+        }
+        return null;
+    }
+
+    public TriggerDAO createSmsTrigger(String accountId,String smsTitle,String smsBody,String senderId) {
+
+        TriggerDAO triggerDAO = new TriggerDAO();
+
+        SmsTrigger smsTrigger = new SmsTrigger();
+        smsTrigger.setId(appUtils.generateUUID());
         Optional<SmsAccountDBModel> smsAccountDBModel = smsAccountRepository.findById(accountId);
         if (smsAccountDBModel.isPresent()){
-
-            SmsTriggerDAO smsTriggerDAO = new SmsTriggerDAO();
-            smsTriggerDAO.setId(appUtils.generateUUID());
-            smsTriggerDAO.setAccountId(accountId);
-            smsTriggerDAO.setAccount(smsAccountDBModel.get().getAccount());
-            smsTriggerDAO.setTitle(title);
-            smsTriggerDAO.setBody(body);
-            smsTriggerDAO.setSenderId(senderId);
-            smsTriggerDAO.setMessageType(triggerType);
-            smsTriggerDAO.setcDate(appUtils.getCurrentTimeStamp());
-            smsTriggerDAO.setStatus(1);
-
-            return smsTriggerDAO;
+            smsTrigger.setAccountId(accountId);
+            smsTrigger.setSmsAccount(smsAccountDBModel.get().getAccount());
         }
+        smsTrigger.setSmsTitle(smsTitle);
+        smsTrigger.setSmsBody(smsBody);
+        smsTrigger.setSenderId(senderId);
+        smsTrigger.setDatas(new ArrayList<>());
+        smsTrigger.setuDate(appUtils.getCurrentTimeStamp());
+        smsTrigger.setcDate(appUtils.getCurrentTimeStamp());
+        smsTrigger.setStatus(1);
+
+        triggerDAO.setSmsTrigger(smsTrigger);
+        return triggerDAO;
+    }
+
+    public TriggerWSDTO updateSmsTriggerService(long userId,String processId,String triggerId,String accountId,String smsTitle,String smsBody,String senderId,long typeId) {
+
         return null;
     }
 
 
 
-    public ProcessTriggerWSDTO removeSmsTriggerService(long userId,String processId) {
+    public TriggerWSDTO createWappTriggerService(long userId, String processId,String accountId,String wappTitle,String wappBody,long typeId) {
 
-        List<ProcessTriggerDBModel> processTriggerDBModels = processTriggerRepository.findByProcessId(processId);
-        if (processTriggerDBModels.size()>0){
-            processTriggerRepository.deleteAll(processTriggerDBModels);
-            return new ProcessTriggerWSDTO(processTriggerDBModels.get(0));
+        Optional<TriggerTypeDBModel> triggerTypeDBModel = triggerTypeRepository.findById(typeId);
+        if (triggerTypeDBModel.isPresent()){
+
+            TriggerDBModel triggerDBModel = new TriggerDBModel();
+            triggerDBModel.setProcessId(processId);
+            triggerDBModel.setTrigger(createWappTrigger(accountId,wappTitle,wappBody));
+            triggerDBModel.setTypeId(typeId);
+            triggerDBModel.setType(triggerTypeDBModel.get().getTriggerType());
+            triggerDBModel.setBaseType(triggerTypeDBModel.get().getBaseType());
+            triggerDBModel.setuDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setcDate(appUtils.getCurrentTimeStamp());
+            triggerDBModel.setStatus(1);
+
+            return new TriggerWSDTO(triggerRepository.save(triggerDBModel));
         }
         return null;
     }
 
+    public TriggerDAO createWappTrigger(String accountId,String wappTitle,String wappBody) {
 
-    public ProcessTriggerWSDTO createWappTriggerService(long userId,String processId,String title,String body,String triggerType,String accountId) {
+        TriggerDAO triggerDAO = new TriggerDAO();
 
-        WappTriggerDAO wappTriggerDAO = createWappTriggerDAO(title,body,triggerType,accountId);
-        if (wappTriggerDAO != null){
-            processTriggerRepository.deleteAll(processTriggerRepository.findByProcessId(processId));
-
-            ProcessTriggerDBModel processTriggerDBModel = new ProcessTriggerDBModel();
-            processTriggerDBModel.setProcessId(processId);
-            processTriggerDBModel.setWappTrigger(wappTriggerDAO);
-            processTriggerDBModel.setTriggerType(triggerType);
-            processTriggerDBModel.setuDate(appUtils.getCurrentTimeStamp());
-            processTriggerDBModel.setcDate(appUtils.getCurrentTimeStamp());
-            processTriggerDBModel.setStatus(1);
-
-            return new ProcessTriggerWSDTO(processTriggerRepository.save(processTriggerDBModel));
-        }
-        return null;
-    }
-
-
-    public WappTriggerDAO createWappTriggerDAO(String title, String body, String triggerType, String accountId){
-
+        WappTrigger wappTrigger = new WappTrigger();
+        wappTrigger.setId(appUtils.generateUUID());
         Optional<WappAccountDBModel> wappAccountDBModel = wappAccountRepository.findById(accountId);
         if (wappAccountDBModel.isPresent()){
+            wappTrigger.setAccountId(accountId);
+            wappTrigger.setWappAccount(wappAccountDBModel.get().getAccount());
+        }
+        wappTrigger.setWappTitle(wappTitle);
+        wappTrigger.setWappBody(wappBody);
+        wappTrigger.setDatas(new ArrayList<>());
+        wappTrigger.setuDate(appUtils.getCurrentTimeStamp());
+        wappTrigger.setcDate(appUtils.getCurrentTimeStamp());
+        wappTrigger.setStatus(1);
 
-            WappTriggerDAO wappTriggerDAO = new WappTriggerDAO();
-            wappTriggerDAO.setId(appUtils.generateUUID());
-            wappTriggerDAO.setAccountId(accountId);
-            wappTriggerDAO.setAccount(wappAccountDBModel.get().getAccount());
-            wappTriggerDAO.setTitle(title);
-            wappTriggerDAO.setBody(body);
-            wappTriggerDAO.setMessageType(triggerType);
-            wappTriggerDAO.setcDate(appUtils.getCurrentTimeStamp());
-            wappTriggerDAO.setStatus(1);
+        triggerDAO.setWappTrigger(wappTrigger);
+        return triggerDAO;
+    }
 
-            return wappTriggerDAO;
+    public TriggerWSDTO updateWappTriggerService(long userId,String processId,String triggerId,String accountId,String wappTitle,String wappBody,long typeId) {
+
+        return null;
+    }
+
+
+
+    public TriggerWSDTO removeTriggerService(long userId,String processId,String triggerId) {
+
+        List<TriggerDBModel> triggerDBModels = triggerRepository.findByIdAndProcessId(triggerId,processId);
+        if (triggerDBModels.size()>0){
+            triggerRepository.deleteAll(triggerDBModels);
+            return new TriggerWSDTO(triggerDBModels.get(0));
         }
         return null;
     }
 
-    public ProcessTriggerWSDTO removeWappTriggerService(long userId,String processId) {
 
-        List<ProcessTriggerDBModel> processTriggerDBModels = processTriggerRepository.findByProcessId(processId);
-        if (processTriggerDBModels.size()>0){
-            processTriggerRepository.deleteAll(processTriggerDBModels);
-            return new ProcessTriggerWSDTO(processTriggerDBModels.get(0));
-        }
-        return null;
-    }
 
 }

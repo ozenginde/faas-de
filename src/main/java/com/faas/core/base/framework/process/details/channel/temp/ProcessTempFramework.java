@@ -69,8 +69,6 @@ public class ProcessTempFramework {
 
             SmsMessageTempDBModel smsMessageTempDBModel = new SmsMessageTempDBModel();
             smsMessageTempDBModel.setProcessId(processId);
-            smsMessageTempDBModel.setTitle(title);
-            smsMessageTempDBModel.setBody(body);
             smsMessageTempDBModel.setSenderId(senderId);
             smsMessageTempDBModel.setTypeId(typeId);
             smsMessageTempDBModel.setMessageType(messageTypeDBModel.get().getMessageType());
@@ -91,8 +89,6 @@ public class ProcessTempFramework {
         Optional<MessageTypeDBModel> messageTypeDBModel = messageTypeRepository.findById(typeId);
         if (smsMessageTempDBModel.isPresent() && messageTypeDBModel.isPresent()) {
 
-            smsMessageTempDBModel.get().setTitle(title);
-            smsMessageTempDBModel.get().setBody(body);
             smsMessageTempDBModel.get().setSenderId(senderId);
             smsMessageTempDBModel.get().setTypeId(typeId);
             smsMessageTempDBModel.get().setMessageType(messageTypeDBModel.get().getMessageType());
@@ -132,8 +128,6 @@ public class ProcessTempFramework {
 
             WappMessageTempDBModel wappMessageTempDBModel = new WappMessageTempDBModel();
             wappMessageTempDBModel.setProcessId(processId);
-            wappMessageTempDBModel.setTitle(title);
-            wappMessageTempDBModel.setBody(body);
             wappMessageTempDBModel.setTypeId(typeId);
             wappMessageTempDBModel.setMessageType(messageTypeDBModel.get().getMessageType());
             wappMessageTempDBModel.setuDate(appUtils.getCurrentTimeStamp());
@@ -151,8 +145,6 @@ public class ProcessTempFramework {
         Optional<WappMessageTempDBModel> wappMessageTempDBModel = wappMessageTempRepository.findById(tempId);
         if (messageTypeDBModel.isPresent() && wappMessageTempDBModel.isPresent()) {
 
-            wappMessageTempDBModel.get().setTitle(title);
-            wappMessageTempDBModel.get().setBody(body);
             wappMessageTempDBModel.get().setTypeId(typeId);
             wappMessageTempDBModel.get().setMessageType(messageTypeDBModel.get().getMessageType());
             wappMessageTempDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
@@ -186,10 +178,6 @@ public class ProcessTempFramework {
 
         EmailTempDBModel emailTempDBModel = new EmailTempDBModel();
         emailTempDBModel.setProcessId(processId);
-        emailTempDBModel.setSubject(subject);
-        emailTempDBModel.setBody(body);
-        emailTempDBModel.setFooter(footer);
-        emailTempDBModel.setSender(sender);
         Optional<EmailTypeDBModel> emailTypeDBModel = emailTypeRepository.findById(typeId);
         if (emailTypeDBModel.isPresent()){
             emailTempDBModel.setTypeId(typeId);
@@ -207,10 +195,6 @@ public class ProcessTempFramework {
 
         Optional<EmailTempDBModel> processEmailDBModel = emailTempRepository.findById(tempId);
         if (processEmailDBModel.isPresent()){
-            processEmailDBModel.get().setSubject(subject);
-            processEmailDBModel.get().setBody(body);
-            processEmailDBModel.get().setFooter(footer);
-            processEmailDBModel.get().setSender(sender);
             Optional<EmailTypeDBModel> emailTypeDBModel = emailTypeRepository.findById(typeId);
             if (emailTypeDBModel.isPresent()){
                 processEmailDBModel.get().setTypeId(typeId);
@@ -252,10 +236,6 @@ public class ProcessTempFramework {
 
             PushTempDBModel pushTempDBModel = new PushTempDBModel();
             pushTempDBModel.setProcessId(processId);
-            pushTempDBModel.setHeader(header);
-            pushTempDBModel.setBody(body);
-            pushTempDBModel.setFooter(footer);
-            pushTempDBModel.setSender(sender);
             pushTempDBModel.setTypeId(pushTypeDBModel.get().getId());
             pushTempDBModel.setPushType(pushTypeDBModel.get().getPushType());
             pushTempDBModel.setuDate(appUtils.getCurrentTimeStamp());
@@ -274,10 +254,6 @@ public class ProcessTempFramework {
         Optional<PushTypeDBModel> pushTypeDBModel = pushTypeRepository.findById(typeId);
         if (pushTempDBModel.isPresent() && pushTypeDBModel.isPresent()){
 
-            pushTempDBModel.get().setHeader(header);
-            pushTempDBModel.get().setBody(body);
-            pushTempDBModel.get().setFooter(footer);
-            pushTempDBModel.get().setSender(sender);
             pushTempDBModel.get().setTypeId(pushTypeDBModel.get().getId());
             pushTempDBModel.get().setPushType(pushTypeDBModel.get().getPushType());
             pushTempDBModel.get().setuDate(appUtils.getCurrentTimeStamp());

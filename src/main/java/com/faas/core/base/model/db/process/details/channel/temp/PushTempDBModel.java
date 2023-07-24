@@ -13,13 +13,13 @@ public class PushTempDBModel {
     @Id
     private String id;
     private String processId;
-    private String header;
-    private String body;
-    private String footer;
-    private String sender;
+    private String pushHeader;
+    private String pushBody;
+    private String pushFooter;
+    private String pushSender;
     private long typeId;
     private String pushType;
-    private List<ChannelTempDataDAO>tempDatas;
+    private List<ChannelTempDataDAO>datas;
     private long uDate;
     private long cDate;
     private int status;
@@ -27,16 +27,16 @@ public class PushTempDBModel {
     public PushTempDBModel() {
     }
 
-    public PushTempDBModel(String id, String processId, String header, String body, String footer, String sender, long typeId, String pushType, List<ChannelTempDataDAO> tempDatas, long uDate, long cDate, int status) {
+    public PushTempDBModel(String id, String processId, String pushHeader, String pushBody, String pushFooter, String pushSender, long typeId, String pushType, List<ChannelTempDataDAO> datas, long uDate, long cDate, int status) {
         this.id = id;
         this.processId = processId;
-        this.header = header;
-        this.body = body;
-        this.footer = footer;
-        this.sender = sender;
+        this.pushHeader = pushHeader;
+        this.pushBody = pushBody;
+        this.pushFooter = pushFooter;
+        this.pushSender = pushSender;
         this.typeId = typeId;
         this.pushType = pushType;
-        this.tempDatas = tempDatas;
+        this.datas = datas;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -58,36 +58,36 @@ public class PushTempDBModel {
         this.processId = processId;
     }
 
-    public String getHeader() {
-        return header;
+    public String getPushHeader() {
+        return pushHeader;
     }
 
-    public void setHeader(String header) {
-        this.header = header;
+    public void setPushHeader(String pushHeader) {
+        this.pushHeader = pushHeader;
     }
 
-    public String getBody() {
-        return body;
+    public String getPushBody() {
+        return pushBody;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public void setPushBody(String pushBody) {
+        this.pushBody = pushBody;
     }
 
-    public String getFooter() {
-        return footer;
+    public String getPushFooter() {
+        return pushFooter;
     }
 
-    public void setFooter(String footer) {
-        this.footer = footer;
+    public void setPushFooter(String pushFooter) {
+        this.pushFooter = pushFooter;
     }
 
-    public String getSender() {
-        return sender;
+    public String getPushSender() {
+        return pushSender;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
+    public void setPushSender(String pushSender) {
+        this.pushSender = pushSender;
     }
 
     public long getTypeId() {
@@ -106,12 +106,12 @@ public class PushTempDBModel {
         this.pushType = pushType;
     }
 
-    public List<ChannelTempDataDAO> getTempDatas() {
-        return tempDatas;
+    public List<ChannelTempDataDAO> getDatas() {
+        return datas;
     }
 
-    public void setTempDatas(List<ChannelTempDataDAO> tempDatas) {
-        this.tempDatas = tempDatas;
+    public void setDatas(List<ChannelTempDataDAO> datas) {
+        this.datas = datas;
     }
 
     public long getuDate() {

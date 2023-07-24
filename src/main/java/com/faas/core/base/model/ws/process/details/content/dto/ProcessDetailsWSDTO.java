@@ -4,14 +4,14 @@ import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.ws.process.details.channel.content.dto.ProcessChannelWSDTO;
 import com.faas.core.base.model.ws.process.details.channel.temp.dto.ProcessTempWSDTO;
 import com.faas.core.base.model.ws.process.details.scenario.dto.ProcessScenarioWSDTO;
-import com.faas.core.base.model.ws.process.details.trigger.dto.ProcessTriggerWSDTO;
+import com.faas.core.base.model.ws.process.details.trigger.dto.TriggerWSDTO;
 
 import java.util.List;
 
 public class ProcessDetailsWSDTO {
 
     private ProcessDBModel process;
-    private ProcessTriggerWSDTO processTrigger;
+    private TriggerWSDTO processTrigger;
     private ProcessTempWSDTO processTemps;
     private ProcessChannelWSDTO processChannels;
     private List<ProcessScenarioWSDTO> processScenarios;
@@ -20,7 +20,7 @@ public class ProcessDetailsWSDTO {
     public ProcessDetailsWSDTO() {
     }
 
-    public ProcessDetailsWSDTO(ProcessDBModel process, ProcessTriggerWSDTO processTrigger, ProcessTempWSDTO processTemps, ProcessChannelWSDTO processChannels, List<ProcessScenarioWSDTO> processScenarios, List<ProcessAssetWSDTO> processAssets) {
+    public ProcessDetailsWSDTO(ProcessDBModel process, TriggerWSDTO processTrigger, ProcessTempWSDTO processTemps, ProcessChannelWSDTO processChannels, List<ProcessScenarioWSDTO> processScenarios, List<ProcessAssetWSDTO> processAssets) {
         this.process = process;
         this.processTrigger = processTrigger;
         this.processTemps = processTemps;
@@ -37,11 +37,11 @@ public class ProcessDetailsWSDTO {
         this.process = process;
     }
 
-    public ProcessTriggerWSDTO getProcessTrigger() {
+    public TriggerWSDTO getProcessTrigger() {
         return processTrigger;
     }
 
-    public void setProcessTrigger(ProcessTriggerWSDTO processTrigger) {
+    public void setProcessTrigger(TriggerWSDTO processTrigger) {
         this.processTrigger = processTrigger;
     }
 
