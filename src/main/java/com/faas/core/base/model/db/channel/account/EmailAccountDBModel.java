@@ -18,7 +18,6 @@ public class EmailAccountDBModel {
     private long cDate;
     private int status;
 
-
     public EmailAccountDBModel() {
     }
 
