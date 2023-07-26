@@ -65,12 +65,12 @@ public class ProcessTempController {
     @RequestMapping(value = BaseRoute.CREATE_SMS_MESSAGE_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> createSmsMessageTemp(@RequestParam long userId,
                                                   @RequestParam String processId,
-                                                  @RequestParam String title,
-                                                  @RequestParam String body,
+                                                  @RequestParam String smsTitle,
+                                                  @RequestParam String smsBody,
                                                   @RequestParam String senderId,
                                                   @RequestParam long typeId) {
 
-        SmsMessageTempWSModel response = processTempMiddleware.createSmsMessageTemp(userId,processId,title,body,senderId,typeId);
+        SmsMessageTempWSModel response = processTempMiddleware.createSmsMessageTemp(userId,processId,smsTitle,smsBody,senderId,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -82,12 +82,12 @@ public class ProcessTempController {
     @RequestMapping(value = BaseRoute.UPDATE_SMS_MESSAGE_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> updateSmsMessageTemp(@RequestParam long userId,
                                                   @RequestParam String tempId,
-                                                  @RequestParam String title,
-                                                  @RequestParam String body,
+                                                  @RequestParam String smsTitle,
+                                                  @RequestParam String smsBody,
                                                   @RequestParam String senderId,
                                                   @RequestParam long typeId) {
 
-        SmsMessageTempWSModel response = processTempMiddleware.updateSmsMessageTemp(userId,tempId,title,body,senderId,typeId);
+        SmsMessageTempWSModel response = processTempMiddleware.updateSmsMessageTemp(userId,tempId,smsTitle,smsBody,senderId,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -139,11 +139,11 @@ public class ProcessTempController {
     @RequestMapping(value = BaseRoute.CREATE_WAPP_MESSAGE_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> createWappMessageTemp(@RequestParam long userId,
                                                    @RequestParam String processId,
-                                                   @RequestParam String title,
-                                                   @RequestParam String body,
+                                                   @RequestParam String wappTitle,
+                                                   @RequestParam String wappBody,
                                                    @RequestParam long typeId) {
 
-        WappMessageTempWSModel response = processTempMiddleware.createWappMessageTemp(userId,processId,title,body,typeId);
+        WappMessageTempWSModel response = processTempMiddleware.createWappMessageTemp(userId,processId,wappTitle,wappBody,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -155,11 +155,11 @@ public class ProcessTempController {
     @RequestMapping(value = BaseRoute.UPDATE_WAPP_MESSAGE_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> updateWappMessageTemp(@RequestParam long userId,
                                                    @RequestParam String tempId,
-                                                   @RequestParam String title,
-                                                   @RequestParam String body,
+                                                   @RequestParam String wappTitle,
+                                                   @RequestParam String wappBody,
                                                    @RequestParam long typeId) {
 
-        WappMessageTempWSModel response = processTempMiddleware.updateWappMessageTemp(userId,tempId,title,body,typeId);
+        WappMessageTempWSModel response = processTempMiddleware.updateWappMessageTemp(userId,tempId,wappTitle,wappBody,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -211,13 +211,13 @@ public class ProcessTempController {
     @RequestMapping(value = BaseRoute.CREATE_EMAIL_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> createEmailTemp(@RequestParam long userId,
                                              @RequestParam String processId,
-                                             @RequestParam String subject,
-                                             @RequestParam String body,
-                                             @RequestParam String footer,
-                                             @RequestParam String sender,
+                                             @RequestParam String emailSubject,
+                                             @RequestParam String emailBody,
+                                             @RequestParam String emailFooter,
+                                             @RequestParam String emailSender,
                                              @RequestParam long typeId) {
 
-        EmailTempWSModel response = processTempMiddleware.createEmailTemp(userId,processId,subject,body,footer,sender,typeId);
+        EmailTempWSModel response = processTempMiddleware.createEmailTemp(userId,processId,emailSubject,emailBody,emailFooter,emailSender,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -229,13 +229,13 @@ public class ProcessTempController {
     @RequestMapping(value = BaseRoute.UPDATE_EMAIL_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> updateEmailTemp(@RequestParam long userId,
                                              @RequestParam String tempId,
-                                             @RequestParam String subject,
-                                             @RequestParam String body,
-                                             @RequestParam String footer,
-                                             @RequestParam String sender,
+                                             @RequestParam String emailSubject,
+                                             @RequestParam String emailBody,
+                                             @RequestParam String emailFooter,
+                                             @RequestParam String emailSender,
                                              @RequestParam long typeId) {
 
-        EmailTempWSModel response = processTempMiddleware.updateEmailTemp(userId,tempId,subject,body,footer,sender,typeId);
+        EmailTempWSModel response = processTempMiddleware.updateEmailTemp(userId,tempId,emailSubject,emailBody,emailFooter,emailSender,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -287,13 +287,13 @@ public class ProcessTempController {
     @RequestMapping(value = BaseRoute.CREATE_PUSH_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> createPushTemp(@RequestParam long userId,
                                             @RequestParam String processId,
-                                            @RequestParam String header,
-                                            @RequestParam String body,
-                                            @RequestParam String footer,
-                                            @RequestParam String sender,
+                                            @RequestParam String pushHeader,
+                                            @RequestParam String pushBody,
+                                            @RequestParam String pushFooter,
+                                            @RequestParam String pushSender,
                                             @RequestParam long typeId) {
 
-        PushTempWSModel response = processTempMiddleware.createPushTemp(userId,processId,header,body,footer,sender,typeId);
+        PushTempWSModel response = processTempMiddleware.createPushTemp(userId,processId,pushHeader,pushBody,pushFooter,pushSender,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -305,13 +305,13 @@ public class ProcessTempController {
     @RequestMapping(value = BaseRoute.UPDATE_PUSH_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> updatePushTemp(@RequestParam long userId,
                                             @RequestParam String tempId,
-                                            @RequestParam String header,
-                                            @RequestParam String body,
-                                            @RequestParam String footer,
-                                            @RequestParam String sender,
+                                            @RequestParam String pushHeader,
+                                            @RequestParam String pushBody,
+                                            @RequestParam String pushFooter,
+                                            @RequestParam String pushSender,
                                             @RequestParam long typeId) {
 
-        PushTempWSModel response = processTempMiddleware.updatePushTemp(userId,tempId,header,body,footer,sender,typeId);
+        PushTempWSModel response = processTempMiddleware.updatePushTemp(userId,tempId,pushHeader,pushBody,pushFooter,pushSender,typeId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
