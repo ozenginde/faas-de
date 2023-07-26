@@ -40,27 +40,13 @@ public class ApiDashboardController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_DASH_SESSION, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetDashSession(@RequestParam long agentId,
-                                               @RequestParam String sessionState,
-                                               @RequestParam int reqPage,
-                                               @RequestParam int reqSize) {
+    @RequestMapping(value = ApiRoute.API_GET_DASH_SESSIONS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetDashSessions(@RequestParam long agentId,
+                                                @RequestParam String sessionState,
+                                                @RequestParam int reqPage,
+                                                @RequestParam int reqSize) {
 
-        ApiSessionWSModel response = apiDashboardMiddleware.apiGetDashSession(agentId,sessionState,reqPage,reqSize);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = ApiRoute.API_GET_DASH_INQUIRY, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetDashInquiry(@RequestParam long agentId,
-                                               @RequestParam int reqPage,
-                                               @RequestParam int reqSize) {
-
-        ApiInquiryWSModel response = apiDashboardMiddleware.apiGetDashInquiry(agentId,reqPage,reqSize);
+        ApiSessionWSModel response = apiDashboardMiddleware.apiGetDashSessions(agentId,sessionState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -69,10 +55,24 @@ public class ApiDashboardController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_DASH_CAMPAIGN, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetDashCampaign(@RequestParam long agentId) {
+    @RequestMapping(value = ApiRoute.API_GET_DASH_INQUIRIES, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetDashInquiries(@RequestParam long agentId,
+                                                 @RequestParam int reqPage,
+                                                 @RequestParam int reqSize) {
 
-        ApiCampaignWSModel response = apiDashboardMiddleware.apiGetDashCampaign(agentId);
+        ApiInquiryWSModel response = apiDashboardMiddleware.apiGetDashInquiries(agentId,reqPage,reqSize);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_DASH_CAMPAIGNS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetDashCampaigns(@RequestParam long agentId) {
+
+        ApiCampaignWSModel response = apiDashboardMiddleware.apiGetDashCampaigns(agentId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

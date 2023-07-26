@@ -7,8 +7,9 @@ import java.util.List;
 
 public class CampaignFlowWSDTO {
 
-    private PaginationWSDTO pagination;
     private List<FlowWSDTO> flows;
+    private PaginationWSDTO pagination;
+
 
     public CampaignFlowWSDTO() {
     }

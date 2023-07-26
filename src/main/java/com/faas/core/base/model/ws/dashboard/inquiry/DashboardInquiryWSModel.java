@@ -8,14 +8,14 @@ import java.util.List;
 public class DashboardInquiryWSModel {
 
     private GeneralWSModel general;
-    private List<DashboardInquiryWSDTO>dashboardInquiries;
+    private List<DashboardInquiryWSDTO>inquiries;
 
     public DashboardInquiryWSModel() {
     }
 
-    public DashboardInquiryWSModel(GeneralWSModel general, List<DashboardInquiryWSDTO> dashboardInquiries) {
+    public DashboardInquiryWSModel(GeneralWSModel general, List<DashboardInquiryWSDTO> inquiries) {
         this.general = general;
-        this.dashboardInquiries = dashboardInquiries;
+        this.inquiries = inquiries;
     }
 
     public GeneralWSModel getGeneral() {
@@ -26,11 +26,11 @@ public class DashboardInquiryWSModel {
         this.general = general;
     }
 
-    public List<DashboardInquiryWSDTO> getDashboardInquiries() {
-        return dashboardInquiries;
+    public List<DashboardInquiryWSDTO> getInquiries() {
+        return inquiries;
     }
 
-    public void setDashboardInquiries(List<DashboardInquiryWSDTO> dashboardInquiries) {
-        this.dashboardInquiries = dashboardInquiries;
+    public void setInquiries(List<DashboardInquiryWSDTO> inquiries) {
+        this.inquiries = inquiries;
     }
 }

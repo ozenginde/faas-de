@@ -65,24 +65,24 @@ public class ApiDashboardFramework {
         dashboardWSDTO.setReadySession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,AppConstant.READY_SESSION,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setActiveSession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,AppConstant.ACTIVE_SESSION,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setDashInquiry(inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,AppConstant.NEW_INQUIRY,PageRequest.of(reqPage,reqSize))));
-        dashboardWSDTO.setDashCampaigns(apiGetDashCampaignService(agentId));
+        dashboardWSDTO.setDashCampaigns(apiGetDashCampaignsService(agentId));
 
         return dashboardWSDTO;
     }
 
 
 
-    public ApiSessionWSDTO apiGetDashSessionService(long agentId,String sessionState,int reqPage,int reqSize){
+    public ApiSessionWSDTO apiGetDashSessionsService(long agentId,String sessionState,int reqPage,int reqSize){
         return sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,sessionState,PageRequest.of(reqPage,reqSize)));
     }
 
 
-    public ApiInquiryWSDTO apiGetDashInquiryService(long agentId,  int reqPage, int reqSize){
+    public ApiInquiryWSDTO apiGetDashInquiriesService(long agentId,  int reqPage, int reqSize){
         return inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,AppConstant.READY_INQUIRY,PageRequest.of(reqPage,reqSize)));
     }
 
 
-    public List<ApiCampaignWSDTO> apiGetDashCampaignService(long agentId) {
+    public List<ApiCampaignWSDTO> apiGetDashCampaignsService(long agentId) {
 
         List<ApiCampaignWSDTO> campaignWSDTOS = new ArrayList<>();
         List<CampaignAgentDBModel> agentCampaigns = campaignAgentRepository.findByAgentId(agentId);
