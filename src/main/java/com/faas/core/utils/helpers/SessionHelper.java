@@ -50,7 +50,7 @@ public class SessionHelper {
 
     public ApiSessionWSDTO getApiSessionWSDTO(long agentId, String sessionState, int reqPage, int reqSize) {
 
-        Page<SessionDBModel> sessionsPage = sessionRepository.findAllByAgentIdAndSessionState(agentId,sessionState,PageRequest.of(reqPage,reqSize));
+        Page<SessionDBModel> sessionsPage = sessionRepository.findAllByAgentIdAndSessionStateAndSessionType(agentId,sessionState,AppConstant.MANUAL_CAMPAIGN,PageRequest.of(reqPage,reqSize));
         if (sessionsPage != null){
             ApiSessionWSDTO apiSessionWSDTO  = new ApiSessionWSDTO();
             apiSessionWSDTO.setPagination(sessionMapper.createSessionPaginationWSDTO(sessionsPage));

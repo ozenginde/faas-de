@@ -62,8 +62,8 @@ public class ApiDashboardFramework {
     public ApiDashboardWSDTO apiGetDashboardService(long agentId,int reqPage,int reqSize){
 
         ApiDashboardWSDTO dashboardWSDTO = new ApiDashboardWSDTO();
-        dashboardWSDTO.setReadySession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,AppConstant.READY_SESSION,PageRequest.of(reqPage,reqSize))));
-        dashboardWSDTO.setActiveSession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,AppConstant.ACTIVE_SESSION,PageRequest.of(reqPage,reqSize))));
+        dashboardWSDTO.setReadySession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionStateAndSessionType(agentId,AppConstant.READY_SESSION,AppConstant.MANUAL_CAMPAIGN,PageRequest.of(reqPage,reqSize))));
+        dashboardWSDTO.setActiveSession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionStateAndSessionType(agentId,AppConstant.ACTIVE_SESSION,AppConstant.MANUAL_CAMPAIGN,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setDashInquiry(inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,AppConstant.NEW_INQUIRY,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setDashCampaigns(apiGetDashCampaignsService(agentId));
 
@@ -73,7 +73,7 @@ public class ApiDashboardFramework {
 
 
     public ApiSessionWSDTO apiGetDashSessionsService(long agentId,String sessionState,int reqPage,int reqSize){
-        return sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,sessionState,PageRequest.of(reqPage,reqSize)));
+        return sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionStateAndSessionType(agentId,sessionState,AppConstant.MANUAL_CAMPAIGN,PageRequest.of(reqPage,reqSize)));
     }
 
 

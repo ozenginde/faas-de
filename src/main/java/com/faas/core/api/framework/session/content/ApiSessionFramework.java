@@ -73,7 +73,7 @@ public class ApiSessionFramework {
 
     public ApiSessionWSDTO apiGetSessionsService(long agentId,String sessionState,int reqPage,int reqSize) {
 
-        Page<SessionDBModel> sessionModelPage =sessionRepository.findAllByAgentIdAndSessionState(agentId,sessionState,PageRequest.of(reqPage,reqSize));
+        Page<SessionDBModel> sessionModelPage =sessionRepository.findAllByAgentIdAndSessionStateAndSessionType(agentId,sessionState,AppConstant.MANUAL_CAMPAIGN,PageRequest.of(reqPage,reqSize));
         if (sessionModelPage != null){
             return fillApiSessionWSDTO(sessionModelPage.getContent(),sessionMapper.createSessionPaginationWSDTO(sessionModelPage)) ;
         }
