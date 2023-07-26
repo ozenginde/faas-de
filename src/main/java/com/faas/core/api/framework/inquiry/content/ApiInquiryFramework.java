@@ -81,10 +81,9 @@ public class ApiInquiryFramework {
 
     public ApiInquiryWSDTO apiStartInquiryService(long agentId,long inquiryId,long sessionId,String campaignId){
 
-        List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndAgentIdAndCampaignIdAndInquiryState(inquiryId,agentId,campaignId,AppConstant.READY_INQUIRY);
+        List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndAgentIdAndCampaignIdAndInquiryState(inquiryId,agentId,campaignId,AppConstant.NEW_INQUIRY);
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndCampaignIdAndSessionStateAndSessionType(sessionId,campaignId,AppConstant.READY_SESSION,AppConstant.INQUIRY_CAMPAIGN);
         List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndCampaignIdAndOperationState(sessionId,campaignId,AppConstant.READY_OPERATION);
-
         if (inquiryDBModels.size()>0 && sessionDBModels.size()>0 && operationDBModels.size()>0 ){
 
             sessionDBModels.get(0).setSessionState(AppConstant.ACTIVE_SESSION);
