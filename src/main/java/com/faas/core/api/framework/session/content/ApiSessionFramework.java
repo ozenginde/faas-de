@@ -89,6 +89,10 @@ public class ApiSessionFramework {
 
     public ApiSessionWSDTO apiGetSessionService(long agentId, long sessionId) {
 
+        Page<SessionDBModel> sessionModelPage =sessionRepository.findAllByIdAndAgentId(sessionId,agentId,PageRequest.of(0,20));
+        if (sessionModelPage != null){
+            return fillApiSessionWSDTO(sessionModelPage.getContent(),sessionMapper.createSessionPaginationWSDTO(sessionModelPage)) ;
+        }
         return null;
     }
 
