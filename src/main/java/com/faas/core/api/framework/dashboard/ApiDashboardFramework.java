@@ -62,20 +62,26 @@ public class ApiDashboardFramework {
     public ApiDashboardWSDTO apiGetDashboardService(long agentId,int reqPage,int reqSize){
 
         ApiDashboardWSDTO dashboardWSDTO = new ApiDashboardWSDTO();
-
         dashboardWSDTO.setReadySession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionStateAndSessionType(agentId,AppConstant.READY_SESSION,AppConstant.MANUAL_CAMPAIGN,PageRequest.of(reqPage,reqSize))));
-        dashboardWSDTO.setActiveSession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionStateAndSessionType(agentId,AppConstant.ACTIVE_SESSION,AppConstant.MANUAL_CAMPAIGN,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setReadyInquiry(inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,AppConstant.NEW_INQUIRY,PageRequest.of(reqPage,reqSize))));
-        dashboardWSDTO.setActiveInquiry(inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,AppConstant.ACTIVE_INQUIRY,PageRequest.of(reqPage,reqSize))));
+        dashboardWSDTO.setActiveSession(sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,AppConstant.ACTIVE_SESSION,PageRequest.of(reqPage,reqSize))));
         dashboardWSDTO.setDashCampaigns(apiGetDashCampaignsService(agentId));
 
         return dashboardWSDTO;
     }
 
 
-
-    public ApiSessionWSDTO apiGetDashSessionsService(long agentId,String sessionState,int reqPage,int reqSize){
-        return sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionStateAndSessionType(agentId,sessionState,AppConstant.MANUAL_CAMPAIGN,PageRequest.of(reqPage,reqSize)));
+    public ApiSessionWSDTO apiGetDashSessionsService(long agentId,String sessionType,String sessionState,int reqPage,int reqSize){
+        if (sessionType.equalsIgnoreCase(AppConstant.MANUAL_CAMPAIGN)){
+            return sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionTypeAndSessionState(agentId,sessionType,sessionState,PageRequest.of(reqPage,reqSize)));
+        }
+        if (sessionType.equalsIgnoreCase(AppConstant.INQUIRY_CAMPAIGN)){
+            return sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionTypeAndSessionState(agentId,sessionType,sessionState,PageRequest.of(reqPage,reqSize)));
+        }
+        if (sessionType.equalsIgnoreCase(AppConstant.ALL_CAMPAIGN)){
+            return sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionState(agentId,sessionState,PageRequest.of(reqPage,reqSize)));
+        }
+        return null;
     }
 
 

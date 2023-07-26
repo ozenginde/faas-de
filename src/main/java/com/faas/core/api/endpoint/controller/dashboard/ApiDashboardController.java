@@ -42,11 +42,12 @@ public class ApiDashboardController {
 
     @RequestMapping(value = ApiRoute.API_GET_DASH_SESSIONS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetDashSessions(@RequestParam long agentId,
+                                                @RequestParam String sessionType,
                                                 @RequestParam String sessionState,
                                                 @RequestParam int reqPage,
                                                 @RequestParam int reqSize) {
 
-        ApiSessionWSModel response = apiDashboardMiddleware.apiGetDashSessions(agentId,sessionState,reqPage,reqSize);
+        ApiSessionWSModel response = apiDashboardMiddleware.apiGetDashSessions(agentId,sessionType,sessionState,reqPage,reqSize);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -68,6 +69,7 @@ public class ApiDashboardController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
 
 
     @RequestMapping(value = ApiRoute.API_GET_DASH_CAMPAIGNS, method = RequestMethod.POST)

@@ -9,19 +9,17 @@ import java.util.List;
 public class ApiDashboardWSDTO {
 
     private ApiSessionWSDTO readySession;
-    private ApiSessionWSDTO activeSession;
     private ApiInquiryWSDTO readyInquiry;
-    private ApiInquiryWSDTO activeInquiry;
+    private ApiSessionWSDTO activeSession;
     private List<ApiCampaignWSDTO> dashCampaigns;
 
     public ApiDashboardWSDTO() {
     }
 
-    public ApiDashboardWSDTO(ApiSessionWSDTO readySession, ApiSessionWSDTO activeSession, ApiInquiryWSDTO readyInquiry, ApiInquiryWSDTO activeInquiry, List<ApiCampaignWSDTO> dashCampaigns) {
+    public ApiDashboardWSDTO(ApiSessionWSDTO readySession, ApiInquiryWSDTO readyInquiry, ApiSessionWSDTO activeSession, List<ApiCampaignWSDTO> dashCampaigns) {
         this.readySession = readySession;
-        this.activeSession = activeSession;
         this.readyInquiry = readyInquiry;
-        this.activeInquiry = activeInquiry;
+        this.activeSession = activeSession;
         this.dashCampaigns = dashCampaigns;
     }
 
@@ -33,14 +31,6 @@ public class ApiDashboardWSDTO {
         this.readySession = readySession;
     }
 
-    public ApiSessionWSDTO getActiveSession() {
-        return activeSession;
-    }
-
-    public void setActiveSession(ApiSessionWSDTO activeSession) {
-        this.activeSession = activeSession;
-    }
-
     public ApiInquiryWSDTO getReadyInquiry() {
         return readyInquiry;
     }
@@ -49,12 +39,12 @@ public class ApiDashboardWSDTO {
         this.readyInquiry = readyInquiry;
     }
 
-    public ApiInquiryWSDTO getActiveInquiry() {
-        return activeInquiry;
+    public ApiSessionWSDTO getActiveSession() {
+        return activeSession;
     }
 
-    public void setActiveInquiry(ApiInquiryWSDTO activeInquiry) {
-        this.activeInquiry = activeInquiry;
+    public void setActiveSession(ApiSessionWSDTO activeSession) {
+        this.activeSession = activeSession;
     }
 
     public List<ApiCampaignWSDTO> getDashCampaigns() {

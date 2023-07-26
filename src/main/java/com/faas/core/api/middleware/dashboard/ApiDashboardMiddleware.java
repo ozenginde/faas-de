@@ -46,12 +46,12 @@ public class ApiDashboardMiddleware {
     }
 
 
-    public ApiSessionWSModel apiGetDashSessions(long agentId,String sessionState,int reqPage,int reqSize) {
+    public ApiSessionWSModel apiGetDashSessions(long agentId,String sessionType,String sessionState,int reqPage,int reqSize) {
 
         ApiSessionWSModel response = new ApiSessionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiSessionWSDTO sessionWSDTO = apiDashboardFramework.apiGetDashSessionsService(agentId,sessionState,reqPage,reqSize);
+        ApiSessionWSDTO sessionWSDTO = apiDashboardFramework.apiGetDashSessionsService(agentId,sessionType,sessionState,reqPage,reqSize);
         if (sessionWSDTO != null){
             response.setSession(sessionWSDTO);
         }
@@ -76,7 +76,7 @@ public class ApiDashboardMiddleware {
             response.setInquiry(inquiryWSDTO);
         }
 
-        general.setOperation("apiGetDashInquiries");
+        general.setOperation("apiGetDashReadyInquiries");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -84,6 +84,7 @@ public class ApiDashboardMiddleware {
 
         return response;
     }
+
 
 
     public ApiCampaignWSModel apiGetDashCampaigns(long agentId) {
