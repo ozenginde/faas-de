@@ -66,12 +66,12 @@ public class ApiDashboardMiddleware {
     }
 
 
-    public ApiInquiryWSModel apiGetDashInquiries(long agentId, int reqPage, int reqSize) {
+    public ApiInquiryWSModel apiGetDashInquiries(long agentId,String inquiryState, int reqPage, int reqSize) {
 
         ApiInquiryWSModel response = new ApiInquiryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiInquiryWSDTO inquiryWSDTO = apiDashboardFramework.apiGetDashInquiriesService(agentId,reqPage,reqSize);
+        ApiInquiryWSDTO inquiryWSDTO = apiDashboardFramework.apiGetDashInquiriesService(agentId,inquiryState,reqPage,reqSize);
         if (inquiryWSDTO != null){
             response.setInquiry(inquiryWSDTO);
         }
@@ -106,17 +106,17 @@ public class ApiDashboardMiddleware {
     }
 
 
-    public ApiSummaryWSModel apiGetDashSummary(long agentId) {
+    public ApiSummaryWSModel apiGetDashSummaries(long agentId) {
 
         ApiSummaryWSModel response = new ApiSummaryWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiSummaryWSDTO> summaries = apiDashboardFramework.apiGetDashSummaryService(agentId);
+        List<ApiSummaryWSDTO> summaries = apiDashboardFramework.apiGetDashSummariesService(agentId);
         if (summaries != null){
             response.setSummaries(summaries);
         }
 
-        general.setOperation("apiGetDashSummary");
+        general.setOperation("apiGetDashSummaries");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

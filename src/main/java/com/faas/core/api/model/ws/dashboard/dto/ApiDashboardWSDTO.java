@@ -10,16 +10,18 @@ public class ApiDashboardWSDTO {
 
     private ApiSessionWSDTO readySession;
     private ApiSessionWSDTO activeSession;
-    private ApiInquiryWSDTO dashInquiry;
+    private ApiInquiryWSDTO readyInquiry;
+    private ApiInquiryWSDTO activeInquiry;
     private List<ApiCampaignWSDTO> dashCampaigns;
 
     public ApiDashboardWSDTO() {
     }
 
-    public ApiDashboardWSDTO(ApiSessionWSDTO readySession, ApiSessionWSDTO activeSession, ApiInquiryWSDTO dashInquiry, List<ApiCampaignWSDTO> dashCampaigns) {
+    public ApiDashboardWSDTO(ApiSessionWSDTO readySession, ApiSessionWSDTO activeSession, ApiInquiryWSDTO readyInquiry, ApiInquiryWSDTO activeInquiry, List<ApiCampaignWSDTO> dashCampaigns) {
         this.readySession = readySession;
         this.activeSession = activeSession;
-        this.dashInquiry = dashInquiry;
+        this.readyInquiry = readyInquiry;
+        this.activeInquiry = activeInquiry;
         this.dashCampaigns = dashCampaigns;
     }
 
@@ -39,12 +41,20 @@ public class ApiDashboardWSDTO {
         this.activeSession = activeSession;
     }
 
-    public ApiInquiryWSDTO getDashInquiry() {
-        return dashInquiry;
+    public ApiInquiryWSDTO getReadyInquiry() {
+        return readyInquiry;
     }
 
-    public void setDashInquiry(ApiInquiryWSDTO dashInquiry) {
-        this.dashInquiry = dashInquiry;
+    public void setReadyInquiry(ApiInquiryWSDTO readyInquiry) {
+        this.readyInquiry = readyInquiry;
+    }
+
+    public ApiInquiryWSDTO getActiveInquiry() {
+        return activeInquiry;
+    }
+
+    public void setActiveInquiry(ApiInquiryWSDTO activeInquiry) {
+        this.activeInquiry = activeInquiry;
     }
 
     public List<ApiCampaignWSDTO> getDashCampaigns() {
