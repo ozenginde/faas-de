@@ -72,6 +72,7 @@ public class ApiDashboardFramework {
 
 
     public ApiSessionWSDTO apiGetDashSessionsService(long agentId,String sessionType,String sessionState,int reqPage,int reqSize){
+
         if (sessionType.equalsIgnoreCase(AppConstant.MANUAL_CAMPAIGN)){
             return sessionHelper.mapApiSessionWSDTO(sessionRepository.findAllByAgentIdAndSessionTypeAndSessionState(agentId,sessionType,sessionState,PageRequest.of(reqPage,reqSize)));
         }
