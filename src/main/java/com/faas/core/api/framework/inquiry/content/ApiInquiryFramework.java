@@ -58,15 +58,14 @@ public class ApiInquiryFramework {
     }
 
 
-    public ApiInquiryWSDTO apiGetInquiriesService(long agentId, String inquiryState, int reqPage, int reqSize){
-        return inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,inquiryState,PageRequest.of(reqPage,reqSize)));
-    }
-
-
-    public ApiInquiryWSDTO apiGetCampaignInquiriesService(long agentId, String campaignId,String inquiryState, int reqPage, int reqSize){
+    public ApiInquiryWSDTO apiGetCampaignInquiryService(long agentId, String campaignId,String inquiryState, int reqPage, int reqSize){
         return inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndCampaignIdAndInquiryState(agentId,campaignId,inquiryState,PageRequest.of(reqPage,reqSize)));
     }
 
+
+    public ApiInquiryWSDTO apiGetInquiriesService(long agentId, String inquiryState, int reqPage, int reqSize){
+        return inquiryHelper.getApiInquiryWSDTO(inquiryRepository.findAllByAgentIdAndInquiryState(agentId,inquiryState,PageRequest.of(reqPage,reqSize)));
+    }
 
 
     public ApiInquiryWSDTO apiGetInquiryService(long agentId,long inquiryId,String campaignId){

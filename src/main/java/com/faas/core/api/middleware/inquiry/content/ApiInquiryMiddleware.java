@@ -43,6 +43,26 @@ public class ApiInquiryMiddleware {
     }
 
 
+    public ApiInquiryWSModel apiGetCampaignInquiry(long agentId, String campaignId,String inquiryState, int reqPage, int reqSize) {
+
+        ApiInquiryWSModel response = new ApiInquiryWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiGetCampaignInquiryService(agentId,campaignId,inquiryState,reqPage,reqSize);
+        if (inquiryWSDTO != null){
+            response.setInquiry(inquiryWSDTO);
+        }
+
+        general.setOperation("apiGetCampaignInquiry");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
     public ApiInquiryWSModel apiGetInquiries(long agentId,String inquiryState,int reqPage,int reqSize) {
 
         ApiInquiryWSModel response = new ApiInquiryWSModel();
@@ -63,24 +83,6 @@ public class ApiInquiryMiddleware {
     }
 
 
-    public ApiInquiryWSModel apiGetCampaignInquiries(long agentId, String campaignId,String inquiryState, int reqPage, int reqSize) {
-
-        ApiInquiryWSModel response = new ApiInquiryWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        ApiInquiryWSDTO inquiryWSDTO = apiInquiryFramework.apiGetCampaignInquiriesService(agentId,campaignId,inquiryState,reqPage,reqSize);
-        if (inquiryWSDTO != null){
-            response.setInquiry(inquiryWSDTO);
-        }
-
-        general.setOperation("apiGetCampaignInquiries");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
     public ApiInquiryWSModel apiGetInquiry(long agentId, long inquiryId,String campaignId) {
 

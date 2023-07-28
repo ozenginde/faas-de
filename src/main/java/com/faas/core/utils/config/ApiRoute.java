@@ -34,8 +34,8 @@ public class ApiRoute {
 
 
     public static final String API_GET_AGENT_INQUIRY = "apigetagentinquiry";
+    public static final String API_GET_CAMPAIGN_INQUIRY = "apigetcampaigninquiry";
     public static final String API_GET_INQUIRIES = "apigetinquiries";
-    public static final String API_GET_CAMPAIGN_INQUIRIES = "apigetcampaigninquiries";
     public static final String API_GET_INQUIRY = "apigetinquiry";
     public static final String API_START_INQUIRY = "apistartinquiry";
     public static final String API_UPDATE_INQUIRY = "apiupdateinquiry";
@@ -45,13 +45,24 @@ public class ApiRoute {
     public static final String API_GET_INQUIRY_DETAILS = "apigetinquirydetails";
 
 
+    public static final String API_GET_AGENT_FLOW = "apigetagentflow";
+    public static final String API_GET_CAMPAIGN_FLOW = "apigetcampaignflow";
+    public static final String API_GET_FLOWS = "apigetflows";
+    public static final String API_GET_FLOW = "apigetflow";
+    public static final String API_START_FLOW = "apistartflow";
+    public static final String API_UPDATE_FLOW = "apiupdateflow";
+    public static final String API_REMOVE_FLOW = "apiremoveflow";
+    public static final String API_GET_FLOW_SUMMARY = "apigetflowsummary";
+
+    public static final String API_GET_FLOW_DETAILS = "apigetflowdetails";
+
+
 
     public static final String API_GET_NOTIFICATIONS = "apigetnotifications";
     public static final String API_GET_NOTIFICATIONS_BY_STATE = "apigetnotificationsbystate";
     public static final String API_GET_NOTIFICATION = "apigetnotification";
     public static final String API_UPDATE_NOTIFICATION = "apiupdatenotification";
     public static final String API_REMOVE_NOTIFICATION = "apiremovenotification";
-
 
 
     public static final String API_GET_AGENT_SESSION = "apigetagentsession";

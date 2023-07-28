@@ -40,6 +40,8 @@ import com.faas.core.base.repo.automation.content.AutomationTempRepository;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.*;
+import com.faas.core.base.repo.flow.FlowRepository;
+import com.faas.core.base.repo.inquiry.InquiryRepository;
 import com.faas.core.base.repo.operation.channel.*;
 import com.faas.core.base.repo.operation.content.OperationRepository;
 import com.faas.core.base.repo.operation.scenario.ScenarioExecutionRepository;
@@ -75,6 +77,12 @@ public class OperationMapper {
 
     @Autowired
     OperationRepository operationRepository;
+
+    @Autowired
+    InquiryRepository inquiryRepository;
+
+    @Autowired
+    FlowRepository flowRepository;
 
     @Autowired
     ClientRepository clientRepository;
@@ -192,6 +200,13 @@ public class OperationMapper {
 
         operationDetailsWSDTO.setOperation(operationDBModel);
         operationDetailsWSDTO.setOperationSession(sessionDBModel);
+        if (sessionDBModel.getSessionType().equalsIgnoreCase(AppConstant.INQUIRY_CAMPAIGN)){
+
+        }
+        if (sessionDBModel.getSessionType().equalsIgnoreCase(AppConstant.INQUIRY_CAMPAIGN)){
+
+        }
+
         operationDetailsWSDTO.setOperationClient(mapApiOperationClientWSDTO(clientDBModel));
         operationDetailsWSDTO.setOperationOsInt(mapApiOperationOsIntWSDTO(clientDBModel));
         operationDetailsWSDTO.setOperationNote(mapApiOperationNoteWSDTO(clientDBModel));

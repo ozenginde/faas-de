@@ -6,6 +6,8 @@ import com.faas.core.api.model.ws.operation.details.client.dto.ApiOperationClien
 import com.faas.core.api.model.ws.operation.details.note.dto.ApiOperationNoteWSDTO;
 import com.faas.core.api.model.ws.operation.details.osint.dto.ApiOperationOsIntWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationScenarioWSDTO;
+import com.faas.core.base.model.db.flow.FlowDBModel;
+import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 
@@ -15,6 +17,8 @@ public class ApiOperationDetailsWSDTO {
 
     private OperationDBModel operation;
     private SessionDBModel operationSession;
+    private FlowDBModel operationFlow;
+    private InquiryDBModel operationInquiry;
     private ApiOperationClientWSDTO operationClient;
     private ApiOperationOsIntWSDTO operationOsInt;
     private ApiOperationNoteWSDTO operationNote;
@@ -26,9 +30,11 @@ public class ApiOperationDetailsWSDTO {
     public ApiOperationDetailsWSDTO() {
     }
 
-    public ApiOperationDetailsWSDTO(OperationDBModel operation, SessionDBModel operationSession, ApiOperationClientWSDTO operationClient, ApiOperationOsIntWSDTO operationOsInt, ApiOperationNoteWSDTO operationNote, List<ApiOperationActivityWSDTO> operationActivities, ApiOperationCampaignWSDTO operationCampaign, ApiOperationScenarioWSDTO operationScenario, ApiOperationChannelWSDTO operationChannel) {
+    public ApiOperationDetailsWSDTO(OperationDBModel operation, SessionDBModel operationSession, FlowDBModel operationFlow, InquiryDBModel operationInquiry, ApiOperationClientWSDTO operationClient, ApiOperationOsIntWSDTO operationOsInt, ApiOperationNoteWSDTO operationNote, List<ApiOperationActivityWSDTO> operationActivities, ApiOperationCampaignWSDTO operationCampaign, ApiOperationScenarioWSDTO operationScenario, ApiOperationChannelWSDTO operationChannel) {
         this.operation = operation;
         this.operationSession = operationSession;
+        this.operationFlow = operationFlow;
+        this.operationInquiry = operationInquiry;
         this.operationClient = operationClient;
         this.operationOsInt = operationOsInt;
         this.operationNote = operationNote;
@@ -52,6 +58,22 @@ public class ApiOperationDetailsWSDTO {
 
     public void setOperationSession(SessionDBModel operationSession) {
         this.operationSession = operationSession;
+    }
+
+    public FlowDBModel getOperationFlow() {
+        return operationFlow;
+    }
+
+    public void setOperationFlow(FlowDBModel operationFlow) {
+        this.operationFlow = operationFlow;
+    }
+
+    public InquiryDBModel getOperationInquiry() {
+        return operationInquiry;
+    }
+
+    public void setOperationInquiry(InquiryDBModel operationInquiry) {
+        this.operationInquiry = operationInquiry;
     }
 
     public ApiOperationClientWSDTO getOperationClient() {
