@@ -1,6 +1,6 @@
-package com.faas.core.api.framework.operation.scenario.execution;
+package com.faas.core.api.framework.operation.scenario.details;
 
-import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiScenarioExecutionWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiScenarioExecutionWSDTO;
 import com.faas.core.base.model.db.operation.details.ScenarioExecutionDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
@@ -23,7 +23,7 @@ import java.util.Optional;
 
 
 @Component
-public class ApiScenarioExecutionFramework {
+public class ApiScenarioRunFramework {
 
 
     @Autowired

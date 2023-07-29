@@ -84,4 +84,62 @@ public class ApiScenarioMiddleware {
 
 
 
+    public ApiScenarioWSModel apiRunScenario(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
+
+        ApiScenarioWSModel response = new ApiScenarioWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
+
+
+
+        response.setScenarios(scenarioWSDTOS);
+        general.setOperation("apiRunScenario");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public ApiScenarioWSModel apiUpdateScenario(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
+
+        ApiScenarioWSModel response = new ApiScenarioWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
+
+
+
+        response.setScenarios(scenarioWSDTOS);
+        general.setOperation("apiUpdateScenario");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+    public ApiScenarioWSModel apiRemoveScenario(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
+
+        ApiScenarioWSModel response = new ApiScenarioWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
+
+
+
+        response.setScenarios(scenarioWSDTOS);
+        general.setOperation("apiRemoveScenario");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
+
 }
