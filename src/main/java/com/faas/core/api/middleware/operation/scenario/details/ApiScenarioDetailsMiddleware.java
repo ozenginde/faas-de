@@ -1,6 +1,6 @@
 package com.faas.core.api.middleware.operation.scenario.details;
 
-import com.faas.core.api.framework.operation.scenario.details.ApiOperationScenarioDetailsFramework;
+import com.faas.core.api.framework.operation.scenario.details.ApiScenarioDetailsFramework;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioActionWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioAutomationWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioDetailsWSModel;
@@ -16,11 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ApiOperationScenarioDetailsMiddleware {
+public class ApiScenarioDetailsMiddleware {
 
 
     @Autowired
-    ApiOperationScenarioDetailsFramework apiOperationScenarioDetailsFramework;
+    ApiScenarioDetailsFramework apiScenarioDetailsFramework;
 
 
     public ApiScenarioDetailsWSModel apiGetScenarioDetails(long agentId, long sessionId, long clientId, String processId) {
@@ -28,7 +28,7 @@ public class ApiOperationScenarioDetailsMiddleware {
         ApiScenarioDetailsWSModel response = new ApiScenarioDetailsWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiScenarioDetailsWSDTO scenarioDetailsWSDTO = apiOperationScenarioDetailsFramework.apiGetScenarioDetailsService(agentId,sessionId,clientId,processId);
+        ApiScenarioDetailsWSDTO scenarioDetailsWSDTO = apiScenarioDetailsFramework.apiGetScenarioDetailsService(agentId,sessionId,clientId,processId);
         if (scenarioDetailsWSDTO != null){
             response.setScenarioDetails(scenarioDetailsWSDTO);
         }
@@ -48,7 +48,7 @@ public class ApiOperationScenarioDetailsMiddleware {
         ApiScenarioActionWSModel response = new ApiScenarioActionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiScenarioActionWSDTO> scenarioActionWSDTOS = apiOperationScenarioDetailsFramework.apiGetScenarioActionsService(agentId,sessionId,clientId,processId);
+        List<ApiScenarioActionWSDTO> scenarioActionWSDTOS = apiScenarioDetailsFramework.apiGetScenarioActionsService(agentId,sessionId,clientId,processId);
         if (scenarioActionWSDTOS != null){
             response.setScenarioActions(scenarioActionWSDTOS);
         }
@@ -69,7 +69,7 @@ public class ApiOperationScenarioDetailsMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioActionWSDTO>scenarioActionWSDTOS = new ArrayList<>();
 
-        ApiScenarioActionWSDTO scenarioActionWSDTO = apiOperationScenarioDetailsFramework.apiGetScenarioActionService(agentId,sessionId,clientId,processId);
+        ApiScenarioActionWSDTO scenarioActionWSDTO = apiScenarioDetailsFramework.apiGetScenarioActionService(agentId,sessionId,clientId,processId);
         if (scenarioActionWSDTO != null){
             scenarioActionWSDTOS.add(scenarioActionWSDTO);
         }
@@ -91,7 +91,7 @@ public class ApiOperationScenarioDetailsMiddleware {
         ApiScenarioAutomationWSModel response = new ApiScenarioAutomationWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiScenarioAutomationWSDTO> scenarioAutomationWSDTOS = apiOperationScenarioDetailsFramework.apiGetScenarioAutomationsService(agentId,sessionId,clientId,processId);
+        List<ApiScenarioAutomationWSDTO> scenarioAutomationWSDTOS = apiScenarioDetailsFramework.apiGetScenarioAutomationsService(agentId,sessionId,clientId,processId);
         if (scenarioAutomationWSDTOS != null){
             response.setScenarioAutomations(scenarioAutomationWSDTOS);
         }
@@ -113,7 +113,7 @@ public class ApiOperationScenarioDetailsMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioAutomationWSDTO>scenarioAutomations = new ArrayList<>();
 
-        ApiScenarioAutomationWSDTO scenarioAutomation = apiOperationScenarioDetailsFramework.apiGetScenarioAutomationService(agentId,sessionId,clientId,processId);
+        ApiScenarioAutomationWSDTO scenarioAutomation = apiScenarioDetailsFramework.apiGetScenarioAutomationService(agentId,sessionId,clientId,processId);
         if (scenarioAutomation != null){
             scenarioAutomations.add(scenarioAutomation);
         }

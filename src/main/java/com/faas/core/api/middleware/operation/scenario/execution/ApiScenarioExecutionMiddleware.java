@@ -1,6 +1,6 @@
 package com.faas.core.api.middleware.operation.scenario.execution;
 
-import com.faas.core.api.framework.operation.scenario.execution.ApiOperationScenarioExecutionFramework;
+import com.faas.core.api.framework.operation.scenario.execution.ApiScenarioExecutionFramework;
 import com.faas.core.api.model.ws.operation.scenario.execution.ApiScenarioExecutionWSModel;
 import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiScenarioExecutionWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ApiOperationScenarioExecutionMiddleware {
+public class ApiScenarioExecutionMiddleware {
 
 
     @Autowired
-    ApiOperationScenarioExecutionFramework apiOperationScenarioExecutionFramework;
+    ApiScenarioExecutionFramework apiScenarioExecutionFramework;
 
 
     public ApiScenarioExecutionWSModel apiExecuteScenario(long agentId, long sessionId,long clientId,String scenarioId) {
@@ -25,7 +25,7 @@ public class ApiOperationScenarioExecutionMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
 
-        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiOperationScenarioExecutionFramework.apiExecuteScenarioService(agentId,sessionId,clientId,scenarioId);
+        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiExecuteScenarioService(agentId,sessionId,clientId,scenarioId);
         if (scenarioExecutionWSDTO != null){
             scenarioExecutionWSDTOS.add(scenarioExecutionWSDTO);
         }
@@ -46,7 +46,7 @@ public class ApiOperationScenarioExecutionMiddleware {
         ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiScenarioExecutionWSDTO> scenarioExecutionWSDTOS =  apiOperationScenarioExecutionFramework.apiGetScenarioExecutionsService(agentId,sessionId,clientId);
+        List<ApiScenarioExecutionWSDTO> scenarioExecutionWSDTOS =  apiScenarioExecutionFramework.apiGetScenarioExecutionsService(agentId,sessionId,clientId);
         if (scenarioExecutionWSDTOS != null){
             response.setScenarioExecutions(scenarioExecutionWSDTOS);
         }
@@ -67,7 +67,7 @@ public class ApiOperationScenarioExecutionMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
 
-        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiOperationScenarioExecutionFramework.apiGetScenarioExecutionService(agentId,sessionId,clientId,executionId);
+        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiGetScenarioExecutionService(agentId,sessionId,clientId,executionId);
         if (scenarioExecutionWSDTO != null){
             scenarioExecutionWSDTOS.add(scenarioExecutionWSDTO);
         }
@@ -89,7 +89,7 @@ public class ApiOperationScenarioExecutionMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
 
-        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiOperationScenarioExecutionFramework.apiUpdateScenarioExecutionService(agentId,sessionId,clientId,executionId);
+        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiUpdateScenarioExecutionService(agentId,sessionId,clientId,executionId);
         if (scenarioExecutionWSDTO != null){
             scenarioExecutionWSDTOS.add(scenarioExecutionWSDTO);
         }
@@ -111,7 +111,7 @@ public class ApiOperationScenarioExecutionMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
 
-        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiOperationScenarioExecutionFramework.apiRemoveScenarioExecutionService(agentId,sessionId,clientId,executionId);
+        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiRemoveScenarioExecutionService(agentId,sessionId,clientId,executionId);
         if (scenarioExecutionWSDTO != null){
             scenarioExecutionWSDTOS.add(scenarioExecutionWSDTO);
         }

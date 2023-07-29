@@ -1,6 +1,6 @@
 package com.faas.core.api.middleware.operation.scenario.content;
 
-import com.faas.core.api.framework.operation.scenario.content.ApiOperationScenarioFramework;
+import com.faas.core.api.framework.operation.scenario.content.ApiScenarioFramework;
 import com.faas.core.api.model.ws.operation.scenario.content.ApiOperationScenarioWSModel;
 import com.faas.core.api.model.ws.operation.scenario.content.ApiScenarioWSModel;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationScenarioWSDTO;
@@ -14,11 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ApiOperationScenarioMiddleware {
+public class ApiScenarioMiddleware {
 
 
     @Autowired
-    ApiOperationScenarioFramework apiOperationScenarioFramework;
+    ApiScenarioFramework apiScenarioFramework;
 
 
     public ApiOperationScenarioWSModel apiGetOperationScenario(long agentId,long sessionId,long clientId,String processId) {
@@ -26,7 +26,7 @@ public class ApiOperationScenarioMiddleware {
         ApiOperationScenarioWSModel response = new ApiOperationScenarioWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiOperationScenarioWSDTO operationScenarioWSDTO = apiOperationScenarioFramework.apiGetOperationScenarioService(agentId,sessionId,clientId,processId);
+        ApiOperationScenarioWSDTO operationScenarioWSDTO = apiScenarioFramework.apiGetOperationScenarioService(agentId,sessionId,clientId,processId);
         if (operationScenarioWSDTO != null){
             response.setOperationScenario(operationScenarioWSDTO);
         }
@@ -46,7 +46,7 @@ public class ApiOperationScenarioMiddleware {
         ApiScenarioWSModel response = new ApiScenarioWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiScenarioWSDTO> scenarioWSDTOS = apiOperationScenarioFramework.apiGetScenariosService(agentId,sessionId,clientId,processId);
+        List<ApiScenarioWSDTO> scenarioWSDTOS = apiScenarioFramework.apiGetScenariosService(agentId,sessionId,clientId,processId);
         if (scenarioWSDTOS != null){
             response.setScenarios(scenarioWSDTOS);
         }
@@ -67,7 +67,7 @@ public class ApiOperationScenarioMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
 
-        ApiScenarioWSDTO scenarioWSDTO = apiOperationScenarioFramework.apiGetScenarioService(agentId,sessionId,clientId,processId,scenarioId);
+        ApiScenarioWSDTO scenarioWSDTO = apiScenarioFramework.apiGetScenarioService(agentId,sessionId,clientId,processId,scenarioId);
         if (scenarioWSDTO != null){
             scenarioWSDTOS.add(scenarioWSDTO);
         }

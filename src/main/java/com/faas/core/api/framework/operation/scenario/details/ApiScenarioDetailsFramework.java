@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Component
-public class ApiOperationScenarioDetailsFramework {
+public class ApiScenarioDetailsFramework {
 
     @Autowired
     AppUtils appUtils;

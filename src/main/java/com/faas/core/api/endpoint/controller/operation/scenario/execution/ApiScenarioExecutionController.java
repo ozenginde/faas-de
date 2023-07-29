@@ -1,6 +1,6 @@
 package com.faas.core.api.endpoint.controller.operation.scenario.execution;
 
-import com.faas.core.api.middleware.operation.scenario.execution.ApiOperationScenarioExecutionMiddleware;
+import com.faas.core.api.middleware.operation.scenario.execution.ApiScenarioExecutionMiddleware;
 import com.faas.core.api.model.ws.operation.scenario.execution.ApiScenarioExecutionWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = AppConstant.API_VERSION + "/api/operation/scenario/execution/")
-public class ApiOperationScenarioExecutionController {
+public class ApiScenarioExecutionController {
 
 
     @Autowired
-    ApiOperationScenarioExecutionMiddleware apiOperationScenarioExecutionMiddleware;
+    ApiScenarioExecutionMiddleware apiScenarioExecutionMiddleware;
 
 
     @RequestMapping(value = ApiRoute.API_EXECUTE_SCENARIO, method = RequestMethod.POST)
@@ -28,7 +28,7 @@ public class ApiOperationScenarioExecutionController {
                                                 @RequestParam long clientId,
                                                 @RequestParam String scenarioId) {
 
-        ApiScenarioExecutionWSModel response = apiOperationScenarioExecutionMiddleware.apiExecuteScenario(agentId,sessionId,clientId,scenarioId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiExecuteScenario(agentId,sessionId,clientId,scenarioId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -42,7 +42,7 @@ public class ApiOperationScenarioExecutionController {
                                                       @RequestParam long sessionId,
                                                       @RequestParam long clientId) {
 
-        ApiScenarioExecutionWSModel response = apiOperationScenarioExecutionMiddleware.apiGetScenarioExecutions(agentId,sessionId,clientId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiGetScenarioExecutions(agentId,sessionId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -57,7 +57,7 @@ public class ApiOperationScenarioExecutionController {
                                                      @RequestParam long clientId,
                                                      @RequestParam String executionId) {
 
-        ApiScenarioExecutionWSModel response = apiOperationScenarioExecutionMiddleware.apiGetScenarioExecution(agentId,sessionId,clientId,executionId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiGetScenarioExecution(agentId,sessionId,clientId,executionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -72,7 +72,7 @@ public class ApiOperationScenarioExecutionController {
                                                         @RequestParam long clientId,
                                                         @RequestParam String executionId) {
 
-        ApiScenarioExecutionWSModel response = apiOperationScenarioExecutionMiddleware.apiUpdateScenarioExecution(agentId,sessionId,clientId,executionId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiUpdateScenarioExecution(agentId,sessionId,clientId,executionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -87,7 +87,7 @@ public class ApiOperationScenarioExecutionController {
                                                         @RequestParam long clientId,
                                                         @RequestParam String executionId) {
 
-        ApiScenarioExecutionWSModel response = apiOperationScenarioExecutionMiddleware.apiRemoveScenarioExecution(agentId,sessionId,clientId,executionId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiRemoveScenarioExecution(agentId,sessionId,clientId,executionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

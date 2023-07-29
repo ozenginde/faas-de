@@ -20,7 +20,7 @@ import java.util.Optional;
 
 
 @Component
-public class ApiOperationScenarioFramework {
+public class ApiScenarioFramework {
 
 
     @Autowired

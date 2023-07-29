@@ -1,6 +1,6 @@
 package com.faas.core.api.endpoint.controller.operation.scenario.details;
 
-import com.faas.core.api.middleware.operation.scenario.details.ApiOperationScenarioDetailsMiddleware;
+import com.faas.core.api.middleware.operation.scenario.details.ApiScenarioDetailsMiddleware;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioActionWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioAutomationWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioDetailsWSModel;
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping(value = AppConstant.API_VERSION + "/api/operation/scenario/details/")
-public class ApiOperationScenarioDetailsController {
+public class ApiScenarioDetailsController {
 
 
     @Autowired
-    ApiOperationScenarioDetailsMiddleware apiScenarioDetailsMiddleware;
+    ApiScenarioDetailsMiddleware apiScenarioDetailsMiddleware;
 
 
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO_DETAILS, method = RequestMethod.POST)
