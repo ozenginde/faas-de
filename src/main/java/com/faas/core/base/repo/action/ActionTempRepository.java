@@ -10,5 +10,4 @@ import java.util.List;
 public interface ActionTempRepository extends PagingAndSortingRepository<ActionTempDBModel, Long> {
 
     List<ActionTempDBModel> findByStatus(int status);
-    List<ActionTempDBModel>findByActionType(String actionType);
 }
