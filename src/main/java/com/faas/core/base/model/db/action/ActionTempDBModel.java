@@ -3,7 +3,7 @@ package com.faas.core.base.model.db.action;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "action_temp_table")
+@Table(name = "action_temps_table")
 public class ActionTempDBModel {
 
     @Id

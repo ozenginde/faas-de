@@ -3,7 +3,7 @@ package com.faas.core.base.model.db.automation.content;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "automation_temp_table")
+@Table(name = "automation_temps_table")
 public class AutomationTempDBModel {
 
     @Id
