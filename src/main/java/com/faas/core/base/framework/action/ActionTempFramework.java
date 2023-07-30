@@ -1,10 +1,8 @@
-package com.faas.core.base.framework.action.content;
+package com.faas.core.base.framework.action;
 
-import com.faas.core.base.model.db.action.content.ActionTempDBModel;
-import com.faas.core.base.model.db.action.settings.ActionTypeDBModel;
-import com.faas.core.base.model.ws.action.content.dto.ActionTempWSDTO;
-import com.faas.core.base.repo.action.content.ActionTempRepository;
-import com.faas.core.base.repo.action.settings.ActionTypeRepository;
+import com.faas.core.base.model.db.action.ActionTempDBModel;
+import com.faas.core.base.model.ws.action.dto.ActionTempWSDTO;
+import com.faas.core.base.repo.action.ActionTempRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,9 +17,6 @@ public class ActionTempFramework {
     ActionTempRepository actionTempRepository;
 
     @Autowired
-    ActionTypeRepository actionTypeRepository;
-
-    @Autowired
     AppUtils appUtils;
 
 
@@ -33,15 +28,10 @@ public class ActionTempFramework {
     }
 
 
-    public ActionTempDBModel createActionTempService(String actionTemp, long typeId) {
+    public ActionTempDBModel createActionTempService(String actionTemp) {
 
         ActionTempDBModel actionTempDBModel = new ActionTempDBModel();
         actionTempDBModel.setActionTemp(actionTemp);
-        Optional<ActionTypeDBModel> actionTypeDBModel = actionTypeRepository.findById(typeId);
-        if (actionTypeDBModel.isPresent()){
-            actionTempDBModel.setTypeId(typeId);
-            actionTempDBModel.setActionType(actionTypeDBModel.get().getActionType());
-        }
         actionTempDBModel.setuDate(appUtils.getCurrentTimeStamp());
         actionTempDBModel.setcDate(appUtils.getCurrentTimeStamp());
         actionTempDBModel.setStatus(1);
@@ -50,16 +40,11 @@ public class ActionTempFramework {
     }
 
 
-    public ActionTempDBModel updateActionTempService(long tempId, String actionTemp, long typeId) {
+    public ActionTempDBModel updateActionTempService(long tempId, String actionTemp) {
 
         Optional<ActionTempDBModel> actionTempDBModel = actionTempRepository.findById(tempId);
         if (actionTempDBModel.isPresent()){
             actionTempDBModel.get().setActionTemp(actionTemp);
-            Optional<ActionTypeDBModel> actionTypeDBModel = actionTypeRepository.findById(typeId);
-            if (actionTypeDBModel.isPresent()){
-                actionTempDBModel.get().setTypeId(typeId);
-                actionTempDBModel.get().setActionType(actionTypeDBModel.get().getActionType());
-            }
             actionTempDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             actionTempDBModel.get().setStatus(1);
 
@@ -78,7 +63,5 @@ public class ActionTempFramework {
         }
         return null;
     }
-
-
 
 }

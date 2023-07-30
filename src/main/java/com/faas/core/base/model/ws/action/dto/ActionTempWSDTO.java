@@ -1,6 +1,6 @@
-package com.faas.core.base.model.ws.action.content.dto;
+package com.faas.core.base.model.ws.action.dto;
 
-import com.faas.core.base.model.db.action.content.ActionTempDBModel;
+import com.faas.core.base.model.db.action.ActionTempDBModel;
 
 public class ActionTempWSDTO {
 

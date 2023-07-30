@@ -1,9 +1,9 @@
 package com.faas.core.base.framework.scenario.details.action.content;
 
-import com.faas.core.base.model.db.action.content.ActionTempDBModel;
+import com.faas.core.base.model.db.action.ActionTempDBModel;
 import com.faas.core.base.model.db.scenario.details.action.ActionDBModel;
 import com.faas.core.base.model.ws.scenario.details.action.content.dto.ActionWSDTO;
-import com.faas.core.base.repo.action.content.ActionTempRepository;
+import com.faas.core.base.repo.action.ActionTempRepository;
 import com.faas.core.base.repo.scenario.details.action.ActionRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +60,6 @@ public class ActionFramework {
             actionDBModel.setAction(action);
             actionDBModel.setActionTempId(actionTempId);
             actionDBModel.setActionTemp(actionTempDBModel.get().getActionTemp());
-            actionDBModel.setActionTypeId(actionTempDBModel.get().getTypeId());
-            actionDBModel.setActionType(actionTempDBModel.get().getActionType());
             actionDBModel.setActionVariables(new ArrayList<>());
             actionDBModel.setOrder(order);
             actionDBModel.setuDate(appUtils.getCurrentTimeStamp());
@@ -83,8 +81,6 @@ public class ActionFramework {
             actionDBModel.get().setAction(action);
             actionDBModel.get().setActionTempId(actionTempId);
             actionDBModel.get().setActionTemp(actionTempDBModel.get().getActionTemp());
-            actionDBModel.get().setActionTypeId(actionTempDBModel.get().getTypeId());
-            actionDBModel.get().setActionType(actionTempDBModel.get().getActionType());
             actionDBModel.get().setOrder(order);
             actionDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             actionDBModel.get().setStatus(1);

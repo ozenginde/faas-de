@@ -1,6 +1,6 @@
 package com.faas.core.base.framework.utils.settings;
 
-import com.faas.core.base.repo.action.content.ActionTempRepository;
+import com.faas.core.base.repo.action.ActionTempRepository;
 import com.faas.core.base.repo.assets.content.AssetRepository;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;

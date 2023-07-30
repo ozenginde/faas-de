@@ -523,11 +523,6 @@ public class BaseRoute {
     public static final String REMOVE_ACTION_TEMP = "removeactiontemp";
 
 
-    public static final String GET_ACTION_TYPES = "getactiontypes";
-    public static final String GET_ACTION_TYPE = "getactiontype";
-    public static final String CREATE_ACTION_TYPE = "createactiontype";
-    public static final String UPDATE_ACTION_TYPE = "updateactiontype";
-    public static final String REMOVE_ACTION_TYPE = "removeactiontype";
 
 
     public static final String REMOVE_ALL_CLIENTS = "removeallclients";

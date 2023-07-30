@@ -1,6 +1,6 @@
-package com.faas.core.base.model.ws.action.content;
+package com.faas.core.base.model.ws.action;
 
-import com.faas.core.base.model.ws.action.content.dto.ActionTempWSDTO;
+import com.faas.core.base.model.ws.action.dto.ActionTempWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;

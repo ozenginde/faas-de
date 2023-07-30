@@ -53,6 +53,7 @@ public class AutomationTempFramework {
         if (automationTypeDBModel.isPresent()){
 
             AutomationTempDBModel automationTempDBModel = new AutomationTempDBModel();
+
             automationTempDBModel.setAutomationTemp(automationTemp);
             automationTempDBModel.setTypeId(typeId);
             automationTempDBModel.setAutomationType(automationTypeDBModel.get().getAutomationType());

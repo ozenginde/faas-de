@@ -1,6 +1,6 @@
-package com.faas.core.base.repo.action.content;
+package com.faas.core.base.repo.action;
 
-import com.faas.core.base.model.db.action.content.ActionTempDBModel;
+import com.faas.core.base.model.db.action.ActionTempDBModel;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

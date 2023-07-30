@@ -46,6 +46,7 @@ public class AutomationSettingsFramework {
     public AutomationTypeWSDTO createAutomationTypeService(long userId,String automationType,String baseType) {
 
         AutomationTypeDBModel automationTypeDBModel = new AutomationTypeDBModel();
+
         automationTypeDBModel.setAutomationType(automationType);
         automationTypeDBModel.setBaseType(baseType);
         automationTypeDBModel.setuDate(appUtils.getCurrentTimeStamp());
@@ -60,6 +61,7 @@ public class AutomationSettingsFramework {
 
         Optional<AutomationTypeDBModel> automationTypeDBModel = automationTypeRepository.findById(typeId);
         if (automationTypeDBModel.isPresent()){
+
             automationTypeDBModel.get().setAutomationType(automationType);
             automationTypeDBModel.get().setBaseType(baseType);
             automationTypeDBModel.get().setuDate(appUtils.getCurrentTimeStamp());

@@ -1,17 +1,17 @@
-package com.faas.core.base.model.db.action.settings;
+package com.faas.core.base.model.db.action;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "action_types_table")
-public class ActionTypeDBModel {
+@Table(name = "action_temp_table")
+public class ActionTempDBModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "action_type")
-    private String actionType;
+    @Column(name = "action_temp")
+    private String actionTemp;
 
     @Column(name = "u_date")
     private long uDate;
@@ -23,12 +23,12 @@ public class ActionTypeDBModel {
     private int status;
 
 
-    public ActionTypeDBModel() {
+    public ActionTempDBModel() {
     }
 
-    public ActionTypeDBModel(long id, String actionType, long uDate, long cDate, int status) {
+    public ActionTempDBModel(long id, String actionTemp, long uDate, long cDate, int status) {
         this.id = id;
-        this.actionType = actionType;
+        this.actionTemp = actionTemp;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
@@ -42,12 +42,12 @@ public class ActionTypeDBModel {
         this.id = id;
     }
 
-    public String getActionType() {
-        return actionType;
+    public String getActionTemp() {
+        return actionTemp;
     }
 
-    public void setActionType(String actionType) {
-        this.actionType = actionType;
+    public void setActionTemp(String actionTemp) {
+        this.actionTemp = actionTemp;
     }
 
     public long getuDate() {

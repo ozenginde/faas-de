@@ -1,7 +1,7 @@
-package com.faas.core.base.endpoint.controller.action.content;
+package com.faas.core.base.endpoint.controller.action;
 
-import com.faas.core.base.middleware.action.content.ActionTempMiddleware;
-import com.faas.core.base.model.ws.action.content.ActionTempWSModel;
+import com.faas.core.base.middleware.action.ActionTempMiddleware;
+import com.faas.core.base.model.ws.action.ActionTempWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,10 +49,9 @@ public class ActionTempController {
 
     @RequestMapping(value = BaseRoute.CREATE_ACTION_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> createActionTemp(@RequestParam long userId,
-                                              @RequestParam String actionTemp,
-                                              @RequestParam long typeId) {
+                                              @RequestParam String actionTemp) {
 
-        ActionTempWSModel response = actionTempMiddleware.createActionTemp(userId,actionTemp,typeId);
+        ActionTempWSModel response = actionTempMiddleware.createActionTemp(userId,actionTemp);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -64,10 +63,9 @@ public class ActionTempController {
     @RequestMapping(value = BaseRoute.UPDATE_ACTION_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> updateActionTemp(@RequestParam long userId,
                                               @RequestParam long tempId,
-                                              @RequestParam String actionTemp,
-                                              @RequestParam long typeId) {
+                                              @RequestParam String actionTemp) {
 
-        ActionTempWSModel response = actionTempMiddleware.updateActionTemp(userId,tempId,actionTemp,typeId);
+        ActionTempWSModel response = actionTempMiddleware.updateActionTemp(userId,tempId,actionTemp);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

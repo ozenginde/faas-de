@@ -1,11 +1,11 @@
-package com.faas.core.base.middleware.action.content;
+package com.faas.core.base.middleware.action;
 
-import com.faas.core.base.framework.action.content.ActionTempFramework;
-import com.faas.core.base.model.db.action.content.ActionTempDBModel;
-import com.faas.core.base.model.ws.action.content.ActionTempWSModel;
-import com.faas.core.base.model.ws.action.content.dto.ActionTempWSDTO;
+import com.faas.core.base.framework.action.ActionTempFramework;
+import com.faas.core.base.model.db.action.ActionTempDBModel;
+import com.faas.core.base.model.ws.action.ActionTempWSModel;
+import com.faas.core.base.model.ws.action.dto.ActionTempWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
-import com.faas.core.base.repo.action.content.ActionTempRepository;
+import com.faas.core.base.repo.action.ActionTempRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +50,6 @@ public class ActionTempMiddleware {
     }
 
 
-
     public ActionTempWSModel getActionTemp(long userId, long tempId) {
 
         ActionTempWSModel response = new ActionTempWSModel();
@@ -73,13 +72,13 @@ public class ActionTempMiddleware {
     }
 
 
-    public ActionTempWSModel createActionTemp(long userId, String actionTemp, long typeId) {
+    public ActionTempWSModel createActionTemp(long userId, String actionTemp) {
 
         ActionTempWSModel response = new ActionTempWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ActionTempWSDTO> actionTempWSDTOS = new ArrayList<>();
 
-        ActionTempDBModel actionTempDBModel = actionTempFramework.createActionTempService(actionTemp,typeId);
+        ActionTempDBModel actionTempDBModel = actionTempFramework.createActionTempService(actionTemp);
         if (actionTempDBModel != null){
             actionTempWSDTOS.add(actionTempFramework.fillActionTempWSDTO(actionTempDBModel));
         }
@@ -95,14 +94,13 @@ public class ActionTempMiddleware {
     }
 
 
-
-    public ActionTempWSModel updateActionTemp(long userId, long tempId, String actionTemp, long typeId) {
+    public ActionTempWSModel updateActionTemp(long userId, long tempId, String actionTemp) {
 
         ActionTempWSModel response = new ActionTempWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ActionTempWSDTO> actionTempWSDTOS = new ArrayList<>();
 
-        ActionTempDBModel actionTempDBModel = actionTempFramework.updateActionTempService(tempId,actionTemp,typeId);
+        ActionTempDBModel actionTempDBModel = actionTempFramework.updateActionTempService(tempId,actionTemp);
         if (actionTempDBModel != null){
             actionTempWSDTOS.add(actionTempFramework.fillActionTempWSDTO(actionTempDBModel));
         }
@@ -116,7 +114,6 @@ public class ActionTempMiddleware {
 
         return response;
     }
-
 
 
     public ActionTempWSModel removeActionTemp(long userId, long tempId) {
