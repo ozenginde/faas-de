@@ -7,8 +7,8 @@ public class ScenarioElement {
     private String id;
     private String element;
     private String elementType;
-    private AutomationDAO automation;
     private ActionDAO action;
+    private AutomationDAO automation;
     private List<ElementVariableDAO>variables;
     private int elementOrder;
     private long uDate;

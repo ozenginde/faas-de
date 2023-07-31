@@ -66,7 +66,6 @@ public class ScenarioElementController {
     }
 
 
-
     @RequestMapping(value = BaseRoute.UPDATE_SCENARIO_ELEMENT, method = RequestMethod.POST)
     public ResponseEntity<?> updateScenarioElement(@RequestParam long userId,
                                                    @RequestParam String scenarioId,
