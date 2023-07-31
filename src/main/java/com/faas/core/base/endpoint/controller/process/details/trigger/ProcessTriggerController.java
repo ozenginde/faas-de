@@ -22,11 +22,11 @@ public class ProcessTriggerController {
     ProcessTriggerMiddleware processTriggerMiddleware;
 
 
-    @RequestMapping(value = BaseRoute.GET_TRIGGERS, method = RequestMethod.POST)
-    public ResponseEntity<?> getTriggers(@RequestParam long userId,
-                                         @RequestParam String processId) {
+    @RequestMapping(value = BaseRoute.GET_PROCESS_TRIGGERS, method = RequestMethod.POST)
+    public ResponseEntity<?> getProcessTriggers(@RequestParam long userId,
+                                                @RequestParam String processId) {
 
-        TriggerWSModel response = processTriggerMiddleware.getTriggers(userId,processId);
+        TriggerWSModel response = processTriggerMiddleware.getProcessTriggers(userId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -35,26 +35,26 @@ public class ProcessTriggerController {
     }
 
 
-    @RequestMapping(value = BaseRoute.GET_TRIGGERS_BY_TYPE, method = RequestMethod.POST)
-    public ResponseEntity<?> getTriggersByType(@RequestParam long userId,
+    @RequestMapping(value = BaseRoute.GET_PROCESS_TRIGGERS_BY_TYPE, method = RequestMethod.POST)
+    public ResponseEntity<?> getProcessTriggersByType(@RequestParam long userId,
+                                                      @RequestParam String processId,
+                                                      @RequestParam String baseType) {
+
+        TriggerWSModel response = processTriggerMiddleware.getProcessTriggersByType(userId,processId,baseType);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = BaseRoute.GET_PROCESS_TRIGGER, method = RequestMethod.POST)
+    public ResponseEntity<?> getProcessTrigger(@RequestParam long userId,
                                                @RequestParam String processId,
-                                               @RequestParam String baseType) {
+                                               @RequestParam String triggerId) {
 
-        TriggerWSModel response = processTriggerMiddleware.getTriggersByType(userId,processId,baseType);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = BaseRoute.GET_TRIGGER, method = RequestMethod.POST)
-    public ResponseEntity<?> getTrigger(@RequestParam long userId,
-                                        @RequestParam String processId,
-                                        @RequestParam String triggerId) {
-
-        TriggerWSModel response = processTriggerMiddleware.getTrigger(userId,processId,triggerId);
+        TriggerWSModel response = processTriggerMiddleware.getProcessTrigger(userId,processId,triggerId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

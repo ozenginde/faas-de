@@ -20,12 +20,12 @@ public class ProcessTriggerMiddleware {
     ProcessTriggerFramework processTriggerFramework;
 
 
-    public TriggerWSModel getTriggers(long userId, String processId) {
+    public TriggerWSModel getProcessTriggers(long userId, String processId) {
 
         TriggerWSModel response = new TriggerWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<TriggerWSDTO> triggerWSDTOS = processTriggerFramework.getTriggersService(userId,processId);
+        List<TriggerWSDTO> triggerWSDTOS = processTriggerFramework.getProcessTriggersService(userId,processId);
         if (triggerWSDTOS != null){
             response.setTriggers(triggerWSDTOS);
         }
@@ -40,17 +40,17 @@ public class ProcessTriggerMiddleware {
     }
 
 
-    public TriggerWSModel getTriggersByType(long userId, String processId,String baseType) {
+    public TriggerWSModel getProcessTriggersByType(long userId, String processId,String baseType) {
 
         TriggerWSModel response = new TriggerWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<TriggerWSDTO> triggerWSDTOS = processTriggerFramework.getTriggersByTypeService(userId,processId,baseType);
+        List<TriggerWSDTO> triggerWSDTOS = processTriggerFramework.getProcessTriggersByTypeService(userId,processId,baseType);
         if (triggerWSDTOS != null){
             response.setTriggers(triggerWSDTOS);
         }
 
-        general.setOperation("getTriggersByType");
+        general.setOperation("getProcessTriggersByType");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -60,19 +60,19 @@ public class ProcessTriggerMiddleware {
     }
 
 
-    public TriggerWSModel getTrigger(long userId, String processId,String triggerId) {
+    public TriggerWSModel getProcessTrigger(long userId, String processId,String triggerId) {
 
         TriggerWSModel response = new TriggerWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<TriggerWSDTO>triggerWSDTOS = new ArrayList<>();
 
-        TriggerWSDTO triggerWSDTO = processTriggerFramework.getTriggerService(userId,processId,triggerId);
+        TriggerWSDTO triggerWSDTO = processTriggerFramework.getProcessTriggerService(userId,processId,triggerId);
         if (triggerWSDTO != null){
             triggerWSDTOS.add(triggerWSDTO);
         }
 
         response.setTriggers(triggerWSDTOS);
-        general.setOperation("getTrigger");
+        general.setOperation("getProcessTrigger");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

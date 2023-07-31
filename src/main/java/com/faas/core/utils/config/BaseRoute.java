@@ -353,9 +353,9 @@ public class BaseRoute {
     public static final String REMOVE_CALL_SCRIPT = "removecallscript";
 
 
-    public static final String GET_TRIGGERS = "gettriggers";
-    public static final String GET_TRIGGERS_BY_TYPE = "gettriggersbytype";
-    public static final String GET_TRIGGER = "gettrigger";
+    public static final String GET_PROCESS_TRIGGERS = "getprocesstriggers";
+    public static final String GET_PROCESS_TRIGGERS_BY_TYPE = "getprocesstriggersbytype";
+    public static final String GET_PROCESS_TRIGGER = "getprocesstrigger";
 
     public static final String CREATE_AI_TRIGGER = "createaitrigger";
     public static final String UPDATE_AI_TRIGGER = "updateaitrigger";

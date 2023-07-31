@@ -51,7 +51,7 @@ public class ProcessTriggerFramework {
     AppUtils appUtils;
 
 
-    public List<TriggerWSDTO> getTriggersService(long userId, String processId) {
+    public List<TriggerWSDTO> getProcessTriggersService(long userId, String processId) {
 
         List<TriggerWSDTO>triggerWSDTOS = new ArrayList<>();
         List<TriggerDBModel> triggerDBModels = triggerRepository.findByProcessId(processId);
@@ -62,7 +62,7 @@ public class ProcessTriggerFramework {
     }
 
 
-    public List<TriggerWSDTO> getTriggersByTypeService(long userId, String processId,String baseType) {
+    public List<TriggerWSDTO> getProcessTriggersByTypeService(long userId, String processId,String baseType) {
 
         List<TriggerWSDTO>triggerWSDTOS = new ArrayList<>();
         List<TriggerDBModel> triggerDBModels = triggerRepository.findByProcessIdAndBaseType(processId,baseType);
@@ -73,7 +73,7 @@ public class ProcessTriggerFramework {
     }
 
 
-    public TriggerWSDTO getTriggerService(long userId, String processId,String triggerId) {
+    public TriggerWSDTO getProcessTriggerService(long userId, String processId,String triggerId) {
 
         List<TriggerDBModel> triggerDBModels = triggerRepository.findByIdAndProcessId(triggerId,processId);
         if (triggerDBModels.size()>0){
