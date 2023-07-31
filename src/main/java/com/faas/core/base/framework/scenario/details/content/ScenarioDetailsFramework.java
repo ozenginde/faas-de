@@ -81,6 +81,7 @@ public class ScenarioDetailsFramework {
             scenarioVariableDAO.setValue(value);
             scenarioVariableDAO.setcDate(appUtils.getCurrentTimeStamp());
             scenarioVariableDAO.setStatus(1);
+
             if (scenarioDBModel.get().getVariables() == null){
                 List<ScenarioVariableDAO> scenarioVariableDAOS = new ArrayList<>();
                 scenarioVariableDAOS.add(scenarioVariableDAO);
@@ -109,6 +110,7 @@ public class ScenarioDetailsFramework {
         if (scenarioDBModel.isPresent() && scenarioDBModel.get().getVariables() != null){
             for (int i=0;i<scenarioDBModel.get().getVariables().size();i++){
                 if (scenarioDBModel.get().getVariables().get(i).getVariableId().equalsIgnoreCase(variableId)){
+
                     ScenarioVariableDAO scenarioVariableDAO = scenarioDBModel.get().getVariables().get(i);
                     scenarioDBModel.get().getVariables().remove(scenarioVariableDAO);
                     scenarioDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
@@ -120,8 +122,6 @@ public class ScenarioDetailsFramework {
         }
         return null;
     }
-
-
 
 
 
