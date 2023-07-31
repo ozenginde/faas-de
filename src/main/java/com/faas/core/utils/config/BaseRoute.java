@@ -480,8 +480,6 @@ public class BaseRoute {
     public static final String REMOVE_VARIABLE_TYPE = "removevariabletype";
 
 
-    public static final String GET_SCENARIO_ELEMENTS = "getscenarioelements";
-
     public static final String GET_SCENARIO_VARIABLES = "getscenariovariables";
     public static final String GET_SCENARIO_VARIABLE = "getscenariovariable";
     public static final String CREATE_SCENARIO_VARIABLE = "createscenariovariable";
@@ -489,30 +487,18 @@ public class BaseRoute {
     public static final String REMOVE_SCENARIO_VARIABLE = "removescenariovariable";
 
 
-    public static final String GET_SCENARIO_ACTIONS = "getscenarioactions";
-    public static final String GET_ACTION = "getaction";
-    public static final String CREATE_ACTION = "createaction";
-    public static final String UPDATE_ACTION = "updateaction";
-    public static final String REMOVE_ACTION = "removeaction";
+    public static final String GET_SCENARIO_ELEMENTS = "getscenarioelements";
+    public static final String GET_SCENARIO_ELEMENT = "getscenarioelement";
+    public static final String CREATE_SCENARIO_ELEMENT = "createscenarioelement";
+    public static final String UPDATE_SCENARIO_ELEMENT = "updatescenarioelement";
+    public static final String REMOVE_SCENARIO_ELEMENT = "removescenarioelement";
 
-    public static final String GET_ACTION_VARIABLES = "getactionvariables";
-    public static final String GET_ACTION_VARIABLE = "getactionvariable";
-    public static final String CREATE_ACTION_VARIABLE = "createactionvariable";
-    public static final String UPDATE_ACTION_VARIABLE = "updateactionvariable";
-    public static final String REMOVE_ACTION_VARIABLE = "removeactionvariable";
+    public static final String GET_ELEMENT_VARIABLES = "getelementvariables";
+    public static final String GET_ELEMENT_VARIABLE = "getelementvariable";
+    public static final String CREATE_ELEMENT_VARIABLE = "createelementvariable";
+    public static final String UPDATE_ELEMENT_VARIABLE = "updateelementvariable";
+    public static final String REMOVE_ELEMENT_VARIABLE = "removeelementvariable";
 
-
-    public static final String GET_SCENARIO_AUTOMATIONS = "getscenarioautomatios";
-    public static final String GET_AUTOMATION = "getautomation";
-    public static final String CREATE_AUTOMATION = "createautomation";
-    public static final String UPDATE_AUTOMATION = "updateautomation";
-    public static final String REMOVE_AUTOMATION = "removeautomation";
-
-    public static final String GET_AUTOMATION_VARIABLES = "getautomationvariables";
-    public static final String GET_AUTOMATION_VARIABLE = "getautomationvariable";
-    public static final String CREATE_AUTOMATION_VARIABLE = "createautomationvariable";
-    public static final String UPDATE_AUTOMATION_VARIABLE = "updateautomationvariable";
-    public static final String REMOVE_AUTOMATION_VARIABLE = "removeautomationvariable";
 
 
 
@@ -521,8 +507,6 @@ public class BaseRoute {
     public static final String CREATE_ACTION_TEMP = "createactiontemp";
     public static final String UPDATE_ACTION_TEMP = "updateactiontemp";
     public static final String REMOVE_ACTION_TEMP = "removeactiontemp";
-
-
 
 
     public static final String REMOVE_ALL_CLIENTS = "removeallclients";

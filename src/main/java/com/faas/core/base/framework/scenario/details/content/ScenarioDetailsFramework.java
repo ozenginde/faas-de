@@ -2,17 +2,10 @@ package com.faas.core.base.framework.scenario.details.content;
 
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.dao.ScenarioVariableDAO;
-import com.faas.core.base.model.db.scenario.details.action.ActionDBModel;
-import com.faas.core.base.model.db.scenario.details.automation.AutomationDBModel;
 import com.faas.core.base.model.db.scenario.settings.VariableTypeDBModel;
 import com.faas.core.base.model.ws.scenario.details.content.dto.ScenarioVariableWSDTO;
-import com.faas.core.base.model.ws.scenario.details.content.dto.ScenarioElementWSDTO;
-import com.faas.core.base.model.ws.scenario.details.action.content.dto.ActionWSDTO;
-import com.faas.core.base.model.ws.scenario.details.automation.content.dto.AutomationWSDTO;
 import com.faas.core.base.repo.action.ActionTempRepository;
 import com.faas.core.base.repo.scenario.content.ScenarioRepository;
-import com.faas.core.base.repo.scenario.details.action.ActionRepository;
-import com.faas.core.base.repo.scenario.details.automation.AutomationRepository;
 import com.faas.core.base.repo.scenario.settings.VariableTypeRepository;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +19,6 @@ import java.util.Optional;
 @Component
 public class ScenarioDetailsFramework {
 
-    @Autowired
-    ActionRepository actionRepository;
-
-    @Autowired
-    AutomationRepository automationRepository;
 
     @Autowired
     ScenarioRepository scenarioRepository;
@@ -43,26 +31,6 @@ public class ScenarioDetailsFramework {
 
     @Autowired
     AppUtils appUtils;
-
-
-    public List<ScenarioElementWSDTO> getScenarioElementsService(String scenarioId) {
-
-        List<ScenarioElementWSDTO> scenarioElementWSDTOS = new ArrayList<>();
-        List<ActionDBModel> actionDBModels = actionRepository.findByScenarioId(scenarioId);
-        for (ActionDBModel actionDBModel : actionDBModels) {
-            ScenarioElementWSDTO scenarioElementWSDTO = new ScenarioElementWSDTO();
-            scenarioElementWSDTO.setActionElement(new ActionWSDTO(actionDBModel));
-            scenarioElementWSDTOS.add(scenarioElementWSDTO);
-        }
-        List<AutomationDBModel> automationDBModels = automationRepository.findByScenarioId(scenarioId);
-        for (AutomationDBModel automationDBModel : automationDBModels) {
-            ScenarioElementWSDTO scenarioElementWSDTO = new ScenarioElementWSDTO();
-            scenarioElementWSDTO.setAutomationElement(new AutomationWSDTO(automationDBModel));
-            scenarioElementWSDTOS.add(scenarioElementWSDTO);
-        }
-
-        return scenarioElementWSDTOS;
-    }
 
 
 
@@ -78,9 +46,9 @@ public class ScenarioDetailsFramework {
 
         List<ScenarioVariableWSDTO> scenarioVariableWSDTOS = new ArrayList<>();
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
-        if (scenarioDBModel.isPresent() && scenarioDBModel.get().getScenarioVariables() != null){
-            for (int i=0;i<scenarioDBModel.get().getScenarioVariables().size();i++){
-                scenarioVariableWSDTOS.add(fillScenarioVariableWSDTO(scenarioDBModel.get().getScenarioVariables().get(i)));
+        if (scenarioDBModel.isPresent() && scenarioDBModel.get().getVariables() != null){
+            for (int i=0;i<scenarioDBModel.get().getVariables().size();i++){
+                scenarioVariableWSDTOS.add(fillScenarioVariableWSDTO(scenarioDBModel.get().getVariables().get(i)));
             }
         }
         return scenarioVariableWSDTOS;
@@ -90,10 +58,10 @@ public class ScenarioDetailsFramework {
     public ScenarioVariableWSDTO getScenarioVariableService(String scenarioId, String variableId) {
 
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
-        if (scenarioDBModel.isPresent() && scenarioDBModel.get().getScenarioVariables() != null){
-            for (int i=0;i<scenarioDBModel.get().getScenarioVariables().size();i++){
-                if (scenarioDBModel.get().getScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)){
-                    return fillScenarioVariableWSDTO(scenarioDBModel.get().getScenarioVariables().get(i));
+        if (scenarioDBModel.isPresent() && scenarioDBModel.get().getVariables() != null){
+            for (int i=0;i<scenarioDBModel.get().getVariables().size();i++){
+                if (scenarioDBModel.get().getVariables().get(i).getVariableId().equalsIgnoreCase(variableId)){
+                    return fillScenarioVariableWSDTO(scenarioDBModel.get().getVariables().get(i));
                 }
             }
         }
@@ -113,12 +81,12 @@ public class ScenarioDetailsFramework {
             scenarioVariableDAO.setValue(value);
             scenarioVariableDAO.setcDate(appUtils.getCurrentTimeStamp());
             scenarioVariableDAO.setStatus(1);
-            if (scenarioDBModel.get().getScenarioVariables() == null){
+            if (scenarioDBModel.get().getVariables() == null){
                 List<ScenarioVariableDAO> scenarioVariableDAOS = new ArrayList<>();
                 scenarioVariableDAOS.add(scenarioVariableDAO);
-                scenarioDBModel.get().setScenarioVariables(scenarioVariableDAOS);
+                scenarioDBModel.get().setVariables(scenarioVariableDAOS);
             }else {
-                scenarioDBModel.get().getScenarioVariables().add(scenarioVariableDAO);
+                scenarioDBModel.get().getVariables().add(scenarioVariableDAO);
             }
             scenarioDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             scenarioRepository.save(scenarioDBModel.get());
@@ -138,11 +106,11 @@ public class ScenarioDetailsFramework {
     public ScenarioVariableWSDTO removeScenarioVariableService(String scenarioId, String variableId) {
 
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
-        if (scenarioDBModel.isPresent() && scenarioDBModel.get().getScenarioVariables() != null){
-            for (int i=0;i<scenarioDBModel.get().getScenarioVariables().size();i++){
-                if (scenarioDBModel.get().getScenarioVariables().get(i).getVariableId().equalsIgnoreCase(variableId)){
-                    ScenarioVariableDAO scenarioVariableDAO = scenarioDBModel.get().getScenarioVariables().get(i);
-                    scenarioDBModel.get().getScenarioVariables().remove(scenarioVariableDAO);
+        if (scenarioDBModel.isPresent() && scenarioDBModel.get().getVariables() != null){
+            for (int i=0;i<scenarioDBModel.get().getVariables().size();i++){
+                if (scenarioDBModel.get().getVariables().get(i).getVariableId().equalsIgnoreCase(variableId)){
+                    ScenarioVariableDAO scenarioVariableDAO = scenarioDBModel.get().getVariables().get(i);
+                    scenarioDBModel.get().getVariables().remove(scenarioVariableDAO);
                     scenarioDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                     scenarioRepository.save(scenarioDBModel.get());
 

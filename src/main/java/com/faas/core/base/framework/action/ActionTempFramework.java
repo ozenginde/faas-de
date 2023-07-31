@@ -31,6 +31,7 @@ public class ActionTempFramework {
     public ActionTempDBModel createActionTempService(String actionTemp) {
 
         ActionTempDBModel actionTempDBModel = new ActionTempDBModel();
+
         actionTempDBModel.setActionTemp(actionTemp);
         actionTempDBModel.setuDate(appUtils.getCurrentTimeStamp());
         actionTempDBModel.setcDate(appUtils.getCurrentTimeStamp());
@@ -44,6 +45,7 @@ public class ActionTempFramework {
 
         Optional<ActionTempDBModel> actionTempDBModel = actionTempRepository.findById(tempId);
         if (actionTempDBModel.isPresent()){
+
             actionTempDBModel.get().setActionTemp(actionTemp);
             actionTempDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             actionTempDBModel.get().setStatus(1);

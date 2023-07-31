@@ -1,5 +1,6 @@
 package com.faas.core.base.model.db.scenario.content;
 
+import com.faas.core.base.model.db.scenario.content.dao.ScenarioElement;
 import com.faas.core.base.model.db.scenario.content.dao.ScenarioVariableDAO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,11 +14,11 @@ public class ScenarioDBModel {
     @Id
     private String id;
     private String scenario;
-    private String scenarioDesc;
     private long typeId;
     private String scenarioType;
     private String baseType;
-    private List<ScenarioVariableDAO> scenarioVariables;
+    private List<ScenarioVariableDAO> variables;
+    private List<ScenarioElement>elements;
     private long uDate;
     private long cDate;
     private int status;
@@ -25,19 +26,18 @@ public class ScenarioDBModel {
     public ScenarioDBModel() {
     }
 
-    public ScenarioDBModel(String id, String scenario, String scenarioDesc, long typeId, String scenarioType, String baseType, List<ScenarioVariableDAO> scenarioVariables, long uDate, long cDate, int status) {
+    public ScenarioDBModel(String id, String scenario, long typeId, String scenarioType, String baseType, List<ScenarioVariableDAO> variables, List<ScenarioElement> elements, long uDate, long cDate, int status) {
         this.id = id;
         this.scenario = scenario;
-        this.scenarioDesc = scenarioDesc;
         this.typeId = typeId;
         this.scenarioType = scenarioType;
         this.baseType = baseType;
-        this.scenarioVariables = scenarioVariables;
+        this.variables = variables;
+        this.elements = elements;
         this.uDate = uDate;
         this.cDate = cDate;
         this.status = status;
     }
-
 
     public String getId() {
         return id;
@@ -53,14 +53,6 @@ public class ScenarioDBModel {
 
     public void setScenario(String scenario) {
         this.scenario = scenario;
-    }
-
-    public String getScenarioDesc() {
-        return scenarioDesc;
-    }
-
-    public void setScenarioDesc(String scenarioDesc) {
-        this.scenarioDesc = scenarioDesc;
     }
 
     public long getTypeId() {
@@ -87,12 +79,20 @@ public class ScenarioDBModel {
         this.baseType = baseType;
     }
 
-    public List<ScenarioVariableDAO> getScenarioVariables() {
-        return scenarioVariables;
+    public List<ScenarioVariableDAO> getVariables() {
+        return variables;
     }
 
-    public void setScenarioVariables(List<ScenarioVariableDAO> scenarioVariables) {
-        this.scenarioVariables = scenarioVariables;
+    public void setVariables(List<ScenarioVariableDAO> variables) {
+        this.variables = variables;
+    }
+
+    public List<ScenarioElement> getElements() {
+        return elements;
+    }
+
+    public void setElements(List<ScenarioElement> elements) {
+        this.elements = elements;
     }
 
     public long getuDate() {

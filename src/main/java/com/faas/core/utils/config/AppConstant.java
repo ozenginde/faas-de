@@ -45,6 +45,8 @@ public class AppConstant {
     public static final String ALL_CAMPAIGN = "ALL";
 
 
+    public static final String ACTION_ELEMENT = "ACTION";
+    public static final String AUTOMATION_ELEMENT = "AUTOMATION";
 
 
     public static final String EXECUTION_READY = "EXECUTION_READY";

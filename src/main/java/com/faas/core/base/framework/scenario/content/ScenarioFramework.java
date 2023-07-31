@@ -72,18 +72,18 @@ public class ScenarioFramework {
     }
 
 
-    public ScenarioWSDTO createScenarioService(String scenario,String scenarioDesc,long typeId) {
+    public ScenarioWSDTO createScenarioService(String scenario,long typeId) {
 
         ScenarioDBModel scenarioDBModel = new ScenarioDBModel();
         scenarioDBModel.setScenario(scenario);
-        scenarioDBModel.setScenarioDesc(scenarioDesc);
         Optional<ScenarioTypeDBModel> scenarioTypeDBModel = scenarioTypeRepository.findById(typeId);
         if (scenarioTypeDBModel.isPresent()) {
             scenarioDBModel.setTypeId(typeId);
             scenarioDBModel.setScenarioType(scenarioTypeDBModel.get().getScenarioType());
             scenarioDBModel.setBaseType(scenarioTypeDBModel.get().getBaseType());
         }
-        scenarioDBModel.setScenarioVariables(new ArrayList<>());
+        scenarioDBModel.setVariables(new ArrayList<>());
+        scenarioDBModel.setElements(new ArrayList<>());
         scenarioDBModel.setuDate(appUtils.getCurrentTimeStamp());
         scenarioDBModel.setcDate(appUtils.getCurrentTimeStamp());
         scenarioDBModel.setStatus(1);
@@ -92,12 +92,11 @@ public class ScenarioFramework {
     }
 
 
-    public ScenarioWSDTO updateScenarioService(String scenarioId,String scenario,String scenarioDesc,long typeId) {
+    public ScenarioWSDTO updateScenarioService(String scenarioId,String scenario,long typeId) {
 
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
         if (scenarioDBModel.isPresent()) {
             scenarioDBModel.get().setScenario(scenario);
-            scenarioDBModel.get().setScenarioDesc(scenarioDesc);
             Optional<ScenarioTypeDBModel> scenarioTypeDBModel = scenarioTypeRepository.findById(typeId);
             if (scenarioTypeDBModel.isPresent()) {
                 scenarioDBModel.get().setTypeId(typeId);

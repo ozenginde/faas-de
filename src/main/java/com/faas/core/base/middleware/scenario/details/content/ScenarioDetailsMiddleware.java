@@ -3,9 +3,9 @@ package com.faas.core.base.middleware.scenario.details.content;
 import com.faas.core.base.framework.scenario.details.content.ScenarioDetailsFramework;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.model.ws.scenario.details.content.ScenarioVariableWSModel;
-import com.faas.core.base.model.ws.scenario.details.content.ScenarioElementWSModel;
+import com.faas.core.base.model.ws.scenario.details.element.content.ScenarioElementWSModel;
 import com.faas.core.base.model.ws.scenario.details.content.dto.ScenarioVariableWSDTO;
-import com.faas.core.base.model.ws.scenario.details.content.dto.ScenarioElementWSDTO;
+import com.faas.core.base.model.ws.scenario.details.element.content.dto.ScenarioElementWSDTO;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,25 +22,6 @@ public class ScenarioDetailsMiddleware {
     ScenarioDetailsFramework scenarioDetailsFramework;
 
 
-
-    public ScenarioElementWSModel getScenarioElements(long userId, String scenarioId) {
-
-        ScenarioElementWSModel response = new ScenarioElementWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        List<ScenarioElementWSDTO>scenarioElementWSDTOS = scenarioDetailsFramework.getScenarioElementsService(scenarioId);
-        if (scenarioElementWSDTOS != null){
-            response.setScenarioElements(scenarioElementWSDTOS);
-        }
-
-        general.setOperation("getScenarioElements");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
     public ScenarioVariableWSModel getScenarioVariables(long userId, String scenarioId) {

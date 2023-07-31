@@ -2,7 +2,7 @@ package com.faas.core.base.endpoint.controller.scenario.details.content;
 
 import com.faas.core.base.middleware.scenario.details.content.ScenarioDetailsMiddleware;
 import com.faas.core.base.model.ws.scenario.details.content.ScenarioVariableWSModel;
-import com.faas.core.base.model.ws.scenario.details.content.ScenarioElementWSModel;
+import com.faas.core.base.model.ws.scenario.details.element.content.ScenarioElementWSModel;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.BaseRoute;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +22,6 @@ public class ScenarioDetailsController {
     @Autowired
     ScenarioDetailsMiddleware scenarioDetailsMiddleware;
 
-
-    @RequestMapping(value = BaseRoute.GET_SCENARIO_ELEMENTS, method = RequestMethod.POST)
-    public ResponseEntity<?> getScenarioElements(@RequestParam long userId,
-                                                 @RequestParam String scenarioId) {
-
-        ScenarioElementWSModel response = scenarioDetailsMiddleware.getScenarioElements(userId,scenarioId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
     @RequestMapping(value = BaseRoute.GET_SCENARIO_VARIABLES, method = RequestMethod.POST)

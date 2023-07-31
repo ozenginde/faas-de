@@ -66,7 +66,7 @@ public class ProcessScenarioFramework {
     public ProcessScenarioWSDTO getProcessScenarioService(String processId, String scenarioId) {
 
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (processScenarioDBModels.size() > 0) {
+        if (!processScenarioDBModels.isEmpty()) {
             return fillProcessScenarioWSDTO(processScenarioDBModels.get(0));
         }
         return null;
@@ -81,6 +81,7 @@ public class ProcessScenarioFramework {
         if (!processScenarioRepository.existsByProcessIdAndScenarioId(processId,scenarioId) && processDBModel.isPresent() && scenarioDBModel.isPresent()) {
 
             ProcessScenarioDBModel processScenarioDBModel = new ProcessScenarioDBModel();
+
             processScenarioDBModel.setProcessId(processId);
             processScenarioDBModel.setScenarioId(scenarioId);
             processScenarioDBModel.setScenarioDatas(new ArrayList<>());
@@ -98,7 +99,7 @@ public class ProcessScenarioFramework {
     public ProcessScenarioWSDTO removeProcessScenarioService(String processId, String scenarioId) {
 
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (processScenarioDBModels.size() > 0) {
+        if (!processScenarioDBModels.isEmpty()) {
             processScenarioRepository.deleteAll(processScenarioDBModels);
             return fillProcessScenarioWSDTO(processScenarioDBModels.get(0));
         }
@@ -110,7 +111,7 @@ public class ProcessScenarioFramework {
 
         List<ProcessScenarioDataWSDTO> scenarioDataWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioDatas() != null) {
+        if (!scenarioDBModels.isEmpty() && scenarioDBModels.get(0).getScenarioDatas() != null) {
             for (int i = 0; i < scenarioDBModels.get(0).getScenarioDatas().size(); i++) {
                 scenarioDataWSDTOS.add(new ProcessScenarioDataWSDTO(scenarioDBModels.get(0).getScenarioDatas().get(i)));
             }
@@ -122,7 +123,7 @@ public class ProcessScenarioFramework {
     public ProcessScenarioDataWSDTO getProcessScenarioDataService(String processId, String scenarioId, String dataId) {
 
         List<ProcessScenarioDBModel> scenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        if (scenarioDBModels.size() > 0 && scenarioDBModels.get(0).getScenarioDatas() != null) {
+        if (!scenarioDBModels.isEmpty() && scenarioDBModels.get(0).getScenarioDatas() != null) {
             for (int i = 0; i < scenarioDBModels.get(0).getScenarioDatas().size(); i++) {
                 if (scenarioDBModels.get(0).getScenarioDatas().get(i).getDataId().equalsIgnoreCase(dataId)) {
                     return new ProcessScenarioDataWSDTO(scenarioDBModels.get(0).getScenarioDatas().get(i));
