@@ -26,6 +26,8 @@ import com.faas.core.api.model.ws.operation.scenario.execute.dto.ApiScenarioExec
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
+import com.faas.core.base.model.db.flow.FlowDBModel;
+import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 import com.faas.core.base.model.db.operation.channel.SipCallDBModel;
 import com.faas.core.base.model.db.operation.channel.WappCallDBModel;
 import com.faas.core.base.model.db.operation.content.OperationDBModel;
@@ -201,15 +203,21 @@ public class OperationMapper {
         operationDetailsWSDTO.setOperation(operationDBModel);
         operationDetailsWSDTO.setOperationSession(sessionDBModel);
         if (sessionDBModel.getSessionType().equalsIgnoreCase(AppConstant.INQUIRY_CAMPAIGN)){
-
+            List<InquiryDBModel> inquiryDBModels = inquiryRepository.findBySessionIdAndClientId(sessionDBModel.getId(),sessionDBModel.getClientId());
+            if (!inquiryDBModels.isEmpty()){
+                operationDetailsWSDTO.setOperationInquiry(inquiryDBModels.get(0));
+            }
         }
-        if (sessionDBModel.getSessionType().equalsIgnoreCase(AppConstant.INQUIRY_CAMPAIGN)){
-
+        if (sessionDBModel.getSessionType().equalsIgnoreCase(AppConstant.AUTOMATIC_CAMPAIGN)){
+            List<FlowDBModel> flowDBModels = flowRepository.findBySessionIdAndClientId(sessionDBModel.getId(),sessionDBModel.getClientId());
+            if (!flowDBModels.isEmpty()){
+                operationDetailsWSDTO.setOperationFlow(flowDBModels.get(0));
+            }
         }
         operationDetailsWSDTO.setOperationClient(mapApiOperationClientWSDTO(clientDBModel));
         operationDetailsWSDTO.setOperationOsInt(mapApiOperationOsIntWSDTO(clientDBModel));
         operationDetailsWSDTO.setOperationNote(mapApiOperationNoteWSDTO(clientDBModel));
-        operationDetailsWSDTO.setOperationCampaign(mapApiOperationCampaignWSDTO(campaignDBModel, processDBModel));
+        operationDetailsWSDTO.setOperationCampaign(mapApiOperationCampaignWSDTO(campaignDBModel,processDBModel));
         operationDetailsWSDTO.setOperationActivities(mapApiOperationActivities(operationDBModel));
         operationDetailsWSDTO.setOperationScenario(mapApiOperationScenarioWSDTO(sessionDBModel.getId(), sessionDBModel.getClientId(),sessionDBModel.getProcessId()));
         operationDetailsWSDTO.setOperationChannel(mapApiOperationChannelWSDTO(sessionDBModel,clientDBModel));
@@ -271,33 +279,36 @@ public class OperationMapper {
     public ApiOperationScenarioWSDTO mapApiOperationScenarioWSDTO(long sessionId,long clientId,String processId) {
 
         ApiOperationScenarioWSDTO operationScenarioWSDTO = new ApiOperationScenarioWSDTO();
-        List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
-        List<ApiScenarioExecuteWSDTO> scenarioExecutionWSDTOS = new ArrayList<>();
-
-        List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processId);
-        for (ProcessScenarioDBModel processScenarioDBModel : processScenarioDBModels) {
-            Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
-            if (scenarioDBModel.isPresent()) {
-                scenarioWSDTOS.add(mapApiScenarioWSDTO(scenarioDBModel.get(),processScenarioDBModel));
-            }
-        }
-        operationScenarioWSDTO.setScenarios(scenarioWSDTOS);
-
-
-        operationScenarioWSDTO.setScenarioExecutions(scenarioExecutionWSDTOS);
-
+        operationScenarioWSDTO.setScenarios(mapApiScenarioWSDTOS(processScenarioRepository.findByProcessId(processId)));
+        operationScenarioWSDTO.setScenarioExecutes(mapApiScenarioExecuteWSDTOS(scenarioExecuteRepository.findBySessionIdAndClientIdAndProcessId(sessionId,clientId,processId)));
         return operationScenarioWSDTO;
     }
 
 
-    public ApiScenarioWSDTO mapApiScenarioWSDTO(ScenarioDBModel scenarioDBModel,ProcessScenarioDBModel processScenarioDBModel){
+    public List<ApiScenarioWSDTO> mapApiScenarioWSDTOS(List<ProcessScenarioDBModel> processScenarioDBModels){
 
-        ApiScenarioWSDTO scenarioWSDTO = new ApiScenarioWSDTO();
-        scenarioWSDTO.setScenario(scenarioDBModel);
-        scenarioWSDTO.setProcessScenario(processScenarioDBModel);
-        return scenarioWSDTO;
+        List<ApiScenarioWSDTO> scenarioWSDTOS = new ArrayList<>();
+        for (ProcessScenarioDBModel processScenarioDBModel : processScenarioDBModels) {
+            Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
+            if (scenarioDBModel.isPresent()) {
+                ApiScenarioWSDTO scenarioWSDTO = new ApiScenarioWSDTO();
+                scenarioWSDTO.setProcessScenario(processScenarioDBModel);
+                scenarioWSDTO.setScenario(scenarioDBModel.get());
+                scenarioWSDTOS.add(scenarioWSDTO);
+            }
+        }
+        return scenarioWSDTOS;
     }
 
+
+    public List<ApiScenarioExecuteWSDTO> mapApiScenarioExecuteWSDTOS(List<ScenarioExecuteDBModel> scenarioExecuteDBModels){
+
+        List<ApiScenarioExecuteWSDTO> scenarioExecuteWSDTOS = new ArrayList<>();
+        for (ScenarioExecuteDBModel scenarioExecuteDBModel : scenarioExecuteDBModels) {
+            scenarioExecuteWSDTOS.add(new ApiScenarioExecuteWSDTO(scenarioExecuteDBModel));
+        }
+        return scenarioExecuteWSDTOS;
+    }
 
 
 

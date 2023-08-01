@@ -12,9 +12,12 @@ public class ScenarioExecuteDBModel {
 
     @Id
     private String id;
-    private long sessionId;
     private String operationId;
+    private long sessionId;
+    private long clientId;
     private long agentId;
+    private String campaignId;
+    private String processId;
     private String scenarioId;
     private String scenario;
     private String scenarioType;
@@ -27,11 +30,14 @@ public class ScenarioExecuteDBModel {
     public ScenarioExecuteDBModel() {
     }
 
-    public ScenarioExecuteDBModel(String id, long sessionId, String operationId, long agentId, String scenarioId, String scenario, String scenarioType, List<ScenarioExecute> executes, String executeState, long uDate, long cDate, int status) {
+    public ScenarioExecuteDBModel(String id, String operationId, long sessionId, long clientId, long agentId, String campaignId, String processId, String scenarioId, String scenario, String scenarioType, List<ScenarioExecute> executes, String executeState, long uDate, long cDate, int status) {
         this.id = id;
-        this.sessionId = sessionId;
         this.operationId = operationId;
+        this.sessionId = sessionId;
+        this.clientId = clientId;
         this.agentId = agentId;
+        this.campaignId = campaignId;
+        this.processId = processId;
         this.scenarioId = scenarioId;
         this.scenario = scenario;
         this.scenarioType = scenarioType;
@@ -50,14 +56,6 @@ public class ScenarioExecuteDBModel {
         this.id = id;
     }
 
-    public long getSessionId() {
-        return sessionId;
-    }
-
-    public void setSessionId(long sessionId) {
-        this.sessionId = sessionId;
-    }
-
     public String getOperationId() {
         return operationId;
     }
@@ -66,12 +64,44 @@ public class ScenarioExecuteDBModel {
         this.operationId = operationId;
     }
 
+    public long getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(long sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    public long getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(long clientId) {
+        this.clientId = clientId;
+    }
+
     public long getAgentId() {
         return agentId;
     }
 
     public void setAgentId(long agentId) {
         this.agentId = agentId;
+    }
+
+    public String getCampaignId() {
+        return campaignId;
+    }
+
+    public void setCampaignId(String campaignId) {
+        this.campaignId = campaignId;
+    }
+
+    public String getProcessId() {
+        return processId;
+    }
+
+    public void setProcessId(String processId) {
+        this.processId = processId;
     }
 
     public String getScenarioId() {
