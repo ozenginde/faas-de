@@ -1,5 +1,8 @@
 package com.faas.core.base.framework.utils.settings;
 
+import com.faas.core.base.model.db.flow.FlowDBModel;
+import com.faas.core.base.model.db.inquiry.InquiryDBModel;
+import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.repo.action.ActionTempRepository;
 import com.faas.core.base.repo.assets.content.AssetRepository;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
@@ -9,6 +12,7 @@ import com.faas.core.base.repo.client.details.ClientAddressRepository;
 import com.faas.core.base.repo.client.details.ClientDataRepository;
 import com.faas.core.base.repo.client.details.ClientEmailRepository;
 import com.faas.core.base.repo.client.details.ClientPhoneRepository;
+import com.faas.core.base.repo.flow.FlowRepository;
 import com.faas.core.base.repo.inquiry.InquiryRepository;
 import com.faas.core.base.repo.notification.NotificationRepository;
 import com.faas.core.base.repo.operation.channel.*;
@@ -26,6 +30,9 @@ import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.Optional;
 
 
 @Component
@@ -72,6 +79,9 @@ public class UtilsSettingsFramework {
 
     @Autowired
     InquiryRepository inquiryRepository;
+
+    @Autowired
+    FlowRepository flowRepository;
 
     @Autowired
     NotificationRepository notificationRepository;
@@ -148,57 +158,63 @@ public class UtilsSettingsFramework {
 
     public void removeAllSessionsService() {
 
-        clientRepository.deleteAll();
-        clientDataRepository.deleteAll();
-        clientEmailRepository.deleteAll();
-        clientPhoneRepository.deleteAll();
-        clientAddressRepository.deleteAll();
-        sessionRepository.deleteAll();
-        operationRepository.deleteAll();
-        emailMessageRepository.deleteAll();
-        pushMessageRepository.deleteAll();
-        sipCallRepository.deleteAll();
-        smsMessageRepository.deleteAll();
-        wappCallRepository.deleteAll();
-        wappMessageRepository.deleteAll();
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByStatus(1);
+        for (SessionDBModel sessionDBModel : sessionDBModels) {
+
+            operationRepository.deleteAll(operationRepository.findBySessionId(sessionDBModel.getId()));
+            emailMessageRepository.deleteAll(emailMessageRepository.findBySessionId(sessionDBModel.getId()));
+            pushMessageRepository.deleteAll(pushMessageRepository.findBySessionId(sessionDBModel.getId()));
+            sipCallRepository.deleteAll(sipCallRepository.findBySessionId(sessionDBModel.getId()));
+            smsMessageRepository.deleteAll(smsMessageRepository.findBySessionId(sessionDBModel.getId()));
+            wappCallRepository.deleteAll(wappCallRepository.findBySessionId(sessionDBModel.getId()));
+            wappMessageRepository.deleteAll(wappMessageRepository.findBySessionId(sessionDBModel.getId()));
+
+            flowRepository.deleteAll(flowRepository.findBySessionId(sessionDBModel.getId()));
+            inquiryRepository.deleteAll(inquiryRepository.findBySessionId(sessionDBModel.getId()));
+            sessionRepository.delete(sessionDBModel);
+        }
     }
 
 
     public void removeAllFlowsService() {
 
-        clientRepository.deleteAll();
-        clientDataRepository.deleteAll();
-        clientEmailRepository.deleteAll();
-        clientPhoneRepository.deleteAll();
-        clientAddressRepository.deleteAll();
-        sessionRepository.deleteAll();
-        operationRepository.deleteAll();
-        emailMessageRepository.deleteAll();
-        pushMessageRepository.deleteAll();
-        sipCallRepository.deleteAll();
-        smsMessageRepository.deleteAll();
-        wappCallRepository.deleteAll();
-        wappMessageRepository.deleteAll();
+        List<FlowDBModel> flowDBModels = flowRepository.findByStatus(1);
+        for (FlowDBModel flowDBModel : flowDBModels) {
+
+            operationRepository.deleteAll(operationRepository.findBySessionId(flowDBModel.getId()));
+            emailMessageRepository.deleteAll(emailMessageRepository.findBySessionId(flowDBModel.getId()));
+            pushMessageRepository.deleteAll(pushMessageRepository.findBySessionId(flowDBModel.getId()));
+            sipCallRepository.deleteAll(sipCallRepository.findBySessionId(flowDBModel.getId()));
+            smsMessageRepository.deleteAll(smsMessageRepository.findBySessionId(flowDBModel.getId()));
+            wappCallRepository.deleteAll(wappCallRepository.findBySessionId(flowDBModel.getId()));
+            wappMessageRepository.deleteAll(wappMessageRepository.findBySessionId(flowDBModel.getId()));
+
+            Optional<SessionDBModel> sessionDBModel = sessionRepository.findById(flowDBModel.getSessionId());
+            sessionDBModel.ifPresent(dbModel -> sessionRepository.delete(dbModel));
+
+            flowRepository.delete(flowDBModel);
+        }
     }
-
-
 
 
     public void removeAllInquiriesService() {
 
-        clientRepository.deleteAll();
-        clientDataRepository.deleteAll();
-        clientEmailRepository.deleteAll();
-        clientPhoneRepository.deleteAll();
-        clientAddressRepository.deleteAll();
-        sessionRepository.deleteAll();
-        operationRepository.deleteAll();
-        emailMessageRepository.deleteAll();
-        pushMessageRepository.deleteAll();
-        sipCallRepository.deleteAll();
-        smsMessageRepository.deleteAll();
-        wappCallRepository.deleteAll();
-        wappMessageRepository.deleteAll();
+        List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByStatus(1);
+        for (InquiryDBModel inquiryDBModel : inquiryDBModels) {
+
+            operationRepository.deleteAll(operationRepository.findBySessionId(inquiryDBModel.getId()));
+            emailMessageRepository.deleteAll(emailMessageRepository.findBySessionId(inquiryDBModel.getId()));
+            pushMessageRepository.deleteAll(pushMessageRepository.findBySessionId(inquiryDBModel.getId()));
+            sipCallRepository.deleteAll(sipCallRepository.findBySessionId(inquiryDBModel.getId()));
+            smsMessageRepository.deleteAll(smsMessageRepository.findBySessionId(inquiryDBModel.getId()));
+            wappCallRepository.deleteAll(wappCallRepository.findBySessionId(inquiryDBModel.getId()));
+            wappMessageRepository.deleteAll(wappMessageRepository.findBySessionId(inquiryDBModel.getId()));
+
+            Optional<SessionDBModel> sessionDBModel = sessionRepository.findById(inquiryDBModel.getSessionId());
+            sessionDBModel.ifPresent(dbModel -> sessionRepository.delete(dbModel));
+
+            inquiryRepository.delete(inquiryDBModel);
+        }
     }
 
 

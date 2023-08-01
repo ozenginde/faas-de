@@ -18,6 +18,7 @@ public interface SessionRepository extends PagingAndSortingRepository<SessionDBM
     long countByAgentIdAndCampaignIdAndSessionState(long agentId,String campaignId,String sessionState);
     boolean existsByIdAndClientIdAndProcessId(long sessionId,long clientId,String processId);
     boolean existsByIdAndAgentIdAndProcessId(long sessionId,long agentId,String processId);
+    List<SessionDBModel>findByStatus(int status);
     List<SessionDBModel>findByClientId(long clientId);
     List<SessionDBModel>findByIdAndClientId(long sessionId,long clientId);
     List<SessionDBModel>findByIdAndClientIdAndAgentIdAndCampaignId(long sessionId,long clientId,long agentId,String campaignId);

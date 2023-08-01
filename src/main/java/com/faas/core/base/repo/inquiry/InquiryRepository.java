@@ -23,6 +23,7 @@ public interface InquiryRepository extends PagingAndSortingRepository<InquiryDBM
     List<InquiryDBModel>findByCampaignIdAndInquiryState(String campaignId, String inquiryState);
     List<InquiryDBModel>findByCampaignIdAndAgentIdAndInquiryState(String campaignId, long agentId, String inquiryState);
     List<InquiryDBModel>findBySessionIdAndClientId(long sessionId, long clientId);
+    List<InquiryDBModel>findBySessionId(long sessionId);
 
     Page<InquiryDBModel>findAllByInquiryState(String inquiryState, Pageable pageable);
     Page<InquiryDBModel>findAllByAgentId(long agentId,Pageable pageable);
