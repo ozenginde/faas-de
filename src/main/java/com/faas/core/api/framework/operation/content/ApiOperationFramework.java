@@ -69,15 +69,13 @@ public class ApiOperationFramework {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId, agentId);
         List<OperationDBModel> operationDBModels = operationRepository.findBySessionId(sessionId);
-        if (sessionDBModels.size() > 0 && operationDBModels.size() > 0) {
+        if (!sessionDBModels.isEmpty() && !operationDBModels.isEmpty()) {
 
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionDBModels.get(0).getClientId());
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(sessionDBModels.get(0).getCampaignId());
             Optional<ProcessDBModel> processDBModel = processRepository.findById(sessionDBModels.get(0).getProcessId());
-
             if (clientDBModel.isPresent() && campaignDBModel.isPresent() && processDBModel.isPresent()) {
-                return operationMapper.mapApiOperationDetailsWSDTO(sessionDBModels.get(0), clientDBModel.get(), operationDBModels.get(0),
-                        campaignDBModel.get(), processDBModel.get());
+                return operationMapper.mapApiOperationDetailsWSDTO(sessionDBModels.get(0), clientDBModel.get(), operationDBModels.get(0), campaignDBModel.get(), processDBModel.get());
             }
         }
         return null;

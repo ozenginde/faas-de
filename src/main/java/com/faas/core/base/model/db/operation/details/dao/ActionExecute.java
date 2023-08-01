@@ -2,33 +2,23 @@ package com.faas.core.base.model.db.operation.details.dao;
 
 import java.util.List;
 
-public class ActionResultDAO {
+public class ActionExecute {
 
-    private String id;
     private String actionId;
     private String action;
-    private List<ExecutionDataDAO> executionDatas;
+    private List<ExecuteValue> executeValues;
     private long cDate;
     private int status;
 
-    public ActionResultDAO() {
+    public ActionExecute() {
     }
 
-    public ActionResultDAO(String id, String actionId, String action, List<ExecutionDataDAO> executionDatas, long cDate, int status) {
-        this.id = id;
+    public ActionExecute(String actionId, String action, List<ExecuteValue> executeValues, long cDate, int status) {
         this.actionId = actionId;
         this.action = action;
-        this.executionDatas = executionDatas;
+        this.executeValues = executeValues;
         this.cDate = cDate;
         this.status = status;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public String getActionId() {
@@ -47,12 +37,12 @@ public class ActionResultDAO {
         this.action = action;
     }
 
-    public List<ExecutionDataDAO> getExecutionDatas() {
-        return executionDatas;
+    public List<ExecuteValue> getExecuteValues() {
+        return executeValues;
     }
 
-    public void setExecutionDatas(List<ExecutionDataDAO> executionDatas) {
-        this.executionDatas = executionDatas;
+    public void setExecuteValues(List<ExecuteValue> executeValues) {
+        this.executeValues = executeValues;
     }
 
     public long getcDate() {

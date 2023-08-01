@@ -1,21 +1,21 @@
-package com.faas.core.api.model.ws.operation.scenario.details.dto;
+package com.faas.core.api.model.ws.operation.scenario.execute.dto;
 
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
-import com.faas.core.base.model.db.operation.details.ScenarioExecutionDBModel;
+import com.faas.core.base.model.db.operation.details.ScenarioExecuteDBModel;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 
-public class ApiScenarioExecutionWSDTO {
+public class ApiScenarioExecuteWSDTO {
 
     private CampaignDBModel campaign;
     private ScenarioDBModel scenario;
     private ProcessScenarioDBModel processScenario;
-    private ScenarioExecutionDBModel scenarioExecution;
+    private ScenarioExecuteDBModel scenarioExecution;
 
-    public ApiScenarioExecutionWSDTO() {
+    public ApiScenarioExecuteWSDTO() {
     }
 
-    public ApiScenarioExecutionWSDTO(CampaignDBModel campaign, ScenarioDBModel scenario, ProcessScenarioDBModel processScenario, ScenarioExecutionDBModel scenarioExecution) {
+    public ApiScenarioExecuteWSDTO(CampaignDBModel campaign, ScenarioDBModel scenario, ProcessScenarioDBModel processScenario, ScenarioExecuteDBModel scenarioExecution) {
         this.campaign = campaign;
         this.scenario = scenario;
         this.processScenario = processScenario;
@@ -46,11 +46,11 @@ public class ApiScenarioExecutionWSDTO {
         this.processScenario = processScenario;
     }
 
-    public ScenarioExecutionDBModel getScenarioExecution() {
+    public ScenarioExecuteDBModel getScenarioExecution() {
         return scenarioExecution;
     }
 
-    public void setScenarioExecution(ScenarioExecutionDBModel scenarioExecution) {
+    public void setScenarioExecution(ScenarioExecuteDBModel scenarioExecution) {
         this.scenarioExecution = scenarioExecution;
     }
 }

@@ -4,7 +4,7 @@ import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationSce
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioWSDTO;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
-import com.faas.core.base.repo.operation.scenario.ScenarioExecutionRepository;
+import com.faas.core.base.repo.operation.scenario.ScenarioExecuteRepository;
 import com.faas.core.base.repo.process.details.scenario.ProcessScenarioRepository;
 import com.faas.core.base.repo.scenario.content.ScenarioRepository;
 import com.faas.core.base.repo.session.SessionRepository;
@@ -36,7 +36,7 @@ public class ApiScenarioFramework {
     ScenarioRepository scenarioRepository;
 
     @Autowired
-    ScenarioExecutionRepository scenarioExecutionRepository;
+    ScenarioExecuteRepository scenarioExecuteRepository;
 
     @Autowired
     ProcessScenarioRepository processScenarioRepository;
@@ -55,17 +55,6 @@ public class ApiScenarioFramework {
         List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processId);
 
-        for (ProcessScenarioDBModel processScenarioDBModel : processScenarioDBModels) {
-            Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
-
-            if (scenarioDBModel.isPresent()){
-
-                ApiScenarioWSDTO scenarioWSDTO = new ApiScenarioWSDTO();
-                scenarioWSDTO.setScenario(scenarioDBModel.get());
-                scenarioWSDTO.setProcessScenario(processScenarioDBModel);
-                scenarioWSDTOS.add(scenarioWSDTO);
-            }
-        }
         return scenarioWSDTOS;
     }
 
@@ -74,14 +63,7 @@ public class ApiScenarioFramework {
 
         List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
-        if (processScenarioDBModel.size()>0 && scenarioDBModel.isPresent()){
 
-            ApiScenarioWSDTO scenarioWSDTO = new ApiScenarioWSDTO();
-            scenarioWSDTO.setScenario(scenarioDBModel.get());
-            scenarioWSDTO.setProcessScenario(processScenarioDBModel.get(0));
-
-            return scenarioWSDTO;
-        }
         return null;
     }
 

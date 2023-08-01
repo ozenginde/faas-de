@@ -17,7 +17,7 @@ import com.faas.core.base.repo.inquiry.InquiryRepository;
 import com.faas.core.base.repo.notification.NotificationRepository;
 import com.faas.core.base.repo.operation.channel.*;
 import com.faas.core.base.repo.operation.content.OperationRepository;
-import com.faas.core.base.repo.operation.scenario.ScenarioExecutionRepository;
+import com.faas.core.base.repo.operation.scenario.ScenarioExecuteRepository;
 import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.base.repo.process.details.channel.content.*;
 import com.faas.core.base.repo.process.details.channel.temp.EmailTempRepository;
@@ -99,7 +99,7 @@ public class UtilsSettingsFramework {
     CampaignAgentRepository campaignAgentRepository;
 
     @Autowired
-    ScenarioExecutionRepository scenarioExecutionRepository;
+    ScenarioExecuteRepository scenarioExecuteRepository;
 
     @Autowired
     ProcessEmailChannelRepository processEmailChannelRepository;
@@ -244,7 +244,7 @@ public class UtilsSettingsFramework {
         processRepository.deleteAll();
         campaignRepository.deleteAll();
         campaignAgentRepository.deleteAll();
-        scenarioExecutionRepository.deleteAll();
+        scenarioExecuteRepository.deleteAll();
         processEmailChannelRepository.deleteAll();
         processPushChannelRepository.deleteAll();
         processSipChannelRepository.deleteAll();

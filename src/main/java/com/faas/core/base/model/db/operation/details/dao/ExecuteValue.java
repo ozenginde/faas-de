@@ -1,38 +1,38 @@
 package com.faas.core.base.model.db.operation.details.dao;
 
-public class ExecutionDataDAO {
+public class ExecuteValue {
 
-    private String dataId;
-    private String dataType;
+    private String valueId;
+    private String valueType;
     private String value;
     private long cDate;
     private int status;
 
-    public ExecutionDataDAO() {
+    public ExecuteValue() {
     }
 
-    public ExecutionDataDAO(String dataId, String dataType, String value, long cDate, int status) {
-        this.dataId = dataId;
-        this.dataType = dataType;
+    public ExecuteValue(String valueId, String valueType, String value, long cDate, int status) {
+        this.valueId = valueId;
+        this.valueType = valueType;
         this.value = value;
         this.cDate = cDate;
         this.status = status;
     }
 
-    public String getDataId() {
-        return dataId;
+    public String getValueId() {
+        return valueId;
     }
 
-    public void setDataId(String dataId) {
-        this.dataId = dataId;
+    public void setValueId(String valueId) {
+        this.valueId = valueId;
     }
 
-    public String getDataType() {
-        return dataType;
+    public String getValueType() {
+        return valueType;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setValueType(String valueType) {
+        this.valueType = valueType;
     }
 
     public String getValue() {
