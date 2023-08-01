@@ -101,7 +101,6 @@ public class ApiScenarioController {
     }
 
 
-
     @RequestMapping(value = ApiRoute.API_REMOVE_SCENARIO, method = RequestMethod.POST)
     public ResponseEntity<?> apiRemoveScenario(@RequestParam long agentId,
                                                @RequestParam long sessionId,
