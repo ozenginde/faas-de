@@ -33,7 +33,6 @@ public class UtilsSettingsController {
     }
 
 
-
     @RequestMapping(value = BaseRoute.REMOVE_ALL_SESSIONS, method = RequestMethod.POST)
     public ResponseEntity<?> removeAllSessions(@RequestParam long userId) {
 
@@ -45,6 +44,7 @@ public class UtilsSettingsController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
+
     @RequestMapping(value = BaseRoute.REMOVE_ALL_FLOWS, method = RequestMethod.POST)
     public ResponseEntity<?> removeAllFlows(@RequestParam long userId) {
 
@@ -55,6 +55,7 @@ public class UtilsSettingsController {
         }
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
 
     @RequestMapping(value = BaseRoute.REMOVE_ALL_INQUIRIES, method = RequestMethod.POST)
     public ResponseEntity<?> removeAllInquiries(@RequestParam long userId) {
