@@ -326,7 +326,7 @@ public class OperationMapper {
             operationSipCall.setSipAccount(sipAccountWSDTO);
             operationSipCall.setPhones(clientPhones);
             List<SipCallDBModel> activeSipCall = sipCallRepository.findBySessionIdAndCallState(sessionDBModel.getId(), AppConstant.ACTIVE_CALL);
-            if (activeSipCall.size() > 0) {
+            if (!activeSipCall.isEmpty()) {
                 operationSipCall.setSipCall(activeSipCall.get(0));
             }
             operationSipCall.setSipCalls(sipCallRepository.findBySessionId(sessionDBModel.getId()));
@@ -335,6 +335,7 @@ public class OperationMapper {
         }
         return null;
     }
+
 
 
     public ApiSipAccountWSDTO getApiSipAccountWSDTO(long agentId, String processId) {
