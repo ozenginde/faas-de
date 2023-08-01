@@ -10,6 +10,5 @@ import java.util.List;
 public interface ScenarioExecuteRepository extends MongoRepository<ScenarioExecuteDBModel, String> {
 
     List<ScenarioExecuteDBModel>findByScenarioId(String scenarioId);
-    List<ScenarioExecuteDBModel>findBySessionIdAndProcessId(long sessionId, String processId);
 
 }
