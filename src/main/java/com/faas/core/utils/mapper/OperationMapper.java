@@ -280,7 +280,7 @@ public class OperationMapper {
 
         ApiOperationScenarioWSDTO operationScenarioWSDTO = new ApiOperationScenarioWSDTO();
         operationScenarioWSDTO.setScenarios(mapApiScenarioWSDTOS(processScenarioRepository.findByProcessId(processId)));
-        operationScenarioWSDTO.setScenarioExecutions(mapApiScenarioExecutionWSDTOS(scenarioExecutionRepository.findBySessionIdAndProcessId(sessionId,processId)));
+        operationScenarioWSDTO.setExecutions(mapApiScenarioExecutionWSDTOS(scenarioExecutionRepository.findBySessionIdAndProcessId(sessionId,processId)));
         return operationScenarioWSDTO;
     }
 
