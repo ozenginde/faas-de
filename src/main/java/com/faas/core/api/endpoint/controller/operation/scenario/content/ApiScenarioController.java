@@ -1,8 +1,7 @@
 package com.faas.core.api.endpoint.controller.operation.scenario.content;
 
 import com.faas.core.api.middleware.operation.scenario.content.ApiScenarioMiddleware;
-import com.faas.core.api.model.ws.operation.scenario.content.ApiOperationScenarioWSModel;
-import com.faas.core.api.model.ws.operation.scenario.content.ApiScenarioWSModel;
+import com.faas.core.api.model.ws.operation.scenario.content.*;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,5 +99,76 @@ public class ApiScenarioController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
+
+
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_DETAILS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioDetails(@RequestParam long agentId,
+                                                   @RequestParam long sessionId,
+                                                   @RequestParam String scenarioId) {
+
+        ApiScenarioDetailsWSModel response = apiScenarioMiddleware.apiGetScenarioDetails(agentId,sessionId,scenarioId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_ACTIONS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioActions(@RequestParam long agentId,
+                                                   @RequestParam long sessionId,
+                                                   @RequestParam String scenarioId) {
+
+        ApiScenarioActionWSModel response = apiScenarioMiddleware.apiGetScenarioActions(agentId,sessionId,scenarioId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_ACTION, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioAction(@RequestParam long agentId,
+                                                  @RequestParam long sessionId,
+                                                  @RequestParam String processId) {
+
+        ApiScenarioActionWSModel response = apiScenarioMiddleware.apiGetScenarioAction(agentId,sessionId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_AUTOMATIONS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioAutomations(@RequestParam long agentId,
+                                                       @RequestParam long sessionId,
+                                                       @RequestParam String processId) {
+
+        ApiScenarioAutomationWSModel response = apiScenarioMiddleware.apiGetScenarioAutomations(agentId,sessionId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_AUTOMATION, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioAutomation(@RequestParam long agentId,
+                                                      @RequestParam long sessionId,
+                                                      @RequestParam String processId) {
+
+        ApiScenarioAutomationWSModel response = apiScenarioMiddleware.apiGetScenarioAutomation(agentId,sessionId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
 
 }

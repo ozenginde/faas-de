@@ -8,14 +8,14 @@ import java.util.List;
 public class ApiOperationScenarioWSDTO {
 
     private List<ApiScenarioWSDTO> scenarios;
-    private List<ApiScenarioExecutionWSDTO> scenarioExecutions;
+    private List<ApiScenarioExecutionWSDTO> executions;
 
     public ApiOperationScenarioWSDTO() {
     }
 
-    public ApiOperationScenarioWSDTO(List<ApiScenarioWSDTO> scenarios, List<ApiScenarioExecutionWSDTO> scenarioExecutions) {
+    public ApiOperationScenarioWSDTO(List<ApiScenarioWSDTO> scenarios, List<ApiScenarioExecutionWSDTO> executions) {
         this.scenarios = scenarios;
-        this.scenarioExecutions = scenarioExecutions;
+        this.executions = executions;
     }
 
     public List<ApiScenarioWSDTO> getScenarios() {
@@ -26,11 +26,11 @@ public class ApiOperationScenarioWSDTO {
         this.scenarios = scenarios;
     }
 
-    public List<ApiScenarioExecutionWSDTO> getScenarioExecutions() {
-        return scenarioExecutions;
+    public List<ApiScenarioExecutionWSDTO> getExecutions() {
+        return executions;
     }
 
-    public void setScenarioExecutions(List<ApiScenarioExecutionWSDTO> scenarioExecutions) {
-        this.scenarioExecutions = scenarioExecutions;
+    public void setExecutions(List<ApiScenarioExecutionWSDTO> executions) {
+        this.executions = executions;
     }
 }

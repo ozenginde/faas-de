@@ -499,6 +499,7 @@ public class OperationMapper {
         if (!emailChannelDBModels.isEmpty() && emailChannelDBModels.get(0).getEmailAccount() != null) {
 
             ApiEmailAccountWSDTO emailAccountWSDTO = new ApiEmailAccountWSDTO();
+
             emailAccountWSDTO.setAccountId(emailChannelDBModels.get(0).getAccountId());
             emailAccountWSDTO.setAccount(emailChannelDBModels.get(0).getEmailAccount().getAccount());
             emailAccountWSDTO.setAccountDatas(emailChannelDBModels.get(0).getEmailAccount().getAccountDatas());
@@ -524,6 +525,7 @@ public class OperationMapper {
 
         ApiPushAccountWSDTO pushAccountWSDTO = getApiPushAccountWSDTO(sessionDBModel.getProcessId());
         if (pushAccountWSDTO != null){
+
             ApiOperationPushMessageWSDTO operationPushMessageWSDTO = new ApiOperationPushMessageWSDTO();
             operationPushMessageWSDTO.setPushAccount(pushAccountWSDTO);
             operationPushMessageWSDTO.setPushMessages(pushMessageRepository.findBySessionId(sessionDBModel.getId()));
@@ -541,6 +543,7 @@ public class OperationMapper {
         if (!pushChannelDBModels.isEmpty() && pushChannelDBModels.get(0).getPushAccount() != null) {
 
             ApiPushAccountWSDTO pushAccountWSDTO = new ApiPushAccountWSDTO();
+
             pushAccountWSDTO.setAccountId(pushChannelDBModels.get(0).getAccountId());
             pushAccountWSDTO.setAccount(pushChannelDBModels.get(0).getPushAccount().getAccount());
             pushAccountWSDTO.setAccountDatas(pushChannelDBModels.get(0).getPushAccount().getAccountDatas());

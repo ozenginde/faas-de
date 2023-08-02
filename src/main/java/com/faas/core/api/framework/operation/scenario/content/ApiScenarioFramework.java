@@ -1,7 +1,6 @@
 package com.faas.core.api.framework.operation.scenario.content;
 
-import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationScenarioWSDTO;
-import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.content.dto.*;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.repo.operation.scenario.ScenarioExecutionRepository;
@@ -67,6 +66,52 @@ public class ApiScenarioFramework {
         return null;
     }
 
+
+    public ApiScenarioWSDTO apiUpdateScenarioService(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
+
+        List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
+        Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
+
+        return null;
+    }
+
+
+    public ApiScenarioWSDTO apiRemoveScenarioService(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
+
+        List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
+        Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
+
+        return null;
+    }
+
+
+
+    public ApiScenarioDetailsWSDTO apiGetScenarioDetailsService(long agentId, long sessionId, String scenarioId) {
+        return null;
+    }
+
+
+    public List<ApiScenarioActionWSDTO> apiGetScenarioActionsService(long agentId, long sessionId, String scenarioId) {
+
+        return null;
+    }
+
+    public ApiScenarioActionWSDTO apiGetScenarioActionService(long agentId, long sessionId, String scenarioId) {
+
+        return null;
+    }
+
+
+    public List<ApiScenarioAutomationWSDTO> apiGetScenarioAutomationsService(long agentId, long sessionId, String scenarioId) {
+
+        return null;
+    }
+
+
+    public ApiScenarioAutomationWSDTO apiGetScenarioAutomationService(long agentId, long sessionId, String scenarioId) {
+
+        return null;
+    }
 
 
 }
