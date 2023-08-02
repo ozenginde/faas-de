@@ -25,9 +25,10 @@ public class ApiClientHookController {
     @RequestMapping(value = ApiRoute.API_GET_CLIENT_HOOKS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetClientHooks(@RequestParam long agentId,
                                                @RequestParam long sessionId,
-                                               @RequestParam long clientId) {
+                                               @RequestParam long clientId,
+                                               @RequestParam String campaignId) {
 
-        ApiClientHookWSModel response = apiClientHookMiddleware.apiGetClientHooks(agentId,sessionId,clientId);
+        ApiClientHookWSModel response = apiClientHookMiddleware.apiGetClientHooks(agentId,sessionId,clientId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

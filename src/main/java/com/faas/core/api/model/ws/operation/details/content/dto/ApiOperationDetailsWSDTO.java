@@ -16,9 +16,9 @@ import java.util.List;
 public class ApiOperationDetailsWSDTO {
 
     private OperationDBModel operation;
-    private SessionDBModel operationSession;
     private FlowDBModel operationFlow;
     private InquiryDBModel operationInquiry;
+    private SessionDBModel operationSession;
     private ApiOperationClientWSDTO operationClient;
     private List<ApiClientOsIntWSDTO> clientOsInts;
     private List<ApiClientNoteWSDTO> clientNotes;

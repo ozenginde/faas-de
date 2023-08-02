@@ -28,7 +28,7 @@ public class ApiClientOsIntMiddleware {
             response.setClientOsInts(clientOsIntWSDTOS);
         }
 
-        general.setOperation("apiGetClientOsInt");
+        general.setOperation("apiGetClientOsInts");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);

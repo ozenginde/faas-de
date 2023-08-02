@@ -18,7 +18,7 @@ public class ApiClientHookMiddleware {
     ApiClientHookFramework operationHookFramework;
 
 
-    public ApiClientHookWSModel apiGetClientHooks(long agentId, long sessionId, long clientId) {
+    public ApiClientHookWSModel apiGetClientHooks(long agentId, long sessionId, long clientId,String campaignId) {
 
         ApiClientHookWSModel response = new ApiClientHookWSModel();
         GeneralWSModel general = new GeneralWSModel();
