@@ -353,7 +353,7 @@ public class OperationMapper {
 
         List<ProcessSipChannelDBModel> sipChannelDBModels = processSipChannelRepository.findByProcessId(processId);
         List<UserDetailsDBModel> agentDetails = userDetailsRepository.findByUserId(agentId);
-        if (sipChannelDBModels.size() > 0 && agentDetails.size() > 0 && agentDetails.get(0).getSipChannel() != null) {
+        if (!sipChannelDBModels.isEmpty() && !agentDetails.isEmpty() && agentDetails.get(0).getSipChannel() != null) {
 
             ApiSipAccountWSDTO sipAccountWSDTO = new ApiSipAccountWSDTO();
             sipAccountWSDTO.setAccountId(agentDetails.get(0).getSipChannel().getAccountId());
@@ -383,7 +383,7 @@ public class OperationMapper {
             operationWappCall.setWappAccount(wappAccountWSDTO);
             operationWappCall.setPhones(clientPhones);
             List<WappCallDBModel> activeWappCall = wappCallRepository.findBySessionIdAndCallState(sessionDBModel.getId(), AppConstant.ACTIVE_CALL);
-            if (activeWappCall.size() > 0) {
+            if (!activeWappCall.isEmpty()) {
                 operationWappCall.setWappCall(activeWappCall.get(0));
             }
             operationWappCall.setWappCalls(wappCallRepository.findBySessionId(sessionDBModel.getId()));
@@ -398,8 +398,7 @@ public class OperationMapper {
 
         List<UserDetailsDBModel> agentDetails = userDetailsRepository.findByUserId(agentId);
         List<ProcessWappChannelDBModel> wappChannels = processWappChannelRepository.findByProcessId(processId);
-        if (agentDetails.size() > 0 && agentDetails.get(0).getWappChannel() != null
-                && agentDetails.get(0).getWappChannel().getAccountId() != null && wappChannels.size() > 0) {
+        if (!agentDetails.isEmpty() && agentDetails.get(0).getWappChannel() != null && agentDetails.get(0).getWappChannel().getAccountId() != null && !wappChannels.isEmpty()) {
 
             ApiWappAccountWSDTO wappAccountWSDTO = new ApiWappAccountWSDTO();
 
@@ -440,7 +439,7 @@ public class OperationMapper {
     public ApiSmsAccountWSDTO getApiSmsAccountWSDTO(String processId) {
 
         List<ProcessSmsChannelDBModel>smsChannelDBModels = processSmsChannelRepository.findByProcessId(processId);
-        if (smsChannelDBModels.size()>0 && smsChannelDBModels.get(0).getSmsAccount() != null) {
+        if (!smsChannelDBModels.isEmpty() && smsChannelDBModels.get(0).getSmsAccount() != null) {
 
             ApiSmsAccountWSDTO smsAccountWSDTO = new ApiSmsAccountWSDTO();
 
@@ -497,7 +496,8 @@ public class OperationMapper {
     public ApiEmailAccountWSDTO getApiEmailAccountWSDTO(String processId) {
 
         List<ProcessEmailChannelDBModel>emailChannelDBModels = processEmailChannelRepository.findByProcessId(processId);
-        if (emailChannelDBModels.size()>0 && emailChannelDBModels.get(0).getEmailAccount() != null) {
+        if (!emailChannelDBModels.isEmpty() && emailChannelDBModels.get(0).getEmailAccount() != null) {
+
             ApiEmailAccountWSDTO emailAccountWSDTO = new ApiEmailAccountWSDTO();
             emailAccountWSDTO.setAccountId(emailChannelDBModels.get(0).getAccountId());
             emailAccountWSDTO.setAccount(emailChannelDBModels.get(0).getEmailAccount().getAccount());
@@ -538,7 +538,7 @@ public class OperationMapper {
     public ApiPushAccountWSDTO getApiPushAccountWSDTO(String processId) {
 
         List<ProcessPushChannelDBModel>pushChannelDBModels = processPushChannelRepository.findByProcessId(processId);
-        if (pushChannelDBModels.size()>0 && pushChannelDBModels.get(0).getPushAccount() != null) {
+        if (!pushChannelDBModels.isEmpty() && pushChannelDBModels.get(0).getPushAccount() != null) {
 
             ApiPushAccountWSDTO pushAccountWSDTO = new ApiPushAccountWSDTO();
             pushAccountWSDTO.setAccountId(pushChannelDBModels.get(0).getAccountId());
