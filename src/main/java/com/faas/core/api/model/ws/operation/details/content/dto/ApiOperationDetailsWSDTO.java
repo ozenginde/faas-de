@@ -132,4 +132,5 @@ public class ApiOperationDetailsWSDTO {
     public void setOperationChannel(ApiOperationChannelWSDTO operationChannel) {
         this.operationChannel = operationChannel;
     }
+
 }
