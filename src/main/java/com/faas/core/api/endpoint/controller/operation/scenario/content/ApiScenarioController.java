@@ -104,9 +104,10 @@ public class ApiScenarioController {
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO_DETAILS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenarioDetails(@RequestParam long agentId,
                                                    @RequestParam long sessionId,
+                                                   @RequestParam String processId,
                                                    @RequestParam String scenarioId) {
 
-        ApiScenarioDetailsWSModel response = apiScenarioMiddleware.apiGetScenarioDetails(agentId,sessionId,scenarioId);
+        ApiScenarioDetailsWSModel response = apiScenarioMiddleware.apiGetScenarioDetails(agentId,sessionId,processId,scenarioId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

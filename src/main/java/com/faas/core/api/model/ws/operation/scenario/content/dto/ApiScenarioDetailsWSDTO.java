@@ -5,30 +5,30 @@ import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 
 public class ApiScenarioDetailsWSDTO {
 
-    private ProcessScenarioDBModel scenario;
-    private ScenarioDBModel scenarioDetails;
+    private ScenarioDBModel scenario;
+    private ProcessScenarioDBModel processScenario;
 
     public ApiScenarioDetailsWSDTO() {
     }
 
-    public ApiScenarioDetailsWSDTO(ProcessScenarioDBModel scenario, ScenarioDBModel scenarioDetails) {
+    public ApiScenarioDetailsWSDTO(ScenarioDBModel scenario, ProcessScenarioDBModel processScenario) {
         this.scenario = scenario;
-        this.scenarioDetails = scenarioDetails;
+        this.processScenario = processScenario;
     }
 
-    public ProcessScenarioDBModel getScenario() {
+    public ScenarioDBModel getScenario() {
         return scenario;
     }
 
-    public void setScenario(ProcessScenarioDBModel scenario) {
+    public void setScenario(ScenarioDBModel scenario) {
         this.scenario = scenario;
     }
 
-    public ScenarioDBModel getScenarioDetails() {
-        return scenarioDetails;
+    public ProcessScenarioDBModel getProcessScenario() {
+        return processScenario;
     }
 
-    public void setScenarioDetails(ScenarioDBModel scenarioDetails) {
-        this.scenarioDetails = scenarioDetails;
+    public void setProcessScenario(ProcessScenarioDBModel processScenario) {
+        this.processScenario = processScenario;
     }
 }

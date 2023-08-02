@@ -86,7 +86,18 @@ public class ApiScenarioFramework {
 
 
 
-    public ApiScenarioDetailsWSDTO apiGetScenarioDetailsService(long agentId, long sessionId, String scenarioId) {
+    public ApiScenarioDetailsWSDTO apiGetScenarioDetailsService(long agentId,long sessionId,String processId,String scenarioId) {
+
+        Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
+        List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
+        if (scenarioDBModel.isPresent() && !processScenarioDBModels.isEmpty()){
+
+            ApiScenarioDetailsWSDTO scenarioDetailsWSDTO = new ApiScenarioDetailsWSDTO();
+            scenarioDetailsWSDTO.setScenario(scenarioDBModel.get());
+            scenarioDetailsWSDTO.setProcessScenario(processScenarioDBModels.get(0));
+
+            return scenarioDetailsWSDTO;
+        }
         return null;
     }
 

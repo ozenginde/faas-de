@@ -127,11 +127,15 @@ public class ApiScenarioMiddleware {
 
 
 
-    public ApiScenarioDetailsWSModel apiGetScenarioDetails(long agentId, long sessionId, String scenarioId) {
+    public ApiScenarioDetailsWSModel apiGetScenarioDetails(long agentId,long sessionId,String processId,String scenarioId) {
 
         ApiScenarioDetailsWSModel response = new ApiScenarioDetailsWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
+        ApiScenarioDetailsWSDTO scenarioDetailsWSDTO = apiScenarioFramework.apiGetScenarioDetailsService(agentId,sessionId,processId,scenarioId);
+        if (scenarioDetailsWSDTO != null){
+            response.setScenarioDetails(scenarioDetailsWSDTO);
+        }
 
         general.setOperation("apiGetScenarioDetails");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
