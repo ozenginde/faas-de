@@ -69,22 +69,6 @@ public class ApiScenarioController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_RUN_SCENARIO, method = RequestMethod.POST)
-    public ResponseEntity<?> apiRunScenario(@RequestParam long agentId,
-                                            @RequestParam long sessionId,
-                                            @RequestParam long clientId,
-                                            @RequestParam String processId,
-                                            @RequestParam String scenarioId) {
-
-        ApiScenarioWSModel response = apiScenarioMiddleware.apiRunScenario(agentId,sessionId,clientId,processId,scenarioId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
     @RequestMapping(value = ApiRoute.API_UPDATE_SCENARIO, method = RequestMethod.POST)
     public ResponseEntity<?> apiUpdateScenario(@RequestParam long agentId,
                                             @RequestParam long sessionId,

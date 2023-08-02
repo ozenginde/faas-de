@@ -4,7 +4,7 @@ import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationSce
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioWSDTO;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
-import com.faas.core.base.repo.operation.scenario.ScenarioExecuteRepository;
+import com.faas.core.base.repo.operation.scenario.ScenarioExecutionRepository;
 import com.faas.core.base.repo.process.details.scenario.ProcessScenarioRepository;
 import com.faas.core.base.repo.scenario.content.ScenarioRepository;
 import com.faas.core.base.repo.session.SessionRepository;
@@ -36,7 +36,7 @@ public class ApiScenarioFramework {
     ScenarioRepository scenarioRepository;
 
     @Autowired
-    ScenarioExecuteRepository scenarioExecuteRepository;
+    ScenarioExecutionRepository scenarioExecutionRepository;
 
     @Autowired
     ProcessScenarioRepository processScenarioRepository;
@@ -46,7 +46,7 @@ public class ApiScenarioFramework {
 
 
     public ApiOperationScenarioWSDTO apiGetOperationScenarioService(long agentId,long sessionId,long clientId,String processId) {
-        return operationMapper.mapApiOperationScenarioWSDTO(sessionId,clientId,processId);
+        return operationMapper.mapApiOperationScenarioWSDTO(sessionId,processId);
     }
 
 

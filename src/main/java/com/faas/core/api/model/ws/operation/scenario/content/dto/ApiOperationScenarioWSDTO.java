@@ -1,21 +1,21 @@
 package com.faas.core.api.model.ws.operation.scenario.content.dto;
 
 
-import com.faas.core.api.model.ws.operation.scenario.execute.dto.ApiScenarioExecuteWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiScenarioExecutionWSDTO;
 
 import java.util.List;
 
 public class ApiOperationScenarioWSDTO {
 
     private List<ApiScenarioWSDTO> scenarios;
-    private List<ApiScenarioExecuteWSDTO> scenarioExecutes;
+    private List<ApiScenarioExecutionWSDTO> scenarioExecutions;
 
     public ApiOperationScenarioWSDTO() {
     }
 
-    public ApiOperationScenarioWSDTO(List<ApiScenarioWSDTO> scenarios, List<ApiScenarioExecuteWSDTO> scenarioExecutes) {
+    public ApiOperationScenarioWSDTO(List<ApiScenarioWSDTO> scenarios, List<ApiScenarioExecutionWSDTO> scenarioExecutions) {
         this.scenarios = scenarios;
-        this.scenarioExecutes = scenarioExecutes;
+        this.scenarioExecutions = scenarioExecutions;
     }
 
     public List<ApiScenarioWSDTO> getScenarios() {
@@ -26,11 +26,11 @@ public class ApiOperationScenarioWSDTO {
         this.scenarios = scenarios;
     }
 
-    public List<ApiScenarioExecuteWSDTO> getScenarioExecutes() {
-        return scenarioExecutes;
+    public List<ApiScenarioExecutionWSDTO> getScenarioExecutions() {
+        return scenarioExecutions;
     }
 
-    public void setScenarioExecutes(List<ApiScenarioExecuteWSDTO> scenarioExecutes) {
-        this.scenarioExecutes = scenarioExecutes;
+    public void setScenarioExecutions(List<ApiScenarioExecutionWSDTO> scenarioExecutions) {
+        this.scenarioExecutions = scenarioExecutions;
     }
 }
