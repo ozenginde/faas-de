@@ -40,10 +40,9 @@ public class ApiScenarioController {
     @RequestMapping(value = ApiRoute.API_GET_SCENARIOS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenarios(@RequestParam long agentId,
                                              @RequestParam long sessionId,
-                                             @RequestParam long clientId,
                                              @RequestParam String processId) {
 
-        ApiScenarioWSModel response = apiScenarioMiddleware.apiGetScenarios(agentId,sessionId,clientId,processId);
+        ApiScenarioWSModel response = apiScenarioMiddleware.apiGetScenarios(agentId,sessionId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -55,11 +54,10 @@ public class ApiScenarioController {
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenario(@RequestParam long agentId,
                                             @RequestParam long sessionId,
-                                            @RequestParam long clientId,
                                             @RequestParam String processId,
                                             @RequestParam String scenarioId) {
 
-        ApiScenarioWSModel response = apiScenarioMiddleware.apiGetScenario(agentId,sessionId,clientId,processId,scenarioId);
+        ApiScenarioWSModel response = apiScenarioMiddleware.apiGetScenario(agentId,sessionId,processId,scenarioId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -70,12 +68,11 @@ public class ApiScenarioController {
 
     @RequestMapping(value = ApiRoute.API_UPDATE_SCENARIO, method = RequestMethod.POST)
     public ResponseEntity<?> apiUpdateScenario(@RequestParam long agentId,
-                                            @RequestParam long sessionId,
-                                            @RequestParam long clientId,
-                                            @RequestParam String processId,
-                                            @RequestParam String scenarioId) {
+                                               @RequestParam long sessionId,
+                                               @RequestParam String processId,
+                                               @RequestParam String scenarioId) {
 
-        ApiScenarioWSModel response = apiScenarioMiddleware.apiUpdateScenario(agentId,sessionId,clientId,processId,scenarioId);
+        ApiScenarioWSModel response = apiScenarioMiddleware.apiUpdateScenario(agentId,sessionId,processId,scenarioId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
