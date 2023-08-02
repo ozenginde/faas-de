@@ -76,10 +76,10 @@ public class ApiRoute {
 
     public static final String API_OPERATION_VALIDATE = "apioperationvalidate";
     public static final String API_GET_OPERATION = "apigetoperation";
-    public static final String API_LAUNCH_OPERATION = "apilaunchoperation";
-    public static final String API_FINISH_OPERATION = "apifinishoperation";
-    public static final String API_UPDATE_OPERATION = "apiupdateoperation";
-    public static final String API_REMOVE_OPERATION = "apiremoveoperation";
+    public static final String API_OPERATION_LAUNCH = "apioperationlaunch";
+    public static final String API_OPERATION_FINISH = "apioperationfinish";
+    public static final String API_OPERATION_UPDATE = "apioperationupdate";
+    public static final String API_OPERATION_REMOVE = "apioperationremove";
 
 
 
@@ -87,16 +87,17 @@ public class ApiRoute {
     public static final String API_GET_OPERATION_CAMPAIGN = "apigetoperationcampaign";
 
     public static final String API_GET_OPERATION_CLIENT = "apigetoperationclient";
-    public static final String API_GET_OPERATION_OS_INT = "apigetoperationosint";
-    public static final String API_GET_OPERATION_HOOKS = "apigetoperationhooks";
+
+    public static final String API_GET_CLIENT_OS_INT = "apigetclientosint";
+
+    public static final String API_GET_CLIENT_HOOKS = "apigetclienthooks";
 
 
     public static final String API_GET_CLIENT_NOTES = "apigetclientnotes";
-    public static final String API_GET_OPERATION_NOTES = "apigetoperationnotes";
-    public static final String API_GET_OPERATION_NOTE = "apigetoperationnote";
-    public static final String API_CREATE_OPERATION_NOTE = "apicreateoperationnote";
-    public static final String API_UPDATE_OPERATION_NOTE = "apiupdateoperationnote";
-    public static final String API_REMOVE_OPERATION_NOTE = "apiremoveoperationnote";
+    public static final String API_GET_CLIENT_NOTE = "apigetclientnote";
+    public static final String API_CREATE_CLIENT_NOTE = "apicreateclientnote";
+    public static final String API_UPDATE_CLIENT_NOTE = "apiupdateclientnote";
+    public static final String API_REMOVE_CLIENT_NOTE = "apiremoveclientnote";
 
 
     public static final String API_GET_OPERATION_ACTIVITIES = "apigetoperationactivities";

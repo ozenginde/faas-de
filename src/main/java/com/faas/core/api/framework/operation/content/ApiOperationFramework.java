@@ -87,7 +87,8 @@ public class ApiOperationFramework {
 
         List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientId(sessionId, clientId);
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId, clientId);
-        if (sessionDBModels.size() > 0 && operationDBModels.size() > 0) {
+
+        if (!sessionDBModels.isEmpty() && !operationDBModels.isEmpty()) {
 
             ApiOperationWSDTO operationWSDTO = new ApiOperationWSDTO();
             operationWSDTO.setOperation(operationDBModels.get(0));
@@ -99,14 +100,14 @@ public class ApiOperationFramework {
     }
 
 
-    public ApiOperationWSDTO apiLaunchOperationService(long agentId, long sessionId, long clientId, String campaignId) {
+    public ApiOperationWSDTO apiOperationLaunchService(long agentId, long sessionId, long clientId, String campaignId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(sessionId, clientId, agentId, campaignId, AppConstant.READY_SESSION);
         List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentIdAndCampaignIdAndOperationState(sessionId, clientId, agentId, campaignId, AppConstant.READY_OPERATION);
-        if (sessionDBModels.size() > 0 && operationDBModels.size() > 0) {
+
+        if (!sessionDBModels.isEmpty() && !operationDBModels.isEmpty()) {
 
             ApiOperationWSDTO operationWSDTO = new ApiOperationWSDTO();
-
             sessionDBModels.get(0).setSessionState(AppConstant.ACTIVE_SESSION);
             sessionDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             SessionDBModel operationSession = sessionRepository.save(sessionDBModels.get(0));
@@ -142,14 +143,13 @@ public class ApiOperationFramework {
     }
 
 
-    public ApiOperationWSDTO apiFinishOperationService(long agentId, long sessionId, long clientId, String campaignId,String operationResult) {
+    public ApiOperationWSDTO apiOperationFinishService(long agentId, long sessionId, long clientId, String campaignId,String operationResult) {
 
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(sessionId, clientId, agentId, campaignId, AppConstant.READY_SESSION);
         List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentIdAndCampaignIdAndOperationState(sessionId, clientId, agentId, campaignId, AppConstant.READY_OPERATION);
 
-        if (clientDBModel.isPresent() && clientDBModel.get().getClientState().equalsIgnoreCase(AppConstant.BUSY_CLIENT)
-                && sessionDBModels.size() > 0 && operationDBModels.size()>0) {
+        if (clientDBModel.isPresent() && clientDBModel.get().getClientState().equalsIgnoreCase(AppConstant.BUSY_CLIENT) && !sessionDBModels.isEmpty() && !operationDBModels.isEmpty()) {
 
             ApiOperationWSDTO operationWSDTO = new ApiOperationWSDTO();
 
@@ -190,14 +190,14 @@ public class ApiOperationFramework {
 
 
 
-    public ApiOperationWSDTO apiUpdateOperationService(long agentId, long sessionId, long clientId, String campaignId) {
+    public ApiOperationWSDTO apiOperationUpdateService(long agentId, long sessionId, long clientId, String campaignId) {
 
         return null;
     }
 
 
 
-    public ApiOperationWSDTO apiRemoveOperationService(long agentId, long sessionId, long clientId, String campaignId) {
+    public ApiOperationWSDTO apiOperationRemoveService(long agentId, long sessionId, long clientId, String campaignId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignId(sessionId, clientId, agentId, campaignId);
         List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentId(sessionId, clientId, agentId);

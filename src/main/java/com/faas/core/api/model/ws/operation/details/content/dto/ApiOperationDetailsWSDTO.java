@@ -2,9 +2,9 @@ package com.faas.core.api.model.ws.operation.details.content.dto;
 
 import com.faas.core.api.model.ws.operation.channel.content.dto.ApiOperationChannelWSDTO;
 import com.faas.core.api.model.ws.operation.details.activity.dto.ApiOperationActivityWSDTO;
-import com.faas.core.api.model.ws.operation.details.client.dto.ApiOperationClientWSDTO;
-import com.faas.core.api.model.ws.operation.details.note.dto.ApiOperationNoteWSDTO;
-import com.faas.core.api.model.ws.operation.details.osint.dto.ApiOperationOsIntWSDTO;
+import com.faas.core.api.model.ws.operation.details.client.content.dto.ApiOperationClientWSDTO;
+import com.faas.core.api.model.ws.operation.details.client.note.dto.ApiClientNoteWSDTO;
+import com.faas.core.api.model.ws.operation.details.client.osint.dto.ApiClientOsIntWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationScenarioWSDTO;
 import com.faas.core.base.model.db.flow.FlowDBModel;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
@@ -20,8 +20,8 @@ public class ApiOperationDetailsWSDTO {
     private FlowDBModel operationFlow;
     private InquiryDBModel operationInquiry;
     private ApiOperationClientWSDTO operationClient;
-    private ApiOperationOsIntWSDTO operationOsInt;
-    private ApiOperationNoteWSDTO operationNote;
+    private List<ApiClientOsIntWSDTO> clientOsInts;
+    private List<ApiClientNoteWSDTO> clientNotes;
     private List<ApiOperationActivityWSDTO> operationActivities;
     private ApiOperationCampaignWSDTO operationCampaign;
     private ApiOperationScenarioWSDTO operationScenario;
@@ -30,19 +30,20 @@ public class ApiOperationDetailsWSDTO {
     public ApiOperationDetailsWSDTO() {
     }
 
-    public ApiOperationDetailsWSDTO(OperationDBModel operation, SessionDBModel operationSession, FlowDBModel operationFlow, InquiryDBModel operationInquiry, ApiOperationClientWSDTO operationClient, ApiOperationOsIntWSDTO operationOsInt, ApiOperationNoteWSDTO operationNote, List<ApiOperationActivityWSDTO> operationActivities, ApiOperationCampaignWSDTO operationCampaign, ApiOperationScenarioWSDTO operationScenario, ApiOperationChannelWSDTO operationChannel) {
+    public ApiOperationDetailsWSDTO(OperationDBModel operation, SessionDBModel operationSession, FlowDBModel operationFlow, InquiryDBModel operationInquiry, ApiOperationClientWSDTO operationClient, List<ApiClientOsIntWSDTO> clientOsInts, List<ApiClientNoteWSDTO> clientNotes, List<ApiOperationActivityWSDTO> operationActivities, ApiOperationCampaignWSDTO operationCampaign, ApiOperationScenarioWSDTO operationScenario, ApiOperationChannelWSDTO operationChannel) {
         this.operation = operation;
         this.operationSession = operationSession;
         this.operationFlow = operationFlow;
         this.operationInquiry = operationInquiry;
         this.operationClient = operationClient;
-        this.operationOsInt = operationOsInt;
-        this.operationNote = operationNote;
+        this.clientOsInts = clientOsInts;
+        this.clientNotes = clientNotes;
         this.operationActivities = operationActivities;
         this.operationCampaign = operationCampaign;
         this.operationScenario = operationScenario;
         this.operationChannel = operationChannel;
     }
+
 
     public OperationDBModel getOperation() {
         return operation;
@@ -84,20 +85,20 @@ public class ApiOperationDetailsWSDTO {
         this.operationClient = operationClient;
     }
 
-    public ApiOperationOsIntWSDTO getOperationOsInt() {
-        return operationOsInt;
+    public List<ApiClientOsIntWSDTO> getClientOsInts() {
+        return clientOsInts;
     }
 
-    public void setOperationOsInt(ApiOperationOsIntWSDTO operationOsInt) {
-        this.operationOsInt = operationOsInt;
+    public void setClientOsInts(List<ApiClientOsIntWSDTO> clientOsInts) {
+        this.clientOsInts = clientOsInts;
     }
 
-    public ApiOperationNoteWSDTO getOperationNote() {
-        return operationNote;
+    public List<ApiClientNoteWSDTO> getClientNotes() {
+        return clientNotes;
     }
 
-    public void setOperationNote(ApiOperationNoteWSDTO operationNote) {
-        this.operationNote = operationNote;
+    public void setClientNotes(List<ApiClientNoteWSDTO> clientNotes) {
+        this.clientNotes = clientNotes;
     }
 
     public List<ApiOperationActivityWSDTO> getOperationActivities() {

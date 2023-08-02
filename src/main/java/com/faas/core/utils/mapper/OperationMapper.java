@@ -15,16 +15,17 @@ import com.faas.core.api.model.ws.operation.channel.messenger.dto.ApiOperationMe
 import com.faas.core.api.model.ws.operation.channel.push.dto.ApiOperationPushMessageWSDTO;
 import com.faas.core.api.model.ws.operation.channel.push.dto.ApiPushAccountWSDTO;
 import com.faas.core.api.model.ws.operation.details.activity.dto.ApiOperationActivityWSDTO;
-import com.faas.core.api.model.ws.operation.details.client.dto.ApiOperationClientWSDTO;
+import com.faas.core.api.model.ws.operation.details.client.content.dto.ApiOperationClientWSDTO;
 import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationCampaignWSDTO;
 import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationDetailsWSDTO;
-import com.faas.core.api.model.ws.operation.details.note.dto.ApiOperationNoteWSDTO;
-import com.faas.core.api.model.ws.operation.details.osint.dto.ApiOperationOsIntWSDTO;
+import com.faas.core.api.model.ws.operation.details.client.note.dto.ApiClientNoteWSDTO;
+import com.faas.core.api.model.ws.operation.details.client.osint.dto.ApiClientOsIntWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationScenarioWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiExecutionWSDTO;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
+import com.faas.core.base.model.db.client.details.ClientNoteDBModel;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
 import com.faas.core.base.model.db.flow.FlowDBModel;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
@@ -202,6 +203,7 @@ public class OperationMapper {
 
         operationDetailsWSDTO.setOperation(operationDBModel);
         operationDetailsWSDTO.setOperationSession(sessionDBModel);
+
         if (sessionDBModel.getSessionType().equalsIgnoreCase(AppConstant.INQUIRY_CAMPAIGN)){
             List<InquiryDBModel> inquiryDBModels = inquiryRepository.findBySessionIdAndClientId(sessionDBModel.getId(),sessionDBModel.getClientId());
             if (!inquiryDBModels.isEmpty()){
@@ -215,8 +217,8 @@ public class OperationMapper {
             }
         }
         operationDetailsWSDTO.setOperationClient(mapApiOperationClientWSDTO(clientDBModel));
-        operationDetailsWSDTO.setOperationOsInt(mapApiOperationOsIntWSDTO(clientDBModel));
-        operationDetailsWSDTO.setOperationNote(mapApiOperationNoteWSDTO(clientDBModel));
+        operationDetailsWSDTO.setClientOsInts(mapApiClientOsIntWSDTOS(clientDBModel));
+        operationDetailsWSDTO.setClientNotes(mapApiOperationNoteWSDTO(clientDBModel));
         operationDetailsWSDTO.setOperationCampaign(mapApiOperationCampaignWSDTO(campaignDBModel,processDBModel));
         operationDetailsWSDTO.setOperationActivities(mapApiOperationActivities(operationDBModel));
         operationDetailsWSDTO.setOperationScenario(mapApiOperationScenarioWSDTO(sessionDBModel.getId(),sessionDBModel.getProcessId()));
@@ -240,18 +242,20 @@ public class OperationMapper {
     }
 
 
-    public ApiOperationOsIntWSDTO mapApiOperationOsIntWSDTO(ClientDBModel clientDBModel) {
+    public List<ApiClientOsIntWSDTO> mapApiClientOsIntWSDTOS(ClientDBModel clientDBModel) {
 
-        ApiOperationOsIntWSDTO operationOSIntWSDTO = new ApiOperationOsIntWSDTO();
-        operationOSIntWSDTO.setClient(clientDBModel);
-        return operationOSIntWSDTO;
+        List<ApiClientOsIntWSDTO> clientOsIntWSDTOS = new ArrayList<>();
+        return clientOsIntWSDTOS;
     }
 
-    public ApiOperationNoteWSDTO mapApiOperationNoteWSDTO(ClientDBModel clientDBModel) {
+    public List<ApiClientNoteWSDTO> mapApiOperationNoteWSDTO(ClientDBModel clientDBModel) {
 
-        ApiOperationNoteWSDTO operationNoteWSDTO = new ApiOperationNoteWSDTO();
-        operationNoteWSDTO.setClientNotes(clientNoteRepository.findByClientId(clientDBModel.getId()));
-        return operationNoteWSDTO;
+        List<ApiClientNoteWSDTO> clientNoteWSDTOS = new ArrayList<>();
+        List<ClientNoteDBModel> clientNoteDBModels = clientNoteRepository.findByClientId(clientDBModel.getId());
+        for (ClientNoteDBModel clientNoteDBModel : clientNoteDBModels) {
+            clientNoteWSDTOS.add(new ApiClientNoteWSDTO(clientNoteDBModel));
+        }
+        return clientNoteWSDTOS;
     }
 
 
