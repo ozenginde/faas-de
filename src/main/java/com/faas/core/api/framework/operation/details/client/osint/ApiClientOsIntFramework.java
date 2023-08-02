@@ -5,6 +5,9 @@ import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Component
 public class ApiClientOsIntFramework {
@@ -13,10 +16,10 @@ public class ApiClientOsIntFramework {
     AppUtils appUtils;
 
 
-    public ApiClientOsIntWSDTO apiGetClientOsIntService(){
+    public List<ApiClientOsIntWSDTO> apiGetClientOsIntsService(){
 
-        ApiClientOsIntWSDTO clientOsIntWSDTO = new ApiClientOsIntWSDTO();
-        return clientOsIntWSDTO;
+        List<ApiClientOsIntWSDTO> clientOsIntWSDTOS = new ArrayList<>();
+        return clientOsIntWSDTOS;
     }
 
 

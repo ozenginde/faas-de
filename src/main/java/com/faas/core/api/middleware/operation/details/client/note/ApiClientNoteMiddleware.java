@@ -8,6 +8,9 @@ import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 public class ApiClientNoteMiddleware {
 
@@ -21,9 +24,9 @@ public class ApiClientNoteMiddleware {
         ApiClientNoteWSModel response = new ApiClientNoteWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiClientNoteWSDTO operationNoteWSDTO = apiClientNoteFramework.apiGetClientNotesService(agentId,clientId);
-        if (operationNoteWSDTO != null){
-
+        List<ApiClientNoteWSDTO> clientNoteWSDTOS = apiClientNoteFramework.apiGetClientNotesService(agentId,clientId);
+        if (clientNoteWSDTOS != null){
+            response.setClientNotes(clientNoteWSDTOS);
         }
 
         general.setOperation("apiGetOperationNotes");
@@ -41,11 +44,14 @@ public class ApiClientNoteMiddleware {
 
         ApiClientNoteWSModel response = new ApiClientNoteWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<ApiClientNoteWSDTO>clientNoteWSDTOS = new ArrayList<>();
 
-        ApiClientNoteWSDTO operationNoteWSDTO = apiClientNoteFramework.apiGetClientNoteService(agentId,sessionId,clientId,noteId);
-        if (operationNoteWSDTO != null){
+        ApiClientNoteWSDTO clientNoteWSDTO = apiClientNoteFramework.apiGetClientNoteService(agentId,sessionId,clientId,noteId);
+        if (clientNoteWSDTO != null){
+            clientNoteWSDTOS.add(clientNoteWSDTO);
         }
 
+        response.setClientNotes(clientNoteWSDTOS);
         general.setOperation("apiGetClientNote");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -60,11 +66,14 @@ public class ApiClientNoteMiddleware {
 
         ApiClientNoteWSModel response = new ApiClientNoteWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<ApiClientNoteWSDTO>clientNoteWSDTOS = new ArrayList<>();
 
-        ApiClientNoteWSDTO operationNoteWSDTO = apiClientNoteFramework.apiCreateClientNoteService(agentId,sessionId,clientId,noteTitle,noteText,noteAsset);
-        if (operationNoteWSDTO != null){
+        ApiClientNoteWSDTO clientNoteWSDTO = apiClientNoteFramework.apiCreateClientNoteService(agentId,sessionId,clientId,noteTitle,noteText,noteAsset);
+        if (clientNoteWSDTO != null){
+            clientNoteWSDTOS.add(clientNoteWSDTO);
         }
 
+        response.setClientNotes(clientNoteWSDTOS);
         general.setOperation("apiCreateClientNote");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -79,11 +88,14 @@ public class ApiClientNoteMiddleware {
 
         ApiClientNoteWSModel response = new ApiClientNoteWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<ApiClientNoteWSDTO>clientNoteWSDTOS = new ArrayList<>();
 
-        ApiClientNoteWSDTO operationNoteWSDTO = apiClientNoteFramework.apiUpdateClientNoteService(agentId,sessionId,clientId,noteId,noteTitle,noteText,noteAsset);
-        if (operationNoteWSDTO != null){
+        ApiClientNoteWSDTO clientNoteWSDTO = apiClientNoteFramework.apiUpdateClientNoteService(agentId,sessionId,clientId,noteId,noteTitle,noteText,noteAsset);
+        if (clientNoteWSDTO != null){
+            clientNoteWSDTOS.add(clientNoteWSDTO);
         }
 
+        response.setClientNotes(clientNoteWSDTOS);
         general.setOperation("apiUpdateClientNote");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
@@ -98,11 +110,14 @@ public class ApiClientNoteMiddleware {
 
         ApiClientNoteWSModel response = new ApiClientNoteWSModel();
         GeneralWSModel general = new GeneralWSModel();
+        List<ApiClientNoteWSDTO>clientNoteWSDTOS = new ArrayList<>();
 
-        ApiClientNoteWSDTO operationNoteWSDTO = apiClientNoteFramework.apiRemoveClientNoteService(agentId,sessionId,clientId,noteId);
-        if (operationNoteWSDTO != null){
+        ApiClientNoteWSDTO clientNoteWSDTO = apiClientNoteFramework.apiRemoveClientNoteService(agentId,sessionId,clientId,noteId);
+        if (clientNoteWSDTO != null){
+            clientNoteWSDTOS.add(clientNoteWSDTO);
         }
 
+        response.setClientNotes(clientNoteWSDTOS);
         general.setOperation("apiRemoveClientNote");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);

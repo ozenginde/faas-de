@@ -22,12 +22,12 @@ public class ApiClientOsIntController {
     ApiClientOsIntMiddleware apiClientOsIntMiddleware;
 
 
-    @RequestMapping(value = ApiRoute.API_GET_CLIENT_OS_INT, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetClientOsInt(@RequestParam long agentId,
-                                               @RequestParam long sessionId,
-                                               @RequestParam long clientId) {
+    @RequestMapping(value = ApiRoute.API_GET_CLIENT_OS_INTS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetClientOsInts(@RequestParam long agentId,
+                                                @RequestParam long sessionId,
+                                                @RequestParam long clientId) {
 
-        ApiClientOsIntWSModel response = apiClientOsIntMiddleware.apiGetClientOsInt(agentId,sessionId,clientId);
+        ApiClientOsIntWSModel response = apiClientOsIntMiddleware.apiGetClientOsInts(agentId,sessionId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

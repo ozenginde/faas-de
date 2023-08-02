@@ -88,7 +88,7 @@ public class ApiRoute {
 
     public static final String API_GET_OPERATION_CLIENT = "apigetoperationclient";
 
-    public static final String API_GET_CLIENT_OS_INT = "apigetclientosint";
+    public static final String API_GET_CLIENT_OS_INTS = "apigetclientosints";
 
     public static final String API_GET_CLIENT_HOOKS = "apigetclienthooks";
 

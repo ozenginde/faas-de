@@ -21,20 +21,22 @@ public class ApiClientNoteFramework {
     AppUtils appUtils;
 
 
-    public ApiClientNoteWSDTO apiGetClientNotesService(long agentId, long clientId) {
+    public List<ApiClientNoteWSDTO> apiGetClientNotesService(long agentId, long clientId) {
 
-        ApiClientNoteWSDTO operationNoteWSDTO = new ApiClientNoteWSDTO();
+        List<ApiClientNoteWSDTO> clientNoteWSDTOS = new ArrayList<>();
         List<ClientNoteDBModel> clientNoteDBModels = clientNoteRepository.findByClientId(clientId);
-        return operationNoteWSDTO;
+        for (ClientNoteDBModel clientNoteDBModel : clientNoteDBModels) {
+            clientNoteWSDTOS.add(new ApiClientNoteWSDTO(clientNoteDBModel));
+        }
+        return clientNoteWSDTOS;
     }
 
 
     public ApiClientNoteWSDTO apiGetClientNoteService(long agentId, long sessionId, long clientId, long noteId) {
 
         List<ClientNoteDBModel> clientNoteDBModels = clientNoteRepository.findByIdAndSessionIdAndClientId(noteId,sessionId,clientId);
-        if (clientNoteDBModels.size()>0){
-            ApiClientNoteWSDTO operationNoteWSDTO = new ApiClientNoteWSDTO();
-            return operationNoteWSDTO;
+        if (!clientNoteDBModels.isEmpty()){
+            return new ApiClientNoteWSDTO(clientNoteDBModels.get(0));
         }
         return null;
     }
