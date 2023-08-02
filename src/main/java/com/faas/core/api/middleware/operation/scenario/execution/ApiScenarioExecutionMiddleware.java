@@ -1,8 +1,8 @@
 package com.faas.core.api.middleware.operation.scenario.execution;
 
 import com.faas.core.api.framework.operation.scenario.execution.ApiScenarioExecutionFramework;
-import com.faas.core.api.model.ws.operation.scenario.execution.ApiScenarioExecutionWSModel;
-import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiScenarioExecutionWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.execution.ApiExecutionWSModel;
+import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiExecutionWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ public class ApiScenarioExecutionMiddleware {
     ApiScenarioExecutionFramework apiScenarioExecutionFramework;
 
 
-    public ApiScenarioExecutionWSModel apiGetScenarioExecutions(long agentId, long sessionId, long clientId, String scenarioId) {
+    public ApiExecutionWSModel apiGetScenarioExecutions(long agentId, long sessionId, long clientId, String scenarioId) {
 
-        ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
+        ApiExecutionWSModel response = new ApiExecutionWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
+        List<ApiExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
 
 
 
@@ -37,9 +37,9 @@ public class ApiScenarioExecutionMiddleware {
     }
 
 
-    public ApiScenarioExecutionWSModel apiGetScenarioExecution(long agentId, long sessionId, String scenarioId) {
+    public ApiExecutionWSModel apiGetScenarioExecution(long agentId, long sessionId, String scenarioId) {
 
-        ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
+        ApiExecutionWSModel response = new ApiExecutionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
@@ -53,13 +53,13 @@ public class ApiScenarioExecutionMiddleware {
     }
 
 
-    public ApiScenarioExecutionWSModel apiExecuteScenario(long agentId, long sessionId, long clientId, String executionId) {
+    public ApiExecutionWSModel apiExecuteScenario(long agentId, long sessionId, long clientId, String executionId) {
 
-        ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
+        ApiExecutionWSModel response = new ApiExecutionWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
+        List<ApiExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
 
-        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiGetScenarioExecutionService(agentId,sessionId,clientId,executionId);
+        ApiExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiGetScenarioExecutionService(agentId,sessionId,clientId,executionId);
         if (scenarioExecutionWSDTO != null){
             scenarioExecutionWSDTOS.add(scenarioExecutionWSDTO);
         }
@@ -74,11 +74,11 @@ public class ApiScenarioExecutionMiddleware {
     }
 
 
-    public ApiScenarioExecutionWSModel apiUpdateScenarioExecution(long agentId, long sessionId, long clientId, String executionId) {
+    public ApiExecutionWSModel apiUpdateScenarioExecution(long agentId, long sessionId, long clientId, String executionId) {
 
-        ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
+        ApiExecutionWSModel response = new ApiExecutionWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
+        List<ApiExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
 
 
 
@@ -92,11 +92,11 @@ public class ApiScenarioExecutionMiddleware {
     }
 
 
-    public ApiScenarioExecutionWSModel apiRemoveScenarioExecution(long agentId, long sessionId, long clientId, String executionId) {
+    public ApiExecutionWSModel apiRemoveScenarioExecution(long agentId, long sessionId, long clientId, String executionId) {
 
-        ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
+        ApiExecutionWSModel response = new ApiExecutionWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
+        List<ApiExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
 
 
 

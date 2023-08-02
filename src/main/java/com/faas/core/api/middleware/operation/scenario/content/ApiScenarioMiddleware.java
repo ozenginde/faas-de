@@ -148,9 +148,9 @@ public class ApiScenarioMiddleware {
 
 
 
-    public ApiScenarioActionWSModel apiGetScenarioActions(long agentId, long sessionId, String scenarioId) {
+    public ApiActionWSModel apiGetScenarioActions(long agentId, long sessionId, String scenarioId) {
 
-        ApiScenarioActionWSModel response = new ApiScenarioActionWSModel();
+        ApiActionWSModel response = new ApiActionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
@@ -165,11 +165,11 @@ public class ApiScenarioMiddleware {
     }
 
 
-    public ApiScenarioActionWSModel apiGetScenarioAction(long agentId, long sessionId, String processId) {
+    public ApiActionWSModel apiGetScenarioAction(long agentId, long sessionId, String processId) {
 
-        ApiScenarioActionWSModel response = new ApiScenarioActionWSModel();
+        ApiActionWSModel response = new ApiActionWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiScenarioActionWSDTO>scenarioActionWSDTOS = new ArrayList<>();
+        List<ApiActionWSDTO>scenarioActionWSDTOS = new ArrayList<>();
 
 
 
@@ -183,9 +183,9 @@ public class ApiScenarioMiddleware {
     }
 
 
-    public ApiScenarioAutomationWSModel apiGetScenarioAutomations(long agentId, long sessionId, String processId) {
+    public ApiAutomationWSModel apiGetScenarioAutomations(long agentId, long sessionId, String processId) {
 
-        ApiScenarioAutomationWSModel response = new ApiScenarioAutomationWSModel();
+        ApiAutomationWSModel response = new ApiAutomationWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
@@ -200,11 +200,11 @@ public class ApiScenarioMiddleware {
     }
 
 
-    public ApiScenarioAutomationWSModel apiGetScenarioAutomation(long agentId, long sessionId, String processId) {
+    public ApiAutomationWSModel apiGetScenarioAutomation(long agentId, long sessionId, String processId) {
 
-        ApiScenarioAutomationWSModel response = new ApiScenarioAutomationWSModel();
+        ApiAutomationWSModel response = new ApiAutomationWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiScenarioAutomationWSDTO>scenarioAutomations = new ArrayList<>();
+        List<ApiAutomationWSDTO>scenarioAutomations = new ArrayList<>();
 
 
 

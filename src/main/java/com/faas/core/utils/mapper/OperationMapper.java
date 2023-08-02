@@ -22,7 +22,7 @@ import com.faas.core.api.model.ws.operation.details.note.dto.ApiOperationNoteWSD
 import com.faas.core.api.model.ws.operation.details.osint.dto.ApiOperationOsIntWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationScenarioWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioWSDTO;
-import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiScenarioExecutionWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiExecutionWSDTO;
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
@@ -301,11 +301,11 @@ public class OperationMapper {
     }
 
 
-    public List<ApiScenarioExecutionWSDTO> mapApiScenarioExecutionWSDTOS(List<ScenarioExecutionDBModel> scenarioExecutionDBModels){
+    public List<ApiExecutionWSDTO> mapApiScenarioExecutionWSDTOS(List<ScenarioExecutionDBModel> scenarioExecutionDBModels){
 
-        List<ApiScenarioExecutionWSDTO> scenarioExecutionWSDTOS = new ArrayList<>();
+        List<ApiExecutionWSDTO> scenarioExecutionWSDTOS = new ArrayList<>();
         for (ScenarioExecutionDBModel scenarioExecutionDBModel : scenarioExecutionDBModels) {
-            scenarioExecutionWSDTOS.add(new ApiScenarioExecutionWSDTO(scenarioExecutionDBModel));
+            scenarioExecutionWSDTOS.add(new ApiExecutionWSDTO(scenarioExecutionDBModel));
         }
         return scenarioExecutionWSDTOS;
     }

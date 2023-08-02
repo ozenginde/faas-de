@@ -49,7 +49,7 @@ public class ApiScenarioFramework {
     }
 
 
-    public List<ApiScenarioWSDTO> apiGetScenariosService(long agentId,long sessionId,long clientId, String processId) {
+    public List<ApiScenarioWSDTO> apiGetScenariosService(long agentId,long sessionId,String processId) {
 
         List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processId);
@@ -58,16 +58,15 @@ public class ApiScenarioFramework {
     }
 
 
-    public ApiScenarioWSDTO apiGetScenarioService(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
+    public ApiScenarioWSDTO apiGetScenarioService(long agentId,long sessionId,String processId,String scenarioId) {
 
-        List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
+
 
         return null;
     }
 
 
-    public ApiScenarioWSDTO apiUpdateScenarioService(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
+    public ApiScenarioWSDTO apiUpdateScenarioService(long agentId,long sessionId,String processId,String scenarioId) {
 
         List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
@@ -102,27 +101,27 @@ public class ApiScenarioFramework {
     }
 
 
-    public List<ApiScenarioActionWSDTO> apiGetScenarioActionsService(long agentId, long sessionId, String scenarioId) {
+    public List<ApiActionWSDTO> apiGetScenarioActionsService(long agentId, long sessionId, String scenarioId) {
 
         return null;
     }
 
-    public ApiScenarioActionWSDTO apiGetScenarioActionService(long agentId, long sessionId, String scenarioId) {
-
-        return null;
-    }
-
-
-    public List<ApiScenarioAutomationWSDTO> apiGetScenarioAutomationsService(long agentId, long sessionId, String scenarioId) {
+    public ApiActionWSDTO apiGetScenarioActionService(long agentId, long sessionId, String scenarioId) {
 
         return null;
     }
 
 
-    public ApiScenarioAutomationWSDTO apiGetScenarioAutomationService(long agentId, long sessionId, String scenarioId) {
+    public List<ApiAutomationWSDTO> apiGetScenarioAutomationsService(long agentId, long sessionId, String scenarioId) {
 
         return null;
     }
+
+    public ApiAutomationWSDTO apiGetScenarioAutomationService(long agentId, long sessionId, String scenarioId) {
+
+        return null;
+    }
+
 
 
 }

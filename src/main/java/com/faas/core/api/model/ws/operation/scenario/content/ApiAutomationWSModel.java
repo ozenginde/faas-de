@@ -1,19 +1,19 @@
 package com.faas.core.api.model.ws.operation.scenario.content;
 
-import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioAutomationWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiAutomationWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;
 
-public class ApiScenarioAutomationWSModel {
+public class ApiAutomationWSModel {
 
     private GeneralWSModel general;
-    private List<ApiScenarioAutomationWSDTO>scenarioAutomations;
+    private List<ApiAutomationWSDTO>scenarioAutomations;
 
-    public ApiScenarioAutomationWSModel() {
+    public ApiAutomationWSModel() {
     }
 
-    public ApiScenarioAutomationWSModel(GeneralWSModel general, List<ApiScenarioAutomationWSDTO> scenarioAutomations) {
+    public ApiAutomationWSModel(GeneralWSModel general, List<ApiAutomationWSDTO> scenarioAutomations) {
         this.general = general;
         this.scenarioAutomations = scenarioAutomations;
     }
@@ -26,11 +26,11 @@ public class ApiScenarioAutomationWSModel {
         this.general = general;
     }
 
-    public List<ApiScenarioAutomationWSDTO> getScenarioAutomations() {
+    public List<ApiAutomationWSDTO> getScenarioAutomations() {
         return scenarioAutomations;
     }
 
-    public void setScenarioAutomations(List<ApiScenarioAutomationWSDTO> scenarioAutomations) {
+    public void setScenarioAutomations(List<ApiAutomationWSDTO> scenarioAutomations) {
         this.scenarioAutomations = scenarioAutomations;
     }
 }
