@@ -1,6 +1,6 @@
 package com.faas.core.api.framework.operation.scenario.execution;
 
-import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiExecutionWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiScenarioExecutionWSDTO;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
@@ -52,7 +52,7 @@ public class ApiScenarioExecutionFramework {
     AppUtils appUtils;
 
 
-    public ApiExecutionWSDTO apiExecuteScenarioService(long agentId, long sessionId, long clientId, String scenarioId) {
+    public ApiScenarioExecutionWSDTO apiExecuteScenarioService(long agentId, long sessionId, long clientId, String scenarioId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
@@ -61,28 +61,28 @@ public class ApiScenarioExecutionFramework {
     }
 
 
-    public List<ApiExecutionWSDTO> apiGetScenarioExecutionsService(long agentId, long sessionId, long clientId) {
+    public List<ApiScenarioExecutionWSDTO> apiGetScenarioExecutionsService(long agentId, long sessionId, long clientId) {
 
-        List<ApiExecutionWSDTO> scenarioExecutionWSDTOS = new ArrayList<>();
+        List<ApiScenarioExecutionWSDTO> scenarioExecutionWSDTOS = new ArrayList<>();
 
         return scenarioExecutionWSDTOS;
     }
 
 
-    public ApiExecutionWSDTO apiGetScenarioExecutionService(long agentId, long sessionId, long clientId, String executionId) {
+    public ApiScenarioExecutionWSDTO apiGetScenarioExecutionService(long agentId, long sessionId, long clientId, String executionId) {
 
 
         return null;
     }
 
 
-    public ApiExecutionWSDTO apiUpdateScenarioExecutionService(long agentId, long sessionId, long clientId, String executionId) {
+    public ApiScenarioExecutionWSDTO apiUpdateScenarioExecutionService(long agentId, long sessionId, long clientId, String executionId) {
 
         return null;
     }
 
 
-    public ApiExecutionWSDTO apiRemoveScenarioExecutionService(long agentId, long sessionId, long clientId, String executionId) {
+    public ApiScenarioExecutionWSDTO apiRemoveScenarioExecutionService(long agentId, long sessionId, long clientId, String executionId) {
 
 
         return null;

@@ -1,19 +1,19 @@
 package com.faas.core.api.model.ws.operation.scenario.execution;
 
-import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiExecutionWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiScenarioExecutionWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;
 
-public class ApiExecutionWSModel {
+public class ApiScenarioExecutionWSModel {
 
     private GeneralWSModel general;
-    private List<ApiExecutionWSDTO>scenarioExecutions;
+    private List<ApiScenarioExecutionWSDTO>scenarioExecutions;
 
-    public ApiExecutionWSModel() {
+    public ApiScenarioExecutionWSModel() {
     }
 
-    public ApiExecutionWSModel(GeneralWSModel general, List<ApiExecutionWSDTO> scenarioExecutions) {
+    public ApiScenarioExecutionWSModel(GeneralWSModel general, List<ApiScenarioExecutionWSDTO> scenarioExecutions) {
         this.general = general;
         this.scenarioExecutions = scenarioExecutions;
     }
@@ -26,11 +26,11 @@ public class ApiExecutionWSModel {
         this.general = general;
     }
 
-    public List<ApiExecutionWSDTO> getScenarioExecutions() {
+    public List<ApiScenarioExecutionWSDTO> getScenarioExecutions() {
         return scenarioExecutions;
     }
 
-    public void setScenarioExecutions(List<ApiExecutionWSDTO> scenarioExecutions) {
+    public void setScenarioExecutions(List<ApiScenarioExecutionWSDTO> scenarioExecutions) {
         this.scenarioExecutions = scenarioExecutions;
     }
 }

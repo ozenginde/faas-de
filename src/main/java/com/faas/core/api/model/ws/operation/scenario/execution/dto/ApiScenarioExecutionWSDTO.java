@@ -2,14 +2,14 @@ package com.faas.core.api.model.ws.operation.scenario.execution.dto;
 
 import com.faas.core.base.model.db.operation.scenario.ScenarioExecutionDBModel;
 
-public class ApiExecutionWSDTO {
+public class ApiScenarioExecutionWSDTO {
 
     private ScenarioExecutionDBModel scenarioExecution;
 
-    public ApiExecutionWSDTO() {
+    public ApiScenarioExecutionWSDTO() {
     }
 
-    public ApiExecutionWSDTO(ScenarioExecutionDBModel scenarioExecution) {
+    public ApiScenarioExecutionWSDTO(ScenarioExecutionDBModel scenarioExecution) {
         this.scenarioExecution = scenarioExecution;
     }
 
