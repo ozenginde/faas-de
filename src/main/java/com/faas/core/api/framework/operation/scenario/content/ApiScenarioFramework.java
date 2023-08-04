@@ -44,7 +44,7 @@ public class ApiScenarioFramework {
     AppUtils appUtils;
 
 
-    public ApiOperationScenarioWSDTO apiGetOperationScenarioService(long agentId,long sessionId,long clientId,String processId) {
+    public ApiOperationScenarioWSDTO apiGetOperationScenarioService(long agentId,long sessionId,String processId) {
         return operationMapper.mapApiOperationScenarioWSDTO(sessionId,processId);
     }
 
@@ -59,8 +59,6 @@ public class ApiScenarioFramework {
 
 
     public ApiScenarioWSDTO apiGetScenarioService(long agentId,long sessionId,String processId,String scenarioId) {
-
-
 
         return null;
     }
@@ -84,7 +82,6 @@ public class ApiScenarioFramework {
     }
 
 
-
     public ApiScenarioDetailsWSDTO apiGetScenarioDetailsService(long agentId,long sessionId,String processId,String scenarioId) {
 
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
@@ -106,6 +103,7 @@ public class ApiScenarioFramework {
         return null;
     }
 
+
     public ApiActionWSDTO apiGetScenarioActionService(long agentId, long sessionId, String scenarioId) {
 
         return null;
@@ -121,7 +119,6 @@ public class ApiScenarioFramework {
 
         return null;
     }
-
 
 
 }

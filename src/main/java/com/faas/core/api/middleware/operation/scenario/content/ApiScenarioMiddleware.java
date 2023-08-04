@@ -20,12 +20,12 @@ public class ApiScenarioMiddleware {
     ApiScenarioFramework apiScenarioFramework;
 
 
-    public ApiOperationScenarioWSModel apiGetOperationScenario(long agentId,long sessionId,long clientId,String processId) {
+    public ApiOperationScenarioWSModel apiGetOperationScenario(long agentId,long sessionId,String processId) {
 
         ApiOperationScenarioWSModel response = new ApiOperationScenarioWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiOperationScenarioWSDTO operationScenarioWSDTO = apiScenarioFramework.apiGetOperationScenarioService(agentId,sessionId,clientId,processId);
+        ApiOperationScenarioWSDTO operationScenarioWSDTO = apiScenarioFramework.apiGetOperationScenarioService(agentId,sessionId,processId);
         if (operationScenarioWSDTO != null){
             response.setOperationScenario(operationScenarioWSDTO);
         }
