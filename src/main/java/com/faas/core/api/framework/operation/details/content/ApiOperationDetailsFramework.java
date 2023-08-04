@@ -61,12 +61,29 @@ public class ApiOperationDetailsFramework {
     }
 
 
+    public ApiOperationDetailsWSDTO apiOperationValidateService(long agentId, long sessionId) {
+
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId, agentId);
+        List<OperationDBModel> operationDBModels = operationRepository.findBySessionId(sessionId);
+        if (!sessionDBModels.isEmpty() && !operationDBModels.isEmpty()) {
+
+            Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionDBModels.get(0).getClientId());
+            Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(sessionDBModels.get(0).getCampaignId());
+            Optional<ProcessDBModel> processDBModel = processRepository.findById(sessionDBModels.get(0).getProcessId());
+
+            if (clientDBModel.isPresent() && campaignDBModel.isPresent() && processDBModel.isPresent()) {
+                return operationMapper.mapApiOperationDetailsWSDTO(sessionDBModels.get(0), clientDBModel.get(), operationDBModels.get(0), campaignDBModel.get(), processDBModel.get());
+            }
+        }
+        return null;
+    }
+
 
     public ApiOperationCampaignWSDTO apiGetOperationCampaignService(long sessionId, long clientId, String campaignId, String processId) {
 
         List<CampaignDBModel> campaignDBModels = campaignRepository.findByIdAndStatus(campaignId,1);
         List<ProcessDBModel> processDBModels = processRepository.findByIdAndStatus(processId,1);
-        if (campaignDBModels.size()>0 && processDBModels.size()>0){
+        if (!campaignDBModels.isEmpty() && !processDBModels.isEmpty()){
 
             ApiOperationCampaignWSDTO campaignWSDTO = new ApiOperationCampaignWSDTO();
             campaignWSDTO.setOperationCampaign(campaignDBModels.get(0));
@@ -76,7 +93,6 @@ public class ApiOperationDetailsFramework {
         }
         return null;
     }
-
 
 
 }

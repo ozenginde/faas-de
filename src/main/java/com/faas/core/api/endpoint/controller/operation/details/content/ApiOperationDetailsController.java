@@ -40,6 +40,19 @@ public class ApiOperationDetailsController {
     }
 
 
+    @RequestMapping(value = ApiRoute.API_OPERATION_VALIDATE, method = RequestMethod.POST)
+    public ResponseEntity<?> apiOperationValidate(@RequestParam long agentId,
+                                                  @RequestParam long sessionId) {
+
+        ApiOperationDetailsWSModel response = apiOperationDetailsMiddleware.apiOperationValidate(agentId,sessionId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
     @RequestMapping(value = ApiRoute.API_GET_OPERATION_CAMPAIGN, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetOperationCampaign(@RequestParam long agentId,
                                                      @RequestParam long sessionId,

@@ -23,18 +23,6 @@ public class ApiOperationController {
     ApiOperationMiddleware apiOperationMiddleware;
 
 
-    @RequestMapping(value = ApiRoute.API_OPERATION_VALIDATE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiOperationValidate(@RequestParam long agentId,
-                                                  @RequestParam long sessionId) {
-
-        ApiOperationDetailsWSModel response = apiOperationMiddleware.apiOperationValidate(agentId,sessionId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
 
     @RequestMapping(value = ApiRoute.API_GET_OPERATION, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetOperation(@RequestParam long agentId,

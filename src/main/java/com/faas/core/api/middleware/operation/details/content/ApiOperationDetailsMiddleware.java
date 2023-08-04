@@ -38,6 +38,26 @@ public class ApiOperationDetailsMiddleware {
     }
 
 
+    public ApiOperationDetailsWSModel apiOperationValidate(long agentId, long sessionId) {
+
+        ApiOperationDetailsWSModel response = new ApiOperationDetailsWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        ApiOperationDetailsWSDTO operationDetailsWSDTO = apiOperationDetailsFramework.apiOperationValidateService(agentId,sessionId);
+        if (operationDetailsWSDTO != null){
+            response.setOperationDetails(operationDetailsWSDTO);
+        }
+
+        general.setOperation("apiOperationValidate");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
     public ApiOperationCampaignWSModel apiGetOperationCampaign(long agentId, long sessionId, long clientId, String campaignId, String processId) {
 
         ApiOperationCampaignWSModel response = new ApiOperationCampaignWSModel();

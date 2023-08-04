@@ -28,24 +28,7 @@ public class ApiOperationMiddleware {
     AppUtils appUtils;
 
 
-    public ApiOperationDetailsWSModel apiOperationValidate(long agentId, long sessionId) {
 
-        ApiOperationDetailsWSModel response = new ApiOperationDetailsWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-        ApiOperationDetailsWSDTO operationDetailsWSDTO = apiOperationFramework.apiOperationValidateService(agentId,sessionId);
-        if (operationDetailsWSDTO != null){
-            response.setOperationDetails(operationDetailsWSDTO);
-        }
-
-        general.setOperation("apiOperationValidate");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
     public ApiOperationWSModel apiGetOperation(long agentId,long sessionId,long clientId) {
