@@ -96,7 +96,6 @@ public class ApiScenarioController {
     }
 
 
-
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO_DETAILS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenarioDetails(@RequestParam long agentId,
                                                    @RequestParam long sessionId,
