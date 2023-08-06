@@ -18,7 +18,7 @@ public class ScenarioDBModel {
     private String scenarioType;
     private String baseType;
     private List<ScenarioVariableDAO> variables;
-    private List<ScenarioElement>elements;
+    private List<ScenarioElement> elements;
     private long uDate;
     private long cDate;
     private int status;
