@@ -1,8 +1,7 @@
 package com.faas.core.api.endpoint.controller.operation.scenario.details;
 
 import com.faas.core.api.middleware.operation.scenario.details.ApiScenarioDetailsMiddleware;
-import com.faas.core.api.model.ws.operation.scenario.details.ApiActionWSModel;
-import com.faas.core.api.model.ws.operation.scenario.details.ApiAutomationWSModel;
+import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioElementWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioDetailsWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
@@ -39,26 +38,26 @@ public class ApiScenarioDetailsController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_ACTIONS, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetScenarioActions(@RequestParam long agentId,
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_ELEMENTS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioElements(@RequestParam long agentId,
+                                                    @RequestParam long sessionId,
+                                                    @RequestParam String scenarioId) {
+
+        ApiScenarioElementWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioElements(agentId,sessionId,scenarioId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_ELEMENT, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioElement(@RequestParam long agentId,
                                                    @RequestParam long sessionId,
-                                                   @RequestParam String scenarioId) {
+                                                   @RequestParam String processId) {
 
-        ApiActionWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioActions(agentId,sessionId,scenarioId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_ACTION, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetScenarioAction(@RequestParam long agentId,
-                                                  @RequestParam long sessionId,
-                                                  @RequestParam String processId) {
-
-        ApiActionWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioAction(agentId,sessionId,processId);
+        ApiScenarioElementWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioElement(agentId,sessionId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -66,33 +65,6 @@ public class ApiScenarioDetailsController {
         return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
 
-
-    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_AUTOMATIONS, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetScenarioAutomations(@RequestParam long agentId,
-                                                       @RequestParam long sessionId,
-                                                       @RequestParam String processId) {
-
-        ApiAutomationWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioAutomations(agentId,sessionId,processId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_AUTOMATION, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetScenarioAutomation(@RequestParam long agentId,
-                                                      @RequestParam long sessionId,
-                                                      @RequestParam String processId) {
-
-        ApiAutomationWSModel response = apiScenarioDetailsMiddleware.apiGetScenarioAutomation(agentId,sessionId,processId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
 

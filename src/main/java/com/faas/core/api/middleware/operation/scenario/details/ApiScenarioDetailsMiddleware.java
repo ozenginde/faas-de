@@ -1,11 +1,9 @@
 package com.faas.core.api.middleware.operation.scenario.details;
 
 import com.faas.core.api.framework.operation.scenario.details.ApiScenarioDetailsFramework;
-import com.faas.core.api.model.ws.operation.scenario.details.ApiActionWSModel;
-import com.faas.core.api.model.ws.operation.scenario.details.ApiAutomationWSModel;
+import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioElementWSModel;
 import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioDetailsWSModel;
-import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiActionWSDTO;
-import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiAutomationWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiScenarioElementWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiScenarioDetailsWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.utils.config.AppConstant;
@@ -45,14 +43,14 @@ public class ApiScenarioDetailsMiddleware {
 
 
 
-    public ApiActionWSModel apiGetScenarioActions(long agentId, long sessionId, String scenarioId) {
+    public ApiScenarioElementWSModel apiGetScenarioElements(long agentId, long sessionId, String scenarioId) {
 
-        ApiActionWSModel response = new ApiActionWSModel();
+        ApiScenarioElementWSModel response = new ApiScenarioElementWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
 
 
-        general.setOperation("apiGetScenarioActions");
+        general.setOperation("apiGetScenarioElements");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -62,15 +60,16 @@ public class ApiScenarioDetailsMiddleware {
     }
 
 
-    public ApiActionWSModel apiGetScenarioAction(long agentId, long sessionId, String processId) {
+    public ApiScenarioElementWSModel apiGetScenarioElement(long agentId, long sessionId, String processId) {
 
-        ApiActionWSModel response = new ApiActionWSModel();
+        ApiScenarioElementWSModel response = new ApiScenarioElementWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiActionWSDTO>scenarioActionWSDTOS = new ArrayList<>();
+        List<ApiScenarioElementWSDTO>scenarioElementWSDTOS = new ArrayList<>();
 
 
 
-        general.setOperation("apiGetScenarioAction");
+        response.setScenarioElements(scenarioElementWSDTOS);
+        general.setOperation("apiGetScenarioElement");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -79,40 +78,6 @@ public class ApiScenarioDetailsMiddleware {
         return response;
     }
 
-
-    public ApiAutomationWSModel apiGetScenarioAutomations(long agentId, long sessionId, String processId) {
-
-        ApiAutomationWSModel response = new ApiAutomationWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-
-
-
-        general.setOperation("apiGetScenarioAutomations");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
-
-
-    public ApiAutomationWSModel apiGetScenarioAutomation(long agentId, long sessionId, String processId) {
-
-        ApiAutomationWSModel response = new ApiAutomationWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<ApiAutomationWSDTO>scenarioAutomations = new ArrayList<>();
-
-
-
-        general.setOperation("apiGetScenarioAutomation");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
 

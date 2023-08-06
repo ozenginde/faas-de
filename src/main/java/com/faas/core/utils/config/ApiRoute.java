@@ -114,11 +114,8 @@ public class ApiRoute {
     public static final String API_REMOVE_SCENARIO = "apiremovescenario";
 
     public static final String API_GET_SCENARIO_DETAILS = "apigetscenariodetails";
-    public static final String API_GET_SCENARIO_ACTIONS = "apigetscenarioactions";
-    public static final String API_GET_SCENARIO_ACTION = "apigetscenarioaction";
-    public static final String API_GET_SCENARIO_AUTOMATIONS = "apigetscenarioautomations";
-    public static final String API_GET_SCENARIO_AUTOMATION = "apigetscenarioautomation";
-
+    public static final String API_GET_SCENARIO_ELEMENTS = "apigetscenarioelements";
+    public static final String API_GET_SCENARIO_ELEMENT = "apigetscenarioelement";
 
 
     public static final String API_EXECUTE_SCENARIO = "apiexecutescenario";
@@ -127,6 +124,7 @@ public class ApiRoute {
     public static final String API_GET_SCENARIO_EXECUTION = "apigetscenarioexecution";
     public static final String API_UPDATE_SCENARIO_EXECUTION = "apiupdatescenarioexecution";
     public static final String API_REMOVE_SCENARIO_EXECUTION = "apiremovescenarioexecution";
+
 
 
 

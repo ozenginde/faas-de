@@ -1,7 +1,6 @@
 package com.faas.core.api.framework.operation.scenario.details;
 
-import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiActionWSDTO;
-import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiAutomationWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiScenarioElementWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiScenarioDetailsWSDTO;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
@@ -61,27 +60,17 @@ public class ApiScenarioDetailsFramework {
     }
 
 
-    public List<ApiActionWSDTO> apiGetScenarioActionsService(long agentId, long sessionId, String scenarioId) {
+    public List<ApiScenarioElementWSDTO> apiGetScenarioElementsService(long agentId, long sessionId, String scenarioId) {
 
         return null;
     }
 
 
-    public ApiActionWSDTO apiGetScenarioActionService(long agentId, long sessionId, String scenarioId) {
+    public ApiScenarioElementWSDTO apiGetScenarioElementService(long agentId, long sessionId, String scenarioId) {
 
         return null;
     }
 
-
-    public List<ApiAutomationWSDTO> apiGetScenarioAutomationsService(long agentId, long sessionId, String scenarioId) {
-
-        return null;
-    }
-
-    public ApiAutomationWSDTO apiGetScenarioAutomationService(long agentId, long sessionId, String scenarioId) {
-
-        return null;
-    }
 
 
 }

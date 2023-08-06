@@ -2,9 +2,6 @@ package com.faas.core.api.endpoint.controller.operation.scenario.content;
 
 import com.faas.core.api.middleware.operation.scenario.content.ApiScenarioMiddleware;
 import com.faas.core.api.model.ws.operation.scenario.content.*;
-import com.faas.core.api.model.ws.operation.scenario.details.ApiActionWSModel;
-import com.faas.core.api.model.ws.operation.scenario.details.ApiAutomationWSModel;
-import com.faas.core.api.model.ws.operation.scenario.details.ApiScenarioDetailsWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
