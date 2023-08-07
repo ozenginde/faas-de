@@ -42,7 +42,6 @@ public class ApiScenarioDetailsMiddleware {
     }
 
 
-
     public ApiScenarioElementWSModel apiGetScenarioElements(long agentId, long sessionId, String scenarioId) {
 
         ApiScenarioElementWSModel response = new ApiScenarioElementWSModel();
@@ -77,7 +76,6 @@ public class ApiScenarioDetailsMiddleware {
 
         return response;
     }
-
 
 
 
