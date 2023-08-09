@@ -64,22 +64,36 @@ public class ApiScenarioFramework {
     }
 
 
-    public ApiScenarioWSDTO apiUpdateScenarioService(long agentId,long sessionId,String processId,String scenarioId) {
 
-        List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
+    public ApiScenarioDetailsWSDTO apiGetScenarioDetailsService(long agentId, long sessionId, String processId, String scenarioId) {
+
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
+        List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
+        if (scenarioDBModel.isPresent() && !processScenarioDBModels.isEmpty()){
+
+            ApiScenarioDetailsWSDTO scenarioDetailsWSDTO = new ApiScenarioDetailsWSDTO();
+            scenarioDetailsWSDTO.setScenario(scenarioDBModel.get());
+            scenarioDetailsWSDTO.setProcessScenario(processScenarioDBModels.get(0));
+
+            return scenarioDetailsWSDTO;
+        }
+        return null;
+    }
+
+
+    public List<ApiScenarioElementWSDTO> apiGetScenarioElementsService(long agentId, long sessionId, String scenarioId) {
 
         return null;
     }
 
 
-    public ApiScenarioWSDTO apiRemoveScenarioService(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
-
-        List<ProcessScenarioDBModel> processScenarioDBModel = processScenarioRepository.findByProcessIdAndScenarioId(processId,scenarioId);
-        Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
+    public ApiScenarioElementWSDTO apiGetScenarioElementService(long agentId, long sessionId, String scenarioId) {
 
         return null;
     }
+
+
+
 
 
 

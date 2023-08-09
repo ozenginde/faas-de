@@ -1,6 +1,6 @@
-package com.faas.core.api.model.ws.operation.scenario.details;
+package com.faas.core.api.model.ws.operation.scenario.content;
 
-import com.faas.core.api.model.ws.operation.scenario.details.dto.ApiScenarioDetailsWSDTO;
+import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioDetailsWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 public class ApiScenarioDetailsWSModel {

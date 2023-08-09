@@ -1,4 +1,4 @@
-package com.faas.core.api.model.ws.operation.scenario.details.dto;
+package com.faas.core.api.model.ws.operation.scenario.content.dto;
 
 public class ApiScenarioElementWSDTO {
 

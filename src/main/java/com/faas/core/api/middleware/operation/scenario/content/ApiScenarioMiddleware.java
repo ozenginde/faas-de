@@ -82,19 +82,18 @@ public class ApiScenarioMiddleware {
     }
 
 
-    public ApiScenarioWSModel apiUpdateScenario(long agentId,long sessionId,String processId,String scenarioId) {
 
-        ApiScenarioWSModel response = new ApiScenarioWSModel();
+    public ApiScenarioDetailsWSModel apiGetScenarioDetails(long agentId, long sessionId, String processId, String scenarioId) {
+
+        ApiScenarioDetailsWSModel response = new ApiScenarioDetailsWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
 
-        ApiScenarioWSDTO scenarioWSDTO = apiScenarioFramework.apiUpdateScenarioService(agentId,sessionId,processId,scenarioId);
-        if (scenarioWSDTO != null){
-            scenarioWSDTOS.add(scenarioWSDTO);
+        ApiScenarioDetailsWSDTO scenarioDetailsWSDTO = apiScenarioFramework.apiGetScenarioDetailsService(agentId,sessionId,processId,scenarioId);
+        if (scenarioDetailsWSDTO != null){
+            response.setScenarioDetails(scenarioDetailsWSDTO);
         }
 
-        response.setScenarios(scenarioWSDTOS);
-        general.setOperation("apiUpdateScenario");
+        general.setOperation("apiGetScenarioDetails");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -104,19 +103,14 @@ public class ApiScenarioMiddleware {
     }
 
 
-    public ApiScenarioWSModel apiRemoveScenario(long agentId,long sessionId,long clientId,String processId,String scenarioId) {
+    public ApiScenarioElementWSModel apiGetScenarioElements(long agentId, long sessionId, String scenarioId) {
 
-        ApiScenarioWSModel response = new ApiScenarioWSModel();
+        ApiScenarioElementWSModel response = new ApiScenarioElementWSModel();
         GeneralWSModel general = new GeneralWSModel();
-        List<ApiScenarioWSDTO>scenarioWSDTOS = new ArrayList<>();
 
-        ApiScenarioWSDTO scenarioWSDTO = apiScenarioFramework.apiRemoveScenarioService(agentId,sessionId,clientId,processId,scenarioId);
-        if (scenarioWSDTO != null){
-            scenarioWSDTOS.add(scenarioWSDTO);
-        }
 
-        response.setScenarios(scenarioWSDTOS);
-        general.setOperation("apiRemoveScenario");
+
+        general.setOperation("apiGetScenarioElements");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
         general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
         general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -124,6 +118,27 @@ public class ApiScenarioMiddleware {
 
         return response;
     }
+
+
+    public ApiScenarioElementWSModel apiGetScenarioElement(long agentId, long sessionId, String processId) {
+
+        ApiScenarioElementWSModel response = new ApiScenarioElementWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<ApiScenarioElementWSDTO>scenarioElementWSDTOS = new ArrayList<>();
+
+
+
+        response.setScenarioElements(scenarioElementWSDTOS);
+        general.setOperation("apiGetScenarioElement");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
 
 
 

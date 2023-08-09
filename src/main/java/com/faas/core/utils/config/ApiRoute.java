@@ -110,12 +110,10 @@ public class ApiRoute {
     public static final String API_GET_OPERATION_SCENARIO = "apigetoperationscenario";
     public static final String API_GET_SCENARIOS = "apigetscenarios";
     public static final String API_GET_SCENARIO = "apigetscenario";
-    public static final String API_UPDATE_SCENARIO = "apiupdatescenario";
-    public static final String API_REMOVE_SCENARIO = "apiremovescenario";
-
     public static final String API_GET_SCENARIO_DETAILS = "apigetscenariodetails";
     public static final String API_GET_SCENARIO_ELEMENTS = "apigetscenarioelements";
     public static final String API_GET_SCENARIO_ELEMENT = "apigetscenarioelement";
+
 
 
     public static final String API_EXECUTE_SCENARIO = "apiexecutescenario";

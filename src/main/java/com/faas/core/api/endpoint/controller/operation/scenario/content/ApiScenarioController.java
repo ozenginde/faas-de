@@ -65,13 +65,13 @@ public class ApiScenarioController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_UPDATE_SCENARIO, method = RequestMethod.POST)
-    public ResponseEntity<?> apiUpdateScenario(@RequestParam long agentId,
-                                               @RequestParam long sessionId,
-                                               @RequestParam String processId,
-                                               @RequestParam String scenarioId) {
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_DETAILS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioDetails(@RequestParam long agentId,
+                                                   @RequestParam long sessionId,
+                                                   @RequestParam String processId,
+                                                   @RequestParam String scenarioId) {
 
-        ApiScenarioWSModel response = apiScenarioMiddleware.apiUpdateScenario(agentId,sessionId,processId,scenarioId);
+        ApiScenarioDetailsWSModel response = apiScenarioMiddleware.apiGetScenarioDetails(agentId,sessionId,processId,scenarioId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -80,14 +80,26 @@ public class ApiScenarioController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_REMOVE_SCENARIO, method = RequestMethod.POST)
-    public ResponseEntity<?> apiRemoveScenario(@RequestParam long agentId,
-                                               @RequestParam long sessionId,
-                                               @RequestParam long clientId,
-                                               @RequestParam String processId,
-                                               @RequestParam String scenarioId) {
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_ELEMENTS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioElements(@RequestParam long agentId,
+                                                    @RequestParam long sessionId,
+                                                    @RequestParam String scenarioId) {
 
-        ApiScenarioWSModel response = apiScenarioMiddleware.apiRemoveScenario(agentId,sessionId,clientId,processId,scenarioId);
+        ApiScenarioElementWSModel response = apiScenarioMiddleware.apiGetScenarioElements(agentId,sessionId,scenarioId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_SCENARIO_ELEMENT, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetScenarioElement(@RequestParam long agentId,
+                                                   @RequestParam long sessionId,
+                                                   @RequestParam String processId) {
+
+        ApiScenarioElementWSModel response = apiScenarioMiddleware.apiGetScenarioElement(agentId,sessionId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
