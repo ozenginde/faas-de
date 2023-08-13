@@ -103,12 +103,15 @@ public class ApiScenarioMiddleware {
     }
 
 
-    public ApiScenarioElementWSModel apiGetScenarioElements(long agentId, long sessionId, String scenarioId) {
+    public ApiScenarioElementWSModel apiGetScenarioElements(long agentId,long sessionId,String scenarioId) {
 
         ApiScenarioElementWSModel response = new ApiScenarioElementWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-
+        List<ApiScenarioElementWSDTO> scenarioElementWSDTOS = apiScenarioFramework.apiGetScenarioElementsService(agentId,sessionId,scenarioId);
+        if (scenarioElementWSDTOS != null){
+            response.setScenarioElements(scenarioElementWSDTOS);
+        }
 
         general.setOperation("apiGetScenarioElements");
         general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
@@ -120,13 +123,16 @@ public class ApiScenarioMiddleware {
     }
 
 
-    public ApiScenarioElementWSModel apiGetScenarioElement(long agentId, long sessionId, String processId) {
+    public ApiScenarioElementWSModel apiGetScenarioElement(long agentId,long sessionId, String scenarioId,String elementId) {
 
         ApiScenarioElementWSModel response = new ApiScenarioElementWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioElementWSDTO>scenarioElementWSDTOS = new ArrayList<>();
 
-
+        ApiScenarioElementWSDTO scenarioElementWSDTO = apiScenarioFramework.apiGetScenarioElementService(agentId,sessionId,scenarioId,elementId);
+        if (scenarioElementWSDTO != null){
+            scenarioElementWSDTOS.add(scenarioElementWSDTO);
+        }
 
         response.setScenarioElements(scenarioElementWSDTOS);
         general.setOperation("apiGetScenarioElement");

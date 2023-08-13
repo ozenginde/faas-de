@@ -91,14 +91,31 @@ public class ApiScenarioFramework {
     }
 
 
-    public List<ApiScenarioElementWSDTO> apiGetScenarioElementsService(long agentId, long sessionId, String scenarioId) {
+    public List<ApiScenarioElementWSDTO> apiGetScenarioElementsService(long agentId,long sessionId,String scenarioId) {
 
-        return null;
+        List<ApiScenarioElementWSDTO>scenarioElementWSDTOS = new ArrayList<>();
+        Optional<SessionDBModel> sessionDBModel = sessionRepository.findById(sessionId);
+        Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
+        if (sessionDBModel.isPresent() && scenarioDBModel.isPresent() && scenarioDBModel.get().getElements() != null){
+            for (int i=0;i<scenarioDBModel.get().getElements().size();i++){
+                scenarioElementWSDTOS.add(new ApiScenarioElementWSDTO(scenarioDBModel.get().getElements().get(i)));
+            }
+        }
+        return scenarioElementWSDTOS;
     }
 
 
-    public ApiScenarioElementWSDTO apiGetScenarioElementService(long agentId, long sessionId, String scenarioId) {
+    public ApiScenarioElementWSDTO apiGetScenarioElementService(long agentId,long sessionId, String scenarioId,String elementId) {
 
+        Optional<SessionDBModel> sessionDBModel = sessionRepository.findById(sessionId);
+        Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
+        if (sessionDBModel.isPresent() && scenarioDBModel.isPresent() && scenarioDBModel.get().getElements() != null){
+            for (int i=0;i<scenarioDBModel.get().getElements().size();i++){
+                if (scenarioDBModel.get().getElements().get(i).getId().equalsIgnoreCase(elementId)){
+                    return new ApiScenarioElementWSDTO(scenarioDBModel.get().getElements().get(i));
+                }
+            }
+        }
         return null;
     }
 
