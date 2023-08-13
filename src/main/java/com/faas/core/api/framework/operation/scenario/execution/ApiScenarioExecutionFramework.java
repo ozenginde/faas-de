@@ -52,10 +52,8 @@ public class ApiScenarioExecutionFramework {
     AppUtils appUtils;
 
 
-    public ApiScenarioExecutionWSDTO apiExecuteScenarioService(long agentId, long sessionId, long clientId, String scenarioId) {
+    public ApiScenarioExecutionWSDTO apiScenarioExecuteService(long agentId,long sessionId,String processId,String scenarioId) {
 
-        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
-        Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
 
         return null;
     }

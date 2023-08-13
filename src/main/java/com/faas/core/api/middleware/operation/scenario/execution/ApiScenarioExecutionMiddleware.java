@@ -19,6 +19,28 @@ public class ApiScenarioExecutionMiddleware {
     ApiScenarioExecutionFramework apiScenarioExecutionFramework;
 
 
+    public ApiScenarioExecutionWSModel apiScenarioExecute(long agentId,long sessionId,String processId,String scenarioId) {
+
+        ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
+
+        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiScenarioExecuteService(agentId,sessionId,processId,scenarioId);
+        if (scenarioExecutionWSDTO != null){
+            scenarioExecutionWSDTOS.add(scenarioExecutionWSDTO);
+        }
+
+        response.setScenarioExecutions(scenarioExecutionWSDTOS);
+        general.setOperation("apiGetScenarioExecution");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
     public ApiScenarioExecutionWSModel apiGetScenarioExecutions(long agentId, long sessionId, long clientId, String scenarioId) {
 
         ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
@@ -53,25 +75,6 @@ public class ApiScenarioExecutionMiddleware {
     }
 
 
-    public ApiScenarioExecutionWSModel apiExecuteScenario(long agentId, long sessionId, long clientId, String executionId) {
-
-        ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
-        GeneralWSModel general = new GeneralWSModel();
-        List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
-
-        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiGetScenarioExecutionService(agentId,sessionId,clientId,executionId);
-        if (scenarioExecutionWSDTO != null){
-            scenarioExecutionWSDTOS.add(scenarioExecutionWSDTO);
-        }
-
-        general.setOperation("apiGetScenarioExecution");
-        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
-        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
-        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
-        response.setGeneral(general);
-
-        return response;
-    }
 
 
     public ApiScenarioExecutionWSModel apiUpdateScenarioExecution(long agentId, long sessionId, long clientId, String executionId) {

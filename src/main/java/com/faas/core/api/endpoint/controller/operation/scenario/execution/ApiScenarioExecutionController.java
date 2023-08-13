@@ -22,13 +22,13 @@ public class ApiScenarioExecutionController {
     ApiScenarioExecutionMiddleware apiScenarioExecutionMiddleware;
 
 
-    @RequestMapping(value = ApiRoute.API_EXECUTE_SCENARIO, method = RequestMethod.POST)
-    public ResponseEntity<?> apiExecuteScenario(@RequestParam long agentId,
+    @RequestMapping(value = ApiRoute.API_SCENARIO_EXECUTE, method = RequestMethod.POST)
+    public ResponseEntity<?> apiScenarioExecute(@RequestParam long agentId,
                                                 @RequestParam long sessionId,
-                                                @RequestParam long clientId,
+                                                @RequestParam String processId,
                                                 @RequestParam String scenarioId) {
 
-        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiExecuteScenario(agentId,sessionId,clientId,scenarioId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiScenarioExecute(agentId,sessionId,processId,scenarioId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
