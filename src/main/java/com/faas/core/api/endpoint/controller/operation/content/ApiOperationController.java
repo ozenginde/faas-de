@@ -38,7 +38,6 @@ public class ApiOperationController {
     }
 
 
-
     @RequestMapping(value = ApiRoute.API_OPERATION_LAUNCH, method = RequestMethod.POST)
     public ResponseEntity<?> apiOperationLaunch(@RequestParam long agentId,
                                                 @RequestParam long sessionId,

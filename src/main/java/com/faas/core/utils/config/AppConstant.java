@@ -49,10 +49,10 @@ public class AppConstant {
     public static final String AUTOMATION_ELEMENT = "AUTOMATION";
 
 
-    public static final String EXECUTION_READY = "EXECUTION_READY";
-    public static final String EXECUTION_ACTIVE = "EXECUTION_ACTIVE";
-    public static final String EXECUTION_SUCCESS = "EXECUTION_SUCCESS";
-    public static final String EXECUTION_FAIL = "EXECUTION_FAIL";
+    public static final String READY_EXECUTION = "READY_EXECUTION";
+    public static final String ACTIVE_EXECUTION = "ACTIVE_EXECUTION";
+    public static final String SUCCESS_EXECUTION = "SUCCESS_EXECUTION";
+    public static final String FAIL_EXECUTION = "FAIL_EXECUTION";
 
 
 

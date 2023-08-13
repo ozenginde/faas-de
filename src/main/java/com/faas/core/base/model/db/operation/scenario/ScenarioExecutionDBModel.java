@@ -18,6 +18,9 @@ public class ScenarioExecutionDBModel {
     private String campaignId;
     private String processId;
     private String scenarioId;
+    private String scenario;
+    private String scenarioType;
+    private String baseType;
     private List<ElementExecutionDAO> executions;
     private String executionState;
     private long uDate;
@@ -27,7 +30,7 @@ public class ScenarioExecutionDBModel {
     public ScenarioExecutionDBModel() {
     }
 
-    public ScenarioExecutionDBModel(String id, long sessionId, long agentId, String operationId, String campaignId, String processId, String scenarioId, List<ElementExecutionDAO> executions, String executionState, long uDate, long cDate, int status) {
+    public ScenarioExecutionDBModel(String id, long sessionId, long agentId, String operationId, String campaignId, String processId, String scenarioId, String scenario, String scenarioType, String baseType, List<ElementExecutionDAO> executions, String executionState, long uDate, long cDate, int status) {
         this.id = id;
         this.sessionId = sessionId;
         this.agentId = agentId;
@@ -35,6 +38,9 @@ public class ScenarioExecutionDBModel {
         this.campaignId = campaignId;
         this.processId = processId;
         this.scenarioId = scenarioId;
+        this.scenario = scenario;
+        this.scenarioType = scenarioType;
+        this.baseType = baseType;
         this.executions = executions;
         this.executionState = executionState;
         this.uDate = uDate;
@@ -96,6 +102,30 @@ public class ScenarioExecutionDBModel {
 
     public void setScenarioId(String scenarioId) {
         this.scenarioId = scenarioId;
+    }
+
+    public String getScenario() {
+        return scenario;
+    }
+
+    public void setScenario(String scenario) {
+        this.scenario = scenario;
+    }
+
+    public String getScenarioType() {
+        return scenarioType;
+    }
+
+    public void setScenarioType(String scenarioType) {
+        this.scenarioType = scenarioType;
+    }
+
+    public String getBaseType() {
+        return baseType;
+    }
+
+    public void setBaseType(String baseType) {
+        this.baseType = baseType;
     }
 
     public List<ElementExecutionDAO> getExecutions() {

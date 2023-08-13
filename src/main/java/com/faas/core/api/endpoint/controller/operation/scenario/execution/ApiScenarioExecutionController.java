@@ -25,10 +25,11 @@ public class ApiScenarioExecutionController {
     @RequestMapping(value = ApiRoute.API_SCENARIO_EXECUTE, method = RequestMethod.POST)
     public ResponseEntity<?> apiScenarioExecute(@RequestParam long agentId,
                                                 @RequestParam long sessionId,
+                                                @RequestParam String operationId,
                                                 @RequestParam String processId,
                                                 @RequestParam String scenarioId) {
 
-        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiScenarioExecute(agentId,sessionId,processId,scenarioId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiScenarioExecute(agentId,sessionId,operationId,processId,scenarioId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -40,10 +41,10 @@ public class ApiScenarioExecutionController {
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO_EXECUTIONS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenarioExecutions(@RequestParam long agentId,
                                                       @RequestParam long sessionId,
-                                                      @RequestParam long clientId,
-                                                      @RequestParam String scenarioId) {
+                                                      @RequestParam String campaignId,
+                                                      @RequestParam String processId) {
 
-        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiGetScenarioExecutions(agentId,sessionId,clientId,scenarioId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiGetScenarioExecutions(agentId,sessionId,campaignId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -55,9 +56,9 @@ public class ApiScenarioExecutionController {
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO_EXECUTION, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenarioExecution(@RequestParam long agentId,
                                                      @RequestParam long sessionId,
-                                                     @RequestParam String scenarioId) {
+                                                     @RequestParam String executionId) {
 
-        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiGetScenarioExecution(agentId,sessionId,scenarioId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiGetScenarioExecution(agentId,sessionId,executionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -69,10 +70,9 @@ public class ApiScenarioExecutionController {
     @RequestMapping(value = ApiRoute.API_UPDATE_SCENARIO_EXECUTION, method = RequestMethod.POST)
     public ResponseEntity<?> apiUpdateScenarioExecution(@RequestParam long agentId,
                                                         @RequestParam long sessionId,
-                                                        @RequestParam long clientId,
-                                                        @RequestParam String scenarioId) {
+                                                        @RequestParam String executionId) {
 
-        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiUpdateScenarioExecution(agentId,sessionId,clientId,scenarioId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiUpdateScenarioExecution(agentId,sessionId,executionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
