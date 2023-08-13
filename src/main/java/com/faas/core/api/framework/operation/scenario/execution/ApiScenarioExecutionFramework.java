@@ -63,11 +63,11 @@ public class ApiScenarioExecutionFramework {
     AppUtils appUtils;
 
 
-    public ApiScenarioExecutionWSDTO apiScenarioExecuteService(long agentId,long sessionId,String operationId,String processId,String scenarioId) {
+    public ApiScenarioExecutionWSDTO apiScenarioExecuteService(long agentId,long sessionId,String processId,String scenarioId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentIdAndProcessId(sessionId,agentId,processId);
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(scenarioId);
-        List<OperationDBModel> operationDBModels = operationRepository.findByIdAndSessionId(operationId,sessionId);
+        List<OperationDBModel> operationDBModels = operationRepository.findBySessionId(sessionId);
 
         if (!sessionDBModels.isEmpty() && sessionDBModels.get(0).getSessionState().equalsIgnoreCase(AppConstant.ACTIVE_SESSION)
                 && !operationDBModels.isEmpty() && operationDBModels.get(0).getOperationState().equalsIgnoreCase(AppConstant.ACTIVE_OPERATION)
@@ -76,7 +76,7 @@ public class ApiScenarioExecutionFramework {
             ScenarioExecutionDBModel scenarioExecutionDBModel = new ScenarioExecutionDBModel();
             scenarioExecutionDBModel.setSessionId(sessionId);
             scenarioExecutionDBModel.setAgentId(agentId);
-            scenarioExecutionDBModel.setOperationId(operationId);
+            scenarioExecutionDBModel.setOperationId(operationDBModels.get(0).getId());
             scenarioExecutionDBModel.setCampaignId(sessionDBModels.get(0).getCampaignId());
             scenarioExecutionDBModel.setProcessId(sessionDBModels.get(0).getProcessId());
             scenarioExecutionDBModel.setScenarioId(scenarioDBModel.get().getId());

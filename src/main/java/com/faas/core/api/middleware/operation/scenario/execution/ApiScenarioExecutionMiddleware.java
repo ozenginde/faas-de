@@ -19,13 +19,13 @@ public class ApiScenarioExecutionMiddleware {
     ApiScenarioExecutionFramework apiScenarioExecutionFramework;
 
 
-    public ApiScenarioExecutionWSModel apiScenarioExecute(long agentId,long sessionId,String operationId,String processId,String scenarioId) {
+    public ApiScenarioExecutionWSModel apiScenarioExecute(long agentId,long sessionId,String processId,String scenarioId) {
 
         ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ApiScenarioExecutionWSDTO>scenarioExecutionWSDTOS = new ArrayList<>();
 
-        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiScenarioExecuteService(agentId,sessionId,operationId,processId,scenarioId);
+        ApiScenarioExecutionWSDTO scenarioExecutionWSDTO =  apiScenarioExecutionFramework.apiScenarioExecuteService(agentId,sessionId,processId,scenarioId);
         if (scenarioExecutionWSDTO != null){
             scenarioExecutionWSDTOS.add(scenarioExecutionWSDTO);
         }
