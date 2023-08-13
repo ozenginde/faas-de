@@ -41,12 +41,12 @@ public class ApiScenarioExecutionMiddleware {
     }
 
 
-    public ApiScenarioExecutionWSModel apiGetScenarioExecutions(long agentId,long sessionId,String campaignId,String processId) {
+    public ApiScenarioExecutionWSModel apiGetScenarioExecutions(long agentId,long sessionId,String processId) {
 
         ApiScenarioExecutionWSModel response = new ApiScenarioExecutionWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiScenarioExecutionWSDTO> scenarioExecutionWSDTOS = apiScenarioExecutionFramework.apiGetScenarioExecutionsService(agentId,sessionId,campaignId,processId);
+        List<ApiScenarioExecutionWSDTO> scenarioExecutionWSDTOS = apiScenarioExecutionFramework.apiGetScenarioExecutionsService(agentId,sessionId,processId);
         if (scenarioExecutionWSDTOS != null){
             response.setScenarioExecutions(scenarioExecutionWSDTOS);
         }

@@ -95,10 +95,10 @@ public class ApiScenarioExecutionFramework {
     }
 
 
-    public List<ApiScenarioExecutionWSDTO> apiGetScenarioExecutionsService(long agentId,long sessionId,String campaignId,String processId) {
+    public List<ApiScenarioExecutionWSDTO> apiGetScenarioExecutionsService(long agentId,long sessionId,String processId) {
 
         List<ApiScenarioExecutionWSDTO> scenarioExecutionWSDTOS = new ArrayList<>();
-        List<ScenarioExecutionDBModel> scenarioExecutionDBModels = scenarioExecutionRepository.findBySessionIdAndCampaignIdAndProcessId(sessionId,campaignId,processId);
+        List<ScenarioExecutionDBModel> scenarioExecutionDBModels = scenarioExecutionRepository.findBySessionIdAndProcessId(sessionId,processId);
         for (ScenarioExecutionDBModel scenarioExecutionDBModel : scenarioExecutionDBModels) {
             scenarioExecutionWSDTOS.add(new ApiScenarioExecutionWSDTO(scenarioExecutionDBModel));
         }

@@ -41,10 +41,9 @@ public class ApiScenarioExecutionController {
     @RequestMapping(value = ApiRoute.API_GET_SCENARIO_EXECUTIONS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetScenarioExecutions(@RequestParam long agentId,
                                                       @RequestParam long sessionId,
-                                                      @RequestParam String campaignId,
                                                       @RequestParam String processId) {
 
-        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiGetScenarioExecutions(agentId,sessionId,campaignId,processId);
+        ApiScenarioExecutionWSModel response = apiScenarioExecutionMiddleware.apiGetScenarioExecutions(agentId,sessionId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
