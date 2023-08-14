@@ -5,9 +5,13 @@ import com.faas.core.api.model.ws.agent.details.dto.ApiAgentInfoWSDTO;
 import com.faas.core.api.model.ws.agent.details.dto.ApiAgentSipAccountWSDTO;
 import com.faas.core.base.model.db.process.details.channel.content.ProcessSipChannelDBModel;
 import com.faas.core.base.model.db.user.details.UserDetailsDBModel;
+import com.faas.core.base.repo.inquiry.InquiryRepository;
+import com.faas.core.base.repo.operation.content.OperationRepository;
 import com.faas.core.base.repo.process.details.channel.content.ProcessSipChannelRepository;
+import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.base.repo.user.details.UserDetailsRepository;
+import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,6 +33,15 @@ public class ApiAgentDetailsFramework {
     ProcessSipChannelRepository processSipChannelRepository;
 
     @Autowired
+    SessionRepository sessionRepository;
+
+    @Autowired
+    OperationRepository operationRepository;
+
+    @Autowired
+    InquiryRepository inquiryRepository;
+
+    @Autowired
     AppUtils appUtils;
 
 
@@ -40,7 +53,13 @@ public class ApiAgentDetailsFramework {
 
     public ApiAgentInfoWSDTO apiGetAgentInfosService(long agentId) {
 
-        return null;
+        ApiAgentInfoWSDTO agentInfoWSDTO = new ApiAgentInfoWSDTO();
+        agentInfoWSDTO.setReadySession(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.READY_SESSION));
+        agentInfoWSDTO.setActiveSession(sessionRepository.countByAgentIdAndSessionState(agentId, AppConstant.ACTIVE_SESSION));
+        agentInfoWSDTO.setReadyInquiry(inquiryRepository.countByAgentIdAndInquiryState(agentId, AppConstant.READY_INQUIRY));
+        agentInfoWSDTO.setActiveInquiry(inquiryRepository.countByAgentIdAndInquiryState(agentId, AppConstant.ACTIVE_INQUIRY));
+
+        return agentInfoWSDTO;
     }
 
 

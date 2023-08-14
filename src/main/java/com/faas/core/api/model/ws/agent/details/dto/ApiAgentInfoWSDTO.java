@@ -4,17 +4,17 @@ public class ApiAgentInfoWSDTO {
 
     private long readySession;
     private long activeSession;
-    private long readyInquiries;
-    private long activeInquiries;
+    private long readyInquiry;
+    private long activeInquiry;
 
     public ApiAgentInfoWSDTO() {
     }
 
-    public ApiAgentInfoWSDTO(long readySession, long activeSession, long readyInquiries, long activeInquiries) {
+    public ApiAgentInfoWSDTO(long readySession, long activeSession, long readyInquiry, long activeInquiry) {
         this.readySession = readySession;
         this.activeSession = activeSession;
-        this.readyInquiries = readyInquiries;
-        this.activeInquiries = activeInquiries;
+        this.readyInquiry = readyInquiry;
+        this.activeInquiry = activeInquiry;
     }
 
     public long getReadySession() {
@@ -33,19 +33,19 @@ public class ApiAgentInfoWSDTO {
         this.activeSession = activeSession;
     }
 
-    public long getReadyInquiries() {
-        return readyInquiries;
+    public long getReadyInquiry() {
+        return readyInquiry;
     }
 
-    public void setReadyInquiries(long readyInquiries) {
-        this.readyInquiries = readyInquiries;
+    public void setReadyInquiry(long readyInquiry) {
+        this.readyInquiry = readyInquiry;
     }
 
-    public long getActiveInquiries() {
-        return activeInquiries;
+    public long getActiveInquiry() {
+        return activeInquiry;
     }
 
-    public void setActiveInquiries(long activeInquiries) {
-        this.activeInquiries = activeInquiries;
+    public void setActiveInquiry(long activeInquiry) {
+        this.activeInquiry = activeInquiry;
     }
 }
