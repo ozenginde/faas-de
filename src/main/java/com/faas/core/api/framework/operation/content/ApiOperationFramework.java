@@ -1,13 +1,10 @@
 package com.faas.core.api.framework.operation.content;
 
 import com.faas.core.api.model.ws.operation.content.dto.ApiOperationWSDTO;
-import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationDetailsWSDTO;
-import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.flow.FlowDBModel;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 import com.faas.core.base.model.db.operation.content.OperationDBModel;
-import com.faas.core.base.model.db.process.content.ProcessDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.repo.campaign.content.CampaignRepository;
 import com.faas.core.base.repo.client.content.ClientRepository;
@@ -62,13 +59,10 @@ public class ApiOperationFramework {
     AppUtils appUtils;
 
 
-
-
     public ApiOperationWSDTO apiGetOperationService(long agentId, long sessionId, long clientId) {
 
         List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientId(sessionId, clientId);
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId, clientId);
-
         if (!sessionDBModels.isEmpty() && !operationDBModels.isEmpty()) {
 
             ApiOperationWSDTO operationWSDTO = new ApiOperationWSDTO();

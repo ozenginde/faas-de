@@ -1,6 +1,6 @@
-package com.faas.core.api.model.ws.agent.content;
+package com.faas.core.api.model.ws.agent.details;
 
-import com.faas.core.api.model.ws.agent.content.dto.ApiAgentSipAccountWSDTO;
+import com.faas.core.api.model.ws.agent.details.dto.ApiAgentSipAccountWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 public class ApiAgentSipAccountWSModel {

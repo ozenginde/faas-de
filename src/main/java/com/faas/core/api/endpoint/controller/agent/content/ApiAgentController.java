@@ -1,6 +1,5 @@
 package com.faas.core.api.endpoint.controller.agent.content;
 
-import com.faas.core.api.model.ws.agent.content.ApiAgentSipAccountWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.api.middleware.agent.content.ApiAgentMiddleware;
 import com.faas.core.api.model.ws.agent.content.ApiAgentWSModel;
@@ -36,17 +35,6 @@ public class ApiAgentController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_AGENT_SIP_ACCOUNT, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetAgentSipAccount(@RequestParam long agentId,
-                                                   @RequestParam String processId) {
-
-        ApiAgentSipAccountWSModel response = apiAgentMiddleware.apiGetAgentSipAccount(agentId,processId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
 
 
 

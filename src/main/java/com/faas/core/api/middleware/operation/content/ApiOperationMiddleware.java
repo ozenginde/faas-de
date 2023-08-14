@@ -3,8 +3,6 @@ package com.faas.core.api.middleware.operation.content;
 import com.faas.core.api.framework.operation.content.ApiOperationFramework;
 import com.faas.core.api.model.ws.operation.content.ApiOperationWSModel;
 import com.faas.core.api.model.ws.operation.content.dto.ApiOperationWSDTO;
-import com.faas.core.api.model.ws.operation.details.content.ApiOperationDetailsWSModel;
-import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationDetailsWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.repo.operation.content.OperationRepository;
 import com.faas.core.utils.config.AppConstant;
@@ -28,9 +26,6 @@ public class ApiOperationMiddleware {
     AppUtils appUtils;
 
 
-
-
-
     public ApiOperationWSModel apiGetOperation(long agentId,long sessionId,long clientId) {
 
         ApiOperationWSModel response = new ApiOperationWSModel();
@@ -51,6 +46,7 @@ public class ApiOperationMiddleware {
 
         return response;
     }
+
 
 
 

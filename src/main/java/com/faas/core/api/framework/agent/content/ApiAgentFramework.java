@@ -1,10 +1,7 @@
 package com.faas.core.api.framework.agent.content;
 
 import com.faas.core.api.model.ws.agent.content.dto.ApiAgentWSDTO;
-import com.faas.core.api.model.ws.agent.content.dto.ApiAgentSipAccountWSDTO;
-import com.faas.core.base.model.db.process.details.channel.content.ProcessSipChannelDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
-import com.faas.core.base.model.db.user.details.UserDetailsDBModel;
 import com.faas.core.base.repo.channel.account.SipAccountRepository;
 import com.faas.core.base.repo.process.details.channel.content.ProcessSipChannelRepository;
 import com.faas.core.base.repo.user.content.UserRepository;
@@ -60,19 +57,6 @@ public class ApiAgentFramework {
     }
 
 
-    public ApiAgentSipAccountWSDTO apiGetAgentSipAccountService(long agentId, String processId) {
-
-        ApiAgentSipAccountWSDTO sipAccountWSDTO = new ApiAgentSipAccountWSDTO();
-        List<ProcessSipChannelDBModel> sipChannels = processSipChannelRepository.findByProcessId(processId);
-        if (sipChannels.size()>0){
-            sipAccountWSDTO.setSipChannel(sipChannels.get(0));
-        }
-        List<UserDetailsDBModel> userDetails = userDetailsRepository.findByUserId(agentId);
-        if (userDetails.size()>0 && userDetails.get(0).getSipChannel() != null){
-            sipAccountWSDTO.setSipAccount(userDetails.get(0).getSipChannel());
-        }
-        return sipAccountWSDTO;
-    }
 
 
 }

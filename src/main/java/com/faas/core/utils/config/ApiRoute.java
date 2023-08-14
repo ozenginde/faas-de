@@ -4,6 +4,9 @@ public class ApiRoute {
 
 
     public static final String API_AGENT_LOGIN = "apiagentlogin";
+
+    public static final String API_GET_AGENT_DETAILS = "apigetagentdetails";
+    public static final String API_GET_AGENT_INFOS = "apigetagentinfos";
     public static final String API_GET_AGENT_SIP_ACCOUNT = "apigetagentsipaccount";
 
 
@@ -18,7 +21,6 @@ public class ApiRoute {
     public static final String API_GET_CAMPAIGNS = "apigetcampaigns";
     public static final String API_GET_CAMPAIGN = "apigetcampaign";
     public static final String API_GET_AGENT_CAMPAIGN_SUMMARY = "apigetagentcampaignsummary";
-
 
     public static final String API_GET_CAMPAIGN_DETAILS = "apigetcampaigndetails";
 
@@ -57,7 +59,6 @@ public class ApiRoute {
     public static final String API_GET_FLOW_DETAILS = "apigetflowdetails";
 
 
-
     public static final String API_GET_NOTIFICATIONS = "apigetnotifications";
     public static final String API_GET_NOTIFICATIONS_BY_STATE = "apigetnotificationsbystate";
     public static final String API_GET_NOTIFICATION = "apigetnotification";
@@ -80,7 +81,6 @@ public class ApiRoute {
     public static final String API_OPERATION_FINISH = "apioperationfinish";
     public static final String API_OPERATION_UPDATE = "apioperationupdate";
     public static final String API_OPERATION_REMOVE = "apioperationremove";
-
 
 
     public static final String API_GET_OPERATION_DETAILS = "apigetoperationdetails";
