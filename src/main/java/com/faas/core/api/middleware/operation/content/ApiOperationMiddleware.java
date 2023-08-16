@@ -48,6 +48,26 @@ public class ApiOperationMiddleware {
     }
 
 
+    public ApiOperationWSModel apiValidateAgentOperation(long agentId,long sessionId,String sessionState,String operationState) {
+
+        ApiOperationWSModel response = new ApiOperationWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+        List<ApiOperationWSDTO>operationWSDTOS = new ArrayList<>();
+
+        ApiOperationWSDTO operationWSDTO = apiOperationFramework.apiValidateAgentOperationService(agentId,sessionId,sessionState,operationState);
+        if (operationWSDTO != null) {
+            operationWSDTOS.add(operationWSDTO);
+        }
+
+        response.setOperations(operationWSDTOS);
+        general.setOperation("apiValidateAgentOperation");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
 
 
     public ApiOperationWSModel apiOperationLaunch(long agentId,long sessionId,long clientId,String campaignId) {

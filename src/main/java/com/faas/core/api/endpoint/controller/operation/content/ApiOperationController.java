@@ -37,6 +37,21 @@ public class ApiOperationController {
     }
 
 
+    @RequestMapping(value = ApiRoute.API_VALIDATE_AGENT_OPERATION, method = RequestMethod.POST)
+    public ResponseEntity<?> apiValidateAgentOperation(@RequestParam long agentId,
+                                                       @RequestParam long sessionId,
+                                                       @RequestParam String sessionState,
+                                                       @RequestParam String operationState) {
+
+        ApiOperationWSModel response = apiOperationMiddleware.apiValidateAgentOperation(agentId,sessionId,sessionState,operationState);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
     @RequestMapping(value = ApiRoute.API_OPERATION_LAUNCH, method = RequestMethod.POST)
     public ResponseEntity<?> apiOperationLaunch(@RequestParam long agentId,
                                                 @RequestParam long sessionId,

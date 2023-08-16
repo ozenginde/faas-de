@@ -23,6 +23,7 @@ public interface OperationRepository extends MongoRepository<OperationDBModel, S
     List<OperationDBModel>findBySessionIdAndClientIdAndAgentIdAndCampaignIdAndOperationState(long sessionId,long clientId,long agentId,String campaignId,String operationState);
     List<OperationDBModel>findByAgentId(long agentId);
     List<OperationDBModel>findByAgentIdAndSessionId(long agentId,long sessionId);
+    List<OperationDBModel>findByAgentIdAndSessionIdAndOperationState(long agentId,long sessionId,String operationState);
     List<OperationDBModel>findByCampaignId(String campaignId);
     List<OperationDBModel>findByCampaignIdAndProcessId(String campaignId,String processId);
     List<OperationDBModel>findBySessionIdAndProcessId(long sessionId,String processId);

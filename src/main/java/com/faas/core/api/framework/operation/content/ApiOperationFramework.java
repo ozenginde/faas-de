@@ -75,6 +75,22 @@ public class ApiOperationFramework {
     }
 
 
+    public ApiOperationWSDTO apiValidateAgentOperationService(long agentId,long sessionId,String sessionState,String operationState) {
+
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentIdAndSessionState(sessionId,agentId,sessionState);
+        List<OperationDBModel> operationDBModels = operationRepository.findByAgentIdAndSessionIdAndOperationState(agentId,sessionId,operationState);
+        if (!operationDBModels.isEmpty() && !sessionDBModels.isEmpty()){
+
+            ApiOperationWSDTO operationWSDTO = new ApiOperationWSDTO();
+            operationWSDTO.setOperation(operationDBModels.get(0));
+            operationWSDTO.setOperationSession(sessionDBModels.get(0));
+
+            return operationWSDTO;
+        }
+        return null;
+    }
+
+
     public ApiOperationWSDTO apiOperationLaunchService(long agentId, long sessionId, long clientId, String campaignId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(sessionId, clientId, agentId, campaignId, AppConstant.READY_SESSION);

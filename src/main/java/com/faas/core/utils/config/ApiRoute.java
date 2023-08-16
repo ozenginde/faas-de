@@ -75,15 +75,16 @@ public class ApiRoute {
     public static final String API_GET_SESSION_SUMMARY = "apigetsessionsummary";
 
 
-    public static final String API_OPERATION_VALIDATE = "apioperationvalidate";
+
     public static final String API_GET_OPERATION = "apigetoperation";
+    public static final String API_VALIDATE_AGENT_OPERATION = "apivalidateagentoperation";
     public static final String API_OPERATION_LAUNCH = "apioperationlaunch";
     public static final String API_OPERATION_FINISH = "apioperationfinish";
     public static final String API_OPERATION_UPDATE = "apioperationupdate";
     public static final String API_OPERATION_REMOVE = "apioperationremove";
 
-
     public static final String API_GET_OPERATION_DETAILS = "apigetoperationdetails";
+    public static final String API_OPERATION_VALIDATE = "apioperationvalidate";
     public static final String API_GET_OPERATION_CAMPAIGN = "apigetoperationcampaign";
 
     public static final String API_GET_OPERATION_CLIENT = "apigetoperationclient";
