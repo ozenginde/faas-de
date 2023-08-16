@@ -80,7 +80,6 @@ public class ApiOperationFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentIdAndSessionState(sessionId,agentId,sessionState);
         List<OperationDBModel> operationDBModels = operationRepository.findByAgentIdAndSessionIdAndOperationState(agentId,sessionId,operationState);
         if (!operationDBModels.isEmpty() && !sessionDBModels.isEmpty()){
-
             ApiOperationWSDTO operationWSDTO = new ApiOperationWSDTO();
             operationWSDTO.setOperation(operationDBModels.get(0));
             operationWSDTO.setOperationSession(sessionDBModels.get(0));
@@ -137,8 +136,8 @@ public class ApiOperationFramework {
     public ApiOperationWSDTO apiOperationFinishService(long agentId, long sessionId, long clientId, String campaignId,String operationResult) {
 
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
-        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(sessionId, clientId, agentId, campaignId, AppConstant.READY_SESSION);
-        List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentIdAndCampaignIdAndOperationState(sessionId, clientId, agentId, campaignId, AppConstant.READY_OPERATION);
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(sessionId, clientId, agentId, campaignId, AppConstant.ACTIVE_SESSION);
+        List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientIdAndAgentIdAndCampaignIdAndOperationState(sessionId, clientId, agentId, campaignId, AppConstant.ACTIVE_OPERATION);
 
         if (clientDBModel.isPresent() && clientDBModel.get().getClientState().equalsIgnoreCase(AppConstant.BUSY_CLIENT) && !sessionDBModels.isEmpty() && !operationDBModels.isEmpty()) {
 
@@ -197,6 +196,7 @@ public class ApiOperationFramework {
 
         return null;
     }
+
 
 
 }

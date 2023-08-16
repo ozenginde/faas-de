@@ -55,7 +55,6 @@ public class AppConstant {
     public static final String FAIL_EXECUTION = "FAIL_EXECUTION";
 
 
-
     public static final String READY_CLIENT = "READY_CLIENT";
     public static final String BUSY_CLIENT = "BUSY_CLIENT";
     public static final String ALL_CLIENTS = "ALL_CLIENTS";
