@@ -42,9 +42,9 @@ public class ApiSmsMessageController {
 
     @RequestMapping(value = ApiRoute.API_GET_SMS_MESSAGES, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetSmsMessages(@RequestParam long agentId,
-                                        @RequestParam long sessionId,
-                                        @RequestParam long clientId,
-                                        @RequestParam String processId) {
+                                               @RequestParam long sessionId,
+                                               @RequestParam long clientId,
+                                               @RequestParam String processId) {
 
         ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiGetSmsMessages(agentId,sessionId,clientId,processId);
 
@@ -57,10 +57,10 @@ public class ApiSmsMessageController {
 
     @RequestMapping(value = ApiRoute.API_GET_SMS_MESSAGE, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetSmsMessage(@RequestParam long agentId,
-                                       @RequestParam long sessionId,
-                                       @RequestParam long clientId,
-                                       @RequestParam String processId,
-                                       @RequestParam String messageId) {
+                                              @RequestParam long sessionId,
+                                              @RequestParam long clientId,
+                                              @RequestParam String processId,
+                                              @RequestParam String messageId) {
 
         ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiGetSmsMessage(agentId,sessionId,clientId,processId,messageId);
 
@@ -73,11 +73,11 @@ public class ApiSmsMessageController {
 
     @RequestMapping(value = ApiRoute.API_SEND_SMS_MESSAGE, method = RequestMethod.POST)
     public ResponseEntity<?> apiSendSmsMessage(@RequestParam long agentId,
-                                        @RequestParam long sessionId,
-                                        @RequestParam long clientId,
-                                        @RequestParam String processId,
-                                        @RequestParam String tempId,
-                                        @RequestParam long numberId) throws IOException {
+                                               @RequestParam long sessionId,
+                                               @RequestParam long clientId,
+                                               @RequestParam String processId,
+                                               @RequestParam String tempId,
+                                               @RequestParam long numberId) throws IOException {
 
         ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiSendSmsMessage(agentId,sessionId,clientId,processId,tempId,numberId);
 
@@ -90,10 +90,10 @@ public class ApiSmsMessageController {
 
     @RequestMapping(value = ApiRoute.API_UPDATE_SMS_MESSAGE, method = RequestMethod.POST)
     public ResponseEntity<?> apiUpdateSmsMessage(@RequestParam long agentId,
-                                          @RequestParam long sessionId,
-                                          @RequestParam long clientId,
-                                          @RequestParam String processId,
-                                          @RequestParam String messageId) {
+                                                 @RequestParam long sessionId,
+                                                 @RequestParam long clientId,
+                                                 @RequestParam String processId,
+                                                 @RequestParam String messageId) {
 
         ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiUpdateSmsMessage(agentId,sessionId,clientId,processId,messageId);
 
@@ -106,10 +106,10 @@ public class ApiSmsMessageController {
 
     @RequestMapping(value = ApiRoute.API_REMOVE_SMS_MESSAGE, method = RequestMethod.POST)
     public ResponseEntity<?> apiRemoveSmsMessage(@RequestParam long agentId,
-                                          @RequestParam long sessionId,
-                                          @RequestParam long clientId,
-                                          @RequestParam String processId,
-                                          @RequestParam String messageId) {
+                                                 @RequestParam long sessionId,
+                                                 @RequestParam long clientId,
+                                                 @RequestParam String processId,
+                                                 @RequestParam String messageId) {
 
         ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiRemoveSmsMessage(agentId,sessionId,clientId,processId,messageId);
 
