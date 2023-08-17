@@ -6,19 +6,25 @@ import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsMessag
 import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsMessageWSDTO;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
 import com.faas.core.base.model.db.operation.channel.SmsMessageDBModel;
+import com.faas.core.base.model.db.process.details.channel.content.ProcessSmsChannelDBModel;
+import com.faas.core.base.model.db.process.details.channel.temp.SmsMessageTempDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.ClientPhoneRepository;
 import com.faas.core.base.repo.operation.channel.SmsMessageRepository;
+import com.faas.core.base.repo.process.details.channel.content.ProcessSmsChannelRepository;
 import com.faas.core.base.repo.process.details.channel.temp.SmsMessageTempRepository;
 import com.faas.core.base.repo.session.SessionRepository;
+import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
+import com.faas.core.utils.helpers.ChannelHelper;
 import com.faas.core.utils.mapper.OperationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Component
@@ -26,6 +32,9 @@ public class ApiSmsMessageFramework {
 
     @Autowired
     OperationMapper operationMapper;
+
+    @Autowired
+    ChannelHelper channelHelper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -41,6 +50,9 @@ public class ApiSmsMessageFramework {
 
     @Autowired
     SmsMessageTempRepository smsMessageTempRepository;
+
+    @Autowired
+    ProcessSmsChannelRepository processSmsChannelRepository;
 
     @Autowired
     AppUtils appUtils;
@@ -79,6 +91,31 @@ public class ApiSmsMessageFramework {
 
     public ApiSmsMessageWSDTO apiSendSmsMessageService(long agentId,long sessionId,String campaignId,String processId,String tempId,long numberId){
 
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
+        List<SmsMessageTempDBModel>smsMessageTempDBModels = smsMessageTempRepository.findByIdAndProcessId(tempId,processId);
+        Optional<ClientPhoneDBModel> clientPhoneDBModel = clientPhoneRepository.findById(numberId);
+        List<ProcessSmsChannelDBModel> processSmsChannelDBModels = processSmsChannelRepository.findByProcessId(processId);
+
+        if (!sessionDBModels.isEmpty() && !smsMessageTempDBModels.isEmpty() && clientPhoneDBModel.isPresent() && !processSmsChannelDBModels.isEmpty()){
+
+            SmsMessageDBModel smsMessageDBModel = new SmsMessageDBModel();
+
+            smsMessageDBModel.setSessionId(sessionId);
+            smsMessageDBModel.setClientId(sessionDBModels.get(0).getClientId());
+            smsMessageDBModel.setNumberId(numberId);
+            smsMessageDBModel.setPhoneNumber(clientPhoneDBModel.get().getPhoneNumber());
+            smsMessageDBModel.setAgentId(agentId);
+            smsMessageDBModel.setCampaignId(campaignId);
+            smsMessageDBModel.setProcessId(processId);
+            smsMessageDBModel.setSmsMessage(channelHelper.fillSmsMessageDAO(smsMessageTempDBModels.get(0),processSmsChannelDBModels.get(0)));
+            smsMessageDBModel.setMessageSentId("");
+            smsMessageDBModel.setMessageState(AppConstant.SENT_MESSAGE);
+            smsMessageDBModel.setuDate(appUtils.getCurrentTimeStamp());
+            smsMessageDBModel.setcDate(appUtils.getCurrentTimeStamp());
+            smsMessageDBModel.setStatus(1);
+
+            return new ApiSmsMessageWSDTO(smsMessageRepository.save(smsMessageDBModel));
+        }
         return null;
     }
 

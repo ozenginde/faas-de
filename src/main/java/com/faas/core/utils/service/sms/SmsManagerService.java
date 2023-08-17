@@ -40,7 +40,7 @@ public class SmsManagerService {
 
     public void sendSmsMessageService(SmsMessageDBModel smsMessageDBModel) throws IOException {
 
-        Optional<SmsAccountDBModel> smsAccountDBModel = smsAccountRepository.findById(smsMessageDBModel.getSmsAccountId());
+        Optional<SmsAccountDBModel> smsAccountDBModel = smsAccountRepository.findById(smsMessageDBModel.getSmsMessage().getAccountId());
         if (smsAccountDBModel.isPresent()) {
             String smsMessageBody = smsMessageBodyPopulate(smsMessageDBModel);
             if (smsMessageBody == null) {
@@ -49,8 +49,8 @@ public class SmsManagerService {
             String smsApiUrl = "smsAccountDBModel.get().getSmsApiUrl()";
             String accountUserName = smsAccountDBModel.get().getUserName();
             String accountPassword = smsAccountDBModel.get().getPassword();
-            String smsType = appUtils.convertSmsType(smsMessageDBModel.getMessageType());
-            String senderId = smsMessageDBModel.getSenderId();
+            String smsType = appUtils.convertSmsType(smsMessageDBModel.getSmsMessage().getMessageType());
+            String senderId = smsMessageDBModel.getSmsMessage().getSenderId();
             String phoneNumber = smsMessageDBModel.getPhoneNumber();
 
             String sentResult = sendSmsMessageIntegration(smsApiUrl, accountUserName, accountPassword, smsType, senderId, phoneNumber, smsMessageBody);
@@ -101,7 +101,7 @@ public class SmsManagerService {
 
     public String smsMessageBodyPopulate(SmsMessageDBModel smsMessageDBModel) throws IOException {
 
-        String smsMessageBody = smsMessageDBModel.getBody();
+        String smsMessageBody = smsMessageDBModel.getSmsMessage().getSmsBody();
         if (smsMessageBody.contains(AppConstant.MESSAGE_CLIENT_NAME_TAG)) {
            // smsMessageBody = smsMessageBody.replace(AppConstant.MESSAGE_CLIENT_NAME_TAG, smsMessageDBModel.getClientName());
         }
