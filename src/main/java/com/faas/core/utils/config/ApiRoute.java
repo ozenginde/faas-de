@@ -138,15 +138,15 @@ public class ApiRoute {
     public static final String API_REMOVE_WAPP_CALL = "apiremovewappcall";
 
 
-    public static final String API_GET_OPERATION_SMS_MESSAGE = "apigetoperationsmsmessage";
-    public static final String API_GET_SMS_MESSAGES = "apigetsmsmessages";
-    public static final String API_GET_SMS_MESSAGE = "apigetsmsmessage";
-    public static final String API_SEND_SMS_MESSAGE = "apisendsmsmessage";
-    public static final String API_UPDATE_SMS_MESSAGE = "apiupdatesmsmessage";
-    public static final String API_REMOVE_SMS_MESSAGE = "apiremovesmsmessage";
+    public static final String API_GET_OPERATION_SMS = "apigetoperationsms";
+    public static final String API_GET_SMSS = "apigetsmss";
+    public static final String API_GET_SMS = "apigetsms";
+    public static final String API_SEND_SMS = "apisendsms";
+    public static final String API_UPDATE_SMS = "apiupdatesms";
+    public static final String API_REMOVE_SMS = "apiremovesms";
 
-    public static final String API_GET_SMS_MESSAGE_TEMPS = "apigetsmsmessagetemps";
-    public static final String API_GET_SMS_MESSAGE_TEMP = "apigetsmsmessagetemp";
+    public static final String API_GET_SMS_TEMPS = "apigetsmstemps";
+    public static final String API_GET_SMS_TEMP = "apigetsmstemp";
 
 
     public static final String API_GET_OPERATION_WAPP_MESSAGE = "apigetoperationwappmessage";
@@ -160,21 +160,22 @@ public class ApiRoute {
     public static final String API_GET_WAPP_MESSAGE_TEMP = "apigetwappmessagetemp";
 
 
-    public static final String API_GET_OPERATION_EMAIL_MESSAGE = "apigetoperationemailmessage";
-    public static final String API_GET_EMAIL_MESSAGES = "apigetemailmessages";
-    public static final String API_GET_EMAIL_MESSAGE = "apigetemailmessage";
-    public static final String API_SEND_EMAIL_MESSAGE = "apisendemailmessage";
-    public static final String API_UPDATE_EMAIL_MESSAGE = "apiupdateemailmessage";
-    public static final String API_REMOVE_EMAIL_MESSAGE = "apiremoveemailmessage";
+    public static final String API_GET_OPERATION_EMAIL = "apigetoperationemail";
+    public static final String API_GET_EMAILS = "apigetemails";
+    public static final String API_GET_EMAIL = "apigetemail";
+    public static final String API_SEND_EMAIL = "apisendemail";
+    public static final String API_UPDATE_EMAIL = "apiupdateemail";
+    public static final String API_REMOVE_EMAIL = "apiremoveemail";
 
-    public static final String API_GET_EMAIL_MESSAGE_TEMPS = "apigetemailmessagetemps";
-    public static final String API_GET_EMAIL_MESSAGE_TEMP = "apigetemailmessagetemp";
+    public static final String API_GET_EMAIL_TEMPS = "apigetemailtemps";
+    public static final String API_GET_EMAIL_TEMP = "apigetemailtemp";
 
 
     public static final String API_GET_OPERATION_MESSENGER = "apigetoperationmessenger";
 
 
     public static final String API_GET_OPERATION_PUSH_MESSAGE = "apigetoperationpushmessage";
+
 
     public static final String API_GET_PUSH_MESSAGES = "apigetpushmessages";
     public static final String API_GET_PUSH_MESSAGE = "apigetpushmessage";

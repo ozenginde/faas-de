@@ -10,7 +10,6 @@ public class UserDetailsWSModel {
     private GeneralWSModel general;
     private UserDetailsWSDTO userDetails;
 
-
     public UserDetailsWSModel() {
     }
 

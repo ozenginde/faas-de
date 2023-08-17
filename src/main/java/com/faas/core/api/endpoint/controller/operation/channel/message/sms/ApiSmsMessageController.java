@@ -1,9 +1,9 @@
 package com.faas.core.api.endpoint.controller.operation.channel.message.sms;
 
 import com.faas.core.api.middleware.operation.channel.message.sms.ApiSmsMessageMiddleware;
-import com.faas.core.api.model.ws.operation.channel.message.sms.ApiOperationSmsMessageWSModel;
-import com.faas.core.api.model.ws.operation.channel.message.sms.ApiSmsMessageTempWSModel;
-import com.faas.core.api.model.ws.operation.channel.message.sms.ApiSmsMessageWSModel;
+import com.faas.core.api.model.ws.operation.channel.message.sms.ApiOperationSmsWSModel;
+import com.faas.core.api.model.ws.operation.channel.message.sms.ApiSmsTempWSModel;
+import com.faas.core.api.model.ws.operation.channel.message.sms.ApiSmsWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +26,12 @@ public class ApiSmsMessageController {
     ApiSmsMessageMiddleware apiSmsMessageMiddleware;
 
 
-    @RequestMapping(value = ApiRoute.API_GET_OPERATION_SMS_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetOperationSmsMessage(@RequestParam long agentId,
+    @RequestMapping(value = ApiRoute.API_GET_OPERATION_SMS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetOperationSms(@RequestParam long agentId,
                                                        @RequestParam long sessionId,
                                                        @RequestParam long clientId) {
 
-        ApiOperationSmsMessageWSModel response = apiSmsMessageMiddleware.apiGetOperationSmsMessage(agentId,sessionId,clientId);
+        ApiOperationSmsWSModel response = apiSmsMessageMiddleware.apiGetOperationSms(agentId,sessionId,clientId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -40,29 +40,13 @@ public class ApiSmsMessageController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_SMS_MESSAGES, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetSmsMessages(@RequestParam long agentId,
-                                               @RequestParam long sessionId,
-                                               @RequestParam long clientId,
-                                               @RequestParam String processId) {
+    @RequestMapping(value = ApiRoute.API_GET_SMSS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetSmss(@RequestParam long agentId,
+                                        @RequestParam long sessionId,
+                                        @RequestParam long clientId,
+                                        @RequestParam String processId) {
 
-        ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiGetSmsMessages(agentId,sessionId,clientId,processId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = ApiRoute.API_GET_SMS_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetSmsMessage(@RequestParam long agentId,
-                                              @RequestParam long sessionId,
-                                              @RequestParam long clientId,
-                                              @RequestParam String processId,
-                                              @RequestParam String messageId) {
-
-        ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiGetSmsMessage(agentId,sessionId,clientId,processId,messageId);
+        ApiSmsWSModel response = apiSmsMessageMiddleware.apiGetSmss(agentId,sessionId,clientId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -71,31 +55,14 @@ public class ApiSmsMessageController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_SEND_SMS_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiSendSmsMessage(@RequestParam long agentId,
-                                               @RequestParam long sessionId,
-                                               @RequestParam long clientId,
-                                               @RequestParam String processId,
-                                               @RequestParam String tempId,
-                                               @RequestParam long numberId) throws IOException {
+    @RequestMapping(value = ApiRoute.API_GET_SMS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetSms(@RequestParam long agentId,
+                                       @RequestParam long sessionId,
+                                       @RequestParam long clientId,
+                                       @RequestParam String processId,
+                                       @RequestParam String messageId) {
 
-        ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiSendSmsMessage(agentId,sessionId,clientId,processId,tempId,numberId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = ApiRoute.API_UPDATE_SMS_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiUpdateSmsMessage(@RequestParam long agentId,
-                                                 @RequestParam long sessionId,
-                                                 @RequestParam long clientId,
-                                                 @RequestParam String processId,
-                                                 @RequestParam String messageId) {
-
-        ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiUpdateSmsMessage(agentId,sessionId,clientId,processId,messageId);
+        ApiSmsWSModel response = apiSmsMessageMiddleware.apiGetSms(agentId,sessionId,clientId,processId,messageId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -104,14 +71,47 @@ public class ApiSmsMessageController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_REMOVE_SMS_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiRemoveSmsMessage(@RequestParam long agentId,
-                                                 @RequestParam long sessionId,
-                                                 @RequestParam long clientId,
-                                                 @RequestParam String processId,
-                                                 @RequestParam String messageId) {
+    @RequestMapping(value = ApiRoute.API_SEND_SMS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiSendSms(@RequestParam long agentId,
+                                        @RequestParam long sessionId,
+                                        @RequestParam long clientId,
+                                        @RequestParam String processId,
+                                        @RequestParam String tempId,
+                                        @RequestParam long numberId) throws IOException {
 
-        ApiSmsMessageWSModel response = apiSmsMessageMiddleware.apiRemoveSmsMessage(agentId,sessionId,clientId,processId,messageId);
+        ApiSmsWSModel response = apiSmsMessageMiddleware.apiSendSms(agentId,sessionId,clientId,processId,tempId,numberId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_UPDATE_SMS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiUpdateSms(@RequestParam long agentId,
+                                          @RequestParam long sessionId,
+                                          @RequestParam long clientId,
+                                          @RequestParam String processId,
+                                          @RequestParam String messageId) {
+
+        ApiSmsWSModel response = apiSmsMessageMiddleware.apiUpdateSms(agentId,sessionId,clientId,processId,messageId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_REMOVE_SMS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiRemoveSms(@RequestParam long agentId,
+                                          @RequestParam long sessionId,
+                                          @RequestParam long clientId,
+                                          @RequestParam String processId,
+                                          @RequestParam String messageId) {
+
+        ApiSmsWSModel response = apiSmsMessageMiddleware.apiRemoveSms(agentId,sessionId,clientId,processId,messageId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -121,13 +121,13 @@ public class ApiSmsMessageController {
 
 
 
-    @RequestMapping(value = ApiRoute.API_GET_SMS_MESSAGE_TEMPS, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetSmsMessageTemps(@RequestParam long agentId,
+    @RequestMapping(value = ApiRoute.API_GET_SMS_TEMPS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetSmsTemps(@RequestParam long agentId,
                                                    @RequestParam long sessionId,
                                                    @RequestParam long clientId,
                                                    @RequestParam String processId) {
 
-        ApiSmsMessageTempWSModel response = apiSmsMessageMiddleware.apiGetSmsMessageTemps(agentId,sessionId,clientId,processId);
+        ApiSmsTempWSModel response = apiSmsMessageMiddleware.apiGetSmsTemps(agentId,sessionId,clientId,processId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -136,14 +136,14 @@ public class ApiSmsMessageController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_SMS_MESSAGE_TEMP, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetSmsMessageTemp(@RequestParam long agentId,
+    @RequestMapping(value = ApiRoute.API_GET_SMS_TEMP, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetSmsTemp(@RequestParam long agentId,
                                                   @RequestParam long sessionId,
                                                   @RequestParam long clientId,
                                                   @RequestParam String processId,
                                                   @RequestParam String tempId) {
 
-        ApiSmsMessageTempWSModel response = apiSmsMessageMiddleware.apiGetSmsMessageTemp(agentId,sessionId,clientId,processId,tempId);
+        ApiSmsTempWSModel response = apiSmsMessageMiddleware.apiGetSmsTemp(agentId,sessionId,clientId,processId,tempId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

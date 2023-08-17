@@ -1,7 +1,7 @@
 package com.faas.core.api.framework.operation.channel.message.email;
 
-import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiEmailMessageWSDTO;
-import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiOperationEmailMessageWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiEmailWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiOperationEmailWSDTO;
 import com.faas.core.utils.config.AppUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,50 +14,50 @@ public class ApiEmailMessageFramework {
     AppUtils appUtils;
 
 
-    public ApiOperationEmailMessageWSDTO apiGetOperationEmailMessagesService(long agentId, long sessionId) {
+    public ApiOperationEmailWSDTO apiGetOperationEmailMessagesService(long agentId, long sessionId) {
 
         return null;
     }
 
 
 
-    public ApiEmailMessageWSDTO apiGetEmailMessagesService() {
+    public ApiEmailWSDTO apiGetEmailMessagesService() {
 
         return null;
     }
 
 
-    public ApiEmailMessageWSDTO apiGetEmailMessageService() {
+    public ApiEmailWSDTO apiGetEmailMessageService() {
 
         return null;
     }
 
 
-    public ApiEmailMessageWSDTO apiSendEmailMessageService() {
+    public ApiEmailWSDTO apiSendEmailMessageService() {
 
         return null;
     }
 
 
-    public ApiEmailMessageWSDTO apiUpdateEmailMessageService() {
+    public ApiEmailWSDTO apiUpdateEmailMessageService() {
 
         return null;
     }
 
 
-    public ApiEmailMessageWSDTO apiRemoveEmailMessageService() {
+    public ApiEmailWSDTO apiRemoveEmailMessageService() {
 
         return null;
     }
 
 
-    public ApiEmailMessageWSDTO apiGetEmailMessageTempsService() {
+    public ApiEmailWSDTO apiGetEmailMessageTempsService() {
 
         return null;
     }
 
 
-    public ApiEmailMessageWSDTO apiGetEmailMessageTempService() {
+    public ApiEmailWSDTO apiGetEmailMessageTempService() {
 
         return null;
     }

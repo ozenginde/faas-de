@@ -2,14 +2,14 @@ package com.faas.core.api.model.ws.operation.channel.message.email.dto;
 
 import com.faas.core.base.model.db.operation.channel.EmailMessageDBModel;
 
-public class ApiEmailMessageWSDTO {
+public class ApiEmailWSDTO {
 
     private EmailMessageDBModel emailMessage;
 
-    public ApiEmailMessageWSDTO() {
+    public ApiEmailWSDTO() {
     }
 
-    public ApiEmailMessageWSDTO(EmailMessageDBModel emailMessage) {
+    public ApiEmailWSDTO(EmailMessageDBModel emailMessage) {
         this.emailMessage = emailMessage;
     }
 

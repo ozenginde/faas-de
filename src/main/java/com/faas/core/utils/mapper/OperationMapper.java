@@ -7,8 +7,8 @@ import com.faas.core.api.model.ws.operation.channel.call.wapp.dto.ApiOperationWa
 import com.faas.core.api.model.ws.operation.channel.call.wapp.dto.ApiWappAccountWSDTO;
 import com.faas.core.api.model.ws.operation.channel.content.dto.ApiOperationChannelWSDTO;
 import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiEmailAccountWSDTO;
-import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiOperationEmailMessageWSDTO;
-import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiOperationSmsMessageWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiOperationEmailWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiOperationSmsWSDTO;
 import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsAccountWSDTO;
 import com.faas.core.api.model.ws.operation.channel.message.wapp.dto.ApiOperationWappMessageWSDTO;
 import com.faas.core.api.model.ws.operation.channel.messenger.dto.ApiOperationMessengerWSDTO;
@@ -423,9 +423,9 @@ public class OperationMapper {
     }
 
 
-    public ApiOperationSmsMessageWSDTO mapApiOperationSmsMessageWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
+    public ApiOperationSmsWSDTO mapApiOperationSmsMessageWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
 
-        ApiOperationSmsMessageWSDTO operationSmsMessageWSDTO = new ApiOperationSmsMessageWSDTO();
+        ApiOperationSmsWSDTO operationSmsMessageWSDTO = new ApiOperationSmsWSDTO();
         ApiSmsAccountWSDTO smsAccountWSDTO = getApiSmsAccountWSDTO(sessionDBModel.getProcessId());
         if (smsAccountWSDTO != null){
             operationSmsMessageWSDTO.setSmsAccount(smsAccountWSDTO);
@@ -443,6 +443,7 @@ public class OperationMapper {
         if (!smsChannelDBModels.isEmpty() && smsChannelDBModels.get(0).getSmsAccount() != null) {
 
             ApiSmsAccountWSDTO smsAccountWSDTO = new ApiSmsAccountWSDTO();
+
             smsAccountWSDTO.setAccountId(smsChannelDBModels.get(0).getAccountId());
             smsAccountWSDTO.setAccount(smsChannelDBModels.get(0).getSmsAccount().getAccount());
             smsAccountWSDTO.setUserName(smsChannelDBModels.get(0).getSmsAccount().getUserName());
@@ -496,9 +497,9 @@ public class OperationMapper {
         return null;
     }
 
-    public ApiOperationEmailMessageWSDTO mapApiOperationEmailMessageWSDTO(SessionDBModel sessionDBModel) {
+    public ApiOperationEmailWSDTO mapApiOperationEmailMessageWSDTO(SessionDBModel sessionDBModel) {
 
-        ApiOperationEmailMessageWSDTO operationEmailMessageWSDTO = new ApiOperationEmailMessageWSDTO();
+        ApiOperationEmailWSDTO operationEmailMessageWSDTO = new ApiOperationEmailWSDTO();
         ApiEmailAccountWSDTO emailAccountWSDTO = getApiEmailAccountWSDTO(sessionDBModel.getProcessId());
         if (emailAccountWSDTO != null){
             operationEmailMessageWSDTO.setEmailAccount(emailAccountWSDTO);

@@ -1,19 +1,19 @@
 package com.faas.core.api.model.ws.operation.channel.message.email;
 
-import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiEmailMessageTempWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiEmailTempWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
 import java.util.List;
 
-public class ApiEmailMessageTempWSModel {
+public class ApiEmailTempWSModel {
 
     private GeneralWSModel general;
-    private List<ApiEmailMessageTempWSDTO>emailTemps;
+    private List<ApiEmailTempWSDTO>emailTemps;
 
-    public ApiEmailMessageTempWSModel() {
+    public ApiEmailTempWSModel() {
     }
 
-    public ApiEmailMessageTempWSModel(GeneralWSModel general, List<ApiEmailMessageTempWSDTO> emailTemps) {
+    public ApiEmailTempWSModel(GeneralWSModel general, List<ApiEmailTempWSDTO> emailTemps) {
         this.general = general;
         this.emailTemps = emailTemps;
     }
@@ -26,11 +26,11 @@ public class ApiEmailMessageTempWSModel {
         this.general = general;
     }
 
-    public List<ApiEmailMessageTempWSDTO> getEmailTemps() {
+    public List<ApiEmailTempWSDTO> getEmailTemps() {
         return emailTemps;
     }
 
-    public void setEmailTemps(List<ApiEmailMessageTempWSDTO> emailTemps) {
+    public void setEmailTemps(List<ApiEmailTempWSDTO> emailTemps) {
         this.emailTemps = emailTemps;
     }
 }

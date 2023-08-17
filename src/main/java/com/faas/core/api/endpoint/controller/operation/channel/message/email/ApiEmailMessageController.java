@@ -1,9 +1,9 @@
 package com.faas.core.api.endpoint.controller.operation.channel.message.email;
 
 import com.faas.core.api.middleware.operation.channel.message.email.ApiEmailMessageMiddleware;
-import com.faas.core.api.model.ws.operation.channel.message.email.ApiEmailMessageTempWSModel;
-import com.faas.core.api.model.ws.operation.channel.message.email.ApiEmailMessageWSModel;
-import com.faas.core.api.model.ws.operation.channel.message.email.ApiOperationEmailMessageWSModel;
+import com.faas.core.api.model.ws.operation.channel.message.email.ApiEmailTempWSModel;
+import com.faas.core.api.model.ws.operation.channel.message.email.ApiEmailWSModel;
+import com.faas.core.api.model.ws.operation.channel.message.email.ApiOperationEmailWSModel;
 import com.faas.core.utils.config.ApiRoute;
 import com.faas.core.utils.config.AppConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +24,11 @@ public class ApiEmailMessageController {
     ApiEmailMessageMiddleware apiEmailMessageMiddleware;
 
 
-    @RequestMapping(value = ApiRoute.API_GET_OPERATION_EMAIL_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetOperationEmailMessage(@RequestParam long agentId,
-                                                         @RequestParam long sessionId) {
+    @RequestMapping(value = ApiRoute.API_GET_OPERATION_EMAIL, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetOperationEmail(@RequestParam long agentId,
+                                                  @RequestParam long sessionId) {
 
-        ApiOperationEmailMessageWSModel response = apiEmailMessageMiddleware.apiGetOperationEmailMessage(agentId,sessionId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = ApiRoute.API_GET_EMAIL_MESSAGES, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetEmailMessages(@RequestParam long agentId,
-                                                 @RequestParam long sessionId) {
-
-        ApiEmailMessageWSModel response = apiEmailMessageMiddleware.apiGetEmailMessages(agentId,sessionId);
+        ApiOperationEmailWSModel response = apiEmailMessageMiddleware.apiGetOperationEmail(agentId,sessionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -50,24 +37,11 @@ public class ApiEmailMessageController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_EMAIL_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetEmailMessage(@RequestParam long agentId,
-                                                @RequestParam long sessionId) {
+    @RequestMapping(value = ApiRoute.API_GET_EMAILS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetEmails(@RequestParam long agentId,
+                                          @RequestParam long sessionId) {
 
-        ApiEmailMessageWSModel response = apiEmailMessageMiddleware.apiGetEmailMessage(agentId,sessionId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = ApiRoute.API_SEND_EMAIL_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiSendEmailMessage(@RequestParam long agentId,
-                                                 @RequestParam long sessionId) {
-
-        ApiEmailMessageWSModel response = apiEmailMessageMiddleware.apiSendEmailMessage(agentId,sessionId);
+        ApiEmailWSModel response = apiEmailMessageMiddleware.apiGetEmails(agentId,sessionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -76,24 +50,11 @@ public class ApiEmailMessageController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_UPDATE_EMAIL_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiUpdateEmailMessage(@RequestParam long agentId,
-                                                   @RequestParam long sessionId) {
+    @RequestMapping(value = ApiRoute.API_GET_EMAIL, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetEmail(@RequestParam long agentId,
+                                         @RequestParam long sessionId) {
 
-        ApiEmailMessageWSModel response = apiEmailMessageMiddleware.apiUpdateEmailMessage(agentId,sessionId);
-
-        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
-    }
-
-
-    @RequestMapping(value = ApiRoute.API_REMOVE_EMAIL_MESSAGE, method = RequestMethod.POST)
-    public ResponseEntity<?> apiRemoveEmailMessage(@RequestParam long agentId,
-                                                   @RequestParam long sessionId) {
-
-        ApiEmailMessageWSModel response = apiEmailMessageMiddleware.apiRemoveEmailMessage(agentId,sessionId);
+        ApiEmailWSModel response = apiEmailMessageMiddleware.apiGetEmail(agentId,sessionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -102,12 +63,11 @@ public class ApiEmailMessageController {
     }
 
 
+    @RequestMapping(value = ApiRoute.API_SEND_EMAIL, method = RequestMethod.POST)
+    public ResponseEntity<?> apiSendEmail(@RequestParam long agentId,
+                                          @RequestParam long sessionId) {
 
-    @RequestMapping(value = ApiRoute.API_GET_EMAIL_MESSAGE_TEMPS, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetEmailMessageTemps(@RequestParam long agentId,
-                                                     @RequestParam long sessionId) {
-
-        ApiEmailMessageTempWSModel response = apiEmailMessageMiddleware.apiGetEmailMessageTemps(agentId,sessionId);
+        ApiEmailWSModel response = apiEmailMessageMiddleware.apiSendEmail(agentId,sessionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -116,11 +76,51 @@ public class ApiEmailMessageController {
     }
 
 
-    @RequestMapping(value = ApiRoute.API_GET_EMAIL_MESSAGE_TEMP, method = RequestMethod.POST)
-    public ResponseEntity<?> apiGetEmailMessageTemp(@RequestParam long agentId,
-                                                    @RequestParam long sessionId) {
+    @RequestMapping(value = ApiRoute.API_UPDATE_EMAIL, method = RequestMethod.POST)
+    public ResponseEntity<?> apiUpdateEmail(@RequestParam long agentId,
+                                            @RequestParam long sessionId) {
 
-        ApiEmailMessageTempWSModel response = apiEmailMessageMiddleware.apiGetEmailMessageTemp(agentId,sessionId);
+        ApiEmailWSModel response = apiEmailMessageMiddleware.apiUpdateEmail(agentId,sessionId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_REMOVE_EMAIL, method = RequestMethod.POST)
+    public ResponseEntity<?> apiRemoveEmail(@RequestParam long agentId,
+                                            @RequestParam long sessionId) {
+
+        ApiEmailWSModel response = apiEmailMessageMiddleware.apiRemoveEmail(agentId,sessionId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+
+    @RequestMapping(value = ApiRoute.API_GET_EMAIL_TEMPS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetEmailTemps(@RequestParam long agentId,
+                                              @RequestParam long sessionId) {
+
+        ApiEmailTempWSModel response = apiEmailMessageMiddleware.apiGetEmailTemps(agentId,sessionId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+    @RequestMapping(value = ApiRoute.API_GET_EMAIL_TEMP, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetEmailTemp(@RequestParam long agentId,
+                                             @RequestParam long sessionId) {
+
+        ApiEmailTempWSModel response = apiEmailMessageMiddleware.apiGetEmailTemp(agentId,sessionId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
