@@ -46,36 +46,35 @@ public class ApiSmsMessageFramework {
     AppUtils appUtils;
 
 
-    public ApiOperationSmsMessageWSDTO apiGetOperationSmsMessageService(long agentId, long sessionId, long clientId) {
+    public ApiOperationSmsMessageWSDTO apiGetOperationSmsMessageService(long agentId,long sessionId) {
 
-        List<SessionDBModel>sessionDBModels =  sessionRepository.findByIdAndClientId(sessionId,clientId);
-        List<ClientPhoneDBModel> clientPhoneDBModels = clientPhoneRepository.findByClientId(clientId);
+        List<SessionDBModel>sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
-            return operationMapper.mapApiOperationSmsMessageWSDTO(sessionDBModels.get(0),clientPhoneDBModels);
+            return operationMapper.mapApiOperationSmsMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
         }
         return null;
     }
 
 
-    public List<ApiSmsMessageWSDTO> apiGetSmsMessagesService(long agentId, long sessionId, long clientId, String processId) {
+    public List<ApiSmsMessageWSDTO> apiGetSmsMessagesService(long agentId,long sessionId,String campaignId,String processId) {
 
-        List<ApiSmsMessageWSDTO> smsWSDTOS = new ArrayList<>();
-        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findBySessionIdAndClientIdAndProcessId(sessionId,clientId,processId);
+        List<ApiSmsMessageWSDTO> smsMessageWSDTOS = new ArrayList<>();
+        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findBySessionIdAndCampaignIdAndProcessId(sessionId,campaignId,processId);
         for (SmsMessageDBModel smsMessageDBModel : smsMessageDBModels) {
-            smsWSDTOS.add(new ApiSmsMessageWSDTO(smsMessageDBModel));
+            smsMessageWSDTOS.add(new ApiSmsMessageWSDTO(smsMessageDBModel));
         }
-        return smsWSDTOS;
+        return smsMessageWSDTOS;
     }
 
-    public ApiSmsMessageWSDTO apiGetSmsMessageService(long agentId, long sessionId, long clientId, String processId, String messageId) {
 
-        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
+    public ApiSmsMessageWSDTO apiGetSmsMessageService(long agentId,long sessionId,String campaignId, String processId,String messageId) {
+
+        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndCampaignIdAndProcessId(messageId,sessionId,campaignId,processId);
         if (!smsMessageDBModels.isEmpty()) {
             return new ApiSmsMessageWSDTO(smsMessageDBModels.get(0));
         }
         return null;
     }
-
 
 
     public ApiSmsMessageWSDTO apiSendSmsMessageService(){
@@ -84,20 +83,20 @@ public class ApiSmsMessageFramework {
     }
 
 
+    public ApiSmsMessageWSDTO apiUpdateSmsMessageService(long agentId,long sessionId,String campaignId,String processId,String messageId) {
 
-    public ApiSmsMessageWSDTO apiUpdateSmsMessageService(long agentId, long sessionId, long clientId, String processId, String messageId) {
-
-        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
-        if (smsMessageDBModels.size()>0) {
+        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndCampaignIdAndProcessId(messageId,sessionId,campaignId,processId);
+        if (!smsMessageDBModels.isEmpty()) {
             return new ApiSmsMessageWSDTO(smsMessageDBModels.get(0));
         }
         return null;
     }
 
-    public ApiSmsMessageWSDTO apiRemoveSmsMessageService(long agentId, long sessionId, long clientId, String processId, String messageId) {
 
-        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
-        if (smsMessageDBModels.size()>0) {
+    public ApiSmsMessageWSDTO apiRemoveSmsMessageService(long agentId,long sessionId,String campaignId,String processId,String messageId) {
+
+        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndCampaignIdAndProcessId(messageId,sessionId,campaignId,processId);
+        if (!smsMessageDBModels.isEmpty()) {
             smsMessageRepository.delete(smsMessageDBModels.get(0));
             return new ApiSmsMessageWSDTO(smsMessageDBModels.get(0));
         }
@@ -106,17 +105,16 @@ public class ApiSmsMessageFramework {
 
 
 
+    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempsService(long agentId,long sessionId,String processId) {
 
-    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempsService(long agentId, long sessionId, long clientId, String processId) {
-
-        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
-        List<ClientPhoneDBModel> clientPhones =  clientPhoneRepository.findByClientId(clientId);
-        ApiSmsAccountWSDTO smsAccountWSDTO = operationMapper.getApiSmsAccountWSDTO(processId);
-        if (sessionDBModels.size()>0 && smsAccountWSDTO != null){
-
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
+        if (!sessionDBModels.isEmpty()){
             ApiSmsMessageTempWSDTO smsMessageTempWSDTO = new ApiSmsMessageTempWSDTO();
-            smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
-            smsMessageTempWSDTO.setPhones(clientPhones);
+            ApiSmsAccountWSDTO smsAccountWSDTO = operationMapper.getApiSmsAccountWSDTO(processId);
+            if (smsAccountWSDTO != null){
+                smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
+            }
+            smsMessageTempWSDTO.setPhones(clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
             smsMessageTempWSDTO.setSmsTemps(smsMessageTempRepository.findByProcessId(processId));
 
             return smsMessageTempWSDTO;
@@ -125,22 +123,23 @@ public class ApiSmsMessageFramework {
     }
 
 
-    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempService(long agentId, long sessionId, long clientId, String processId, String tempId) {
+    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempService(long agentId,long sessionId,String processId,String tempId) {
 
-        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
-        List<ClientPhoneDBModel> clientPhones =  clientPhoneRepository.findByClientId(clientId);
-        ApiSmsAccountWSDTO smsAccountWSDTO = operationMapper.getApiSmsAccountWSDTO(processId);
-        if (sessionDBModels.size()>0 && smsAccountWSDTO != null){
-
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
+        if (!sessionDBModels.isEmpty()){
             ApiSmsMessageTempWSDTO smsMessageTempWSDTO = new ApiSmsMessageTempWSDTO();
-            smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
-            smsMessageTempWSDTO.setPhones(clientPhones);
+            ApiSmsAccountWSDTO smsAccountWSDTO = operationMapper.getApiSmsAccountWSDTO(processId);
+            if (smsAccountWSDTO != null){
+                smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
+            }
+            smsMessageTempWSDTO.setPhones(clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
             smsMessageTempWSDTO.setSmsTemps(smsMessageTempRepository.findByIdAndProcessId(tempId,processId));
 
             return smsMessageTempWSDTO;
         }
         return null;
     }
+
 
 
 }

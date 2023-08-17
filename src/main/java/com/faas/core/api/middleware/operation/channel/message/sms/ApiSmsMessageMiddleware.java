@@ -24,12 +24,12 @@ public class ApiSmsMessageMiddleware {
     ApiSmsMessageFramework apiSmsMessageFramework;
 
 
-    public ApiOperationSmsMessageWSModel apiGetOperationSmsMessage(long agentId, long sessionId, long clientId) {
+    public ApiOperationSmsMessageWSModel apiGetOperationSmsMessage(long agentId,long sessionId) {
 
         ApiOperationSmsMessageWSModel response = new ApiOperationSmsMessageWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiOperationSmsMessageWSDTO operationSmsWSDTO = apiSmsMessageFramework.apiGetOperationSmsMessageService(agentId,sessionId,clientId);
+        ApiOperationSmsMessageWSDTO operationSmsWSDTO = apiSmsMessageFramework.apiGetOperationSmsMessageService(agentId,sessionId);
         if (operationSmsWSDTO != null){
             response.setOperationSmsMessage(operationSmsWSDTO);
         }
@@ -44,12 +44,12 @@ public class ApiSmsMessageMiddleware {
     }
 
 
-    public ApiSmsMessageWSModel apiGetSmsMessages(long agentId, long sessionId, long clientId, String processId) {
+    public ApiSmsMessageWSModel apiGetSmsMessages(long agentId,long sessionId,String campaignId,String processId) {
 
         ApiSmsMessageWSModel response = new ApiSmsMessageWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        List<ApiSmsMessageWSDTO> smsMessageWSDTOS = apiSmsMessageFramework.apiGetSmsMessagesService(agentId,sessionId,clientId,processId);
+        List<ApiSmsMessageWSDTO> smsMessageWSDTOS = apiSmsMessageFramework.apiGetSmsMessagesService(agentId,sessionId,campaignId,processId);
         if (smsMessageWSDTOS != null){
             response.setSmsMessages(smsMessageWSDTOS);
         }
@@ -64,13 +64,13 @@ public class ApiSmsMessageMiddleware {
     }
 
 
-    public ApiSmsMessageWSModel apiGetSmsMessage(long agentId, long sessionId, long clientId, String processId, String messageId) {
+    public ApiSmsMessageWSModel apiGetSmsMessage(long agentId,long sessionId,String campaignId, String processId,String messageId) {
 
         ApiSmsMessageWSModel response = new ApiSmsMessageWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ApiSmsMessageWSDTO> smsMessageWSDTOS = new ArrayList<>();
 
-        ApiSmsMessageWSDTO smsMessageWSDTO = apiSmsMessageFramework.apiGetSmsMessageService(agentId,sessionId,clientId,processId,messageId);
+        ApiSmsMessageWSDTO smsMessageWSDTO = apiSmsMessageFramework.apiGetSmsMessageService(agentId,sessionId,campaignId,processId,messageId);
         if (smsMessageWSDTO != null){
             smsMessageWSDTOS.add(smsMessageWSDTO);
         }
@@ -108,13 +108,13 @@ public class ApiSmsMessageMiddleware {
     }
 
 
-    public ApiSmsMessageWSModel apiUpdateSmsMessage(long agentId, long sessionId, long clientId, String processId, String messageId) {
+    public ApiSmsMessageWSModel apiUpdateSmsMessage(long agentId,long sessionId,String campaignId,String processId,String messageId) {
 
         ApiSmsMessageWSModel response = new ApiSmsMessageWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ApiSmsMessageWSDTO> smsMessageWSDTOS = new ArrayList<>();
 
-        ApiSmsMessageWSDTO smsMessageWSDTO = apiSmsMessageFramework.apiUpdateSmsMessageService(agentId,sessionId,clientId,processId,messageId);
+        ApiSmsMessageWSDTO smsMessageWSDTO = apiSmsMessageFramework.apiUpdateSmsMessageService(agentId,sessionId,campaignId,processId,messageId);
         if (smsMessageWSDTO != null){
             smsMessageWSDTOS.add(smsMessageWSDTO);
         }
@@ -130,13 +130,13 @@ public class ApiSmsMessageMiddleware {
     }
 
 
-    public ApiSmsMessageWSModel apiRemoveSmsMessage(long agentId, long sessionId, long clientId, String processId, String messageId) {
+    public ApiSmsMessageWSModel apiRemoveSmsMessage(long agentId,long sessionId,String campaignId,String processId,String messageId) {
 
         ApiSmsMessageWSModel response = new ApiSmsMessageWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ApiSmsMessageWSDTO> smsMessageWSDTOS = new ArrayList<>();
 
-        ApiSmsMessageWSDTO smsMessageWSDTO = apiSmsMessageFramework.apiRemoveSmsMessageService(agentId,sessionId,clientId,processId,messageId);
+        ApiSmsMessageWSDTO smsMessageWSDTO = apiSmsMessageFramework.apiRemoveSmsMessageService(agentId,sessionId,campaignId,processId,messageId);
         if (smsMessageWSDTO != null){
             smsMessageWSDTOS.add(smsMessageWSDTO);
         }
@@ -153,12 +153,12 @@ public class ApiSmsMessageMiddleware {
 
 
 
-    public ApiSmsMessageTempWSModel apiGetSmsMessageTemps(long agentId, long sessionId, long clientId, String processId) {
+    public ApiSmsMessageTempWSModel apiGetSmsMessageTemps(long agentId,long sessionId ,String processId) {
 
         ApiSmsMessageTempWSModel response = new ApiSmsMessageTempWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiSmsMessageTempWSDTO smsMessageTempWSDTO = apiSmsMessageFramework.apiGetSmsMessageTempsService(agentId,sessionId,clientId,processId);
+        ApiSmsMessageTempWSDTO smsMessageTempWSDTO = apiSmsMessageFramework.apiGetSmsMessageTempsService(agentId,sessionId,processId);
         if (smsMessageTempWSDTO != null){
             response.setSmsMessageTemp(smsMessageTempWSDTO);
         }
@@ -173,12 +173,12 @@ public class ApiSmsMessageMiddleware {
     }
 
 
-    public ApiSmsMessageTempWSModel apiGetSmsMessageTemp(long agentId, long sessionId, long clientId, String processId, String tempId) {
+    public ApiSmsMessageTempWSModel apiGetSmsMessageTemp(long agentId,long sessionId,String processId,String tempId) {
 
         ApiSmsMessageTempWSModel response = new ApiSmsMessageTempWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiSmsMessageTempWSDTO smsMessageTempWSDTO = apiSmsMessageFramework.apiGetSmsMessageTempService(agentId,sessionId,clientId,processId,tempId);
+        ApiSmsMessageTempWSDTO smsMessageTempWSDTO = apiSmsMessageFramework.apiGetSmsMessageTempService(agentId,sessionId,processId,tempId);
         if (smsMessageTempWSDTO != null){
             response.setSmsMessageTemp(smsMessageTempWSDTO);
         }
