@@ -77,7 +77,7 @@ public class ApiSmsMessageFramework {
     }
 
 
-    public ApiSmsMessageWSDTO apiSendSmsMessageService(){
+    public ApiSmsMessageWSDTO apiSendSmsMessageService(long agentId,long sessionId,String campaignId,String processId,String tempId,long numberId){
 
         return null;
     }
@@ -105,7 +105,7 @@ public class ApiSmsMessageFramework {
 
 
 
-    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempsService(long agentId,long sessionId,String processId) {
+    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempsService(long agentId,long sessionId,String campaignId,String processId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
@@ -123,7 +123,7 @@ public class ApiSmsMessageFramework {
     }
 
 
-    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempService(long agentId,long sessionId,String processId,String tempId) {
+    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempService(long agentId,long sessionId,String campaignId,String processId,String tempId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){

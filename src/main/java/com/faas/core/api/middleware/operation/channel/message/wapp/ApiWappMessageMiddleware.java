@@ -87,7 +87,7 @@ public class ApiWappMessageMiddleware {
 
 
 
-    public ApiWappMessageWSModel apiSendWappMessage(long agentId, long sessionId, long clientId, String processId, String tempId, long numberId) throws IOException {
+    public ApiWappMessageWSModel apiSendWappMessage(long agentId,long sessionId,String campaignId,String processId,String tempId,long numberId) throws IOException {
 
         ApiWappMessageWSModel response = new ApiWappMessageWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -151,12 +151,12 @@ public class ApiWappMessageMiddleware {
 
 
 
-    public ApiWappMessageTempWSModel apiGetWappMessageTemps(long agentId,long sessionId,String processId) {
+    public ApiWappMessageTempWSModel apiGetWappMessageTemps(long agentId,long sessionId,String campaignId,String processId) {
 
         ApiWappMessageTempWSModel response = new ApiWappMessageTempWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiWappMessageTempWSDTO wappMessageTempWSDTO = apiWappMessageFramework.apiGetWappMessageTempsService(agentId,sessionId,processId);
+        ApiWappMessageTempWSDTO wappMessageTempWSDTO = apiWappMessageFramework.apiGetWappMessageTempsService(agentId,sessionId,campaignId,processId);
         if (wappMessageTempWSDTO != null){
             response.setWappMessageTemp(wappMessageTempWSDTO);
         }
@@ -172,12 +172,12 @@ public class ApiWappMessageMiddleware {
 
 
 
-    public ApiWappMessageTempWSModel apiGetWappMessageTemp(long agentId,long sessionId,String processId,String tempId) {
+    public ApiWappMessageTempWSModel apiGetWappMessageTemp(long agentId,long sessionId,String campaignId,String processId,String tempId) {
 
         ApiWappMessageTempWSModel response = new ApiWappMessageTempWSModel();
         GeneralWSModel general = new GeneralWSModel();
 
-        ApiWappMessageTempWSDTO wappMessageTempWSDTO = apiWappMessageFramework.apiGetWappMessageTempService(agentId,sessionId,processId,tempId);
+        ApiWappMessageTempWSDTO wappMessageTempWSDTO = apiWappMessageFramework.apiGetWappMessageTempService(agentId,sessionId,campaignId,processId,tempId);
         if (wappMessageTempWSDTO != null){
             response.setWappMessageTemp(wappMessageTempWSDTO);
         }
