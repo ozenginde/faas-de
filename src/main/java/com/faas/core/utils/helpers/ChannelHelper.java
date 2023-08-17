@@ -18,7 +18,7 @@ public class ChannelHelper {
 
         SmsMessageDAO smsMessageDAO = new SmsMessageDAO();
 
-        smsMessageDAO.setMessageType(smsMessageTempDBModel.getId());
+        smsMessageDAO.setTempId(smsMessageTempDBModel.getId());
         smsMessageDAO.setSmsTitle(smsMessageTempDBModel.getSmsTitle());
         smsMessageDAO.setSmsBody(smsMessageTempDBModel.getSmsBody());
         smsMessageDAO.setSenderId(smsMessageTempDBModel.getSenderId());
