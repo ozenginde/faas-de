@@ -8,7 +8,7 @@ import com.faas.core.api.model.ws.operation.channel.call.wapp.dto.ApiWappAccount
 import com.faas.core.api.model.ws.operation.channel.content.dto.ApiOperationChannelWSDTO;
 import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiEmailAccountWSDTO;
 import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiOperationEmailWSDTO;
-import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiOperationSmsWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiOperationSmsMessageWSDTO;
 import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsAccountWSDTO;
 import com.faas.core.api.model.ws.operation.channel.message.wapp.dto.ApiOperationWappMessageWSDTO;
 import com.faas.core.api.model.ws.operation.channel.messenger.dto.ApiOperationMessengerWSDTO;
@@ -325,7 +325,7 @@ public class OperationMapper {
         operationChannelWSDTO.setOperationWappCall(mapApiOperationWappCallWSDTO(sessionDBModel,clientPhoneDBModels));
         operationChannelWSDTO.setOperationSmsMessage(mapApiOperationSmsMessageWSDTO(sessionDBModel,clientPhoneDBModels));
         operationChannelWSDTO.setOperationWappMessage(mapApiOperationWappMessageWSDTO(sessionDBModel,clientPhoneDBModels));
-        operationChannelWSDTO.setOperationEmailMessage(mapApiOperationEmailMessageWSDTO(sessionDBModel));
+        operationChannelWSDTO.setOperationEmail(mapApiOperationEmailWSDTO(sessionDBModel));
         operationChannelWSDTO.setOperationMessenger(mapApiOperationMessengerWSDTO());
         operationChannelWSDTO.setOperationPushMessage(mapApiOperationPushMessageWSDTO(sessionDBModel));
 
@@ -423,9 +423,9 @@ public class OperationMapper {
     }
 
 
-    public ApiOperationSmsWSDTO mapApiOperationSmsMessageWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
+    public ApiOperationSmsMessageWSDTO mapApiOperationSmsMessageWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
 
-        ApiOperationSmsWSDTO operationSmsMessageWSDTO = new ApiOperationSmsWSDTO();
+        ApiOperationSmsMessageWSDTO operationSmsMessageWSDTO = new ApiOperationSmsMessageWSDTO();
         ApiSmsAccountWSDTO smsAccountWSDTO = getApiSmsAccountWSDTO(sessionDBModel.getProcessId());
         if (smsAccountWSDTO != null){
             operationSmsMessageWSDTO.setSmsAccount(smsAccountWSDTO);
@@ -433,6 +433,7 @@ public class OperationMapper {
         operationSmsMessageWSDTO.setPhones(clientPhones);
         operationSmsMessageWSDTO.setSmsMessages(smsMessageRepository.findBySessionId(sessionDBModel.getId()));
         operationSmsMessageWSDTO.setSmsTemps(smsMessageTempRepository.findByProcessId(sessionDBModel.getProcessId()));
+
         return operationSmsMessageWSDTO;
     }
 
@@ -443,7 +444,6 @@ public class OperationMapper {
         if (!smsChannelDBModels.isEmpty() && smsChannelDBModels.get(0).getSmsAccount() != null) {
 
             ApiSmsAccountWSDTO smsAccountWSDTO = new ApiSmsAccountWSDTO();
-
             smsAccountWSDTO.setAccountId(smsChannelDBModels.get(0).getAccountId());
             smsAccountWSDTO.setAccount(smsChannelDBModels.get(0).getSmsAccount().getAccount());
             smsAccountWSDTO.setUserName(smsChannelDBModels.get(0).getSmsAccount().getUserName());
@@ -497,18 +497,19 @@ public class OperationMapper {
         return null;
     }
 
-    public ApiOperationEmailWSDTO mapApiOperationEmailMessageWSDTO(SessionDBModel sessionDBModel) {
+    public ApiOperationEmailWSDTO mapApiOperationEmailWSDTO(SessionDBModel sessionDBModel) {
 
-        ApiOperationEmailWSDTO operationEmailMessageWSDTO = new ApiOperationEmailWSDTO();
+        ApiOperationEmailWSDTO operationEmailWSDTO = new ApiOperationEmailWSDTO();
+
         ApiEmailAccountWSDTO emailAccountWSDTO = getApiEmailAccountWSDTO(sessionDBModel.getProcessId());
         if (emailAccountWSDTO != null){
-            operationEmailMessageWSDTO.setEmailAccount(emailAccountWSDTO);
+            operationEmailWSDTO.setEmailAccount(emailAccountWSDTO);
         }
-        operationEmailMessageWSDTO.setEmails(clientEmailRepository.findByClientId(sessionDBModel.getClientId()));
-        operationEmailMessageWSDTO.setEmailMessages(emailMessageRepository.findBySessionId(sessionDBModel.getId()));
-        operationEmailMessageWSDTO.setEmailTemps(emailTempRepository.findByProcessId(sessionDBModel.getProcessId()));
+        operationEmailWSDTO.setEmails(clientEmailRepository.findByClientId(sessionDBModel.getClientId()));
+        operationEmailWSDTO.setEmailMessages(emailMessageRepository.findBySessionId(sessionDBModel.getId()));
+        operationEmailWSDTO.setEmailTemps(emailTempRepository.findByProcessId(sessionDBModel.getProcessId()));
 
-        return operationEmailMessageWSDTO;
+        return operationEmailWSDTO;
     }
 
 

@@ -138,15 +138,15 @@ public class ApiRoute {
     public static final String API_REMOVE_WAPP_CALL = "apiremovewappcall";
 
 
-    public static final String API_GET_OPERATION_SMS = "apigetoperationsms";
-    public static final String API_GET_SMSS = "apigetsmss";
-    public static final String API_GET_SMS = "apigetsms";
-    public static final String API_SEND_SMS = "apisendsms";
-    public static final String API_UPDATE_SMS = "apiupdatesms";
-    public static final String API_REMOVE_SMS = "apiremovesms";
+    public static final String API_GET_OPERATION_SMS_MESSAGE = "apigetoperationsmsmessage";
+    public static final String API_GET_SMS_MESSAGES = "apigetsmsmessages";
+    public static final String API_GET_SMS_MESSAGE = "apigetsmsmessage";
+    public static final String API_SEND_SMS_MESSAGE = "apisendsmsmessage";
+    public static final String API_UPDATE_SMS_MESSAGE = "apiupdatesmsmessage";
+    public static final String API_REMOVE_SMS_MESSAGE = "apiremovesmsmessage";
 
-    public static final String API_GET_SMS_TEMPS = "apigetsmstemps";
-    public static final String API_GET_SMS_TEMP = "apigetsmstemp";
+    public static final String API_GET_SMS_MESSAGE_TEMPS = "apigetsmsmessagetemps";
+    public static final String API_GET_SMS_MESSAGE_TEMP = "apigetsmsmessagetemp";
 
 
     public static final String API_GET_OPERATION_WAPP_MESSAGE = "apigetoperationwappmessage";

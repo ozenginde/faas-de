@@ -1,9 +1,9 @@
 package com.faas.core.api.framework.operation.channel.message.sms;
 
-import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiOperationSmsWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiOperationSmsMessageWSDTO;
 import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsAccountWSDTO;
-import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsTempWSDTO;
-import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsMessageTempWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsMessageWSDTO;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
 import com.faas.core.base.model.db.operation.channel.SmsMessageDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
@@ -46,60 +46,60 @@ public class ApiSmsMessageFramework {
     AppUtils appUtils;
 
 
-    public ApiOperationSmsWSDTO apiGetOperationSmsService(long agentId, long sessionId, long clientId) {
+    public ApiOperationSmsMessageWSDTO apiGetOperationSmsMessageService(long agentId, long sessionId, long clientId) {
 
         List<SessionDBModel>sessionDBModels =  sessionRepository.findByIdAndClientId(sessionId,clientId);
         List<ClientPhoneDBModel> clientPhoneDBModels = clientPhoneRepository.findByClientId(clientId);
-        if (sessionDBModels.size()>0){
+        if (!sessionDBModels.isEmpty()){
             return operationMapper.mapApiOperationSmsMessageWSDTO(sessionDBModels.get(0),clientPhoneDBModels);
         }
         return null;
     }
 
 
-    public List<ApiSmsWSDTO> apiGetSmssService(long agentId, long sessionId, long clientId, String processId) {
+    public List<ApiSmsMessageWSDTO> apiGetSmsMessagesService(long agentId, long sessionId, long clientId, String processId) {
 
-        List<ApiSmsWSDTO> smsMessageWSDTOS = new ArrayList<>();
+        List<ApiSmsMessageWSDTO> smsWSDTOS = new ArrayList<>();
         List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findBySessionIdAndClientIdAndProcessId(sessionId,clientId,processId);
         for (SmsMessageDBModel smsMessageDBModel : smsMessageDBModels) {
-            smsMessageWSDTOS.add(new ApiSmsWSDTO(smsMessageDBModel));
+            smsWSDTOS.add(new ApiSmsMessageWSDTO(smsMessageDBModel));
         }
-        return smsMessageWSDTOS;
+        return smsWSDTOS;
     }
 
-    public ApiSmsWSDTO apiGetSmsService(long agentId, long sessionId, long clientId, String processId, String messageId) {
+    public ApiSmsMessageWSDTO apiGetSmsMessageService(long agentId, long sessionId, long clientId, String processId, String messageId) {
+
+        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
+        if (!smsMessageDBModels.isEmpty()) {
+            return new ApiSmsMessageWSDTO(smsMessageDBModels.get(0));
+        }
+        return null;
+    }
+
+
+
+    public ApiSmsMessageWSDTO apiSendSmsMessageService(){
+
+        return null;
+    }
+
+
+
+    public ApiSmsMessageWSDTO apiUpdateSmsMessageService(long agentId, long sessionId, long clientId, String processId, String messageId) {
 
         List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
         if (smsMessageDBModels.size()>0) {
-            return new ApiSmsWSDTO(smsMessageDBModels.get(0));
+            return new ApiSmsMessageWSDTO(smsMessageDBModels.get(0));
         }
         return null;
     }
 
-
-
-    public ApiSmsWSDTO apiSendSmsService(){
-
-        return null;
-    }
-
-
-
-    public ApiSmsWSDTO apiUpdateSmsService(long agentId, long sessionId, long clientId, String processId, String messageId) {
-
-        List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
-        if (smsMessageDBModels.size()>0) {
-            return new ApiSmsWSDTO(smsMessageDBModels.get(0));
-        }
-        return null;
-    }
-
-    public ApiSmsWSDTO apiRemoveSmsService(long agentId, long sessionId, long clientId, String processId, String messageId) {
+    public ApiSmsMessageWSDTO apiRemoveSmsMessageService(long agentId, long sessionId, long clientId, String processId, String messageId) {
 
         List<SmsMessageDBModel> smsMessageDBModels = smsMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
         if (smsMessageDBModels.size()>0) {
             smsMessageRepository.delete(smsMessageDBModels.get(0));
-            return new ApiSmsWSDTO(smsMessageDBModels.get(0));
+            return new ApiSmsMessageWSDTO(smsMessageDBModels.get(0));
         }
         return null;
     }
@@ -107,14 +107,14 @@ public class ApiSmsMessageFramework {
 
 
 
-    public ApiSmsTempWSDTO apiGetSmsTempsService(long agentId, long sessionId, long clientId, String processId) {
+    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempsService(long agentId, long sessionId, long clientId, String processId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         List<ClientPhoneDBModel> clientPhones =  clientPhoneRepository.findByClientId(clientId);
         ApiSmsAccountWSDTO smsAccountWSDTO = operationMapper.getApiSmsAccountWSDTO(processId);
         if (sessionDBModels.size()>0 && smsAccountWSDTO != null){
 
-            ApiSmsTempWSDTO smsMessageTempWSDTO = new ApiSmsTempWSDTO();
+            ApiSmsMessageTempWSDTO smsMessageTempWSDTO = new ApiSmsMessageTempWSDTO();
             smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
             smsMessageTempWSDTO.setPhones(clientPhones);
             smsMessageTempWSDTO.setSmsTemps(smsMessageTempRepository.findByProcessId(processId));
@@ -125,14 +125,14 @@ public class ApiSmsMessageFramework {
     }
 
 
-    public ApiSmsTempWSDTO apiGetSmsTempService(long agentId, long sessionId, long clientId, String processId, String tempId) {
+    public ApiSmsMessageTempWSDTO apiGetSmsMessageTempService(long agentId, long sessionId, long clientId, String processId, String tempId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         List<ClientPhoneDBModel> clientPhones =  clientPhoneRepository.findByClientId(clientId);
         ApiSmsAccountWSDTO smsAccountWSDTO = operationMapper.getApiSmsAccountWSDTO(processId);
         if (sessionDBModels.size()>0 && smsAccountWSDTO != null){
 
-            ApiSmsTempWSDTO smsMessageTempWSDTO = new ApiSmsTempWSDTO();
+            ApiSmsMessageTempWSDTO smsMessageTempWSDTO = new ApiSmsMessageTempWSDTO();
             smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
             smsMessageTempWSDTO.setPhones(clientPhones);
             smsMessageTempWSDTO.setSmsTemps(smsMessageTempRepository.findByIdAndProcessId(tempId,processId));

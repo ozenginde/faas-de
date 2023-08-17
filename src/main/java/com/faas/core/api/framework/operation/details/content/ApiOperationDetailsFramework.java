@@ -54,6 +54,7 @@ public class ApiOperationDetailsFramework {
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
+
         if (clientDBModel.isPresent() && campaignDBModel.isPresent() && processDBModel.isPresent()) {
             return operationMapper.mapApiOperationDetailsWSDTO(sessionDBModels.get(0), clientDBModel.get(), operationDBModels.get(0), campaignDBModel.get(), processDBModel.get());
         }
