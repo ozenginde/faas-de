@@ -137,10 +137,10 @@ public class ApiSmsMessageController {
     @RequestMapping(value = ApiRoute.API_GET_SMS_MESSAGE_TEMP, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetSmsMessageTemp(@RequestParam long agentId,
                                                   @RequestParam long sessionId,
-                                                  @RequestParam String campaignId,
+                                                  @RequestParam String processId,
                                                   @RequestParam String tempId) {
 
-        ApiSmsMessageTempWSModel response = apiSmsMessageMiddleware.apiGetSmsMessageTemp(agentId,sessionId,campaignId,tempId);
+        ApiSmsMessageTempWSModel response = apiSmsMessageMiddleware.apiGetSmsMessageTemp(agentId,sessionId,processId,tempId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
