@@ -46,54 +46,58 @@ public class ApiWappMessageFramework {
     AppUtils appUtils;
 
 
-    public ApiOperationWappMessageWSDTO apiGetOperationWappMessagesService(long agentId, long sessionId, long clientId) {
+    public ApiOperationWappMessageWSDTO apiGetOperationWappMessagesService(long agentId, long sessionId) {
 
-        List<SessionDBModel>sessionDBModels =  sessionRepository.findByIdAndClientId(sessionId,clientId);
-        List<ClientPhoneDBModel> clientPhoneDBModels = clientPhoneRepository.findByClientId(clientId);
-        if (sessionDBModels.size()>0){
-            return operationMapper.mapApiOperationWappMessageWSDTO(sessionDBModels.get(0),clientPhoneDBModels);
+        List<SessionDBModel>sessionDBModels =  sessionRepository.findByIdAndAgentId(sessionId,agentId);
+        if (!sessionDBModels.isEmpty()){
+            return operationMapper.mapApiOperationWappMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
         }
         return null;
     }
 
 
-    public List<ApiWappMessageWSDTO> apiGetWappMessagesService(long agentId,long sessionId,long clientId, String processId){
+    public List<ApiWappMessageWSDTO> apiGetWappMessagesService(long agentId,long sessionId,String campaignId, String processId){
 
         List<ApiWappMessageWSDTO>wappMessageWSDTOS = new ArrayList<>();
-        List<WappMessageDBModel>wappMessageDBModels = wappMessageRepository.findBySessionIdAndClientIdAndProcessId(sessionId,clientId,processId);
+        List<WappMessageDBModel>wappMessageDBModels = wappMessageRepository.findBySessionIdAndCampaignIdAndProcessId(sessionId,campaignId,processId);
         for (WappMessageDBModel wappMessageDBModel : wappMessageDBModels) {
             wappMessageWSDTOS.add(new ApiWappMessageWSDTO(wappMessageDBModel));
         }
         return wappMessageWSDTOS;
     }
 
-    public ApiWappMessageWSDTO apiGetWappMessageService(long agentId,long sessionId, long clientId,String processId,String messageId) {
 
-        List<WappMessageDBModel> wappMessageDBModels = wappMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
-        if (wappMessageDBModels.size()>0){
+    public ApiWappMessageWSDTO apiGetWappMessageService(long agentId,long sessionId,String campaignId,String processId,String messageId) {
+
+        List<WappMessageDBModel> wappMessageDBModels = wappMessageRepository.findByIdAndSessionIdAndCampaignIdAndProcessId(messageId,sessionId,campaignId,processId);
+        if (!wappMessageDBModels.isEmpty()){
             return new ApiWappMessageWSDTO(wappMessageDBModels.get(0));
         }
         return null;
     }
+
 
     public ApiWappMessageWSDTO apiSendWappMessageService() {
 
         return null;
     }
 
-    public ApiWappMessageWSDTO apiUpdateWappMessageService(long agentId,long sessionId,long clientId,String processId,String messageId){
 
-        List<WappMessageDBModel> wappMessageDBModels = wappMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
-        if (wappMessageDBModels.size()>0){
+
+    public ApiWappMessageWSDTO apiUpdateWappMessageService(long agentId,long sessionId,String campaignId,String processId,String messageId){
+
+        List<WappMessageDBModel> wappMessageDBModels = wappMessageRepository.findByIdAndSessionIdAndCampaignIdAndProcessId(messageId,sessionId,campaignId,processId);
+        if (!wappMessageDBModels.isEmpty()){
             return new ApiWappMessageWSDTO(wappMessageDBModels.get(0));
         }
         return null;
     }
 
-    public ApiWappMessageWSDTO apiRemoveWappMessageService(long agentId,long sessionId,long clientId,String processId,String messageId){
 
-        List<WappMessageDBModel> wappMessageDBModels = wappMessageRepository.findByIdAndSessionIdAndClientIdAndProcessId(messageId,sessionId,clientId,processId);
-        if (wappMessageDBModels.size()>0){
+    public ApiWappMessageWSDTO apiRemoveWappMessageService(long agentId,long sessionId,String campaignId,String processId,String messageId){
+
+        List<WappMessageDBModel> wappMessageDBModels = wappMessageRepository.findByIdAndSessionIdAndCampaignIdAndProcessId(messageId,sessionId,campaignId,processId);
+        if (!wappMessageDBModels.isEmpty()){
             wappMessageRepository.delete(wappMessageDBModels.get(0));
             return new ApiWappMessageWSDTO(wappMessageDBModels.get(0));
         }
@@ -103,16 +107,16 @@ public class ApiWappMessageFramework {
 
 
 
-    public ApiWappMessageTempWSDTO apiGetWappMessageTempsService(long agentId, long sessionId, long clientId, String processId){
+    public ApiWappMessageTempWSDTO apiGetWappMessageTempsService(long agentId,long sessionId,String processId){
 
-        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
-        List<ClientPhoneDBModel> clientPhones =  clientPhoneRepository.findByClientId(clientId);
-        ApiWappAccountWSDTO wappAccountWSDTO = operationMapper.getApiWappAccountWSDTO(agentId,processId);
-        if (sessionDBModels.size()>0 && wappAccountWSDTO != null){
-
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
+        if (!sessionDBModels.isEmpty()){
             ApiWappMessageTempWSDTO wappMessageTempWSDTO = new ApiWappMessageTempWSDTO();
-            wappMessageTempWSDTO.setWappAccount(wappAccountWSDTO);
-            wappMessageTempWSDTO.setPhones(clientPhones);
+            ApiWappAccountWSDTO wappAccountWSDTO = operationMapper.getApiWappAccountWSDTO(agentId,processId);
+            if (wappAccountWSDTO != null){
+                wappMessageTempWSDTO.setWappAccount(wappAccountWSDTO);
+            }
+            wappMessageTempWSDTO.setPhones(clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
             wappMessageTempWSDTO.setWappTemps(wappMessageTempRepository.findByProcessId(processId));
 
             return wappMessageTempWSDTO;
@@ -120,16 +124,16 @@ public class ApiWappMessageFramework {
         return null;
     }
 
-    public ApiWappMessageTempWSDTO apiGetWappMessageTempService(long agentId,long sessionId,long clientId,String processId,String tempId){
+    public ApiWappMessageTempWSDTO apiGetWappMessageTempService(long agentId,long sessionId,String processId,String tempId){
 
-        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
-        List<ClientPhoneDBModel> clientPhones =  clientPhoneRepository.findByClientId(clientId);
-        ApiWappAccountWSDTO wappAccountWSDTO = operationMapper.getApiWappAccountWSDTO(agentId,processId);
-        if (sessionDBModels.size()>0 && wappAccountWSDTO != null){
-
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
+        if (!sessionDBModels.isEmpty()){
             ApiWappMessageTempWSDTO wappMessageTempWSDTO = new ApiWappMessageTempWSDTO();
-            wappMessageTempWSDTO.setWappAccount(wappAccountWSDTO);
-            wappMessageTempWSDTO.setPhones(clientPhones);
+            ApiWappAccountWSDTO wappAccountWSDTO = operationMapper.getApiWappAccountWSDTO(agentId,processId);
+            if (wappAccountWSDTO != null){
+                wappMessageTempWSDTO.setWappAccount(wappAccountWSDTO);
+            }
+            wappMessageTempWSDTO.setPhones(clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
             wappMessageTempWSDTO.setWappTemps(wappMessageTempRepository.findByIdAndProcessId(tempId,processId));
 
             return wappMessageTempWSDTO;

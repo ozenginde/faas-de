@@ -13,6 +13,8 @@ public interface WappMessageRepository extends MongoRepository<WappMessageDBMode
     List<WappMessageDBModel>findByIdAndSessionId(String messageId, long sessionId);
     List<WappMessageDBModel>findBySessionIdAndClientIdAndProcessId(long sessionId,long clientId,String processId);
     List<WappMessageDBModel>findByIdAndSessionIdAndClientIdAndProcessId(String messageId,long sessionId,long clientId,String processId);
+    List<WappMessageDBModel>findBySessionIdAndCampaignIdAndProcessId(long sessionId,String campaignId,String processId);
+    List<WappMessageDBModel>findByIdAndSessionIdAndCampaignIdAndProcessId(String messageId,long sessionId,String campaignId,String processId);
     List<WappMessageDBModel>findByClientId(long clientId);
 
 }
