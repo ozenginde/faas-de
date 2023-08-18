@@ -34,7 +34,7 @@ public class ApiEmailMessageMiddleware {
     }
 
 
-    public ApiEmailWSModel apiGetEmails(long agentId, long sessionId) {
+    public ApiEmailWSModel apiGetEmails(long agentId,long sessionId,String campaignId,String processId) {
 
         ApiEmailWSModel response = new ApiEmailWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -50,7 +50,7 @@ public class ApiEmailMessageMiddleware {
     }
 
 
-    public ApiEmailWSModel apiGetEmail(long agentId, long sessionId) {
+    public ApiEmailWSModel apiGetEmail(long agentId, long sessionId,String campaignId,String processId,String emailId) {
 
         ApiEmailWSModel response = new ApiEmailWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -66,7 +66,7 @@ public class ApiEmailMessageMiddleware {
     }
 
 
-    public ApiEmailWSModel apiSendEmail(long agentId, long sessionId) {
+    public ApiEmailWSModel apiSendEmail(long agentId, long sessionId,String campaignId,String processId,String tempId,long emailAddressId) {
 
         ApiEmailWSModel response = new ApiEmailWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -82,7 +82,7 @@ public class ApiEmailMessageMiddleware {
     }
 
 
-    public ApiEmailWSModel apiUpdateEmail(long agentId, long sessionId) {
+    public ApiEmailWSModel apiUpdateEmail(long agentId, long sessionId,String campaignId,String processId,String emailId) {
 
         ApiEmailWSModel response = new ApiEmailWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -99,7 +99,7 @@ public class ApiEmailMessageMiddleware {
 
 
 
-    public ApiEmailWSModel apiRemoveEmail(long agentId, long sessionId) {
+    public ApiEmailWSModel apiRemoveEmail(long agentId, long sessionId,String campaignId,String processId,String emailId) {
 
         ApiEmailWSModel response = new ApiEmailWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -116,7 +116,7 @@ public class ApiEmailMessageMiddleware {
 
 
 
-    public ApiEmailTempWSModel apiGetEmailTemps(long agentId, long sessionId) {
+    public ApiEmailTempWSModel apiGetEmailTemps(long agentId,long sessionId,String campaignId,String processId) {
 
         ApiEmailTempWSModel response = new ApiEmailTempWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -132,7 +132,7 @@ public class ApiEmailMessageMiddleware {
     }
 
 
-    public ApiEmailTempWSModel apiGetEmailTemp(long agentId, long sessionId) {
+    public ApiEmailTempWSModel apiGetEmailTemp(long agentId, long sessionId,String campaignId,String processId,String tempId) {
 
         ApiEmailTempWSModel response = new ApiEmailTempWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -146,6 +146,5 @@ public class ApiEmailMessageMiddleware {
 
         return response;
     }
-
 
 }
