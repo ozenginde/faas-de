@@ -24,6 +24,7 @@ public class ChannelHelper {
     public SmsMessageDAO getSmsMessageDAO(SessionDBModel sessionDBModel, SmsMessageTempDBModel smsMessageTempDBModel, ProcessSmsChannelDBModel processSmsChannelDBModel){
 
         SmsMessageDAO smsMessageDAO = new SmsMessageDAO();
+
         smsMessageDAO.setTempId(smsMessageTempDBModel.getId());
         smsMessageDAO.setSmsTitle(smsMessageTempDBModel.getSmsTitle());
         smsMessageDAO.setSmsBody(smsMessageTempDBModel.getSmsBody());
@@ -39,6 +40,7 @@ public class ChannelHelper {
     public WappMessageDAO getWappMessageDAO(SessionDBModel sessionDBModel, WappMessageTempDBModel wappMessageTempDBModel, UserDetailsDBModel agentDetails){
 
         WappMessageDAO wappMessageDAO = new WappMessageDAO();
+
         wappMessageDAO.setTempId(wappMessageTempDBModel.getId());
         wappMessageDAO.setWappTitle(wappMessageTempDBModel.getWappTitle());
         wappMessageDAO.setWappBody(wappMessageTempDBModel.getWappBody());
