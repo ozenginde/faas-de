@@ -6,7 +6,6 @@ public class ApiSipCallWSDTO {
 
     private SipCallDBModel sipCall;
 
-
     public ApiSipCallWSDTO() {
     }
 

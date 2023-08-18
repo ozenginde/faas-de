@@ -8,18 +8,16 @@ import java.util.List;
 public class ApiOperationSipCallWSDTO {
 
     private ApiSipAccountWSDTO sipAccount;
-    private List<ClientPhoneDBModel>phones;
-    private SipCallDBModel sipCall;
-    private List<SipCallDBModel>sipCalls;
+    private List<ClientPhoneDBModel>clientPhones;
+    private SipCallDBModel currentSipCall;
 
     public ApiOperationSipCallWSDTO() {
     }
 
-    public ApiOperationSipCallWSDTO(ApiSipAccountWSDTO sipAccount, List<ClientPhoneDBModel> phones, SipCallDBModel sipCall, List<SipCallDBModel> sipCalls) {
+    public ApiOperationSipCallWSDTO(ApiSipAccountWSDTO sipAccount, List<ClientPhoneDBModel> clientPhones, SipCallDBModel currentSipCall) {
         this.sipAccount = sipAccount;
-        this.phones = phones;
-        this.sipCall = sipCall;
-        this.sipCalls = sipCalls;
+        this.clientPhones = clientPhones;
+        this.currentSipCall = currentSipCall;
     }
 
     public ApiSipAccountWSDTO getSipAccount() {
@@ -30,27 +28,19 @@ public class ApiOperationSipCallWSDTO {
         this.sipAccount = sipAccount;
     }
 
-    public List<ClientPhoneDBModel> getPhones() {
-        return phones;
+    public List<ClientPhoneDBModel> getClientPhones() {
+        return clientPhones;
     }
 
-    public void setPhones(List<ClientPhoneDBModel> phones) {
-        this.phones = phones;
+    public void setClientPhones(List<ClientPhoneDBModel> clientPhones) {
+        this.clientPhones = clientPhones;
     }
 
-    public SipCallDBModel getSipCall() {
-        return sipCall;
+    public SipCallDBModel getCurrentSipCall() {
+        return currentSipCall;
     }
 
-    public void setSipCall(SipCallDBModel sipCall) {
-        this.sipCall = sipCall;
-    }
-
-    public List<SipCallDBModel> getSipCalls() {
-        return sipCalls;
-    }
-
-    public void setSipCalls(List<SipCallDBModel> sipCalls) {
-        this.sipCalls = sipCalls;
+    public void setCurrentSipCall(SipCallDBModel currentSipCall) {
+        this.currentSipCall = currentSipCall;
     }
 }

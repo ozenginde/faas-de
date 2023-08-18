@@ -40,7 +40,7 @@ public class ApiWappCallController {
     public ResponseEntity<?> apiGetWappCall(@RequestParam long agentId,
                                             @RequestParam long sessionId,
                                             @RequestParam long clientId,
-                                            @RequestParam String callId) {
+                                            @RequestParam long callId) {
 
         ApiOperationWappCallWSModel response = apiWappCallMiddleware.apiGetWappCall(agentId,sessionId,clientId,callId);
 
@@ -71,7 +71,7 @@ public class ApiWappCallController {
     public ResponseEntity<?> apiUpdateWappCall(@RequestParam long agentId,
                                                @RequestParam long sessionId,
                                                @RequestParam long clientId,
-                                               @RequestParam String callId) {
+                                               @RequestParam long callId) {
 
         ApiOperationWappCallWSModel response = apiWappCallMiddleware.apiUpdateWappCall(agentId,sessionId,clientId,callId);
 
@@ -86,7 +86,7 @@ public class ApiWappCallController {
     public ResponseEntity<?> apiRemoveWappCall(@RequestParam long agentId,
                                                @RequestParam long sessionId,
                                                @RequestParam long clientId,
-                                               @RequestParam String callId) {
+                                               @RequestParam long callId) {
 
         ApiOperationWappCallWSModel response = apiWappCallMiddleware.apiRemoveWappCall(agentId,sessionId,clientId,callId);
 

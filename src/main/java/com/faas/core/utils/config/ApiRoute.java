@@ -125,10 +125,12 @@ public class ApiRoute {
 
 
     public static final String API_GET_OPERATION_SIP_CALL = "apigetoperationsipcall";
+    public static final String API_GET_SIP_CALLS = "apigetsipcalls";
     public static final String API_GET_SIP_CALL = "apigetsipcall";
     public static final String API_CREATE_SIP_CALL = "apicreatesipcall";
     public static final String API_UPDATE_SIP_CALL = "apiupdatesipcall";
     public static final String API_REMOVE_SIP_CALL = "apiremovesipcall";
+
 
 
     public static final String API_GET_OPERATION_WAPP_CALL = "apigetoperationwappcall";

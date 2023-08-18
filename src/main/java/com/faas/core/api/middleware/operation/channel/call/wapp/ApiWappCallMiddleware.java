@@ -36,7 +36,7 @@ public class ApiWappCallMiddleware {
     }
 
 
-    public ApiOperationWappCallWSModel apiGetWappCall(long agentId,long sessionId,long clientId ,String callId) {
+    public ApiOperationWappCallWSModel apiGetWappCall(long agentId,long sessionId,long clientId ,long callId) {
 
         ApiOperationWappCallWSModel response = new ApiOperationWappCallWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -76,7 +76,7 @@ public class ApiWappCallMiddleware {
     }
 
 
-    public ApiOperationWappCallWSModel apiUpdateWappCall(long agentId,long sessionId,long clientId,String callId) {
+    public ApiOperationWappCallWSModel apiUpdateWappCall(long agentId,long sessionId,long clientId,long callId) {
 
         ApiOperationWappCallWSModel response = new ApiOperationWappCallWSModel();
         GeneralWSModel general = new GeneralWSModel();
@@ -97,7 +97,7 @@ public class ApiWappCallMiddleware {
 
 
 
-    public ApiOperationWappCallWSModel apiRemoveWappCall(long agentId,long sessionId,long clientId, String callId) {
+    public ApiOperationWappCallWSModel apiRemoveWappCall(long agentId,long sessionId,long clientId, long callId) {
 
         ApiOperationWappCallWSModel response = new ApiOperationWappCallWSModel();
         GeneralWSModel general = new GeneralWSModel();

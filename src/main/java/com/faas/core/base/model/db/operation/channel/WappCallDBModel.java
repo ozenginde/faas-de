@@ -1,39 +1,68 @@
 package com.faas.core.base.model.db.operation.channel;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
 
-
-@Document(collection = "wapp_call_table")
+@Entity
+@Table(name = "wapp_call_table")
 public class WappCallDBModel {
 
     @Id
-    private String id;
-    private String sessionUUID;
-    private long sessionId;
-    private long clientId;
-    private long agentId;
-    private String campaignId;
-    private String processId;
-    private long numberId;
-    private String phoneNumber;
-    private String wappAccountId;
-    private String callerId;
-    private String connectionId;
-    private String callState;
-    private long sDate;
-    private long fDate;
-    private long uDate;
-    private long cDate;
-    private int status;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
+    @Column(name = "session_id")
+    private long sessionId;
+
+    @Column(name = "client_id")
+    private long clientId;
+
+    @Column(name = "agent_id")
+    private long agentId;
+
+    @Column(name = "campaign_id")
+    private String campaignId;
+
+    @Column(name = "process_id")
+    private String processId;
+
+    @Column(name = "number_id")
+    private long numberId;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "account_id")
+    private String accountId;
+
+    @Column(name = "caller_id")
+    private String callerId;
+
+    @Column(name = "connection_id")
+    private String connectionId;
+
+    @Column(name = "call_state")
+    private String callState;
+
+    @Column(name = "s_date")
+    private long sDate;
+
+    @Column(name = "f_date")
+    private long fDate;
+
+    @Column(name = "u_date")
+    private long uDate;
+
+    @Column(name = "c_date")
+    private long cDate;
+
+    @Column(name = "status")
+    private int status;
 
     public WappCallDBModel() {
     }
 
-    public WappCallDBModel(String id, String sessionUUID, long sessionId, long clientId, long agentId, String campaignId, String processId, long numberId, String phoneNumber, String wappAccountId, String callerId, String connectionId, String callState, long sDate, long fDate, long uDate, long cDate, int status) {
+    public WappCallDBModel(long id, long sessionId, long clientId, long agentId, String campaignId, String processId, long numberId, String phoneNumber, String accountId, String callerId, String connectionId, String callState, long sDate, long fDate, long uDate, long cDate, int status) {
         this.id = id;
-        this.sessionUUID = sessionUUID;
         this.sessionId = sessionId;
         this.clientId = clientId;
         this.agentId = agentId;
@@ -41,7 +70,7 @@ public class WappCallDBModel {
         this.processId = processId;
         this.numberId = numberId;
         this.phoneNumber = phoneNumber;
-        this.wappAccountId = wappAccountId;
+        this.accountId = accountId;
         this.callerId = callerId;
         this.connectionId = connectionId;
         this.callState = callState;
@@ -52,20 +81,13 @@ public class WappCallDBModel {
         this.status = status;
     }
 
-    public String getId() {
+
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
-    }
-
-    public String getSessionUUID() {
-        return sessionUUID;
-    }
-
-    public void setSessionUUID(String sessionUUID) {
-        this.sessionUUID = sessionUUID;
     }
 
     public long getSessionId() {
@@ -124,12 +146,12 @@ public class WappCallDBModel {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getWappAccountId() {
-        return wappAccountId;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setWappAccountId(String wappAccountId) {
-        this.wappAccountId = wappAccountId;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getCallerId() {

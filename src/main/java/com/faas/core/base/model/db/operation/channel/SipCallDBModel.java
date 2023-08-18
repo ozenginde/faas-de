@@ -1,39 +1,72 @@
 package com.faas.core.base.model.db.operation.channel;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.*;
 
-@Document(collection = "sip_call_table")
+@Entity
+@Table(name = "sip_call_table")
 public class SipCallDBModel {
 
     @Id
-    private String id;
-    private String sessionUUID;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "session_id")
     private long sessionId;
+
+    @Column(name = "client_id")
     private long clientId;
+
+    @Column(name = "agent_id")
     private long agentId;
+
+    @Column(name = "campaign_id")
     private String campaignId;
+
+    @Column(name = "process_id")
     private String processId;
+
+    @Column(name = "number_id")
     private long numberId;
+
+    @Column(name = "phone_number")
     private String phoneNumber;
-    private String sipAccountId;
+
+    @Column(name = "account_id")
+    private String accountId;
+
+    @Column(name = "caller_id")
     private String callerId;
+
+    @Column(name = "provider")
     private String provider;
+
+    @Column(name = "connection_id")
     private String connectionId;
+
+    @Column(name = "call_state")
     private String callState;
+
+    @Column(name = "s_date")
     private long sDate;
+
+    @Column(name = "f_date")
     private long fDate;
+
+    @Column(name = "u_date")
     private long uDate;
+
+    @Column(name = "c_date")
     private long cDate;
+
+    @Column(name = "status")
     private int status;
 
 
     public SipCallDBModel() {
     }
 
-    public SipCallDBModel(String id, String sessionUUID, long sessionId, long clientId, long agentId, String campaignId, String processId, long numberId, String phoneNumber, String sipAccountId, String callerId, String provider, String connectionId, String callState, long sDate, long fDate, long uDate, long cDate, int status) {
+    public SipCallDBModel(long id, long sessionId, long clientId, long agentId, String campaignId, String processId, long numberId, String phoneNumber, String accountId, String callerId, String provider, String connectionId, String callState, long sDate, long fDate, long uDate, long cDate, int status) {
         this.id = id;
-        this.sessionUUID = sessionUUID;
         this.sessionId = sessionId;
         this.clientId = clientId;
         this.agentId = agentId;
@@ -41,7 +74,7 @@ public class SipCallDBModel {
         this.processId = processId;
         this.numberId = numberId;
         this.phoneNumber = phoneNumber;
-        this.sipAccountId = sipAccountId;
+        this.accountId = accountId;
         this.callerId = callerId;
         this.provider = provider;
         this.connectionId = connectionId;
@@ -53,20 +86,12 @@ public class SipCallDBModel {
         this.status = status;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(long id) {
         this.id = id;
-    }
-
-    public String getSessionUUID() {
-        return sessionUUID;
-    }
-
-    public void setSessionUUID(String sessionUUID) {
-        this.sessionUUID = sessionUUID;
     }
 
     public long getSessionId() {
@@ -125,12 +150,12 @@ public class SipCallDBModel {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getSipAccountId() {
-        return sipAccountId;
+    public String getAccountId() {
+        return accountId;
     }
 
-    public void setSipAccountId(String sipAccountId) {
-        this.sipAccountId = sipAccountId;
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public String getCallerId() {

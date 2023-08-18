@@ -1,8 +1,6 @@
 package com.faas.core.utils.mapper;
 
 
-import com.faas.core.api.model.ws.operation.channel.call.sip.dto.ApiOperationSipCallWSDTO;
-import com.faas.core.api.model.ws.operation.channel.call.sip.dto.ApiSipAccountWSDTO;
 import com.faas.core.api.model.ws.operation.channel.call.wapp.dto.ApiOperationWappCallWSDTO;
 import com.faas.core.api.model.ws.operation.channel.call.wapp.dto.ApiWappAccountWSDTO;
 import com.faas.core.api.model.ws.operation.channel.content.dto.ApiOperationChannelWSDTO;
@@ -16,10 +14,10 @@ import com.faas.core.api.model.ws.operation.channel.push.dto.ApiOperationPushMes
 import com.faas.core.api.model.ws.operation.channel.push.dto.ApiPushAccountWSDTO;
 import com.faas.core.api.model.ws.operation.details.activity.dto.ApiOperationActivityWSDTO;
 import com.faas.core.api.model.ws.operation.details.client.content.dto.ApiOperationClientWSDTO;
-import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationCampaignWSDTO;
-import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationDetailsWSDTO;
 import com.faas.core.api.model.ws.operation.details.client.note.dto.ApiClientNoteWSDTO;
 import com.faas.core.api.model.ws.operation.details.client.osint.dto.ApiClientOsIntWSDTO;
+import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationCampaignWSDTO;
+import com.faas.core.api.model.ws.operation.details.content.dto.ApiOperationDetailsWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiOperationScenarioWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.content.dto.ApiScenarioWSDTO;
 import com.faas.core.api.model.ws.operation.scenario.execution.dto.ApiScenarioExecutionWSDTO;
@@ -29,12 +27,14 @@ import com.faas.core.base.model.db.client.details.ClientNoteDBModel;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
 import com.faas.core.base.model.db.flow.FlowDBModel;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
-import com.faas.core.base.model.db.operation.channel.SipCallDBModel;
 import com.faas.core.base.model.db.operation.channel.WappCallDBModel;
 import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.operation.scenario.ScenarioExecutionDBModel;
 import com.faas.core.base.model.db.process.content.ProcessDBModel;
-import com.faas.core.base.model.db.process.details.channel.content.*;
+import com.faas.core.base.model.db.process.details.channel.content.ProcessEmailChannelDBModel;
+import com.faas.core.base.model.db.process.details.channel.content.ProcessPushChannelDBModel;
+import com.faas.core.base.model.db.process.details.channel.content.ProcessSmsChannelDBModel;
+import com.faas.core.base.model.db.process.details.channel.content.ProcessWappChannelDBModel;
 import com.faas.core.base.model.db.process.details.scenario.ProcessScenarioDBModel;
 import com.faas.core.base.model.db.scenario.content.ScenarioDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
@@ -59,6 +59,7 @@ import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.base.repo.user.details.UserDetailsRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
+import com.faas.core.utils.helpers.ChannelHelper;
 import com.faas.core.utils.helpers.OperationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -74,6 +75,9 @@ public class OperationMapper {
 
     @Autowired
     OperationHelper operationHelper;
+
+    @Autowired
+    ChannelHelper channelHelper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -321,7 +325,7 @@ public class OperationMapper {
         List<ClientPhoneDBModel> clientPhoneDBModels = clientPhoneRepository.findByClientId(clientDBModel.getId());
 
         ApiOperationChannelWSDTO operationChannelWSDTO = new ApiOperationChannelWSDTO();
-        operationChannelWSDTO.setOperationSipCall(mapApiOperationSipCallWSDTO(sessionDBModel,clientPhoneDBModels));
+        operationChannelWSDTO.setOperationSipCall(channelHelper.mapApiOperationSipCallWSDTO(sessionDBModel,clientPhoneDBModels));
         operationChannelWSDTO.setOperationWappCall(mapApiOperationWappCallWSDTO(sessionDBModel,clientPhoneDBModels));
         operationChannelWSDTO.setOperationSmsMessage(mapApiOperationSmsMessageWSDTO(sessionDBModel,clientPhoneDBModels));
         operationChannelWSDTO.setOperationWappMessage(mapApiOperationWappMessageWSDTO(sessionDBModel,clientPhoneDBModels));
@@ -333,50 +337,10 @@ public class OperationMapper {
     }
 
 
-    public ApiOperationSipCallWSDTO mapApiOperationSipCallWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
-
-        ApiSipAccountWSDTO sipAccountWSDTO = getApiSipAccountWSDTO(sessionDBModel.getAgentId(), sessionDBModel.getProcessId());
-        if (sipAccountWSDTO != null) {
-            ApiOperationSipCallWSDTO operationSipCall = new ApiOperationSipCallWSDTO();
-            operationSipCall.setSipAccount(sipAccountWSDTO);
-            operationSipCall.setPhones(clientPhones);
-            List<SipCallDBModel> activeSipCall = sipCallRepository.findBySessionIdAndCallState(sessionDBModel.getId(), AppConstant.ACTIVE_CALL);
-            if (!activeSipCall.isEmpty()) {
-                operationSipCall.setSipCall(activeSipCall.get(0));
-            }
-            operationSipCall.setSipCalls(sipCallRepository.findBySessionId(sessionDBModel.getId()));
-
-            return operationSipCall;
-        }
-        return null;
-    }
 
 
 
-    public ApiSipAccountWSDTO getApiSipAccountWSDTO(long agentId, String processId) {
 
-        List<ProcessSipChannelDBModel> sipChannelDBModels = processSipChannelRepository.findByProcessId(processId);
-        List<UserDetailsDBModel> agentDetails = userDetailsRepository.findByUserId(agentId);
-        if (!sipChannelDBModels.isEmpty() && !agentDetails.isEmpty() && agentDetails.get(0).getSipChannel() != null) {
-
-            ApiSipAccountWSDTO sipAccountWSDTO = new ApiSipAccountWSDTO();
-            sipAccountWSDTO.setAccountId(agentDetails.get(0).getSipChannel().getAccountId());
-            sipAccountWSDTO.setAccount(agentDetails.get(0).getSipChannel().getAccount());
-            sipAccountWSDTO.setUserName(agentDetails.get(0).getSipChannel().getUserName());
-            sipAccountWSDTO.setAuthUser(agentDetails.get(0).getSipChannel().getAuthUser());
-            sipAccountWSDTO.setPassword(agentDetails.get(0).getSipChannel().getPassword());
-            sipAccountWSDTO.setSipUrl(agentDetails.get(0).getSipChannel().getSipUrl());
-            sipAccountWSDTO.setAccountDatas(agentDetails.get(0).getSipChannel().getAccountDatas());
-            sipAccountWSDTO.setProvider(agentDetails.get(0).getSipChannel().getProvider());
-            sipAccountWSDTO.setCallerId(sipChannelDBModels.get(0).getCallerId());
-            sipAccountWSDTO.setSipStatus(sipChannelDBModels.get(0).getSipStatus());
-            sipAccountWSDTO.setcDate(sipChannelDBModels.get(0).getcDate());
-            sipAccountWSDTO.setStatus(sipChannelDBModels.get(0).getStatus());
-
-            return sipAccountWSDTO;
-        }
-        return null;
-    }
 
 
     public ApiOperationWappCallWSDTO mapApiOperationWappCallWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {

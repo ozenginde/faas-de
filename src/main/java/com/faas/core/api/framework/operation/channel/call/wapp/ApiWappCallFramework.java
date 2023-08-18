@@ -45,7 +45,7 @@ public class ApiWappCallFramework {
     }
 
 
-    public ApiOperationWappCallWSDTO apiGetWappCallService(long agentId,long sessionId,long clientId ,String callId) {
+    public ApiOperationWappCallWSDTO apiGetWappCallService(long agentId,long sessionId,long clientId ,long callId) {
 
         ApiOperationWappCallWSDTO operationWappCallWSDTO = new ApiOperationWappCallWSDTO();
         operationWappCallWSDTO.setPhones(clientPhoneRepository.findByClientId(clientId));
@@ -63,7 +63,7 @@ public class ApiWappCallFramework {
     }
 
 
-    public ApiOperationWappCallWSDTO apiUpdateWappCallService(long agentId,long sessionId,long clientId,String callId) {
+    public ApiOperationWappCallWSDTO apiUpdateWappCallService(long agentId,long sessionId,long clientId,long callId) {
 
         ApiOperationWappCallWSDTO operationWappCallWSDTO = new ApiOperationWappCallWSDTO();
         operationWappCallWSDTO.setPhones(clientPhoneRepository.findByClientId(clientId));
@@ -75,7 +75,7 @@ public class ApiWappCallFramework {
     }
 
 
-    public ApiOperationWappCallWSDTO apiRemoveWappCallService(long agentId,long sessionId,long clientId, String callId) {
+    public ApiOperationWappCallWSDTO apiRemoveWappCallService(long agentId,long sessionId,long clientId, long callId) {
 
         List<WappCallDBModel> wappCallDBModels = wappCallRepository.findByIdAndSessionId(callId,sessionId);
         if (wappCallDBModels.size()>0){
