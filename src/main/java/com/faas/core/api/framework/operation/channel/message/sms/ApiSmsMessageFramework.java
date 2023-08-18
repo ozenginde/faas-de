@@ -107,7 +107,7 @@ public class ApiSmsMessageFramework {
             smsMessageDBModel.setAgentId(agentId);
             smsMessageDBModel.setCampaignId(campaignId);
             smsMessageDBModel.setProcessId(processId);
-            smsMessageDBModel.setSmsMessage(channelHelper.fillSmsMessageDAO(smsMessageTempDBModels.get(0),processSmsChannelDBModels.get(0)));
+            smsMessageDBModel.setSmsMessage(channelHelper.getSmsMessageDAO(sessionDBModels.get(0),smsMessageTempDBModels.get(0),processSmsChannelDBModels.get(0)));
             smsMessageDBModel.setMessageSentId("");
             smsMessageDBModel.setMessageState(AppConstant.SENT_MESSAGE);
             smsMessageDBModel.setuDate(appUtils.getCurrentTimeStamp());

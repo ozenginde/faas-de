@@ -93,6 +93,10 @@ public class ApiWappMessageMiddleware {
         GeneralWSModel general = new GeneralWSModel();
         List<ApiWappMessageWSDTO>wappMessageWSDTOS = new ArrayList<>();
 
+        ApiWappMessageWSDTO wappMessageWSDTO = apiWappMessageFramework.apiSendWappMessageService(agentId,sessionId,campaignId,processId,tempId,numberId);
+        if (wappMessageWSDTO != null){
+            wappMessageWSDTOS.add(wappMessageWSDTO);
+        }
 
         response.setWappMessages(wappMessageWSDTOS);
         general.setOperation("apiSendWappMessage");

@@ -49,9 +49,9 @@ public class WappManagerService {
 
     public void sendWappMessageService(WappMessageDBModel wappMessageDBModel) throws IOException {
 
-        Optional<WappAccountDBModel> wappAccountDBModel = wappAccountRepository.findById(wappMessageDBModel.getWappAccountId());
+        Optional<WappAccountDBModel> wappAccountDBModel = wappAccountRepository.findById(wappMessageDBModel.getWappMessage().getAccountId());
         if (wappAccountDBModel.isPresent()) {
-            if (wappMessageDBModel.getMessageType().equalsIgnoreCase(AppConstant.TEXT_WAPP)) {
+            if (wappMessageDBModel.getWappMessage().getMessageType().equalsIgnoreCase(AppConstant.TEXT_WAPP)) {
 
                 String messageBody = wappMessageBodyPopulate(wappMessageDBModel);
                 if (messageBody != null && wappManagerRESTCall.sendWappTextMessage(wappAccountDBModel.get().getServerUrl(), wappAccountDBModel.get().getInstanceKey(), wappMessageDBModel.getPhoneNumber(), messageBody)) {
@@ -67,7 +67,7 @@ public class WappManagerService {
 
     public String wappMessageBodyPopulate(WappMessageDBModel wappMessageDBModel) throws IOException {
 
-        String wappMessageBody = wappMessageDBModel.getBody();
+        String wappMessageBody = wappMessageDBModel.getWappMessage().getWappBody();
         if (wappMessageBody.contains(AppConstant.MESSAGE_CLIENT_NAME_TAG)) {
         //    wappMessageBody = wappMessageBody.replace(AppConstant.MESSAGE_CLIENT_NAME_TAG, wappMessageDBModel.getClientName());
         }

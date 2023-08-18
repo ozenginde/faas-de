@@ -1,47 +1,78 @@
 package com.faas.core.base.model.db.operation.channel.dao;
 
 
+import java.util.List;
+
 public class WappMessageDAO {
 
-    private String dataId;
-    private String dataType;
-    private String value;
+    private String tempId;
+    private String wappTitle;
+    private String wappBody;
+    private List<MessageDataDAO> messageDatas;
+    private String messageType;
+    private String accountId;
     private long cDate;
-    private int status;
 
     public WappMessageDAO() {
     }
 
-    public WappMessageDAO(String dataId, String dataType, String value, long cDate, int status) {
-        this.dataId = dataId;
-        this.dataType = dataType;
-        this.value = value;
+    public WappMessageDAO(String tempId, String wappTitle, String wappBody, List<MessageDataDAO> messageDatas, String messageType, String accountId, long cDate) {
+        this.tempId = tempId;
+        this.wappTitle = wappTitle;
+        this.wappBody = wappBody;
+        this.messageDatas = messageDatas;
+        this.messageType = messageType;
+        this.accountId = accountId;
         this.cDate = cDate;
-        this.status = status;
     }
 
-    public String getDataId() {
-        return dataId;
+
+    public String getTempId() {
+        return tempId;
     }
 
-    public void setDataId(String dataId) {
-        this.dataId = dataId;
+    public void setTempId(String tempId) {
+        this.tempId = tempId;
     }
 
-    public String getDataType() {
-        return dataType;
+    public String getWappTitle() {
+        return wappTitle;
     }
 
-    public void setDataType(String dataType) {
-        this.dataType = dataType;
+    public void setWappTitle(String wappTitle) {
+        this.wappTitle = wappTitle;
     }
 
-    public String getValue() {
-        return value;
+    public String getWappBody() {
+        return wappBody;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setWappBody(String wappBody) {
+        this.wappBody = wappBody;
+    }
+
+    public List<MessageDataDAO> getMessageDatas() {
+        return messageDatas;
+    }
+
+    public void setMessageDatas(List<MessageDataDAO> messageDatas) {
+        this.messageDatas = messageDatas;
+    }
+
+    public String getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(String messageType) {
+        this.messageType = messageType;
+    }
+
+    public String getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
     }
 
     public long getcDate() {
@@ -50,13 +81,5 @@ public class WappMessageDAO {
 
     public void setcDate(long cDate) {
         this.cDate = cDate;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 }

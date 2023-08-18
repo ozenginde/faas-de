@@ -9,17 +9,19 @@ public class SmsMessageDAO {
     private String senderId;
     private String messageType;
     private String accountId;
+    private long cDate;
 
     public SmsMessageDAO() {
     }
 
-    public SmsMessageDAO(String tempId, String smsTitle, String smsBody, String senderId, String messageType, String accountId) {
+    public SmsMessageDAO(String tempId, String smsTitle, String smsBody, String senderId, String messageType, String accountId, long cDate) {
         this.tempId = tempId;
         this.smsTitle = smsTitle;
         this.smsBody = smsBody;
         this.senderId = senderId;
         this.messageType = messageType;
         this.accountId = accountId;
+        this.cDate = cDate;
     }
 
     public String getTempId() {
@@ -68,5 +70,13 @@ public class SmsMessageDAO {
 
     public void setAccountId(String accountId) {
         this.accountId = accountId;
+    }
+
+    public long getcDate() {
+        return cDate;
+    }
+
+    public void setcDate(long cDate) {
+        this.cDate = cDate;
     }
 }
