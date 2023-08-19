@@ -45,6 +45,13 @@ public class ApiWappCallFramework {
     }
 
 
+    public ApiOperationWappCallWSDTO apiGetWappCallsService(long agentId,long sessionId,String campaignId,String processId) {
+
+
+        return null;
+    }
+
+
     public ApiOperationWappCallWSDTO apiGetWappCallService(long agentId,long sessionId,long clientId ,long callId) {
 
         ApiOperationWappCallWSDTO operationWappCallWSDTO = new ApiOperationWappCallWSDTO();

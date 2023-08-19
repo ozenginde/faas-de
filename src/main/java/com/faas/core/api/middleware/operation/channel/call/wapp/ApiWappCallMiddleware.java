@@ -36,6 +36,26 @@ public class ApiWappCallMiddleware {
     }
 
 
+    public ApiOperationWappCallWSModel apiGetWappCalls(long agentId,long sessionId,String campaignId,String processId ) {
+
+        ApiOperationWappCallWSModel response = new ApiOperationWappCallWSModel();
+        GeneralWSModel general = new GeneralWSModel();
+
+        ApiOperationWappCallWSDTO operationWappCallWSDTO = apiWappCallFramework.apiGetWappCallsService(agentId,sessionId,campaignId,processId);
+        if (operationWappCallWSDTO != null){
+            response.setOperationWappCall(operationWappCallWSDTO);
+        }
+
+        general.setOperation("apiGetWappCalls");
+        general.setStatus(AppConstant.GENERAL_SUCCESS_STATUS);
+        general.setStatusCode(AppConstant.GENERAL_SUCCESS_CODE);
+        general.setResult(AppConstant.GENERAL_SUCCESS_STATUS);
+        response.setGeneral(general);
+
+        return response;
+    }
+
+
     public ApiOperationWappCallWSModel apiGetWappCall(long agentId,long sessionId,long clientId ,long callId) {
 
         ApiOperationWappCallWSModel response = new ApiOperationWappCallWSModel();

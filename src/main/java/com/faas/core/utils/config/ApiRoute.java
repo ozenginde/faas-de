@@ -134,6 +134,7 @@ public class ApiRoute {
 
 
     public static final String API_GET_OPERATION_WAPP_CALL = "apigetoperationwappcall";
+    public static final String API_GET_WAPP_CALLS = "apigetwappcalls";
     public static final String API_GET_WAPP_CALL = "apigetwappcall";
     public static final String API_CREATE_WAPP_CALL = "apicreatewappcall";
     public static final String API_UPDATE_WAPP_CALL = "apiupdatewappcall";

@@ -36,6 +36,22 @@ public class ApiWappCallController {
     }
 
 
+    @RequestMapping(value = ApiRoute.API_GET_WAPP_CALLS, method = RequestMethod.POST)
+    public ResponseEntity<?> apiGetWappCalls(@RequestParam long agentId,
+                                             @RequestParam long sessionId,
+                                             @RequestParam String campaignId,
+                                             @RequestParam String processId) {
+
+        ApiOperationWappCallWSModel response = apiWappCallMiddleware.apiGetWappCalls(agentId,sessionId,campaignId,processId);
+
+        if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    }
+
+
+
     @RequestMapping(value = ApiRoute.API_GET_WAPP_CALL, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetWappCall(@RequestParam long agentId,
                                             @RequestParam long sessionId,
