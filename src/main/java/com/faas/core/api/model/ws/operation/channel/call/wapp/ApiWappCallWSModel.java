@@ -3,19 +3,19 @@ package com.faas.core.api.model.ws.operation.channel.call.wapp;
 import com.faas.core.api.model.ws.operation.channel.call.wapp.dto.ApiWappCallWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
-
+import java.util.List;
 
 public class ApiWappCallWSModel {
 
     private GeneralWSModel general;
-    private ApiWappCallWSDTO wappCall;
+    private List<ApiWappCallWSDTO> wappCalls;
 
     public ApiWappCallWSModel() {
     }
 
-    public ApiWappCallWSModel(GeneralWSModel general, ApiWappCallWSDTO wappCall) {
+    public ApiWappCallWSModel(GeneralWSModel general, List<ApiWappCallWSDTO> wappCalls) {
         this.general = general;
-        this.wappCall = wappCall;
+        this.wappCalls = wappCalls;
     }
 
     public GeneralWSModel getGeneral() {
@@ -26,11 +26,11 @@ public class ApiWappCallWSModel {
         this.general = general;
     }
 
-    public ApiWappCallWSDTO getWappCall() {
-        return wappCall;
+    public List<ApiWappCallWSDTO> getWappCalls() {
+        return wappCalls;
     }
 
-    public void setWappCall(ApiWappCallWSDTO wappCall) {
-        this.wappCall = wappCall;
+    public void setWappCalls(List<ApiWappCallWSDTO> wappCalls) {
+        this.wappCalls = wappCalls;
     }
 }
