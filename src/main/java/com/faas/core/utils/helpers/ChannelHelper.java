@@ -28,8 +28,7 @@ import java.util.List;
 @Component
 public class ChannelHelper {
 
-    @Autowired
-    OperationMapper operationMapper;
+
 
     @Autowired
     ClientPhoneRepository clientPhoneRepository;
