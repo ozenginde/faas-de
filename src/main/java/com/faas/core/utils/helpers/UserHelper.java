@@ -1,4 +1,4 @@
-package com.faas.core.utils.mapper;
+package com.faas.core.utils.helpers;
 
 import com.faas.core.base.model.db.user.details.dao.UserDataDAO;
 import com.faas.core.base.model.db.utils.datatype.DataTypeDBModel;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class UserMapper {
+public class UserHelper {
 
     @Autowired
     UserDetailsRepository userDetailsRepository;

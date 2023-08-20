@@ -34,8 +34,12 @@ import java.util.Optional;
 @Component
 public class ProcessHelper {
 
+
     @Autowired
-    ProcessScenarioRepository processScenarioRepository;
+    TriggerRepository triggerRepository;
+
+    @Autowired
+    ScenarioRepository scenarioRepository;
 
     @Autowired
     EmailTempRepository emailTempRepository;
@@ -65,10 +69,7 @@ public class ProcessHelper {
     ProcessPushChannelRepository processPushChannelRepository;
 
     @Autowired
-    TriggerRepository triggerRepository;
-
-    @Autowired
-    ScenarioRepository scenarioRepository;
+    ProcessScenarioRepository processScenarioRepository;
 
     @Autowired
     AppUtils appUtils;
@@ -77,6 +78,7 @@ public class ProcessHelper {
     public ProcessDetailsWSDTO createProcessDetailsWSDTO(ProcessDBModel processDBModel) {
 
         ProcessDetailsWSDTO processDetailsWSDTO = new ProcessDetailsWSDTO();
+
         processDetailsWSDTO.setProcess(processDBModel);
         processDetailsWSDTO.setProcessTriggers(createProcessTriggersWSDTOS(processDBModel));
         processDetailsWSDTO.setProcessScenarios(createProcessScenarioWSDTOS(processDBModel));
@@ -186,7 +188,6 @@ public class ProcessHelper {
         if (!pushChannelDBModels.isEmpty()){
             processChannelWSDTO.setPushChannel(new ProcessPushChannelWSDTO(pushChannelDBModels.get(0)));
         }
-
         return processChannelWSDTO;
     }
 

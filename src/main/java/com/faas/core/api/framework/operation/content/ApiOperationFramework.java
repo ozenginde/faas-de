@@ -16,7 +16,6 @@ import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.ActivityHelper;
-import com.faas.core.utils.mapper.OperationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,9 +29,6 @@ public class ApiOperationFramework {
 
     @Autowired
     ActivityHelper activityHelper;
-
-    @Autowired
-    OperationMapper operationMapper;
 
     @Autowired
     CampaignRepository campaignRepository;

@@ -8,7 +8,7 @@ import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.client.details.*;
 import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.SessionMapper;
+import com.faas.core.utils.helpers.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -23,7 +23,7 @@ import java.util.Optional;
 public class SessionFramework {
 
     @Autowired
-    SessionMapper sessionMapper;
+    SessionHelper sessionHelper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -55,8 +55,8 @@ public class SessionFramework {
         SessionWSDTO sessionWSDTO =  new SessionWSDTO();
         sessionWSDTO.setSession(sessionDBModel);
         Optional<ClientDBModel> clientDBModel = clientRepository.findById(sessionDBModel.getClientId());
-        if (clientDBModel.isPresent()){
 
+        if (clientDBModel.isPresent()){
             sessionWSDTO.setClient(clientDBModel.get());
             sessionWSDTO.setClientDatas(clientDataRepository.findByClientId(clientDBModel.get().getId()));
             sessionWSDTO.setClientNotes(clientNoteRepository.findByClientId(clientDBModel.get().getId()));

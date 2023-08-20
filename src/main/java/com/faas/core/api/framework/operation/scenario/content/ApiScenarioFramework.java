@@ -10,7 +10,7 @@ import com.faas.core.base.repo.scenario.content.ScenarioRepository;
 import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.ActivityHelper;
-import com.faas.core.utils.mapper.OperationMapper;
+import com.faas.core.utils.helpers.OperationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +22,8 @@ import java.util.Optional;
 @Component
 public class ApiScenarioFramework {
 
-
     @Autowired
-    OperationMapper operationMapper;
+    OperationHelper operationHelper;
 
     @Autowired
     ActivityHelper activityHelper;
@@ -46,7 +45,7 @@ public class ApiScenarioFramework {
 
 
     public ApiOperationScenarioWSDTO apiGetOperationScenarioService(long agentId,long sessionId,String processId) {
-        return operationMapper.mapApiOperationScenarioWSDTO(sessionId,processId);
+        return operationHelper.mapApiOperationScenarioWSDTO(sessionId,processId);
     }
 
 

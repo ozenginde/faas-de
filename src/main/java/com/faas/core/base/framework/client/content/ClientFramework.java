@@ -21,7 +21,7 @@ import com.faas.core.base.repo.utils.location.CityRepository;
 import com.faas.core.base.repo.utils.location.CountryRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.ClientMapper;
+import com.faas.core.utils.helpers.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,9 +35,8 @@ import java.util.Optional;
 @Component
 public class ClientFramework {
 
-
     @Autowired
-    ClientMapper clientMapper;
+    SessionHelper sessionHelper;
 
     @Autowired
     ClientRepository clientRepository;
@@ -102,7 +101,7 @@ public class ClientFramework {
             clientWSDTOS.add(fillClientWSDTO(clientDBModelPage.getContent().get(i)));
         }
         clientsByStateWSDTO.setClients(clientWSDTOS);
-        clientsByStateWSDTO.setPagination(clientMapper.createClientPaginationWSDTO(clientDBModelPage));
+        clientsByStateWSDTO.setPagination(sessionHelper.createClientPaginationWSDTO(clientDBModelPage));
 
         return clientsByStateWSDTO;
     }
@@ -113,7 +112,7 @@ public class ClientFramework {
         if (clientState.equalsIgnoreCase(AppConstant.ALL_CLIENTS)){
             return fillClientsWSDTO(clientRepository.findAllByStatus(1,PageRequest.of(reqPage,reqSize))) ;
         }
-            return fillClientsWSDTO(clientRepository.findAllByClientStateAndStatus(clientState,1,PageRequest.of(reqPage,reqSize)));
+        return fillClientsWSDTO(clientRepository.findAllByClientStateAndStatus(clientState,1,PageRequest.of(reqPage,reqSize)));
     }
 
 
@@ -127,9 +126,10 @@ public class ClientFramework {
 
     public ClientDBModel createClientService(String clientName,String nationalId,String phoneNumber,String emailAddress,String clientCity,String clientCountry,long clientTypeId) {
 
-        if (clientRepository.findByPhoneNumber(phoneNumber).size() == 0){
+        if (clientRepository.findByPhoneNumber(phoneNumber).isEmpty()){
 
             ClientDBModel clientDBModel = new ClientDBModel();
+
             clientDBModel.setClientName(clientName);
             clientDBModel.setNationalId(nationalId);
             clientDBModel.setPhoneNumber(phoneNumber);
@@ -158,7 +158,7 @@ public class ClientFramework {
 
     public ClientDBModel createVolumeClientService(CreateClientRequestDTO createClientRequestDTO) {
 
-        if (clientRepository.findByPhoneNumber(createClientRequestDTO.getPhoneNumber()).size() == 0){
+        if (clientRepository.findByPhoneNumber(createClientRequestDTO.getPhoneNumber()).isEmpty()){
 
             ClientDBModel clientDBModel = new ClientDBModel();
             clientDBModel.setClientName(createClientRequestDTO.getClientName());
@@ -167,8 +167,9 @@ public class ClientFramework {
             clientDBModel.setEmailAddress(createClientRequestDTO.getEmailAddress());
             clientDBModel.setClientCity(createClientRequestDTO.getClientCity());
             clientDBModel.setClientCountry(createClientRequestDTO.getClientCountry());
+
             List<ClientTypeDBModel> clientTypeDBModels = clientTypeRepository.findByClientType(createClientRequestDTO.getClientType());
-            if (clientTypeDBModels.size()>0) {
+            if (!clientTypeDBModels.isEmpty()) {
                 clientDBModel.setClientTypeId(clientTypeDBModels.get(0).getId());
                 clientDBModel.setClientType(clientTypeDBModels.get(0).getClientType());
             }

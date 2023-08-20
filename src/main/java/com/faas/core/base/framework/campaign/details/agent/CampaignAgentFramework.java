@@ -9,7 +9,7 @@ import com.faas.core.base.repo.campaign.details.CampaignAgentRepository;
 import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.CampaignMapper;
+import com.faas.core.utils.helpers.CampaignHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class CampaignAgentFramework {
 
     @Autowired
-    CampaignMapper campaignMapper;
+    CampaignHelper campaignHelper;
 
     @Autowired
     UserRepository userRepository;
@@ -42,7 +42,7 @@ public class CampaignAgentFramework {
         Optional<UserDBModel> agentDBModel = userRepository.findById(campaignAgentDBModel.getAgentId());
         if (agentDBModel.isPresent()) {
             agentDBModel.get().setPassword("");
-            return campaignMapper.mapCampaignAgentWSDTO(agentDBModel.get());
+            return campaignHelper.mapCampaignAgentWSDTO(agentDBModel.get());
         }
         return null;
     }

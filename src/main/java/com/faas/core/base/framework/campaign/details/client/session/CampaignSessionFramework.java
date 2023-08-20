@@ -6,7 +6,6 @@ import com.faas.core.base.model.db.operation.content.OperationDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.details.client.session.dto.CampaignSessionWSDTO;
-import com.faas.core.base.model.ws.flow.dto.FlowWSDTO;
 import com.faas.core.base.model.ws.session.content.SessionRequest;
 import com.faas.core.base.model.ws.session.content.dto.SessionRequestDTO;
 import com.faas.core.base.model.ws.session.content.dto.SessionWSDTO;
@@ -20,8 +19,8 @@ import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.ActivityHelper;
 import com.faas.core.utils.helpers.OperationHelper;
-import com.faas.core.utils.mapper.OperationMapper;
-import com.faas.core.utils.mapper.SessionMapper;
+
+import com.faas.core.utils.helpers.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,16 +35,13 @@ import java.util.Optional;
 public class CampaignSessionFramework {
 
     @Autowired
-    SessionMapper sessionMapper;
+    SessionHelper sessionHelper;
 
     @Autowired
     ActivityHelper activityHelper;
 
     @Autowired
     OperationHelper operationHelper;
-
-    @Autowired
-    OperationMapper operationMapper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -74,8 +70,8 @@ public class CampaignSessionFramework {
         Page<SessionDBModel> sessionModels = sessionRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId,city,country,PageRequest.of(reqPage,reqSize));
         if (sessionModels != null){
             CampaignSessionWSDTO campaignSessionWSDTO = new CampaignSessionWSDTO();
-            campaignSessionWSDTO.setPagination(sessionMapper.createSessionPaginationWSDTO(sessionModels));
-            campaignSessionWSDTO.setSessions(sessionMapper.mapSessionWSDTOS(sessionModels.getContent()));
+            campaignSessionWSDTO.setPagination(sessionHelper.createSessionPaginationWSDTO(sessionModels));
+            campaignSessionWSDTO.setSessions(sessionHelper.mapSessionWSDTOS(sessionModels.getContent()));
             return campaignSessionWSDTO;
         }
         return null;
@@ -87,8 +83,8 @@ public class CampaignSessionFramework {
         Page<SessionDBModel> sessionModels = sessionRepository.findAllByCampaignId(campaignId, PageRequest.of(reqPage,reqSize));
         if (sessionModels != null){
             CampaignSessionWSDTO campaignSessionWSDTO = new CampaignSessionWSDTO();
-            campaignSessionWSDTO.setPagination(sessionMapper.createSessionPaginationWSDTO(sessionModels));
-            campaignSessionWSDTO.setSessions(sessionMapper.mapSessionWSDTOS(sessionModels.getContent()));
+            campaignSessionWSDTO.setPagination(sessionHelper.createSessionPaginationWSDTO(sessionModels));
+            campaignSessionWSDTO.setSessions(sessionHelper.mapSessionWSDTOS(sessionModels.getContent()));
             return campaignSessionWSDTO;
         }
         return null;
@@ -99,7 +95,7 @@ public class CampaignSessionFramework {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         if (sessionDBModels.size()>0){
-            return sessionMapper.mapSessionWSDTO(sessionDBModels.get(0));
+            return sessionHelper.mapSessionWSDTO(sessionDBModels.get(0));
         }
         return null;
     }
@@ -129,13 +125,13 @@ public class CampaignSessionFramework {
             clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
             clientRepository.save(clientDBModel.get());
 
-            SessionDBModel sessionDBModel = sessionRepository.save(sessionMapper.mapSessionDBModel(campaignDBModel.get(),agentDBModel.get(),clientDBModel.get()));
-            OperationDBModel operationDBModel = operationRepository.save(operationMapper.mapOperationDBModel(sessionDBModel));
+            SessionDBModel sessionDBModel = sessionRepository.save(sessionHelper.mapSessionDBModel(campaignDBModel.get(),agentDBModel.get(),clientDBModel.get()));
+            OperationDBModel operationDBModel = operationRepository.save(operationHelper.mapOperationDBModel(sessionDBModel));
 
             activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
             activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
 
-            return sessionMapper.mapSessionWSDTO(sessionDBModel);
+            return sessionHelper.mapSessionWSDTO(sessionDBModel);
         }
         return null;
     }
@@ -147,7 +143,8 @@ public class CampaignSessionFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         Optional<UserDBModel> agentDBModel = userRepository.findById(agentId);
         Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
-        if (sessionDBModels.size()>0 && campaignDBModel.isPresent() && agentDBModel.isPresent()){
+
+        if (!sessionDBModels.isEmpty() && campaignDBModel.isPresent() && agentDBModel.isPresent()){
 
             sessionDBModels.get(0).setCampaignId(campaignDBModel.get().getCampaign());
             sessionDBModels.get(0).setCampaign(campaignDBModel.get().getCampaign());
@@ -161,7 +158,7 @@ public class CampaignSessionFramework {
             sessionDBModels.get(0).setSessionState(sessionState);
             sessionDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
 
-            return sessionMapper.mapSessionWSDTO(sessionRepository.save(sessionDBModels.get(0)));
+            return sessionHelper.mapSessionWSDTO(sessionRepository.save(sessionDBModels.get(0)));
         }
         return null;
     }
@@ -170,21 +167,19 @@ public class CampaignSessionFramework {
     public SessionWSDTO removeCampaignSessionService(long userId,long sessionId,long clientId) {
 
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
-        if (sessionDBModels.size()>0){
-
+        if (!sessionDBModels.isEmpty()){
             sessionRepository.delete(sessionDBModels.get(0));
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
             if (clientDBModel.isPresent()){
-
                 clientDBModel.get().setClientState(AppConstant.READY_CLIENT);
                 clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                 clientRepository.save(clientDBModel.get());
             }
             List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndClientId(sessionId,clientId);
-            if (operationDBModels.size()>0){
+            if (!operationDBModels.isEmpty()){
                 operationRepository.delete(operationDBModels.get(0));
             }
-            return sessionMapper.mapSessionWSDTO(sessionDBModels.get(0));
+            return sessionHelper.mapSessionWSDTO(sessionDBModels.get(0));
         }
         return null;
     }

@@ -13,7 +13,7 @@ import com.faas.core.base.repo.operation.content.OperationRepository;
 import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.OperationMapper;
+import com.faas.core.utils.helpers.OperationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,9 +24,8 @@ import java.util.Optional;
 @Component
 public class ApiOperationDetailsFramework {
 
-
     @Autowired
-    OperationMapper operationMapper;
+    OperationHelper operationHelper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -56,7 +55,7 @@ public class ApiOperationDetailsFramework {
         Optional<ProcessDBModel> processDBModel = processRepository.findById(processId);
 
         if (clientDBModel.isPresent() && campaignDBModel.isPresent() && processDBModel.isPresent()) {
-            return operationMapper.mapApiOperationDetailsWSDTO(sessionDBModels.get(0), clientDBModel.get(), operationDBModels.get(0), campaignDBModel.get(), processDBModel.get());
+            return operationHelper.mapApiOperationDetailsWSDTO(sessionDBModels.get(0), clientDBModel.get(), operationDBModels.get(0), campaignDBModel.get(), processDBModel.get());
         }
         return null;
     }
@@ -73,7 +72,7 @@ public class ApiOperationDetailsFramework {
             Optional<ProcessDBModel> processDBModel = processRepository.findById(sessionDBModels.get(0).getProcessId());
 
             if (clientDBModel.isPresent() && campaignDBModel.isPresent() && processDBModel.isPresent()) {
-                return operationMapper.mapApiOperationDetailsWSDTO(sessionDBModels.get(0), clientDBModel.get(), operationDBModels.get(0), campaignDBModel.get(), processDBModel.get());
+                return operationHelper.mapApiOperationDetailsWSDTO(sessionDBModels.get(0), clientDBModel.get(), operationDBModels.get(0), campaignDBModel.get(), processDBModel.get());
             }
         }
         return null;

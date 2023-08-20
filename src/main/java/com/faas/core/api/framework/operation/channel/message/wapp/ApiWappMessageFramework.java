@@ -20,7 +20,7 @@ import com.faas.core.base.repo.user.details.UserDetailsRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.ChannelHelper;
-import com.faas.core.utils.mapper.OperationMapper;
+import com.faas.core.utils.helpers.OperationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,10 +33,10 @@ import java.util.Optional;
 public class ApiWappMessageFramework {
 
     @Autowired
-    ChannelHelper channelHelper;
+    OperationHelper operationHelper;
 
     @Autowired
-    OperationMapper operationMapper;
+    ChannelHelper channelHelper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -67,7 +67,7 @@ public class ApiWappMessageFramework {
 
         List<SessionDBModel>sessionDBModels =  sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
-            return operationMapper.mapApiOperationWappMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
+            return operationHelper.mapApiOperationWappMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
         }
         return null;
     }
@@ -156,7 +156,7 @@ public class ApiWappMessageFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
             ApiWappMessageTempWSDTO wappMessageTempWSDTO = new ApiWappMessageTempWSDTO();
-            ApiWappAccountWSDTO wappAccountWSDTO = operationMapper.getApiWappAccountWSDTO(agentId,processId);
+            ApiWappAccountWSDTO wappAccountWSDTO = operationHelper.getApiWappAccountWSDTO(agentId,processId);
             if (wappAccountWSDTO != null){
                 wappMessageTempWSDTO.setWappAccount(wappAccountWSDTO);
             }
@@ -173,7 +173,7 @@ public class ApiWappMessageFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
             ApiWappMessageTempWSDTO wappMessageTempWSDTO = new ApiWappMessageTempWSDTO();
-            ApiWappAccountWSDTO wappAccountWSDTO = operationMapper.getApiWappAccountWSDTO(agentId,processId);
+            ApiWappAccountWSDTO wappAccountWSDTO = operationHelper.getApiWappAccountWSDTO(agentId,processId);
             if (wappAccountWSDTO != null){
                 wappMessageTempWSDTO.setWappAccount(wappAccountWSDTO);
             }

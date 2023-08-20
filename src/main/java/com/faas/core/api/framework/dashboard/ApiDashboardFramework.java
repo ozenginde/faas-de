@@ -17,8 +17,7 @@ import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.InquiryHelper;
 import com.faas.core.utils.helpers.SessionHelper;
-import com.faas.core.utils.mapper.CampaignMapper;
-import com.faas.core.utils.mapper.InquiryMapper;
+import com.faas.core.utils.helpers.CampaignHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
@@ -38,7 +37,7 @@ public class ApiDashboardFramework {
     InquiryHelper inquiryHelper;
 
     @Autowired
-    CampaignMapper campaignMapper;
+    CampaignHelper campaignHelper;
 
     @Autowired
     SessionRepository sessionRepository;

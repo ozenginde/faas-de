@@ -2,12 +2,18 @@ package com.faas.core.utils.helpers;
 
 import com.faas.core.api.model.ws.operation.channel.call.sip.dto.ApiOperationSipCallWSDTO;
 import com.faas.core.api.model.ws.operation.channel.call.sip.dto.ApiSipAccountWSDTO;
+import com.faas.core.base.model.db.channel.account.EmailAccountDBModel;
+import com.faas.core.base.model.db.channel.account.PushAccountDBModel;
+import com.faas.core.base.model.db.channel.account.SmsAccountDBModel;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
 import com.faas.core.base.model.db.operation.channel.SipCallDBModel;
 import com.faas.core.base.model.db.operation.channel.dao.SmsMessageDAO;
 import com.faas.core.base.model.db.operation.channel.dao.WappMessageDAO;
 import com.faas.core.base.model.db.process.details.channel.content.ProcessSipChannelDBModel;
 import com.faas.core.base.model.db.process.details.channel.content.ProcessSmsChannelDBModel;
+import com.faas.core.base.model.db.process.details.channel.content.dao.EmailAccountDAO;
+import com.faas.core.base.model.db.process.details.channel.content.dao.PushAccountDAO;
+import com.faas.core.base.model.db.process.details.channel.content.dao.SmsAccountDAO;
 import com.faas.core.base.model.db.process.details.channel.temp.SmsMessageTempDBModel;
 import com.faas.core.base.model.db.process.details.channel.temp.WappMessageTempDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
@@ -26,6 +32,7 @@ import java.util.List;
 
 @Component
 public class ChannelHelper {
+
 
     @Autowired
     ClientPhoneRepository clientPhoneRepository;
@@ -131,6 +138,65 @@ public class ChannelHelper {
             return operationSipCall;
         }
         return null;
+    }
+
+
+
+    public SmsAccountDAO mapProcessSmsAccountDAO(SmsAccountDBModel smsAccountDBModel) {
+
+        SmsAccountDAO smsAccountDAO = new SmsAccountDAO();
+        smsAccountDAO.setAccountId(smsAccountDBModel.getId());
+        smsAccountDAO.setAccount(smsAccountDBModel.getAccount());
+        smsAccountDAO.setUserName(smsAccountDBModel.getUserName());
+        smsAccountDAO.setPassword(smsAccountDBModel.getPassword());
+        smsAccountDAO.setApiToken(smsAccountDBModel.getApiToken());
+        smsAccountDAO.setApiUrl(smsAccountDBModel.getApiUrl());
+        if (smsAccountDBModel.getAccountDatas() !=null){
+            smsAccountDAO.setAccountDatas(smsAccountDBModel.getAccountDatas());
+        }else{
+            smsAccountDAO.setAccountDatas(new ArrayList<>());
+        }
+        smsAccountDAO.setProvider(smsAccountDBModel.getProvider());
+        smsAccountDAO.setcDate(appUtils.getCurrentTimeStamp());
+        smsAccountDAO.setStatus(1);
+
+        return smsAccountDAO;
+    }
+
+
+    public EmailAccountDAO mapProcessEmailAccountDAO(EmailAccountDBModel emailAccountDBModel) {
+
+        EmailAccountDAO emailAccountDAO = new EmailAccountDAO();
+        emailAccountDAO.setAccountId(emailAccountDBModel.getId());
+        emailAccountDAO.setAccount(emailAccountDBModel.getAccount());
+        if (emailAccountDBModel.getAccountDatas() != null){
+            emailAccountDAO.setAccountDatas(emailAccountDBModel.getAccountDatas());
+        }else {
+            emailAccountDAO.setAccountDatas(new ArrayList<>());
+        }
+        emailAccountDAO.setProvider(emailAccountDBModel.getProvider());
+        emailAccountDAO.setcDate(appUtils.getCurrentTimeStamp());
+        emailAccountDAO.setStatus(1);
+
+        return emailAccountDAO;
+    }
+
+
+    public PushAccountDAO mapProcessPushAccountDAO(PushAccountDBModel pushAccountDBModel) {
+
+        PushAccountDAO pushAccountDAO = new PushAccountDAO();
+        pushAccountDAO.setAccountId(pushAccountDBModel.getId());
+        pushAccountDAO.setAccount(pushAccountDBModel.getAccount());
+        if (pushAccountDBModel.getAccountDatas() != null){
+            pushAccountDAO.setAccountDatas(pushAccountDBModel.getAccountDatas());
+        }else {
+            pushAccountDAO.setAccountDatas(new ArrayList<>());
+        }
+        pushAccountDAO.setProvider(pushAccountDBModel.getProvider());
+        pushAccountDAO.setcDate(appUtils.getCurrentTimeStamp());
+        pushAccountDAO.setStatus(1);
+
+        return pushAccountDAO;
     }
 
 

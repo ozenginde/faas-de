@@ -13,7 +13,6 @@ import com.faas.core.base.model.ws.general.GeneralWSModel;
 import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.ClientMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +23,6 @@ import java.util.List;
 @Component
 public class ClientMiddleware {
 
-    @Autowired
-    ClientMapper clientMapper;
 
     @Autowired
     ClientFramework clientFramework;

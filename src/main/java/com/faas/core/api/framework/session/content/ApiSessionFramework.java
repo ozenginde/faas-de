@@ -12,8 +12,7 @@ import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.SessionHelper;
-import com.faas.core.utils.mapper.CampaignMapper;
-import com.faas.core.utils.mapper.SessionMapper;
+import com.faas.core.utils.helpers.CampaignHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,13 +25,10 @@ import java.util.List;
 public class ApiSessionFramework {
 
     @Autowired
-    SessionMapper sessionMapper;
-
-    @Autowired
-    CampaignMapper campaignMapper;
-
-    @Autowired
     SessionHelper sessionHelper;
+
+    @Autowired
+    CampaignHelper campaignHelper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -75,7 +71,7 @@ public class ApiSessionFramework {
 
         Page<SessionDBModel> sessionModelPage =sessionRepository.findAllByAgentIdAndSessionState(agentId,sessionState,PageRequest.of(reqPage,reqSize));
         if (sessionModelPage != null){
-            return fillApiSessionWSDTO(sessionModelPage.getContent(),sessionMapper.createSessionPaginationWSDTO(sessionModelPage)) ;
+            return fillApiSessionWSDTO(sessionModelPage.getContent(),sessionHelper.createSessionPaginationWSDTO(sessionModelPage)) ;
         }
         return null;
     }
@@ -91,14 +87,14 @@ public class ApiSessionFramework {
 
         Page<SessionDBModel> sessionModelPage =sessionRepository.findAllByIdAndAgentId(sessionId,agentId,PageRequest.of(0,20));
         if (sessionModelPage != null){
-            return fillApiSessionWSDTO(sessionModelPage.getContent(),sessionMapper.createSessionPaginationWSDTO(sessionModelPage)) ;
+            return fillApiSessionWSDTO(sessionModelPage.getContent(),sessionHelper.createSessionPaginationWSDTO(sessionModelPage)) ;
         }
         return null;
     }
 
 
     public List<ApiSummaryWSDTO> apiGetSessionSummaryService(long agentId) {
-        return sessionMapper.getApiSessionSummary(agentId);
+        return sessionHelper.getApiSessionSummary(agentId);
     }
 
     

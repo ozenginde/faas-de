@@ -18,7 +18,7 @@ import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.ChannelHelper;
-import com.faas.core.utils.mapper.OperationMapper;
+import com.faas.core.utils.helpers.OperationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,8 +30,9 @@ import java.util.Optional;
 @Component
 public class ApiSmsMessageFramework {
 
+
     @Autowired
-    OperationMapper operationMapper;
+    OperationHelper operationHelper;
 
     @Autowired
     ChannelHelper channelHelper;
@@ -62,7 +63,7 @@ public class ApiSmsMessageFramework {
 
         List<SessionDBModel>sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
-            return operationMapper.mapApiOperationSmsMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
+            return operationHelper.mapApiOperationSmsMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
         }
         return null;
     }
@@ -147,7 +148,7 @@ public class ApiSmsMessageFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
             ApiSmsMessageTempWSDTO smsMessageTempWSDTO = new ApiSmsMessageTempWSDTO();
-            ApiSmsAccountWSDTO smsAccountWSDTO = operationMapper.getApiSmsAccountWSDTO(processId);
+            ApiSmsAccountWSDTO smsAccountWSDTO = operationHelper.getApiSmsAccountWSDTO(processId);
             if (smsAccountWSDTO != null){
                 smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
             }
@@ -165,7 +166,7 @@ public class ApiSmsMessageFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
             ApiSmsMessageTempWSDTO smsMessageTempWSDTO = new ApiSmsMessageTempWSDTO();
-            ApiSmsAccountWSDTO smsAccountWSDTO = operationMapper.getApiSmsAccountWSDTO(processId);
+            ApiSmsAccountWSDTO smsAccountWSDTO = operationHelper.getApiSmsAccountWSDTO(processId);
             if (smsAccountWSDTO != null){
                 smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
             }

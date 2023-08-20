@@ -1,10 +1,8 @@
 package com.faas.core.base.framework.flow;
 
 import com.faas.core.base.model.db.campaign.content.CampaignDBModel;
-import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
 import com.faas.core.base.model.db.client.content.ClientDBModel;
 import com.faas.core.base.model.db.flow.FlowDBModel;
-import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.content.UserDBModel;
 import com.faas.core.base.model.ws.campaign.content.dto.CampaignWSDTO;
 import com.faas.core.base.model.ws.flow.dto.FlowCampaignWSDTO;
@@ -18,7 +16,7 @@ import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.FlowMapper;
+import com.faas.core.utils.helpers.FlowHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -33,7 +31,7 @@ import java.util.Optional;
 public class FlowFramework {
 
     @Autowired
-    FlowMapper flowMapper;
+    FlowHelper flowHelper;
 
     @Autowired
     ClientRepository clientRepository;
@@ -70,8 +68,8 @@ public class FlowFramework {
                 FlowCampaignWSDTO flowCampaignWSDTO = new FlowCampaignWSDTO();
                 flowCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel));
                 Page<FlowDBModel> flowModelPage = flowRepository.findAllByCampaignId(campaignDBModel.getId(), PageRequest.of(reqPage, reqSize));
-                flowCampaignWSDTO.setPagination(flowMapper.createFlowPagination(flowModelPage));
-                flowCampaignWSDTO.setFlows(flowMapper.createFlowWSDTOS(flowModelPage.getContent()));
+                flowCampaignWSDTO.setPagination(flowHelper.createFlowPagination(flowModelPage));
+                flowCampaignWSDTO.setFlows(flowHelper.createFlowWSDTOS(flowModelPage.getContent()));
                 flowCampaignWSDTOS.add(flowCampaignWSDTO);
             }
         }
@@ -87,8 +85,8 @@ public class FlowFramework {
             FlowCampaignWSDTO flowCampaignWSDTO = new FlowCampaignWSDTO();
             flowCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel.get()));
             Page<FlowDBModel> flowModelPage = flowRepository.findAllByCampaignId(campaignId,PageRequest.of(reqPage,reqSize));
-            flowCampaignWSDTO.setPagination(flowMapper.createFlowPagination(flowModelPage));
-            flowCampaignWSDTO.setFlows(flowMapper.createFlowWSDTOS(flowModelPage.getContent()));
+            flowCampaignWSDTO.setPagination(flowHelper.createFlowPagination(flowModelPage));
+            flowCampaignWSDTO.setFlows(flowHelper.createFlowWSDTOS(flowModelPage.getContent()));
 
             return flowCampaignWSDTO;
         }

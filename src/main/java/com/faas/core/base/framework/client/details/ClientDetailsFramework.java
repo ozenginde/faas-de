@@ -14,7 +14,7 @@ import com.faas.core.base.repo.client.details.ClientEmailRepository;
 import com.faas.core.base.repo.client.details.ClientPhoneRepository;
 import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.ClientMapper;
+import com.faas.core.utils.helpers.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,8 +24,6 @@ import java.util.Optional;
 @Component
 public class ClientDetailsFramework {
 
-    @Autowired
-    ClientMapper clientMapper;
 
     @Autowired
     ClientRepository clientRepository;

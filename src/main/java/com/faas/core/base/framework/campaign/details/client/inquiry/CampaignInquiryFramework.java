@@ -20,9 +20,10 @@ import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.ActivityHelper;
-import com.faas.core.utils.mapper.InquiryMapper;
-import com.faas.core.utils.mapper.OperationMapper;
-import com.faas.core.utils.mapper.SessionMapper;
+
+import com.faas.core.utils.helpers.InquiryHelper;
+import com.faas.core.utils.helpers.OperationHelper;
+import com.faas.core.utils.helpers.SessionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,13 +42,13 @@ public class CampaignInquiryFramework {
     ActivityHelper activityHelper;
 
     @Autowired
-    InquiryMapper inquiryMapper;
+    InquiryHelper inquiryHelper;
 
     @Autowired
-    SessionMapper sessionMapper;
+    SessionHelper sessionHelper;
 
     @Autowired
-    OperationMapper operationMapper;
+    OperationHelper operationHelper;
 
     @Autowired
     InquiryRepository inquiryRepository;
@@ -79,8 +80,8 @@ public class CampaignInquiryFramework {
         Page<InquiryDBModel> inquiryDBModelPage = inquiryRepository.findAllByCampaignIdAndClientCityAndClientCountry(campaignId,clientCity,clientCountry, PageRequest.of(reqPage,reqSize));
         if (inquiryDBModelPage != null){
             CampaignInquiryWSDTO campaignInquiryWSDTO = new CampaignInquiryWSDTO();
-            campaignInquiryWSDTO.setPagination(inquiryMapper.createInquiryPagination(inquiryDBModelPage));
-            campaignInquiryWSDTO.setInquiries(inquiryMapper.createInquiryWSDTOS(inquiryDBModelPage.getContent()));
+            campaignInquiryWSDTO.setPagination(inquiryHelper.createInquiryPagination(inquiryDBModelPage));
+            campaignInquiryWSDTO.setInquiries(inquiryHelper.createInquiryWSDTOS(inquiryDBModelPage.getContent()));
             return campaignInquiryWSDTO;
         }
         return null;
@@ -93,8 +94,8 @@ public class CampaignInquiryFramework {
         if (inquiryDBModelPage != null){
 
             CampaignInquiryWSDTO campaignInquiryWSDTO = new CampaignInquiryWSDTO();
-            campaignInquiryWSDTO.setPagination(inquiryMapper.createInquiryPagination(inquiryDBModelPage));
-            campaignInquiryWSDTO.setInquiries(inquiryMapper.createInquiryWSDTOS(inquiryDBModelPage.getContent()));
+            campaignInquiryWSDTO.setPagination(inquiryHelper.createInquiryPagination(inquiryDBModelPage));
+            campaignInquiryWSDTO.setInquiries(inquiryHelper.createInquiryWSDTOS(inquiryDBModelPage.getContent()));
 
             return campaignInquiryWSDTO;
         }
@@ -105,7 +106,7 @@ public class CampaignInquiryFramework {
     public InquiryWSDTO getCampaignInquiryService(long userId, long inquiryId, long clientId) {
 
         List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndClientId(inquiryId,clientId);
-        if (inquiryDBModels.size()>0){
+        if (!inquiryDBModels.isEmpty()){
             return new InquiryWSDTO(inquiryDBModels.get(0));
         }
         return null;
@@ -137,13 +138,13 @@ public class CampaignInquiryFramework {
                 clientDBModel.get().setuDate(appUtils.getCurrentTimeStamp());
                 clientRepository.save(clientDBModel.get());
 
-                SessionDBModel sessionDBModel = sessionRepository.save(inquiryMapper.mapInquirySession(clientDBModel.get(),agentDBModel.get(),campaignDBModel.get()));
-                OperationDBModel operationDBModel = operationRepository.save(inquiryMapper.mapInquiryOperation(sessionDBModel));
+                SessionDBModel sessionDBModel = sessionRepository.save(inquiryHelper.mapInquirySession(clientDBModel.get(),agentDBModel.get(),campaignDBModel.get()));
+                OperationDBModel operationDBModel = operationRepository.save(inquiryHelper.mapInquiryOperation(sessionDBModel));
 
                 activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_SESSION_ACTIVITY,AppConstant.SESSION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.SESSION_TYPE);
                 activityHelper.createOperationActivity(sessionDBModel.getId(),operationDBModel.getId(),AppConstant.CREATE_OPERATION_ACTIVITY,AppConstant.OPERATION_ACTIVITY,String.valueOf(sessionDBModel.getAgentId()),AppConstant.USER_TYPE,String.valueOf(sessionDBModel.getId()),AppConstant.OPERATION_TYPE);
 
-                return new InquiryWSDTO(inquiryRepository.save(inquiryMapper.mapInquiryDBModel(sessionDBModel)));
+                return new InquiryWSDTO(inquiryRepository.save(inquiryHelper.mapInquiryDBModel(sessionDBModel)));
             }
         }
         return null;
@@ -154,7 +155,7 @@ public class CampaignInquiryFramework {
     public InquiryWSDTO updateCampaignInquiryService(long userId, long inquiryId, long clientId, String inquiryState) {
 
         List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndClientId(inquiryId,clientId);
-        if (inquiryDBModels.size()>0){
+        if (!inquiryDBModels.isEmpty()){
             inquiryDBModels.get(0).setInquiryState(inquiryState);
             inquiryDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
             return new InquiryWSDTO(inquiryRepository.save(inquiryDBModels.get(0)));
@@ -166,7 +167,7 @@ public class CampaignInquiryFramework {
     public InquiryWSDTO removeCampaignInquiryService(long userId, long inquiryId, long clientId) {
 
         List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndClientId(inquiryId,clientId);
-        if (inquiryDBModels.size() > 0) {
+        if (!inquiryDBModels.isEmpty()) {
             inquiryRepository.delete(inquiryDBModels.get(0));
             Optional<SessionDBModel>sessionDBModel = sessionRepository.findById(inquiryDBModels.get(0).getSessionId());
             if(sessionDBModel.isPresent()){

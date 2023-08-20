@@ -8,7 +8,7 @@ import com.faas.core.base.repo.client.details.ClientPhoneRepository;
 import com.faas.core.base.repo.operation.channel.WappCallRepository;
 import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.OperationMapper;
+import com.faas.core.utils.helpers.OperationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ import java.util.List;
 public class ApiWappCallFramework {
 
     @Autowired
-    OperationMapper operationMapper;
+    OperationHelper operationHelper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -39,7 +39,7 @@ public class ApiWappCallFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(sessionId,clientId);
         List<ClientPhoneDBModel> clientPhoneDBModels = clientPhoneRepository.findByClientId(clientId);
         if (sessionDBModels.size()>0){
-            return operationMapper.mapApiOperationWappCallWSDTO(sessionDBModels.get(0),clientPhoneDBModels);
+            return operationHelper.mapApiOperationWappCallWSDTO(sessionDBModels.get(0),clientPhoneDBModels);
         }
         return null;
     }

@@ -17,7 +17,7 @@ import com.faas.core.base.repo.channel.account.SipAccountRepository;
 import com.faas.core.base.repo.channel.account.WappAccountRepository;
 import com.faas.core.base.repo.utils.datatype.DataTypeRepository;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.UserMapper;
+import com.faas.core.utils.helpers.UserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ import java.util.Optional;
 public class UserDetailsFramework {
 
     @Autowired
-    UserMapper userMapper;
+    UserHelper userHelper;
 
     @Autowired
     UserRepository userRepository;
@@ -80,7 +80,7 @@ public class UserDetailsFramework {
 
         List<UserDetailsDBModel> userDetailsDBModels = userDetailsRepository.findByUserId(selectedId);
         if (userDetailsDBModels.size()>0){
-            UserDataDAO userDataDAO = userMapper.mapUserDataDAO(appUtils.generateUUID(),dataTypeId,value);
+            UserDataDAO userDataDAO = userHelper.mapUserDataDAO(appUtils.generateUUID(),dataTypeId,value);
             if (userDataDAO != null){
                 userDetailsDBModels.get(0).getUserDatas().add(userDataDAO);
                 userDetailsDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
@@ -99,7 +99,7 @@ public class UserDetailsFramework {
             for (int i=0;i<userDetailsDBModels.get(0).getUserDatas().size();i++){
                 if (userDetailsDBModels.get(0).getUserDatas().get(i).getDataId().equalsIgnoreCase(dataId)){
 
-                    UserDataDAO userDataDAO = userMapper.mapUserDataDAO(dataId,dataTypeId,value);
+                    UserDataDAO userDataDAO = userHelper.mapUserDataDAO(dataId,dataTypeId,value);
                     userDetailsDBModels.get(0).getUserDatas().set(i,userDataDAO);
                     userDetailsDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
                     userDetailsRepository.save(userDetailsDBModels.get(0));

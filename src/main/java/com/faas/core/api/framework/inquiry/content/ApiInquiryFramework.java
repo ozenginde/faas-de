@@ -2,7 +2,6 @@ package com.faas.core.api.framework.inquiry.content;
 
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiAgentInquiryWSDTO;
-import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryDTO;
 import com.faas.core.api.model.ws.inquiry.content.dto.ApiInquiryWSDTO;
 import com.faas.core.base.model.db.inquiry.InquiryDBModel;
 import com.faas.core.base.model.db.operation.content.OperationDBModel;
@@ -14,23 +13,19 @@ import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
 import com.faas.core.utils.helpers.InquiryHelper;
-import com.faas.core.utils.mapper.InquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Component
 public class ApiInquiryFramework {
 
-    @Autowired
-    InquiryHelper inquiryHelper;
 
     @Autowired
-    InquiryMapper inquiryMapper;
+    InquiryHelper inquiryHelper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -71,8 +66,8 @@ public class ApiInquiryFramework {
     public ApiInquiryWSDTO apiGetInquiryService(long agentId,long inquiryId,String campaignId){
 
         List<InquiryDBModel> inquiryDBModels = inquiryRepository.findByIdAndAgentIdAndCampaignId(inquiryId,agentId,campaignId);
-        if (inquiryDBModels.size()>0){
-            return inquiryMapper.mapApiInquiryWSDTO(inquiryDBModels.get(0));
+        if (!inquiryDBModels.isEmpty()){
+            return inquiryHelper.mapApiInquiryWSDTO(inquiryDBModels.get(0));
         }
        return null;
     }
@@ -84,7 +79,7 @@ public class ApiInquiryFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndCampaignIdAndSessionStateAndSessionType(sessionId,campaignId,AppConstant.READY_SESSION,AppConstant.INQUIRY_CAMPAIGN);
         List<OperationDBModel> operationDBModels = operationRepository.findBySessionIdAndCampaignIdAndOperationState(sessionId,campaignId,AppConstant.READY_OPERATION);
 
-        if (inquiryDBModels.size()>0 && sessionDBModels.size()>0 && operationDBModels.size()>0 ){
+        if (!inquiryDBModels.isEmpty() && !sessionDBModels.isEmpty() && !operationDBModels.isEmpty()){
 
             sessionDBModels.get(0).setSessionState(AppConstant.ACTIVE_SESSION);
             sessionDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
@@ -97,7 +92,7 @@ public class ApiInquiryFramework {
             inquiryDBModels.get(0).setInquiryState(AppConstant.ACTIVE_INQUIRY);
             inquiryDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
 
-            return inquiryMapper.mapApiInquiryWSDTO(inquiryRepository.save(inquiryDBModels.get(0)));
+            return inquiryHelper.mapApiInquiryWSDTO(inquiryRepository.save(inquiryDBModels.get(0)));
         }
         return null;
     }
@@ -110,7 +105,6 @@ public class ApiInquiryFramework {
 
         return inquiryWSDTO;
     }
-
 
 
     public ApiInquiryWSDTO apiRemoveInquiryService(long agentId, long inquiryId){

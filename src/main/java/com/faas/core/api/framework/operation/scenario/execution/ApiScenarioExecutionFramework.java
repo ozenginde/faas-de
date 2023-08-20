@@ -16,7 +16,6 @@ import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.base.repo.user.content.UserRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.OperationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,8 +28,6 @@ import java.util.Optional;
 public class ApiScenarioExecutionFramework {
 
 
-    @Autowired
-    OperationMapper operationMapper;
 
     @Autowired
     SessionRepository sessionRepository;

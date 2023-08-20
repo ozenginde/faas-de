@@ -1,4 +1,4 @@
-package com.faas.core.utils.mapper;
+package com.faas.core.utils.helpers;
 
 import com.faas.core.api.model.ws.general.ApiSummaryWSDTO;
 import com.faas.core.base.model.db.campaign.details.CampaignAgentDBModel;
@@ -28,7 +28,7 @@ import java.util.Optional;
 
 
 @Component
-public class CampaignMapper {
+public class CampaignHelper {
 
 
     @Autowired
@@ -63,6 +63,7 @@ public class CampaignMapper {
 
         CampaignAgentWSDTO campaignAgentWSDTO = new CampaignAgentWSDTO();
         campaignAgentWSDTO.setCampaignAgent(agentDBModel);
+
         return campaignAgentWSDTO;
     }
 
@@ -97,10 +98,12 @@ public class CampaignMapper {
         campaignProcessWSDTO.setProcess(processDBModel);
         List<ProcessScenarioWSDTO> processScenarioWSDTOS = new ArrayList<>();
         List<ProcessScenarioDBModel> processScenarioDBModels = processScenarioRepository.findByProcessId(processDBModel.getId());
+
         for (ProcessScenarioDBModel processScenarioDBModel : processScenarioDBModels) {
             processScenarioWSDTOS.add(mapProcessScenarioWSDTO(processScenarioDBModel));
         }
         campaignProcessWSDTO.setProcessScenarios(processScenarioWSDTOS);
+
         return campaignProcessWSDTO;
     }
 

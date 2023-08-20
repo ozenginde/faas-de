@@ -12,7 +12,7 @@ import com.faas.core.base.repo.process.content.ProcessRepository;
 import com.faas.core.base.repo.session.SessionRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.CampaignMapper;
+import com.faas.core.utils.helpers.CampaignHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,7 +25,7 @@ import java.util.Optional;
 public class ApiCampaignFramework {
 
     @Autowired
-    CampaignMapper campaignMapper;
+    CampaignHelper campaignHelper;
 
     @Autowired
     SessionRepository sessionRepository;
@@ -92,7 +92,7 @@ public class ApiCampaignFramework {
             if (processDBModel.isPresent()) {
                 campaignWSDTO.setCampaignProcess(processDBModel.get());
             }
-            campaignWSDTO.setSummaries(campaignMapper.mapCampaignSummary(agentId, campaignDBModel.get().getCampaign()));
+            campaignWSDTO.setSummaries(campaignHelper.mapCampaignSummary(agentId, campaignDBModel.get().getCampaign()));
             return campaignWSDTO;
         }
         return null;
@@ -107,13 +107,13 @@ public class ApiCampaignFramework {
         if (processDBModel.isPresent()) {
             campaignWSDTO.setCampaignProcess(processDBModel.get());
         }
-        campaignWSDTO.setSummaries(campaignMapper.mapCampaignSummary(agentId, campaignDBModel.getId()));
+        campaignWSDTO.setSummaries(campaignHelper.mapCampaignSummary(agentId, campaignDBModel.getId()));
         return campaignWSDTO;
     }
 
 
     public List<ApiSummaryWSDTO> apiGetAgentCampaignSummaryService(long agentId) {
-        return campaignMapper.mapAgentCampaignSummary(agentId);
+        return campaignHelper.mapAgentCampaignSummary(agentId);
     }
 
 

@@ -11,7 +11,7 @@ import com.faas.core.base.repo.client.content.ClientRepository;
 import com.faas.core.base.repo.inquiry.InquiryRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
-import com.faas.core.utils.mapper.InquiryMapper;
+import com.faas.core.utils.helpers.InquiryHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +27,7 @@ public class InquiryFramework {
 
 
     @Autowired
-    InquiryMapper inquiryMapper;
+    InquiryHelper inquiryHelper;
 
     @Autowired
     ClientRepository clientRepository;
@@ -42,8 +42,6 @@ public class InquiryFramework {
     AppUtils appUtils;
 
 
-
-
     public List<InquiryCampaignWSDTO> getInquiryCampaignsService(long userId,int reqPage,int reqSize) {
 
         List<InquiryCampaignWSDTO> inquiryCampaignWSDTOS = new ArrayList<>();
@@ -53,8 +51,8 @@ public class InquiryFramework {
             InquiryCampaignWSDTO inquiryCampaignWSDTO = new InquiryCampaignWSDTO();
             inquiryCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel));
             Page<InquiryDBModel> clientInquiryModelPage = inquiryRepository.findAllByCampaignId(campaignDBModel.getId(), PageRequest.of(reqPage, reqSize));
-            inquiryCampaignWSDTO.setInquiries(inquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
-            inquiryCampaignWSDTO.setPagination(inquiryMapper.createInquiryPagination(clientInquiryModelPage));
+            inquiryCampaignWSDTO.setInquiries(inquiryHelper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
+            inquiryCampaignWSDTO.setPagination(inquiryHelper.createInquiryPagination(clientInquiryModelPage));
 
             inquiryCampaignWSDTOS.add(inquiryCampaignWSDTO);
         }
@@ -70,8 +68,8 @@ public class InquiryFramework {
             InquiryCampaignWSDTO inquiryCampaignWSDTO = new InquiryCampaignWSDTO();
             inquiryCampaignWSDTO.setCampaign(new CampaignWSDTO(campaignDBModel.get()));
             Page<InquiryDBModel> clientInquiryModelPage = inquiryRepository.findAllByCampaignId(campaignDBModel.get().getId(), PageRequest.of(reqPage, reqSize));
-            inquiryCampaignWSDTO.setPagination(inquiryMapper.createInquiryPagination(clientInquiryModelPage));
-            inquiryCampaignWSDTO.setInquiries(inquiryMapper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
+            inquiryCampaignWSDTO.setPagination(inquiryHelper.createInquiryPagination(clientInquiryModelPage));
+            inquiryCampaignWSDTO.setInquiries(inquiryHelper.createInquiryWSDTOS(clientInquiryModelPage.getContent()));
 
             return inquiryCampaignWSDTO;
         }
@@ -117,14 +115,12 @@ public class InquiryFramework {
             Optional<CampaignDBModel> campaignDBModel = campaignRepository.findById(campaignId);
             Optional<ClientDBModel> clientDBModel = clientRepository.findById(clientId);
             if (campaignDBModel.isPresent() && clientDBModel.isPresent()){
-                InquiryDBModel inquiryDBModel = inquiryMapper.mapInquiryDBModel(null);
+                InquiryDBModel inquiryDBModel = inquiryHelper.mapInquiryDBModel(null);
                 if (inquiryDBModel != null){
                     return new InquiryWSDTO(inquiryRepository.save(inquiryDBModel));
                 }
             }
         }
-
-
         return null;
     }
 
