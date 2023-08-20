@@ -36,7 +36,7 @@ public class ActivityHelper {
                                         String creatorId, String creatorType, String createdId, String createdType) {
 
         List<OperationDBModel> operationDBModels = operationRepository.findByIdAndSessionId(operationId,sessionId);
-        if (operationDBModels.size()>0){
+        if (!operationDBModels.isEmpty()){
             OperationActivityDAO operationActivityDAO = createOperationActivityDAO(sessionId,operationId,activity,activityType,creatorId,creatorType,createdId,createdType);
             if (operationActivityDAO != null){
                 operationDBModels.get(0).getActivities().add(operationActivityDAO);

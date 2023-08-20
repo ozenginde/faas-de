@@ -20,7 +20,7 @@ public class SystemTaskController {
     SystemTaskService systemTaskService;
 
     @RequestMapping(value = BaseRoute.GET_SYSTEM_STATE, method = RequestMethod.GET)
-    public ResponseEntity<?> getSystemState( @RequestParam("from") String from) {
+    public ResponseEntity<?> getSystemState(@RequestParam("from") String from) {
 
         SystemStateWSModel response = systemTaskService.getSystemState(from);
 

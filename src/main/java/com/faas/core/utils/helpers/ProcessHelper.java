@@ -114,16 +114,13 @@ public class ProcessHelper {
 
 
 
-
-
     public ProcessScenarioWSDTO mapProcessScenarioWSDTO(ProcessScenarioDBModel processScenarioDBModel){
 
         ProcessScenarioWSDTO processScenarioWSDTO = new ProcessScenarioWSDTO();
         processScenarioWSDTO.setProcessScenario(processScenarioDBModel);
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
-        if (scenarioDBModel.isPresent()){
-            processScenarioWSDTO.setProcessScenarioDetails(scenarioDBModel.get());
-        }
+        scenarioDBModel.ifPresent(processScenarioWSDTO::setProcessScenarioDetails);
+
         return processScenarioWSDTO;
     }
 
@@ -132,29 +129,32 @@ public class ProcessHelper {
     public ProcessTempWSDTO createProcessTempWSDTO(String processId){
 
         ProcessTempWSDTO processTempWSDTO = new ProcessTempWSDTO();
-        List<EmailTempWSDTO>emailTempWSDTOS = new ArrayList<>();
-        List<PushTempWSDTO>pushTempWSDTOS = new ArrayList<>();
-        List<WappMessageTempWSDTO>wappMessageTempWSDTOS = new ArrayList<>();
-        List<SmsMessageTempWSDTO>smsMessageTempWSDTOS = new ArrayList<>();
 
-        List<EmailTempDBModel> emailTempDBModels = emailTempRepository.findByProcessId(processId);
-        for (EmailTempDBModel emailTempDBModel : emailTempDBModels) {
-            emailTempWSDTOS.add(new EmailTempWSDTO(emailTempDBModel));
+        List<EmailTempDBModel> emailTemps = emailTempRepository.findByProcessId(processId);
+        List<EmailTempWSDTO>emailTempWSDTOS = new ArrayList<>();
+        for (EmailTempDBModel emailTemp : emailTemps) {
+            emailTempWSDTOS.add(new EmailTempWSDTO(emailTemp));
         }
         processTempWSDTO.setEmailTemps(emailTempWSDTOS);
-        List<PushTempDBModel> pushTempDBModels = pushTempRepository.findByProcessId(processId);
-        for (PushTempDBModel pushTempDBModel : pushTempDBModels) {
-            pushTempWSDTOS.add(new PushTempWSDTO(pushTempDBModel));
+
+        List<PushTempDBModel> pushTemps = pushTempRepository.findByProcessId(processId);
+        List<PushTempWSDTO>pushTempWSDTOS = new ArrayList<>();
+        for (PushTempDBModel pushTemp : pushTemps) {
+            pushTempWSDTOS.add(new PushTempWSDTO(pushTemp));
         }
         processTempWSDTO.setPushTemps(pushTempWSDTOS);
-        List<SmsMessageTempDBModel>smsMessageTempDBModels = smsMessageTempRepository.findByProcessId(processId);
-        for (SmsMessageTempDBModel smsMessageTempDBModel : smsMessageTempDBModels) {
-            smsMessageTempWSDTOS.add(new SmsMessageTempWSDTO(smsMessageTempDBModel));
+
+        List<SmsMessageTempDBModel>smsMessageTemps = smsMessageTempRepository.findByProcessId(processId);
+        List<SmsMessageTempWSDTO>smsMessageTempWSDTOS = new ArrayList<>();
+        for (SmsMessageTempDBModel smsMessageTemp : smsMessageTemps) {
+            smsMessageTempWSDTOS.add(new SmsMessageTempWSDTO(smsMessageTemp));
         }
         processTempWSDTO.setSmsMessageTemps(smsMessageTempWSDTOS);
-        List<WappMessageTempDBModel>wappMessageTempDBModels = wappMessageTempRepository.findByProcessId(processId);
-        for (WappMessageTempDBModel wappMessageTempDBModel : wappMessageTempDBModels) {
-            wappMessageTempWSDTOS.add(new WappMessageTempWSDTO(wappMessageTempDBModel));
+
+        List<WappMessageTempDBModel>wappMessageTemps = wappMessageTempRepository.findByProcessId(processId);
+        List<WappMessageTempWSDTO>wappMessageTempWSDTOS = new ArrayList<>();
+        for (WappMessageTempDBModel wappMessageTemp : wappMessageTemps) {
+            wappMessageTempWSDTOS.add(new WappMessageTempWSDTO(wappMessageTemp));
         }
         processTempWSDTO.setWappMessageTemps(wappMessageTempWSDTOS);
 
@@ -167,27 +167,29 @@ public class ProcessHelper {
 
         ProcessChannelWSDTO processChannelWSDTO = new ProcessChannelWSDTO();
         List<ProcessSipChannelDBModel> sipChannelDBModels =  processSipChannelRepository.findByProcessId(processId);
-        if (sipChannelDBModels.size()>0){
+        if (!sipChannelDBModels.isEmpty()){
             processChannelWSDTO.setSipChannel(new ProcessSipChannelWSDTO(sipChannelDBModels.get(0)));
         }
         List<ProcessSmsChannelDBModel> smsChannelDBModels = processSmsChannelRepository.findByProcessId(processId);
-        if (smsChannelDBModels.size()>0){
+        if (!smsChannelDBModels.isEmpty()){
             processChannelWSDTO.setSmsChannel(new ProcessSmsChannelWSDTO(smsChannelDBModels.get(0)));
         }
         List<ProcessWappChannelDBModel> wappChannelDBModels = processWappChannelRepository.findByProcessId(processId);
-        if (wappChannelDBModels.size()>0){
+        if (!wappChannelDBModels.isEmpty()){
             processChannelWSDTO.setWappChannel(new ProcessWappChannelWSDTO(wappChannelDBModels.get(0)));
         }
         List<ProcessEmailChannelDBModel> emailChannelDBModels = processEmailChannelRepository.findByProcessId(processId);
-        if (emailChannelDBModels.size()>0){
+        if (!emailChannelDBModels.isEmpty()){
             processChannelWSDTO.setEmailChannel(new ProcessEmailChannelWSDTO(emailChannelDBModels.get(0)));
         }
         List<ProcessPushChannelDBModel> pushChannelDBModels = processPushChannelRepository.findByProcessId(processId);
-        if (pushChannelDBModels.size()>0){
+        if (!pushChannelDBModels.isEmpty()){
             processChannelWSDTO.setPushChannel(new ProcessPushChannelWSDTO(pushChannelDBModels.get(0)));
         }
+
         return processChannelWSDTO;
     }
+
 
 
 

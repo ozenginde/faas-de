@@ -48,8 +48,6 @@ public class OperationHelper {
     AppUtils appUtils;
 
 
-
-
     public ApiSipAccountWSDTO createApiSipCallAccountWSDTO(long agentId, long sessionId, long clientId, String campaignId, String processId){
 
         ApiSipAccountWSDTO sipCallAccountWSDTO = new ApiSipAccountWSDTO();
@@ -63,11 +61,12 @@ public class OperationHelper {
 
         ApiWappAccountWSDTO wappCallAccountWSDTO = new ApiWappAccountWSDTO();
         List<ProcessWappChannelDBModel> processWappChannels = processWappChannelRepository.findByProcessId(processId);
-        if (processWappChannels.size()>0){
+        if (!processWappChannels.isEmpty()){
             wappCallAccountWSDTO.setCallStatus(processWappChannels.get(0).getCallStatus());
         }
+
         List<UserDetailsDBModel> userDetails = userDetailsRepository.findByUserId(agentId);
-        if (userDetails.size()>0 && userDetails.get(0).getWappChannel() != null){
+        if (!userDetails.isEmpty() && userDetails.get(0).getWappChannel() != null){
             wappCallAccountWSDTO.setAccountId(userDetails.get(0).getWappChannel().getAccountId());
             wappCallAccountWSDTO.setInstanceKey(userDetails.get(0).getWappChannel().getInstanceKey());
             wappCallAccountWSDTO.setPhoneNumber(userDetails.get(0).getWappChannel().getPhoneNumber());

@@ -60,7 +60,7 @@ public class InquiryHelper {
         ApiInquiryDTO inquiryWrapper = new ApiInquiryDTO();
         inquiryWrapper.setInquiry(inquiryDBModel);
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientId(inquiryDBModel.getSessionId(),inquiryDBModel.getClientId());
-        if (sessionDBModels.size()>0){
+        if (!sessionDBModels.isEmpty()){
             inquiryWrapper.setInquirySession(sessionDBModels.get(0));
         }
         return inquiryWrapper;

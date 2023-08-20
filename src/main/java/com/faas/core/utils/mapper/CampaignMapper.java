@@ -32,28 +32,28 @@ public class CampaignMapper {
 
 
     @Autowired
-    CampaignRepository campaignRepository;
-
-    @Autowired
-    ProcessRepository processRepository;
+    UserRepository userRepository;
 
     @Autowired
     SessionRepository sessionRepository;
 
     @Autowired
-    UserRepository userRepository;
+    ProcessRepository processRepository;
+
+    @Autowired
+    CampaignRepository campaignRepository;
+
+    @Autowired
+    CampaignAgentRepository campaignAgentRepository;
 
     @Autowired
     AutomationTempRepository automationTempRepository;
 
     @Autowired
-    ProcessScenarioRepository processScenarioRepository;
-
-    @Autowired
     ScenarioRepository scenarioRepository;
 
     @Autowired
-    CampaignAgentRepository campaignAgentRepository;
+    ProcessScenarioRepository processScenarioRepository;
 
     @Autowired
     AppUtils appUtils;
@@ -91,8 +91,6 @@ public class CampaignMapper {
     }
 
 
-
-
     public CampaignProcessWSDTO mapCampaignProcessWSDTO(ProcessDBModel processDBModel){
 
         CampaignProcessWSDTO campaignProcessWSDTO = new CampaignProcessWSDTO();
@@ -106,14 +104,14 @@ public class CampaignMapper {
         return campaignProcessWSDTO;
     }
 
+
     public ProcessScenarioWSDTO mapProcessScenarioWSDTO(ProcessScenarioDBModel processScenarioDBModel){
 
         ProcessScenarioWSDTO processScenarioWSDTO = new ProcessScenarioWSDTO();
         processScenarioWSDTO.setProcessScenario(processScenarioDBModel);
         Optional<ScenarioDBModel> scenarioDBModel = scenarioRepository.findById(processScenarioDBModel.getScenarioId());
-        if (scenarioDBModel.isPresent()){
-            processScenarioWSDTO.setProcessScenarioDetails(scenarioDBModel.get());
-        }
+        scenarioDBModel.ifPresent(processScenarioWSDTO::setProcessScenarioDetails);
+
         return processScenarioWSDTO;
     }
 
@@ -136,5 +134,6 @@ public class CampaignMapper {
 
         return apiSummaryWSDTOS;
     }
+
 
 }
