@@ -63,7 +63,7 @@ public class ApiSmsMessageFramework {
 
         List<SessionDBModel>sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
-            return operationHelper.mapApiOperationSmsMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
+            return channelHelper.mapApiOperationSmsMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
         }
         return null;
     }
@@ -148,7 +148,7 @@ public class ApiSmsMessageFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
             ApiSmsMessageTempWSDTO smsMessageTempWSDTO = new ApiSmsMessageTempWSDTO();
-            ApiSmsAccountWSDTO smsAccountWSDTO = operationHelper.getApiSmsAccountWSDTO(processId);
+            ApiSmsAccountWSDTO smsAccountWSDTO = channelHelper.getApiSmsAccountWSDTO(processId);
             if (smsAccountWSDTO != null){
                 smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
             }
@@ -166,7 +166,7 @@ public class ApiSmsMessageFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
             ApiSmsMessageTempWSDTO smsMessageTempWSDTO = new ApiSmsMessageTempWSDTO();
-            ApiSmsAccountWSDTO smsAccountWSDTO = operationHelper.getApiSmsAccountWSDTO(processId);
+            ApiSmsAccountWSDTO smsAccountWSDTO = channelHelper.getApiSmsAccountWSDTO(processId);
             if (smsAccountWSDTO != null){
                 smsMessageTempWSDTO.setSmsAccount(smsAccountWSDTO);
             }

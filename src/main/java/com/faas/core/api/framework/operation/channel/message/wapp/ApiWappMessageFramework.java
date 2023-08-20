@@ -67,7 +67,7 @@ public class ApiWappMessageFramework {
 
         List<SessionDBModel>sessionDBModels =  sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
-            return operationHelper.mapApiOperationWappMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
+            return channelHelper.mapApiOperationWappMessageWSDTO(sessionDBModels.get(0),clientPhoneRepository.findByClientId(sessionDBModels.get(0).getClientId()));
         }
         return null;
     }
@@ -156,7 +156,7 @@ public class ApiWappMessageFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
             ApiWappMessageTempWSDTO wappMessageTempWSDTO = new ApiWappMessageTempWSDTO();
-            ApiWappAccountWSDTO wappAccountWSDTO = operationHelper.getApiWappAccountWSDTO(agentId,processId);
+            ApiWappAccountWSDTO wappAccountWSDTO = channelHelper.getApiWappAccountWSDTO(agentId,processId);
             if (wappAccountWSDTO != null){
                 wappMessageTempWSDTO.setWappAccount(wappAccountWSDTO);
             }
@@ -173,7 +173,7 @@ public class ApiWappMessageFramework {
         List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
         if (!sessionDBModels.isEmpty()){
             ApiWappMessageTempWSDTO wappMessageTempWSDTO = new ApiWappMessageTempWSDTO();
-            ApiWappAccountWSDTO wappAccountWSDTO = operationHelper.getApiWappAccountWSDTO(agentId,processId);
+            ApiWappAccountWSDTO wappAccountWSDTO = channelHelper.getApiWappAccountWSDTO(agentId,processId);
             if (wappAccountWSDTO != null){
                 wappMessageTempWSDTO.setWappAccount(wappAccountWSDTO);
             }

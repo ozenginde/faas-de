@@ -2,15 +2,25 @@ package com.faas.core.utils.helpers;
 
 import com.faas.core.api.model.ws.operation.channel.call.sip.dto.ApiOperationSipCallWSDTO;
 import com.faas.core.api.model.ws.operation.channel.call.sip.dto.ApiSipAccountWSDTO;
+import com.faas.core.api.model.ws.operation.channel.call.wapp.dto.ApiOperationWappCallWSDTO;
+import com.faas.core.api.model.ws.operation.channel.call.wapp.dto.ApiWappAccountWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiEmailAccountWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.email.dto.ApiOperationEmailWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiOperationSmsMessageWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.sms.dto.ApiSmsAccountWSDTO;
+import com.faas.core.api.model.ws.operation.channel.message.wapp.dto.ApiOperationWappMessageWSDTO;
+import com.faas.core.api.model.ws.operation.channel.messenger.dto.ApiOperationMessengerWSDTO;
+import com.faas.core.api.model.ws.operation.channel.push.dto.ApiOperationPushMessageWSDTO;
+import com.faas.core.api.model.ws.operation.channel.push.dto.ApiPushAccountWSDTO;
 import com.faas.core.base.model.db.channel.account.EmailAccountDBModel;
 import com.faas.core.base.model.db.channel.account.PushAccountDBModel;
 import com.faas.core.base.model.db.channel.account.SmsAccountDBModel;
 import com.faas.core.base.model.db.client.details.ClientPhoneDBModel;
 import com.faas.core.base.model.db.operation.channel.SipCallDBModel;
+import com.faas.core.base.model.db.operation.channel.WappCallDBModel;
 import com.faas.core.base.model.db.operation.channel.dao.SmsMessageDAO;
 import com.faas.core.base.model.db.operation.channel.dao.WappMessageDAO;
-import com.faas.core.base.model.db.process.details.channel.content.ProcessSipChannelDBModel;
-import com.faas.core.base.model.db.process.details.channel.content.ProcessSmsChannelDBModel;
+import com.faas.core.base.model.db.process.details.channel.content.*;
 import com.faas.core.base.model.db.process.details.channel.content.dao.EmailAccountDAO;
 import com.faas.core.base.model.db.process.details.channel.content.dao.PushAccountDAO;
 import com.faas.core.base.model.db.process.details.channel.content.dao.SmsAccountDAO;
@@ -18,9 +28,14 @@ import com.faas.core.base.model.db.process.details.channel.temp.SmsMessageTempDB
 import com.faas.core.base.model.db.process.details.channel.temp.WappMessageTempDBModel;
 import com.faas.core.base.model.db.session.SessionDBModel;
 import com.faas.core.base.model.db.user.details.UserDetailsDBModel;
+import com.faas.core.base.repo.client.details.ClientEmailRepository;
 import com.faas.core.base.repo.client.details.ClientPhoneRepository;
-import com.faas.core.base.repo.operation.channel.SipCallRepository;
-import com.faas.core.base.repo.process.details.channel.content.ProcessSipChannelRepository;
+import com.faas.core.base.repo.operation.channel.*;
+import com.faas.core.base.repo.process.details.channel.content.*;
+import com.faas.core.base.repo.process.details.channel.temp.EmailTempRepository;
+import com.faas.core.base.repo.process.details.channel.temp.PushTempRepository;
+import com.faas.core.base.repo.process.details.channel.temp.SmsMessageTempRepository;
+import com.faas.core.base.repo.process.details.channel.temp.WappMessageTempRepository;
 import com.faas.core.base.repo.user.details.UserDetailsRepository;
 import com.faas.core.utils.config.AppConstant;
 import com.faas.core.utils.config.AppUtils;
@@ -35,6 +50,9 @@ public class ChannelHelper {
 
 
     @Autowired
+    UserDetailsRepository userDetailsRepository;
+
+    @Autowired
     ClientPhoneRepository clientPhoneRepository;
 
     @Autowired
@@ -44,7 +62,49 @@ public class ChannelHelper {
     ProcessSipChannelRepository processSipChannelRepository;
 
     @Autowired
-    UserDetailsRepository userDetailsRepository;
+    WappCallRepository wappCallRepository;
+
+    @Autowired
+    ProcessWappChannelRepository processWappChannelRepository;
+
+    @Autowired
+    WappMessageRepository wappMessageRepository;
+
+    @Autowired
+    WappMessageTempRepository wappMessageTempRepository;
+
+    @Autowired
+    ProcessEmailChannelRepository processEmailChannelRepository;
+
+    @Autowired
+    ClientEmailRepository clientEmailRepository;
+
+    @Autowired
+    EmailMessageRepository emailMessageRepository;
+
+    @Autowired
+    EmailTempRepository emailTempRepository;
+
+    @Autowired
+    PushMessageRepository pushMessageRepository;
+
+    @Autowired
+    PushTempRepository pushTempRepository;
+
+    @Autowired
+    ProcessPushChannelRepository processPushChannelRepository;
+
+
+    @Autowired
+    SmsMessageRepository smsMessageRepository;
+
+    @Autowired
+    SmsMessageTempRepository smsMessageTempRepository;
+
+    @Autowired
+    ProcessSmsChannelRepository processSmsChannelRepository;
+
+
 
     @Autowired
     AppUtils appUtils;
@@ -123,7 +183,6 @@ public class ChannelHelper {
         return null;
     }
 
-
     public ApiOperationSipCallWSDTO mapApiOperationSipCallWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
 
         ApiSipAccountWSDTO sipAccountWSDTO = getApiSipAccountWSDTO(sessionDBModel.getAgentId(), sessionDBModel.getProcessId());
@@ -139,6 +198,53 @@ public class ChannelHelper {
         }
         return null;
     }
+
+
+
+    public ApiWappAccountWSDTO getApiWappAccountWSDTO(long agentId, String processId) {
+
+        List<UserDetailsDBModel> agentDetails = userDetailsRepository.findByUserId(agentId);
+        List<ProcessWappChannelDBModel> wappChannels = processWappChannelRepository.findByProcessId(processId);
+        if (!agentDetails.isEmpty() && agentDetails.get(0).getWappChannel() != null && agentDetails.get(0).getWappChannel().getAccountId() != null && !wappChannels.isEmpty()) {
+
+            ApiWappAccountWSDTO wappAccountWSDTO = new ApiWappAccountWSDTO();
+
+            wappAccountWSDTO.setAccountId(agentDetails.get(0).getWappChannel().getAccountId());
+            wappAccountWSDTO.setAccount(agentDetails.get(0).getWappChannel().getAccount());
+            wappAccountWSDTO.setInstanceKey(agentDetails.get(0).getWappChannel().getInstanceKey());
+            wappAccountWSDTO.setPhoneNumber(agentDetails.get(0).getWappChannel().getPhoneNumber());
+            wappAccountWSDTO.setServerUrl(agentDetails.get(0).getWappChannel().getServerUrl());
+            wappAccountWSDTO.setAccountDatas(agentDetails.get(0).getWappChannel().getAccountDatas());
+            wappAccountWSDTO.setCallStatus(wappChannels.get(0).getCallStatus());
+            wappAccountWSDTO.setMessageStatus(wappChannels.get(0).getMessageStatus());
+            wappAccountWSDTO.setcDate(wappChannels.get(0).getcDate());
+            wappAccountWSDTO.setStatus(wappChannels.get(0).getStatus());
+
+            return wappAccountWSDTO;
+        }
+        return null;
+    }
+
+
+    public ApiOperationWappCallWSDTO mapApiOperationWappCallWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
+
+        ApiWappAccountWSDTO wappAccountWSDTO = getApiWappAccountWSDTO(sessionDBModel.getAgentId(), sessionDBModel.getProcessId());
+        if (wappAccountWSDTO != null) {
+            ApiOperationWappCallWSDTO operationWappCall = new ApiOperationWappCallWSDTO();
+            operationWappCall.setWappAccount(wappAccountWSDTO);
+            operationWappCall.setClientPhones(clientPhones);
+            List<WappCallDBModel> activeWappCall = wappCallRepository.findBySessionIdAndCallState(sessionDBModel.getId(), AppConstant.ACTIVE_CALL);
+            if (!activeWappCall.isEmpty()) {
+                operationWappCall.setCurrentWappCall(activeWappCall.get(0));
+            }
+            operationWappCall.setRecentWappCalls(wappCallRepository.findBySessionId(sessionDBModel.getId()));
+
+            return operationWappCall;
+        }
+        return null;
+    }
+
+
 
 
 
@@ -198,6 +304,143 @@ public class ChannelHelper {
 
         return pushAccountDAO;
     }
+
+
+
+    public ApiOperationSmsMessageWSDTO mapApiOperationSmsMessageWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
+
+        ApiOperationSmsMessageWSDTO operationSmsMessageWSDTO = new ApiOperationSmsMessageWSDTO();
+        ApiSmsAccountWSDTO smsAccountWSDTO = getApiSmsAccountWSDTO(sessionDBModel.getProcessId());
+        if (smsAccountWSDTO != null){
+            operationSmsMessageWSDTO.setSmsAccount(smsAccountWSDTO);
+        }
+        operationSmsMessageWSDTO.setPhones(clientPhones);
+        operationSmsMessageWSDTO.setSmsMessages(smsMessageRepository.findBySessionId(sessionDBModel.getId()));
+        operationSmsMessageWSDTO.setSmsTemps(smsMessageTempRepository.findByProcessId(sessionDBModel.getProcessId()));
+
+        return operationSmsMessageWSDTO;
+    }
+
+
+    public ApiSmsAccountWSDTO getApiSmsAccountWSDTO(String processId) {
+
+        List<ProcessSmsChannelDBModel>smsChannelDBModels = processSmsChannelRepository.findByProcessId(processId);
+        if (!smsChannelDBModels.isEmpty() && smsChannelDBModels.get(0).getSmsAccount() != null) {
+
+            ApiSmsAccountWSDTO smsAccountWSDTO = new ApiSmsAccountWSDTO();
+            smsAccountWSDTO.setAccountId(smsChannelDBModels.get(0).getAccountId());
+            smsAccountWSDTO.setAccount(smsChannelDBModels.get(0).getSmsAccount().getAccount());
+            smsAccountWSDTO.setUserName(smsChannelDBModels.get(0).getSmsAccount().getUserName());
+            smsAccountWSDTO.setPassword(smsChannelDBModels.get(0).getSmsAccount().getPassword());
+            smsAccountWSDTO.setApiToken(smsChannelDBModels.get(0).getSmsAccount().getApiToken());
+            smsAccountWSDTO.setApiUrl(smsChannelDBModels.get(0).getSmsAccount().getApiUrl());
+            smsAccountWSDTO.setAccountDatas(smsChannelDBModels.get(0).getSmsAccount().getAccountDatas());
+            smsAccountWSDTO.setProvider(smsChannelDBModels.get(0).getSmsAccount().getProvider());
+            smsAccountWSDTO.setSmsStatus(smsChannelDBModels.get(0).getSmsStatus());
+            smsAccountWSDTO.setcDate(smsChannelDBModels.get(0).getcDate());
+            smsAccountWSDTO.setStatus(smsChannelDBModels.get(0).getStatus());
+
+            return smsAccountWSDTO;
+        }
+        return null;
+    }
+
+
+    public ApiOperationWappMessageWSDTO mapApiOperationWappMessageWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
+
+        ApiOperationWappMessageWSDTO operationWappMessageWSDTO = new ApiOperationWappMessageWSDTO();
+        ApiWappAccountWSDTO wappAccountWSDTO = getApiWappAccountWSDTO(sessionDBModel.getAgentId(),sessionDBModel.getProcessId());
+        if (wappAccountWSDTO != null){
+            operationWappMessageWSDTO.setWappAccount(wappAccountWSDTO);
+        }
+        operationWappMessageWSDTO.setPhones(clientPhones);
+        operationWappMessageWSDTO.setWappMessages(wappMessageRepository.findBySessionId(sessionDBModel.getId()));
+        operationWappMessageWSDTO.setWappTemps(wappMessageTempRepository.findByProcessId(sessionDBModel.getProcessId()));
+
+        return operationWappMessageWSDTO;
+    }
+
+
+    public ApiEmailAccountWSDTO getApiEmailAccountWSDTO(String processId) {
+
+        List<ProcessEmailChannelDBModel>emailChannelDBModels = processEmailChannelRepository.findByProcessId(processId);
+        if (!emailChannelDBModels.isEmpty() && emailChannelDBModels.get(0).getEmailAccount() != null) {
+
+            ApiEmailAccountWSDTO emailAccountWSDTO = new ApiEmailAccountWSDTO();
+
+            emailAccountWSDTO.setAccountId(emailChannelDBModels.get(0).getAccountId());
+            emailAccountWSDTO.setAccount(emailChannelDBModels.get(0).getEmailAccount().getAccount());
+            emailAccountWSDTO.setAccountDatas(emailChannelDBModels.get(0).getEmailAccount().getAccountDatas());
+            emailAccountWSDTO.setProvider(emailChannelDBModels.get(0).getEmailAccount().getProvider());
+            emailAccountWSDTO.setEmailStatus(emailChannelDBModels.get(0).getEmailStatus());
+            emailAccountWSDTO.setcDate(emailChannelDBModels.get(0).getcDate());
+            emailAccountWSDTO.setStatus(emailChannelDBModels.get(0).getStatus());
+
+            return emailAccountWSDTO;
+        }
+        return null;
+    }
+
+
+    public ApiOperationEmailWSDTO mapApiOperationEmailWSDTO(SessionDBModel sessionDBModel) {
+
+        ApiOperationEmailWSDTO operationEmailWSDTO = new ApiOperationEmailWSDTO();
+
+        ApiEmailAccountWSDTO emailAccountWSDTO = getApiEmailAccountWSDTO(sessionDBModel.getProcessId());
+        if (emailAccountWSDTO != null){
+            operationEmailWSDTO.setEmailAccount(emailAccountWSDTO);
+        }
+        operationEmailWSDTO.setEmails(clientEmailRepository.findByClientId(sessionDBModel.getClientId()));
+        operationEmailWSDTO.setEmailMessages(emailMessageRepository.findBySessionId(sessionDBModel.getId()));
+        operationEmailWSDTO.setEmailTemps(emailTempRepository.findByProcessId(sessionDBModel.getProcessId()));
+
+        return operationEmailWSDTO;
+    }
+
+
+    public ApiOperationMessengerWSDTO mapApiOperationMessengerWSDTO() {
+
+        return null;
+    }
+
+
+    public ApiOperationPushMessageWSDTO mapApiOperationPushMessageWSDTO(SessionDBModel sessionDBModel) {
+
+        ApiPushAccountWSDTO pushAccountWSDTO = getApiPushAccountWSDTO(sessionDBModel.getProcessId());
+        if (pushAccountWSDTO != null){
+
+            ApiOperationPushMessageWSDTO operationPushMessageWSDTO = new ApiOperationPushMessageWSDTO();
+            operationPushMessageWSDTO.setPushAccount(pushAccountWSDTO);
+            operationPushMessageWSDTO.setPushMessages(pushMessageRepository.findBySessionId(sessionDBModel.getId()));
+            operationPushMessageWSDTO.setPushTemps(pushTempRepository.findByProcessId(sessionDBModel.getProcessId()));
+
+            return operationPushMessageWSDTO;
+        }
+        return null;
+    }
+
+
+    public ApiPushAccountWSDTO getApiPushAccountWSDTO(String processId) {
+
+        List<ProcessPushChannelDBModel>pushChannelDBModels = processPushChannelRepository.findByProcessId(processId);
+        if (!pushChannelDBModels.isEmpty() && pushChannelDBModels.get(0).getPushAccount() != null) {
+
+            ApiPushAccountWSDTO pushAccountWSDTO = new ApiPushAccountWSDTO();
+
+            pushAccountWSDTO.setAccountId(pushChannelDBModels.get(0).getAccountId());
+            pushAccountWSDTO.setAccount(pushChannelDBModels.get(0).getPushAccount().getAccount());
+            pushAccountWSDTO.setAccountDatas(pushChannelDBModels.get(0).getPushAccount().getAccountDatas());
+            pushAccountWSDTO.setProvider(pushChannelDBModels.get(0).getPushAccount().getProvider());
+            pushAccountWSDTO.setPushStatus(pushChannelDBModels.get(0).getPushStatus());
+            pushAccountWSDTO.setcDate(pushChannelDBModels.get(0).getcDate());
+            pushAccountWSDTO.setStatus(pushChannelDBModels.get(0).getStatus());
+
+            return pushAccountWSDTO;
+        }
+        return null;
+    }
+
+
 
 
 }

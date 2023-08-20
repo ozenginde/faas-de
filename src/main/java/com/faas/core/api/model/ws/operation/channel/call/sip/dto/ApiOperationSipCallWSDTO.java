@@ -10,14 +10,16 @@ public class ApiOperationSipCallWSDTO {
     private ApiSipAccountWSDTO sipAccount;
     private List<ClientPhoneDBModel>clientPhones;
     private SipCallDBModel currentSipCall;
+    private SipCallDBModel recentSipCalls;
 
     public ApiOperationSipCallWSDTO() {
     }
 
-    public ApiOperationSipCallWSDTO(ApiSipAccountWSDTO sipAccount, List<ClientPhoneDBModel> clientPhones, SipCallDBModel currentSipCall) {
+    public ApiOperationSipCallWSDTO(ApiSipAccountWSDTO sipAccount, List<ClientPhoneDBModel> clientPhones, SipCallDBModel currentSipCall, SipCallDBModel recentSipCalls) {
         this.sipAccount = sipAccount;
         this.clientPhones = clientPhones;
         this.currentSipCall = currentSipCall;
+        this.recentSipCalls = recentSipCalls;
     }
 
     public ApiSipAccountWSDTO getSipAccount() {
@@ -42,5 +44,13 @@ public class ApiOperationSipCallWSDTO {
 
     public void setCurrentSipCall(SipCallDBModel currentSipCall) {
         this.currentSipCall = currentSipCall;
+    }
+
+    public SipCallDBModel getRecentSipCalls() {
+        return recentSipCalls;
+    }
+
+    public void setRecentSipCalls(SipCallDBModel recentSipCalls) {
+        this.recentSipCalls = recentSipCalls;
     }
 }
