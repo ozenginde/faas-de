@@ -194,6 +194,8 @@ public class ChannelHelper {
             if (!activeSipCall.isEmpty()) {
                 operationSipCall.setCurrentSipCall(activeSipCall.get(0));
             }
+            operationSipCall.setRecentSipCalls(sipCallRepository.findBySessionId(sessionDBModel.getId()));
+
             return operationSipCall;
         }
         return null;

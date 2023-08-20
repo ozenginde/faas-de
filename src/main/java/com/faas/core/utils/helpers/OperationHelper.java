@@ -274,7 +274,6 @@ public class OperationHelper {
 
         operationDetailsWSDTO.setOperation(operationDBModel);
         operationDetailsWSDTO.setOperationSession(sessionDBModel);
-
         if (sessionDBModel.getSessionType().equalsIgnoreCase(AppConstant.INQUIRY_CAMPAIGN)){
             List<InquiryDBModel> inquiryDBModels = inquiryRepository.findBySessionIdAndClientId(sessionDBModel.getId(),sessionDBModel.getClientId());
             if (!inquiryDBModels.isEmpty()){
