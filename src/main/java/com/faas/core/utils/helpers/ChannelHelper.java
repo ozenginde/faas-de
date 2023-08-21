@@ -94,7 +94,6 @@ public class ChannelHelper {
     @Autowired
     ProcessPushChannelRepository processPushChannelRepository;
 
-
     @Autowired
     SmsMessageRepository smsMessageRepository;
 
@@ -142,10 +141,9 @@ public class ChannelHelper {
     }
 
 
-    public ApiOperationSipCallWSDTO getApiOperationSipCallWSDTO(long agentId, long sessionId, long clientId, String processId){
+    public ApiOperationSipCallWSDTO getApiOperationSipCallWSDTO(long agentId, long sessionId,long clientId,String processId){
 
         ApiOperationSipCallWSDTO operationSipCallWSDTO = new ApiOperationSipCallWSDTO();
-
         operationSipCallWSDTO.setSipAccount(getApiSipAccountWSDTO(agentId, processId));
         operationSipCallWSDTO.setClientPhones(clientPhoneRepository.findByClientId(clientId));
         List<SipCallDBModel> sipCalls = sipCallRepository.findBySessionIdAndCallState(sessionId, AppConstant.ACTIVE_CALL);

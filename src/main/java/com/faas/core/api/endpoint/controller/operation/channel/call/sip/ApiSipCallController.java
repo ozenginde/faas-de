@@ -26,10 +26,10 @@ public class ApiSipCallController {
     @RequestMapping(value = ApiRoute.API_GET_OPERATION_SIP_CALL, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetOperationSipCall(@RequestParam long agentId,
                                                     @RequestParam long sessionId,
-                                                    @RequestParam String campaignId,
-                                                    @RequestParam String processId) {
+                                                    @RequestParam long clientId,
+                                                    @RequestParam String campaignId) {
 
-        ApiOperationSipCallWSModel response = apiSipCallMiddleware.apiGetOperationSipCall(agentId,sessionId,campaignId,processId);
+        ApiOperationSipCallWSModel response = apiSipCallMiddleware.apiGetOperationSipCall(agentId,sessionId,clientId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -38,14 +38,12 @@ public class ApiSipCallController {
     }
 
 
-
     @RequestMapping(value = ApiRoute.API_GET_SIP_CALLS, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetSipCalls(@RequestParam long agentId,
                                             @RequestParam long sessionId,
-                                            @RequestParam String campaignId,
-                                            @RequestParam String processId) {
+                                            @RequestParam String campaignId) {
 
-        ApiSipCallWSModel response = apiSipCallMiddleware.apiGetSipCalls(agentId,sessionId,campaignId,processId);
+        ApiSipCallWSModel response = apiSipCallMiddleware.apiGetSipCalls(agentId,sessionId,campaignId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -57,11 +55,9 @@ public class ApiSipCallController {
     @RequestMapping(value = ApiRoute.API_GET_SIP_CALL, method = RequestMethod.POST)
     public ResponseEntity<?> apiGetSipCall(@RequestParam long agentId,
                                            @RequestParam long sessionId,
-                                           @RequestParam String campaignId,
-                                           @RequestParam String processId,
                                            @RequestParam long callId) {
 
-        ApiSipCallWSModel response = apiSipCallMiddleware.apiGetSipCall(agentId,sessionId,campaignId,processId,callId);
+        ApiSipCallWSModel response = apiSipCallMiddleware.apiGetSipCall(agentId,sessionId,callId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -73,11 +69,12 @@ public class ApiSipCallController {
     @RequestMapping(value = ApiRoute.API_CREATE_SIP_CALL, method = RequestMethod.POST)
     public ResponseEntity<?> apiCreateSipCall(@RequestParam long agentId,
                                               @RequestParam long sessionId,
+                                              @RequestParam long clientId,
                                               @RequestParam String campaignId,
                                               @RequestParam String processId,
                                               @RequestParam long numberId) {
 
-        ApiSipCallWSModel response = apiSipCallMiddleware.apiCreateSipCall(agentId,sessionId,campaignId,processId,numberId);
+        ApiSipCallWSModel response = apiSipCallMiddleware.apiCreateSipCall(agentId,sessionId,clientId,campaignId,processId,numberId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -89,12 +86,10 @@ public class ApiSipCallController {
     @RequestMapping(value = ApiRoute.API_UPDATE_SIP_CALL, method = RequestMethod.POST)
     public ResponseEntity<?> apiUpdateSipCall(@RequestParam long agentId,
                                               @RequestParam long sessionId,
-                                              @RequestParam String campaignId,
-                                              @RequestParam String processId,
                                               @RequestParam long callId,
                                               @RequestParam String callState) {
 
-        ApiSipCallWSModel response = apiSipCallMiddleware.apiUpdateSipCall(agentId,sessionId,campaignId,processId,callId,callState);
+        ApiSipCallWSModel response = apiSipCallMiddleware.apiUpdateSipCall(agentId,sessionId,callId,callState);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -106,11 +101,9 @@ public class ApiSipCallController {
     @RequestMapping(value = ApiRoute.API_REMOVE_SIP_CALL, method = RequestMethod.POST)
     public ResponseEntity<?> apiRemoveSipCall(@RequestParam long agentId,
                                               @RequestParam long sessionId,
-                                              @RequestParam String campaignId,
-                                              @RequestParam String processId,
                                               @RequestParam long callId) {
 
-        ApiSipCallWSModel response = apiSipCallMiddleware.apiRemoveSipCall(agentId,sessionId,campaignId,processId,callId);
+        ApiSipCallWSModel response = apiSipCallMiddleware.apiRemoveSipCall(agentId,sessionId,callId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

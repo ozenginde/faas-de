@@ -3,7 +3,6 @@ package com.faas.core.api.model.ws.operation.channel.call.sip;
 import com.faas.core.api.model.ws.operation.channel.call.sip.dto.ApiOperationSipCallWSDTO;
 import com.faas.core.base.model.ws.general.GeneralWSModel;
 
-
 public class ApiOperationSipCallWSModel {
 
     private GeneralWSModel general;
