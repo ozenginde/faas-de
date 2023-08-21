@@ -70,11 +70,9 @@ public class ApiSipCallController {
     public ResponseEntity<?> apiCreateSipCall(@RequestParam long agentId,
                                               @RequestParam long sessionId,
                                               @RequestParam long clientId,
-                                              @RequestParam String campaignId,
-                                              @RequestParam String processId,
                                               @RequestParam long numberId) {
 
-        ApiSipCallWSModel response = apiSipCallMiddleware.apiCreateSipCall(agentId,sessionId,clientId,campaignId,processId,numberId);
+        ApiSipCallWSModel response = apiSipCallMiddleware.apiCreateSipCall(agentId,sessionId,clientId,numberId);
 
         if (response.getGeneral().getStatus().equalsIgnoreCase(AppConstant.GENERAL_SUCCESS_STATUS)) {
             return new ResponseEntity<>(response, HttpStatus.OK);

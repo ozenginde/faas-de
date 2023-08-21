@@ -22,6 +22,7 @@ public interface SessionRepository extends PagingAndSortingRepository<SessionDBM
     List<SessionDBModel>findByClientId(long clientId);
     List<SessionDBModel>findByIdAndClientId(long sessionId,long clientId);
     List<SessionDBModel>findByIdAndClientIdAndAgentIdAndCampaignId(long sessionId,long clientId,long agentId,String campaignId);
+    List<SessionDBModel>findByIdAndClientIdAndAgentId(long sessionId,long clientId,long agentId);
     List<SessionDBModel>findByIdAndClientIdAndAgentIdAndCampaignIdAndProcessId(long sessionId,long clientId,long agentId,String campaignId,String processId);
     List<SessionDBModel>findByIdAndClientIdAndAgentIdAndCampaignIdAndSessionState(long sessionId,long clientId,long agentId,String campaignId,String sessionState);
     List<SessionDBModel>findByClientIdAndCampaignId(long clientId, String campaignId);

@@ -83,13 +83,13 @@ public class ApiSipCallMiddleware {
     }
 
 
-    public ApiSipCallWSModel apiCreateSipCall(long agentId,long sessionId,long clientId,String campaignId,String processId,long numberId) {
+    public ApiSipCallWSModel apiCreateSipCall(long agentId,long sessionId,long clientId,long numberId) {
 
         ApiSipCallWSModel response = new ApiSipCallWSModel();
         GeneralWSModel general = new GeneralWSModel();
         List<ApiSipCallWSDTO>sipCallWSDTOS = new ArrayList<>();
 
-        ApiSipCallWSDTO sipCallWSDTO = apiSipCallFramework.apiCreateSipCallService(agentId,sessionId,clientId,campaignId,processId,numberId);
+        ApiSipCallWSDTO sipCallWSDTO = apiSipCallFramework.apiCreateSipCallService(agentId,sessionId,clientId,numberId);
         if (sipCallWSDTO != null){
             sipCallWSDTOS.add(sipCallWSDTO);
         }
