@@ -39,16 +39,20 @@ public class ApiSipCallFramework {
     AppUtils appUtils;
 
 
-    public ApiOperationSipCallWSDTO apiGetOperationSipCallService(long agentId,long sessionId,long clientId,String campaignId) {
+    public ApiOperationSipCallWSDTO apiGetOperationSipCallService(long agentId,long sessionId,long clientId) {
 
-        return channelHelper.getApiOperationSipCallWSDTO(agentId,sessionId,clientId,campaignId);
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
+        if (!sessionDBModels.isEmpty()){
+            return channelHelper.getApiOperationSipCallWSDTO(agentId,sessionId,clientId,sessionDBModels.get(0).getProcessId());
+        }
+        return null;
     }
 
 
-    public List<ApiSipCallWSDTO> apiGetSipCallsService(long agentId,long sessionId,String campaignId) {
+    public List<ApiSipCallWSDTO> apiGetSipCallsService(long agentId,long sessionId) {
 
         List<ApiSipCallWSDTO> sipCallWSDTOS = new ArrayList<>();
-        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findBySessionIdAndCampaignId(sessionId,campaignId);
+        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findBySessionId(sessionId);
         for (SipCallDBModel sipCallDBModel : sipCallDBModels) {
             sipCallWSDTOS.add(new ApiSipCallWSDTO(sipCallDBModel));
         }
