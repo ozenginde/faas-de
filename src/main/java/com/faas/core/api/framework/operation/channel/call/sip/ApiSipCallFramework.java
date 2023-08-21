@@ -41,7 +41,7 @@ public class ApiSipCallFramework {
 
     public ApiOperationSipCallWSDTO apiGetOperationSipCallService(long agentId,long sessionId,long clientId) {
 
-        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndAgentId(sessionId,agentId);
+        List<SessionDBModel> sessionDBModels = sessionRepository.findByIdAndClientIdAndAgentId(sessionId,clientId,agentId);
         if (!sessionDBModels.isEmpty()){
             return channelHelper.getApiOperationSipCallWSDTO(agentId,sessionId,clientId,sessionDBModels.get(0).getProcessId());
         }
@@ -49,10 +49,10 @@ public class ApiSipCallFramework {
     }
 
 
-    public List<ApiSipCallWSDTO> apiGetSipCallsService(long agentId,long sessionId) {
+    public List<ApiSipCallWSDTO> apiGetSipCallsService(long agentId,long sessionId,long clientId) {
 
         List<ApiSipCallWSDTO> sipCallWSDTOS = new ArrayList<>();
-        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findBySessionId(sessionId);
+        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findBySessionIdAndClientId(sessionId,clientId);
         for (SipCallDBModel sipCallDBModel : sipCallDBModels) {
             sipCallWSDTOS.add(new ApiSipCallWSDTO(sipCallDBModel));
         }
@@ -60,9 +60,9 @@ public class ApiSipCallFramework {
     }
 
 
-    public ApiSipCallWSDTO apiGetSipCallService(long agentId,long sessionId,long callId) {
+    public ApiSipCallWSDTO apiGetSipCallService(long agentId,long sessionId,long clientId,long callId) {
 
-        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findByIdAndSessionId(callId,sessionId);
+        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findByIdAndSessionIdAndAgentIdAndClientId(callId,sessionId,agentId,clientId);
         if (!sipCallDBModels.isEmpty()) {
             return new ApiSipCallWSDTO(sipCallDBModels.get(0));
         }
@@ -75,7 +75,6 @@ public class ApiSipCallFramework {
         List<SessionDBModel> sessionModel = sessionRepository.findByIdAndClientIdAndAgentId(sessionId,clientId,agentId);
         Optional<ClientPhoneDBModel> clientPhoneDBModel = clientPhoneRepository.findById(numberId);
         ApiSipAccountWSDTO sipAccountWSDTO = channelHelper.getApiSipAccountWSDTO(agentId, sessionModel.get(0).getProcessId());
-
         if (!sipCallRepository.existsBySessionIdAndCallState(sessionId,AppConstant.ACTIVE_CALL) && !sessionModel.isEmpty() && clientPhoneDBModel.isPresent() && sipAccountWSDTO != null) {
 
             SipCallDBModel sipCallDBModel = new SipCallDBModel();
@@ -104,9 +103,9 @@ public class ApiSipCallFramework {
 
 
 
-    public ApiSipCallWSDTO apiUpdateSipCallService(long agentId,long sessionId,long callId,String callState) {
+    public ApiSipCallWSDTO apiUpdateSipCallService(long agentId,long sessionId,long clientId,long callId,String callState) {
 
-        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findByIdAndSessionId(callId,sessionId);
+        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findByIdAndSessionIdAndAgentIdAndClientId(callId,sessionId,agentId,clientId);
         if (!sipCallDBModels.isEmpty()) {
             sipCallDBModels.get(0).setCallState(callState);
             if (callState.equalsIgnoreCase(AppConstant.FINISHED_CALL)) {
@@ -119,9 +118,9 @@ public class ApiSipCallFramework {
     }
 
 
-    public ApiSipCallWSDTO apiRemoveSipCallService(long agentId,long sessionId,long callId) {
+    public ApiSipCallWSDTO apiRemoveSipCallService(long agentId,long sessionId,long clientId,long callId) {
 
-        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findByIdAndSessionId(callId,sessionId);
+        List<SipCallDBModel> sipCallDBModels = sipCallRepository.findByIdAndSessionIdAndAgentIdAndClientId(callId,sessionId,agentId,clientId);
         if (!sipCallDBModels.isEmpty()) {
             sipCallRepository.delete(sipCallDBModels.get(0));
             return null;

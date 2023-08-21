@@ -14,7 +14,7 @@ public interface SipCallRepository extends PagingAndSortingRepository<SipCallDBM
     boolean existsBySessionIdAndCallState(long sessionId,String callState);
     List<SipCallDBModel>findBySessionId(long sessionId);
     List<SipCallDBModel>findByIdAndSessionId(long callId, long sessionId);
-    List<SipCallDBModel>findByIdAndSessionIdAndAgentId(long callId, long sessionId,long agentId);
+    List<SipCallDBModel>findByIdAndSessionIdAndAgentIdAndClientId(long callId, long sessionId,long agentId,long clientId);
     List<SipCallDBModel>findBySessionIdAndCampaignIdAndProcessId(long sessionId,String campaignId,String processId);
     List<SipCallDBModel>findBySessionIdAndCampaignId(long sessionId,String campaignId);
     List<SipCallDBModel>findByIdAndSessionIdAndCampaignIdAndProcessId(long callId,long sessionId,String campaignId,String processId);
