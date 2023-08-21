@@ -146,9 +146,13 @@ public class ChannelHelper {
         ApiOperationSipCallWSDTO operationSipCallWSDTO = new ApiOperationSipCallWSDTO();
         operationSipCallWSDTO.setSipAccount(getApiSipAccountWSDTO(agentId, processId));
         operationSipCallWSDTO.setClientPhones(clientPhoneRepository.findByClientId(clientId));
-        List<SipCallDBModel> sipCalls = sipCallRepository.findBySessionIdAndCallState(sessionId, AppConstant.ACTIVE_CALL);
-        if (!sipCalls.isEmpty()) {
-            operationSipCallWSDTO.setCurrentSipCall(sipCalls.get(0));
+        List<SipCallDBModel> readySipCalls = sipCallRepository.findBySessionIdAndCallState(sessionId, AppConstant.READY_CALL);
+        if (!readySipCalls.isEmpty()) {
+            operationSipCallWSDTO.setCurrentSipCall(readySipCalls.get(0));
+        }
+        List<SipCallDBModel> activeSipCalls = sipCallRepository.findBySessionIdAndCallState(sessionId, AppConstant.ACTIVE_CALL);
+        if (!activeSipCalls.isEmpty()) {
+            operationSipCallWSDTO.setCurrentSipCall(activeSipCalls.get(0));
         }
         return operationSipCallWSDTO;
     }
@@ -188,6 +192,10 @@ public class ChannelHelper {
             ApiOperationSipCallWSDTO operationSipCall = new ApiOperationSipCallWSDTO();
             operationSipCall.setSipAccount(sipAccountWSDTO);
             operationSipCall.setClientPhones(clientPhones);
+            List<SipCallDBModel> readySipCalls = sipCallRepository.findBySessionIdAndCallState(sessionDBModel.getId(), AppConstant.READY_CALL);
+            if (!readySipCalls.isEmpty()) {
+                operationSipCall.setCurrentSipCall(readySipCalls.get(0));
+            }
             List<SipCallDBModel> activeSipCall = sipCallRepository.findBySessionIdAndCallState(sessionDBModel.getId(), AppConstant.ACTIVE_CALL);
             if (!activeSipCall.isEmpty()) {
                 operationSipCall.setCurrentSipCall(activeSipCall.get(0));
@@ -233,9 +241,13 @@ public class ChannelHelper {
             ApiOperationWappCallWSDTO operationWappCall = new ApiOperationWappCallWSDTO();
             operationWappCall.setWappAccount(wappAccountWSDTO);
             operationWappCall.setClientPhones(clientPhones);
-            List<WappCallDBModel> activeWappCall = wappCallRepository.findBySessionIdAndCallState(sessionDBModel.getId(), AppConstant.ACTIVE_CALL);
-            if (!activeWappCall.isEmpty()) {
-                operationWappCall.setCurrentWappCall(activeWappCall.get(0));
+            List<WappCallDBModel> readyWappCalls = wappCallRepository.findBySessionIdAndCallState(sessionDBModel.getId(), AppConstant.READY_CALL);
+            if (!readyWappCalls.isEmpty()) {
+                operationWappCall.setCurrentWappCall(readyWappCalls.get(0));
+            }
+            List<WappCallDBModel> activeWappCalls = wappCallRepository.findBySessionIdAndCallState(sessionDBModel.getId(), AppConstant.ACTIVE_CALL);
+            if (!activeWappCalls.isEmpty()) {
+                operationWappCall.setCurrentWappCall(activeWappCalls.get(0));
             }
             operationWappCall.setRecentWappCalls(wappCallRepository.findBySessionId(sessionDBModel.getId()));
 

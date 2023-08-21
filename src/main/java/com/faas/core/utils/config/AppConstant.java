@@ -118,6 +118,7 @@ public class AppConstant {
     public static final String FAILED_MESSAGE = "FAILED_MESSAGE";
 
 
+    public static final String READY_CALL = "READY_CALL";
     public static final String ACTIVE_CALL = "ACTIVE_CALL";
     public static final String FAILED_CALL = "FAILED_CALL";
     public static final String FINISHED_CALL = "FINISHED_CALL";

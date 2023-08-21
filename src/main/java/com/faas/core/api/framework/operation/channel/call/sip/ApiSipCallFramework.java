@@ -76,7 +76,7 @@ public class ApiSipCallFramework {
         Optional<ClientPhoneDBModel> clientPhoneDBModel = clientPhoneRepository.findById(numberId);
         ApiSipAccountWSDTO sipAccountWSDTO = channelHelper.getApiSipAccountWSDTO(agentId, sessionModel.get(0).getProcessId());
 
-        if (!sipCallRepository.existsBySessionIdAndCallState(sessionId,AppConstant.ACTIVE_CALL) && !sessionModel.isEmpty() && clientPhoneDBModel.isPresent() && sipAccountWSDTO != null) {
+        if (!sipCallRepository.existsBySessionIdAndCallState(sessionId,AppConstant.READY_CALL) && !sipCallRepository.existsBySessionIdAndCallState(sessionId,AppConstant.ACTIVE_CALL) && !sessionModel.isEmpty() && clientPhoneDBModel.isPresent() && sipAccountWSDTO != null) {
 
             SipCallDBModel sipCallDBModel = new SipCallDBModel();
             sipCallDBModel.setSessionId(sessionModel.get(0).getId());
@@ -90,7 +90,7 @@ public class ApiSipCallFramework {
             sipCallDBModel.setCallerId(sipAccountWSDTO.getCallerId());
             sipCallDBModel.setProvider(sipAccountWSDTO.getProvider());
             sipCallDBModel.setConnectionId("");
-            sipCallDBModel.setCallState(AppConstant.ACTIVE_CALL);
+            sipCallDBModel.setCallState(AppConstant.READY_CALL);
             sipCallDBModel.setsDate(appUtils.getCurrentTimeStamp());
             sipCallDBModel.setfDate(0);
             sipCallDBModel.setuDate(appUtils.getCurrentTimeStamp());
