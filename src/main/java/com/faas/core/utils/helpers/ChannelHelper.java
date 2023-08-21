@@ -185,6 +185,7 @@ public class ChannelHelper {
         return null;
     }
 
+
     public ApiOperationSipCallWSDTO mapApiOperationSipCallWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
 
         ApiSipAccountWSDTO sipAccountWSDTO = getApiSipAccountWSDTO(sessionDBModel.getAgentId(), sessionDBModel.getProcessId());
@@ -206,7 +207,6 @@ public class ChannelHelper {
         }
         return null;
     }
-
 
 
     public ApiWappAccountWSDTO getApiWappAccountWSDTO(long agentId, String processId) {
@@ -256,9 +256,7 @@ public class ChannelHelper {
         return null;
     }
 
-
-
-
+    
 
     public SmsAccountDAO mapProcessSmsAccountDAO(SmsAccountDBModel smsAccountDBModel) {
 
