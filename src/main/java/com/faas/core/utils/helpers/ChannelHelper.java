@@ -316,7 +316,6 @@ public class ChannelHelper {
     }
 
 
-
     public ApiOperationSmsMessageWSDTO mapApiOperationSmsMessageWSDTO(SessionDBModel sessionDBModel, List<ClientPhoneDBModel> clientPhones) {
 
         ApiOperationSmsMessageWSDTO operationSmsMessageWSDTO = new ApiOperationSmsMessageWSDTO();
@@ -377,7 +376,6 @@ public class ChannelHelper {
         if (!emailChannelDBModels.isEmpty() && emailChannelDBModels.get(0).getEmailAccount() != null) {
 
             ApiEmailAccountWSDTO emailAccountWSDTO = new ApiEmailAccountWSDTO();
-
             emailAccountWSDTO.setAccountId(emailChannelDBModels.get(0).getAccountId());
             emailAccountWSDTO.setAccount(emailChannelDBModels.get(0).getEmailAccount().getAccount());
             emailAccountWSDTO.setAccountDatas(emailChannelDBModels.get(0).getEmailAccount().getAccountDatas());
@@ -395,7 +393,6 @@ public class ChannelHelper {
     public ApiOperationEmailWSDTO mapApiOperationEmailWSDTO(SessionDBModel sessionDBModel) {
 
         ApiOperationEmailWSDTO operationEmailWSDTO = new ApiOperationEmailWSDTO();
-
         ApiEmailAccountWSDTO emailAccountWSDTO = getApiEmailAccountWSDTO(sessionDBModel.getProcessId());
         if (emailAccountWSDTO != null){
             operationEmailWSDTO.setEmailAccount(emailAccountWSDTO);
@@ -436,7 +433,6 @@ public class ChannelHelper {
         if (!pushChannelDBModels.isEmpty() && pushChannelDBModels.get(0).getPushAccount() != null) {
 
             ApiPushAccountWSDTO pushAccountWSDTO = new ApiPushAccountWSDTO();
-
             pushAccountWSDTO.setAccountId(pushChannelDBModels.get(0).getAccountId());
             pushAccountWSDTO.setAccount(pushChannelDBModels.get(0).getPushAccount().getAccount());
             pushAccountWSDTO.setAccountDatas(pushChannelDBModels.get(0).getPushAccount().getAccountDatas());
@@ -449,8 +445,6 @@ public class ChannelHelper {
         }
         return null;
     }
-
-
 
 
 }
