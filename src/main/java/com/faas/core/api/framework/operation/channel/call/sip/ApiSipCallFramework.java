@@ -75,6 +75,7 @@ public class ApiSipCallFramework {
         List<SessionDBModel> sessionModel = sessionRepository.findByIdAndClientIdAndAgentId(sessionId,clientId,agentId);
         Optional<ClientPhoneDBModel> clientPhoneDBModel = clientPhoneRepository.findById(numberId);
         ApiSipAccountWSDTO sipAccountWSDTO = channelHelper.getApiSipAccountWSDTO(agentId, sessionModel.get(0).getProcessId());
+
         if (!sipCallRepository.existsBySessionIdAndCallState(sessionId,AppConstant.ACTIVE_CALL) && !sessionModel.isEmpty() && clientPhoneDBModel.isPresent() && sipAccountWSDTO != null) {
 
             SipCallDBModel sipCallDBModel = new SipCallDBModel();
@@ -112,6 +113,7 @@ public class ApiSipCallFramework {
                 sipCallDBModels.get(0).setfDate(appUtils.getCurrentTimeStamp());
             }
             sipCallDBModels.get(0).setuDate(appUtils.getCurrentTimeStamp());
+
             return new ApiSipCallWSDTO(sipCallRepository.save(sipCallDBModels.get(0)));
         }
         return null;
@@ -123,10 +125,11 @@ public class ApiSipCallFramework {
         List<SipCallDBModel> sipCallDBModels = sipCallRepository.findByIdAndSessionIdAndAgentIdAndClientId(callId,sessionId,agentId,clientId);
         if (!sipCallDBModels.isEmpty()) {
             sipCallRepository.delete(sipCallDBModels.get(0));
-            return null;
+            return new ApiSipCallWSDTO(sipCallDBModels.get(0));
         }
         return null;
     }
+
 
 
 }
